@@ -1,0 +1,1922 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Experimental Design and Data Analysis for the Advancement of Mutant Populations",
+    "section": "",
+    "text": "Welcome\nThis manual accompanies the Regional Training Course on Experimental Design and Data Analysis for the Advancement of Mutant Populations (IAEA project RER5030), held at the Faculty of Agricultural Sciences and Food, Skopje, North Macedonia, 9–20 November 2026.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use-this-manual",
+    "href": "index.html#how-to-use-this-manual",
+    "title": "Experimental Design and Data Analysis for the Advancement of Mutant Populations",
+    "section": "How to use this manual",
+    "text": "How to use this manual\n\nEach chapter matches one or more sessions of the agenda.\nEvery chapter follows the same structure: learning objectives, key concepts, a worked demo in R, interpretation for breeding decisions, an exercise and key takeaways.\nAll code uses the shared datasets in the data/ folder of the course repository.\nSlides for each session are condensed versions of the chapters.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#setup",
+    "href": "index.html#setup",
+    "title": "Experimental Design and Data Analysis for the Advancement of Mutant Populations",
+    "section": "Setup",
+    "text": "Setup\nRun R/install_packages.R once to install all course packages. Participants with older computers can use Posit Cloud.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#authors",
+    "href": "index.html#authors",
+    "title": "Experimental Design and Data Analysis for the Advancement of Mutant Populations",
+    "section": "Authors",
+    "text": "Authors\n\nLuis Fernando Delgado Muñoz – external expert\nMirjana Jankulovska – local expert and host\nAnand Badigannavar – mutation breeding expert",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#acknowledgements",
+    "href": "index.html#acknowledgements",
+    "title": "Experimental Design and Data Analysis for the Advancement of Mutant Populations",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\nFAO/IAEA Centre of Nuclear Techniques in Food and Agriculture – Plant Breeding and Genetics Section.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html",
+    "href": "part0-precourse/01-r-basics.html",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "",
+    "text": "1.1 Learning objectives",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html#learning-objectives",
+    "href": "part0-precourse/01-r-basics.html#learning-objectives",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "",
+    "text": "Install R, RStudio and the course packages, or use Posit Cloud\nWork inside an RStudio project\nCreate and inspect vectors, factors and data frames\nImport a CSV/Excel field file and make a first plot",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html#installing-the-software",
+    "href": "part0-precourse/01-r-basics.html#installing-the-software",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "1.2 Installing the software",
+    "text": "1.2 Installing the software\nR has become one of the most widely used programming languages for data science applied to plant breeding. For beginners, learning how to set up and use R is an important first step, regardless of the operating system they use. This tutorial provides a practical guide to installing R on three major platforms: Windows 10, macOS, and Ubuntu Linux.\n\n1.2.1 Installing R on Windows 10\nInstalling R on Windows 10 is a simple and process. The recommended approach is to download and install R directly from CRAN (The Comprehensive R Archive Network). To begin, visit the CRAN downloads page and follow the installation steps demonstrated in the video below.\n\n\n\nHow to download R for Windows OS\n\n\nOnce the download is complete, run the .exe file and follow the default installation steps by clicking Next until finished.\n\n\n1.2.2 Installing RStudio\nAfter installing R, install RStudio for a better environment to write and run R scripts. It includes a console, plotting tools, and workspace management. Simply visit the RStudio downloads page and follow the installation steps (watch video below).\n\n\n\nHow to download RStudio for Windows OS\n\n\n\n\n1.2.3 Installing the course packages\nR is extended through packages: collections of functions written by the community. We will use about 30 packages during the course. Instead of installing them one by one, run the installation script included in the course repository. Open RStudio and type in the Console:\n\nsource(\"R/install_packages.R\")\n\nThe script installs only the packages that are missing and prints OK or FAILED for each one. Installation can take 10–20 minutes the first time. If a package shows FAILED, copy the error message and bring it to the session.\n\n\n\n\n\n\nTipInstalling a single package\n\n\n\nYou can always install and load one package manually:\n\ninstall.packages(\"dplyr\")   # once per computer\nlibrary(dplyr)              # every time you start R\n\n\n\n\n\n1.2.4 Posit Cloud: the alternative for older computers\nIf your computer has less than 4 GB of RAM or you cannot install software (for example, without administrator rights), use Posit Cloud, which runs RStudio in the web browser:\n\nCreate a free account at https://posit.cloud/plans/free.\nClick New Project → New RStudio Project.\nUpload the course files with the Upload button in the Files pane.\nRun source(\"R/install_packages.R\") as above.\n\nThe free plan has limited memory and hours per month, which is enough for the course exercises. You need a stable internet connection.\n\n\n1.2.5 Before the session\nPlease check that you have:\n\nR and RStudio installed (or a Posit Cloud account).\nThe course packages installed without FAILED messages.\nDownloaded the course repository (datasets and scripts).\nCreated free accounts in at least two AI assistants (e.g., ChatGPT, Claude, Gemini, DeepSeek or Qwen). We will use them in week 2.",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html#the-rstudio-interface",
+    "href": "part0-precourse/01-r-basics.html#the-rstudio-interface",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "1.3 The RStudio interface",
+    "text": "1.3 The RStudio interface\nWhen you open RStudio you will see four panes:\n\n\n\n\n\n\n\nPane\nWhat it is for\n\n\n\n\nSource (top left)\nScripts and Quarto documents: where you write and save your code\n\n\nConsole (bottom left)\nWhere R runs the code and prints the results\n\n\nEnvironment / History (top right)\nObjects you have created (datasets, results)\n\n\nFiles / Plots / Packages / Help (bottom right)\nYour folders, graphs, installed packages and help pages\n\n\n\n\n\n\nR Studio (IDE: integrated development environment)\n\n\nAlways write your code in a script (File → New File → R Script) rather than directly in the Console. A script is a record of your analysis that you can save, correct and run again. To run a line, place the cursor on it and press Ctrl + Enter (Windows) or Cmd + Enter (macOS).",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html#rstudio-projects-and-the-working-directory",
+    "href": "part0-precourse/01-r-basics.html#rstudio-projects-and-the-working-directory",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "1.4 RStudio projects and the working directory",
+    "text": "1.4 RStudio projects and the working directory\nR reads and saves files in a folder called the working directory. The most common error for beginners is cannot open file 'data.csv': No such file or directory, which means R is looking in the wrong folder.\nThe best way to avoid this problem is to work inside an RStudio project. A project is a folder that contains all the files of one analysis, and RStudio automatically sets it as the working directory.\nTo create a project: File → New Project → New Directory → New Project, choose a name (e.g., rtc-course) and a location, and click Create Project. Inside the project, use this folder structure:\nrtc-course/\n├── rtc-course.Rproj   # double-click to open the project\n├── data/              # raw data files (never edit them by hand after saving)\n├── R/                 # your scripts\n└── output/            # tables and figures produced by the scripts\nYou can check the working directory at any time:\n\ngetwd()\n\n\n\n\n\n\n\nWarningAvoid setwd()\n\n\n\nScripts that start with setwd(\"C:/Users/maria/Desktop/analysis\") only work on one computer. Inside a project, use relative paths such as \"data/precourse_trial.csv\", which work on any computer.",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html#objects-and-data-structures",
+    "href": "part0-precourse/01-r-basics.html#objects-and-data-structures",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "1.5 Objects and data structures",
+    "text": "1.5 Objects and data structures\n\n1.5.1 Objects and functions\nEverything in R is an object. You create objects with the assignment operator &lt;- (shortcut: Alt + -). You use functions to do something with objects. A function has a name followed by parentheses with its arguments.\n\nplot_area &lt;- 6          # plot area in m2\ngrain_kg  &lt;- 2.7        # grain weight harvested in the plot\nyield_t_ha &lt;- grain_kg / plot_area * 10   # convert kg/m2 to t/ha\nyield_t_ha\n\n[1] 4.5\n\nround(yield_t_ha, 1)\n\n[1] 4.5\n\n\nObject names are case-sensitive (Yield and yield are different objects). Use short names without spaces, such as plant_height.\n\n\n1.5.2 Vectors\nA vector is a set of values of the same type. It is the basic building block of R: each column of a dataset is a vector.\n\nheight &lt;- c(92.5, 88.0, 101.3, 95.1)         # numeric\ngeno   &lt;- c(\"M4-01\", \"M4-02\", \"Parent\", \"Check\")  # character\nis_check &lt;- c(FALSE, FALSE, TRUE, TRUE)      # logical\n\nmean(height)\n\n[1] 94.225\n\nlength(geno)\n\n[1] 4\n\nheight[3]            # third element\n\n[1] 101.3\n\nheight[height &gt; 90]  # elements that meet a condition\n\n[1]  92.5 101.3  95.1\n\n\n\n\n1.5.3 Factors\nA factor is a vector of categories. In breeding trials, genotype, replicate, block, row and column must be factors when they are used as effects in a model; otherwise R treats them as numbers (for example, it would treat replicate 3 as “three times” replicate 1).\n\nrep &lt;- c(1, 1, 2, 2, 3, 3)\nrep_f &lt;- factor(rep)\nrep_f\n\n[1] 1 1 2 2 3 3\nLevels: 1 2 3\n\nlevels(rep_f)\n\n[1] \"1\" \"2\" \"3\"\n\n\n\n\n1.5.4 Matrices\nA matrix is a table in which all values are of the same type. Matrices appear in genetic analyses (e.g., a genotype × environment table of means).\n\ngxe &lt;- matrix(c(4.1, 3.8, 4.5,\n                3.6, 3.9, 4.0),\n              nrow = 2, byrow = TRUE,\n              dimnames = list(c(\"M4-01\", \"Parent\"), c(\"Env1\", \"Env2\", \"Env3\")))\ngxe\n\n       Env1 Env2 Env3\nM4-01   4.1  3.8  4.5\nParent  3.6  3.9  4.0\n\nrowMeans(gxe)\n\n   M4-01   Parent \n4.133333 3.833333 \n\n\n\n\n1.5.5 Data frames\nA data frame is a table in which each column is a vector and each row is an observation (in our case, a plot). It is the structure we will use for almost all field data.\n\ndf &lt;- data.frame(\n  geno  = c(\"M4-01\", \"M4-02\", \"Parent\"),\n  rep   = factor(c(1, 1, 1)),\n  yield = c(4.6, 3.8, 4.3)\n)\ndf\n\n    geno rep yield\n1  M4-01   1   4.6\n2  M4-02   1   3.8\n3 Parent   1   4.3\n\nstr(df)        # structure: type of each column\n\n'data.frame':   3 obs. of  3 variables:\n $ geno : chr  \"M4-01\" \"M4-02\" \"Parent\"\n $ rep  : Factor w/ 1 level \"1\": 1 1 1\n $ yield: num  4.6 3.8 4.3\n\ndf$yield       # one column\n\n[1] 4.6 3.8 4.3\n\ndf[2, ]        # second row\n\n   geno rep yield\n2 M4-02   1   3.8\n\ndf[df$yield &gt; 4, ]   # rows that meet a condition\n\n    geno rep yield\n1  M4-01   1   4.6\n3 Parent   1   4.3",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html#importing-field-data",
+    "href": "part0-precourse/01-r-basics.html#importing-field-data",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "1.6 Importing field data",
+    "text": "1.6 Importing field data\n\n1.6.1 The practice dataset\nThe course repository includes a small practice dataset, data/precourse_trial.csv: a trial with 10 M4 mutant lines, the parent and a check, evaluated in a randomized complete block design with 3 replicates in Skopje. Each row is a plot. It has four traits: grain yield (t/ha), plant height (cm), days to flowering and disease score (1–9). The same data are provided in three formats so you can practice the most common situations.\n\n\n\n\n\n\n\nFile\nFormat\n\n\n\n\nprecourse_trial.csv\nComma separator, decimal point\n\n\nprecourse_trial_eu.csv\nSemicolon separator, decimal comma (European Excel)\n\n\nprecourse_trial.xlsx\nExcel workbook, sheet trial\n\n\n\n\n\n1.6.2 Reading CSV files\nWe use the readr package (part of the tidyverse). Empty cells are read as missing values (NA). If your files use other codes for missing data (for example . or -), add them to the na argument.\n\nlibrary(readr)\ntrial &lt;- read_csv(\"data/precourse_trial.csv\", na = c(\"\", \"NA\", \".\"))\ntrial\n\n# A tibble: 36 × 13\n   location  year generation  plot   rep   row   col geno   check yield_t_ha\n   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt;\n 1 Skopje    2025 M4             1     1     1     1 M4-01  no          4.6 \n 2 Skopje    2025 M4             2     1     1     2 M4-10  no          3.77\n 3 Skopje    2025 M4             3     1     1     3 M4-06  no          3.24\n 4 Skopje    2025 M4             4     1     1     4 M4-02  no          4.04\n 5 Skopje    2025 M4             5     1     1     5 Parent yes         4.31\n 6 Skopje    2025 M4             6     1     1     6 M4-09  no          3.92\n 7 Skopje    2025 M4             7     1     1     7 M4-05  no          4.2 \n 8 Skopje    2025 M4             8     1     1     8 M4-08  no         NA   \n 9 Skopje    2025 M4             9     1     1     9 M4-04  no          4.75\n10 Skopje    2025 M4            10     1     1    10 Check  yes         5.2 \n# ℹ 26 more rows\n# ℹ 3 more variables: plant_height_cm &lt;dbl&gt;, days_to_flowering &lt;dbl&gt;,\n#   disease_score &lt;dbl&gt;\n\n\n\n\n1.6.3 Decimal comma and semicolon\nExcel in many European countries saves CSV files with semicolons as separators and commas as decimal marks. If you read such a file with read_csv(), all values end up in one column, or numbers are read as text. Use read_csv2() instead:\n\ntrial_eu &lt;- read_csv2(\"data/precourse_trial_eu.csv\")\nhead(trial_eu$yield_t_ha)\n\n[1] 4.60 3.77 3.24 4.04 4.31 3.92\n\n\nFor other combinations, read_delim() lets you choose the separator and the decimal mark:\n\nread_delim(\"my_file.txt\", delim = \"\\t\",\n           locale = locale(decimal_mark = \",\", encoding = \"UTF-8\"))\n\n\n\n\n\n\n\nTipSpecial characters in names\n\n\n\nIf genotype or location names with characters such as č, š, ž or ğ appear incorrectly, the file was saved with a different encoding. Save it from Excel as CSV UTF-8, or add locale = locale(encoding = \"latin1\") (or \"windows-1250\" for Central European files).\n\n\n\n\n1.6.4 Reading Excel files\n\nlibrary(readxl)\ntrial_xl &lt;- read_excel(\"data/precourse_trial.xlsx\", sheet = \"trial\")\ndim(trial_xl)\n\n[1] 36 13\n\n\n\n\n1.6.5 Checking the data after import\nAlways check the data immediately after importing them:\n\nlibrary(dplyr)\nglimpse(trial)    # column names and types\n\nRows: 36\nColumns: 13\n$ location          &lt;chr&gt; \"Skopje\", \"Skopje\", \"Skopje\", \"Skopje\", \"Skopje\", \"S…\n$ year              &lt;dbl&gt; 2025, 2025, 2025, 2025, 2025, 2025, 2025, 2025, 2025…\n$ generation        &lt;chr&gt; \"M4\", \"M4\", \"M4\", \"M4\", \"M4\", \"M4\", \"M4\", \"M4\", \"M4\"…\n$ plot              &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1…\n$ rep               &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2…\n$ row               &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2…\n$ col               &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5…\n$ geno              &lt;chr&gt; \"M4-01\", \"M4-10\", \"M4-06\", \"M4-02\", \"Parent\", \"M4-09…\n$ check             &lt;chr&gt; \"no\", \"no\", \"no\", \"no\", \"yes\", \"no\", \"no\", \"no\", \"no…\n$ yield_t_ha        &lt;dbl&gt; 4.60, 3.77, 3.24, 4.04, 4.31, 3.92, 4.20, NA, 4.75, …\n$ plant_height_cm   &lt;dbl&gt; 86.3, 93.4, 84.3, 88.8, 96.5, 82.8, 94.0, 85.0, 88.1…\n$ days_to_flowering &lt;dbl&gt; 64, 63, 63, 61, 62, 62, 62, 63, 63, 63, 59, 59, 60, …\n$ disease_score     &lt;dbl&gt; 2, 5, 6, 5, 3, 6, 6, 6, 4, 4, 3, 3, 3, 1, 3, 5, NA, …\n\nsummary(trial)    # ranges and number of missing values\n\n      location       year          generation      plot            rep   \n Length   :36   Min.   :2025   Length   :36   Min.   : 1.00   Min.   :1  \n N.unique : 1   1st Qu.:2025   N.unique : 1   1st Qu.: 9.75   1st Qu.:1  \n N.blank  : 0   Median :2025   N.blank  : 0   Median :18.50   Median :2  \n Min.nchar: 6   Mean   :2025   Min.nchar: 2   Mean   :18.50   Mean   :2  \n Max.nchar: 6   3rd Qu.:2025   Max.nchar: 2   3rd Qu.:27.25   3rd Qu.:3  \n                Max.   :2025                  Max.   :36.00   Max.   :3  \n                                                                         \n      row         col               geno          check      yield_t_ha   \n Min.   :1   Min.   : 1.00   Length   :36   Length   :36   Min.   :2.660  \n 1st Qu.:1   1st Qu.: 3.75   N.unique :12   N.unique : 2   1st Qu.:3.513  \n Median :2   Median : 6.50   N.blank  : 0   N.blank  : 0   Median :4.055  \n Mean   :2   Mean   : 6.50   Min.nchar: 5   Min.nchar: 2   Mean   :4.082  \n 3rd Qu.:3   3rd Qu.: 9.25   Max.nchar: 6   Max.nchar: 3   3rd Qu.:4.595  \n Max.   :3   Max.   :12.00                                 Max.   :5.900  \n                                                           NAs    :2      \n plant_height_cm  days_to_flowering disease_score  \n Min.   : 82.80   Min.   :59.00     Min.   :1.000  \n 1st Qu.: 89.17   1st Qu.:61.00     1st Qu.:3.000  \n Median : 92.90   Median :62.50     Median :4.000  \n Mean   : 93.22   Mean   :62.14     Mean   :4.314  \n 3rd Qu.: 97.50   3rd Qu.:63.00     3rd Qu.:5.500  \n Max.   :106.50   Max.   :65.00     Max.   :6.000  \n                                    NAs    :1      \n\n\nThen convert the design variables to factors:\n\ntrial &lt;- trial |&gt;\n  mutate(across(c(rep, row, col, geno), as.factor))\nlevels(trial$geno)\n\n [1] \"Check\"  \"M4-01\"  \"M4-02\"  \"M4-03\"  \"M4-04\"  \"M4-05\"  \"M4-06\"  \"M4-07\" \n [9] \"M4-08\"  \"M4-09\"  \"M4-10\"  \"Parent\"",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html#basic-data-manipulation",
+    "href": "part0-precourse/01-r-basics.html#basic-data-manipulation",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "1.7 Basic data manipulation",
+    "text": "1.7 Basic data manipulation\nThe dplyr package provides a small set of verbs that cover most data preparation tasks. They are combined with the pipe |&gt; (shortcut: Ctrl/Cmd + Shift + M), which reads as “and then”.\n\n\n\nVerb\nWhat it does\n\n\n\n\nselect()\nkeep or drop columns\n\n\nfilter()\nkeep rows that meet a condition\n\n\nmutate()\ncreate or modify columns\n\n\narrange()\nsort rows\n\n\ngroup_by() + summarise()\ncalculate summaries by group\n\n\n\n\n# Keep design columns and yield\ntrial |&gt;\n  select(rep, geno, yield_t_ha) |&gt;\n  head()\n\n# A tibble: 6 × 3\n  rep   geno   yield_t_ha\n  &lt;fct&gt; &lt;fct&gt;       &lt;dbl&gt;\n1 1     M4-01        4.6 \n2 1     M4-10        3.77\n3 1     M4-06        3.24\n4 1     M4-02        4.04\n5 1     Parent       4.31\n6 1     M4-09        3.92\n\n# Plots of the parent only\ntrial |&gt;\n  filter(geno == \"Parent\")\n\n# A tibble: 3 × 13\n  location  year generation  plot rep   row   col   geno   check yield_t_ha\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;  &lt;chr&gt;      &lt;dbl&gt;\n1 Skopje    2025 M4             5 1     1     5     Parent yes         4.31\n2 Skopje    2025 M4            15 2     2     3     Parent yes         4.38\n3 Skopje    2025 M4            33 3     3     9     Parent yes         3.92\n# ℹ 3 more variables: plant_height_cm &lt;dbl&gt;, days_to_flowering &lt;dbl&gt;,\n#   disease_score &lt;dbl&gt;\n\n# New variable: yield in kg/ha\ntrial &lt;- trial |&gt;\n  mutate(yield_kg_ha = yield_t_ha * 1000)\n\nSummaries by genotype are the first step to compare mutant lines with the parent:\n\ngeno_means &lt;- trial |&gt;\n  group_by(geno) |&gt;\n  summarise(\n    n          = sum(!is.na(yield_t_ha)),\n    yield_mean = mean(yield_t_ha, na.rm = TRUE),\n    height_mean = mean(plant_height_cm, na.rm = TRUE)\n  ) |&gt;\n  arrange(desc(yield_mean))\ngeno_means\n\n# A tibble: 12 × 4\n   geno       n yield_mean height_mean\n   &lt;fct&gt;  &lt;int&gt;      &lt;dbl&gt;       &lt;dbl&gt;\n 1 M4-03      3       5.28       102. \n 2 M4-07      3       4.96       104. \n 3 Check      3       4.91        95.4\n 4 M4-01      2       4.38        93.7\n 5 Parent     3       4.20        92.7\n 6 M4-04      3       4.09        93  \n 7 M4-05      3       3.97        93.3\n 8 M4-10      3       3.70        93.6\n 9 M4-02      3       3.60        88.3\n10 M4-08      2       3.52        89.5\n11 M4-09      3       3.19        85.5\n12 M4-06      3       3.10        87.0\n\n\n\n1.7.1 R for Data Science Book\nA great book for anyone starting from scratch. It provides a strong foundation and helps you progress beyond the basics. Highly recommended for learning through reading and hands-on practice.\n\n\n\nR for data science\n\n\n\n\n\n\n\n\nNoteMissing values\n\n\n\nmean() returns NA if any value is missing. The argument na.rm = TRUE removes missing values before calculating. The column n shows that two genotypes have only two yield values, which we will need to account for in the analysis (Day 3).",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html#a-first-plot",
+    "href": "part0-precourse/01-r-basics.html#a-first-plot",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "1.8 A first plot",
+    "text": "1.8 A first plot\nggplot2 builds graphs in layers following a “grammar of graphics”. Every plot needs three elements:\n\ndata: the data frame;\naesthetics (aes()): which variables go on the x and y axes, colour, etc.;\ngeometry (geom_...()): how the data are drawn (points, boxes, bars…).\n\n\nlibrary(ggplot2)\nggplot(trial, aes(x = geno, y = yield_t_ha, fill = geno)) +\n  geom_boxplot() +\n  geom_point(colour = \"grey40\") +\n  labs(x = \"Genotype\", y = \"Grain yield (t/ha)\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nAdding a layer is as simple as adding +. Here, the relationship between plant height and yield, with the parent and check highlighted:\n\nggplot(trial, aes(x = plant_height_cm, y = yield_t_ha, colour = check)) +\n  geom_point(size = 2) +\n  labs(x = \"Plant height (cm)\", y = \"Grain yield (t/ha)\", colour = \"Parent/check\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nTo save a figure in the output/ folder:\n\nggsave(\"part0-precourse/output/yield_boxplot.png\", width = 7, height = 4, dpi = 300)\n\nDay 1 of the course covers visualization for exploratory analysis in detail.",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html#importing-real-field-data-a-bean-trial",
+    "href": "part0-precourse/01-r-basics.html#importing-real-field-data-a-bean-trial",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "1.9 Importing real field data: a bean trial",
+    "text": "1.9 Importing real field data: a bean trial\nThe practice dataset is small and clean. Real trial files are larger and usually bring problems that must be solved before any analysis. In this section we import a real common bean (Phaseolus vulgaris) trial from the Alliance of Bioversity International and CIAT and apply the same steps.\n\n1.9.1 The dataset",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html#dataset-context",
+    "href": "part0-precourse/01-r-basics.html#dataset-context",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "1.10 Dataset context",
+    "text": "1.10 Dataset context\nThe file data/Example_Beans.csv contains data from the Dar16C_hiP common bean field trial conducted in Darién, Colombia, in 2016 under high-phosphorus conditions. The trial was associated with the Bean Breeding Program of the International Center for Tropical Agriculture (CIAT), currently part of the Alliance of Bioversity International and CIAT.\nThe experiment used an alpha-lattice design to evaluate 380 bean lines in two replicates. Each replicate contained 18 incomplete blocks of 22 plots. Each row of the dataset represents one experimental plot, whose field position is identified by row and column coordinates within a 66 × 12 layout.",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html#response-variables",
+    "href": "part0-precourse/01-r-basics.html#response-variables",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "1.11 Response variables",
+    "text": "1.11 Response variables\n\nDF – Days to flowering: Number of days from planting until the flowering criterion was reached.\n\\[\nDF = \\text{Flowering date} - \\text{Planting date}\n\\]\nDPM – Days to physiological maturity: Number of days from planting until the plants reached physiological maturity.\n\\[\nDPM = \\text{Maturity date} - \\text{Planting date}\n\\]\nPLHA – Plants harvested: Number of plants harvested from the experimental plot.\nPOM_c2 – Grain moisture: Moisture content of the harvested seed, expressed as a percentage. Seed weight was adjusted to a reference moisture content of 14% using:\n\\[\nMCF = \\frac{100-POM\\_c2}{100-14}\n\\]\nSW100 – 100-seed weight: Weight of 100 seeds, expressed in grams. This variable is an indicator of seed size.\n\\[\nSW100 =\n\\frac{\\text{Sample weight}}{\\text{Number of seeds}}\n\\times 100\n\\]\nTSW – Total seed weight: Total seed weight harvested from the plot, expressed in grams.\nYDHA – Yield based on plot area: Grain yield in kilograms per hectare, calculated from the total seed weight corrected to 14% moisture and a harvested plot area of \\(1.20\\;m^2\\).\n\\[\nYDHA =\n\\frac{\nTSW\\left(\\frac{100-POM\\_c2}{86}\\right)\\times 10\n}{1.20}\n\\]\nYDHPL – Yield based on harvested plants: Grain yield in kilograms per hectare, estimated from seed production per harvested plant and extrapolated to a reference population of 180,000 plants per hectare.\n\\[\nYDHPL =\n\\frac{TSW}{PLHA}\n\\left(\\frac{100-POM\\_c2}{86}\\right)\n\\times 180\n\\]\nYdHa_clean – Cleaned yield: Corrected grain yield in kilograms per hectare. Based on the numerical relationship observed in the dataset, the calculation uses an effective harvested area of approximately \\(2.22\\;m^2\\).\n\\[\nYdHa_{clean} =\n\\frac{\nTSW\\left(\\frac{100-POM\\_c2}{86}\\right)\\times 10\n}{2.22}\n\\]\n\n\n\n\n\n\n\n\nColumn\nContent\n\n\n\n\ndataset\ntrial name\n\n\nunique_identifier, plot\nplot identifiers\n\n\nline\nbean line (genotype)\n\n\nrep\nreplicate (R1, R2)\n\n\ntreatment\nentry code in the field book\n\n\nblock\nincomplete block within the replicate\n\n\nrow, col\nplot position in the field\n\n\nDF, DPM, PLHA, POM_c2, SW100, TSW, YDHA, YDHPL, YdHa_clean\nmeasured traits\n\n\n\n\n1.11.1 Import and first check\n\nlibrary(readr)\nlibrary(dplyr)\nbeans &lt;- read_csv(\"data/Example_Beans.csv\")\ndim(beans)\n\n[1] 792  18\n\nglimpse(beans)\n\nRows: 792\nColumns: 18\n$ dataset           &lt;chr&gt; \"Dar16C_hiP\", \"Dar16C_hiP\", \"Dar16C_hiP\", \"Dar16C_hi…\n$ unique_identifier &lt;chr&gt; \"16ADB04001.000\", \"16ADB04132.000\", \"16ADB04133.000\"…\n$ plot              &lt;dbl&gt; 4001, 4132, 4133, 4264, 4265, 4396, 4397, 4528, 4529…\n$ line              &lt;chr&gt; \"DAB_913\", \"DAB_609\", \"DAA_122\", \"AFR_735\", \"RAA_030…\n$ rep               &lt;chr&gt; \"R1\", \"R1\", \"R1\", \"R1\", \"R1\", \"R1\", \"R2\", \"R2\", \"R2\"…\n$ treatment         &lt;chr&gt; \"T6\", \"T120\", \"T357\", \"T219\", \"T186\", \"T389\", \"T137\"…\n$ block             &lt;chr&gt; \"B1\", \"B1\", \"B7\", \"B7\", \"B13\", \"B13\", \"B1\", \"B1\", \"B…\n$ row               &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2…\n$ col               &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5…\n$ DF                &lt;dbl&gt; 38, 40, 39, 40, 47, 39, 39, 40, 48, 39, 39, 38, 43, …\n$ DPM               &lt;dbl&gt; 80, 83, 84, 81, 81, 82, 81, 82, 84, 83, 81, 81, 81, …\n$ PLHA              &lt;dbl&gt; 20, 28, 34, 37, 35, 43, 32, 37, 27, 37, 40, 30, 24, …\n$ POM_c2            &lt;dbl&gt; 11.6, 11.6, 11.8, 11.6, 11.6, 12.1, 11.6, 11.6, 11.6…\n$ SW100             &lt;dbl&gt; 38, 45, 52, 54, 57, 22, 47, 44, 46, 47, 52, 49, 49, …\n$ TSW               &lt;dbl&gt; 109.512, 191.646, 264.654, 217.728, 232.713, 285.768…\n$ YDHA              &lt;dbl&gt; 938.0679, 1637.9048, 2261.8685, 1865.0344, 1977.6095…\n$ YDHPL             &lt;dbl&gt; 1013.1133, 1263.5265, 1436.9517, 1088.7768, 1220.467…\n$ YdHa_clean        &lt;dbl&gt; 507.0637, 887.3615, 1222.6316, 1008.1267, 1077.5104,…\n\n\nThe design columns (rep, block, row, col, line) must be factors. row and col were read as numbers, so we convert them as well:\n\nbeans &lt;- beans |&gt;\n  mutate(across(c(rep, block, row, col, line), as.factor))\nnlevels(beans$line) # number of genos (lines)\n\n[1] 380\n\n\n\n\n1.11.2 Finding the problems\nMissing values. Count them per column before doing anything else:\n\ncolSums(is.na(beans))\n\n          dataset unique_identifier              plot              line \n                0                 0                 0                 0 \n              rep         treatment             block               row \n                0                 0                 0                 0 \n              col                DF               DPM              PLHA \n                0                 0                 6                 4 \n           POM_c2             SW100               TSW              YDHA \n                0                 4                 3                 4 \n            YDHPL        YdHa_clean \n                4                 4 \n\n\nSeven traits have between 3 and 6 missing plots. They are few, but they mean that some lines do not have data in both replicates, which matters when we compare them.\nRepeated lines. The trial has 396 plots per replicate but only 380 lines. Some lines appear more than once:\n\nbeans |&gt;\n  count(line, rep) |&gt;\n  filter(n &gt; 1)\n\n# A tibble: 32 × 3\n   line    rep       n\n   &lt;fct&gt;   &lt;fct&gt; &lt;int&gt;\n 1 AFR_298 R1        2\n 2 AFR_298 R2        2\n 3 AFR_722 R1        2\n 4 AFR_722 R2        2\n 5 CAL_096 R1        2\n 6 CAL_096 R2        2\n 7 CAL_143 R1        2\n 8 CAL_143 R2        2\n 9 DAA_153 R1        2\n10 DAA_153 R2        2\n# ℹ 22 more rows\n\n\nSixteen lines appear twice in each replicate, under different entry codes (treatment). This is common in breeding trials: checks or lines entered twice in the field book. Sixteen lines were intentionally included twice in the treatment list as repeated checks\nBalance across replicates. Each replicate should contain the same entries:\n\ntable(beans$rep)\n\n\n R1  R2 \n396 396 \n\n\n\n\n1.11.3 Looking at the trial as an RCBD\nThe original design is an alpha-lattice (replicates divided into incomplete blocks), which we study on Day 2. Because each replicate contains all the entries, we can also look at the trial as a randomized complete block design (RCBD), using the replicate as the complete block and ignoring the incomplete blocks.\nMean yield of the best lines across the two replicates:\n\nbeans |&gt;\n  group_by(line) |&gt;\n  summarise(\n    n_plots = sum(!is.na(YdHa_clean)),\n    yield   = mean(YdHa_clean, na.rm = TRUE)\n  ) |&gt;\n  arrange(desc(yield)) |&gt;\n  head(10)\n\n# A tibble: 10 × 3\n   line    n_plots yield\n   &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt;\n 1 DAB_577       2 2478.\n 2 DAB_366       2 2442.\n 3 DOR_390       2 2247.\n 4 SEF_060       2 2244.\n 5 DAN_011       1 2221.\n 6 DAB_591       2 2197.\n 7 DAB_252       2 2097.\n 8 DAB_576       2 2074.\n 9 DAN_012       2 2049.\n10 LPA_435       2 2023.\n\n\nYield distribution in each replicate (block):\n\nlibrary(ggplot2)\nggplot(beans, aes(x = rep, y = YdHa_clean)) +\n  geom_boxplot() +\n  labs(x = \"Replicate (block)\", y = \"YdHa_clean\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nBecause the field position of every plot is recorded, we can also draw the trial as a map. Patterns in this map are the reason to use blocks and, on Day 4, spatial models:\n\nbeans |&gt;\n  mutate(row = as.numeric(row), col = as.numeric(col)) |&gt;\n  ggplot(aes(x = row, y = col, fill = YdHa_clean)) +\n  geom_tile() +\n  scale_fill_viridis_c() +\n  labs(x = \"Row\", y = \"Column\", fill = \"YdHa_clean\") +\n  coord_equal() +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n1.11.4 When the text looks wrong: file encoding\nThe file data/Example_rice.csv (a rice trial with irrigation and drought treatments) was saved with a Spanish Windows encoding (Latin-1). If we read it with the default settings, the accented letters are not shown correctly:\n\nrice &lt;- read_csv(\"data/Example_rice.csv\")\nunique(rice$TRAT) # Spanish accent marks detected\n\n[1] \"Irrigaci\\xf3n\" \"Sequ\\xeda\"    \n\n\nTelling R the encoding of the file solves the problem:\n\nrice &lt;- read_csv(\"data/Example_rice.csv\",\n                 locale = locale(encoding = \"latin1\"))\nunique(rice$TRAT)\n\n[1] \"Irrigación\" \"Sequía\"    \n\n\nThe same happens with names that contain letters such as č, š, ž or ğ. For Central European files saved in Windows, use encoding = \"windows-1250\". The best long-term solution is to save files from Excel as CSV UTF-8.\n\n\n\n\n\n\nNoteChecklist for any new data file\n\n\n\n\nRead the file and check the dimensions with dim().\nCheck column names and types with glimpse().\nCount missing values per column.\nConvert design variables to factors.\nCheck repeated genotypes and the balance across replicates.\nCheck that names and accents are displayed correctly.",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html#exercise-homework-before-the-course",
+    "href": "part0-precourse/01-r-basics.html#exercise-homework-before-the-course",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "1.12 Exercise (homework before the course)",
+    "text": "1.12 Exercise (homework before the course)\nUse data/precourse_trial.csv in an RStudio project.\n\nImport the European version of the file (precourse_trial_eu.csv) and check that yield_t_ha is numeric.\nHow many plots have a missing value for disease_score?\nCalculate the mean days to flowering for each genotype and sort the result from early to late.\nKeep only the mutant lines (not the parent or the check) with a mean yield higher than the parent.\nDraw a boxplot of disease score by replicate.\n\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\n\nlibrary(readr); library(dplyr); library(ggplot2)\n\n# 1\nex &lt;- read_csv2(\"data/precourse_trial_eu.csv\")\nis.numeric(ex$yield_t_ha)\n\n[1] TRUE\n\n# 2\nsum(is.na(ex$disease_score))\n\n[1] 1\n\n# 3\nex |&gt;\n  group_by(geno) |&gt;\n  summarise(flowering = mean(days_to_flowering)) |&gt;\n  arrange(flowering)\n\n# A tibble: 12 × 2\n   geno   flowering\n   &lt;chr&gt;      &lt;dbl&gt;\n 1 M4-03       60  \n 2 M4-07       60  \n 3 Check       61  \n 4 M4-01       61.3\n 5 M4-04       62  \n 6 M4-02       62.3\n 7 Parent      62.3\n 8 M4-10       62.7\n 9 M4-09       63  \n10 M4-05       63.3\n11 M4-08       63.3\n12 M4-06       64.3\n\n# 4\nmeans &lt;- ex |&gt;\n  group_by(geno, check) |&gt;\n  summarise(yield = mean(yield_t_ha, na.rm = TRUE), .groups = \"drop\")\n\nparent_yield &lt;- means |&gt; filter(geno == \"Parent\") |&gt; pull(yield)\n\nmeans |&gt;\n  filter(check == \"no\", yield &gt; parent_yield)\n\n# A tibble: 3 × 3\n  geno  check yield\n  &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;\n1 M4-01 no     4.38\n2 M4-03 no     5.28\n3 M4-07 no     4.96\n\n# 5\nggplot(ex, aes(x = factor(rep), y = disease_score, fill = factor(rep))) +\n  geom_boxplot() +\n  labs(x = \"Replicate\", y = \"Disease score (1-9)\")",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html#key-takeaways",
+    "href": "part0-precourse/01-r-basics.html#key-takeaways",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "1.13 Key takeaways",
+    "text": "1.13 Key takeaways\n\nWork inside an RStudio project and use relative paths; avoid setwd().\nCheck every dataset right after importing it with glimpse() and summary(); European CSV files need read_csv2().\nGenotype, replicate, block, row and column must be factors before modelling.\nFive dplyr verbs (select, filter, mutate, arrange, group_by + summarise) cover most data preparation.\nA ggplot2 graph is data + aesthetics + geometry, built in layers with +.",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/01-r-basics.html#references",
+    "href": "part0-precourse/01-r-basics.html#references",
+    "title": "1  Getting Started with R and RStudio",
+    "section": "1.14 References",
+    "text": "1.14 References\n\nR Core Team. R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing, Vienna. https://www.r-project.org\nWickham, H., Çetinkaya-Rundel, M. & Grolemund, G. (2023). R for Data Science, 2nd edition. O’Reilly. https://r4ds.hadley.nz\nPosit. RStudio IDE User Guide. https://docs.posit.co/ide/user",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/02-tidy-data.html",
+    "href": "part0-precourse/02-tidy-data.html",
+    "title": "2  Preparing Your Data in Tidy Format",
+    "section": "",
+    "text": "2.1 Learning objectives",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing Your Data in Tidy Format</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/02-tidy-data.html#learning-objectives",
+    "href": "part0-precourse/02-tidy-data.html#learning-objectives",
+    "title": "2  Preparing Your Data in Tidy Format",
+    "section": "",
+    "text": "Organize field data as one row per plot and one column per variable\nRecord the metadata needed for analysis\nWrite a data dictionary\nAvoid the most common spreadsheet problems",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing Your Data in Tidy Format</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/02-tidy-data.html#tidy-data-principles",
+    "href": "part0-precourse/02-tidy-data.html#tidy-data-principles",
+    "title": "2  Preparing Your Data in Tidy Format",
+    "section": "2.2 Tidy data principles",
+    "text": "2.2 Tidy data principles",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing Your Data in Tidy Format</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/02-tidy-data.html#mandatory-metadata",
+    "href": "part0-precourse/02-tidy-data.html#mandatory-metadata",
+    "title": "2  Preparing Your Data in Tidy Format",
+    "section": "2.3 Mandatory metadata",
+    "text": "2.3 Mandatory metadata",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing Your Data in Tidy Format</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/02-tidy-data.html#data-dictionary",
+    "href": "part0-precourse/02-tidy-data.html#data-dictionary",
+    "title": "2  Preparing Your Data in Tidy Format",
+    "section": "2.4 Data dictionary",
+    "text": "2.4 Data dictionary",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing Your Data in Tidy Format</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/02-tidy-data.html#common-spreadsheet-problems",
+    "href": "part0-precourse/02-tidy-data.html#common-spreadsheet-problems",
+    "title": "2  Preparing Your Data in Tidy Format",
+    "section": "2.5 Common spreadsheet problems",
+    "text": "2.5 Common spreadsheet problems",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing Your Data in Tidy Format</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/02-tidy-data.html#checking-your-file-in-r",
+    "href": "part0-precourse/02-tidy-data.html#checking-your-file-in-r",
+    "title": "2  Preparing Your Data in Tidy Format",
+    "section": "2.6 Checking your file in R",
+    "text": "2.6 Checking your file in R\n\n\nsource(\"R/check_dataset.R\")\ncheck_dataset(\"data/my_trial.csv\")",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing Your Data in Tidy Format</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/02-tidy-data.html#field-book-app",
+    "href": "part0-precourse/02-tidy-data.html#field-book-app",
+    "title": "2  Preparing Your Data in Tidy Format",
+    "section": "2.7 Field Book app",
+    "text": "2.7 Field Book app",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing Your Data in Tidy Format</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/02-tidy-data.html#exercise",
+    "href": "part0-precourse/02-tidy-data.html#exercise",
+    "title": "2  Preparing Your Data in Tidy Format",
+    "section": "2.8 Exercise",
+    "text": "2.8 Exercise\n\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing Your Data in Tidy Format</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/02-tidy-data.html#key-takeaways",
+    "href": "part0-precourse/02-tidy-data.html#key-takeaways",
+    "title": "2  Preparing Your Data in Tidy Format",
+    "section": "2.9 Key takeaways",
+    "text": "2.9 Key takeaways",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing Your Data in Tidy Format</span>"
+    ]
+  },
+  {
+    "objectID": "part0-precourse/02-tidy-data.html#references",
+    "href": "part0-precourse/02-tidy-data.html#references",
+    "title": "2  Preparing Your Data in Tidy Format",
+    "section": "2.10 References",
+    "text": "2.10 References",
+    "crumbs": [
+      "Before the course",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing Your Data in Tidy Format</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/03-field-data.html",
+    "href": "part1-week1/03-field-data.html",
+    "title": "3  Collecting and Structuring Field Data",
+    "section": "",
+    "text": "3.1 Learning objectives",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Collecting and Structuring Field Data</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/03-field-data.html#learning-objectives",
+    "href": "part1-week1/03-field-data.html#learning-objectives",
+    "title": "3  Collecting and Structuring Field Data",
+    "section": "",
+    "text": "Use the Field Book app to record standardized traits\nDefine traits and scoring scales\nRecognize phenotyping challenges in mutant populations\nTransform raw field data into an analysis-ready dataset",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Collecting and Structuring Field Data</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/03-field-data.html#planned-content",
+    "href": "part1-week1/03-field-data.html#planned-content",
+    "title": "3  Collecting and Structuring Field Data",
+    "section": "3.2 Planned content",
+    "text": "3.2 Planned content\n\nField Book app: creating a trial from an existing layout\nTrait definition, scoring scales and standardization across environments\nPhenotyping challenges in mutant populations (segregation, off-types)\nStructure of breeding trial data: traits, environments, replications\nFrom messy to tidy data; metadata integration and validation",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Collecting and Structuring Field Data</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/03-field-data.html#key-concepts",
+    "href": "part1-week1/03-field-data.html#key-concepts",
+    "title": "3  Collecting and Structuring Field Data",
+    "section": "3.3 Key concepts",
+    "text": "3.3 Key concepts",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Collecting and Structuring Field Data</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/03-field-data.html#worked-demo-in-r",
+    "href": "part1-week1/03-field-data.html#worked-demo-in-r",
+    "title": "3  Collecting and Structuring Field Data",
+    "section": "3.4 Worked demo in R",
+    "text": "3.4 Worked demo in R\n\n# Use the shared course datasets in data/ where possible",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Collecting and Structuring Field Data</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/03-field-data.html#interpretation-for-breeding-decisions",
+    "href": "part1-week1/03-field-data.html#interpretation-for-breeding-decisions",
+    "title": "3  Collecting and Structuring Field Data",
+    "section": "3.5 Interpretation for breeding decisions",
+    "text": "3.5 Interpretation for breeding decisions",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Collecting and Structuring Field Data</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/03-field-data.html#exercise",
+    "href": "part1-week1/03-field-data.html#exercise",
+    "title": "3  Collecting and Structuring Field Data",
+    "section": "3.6 Exercise",
+    "text": "3.6 Exercise\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Collecting and Structuring Field Data</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/03-field-data.html#key-takeaways",
+    "href": "part1-week1/03-field-data.html#key-takeaways",
+    "title": "3  Collecting and Structuring Field Data",
+    "section": "3.7 Key takeaways",
+    "text": "3.7 Key takeaways",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Collecting and Structuring Field Data</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/03-field-data.html#references",
+    "href": "part1-week1/03-field-data.html#references",
+    "title": "3  Collecting and Structuring Field Data",
+    "section": "3.8 References",
+    "text": "3.8 References",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Collecting and Structuring Field Data</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/04-qc-eda.html",
+    "href": "part1-week1/04-qc-eda.html",
+    "title": "4  Data Quality Control and Exploratory Analysis",
+    "section": "",
+    "text": "4.1 Learning objectives",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Quality Control and Exploratory Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/04-qc-eda.html#learning-objectives",
+    "href": "part1-week1/04-qc-eda.html#learning-objectives",
+    "title": "4  Data Quality Control and Exploratory Analysis",
+    "section": "",
+    "text": "Detect and handle missing values and outliers\nSummarize traits by genotype and replicate\nUse plots to separate biological and technical variation",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Quality Control and Exploratory Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/04-qc-eda.html#planned-content",
+    "href": "part1-week1/04-qc-eda.html#planned-content",
+    "title": "4  Data Quality Control and Exploratory Analysis",
+    "section": "4.2 Planned content",
+    "text": "4.2 Planned content\n\nImporting Field Book / CSV data\nData summaries\nMissing values and outlier detection\nExploratory data analysis: biological vs technical variation\nVisualization with ggplot2: distributions, boxplots, genotype comparisons",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Quality Control and Exploratory Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/04-qc-eda.html#key-concepts",
+    "href": "part1-week1/04-qc-eda.html#key-concepts",
+    "title": "4  Data Quality Control and Exploratory Analysis",
+    "section": "4.3 Key concepts",
+    "text": "4.3 Key concepts",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Quality Control and Exploratory Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/04-qc-eda.html#worked-demo-in-r",
+    "href": "part1-week1/04-qc-eda.html#worked-demo-in-r",
+    "title": "4  Data Quality Control and Exploratory Analysis",
+    "section": "4.4 Worked demo in R",
+    "text": "4.4 Worked demo in R\n\n# Use the shared course datasets in data/ where possible",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Quality Control and Exploratory Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/04-qc-eda.html#interpretation-for-breeding-decisions",
+    "href": "part1-week1/04-qc-eda.html#interpretation-for-breeding-decisions",
+    "title": "4  Data Quality Control and Exploratory Analysis",
+    "section": "4.5 Interpretation for breeding decisions",
+    "text": "4.5 Interpretation for breeding decisions",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Quality Control and Exploratory Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/04-qc-eda.html#exercise",
+    "href": "part1-week1/04-qc-eda.html#exercise",
+    "title": "4  Data Quality Control and Exploratory Analysis",
+    "section": "4.6 Exercise",
+    "text": "4.6 Exercise\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Quality Control and Exploratory Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/04-qc-eda.html#key-takeaways",
+    "href": "part1-week1/04-qc-eda.html#key-takeaways",
+    "title": "4  Data Quality Control and Exploratory Analysis",
+    "section": "4.7 Key takeaways",
+    "text": "4.7 Key takeaways",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Quality Control and Exploratory Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/04-qc-eda.html#references",
+    "href": "part1-week1/04-qc-eda.html#references",
+    "title": "4  Data Quality Control and Exploratory Analysis",
+    "section": "4.8 References",
+    "text": "4.8 References",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Quality Control and Exploratory Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/05-experimental-designs.html",
+    "href": "part1-week1/05-experimental-designs.html",
+    "title": "5  Experimental Designs for Plant Breeding Trials",
+    "section": "",
+    "text": "5.1 Learning objectives",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experimental Designs for Plant Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/05-experimental-designs.html#learning-objectives",
+    "href": "part1-week1/05-experimental-designs.html#learning-objectives",
+    "title": "5  Experimental Designs for Plant Breeding Trials",
+    "section": "",
+    "text": "Choose a design according to breeding stage, number of entries and seed availability\nGenerate and randomize a field layout with FielDHub\nRead a layout and identify its sources of variation\nWrite the statistical model implied by a design",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experimental Designs for Plant Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/05-experimental-designs.html#why-design-matters",
+    "href": "part1-week1/05-experimental-designs.html#why-design-matters",
+    "title": "5  Experimental Designs for Plant Breeding Trials",
+    "section": "5.2 Why design matters",
+    "text": "5.2 Why design matters",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experimental Designs for Plant Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/05-experimental-designs.html#classical-designs-crd-and-rcbd",
+    "href": "part1-week1/05-experimental-designs.html#classical-designs-crd-and-rcbd",
+    "title": "5  Experimental Designs for Plant Breeding Trials",
+    "section": "5.3 Classical designs: CRD and RCBD",
+    "text": "5.3 Classical designs: CRD and RCBD",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experimental Designs for Plant Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/05-experimental-designs.html#augmented-designs",
+    "href": "part1-week1/05-experimental-designs.html#augmented-designs",
+    "title": "5  Experimental Designs for Plant Breeding Trials",
+    "section": "5.4 Augmented designs",
+    "text": "5.4 Augmented designs",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experimental Designs for Plant Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/05-experimental-designs.html#incomplete-block-designs-alpha-lattice",
+    "href": "part1-week1/05-experimental-designs.html#incomplete-block-designs-alpha-lattice",
+    "title": "5  Experimental Designs for Plant Breeding Trials",
+    "section": "5.5 Incomplete block designs: alpha-lattice",
+    "text": "5.5 Incomplete block designs: alpha-lattice",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experimental Designs for Plant Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/05-experimental-designs.html#row-column-and-resolvable-row-column-designs",
+    "href": "part1-week1/05-experimental-designs.html#row-column-and-resolvable-row-column-designs",
+    "title": "5  Experimental Designs for Plant Breeding Trials",
+    "section": "5.6 Row-column and resolvable row-column designs",
+    "text": "5.6 Row-column and resolvable row-column designs",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experimental Designs for Plant Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/05-experimental-designs.html#partially-replicated-p-rep-designs",
+    "href": "part1-week1/05-experimental-designs.html#partially-replicated-p-rep-designs",
+    "title": "5  Experimental Designs for Plant Breeding Trials",
+    "section": "5.7 Partially replicated (p-rep) designs",
+    "text": "5.7 Partially replicated (p-rep) designs",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experimental Designs for Plant Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/05-experimental-designs.html#choosing-a-design-by-breeding-stage",
+    "href": "part1-week1/05-experimental-designs.html#choosing-a-design-by-breeding-stage",
+    "title": "5  Experimental Designs for Plant Breeding Trials",
+    "section": "5.8 Choosing a design by breeding stage",
+    "text": "5.8 Choosing a design by breeding stage",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experimental Designs for Plant Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/05-experimental-designs.html#generating-layouts-with-fieldhub",
+    "href": "part1-week1/05-experimental-designs.html#generating-layouts-with-fieldhub",
+    "title": "5  Experimental Designs for Plant Breeding Trials",
+    "section": "5.9 Generating layouts with FielDHub",
+    "text": "5.9 Generating layouts with FielDHub\n\n\nlibrary(FielDHub)\nalpha &lt;- alpha_lattice(t = 60, k = 6, r = 3, seed = 2026)\nhead(alpha$fieldBook)\nplot(alpha)",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experimental Designs for Plant Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/05-experimental-designs.html#from-layout-to-statistical-model",
+    "href": "part1-week1/05-experimental-designs.html#from-layout-to-statistical-model",
+    "title": "5  Experimental Designs for Plant Breeding Trials",
+    "section": "5.10 From layout to statistical model",
+    "text": "5.10 From layout to statistical model",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experimental Designs for Plant Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/05-experimental-designs.html#exercise",
+    "href": "part1-week1/05-experimental-designs.html#exercise",
+    "title": "5  Experimental Designs for Plant Breeding Trials",
+    "section": "5.11 Exercise",
+    "text": "5.11 Exercise\n\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experimental Designs for Plant Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/05-experimental-designs.html#key-takeaways",
+    "href": "part1-week1/05-experimental-designs.html#key-takeaways",
+    "title": "5  Experimental Designs for Plant Breeding Trials",
+    "section": "5.12 Key takeaways",
+    "text": "5.12 Key takeaways",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experimental Designs for Plant Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/05-experimental-designs.html#references",
+    "href": "part1-week1/05-experimental-designs.html#references",
+    "title": "5  Experimental Designs for Plant Breeding Trials",
+    "section": "5.13 References",
+    "text": "5.13 References",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experimental Designs for Plant Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/06-anova.html",
+    "href": "part1-week1/06-anova.html",
+    "title": "6  ANOVA and Mean Comparison in Breeding Trials",
+    "section": "",
+    "text": "6.1 Learning objectives",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ANOVA and Mean Comparison in Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/06-anova.html#learning-objectives",
+    "href": "part1-week1/06-anova.html#learning-objectives",
+    "title": "6  ANOVA and Mean Comparison in Breeding Trials",
+    "section": "",
+    "text": "Fit ANOVA models for CRD, RCBD and augmented designs\nCheck model assumptions with residual diagnostics\nCompare genotypes with the appropriate post-hoc test\nDistinguish statistical from practical significance",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ANOVA and Mean Comparison in Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/06-anova.html#the-anova-model",
+    "href": "part1-week1/06-anova.html#the-anova-model",
+    "title": "6  ANOVA and Mean Comparison in Breeding Trials",
+    "section": "6.2 The ANOVA model",
+    "text": "6.2 The ANOVA model\n\n\nfit &lt;- lm(yield ~ rep + geno, data = trial)\nanova(fit)",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ANOVA and Mean Comparison in Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/06-anova.html#assumptions-and-residual-diagnostics",
+    "href": "part1-week1/06-anova.html#assumptions-and-residual-diagnostics",
+    "title": "6  ANOVA and Mean Comparison in Breeding Trials",
+    "section": "6.3 Assumptions and residual diagnostics",
+    "text": "6.3 Assumptions and residual diagnostics\n\n\nlibrary(performance)\ncheck_model(fit)",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ANOVA and Mean Comparison in Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/06-anova.html#augmented-designs",
+    "href": "part1-week1/06-anova.html#augmented-designs",
+    "title": "6  ANOVA and Mean Comparison in Breeding Trials",
+    "section": "6.4 Augmented designs",
+    "text": "6.4 Augmented designs\n\n\nlibrary(augmentedRCBD)\n# augmentedRCBD(block, treatment, y, checks = c(\"Parent\", \"Check1\"))",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ANOVA and Mean Comparison in Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/06-anova.html#mean-comparison",
+    "href": "part1-week1/06-anova.html#mean-comparison",
+    "title": "6  ANOVA and Mean Comparison in Breeding Trials",
+    "section": "6.5 Mean comparison",
+    "text": "6.5 Mean comparison\n\n\nlibrary(emmeans)\nem &lt;- emmeans(fit, ~ geno)\nmultcomp::cld(em, Letters = letters)",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ANOVA and Mean Comparison in Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/06-anova.html#mutant-lines-vs-parent-dunnett-test",
+    "href": "part1-week1/06-anova.html#mutant-lines-vs-parent-dunnett-test",
+    "title": "6  ANOVA and Mean Comparison in Breeding Trials",
+    "section": "6.6 Mutant lines vs parent: Dunnett test",
+    "text": "6.6 Mutant lines vs parent: Dunnett test\n\n\ncontrast(em, method = \"trt.vs.ctrl\", ref = \"Parent\")",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ANOVA and Mean Comparison in Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/06-anova.html#interpreting-results-for-selection",
+    "href": "part1-week1/06-anova.html#interpreting-results-for-selection",
+    "title": "6  ANOVA and Mean Comparison in Breeding Trials",
+    "section": "6.7 Interpreting results for selection",
+    "text": "6.7 Interpreting results for selection",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ANOVA and Mean Comparison in Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/06-anova.html#exercise",
+    "href": "part1-week1/06-anova.html#exercise",
+    "title": "6  ANOVA and Mean Comparison in Breeding Trials",
+    "section": "6.8 Exercise",
+    "text": "6.8 Exercise\n\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ANOVA and Mean Comparison in Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/06-anova.html#key-takeaways",
+    "href": "part1-week1/06-anova.html#key-takeaways",
+    "title": "6  ANOVA and Mean Comparison in Breeding Trials",
+    "section": "6.9 Key takeaways",
+    "text": "6.9 Key takeaways",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ANOVA and Mean Comparison in Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/06-anova.html#references",
+    "href": "part1-week1/06-anova.html#references",
+    "title": "6  ANOVA and Mean Comparison in Breeding Trials",
+    "section": "6.10 References",
+    "text": "6.10 References",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ANOVA and Mean Comparison in Breeding Trials</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/07-mixed-models.html",
+    "href": "part1-week1/07-mixed-models.html",
+    "title": "7  Mixed Models in Plant Breeding",
+    "section": "",
+    "text": "7.1 Learning objectives",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Mixed Models in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/07-mixed-models.html#learning-objectives",
+    "href": "part1-week1/07-mixed-models.html#learning-objectives",
+    "title": "7  Mixed Models in Plant Breeding",
+    "section": "",
+    "text": "Explain the limitations of ANOVA for breeding data\nDistinguish fixed and random effects\nEstimate variance components, BLUEs and BLUPs",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Mixed Models in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/07-mixed-models.html#planned-content",
+    "href": "part1-week1/07-mixed-models.html#planned-content",
+    "title": "7  Mixed Models in Plant Breeding",
+    "section": "7.2 Planned content",
+    "text": "7.2 Planned content\n\nLimitations of ANOVA: unbalanced data, incomplete designs\nFixed vs random effects; variance components\nBLUEs vs BLUPs\nMixed model fitting and extraction of BLUEs and BLUPs",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Mixed Models in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/07-mixed-models.html#key-concepts",
+    "href": "part1-week1/07-mixed-models.html#key-concepts",
+    "title": "7  Mixed Models in Plant Breeding",
+    "section": "7.3 Key concepts",
+    "text": "7.3 Key concepts",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Mixed Models in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/07-mixed-models.html#worked-demo-in-r",
+    "href": "part1-week1/07-mixed-models.html#worked-demo-in-r",
+    "title": "7  Mixed Models in Plant Breeding",
+    "section": "7.4 Worked demo in R",
+    "text": "7.4 Worked demo in R\n\n# Use the shared course datasets in data/ where possible",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Mixed Models in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/07-mixed-models.html#interpretation-for-breeding-decisions",
+    "href": "part1-week1/07-mixed-models.html#interpretation-for-breeding-decisions",
+    "title": "7  Mixed Models in Plant Breeding",
+    "section": "7.5 Interpretation for breeding decisions",
+    "text": "7.5 Interpretation for breeding decisions",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Mixed Models in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/07-mixed-models.html#exercise",
+    "href": "part1-week1/07-mixed-models.html#exercise",
+    "title": "7  Mixed Models in Plant Breeding",
+    "section": "7.6 Exercise",
+    "text": "7.6 Exercise\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Mixed Models in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/07-mixed-models.html#key-takeaways",
+    "href": "part1-week1/07-mixed-models.html#key-takeaways",
+    "title": "7  Mixed Models in Plant Breeding",
+    "section": "7.7 Key takeaways",
+    "text": "7.7 Key takeaways",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Mixed Models in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/07-mixed-models.html#references",
+    "href": "part1-week1/07-mixed-models.html#references",
+    "title": "7  Mixed Models in Plant Breeding",
+    "section": "7.8 References",
+    "text": "7.8 References",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Mixed Models in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/08-heritability-selection.html",
+    "href": "part1-week1/08-heritability-selection.html",
+    "title": "8  Heritability and Selection Decisions",
+    "section": "",
+    "text": "8.1 Learning objectives",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Heritability and Selection Decisions</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/08-heritability-selection.html#learning-objectives",
+    "href": "part1-week1/08-heritability-selection.html#learning-objectives",
+    "title": "8  Heritability and Selection Decisions",
+    "section": "",
+    "text": "Estimate and interpret broad-sense and generalized heritability\nRank genotypes from BLUPs\nBuild a multi-trait selection index",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Heritability and Selection Decisions</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/08-heritability-selection.html#planned-content",
+    "href": "part1-week1/08-heritability-selection.html#planned-content",
+    "title": "8  Heritability and Selection Decisions",
+    "section": "8.2 Planned content",
+    "text": "8.2 Planned content\n\nBroad-sense and generalized (Cullis) heritability\nMisunderstandings of heritability; effect of design\nModel diagnostics\nRanking genotypes and multi-trait selection indices",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Heritability and Selection Decisions</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/08-heritability-selection.html#key-concepts",
+    "href": "part1-week1/08-heritability-selection.html#key-concepts",
+    "title": "8  Heritability and Selection Decisions",
+    "section": "8.3 Key concepts",
+    "text": "8.3 Key concepts",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Heritability and Selection Decisions</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/08-heritability-selection.html#worked-demo-in-r",
+    "href": "part1-week1/08-heritability-selection.html#worked-demo-in-r",
+    "title": "8  Heritability and Selection Decisions",
+    "section": "8.4 Worked demo in R",
+    "text": "8.4 Worked demo in R\n\n# Use the shared course datasets in data/ where possible",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Heritability and Selection Decisions</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/08-heritability-selection.html#interpretation-for-breeding-decisions",
+    "href": "part1-week1/08-heritability-selection.html#interpretation-for-breeding-decisions",
+    "title": "8  Heritability and Selection Decisions",
+    "section": "8.5 Interpretation for breeding decisions",
+    "text": "8.5 Interpretation for breeding decisions",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Heritability and Selection Decisions</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/08-heritability-selection.html#exercise",
+    "href": "part1-week1/08-heritability-selection.html#exercise",
+    "title": "8  Heritability and Selection Decisions",
+    "section": "8.6 Exercise",
+    "text": "8.6 Exercise\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Heritability and Selection Decisions</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/08-heritability-selection.html#key-takeaways",
+    "href": "part1-week1/08-heritability-selection.html#key-takeaways",
+    "title": "8  Heritability and Selection Decisions",
+    "section": "8.7 Key takeaways",
+    "text": "8.7 Key takeaways",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Heritability and Selection Decisions</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/08-heritability-selection.html#references",
+    "href": "part1-week1/08-heritability-selection.html#references",
+    "title": "8  Heritability and Selection Decisions",
+    "section": "8.8 References",
+    "text": "8.8 References",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Heritability and Selection Decisions</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/09-spatial-analysis.html",
+    "href": "part1-week1/09-spatial-analysis.html",
+    "title": "9  Spatial Analysis and Trial Precision",
+    "section": "",
+    "text": "9.1 Learning objectives",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Analysis and Trial Precision</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/09-spatial-analysis.html#learning-objectives",
+    "href": "part1-week1/09-spatial-analysis.html#learning-objectives",
+    "title": "9  Spatial Analysis and Trial Precision",
+    "section": "",
+    "text": "Recognize field heterogeneity and its effect on genotype ranking\nDiagnose spatial patterns in residuals\nFit a spatial model with SpATS and interpret its outputs\nQuantify the gain of spatial correction",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Analysis and Trial Precision</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/09-spatial-analysis.html#field-heterogeneity",
+    "href": "part1-week1/09-spatial-analysis.html#field-heterogeneity",
+    "title": "9  Spatial Analysis and Trial Precision",
+    "section": "9.2 Field heterogeneity",
+    "text": "9.2 Field heterogeneity",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Analysis and Trial Precision</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/09-spatial-analysis.html#residual-diagnostics",
+    "href": "part1-week1/09-spatial-analysis.html#residual-diagnostics",
+    "title": "9  Spatial Analysis and Trial Precision",
+    "section": "9.3 Residual diagnostics",
+    "text": "9.3 Residual diagnostics\n\n\nlibrary(ggplot2)\nggplot(trial, aes(col, row, fill = resid)) + geom_tile() + coord_equal()",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Analysis and Trial Precision</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/09-spatial-analysis.html#spatial-models-with-2d-p-splines",
+    "href": "part1-week1/09-spatial-analysis.html#spatial-models-with-2d-p-splines",
+    "title": "9  Spatial Analysis and Trial Precision",
+    "section": "9.4 Spatial models with 2D P-splines",
+    "text": "9.4 Spatial models with 2D P-splines\n\n\nlibrary(SpATS)\nm_sp &lt;- SpATS(response = \"yield\", genotype = \"geno\", genotype.as.random = TRUE,\n              spatial = ~ PSANOVA(col, row, nseg = c(10, 10)),\n              fixed = ~ rep, random = ~ rowf + colf, data = trial)\nplot(m_sp)\ngetHeritability(m_sp)",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Analysis and Trial Precision</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/09-spatial-analysis.html#mr.bean-spatial-analysis-without-code",
+    "href": "part1-week1/09-spatial-analysis.html#mr.bean-spatial-analysis-without-code",
+    "title": "9  Spatial Analysis and Trial Precision",
+    "section": "9.5 Mr.Bean: spatial analysis without code",
+    "text": "9.5 Mr.Bean: spatial analysis without code",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Analysis and Trial Precision</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/09-spatial-analysis.html#spatial-vs-non-spatial-comparison",
+    "href": "part1-week1/09-spatial-analysis.html#spatial-vs-non-spatial-comparison",
+    "title": "9  Spatial Analysis and Trial Precision",
+    "section": "9.6 Spatial vs non-spatial comparison",
+    "text": "9.6 Spatial vs non-spatial comparison",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Analysis and Trial Precision</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/09-spatial-analysis.html#design-vs-statistical-correction",
+    "href": "part1-week1/09-spatial-analysis.html#design-vs-statistical-correction",
+    "title": "9  Spatial Analysis and Trial Precision",
+    "section": "9.7 Design vs statistical correction",
+    "text": "9.7 Design vs statistical correction",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Analysis and Trial Precision</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/09-spatial-analysis.html#full-single-trial-workflow",
+    "href": "part1-week1/09-spatial-analysis.html#full-single-trial-workflow",
+    "title": "9  Spatial Analysis and Trial Precision",
+    "section": "9.8 Full single-trial workflow",
+    "text": "9.8 Full single-trial workflow",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Analysis and Trial Precision</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/09-spatial-analysis.html#exercise",
+    "href": "part1-week1/09-spatial-analysis.html#exercise",
+    "title": "9  Spatial Analysis and Trial Precision",
+    "section": "9.9 Exercise",
+    "text": "9.9 Exercise\n\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Analysis and Trial Precision</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/09-spatial-analysis.html#key-takeaways",
+    "href": "part1-week1/09-spatial-analysis.html#key-takeaways",
+    "title": "9  Spatial Analysis and Trial Precision",
+    "section": "9.10 Key takeaways",
+    "text": "9.10 Key takeaways",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Analysis and Trial Precision</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/09-spatial-analysis.html#references",
+    "href": "part1-week1/09-spatial-analysis.html#references",
+    "title": "9  Spatial Analysis and Trial Precision",
+    "section": "9.11 References",
+    "text": "9.11 References",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Analysis and Trial Precision</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/10-met-gxe.html",
+    "href": "part1-week1/10-met-gxe.html",
+    "title": "10  Multi-Environment Trials and G×E Interaction",
+    "section": "",
+    "text": "10.1 Learning objectives",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Multi-Environment Trials and G×E Interaction</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/10-met-gxe.html#learning-objectives",
+    "href": "part1-week1/10-met-gxe.html#learning-objectives",
+    "title": "10  Multi-Environment Trials and G×E Interaction",
+    "section": "",
+    "text": "Explain G×E and the need for multi-environment testing\nFit a MET model\nInterpret stability indices, AMMI and GGE biplots",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Multi-Environment Trials and G×E Interaction</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/10-met-gxe.html#planned-content",
+    "href": "part1-week1/10-met-gxe.html#planned-content",
+    "title": "10  Multi-Environment Trials and G×E Interaction",
+    "section": "10.2 Planned content",
+    "text": "10.2 Planned content\n\nG×E interaction, stability vs adaptability, mega-environments\nFoundations of PCA with a toy example\nMET data structure and model fitting\nStability indices, AMMI and GGE biplot",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Multi-Environment Trials and G×E Interaction</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/10-met-gxe.html#key-concepts",
+    "href": "part1-week1/10-met-gxe.html#key-concepts",
+    "title": "10  Multi-Environment Trials and G×E Interaction",
+    "section": "10.3 Key concepts",
+    "text": "10.3 Key concepts",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Multi-Environment Trials and G×E Interaction</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/10-met-gxe.html#worked-demo-in-r",
+    "href": "part1-week1/10-met-gxe.html#worked-demo-in-r",
+    "title": "10  Multi-Environment Trials and G×E Interaction",
+    "section": "10.4 Worked demo in R",
+    "text": "10.4 Worked demo in R\n\n# Use the shared course datasets in data/ where possible",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Multi-Environment Trials and G×E Interaction</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/10-met-gxe.html#interpretation-for-breeding-decisions",
+    "href": "part1-week1/10-met-gxe.html#interpretation-for-breeding-decisions",
+    "title": "10  Multi-Environment Trials and G×E Interaction",
+    "section": "10.5 Interpretation for breeding decisions",
+    "text": "10.5 Interpretation for breeding decisions",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Multi-Environment Trials and G×E Interaction</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/10-met-gxe.html#exercise",
+    "href": "part1-week1/10-met-gxe.html#exercise",
+    "title": "10  Multi-Environment Trials and G×E Interaction",
+    "section": "10.6 Exercise",
+    "text": "10.6 Exercise\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Multi-Environment Trials and G×E Interaction</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/10-met-gxe.html#key-takeaways",
+    "href": "part1-week1/10-met-gxe.html#key-takeaways",
+    "title": "10  Multi-Environment Trials and G×E Interaction",
+    "section": "10.7 Key takeaways",
+    "text": "10.7 Key takeaways",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Multi-Environment Trials and G×E Interaction</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/10-met-gxe.html#references",
+    "href": "part1-week1/10-met-gxe.html#references",
+    "title": "10  Multi-Environment Trials and G×E Interaction",
+    "section": "10.8 References",
+    "text": "10.8 References",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Multi-Environment Trials and G×E Interaction</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/11-ai-plant-breeding.html",
+    "href": "part1-week1/11-ai-plant-breeding.html",
+    "title": "11  Artificial Intelligence in Plant Breeding",
+    "section": "",
+    "text": "11.1 Learning objectives",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Artificial Intelligence in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/11-ai-plant-breeding.html#learning-objectives",
+    "href": "part1-week1/11-ai-plant-breeding.html#learning-objectives",
+    "title": "11  Artificial Intelligence in Plant Breeding",
+    "section": "",
+    "text": "Identify applications of machine learning in breeding and agricultural data\nDecide when ML adds value over classical statistics\nRecognize the main limitations of ML in breeding programs",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Artificial Intelligence in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/11-ai-plant-breeding.html#applications",
+    "href": "part1-week1/11-ai-plant-breeding.html#applications",
+    "title": "11  Artificial Intelligence in Plant Breeding",
+    "section": "11.2 Applications",
+    "text": "11.2 Applications",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Artificial Intelligence in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/11-ai-plant-breeding.html#ai-vs-classical-statistics",
+    "href": "part1-week1/11-ai-plant-breeding.html#ai-vs-classical-statistics",
+    "title": "11  Artificial Intelligence in Plant Breeding",
+    "section": "11.3 AI vs classical statistics",
+    "text": "11.3 AI vs classical statistics",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Artificial Intelligence in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/11-ai-plant-breeding.html#role-in-mutation-breeding",
+    "href": "part1-week1/11-ai-plant-breeding.html#role-in-mutation-breeding",
+    "title": "11  Artificial Intelligence in Plant Breeding",
+    "section": "11.4 Role in mutation breeding",
+    "text": "11.4 Role in mutation breeding",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Artificial Intelligence in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/11-ai-plant-breeding.html#limitations",
+    "href": "part1-week1/11-ai-plant-breeding.html#limitations",
+    "title": "11  Artificial Intelligence in Plant Breeding",
+    "section": "11.5 Limitations",
+    "text": "11.5 Limitations",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Artificial Intelligence in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/11-ai-plant-breeding.html#mini-demo-random-forest-vs-linear-model",
+    "href": "part1-week1/11-ai-plant-breeding.html#mini-demo-random-forest-vs-linear-model",
+    "title": "11  Artificial Intelligence in Plant Breeding",
+    "section": "11.6 Mini demo: random forest vs linear model",
+    "text": "11.6 Mini demo: random forest vs linear model\n\n\nlibrary(tidymodels)\n# rf &lt;- rand_forest(mode = \"regression\") |&gt; set_engine(\"ranger\")\n# compare with linear_reg() using vfold_cv()",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Artificial Intelligence in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/11-ai-plant-breeding.html#breeder-knowledge-remains-essential",
+    "href": "part1-week1/11-ai-plant-breeding.html#breeder-knowledge-remains-essential",
+    "title": "11  Artificial Intelligence in Plant Breeding",
+    "section": "11.7 Breeder knowledge remains essential",
+    "text": "11.7 Breeder knowledge remains essential",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Artificial Intelligence in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/11-ai-plant-breeding.html#exercise",
+    "href": "part1-week1/11-ai-plant-breeding.html#exercise",
+    "title": "11  Artificial Intelligence in Plant Breeding",
+    "section": "11.8 Exercise",
+    "text": "11.8 Exercise\n\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Artificial Intelligence in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/11-ai-plant-breeding.html#key-takeaways",
+    "href": "part1-week1/11-ai-plant-breeding.html#key-takeaways",
+    "title": "11  Artificial Intelligence in Plant Breeding",
+    "section": "11.9 Key takeaways",
+    "text": "11.9 Key takeaways",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Artificial Intelligence in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part1-week1/11-ai-plant-breeding.html#references",
+    "href": "part1-week1/11-ai-plant-breeding.html#references",
+    "title": "11  Artificial Intelligence in Plant Breeding",
+    "section": "11.10 References",
+    "text": "11.10 References",
+    "crumbs": [
+      "Week 1: Concepts and methods",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Artificial Intelligence in Plant Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/12-analysis-pipeline.html",
+    "href": "part2-week2/12-analysis-pipeline.html",
+    "title": "12  An End-to-End Analysis Pipeline",
+    "section": "",
+    "text": "12.1 Learning objectives",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>An End-to-End Analysis Pipeline</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/12-analysis-pipeline.html#learning-objectives",
+    "href": "part2-week2/12-analysis-pipeline.html#learning-objectives",
+    "title": "12  An End-to-End Analysis Pipeline",
+    "section": "",
+    "text": "Run a complete, reproducible analysis from raw data to a selection report\nAdapt the pipeline to crop, trial structure, traits and environments\nAnalyse quantitative and qualitative traits",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>An End-to-End Analysis Pipeline</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/12-analysis-pipeline.html#pipeline-overview",
+    "href": "part2-week2/12-analysis-pipeline.html#pipeline-overview",
+    "title": "12  An End-to-End Analysis Pipeline",
+    "section": "12.2 Pipeline overview",
+    "text": "12.2 Pipeline overview",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>An End-to-End Analysis Pipeline</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/12-analysis-pipeline.html#case-1-cassava-breeding-data",
+    "href": "part2-week2/12-analysis-pipeline.html#case-1-cassava-breeding-data",
+    "title": "12  An End-to-End Analysis Pipeline",
+    "section": "12.3 Case 1: cassava breeding data",
+    "text": "12.3 Case 1: cassava breeding data",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>An End-to-End Analysis Pipeline</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/12-analysis-pipeline.html#case-2-bean-breeding-data",
+    "href": "part2-week2/12-analysis-pipeline.html#case-2-bean-breeding-data",
+    "title": "12  An End-to-End Analysis Pipeline",
+    "section": "12.4 Case 2: bean breeding data",
+    "text": "12.4 Case 2: bean breeding data",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>An End-to-End Analysis Pipeline</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/12-analysis-pipeline.html#case-3-a-mutant-population-dataset",
+    "href": "part2-week2/12-analysis-pipeline.html#case-3-a-mutant-population-dataset",
+    "title": "12  An End-to-End Analysis Pipeline",
+    "section": "12.5 Case 3: a mutant population dataset",
+    "text": "12.5 Case 3: a mutant population dataset",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>An End-to-End Analysis Pipeline</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/12-analysis-pipeline.html#qualitative-traits",
+    "href": "part2-week2/12-analysis-pipeline.html#qualitative-traits",
+    "title": "12  An End-to-End Analysis Pipeline",
+    "section": "12.6 Qualitative traits",
+    "text": "12.6 Qualitative traits\n\n\nlibrary(glmmTMB)\n# glmmTMB(disease ~ rep + (1 | geno), family = binomial, data = trial)\nlibrary(ordinal)\n# clmm(score ~ rep + (1 | geno), data = trial)",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>An End-to-End Analysis Pipeline</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/12-analysis-pipeline.html#how-the-pipeline-changes",
+    "href": "part2-week2/12-analysis-pipeline.html#how-the-pipeline-changes",
+    "title": "12  An End-to-End Analysis Pipeline",
+    "section": "12.7 How the pipeline changes",
+    "text": "12.7 How the pipeline changes",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>An End-to-End Analysis Pipeline</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/12-analysis-pipeline.html#reproducibility",
+    "href": "part2-week2/12-analysis-pipeline.html#reproducibility",
+    "title": "12  An End-to-End Analysis Pipeline",
+    "section": "12.8 Reproducibility",
+    "text": "12.8 Reproducibility",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>An End-to-End Analysis Pipeline</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/12-analysis-pipeline.html#exercise",
+    "href": "part2-week2/12-analysis-pipeline.html#exercise",
+    "title": "12  An End-to-End Analysis Pipeline",
+    "section": "12.9 Exercise",
+    "text": "12.9 Exercise\n\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>An End-to-End Analysis Pipeline</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/12-analysis-pipeline.html#key-takeaways",
+    "href": "part2-week2/12-analysis-pipeline.html#key-takeaways",
+    "title": "12  An End-to-End Analysis Pipeline",
+    "section": "12.10 Key takeaways",
+    "text": "12.10 Key takeaways",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>An End-to-End Analysis Pipeline</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/12-analysis-pipeline.html#references",
+    "href": "part2-week2/12-analysis-pipeline.html#references",
+    "title": "12  An End-to-End Analysis Pipeline",
+    "section": "12.11 References",
+    "text": "12.11 References",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>An End-to-End Analysis Pipeline</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/13-mutant-populations.html",
+    "href": "part2-week2/13-mutant-populations.html",
+    "title": "13  Experimental Design and Statistical Pipelines for Mutation Breeding Applications",
+    "section": "",
+    "text": "13.1 Learning objectives",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/13-mutant-populations.html#learning-objectives",
+    "href": "part2-week2/13-mutant-populations.html#learning-objectives",
+    "title": "13  Experimental Design and Statistical Pipelines for Mutation Breeding Applications",
+    "section": "",
+    "text": "To be defined by the author",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/13-mutant-populations.html#planned-content",
+    "href": "part2-week2/13-mutant-populations.html#planned-content",
+    "title": "13  Experimental Design and Statistical Pipelines for Mutation Breeding Applications",
+    "section": "13.2 Planned content",
+    "text": "13.2 Planned content\n\nAnalysis of mutant populations (M2–M5)\nSelection under high variability (unreplicated and replicated approaches at early generations)\nApplication of statistical pipelines to mutation breeding of different types of crops (autogamous and allogamous)",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/13-mutant-populations.html#key-concepts",
+    "href": "part2-week2/13-mutant-populations.html#key-concepts",
+    "title": "13  Experimental Design and Statistical Pipelines for Mutation Breeding Applications",
+    "section": "13.3 Key concepts",
+    "text": "13.3 Key concepts",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/13-mutant-populations.html#worked-demo-in-r",
+    "href": "part2-week2/13-mutant-populations.html#worked-demo-in-r",
+    "title": "13  Experimental Design and Statistical Pipelines for Mutation Breeding Applications",
+    "section": "13.4 Worked demo in R",
+    "text": "13.4 Worked demo in R\n\n# Use the shared course datasets in data/ where possible",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/13-mutant-populations.html#interpretation-for-breeding-decisions",
+    "href": "part2-week2/13-mutant-populations.html#interpretation-for-breeding-decisions",
+    "title": "13  Experimental Design and Statistical Pipelines for Mutation Breeding Applications",
+    "section": "13.5 Interpretation for breeding decisions",
+    "text": "13.5 Interpretation for breeding decisions",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/13-mutant-populations.html#exercise",
+    "href": "part2-week2/13-mutant-populations.html#exercise",
+    "title": "13  Experimental Design and Statistical Pipelines for Mutation Breeding Applications",
+    "section": "13.6 Exercise",
+    "text": "13.6 Exercise\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/13-mutant-populations.html#key-takeaways",
+    "href": "part2-week2/13-mutant-populations.html#key-takeaways",
+    "title": "13  Experimental Design and Statistical Pipelines for Mutation Breeding Applications",
+    "section": "13.7 Key takeaways",
+    "text": "13.7 Key takeaways",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/13-mutant-populations.html#references",
+    "href": "part2-week2/13-mutant-populations.html#references",
+    "title": "13  Experimental Design and Statistical Pipelines for Mutation Breeding Applications",
+    "section": "13.8 References",
+    "text": "13.8 References",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/14-llm-assistants.html",
+    "href": "part2-week2/14-llm-assistants.html",
+    "title": "14  Using Large Language Models as Data Analysis Assistants",
+    "section": "",
+    "text": "14.1 Learning objectives",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Using Large Language Models as Data Analysis Assistants</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/14-llm-assistants.html#learning-objectives",
+    "href": "part2-week2/14-llm-assistants.html#learning-objectives",
+    "title": "14  Using Large Language Models as Data Analysis Assistants",
+    "section": "",
+    "text": "Use free LLMs to write, debug and explain R code\nRecognize typical LLM errors in statistical analysis\nWrite effective prompts for breeding data analysis\nProtect unpublished research data",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Using Large Language Models as Data Analysis Assistants</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/14-llm-assistants.html#free-tools",
+    "href": "part2-week2/14-llm-assistants.html#free-tools",
+    "title": "14  Using Large Language Models as Data Analysis Assistants",
+    "section": "14.2 Free tools",
+    "text": "14.2 Free tools",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Using Large Language Models as Data Analysis Assistants</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/14-llm-assistants.html#what-llms-do-well",
+    "href": "part2-week2/14-llm-assistants.html#what-llms-do-well",
+    "title": "14  Using Large Language Models as Data Analysis Assistants",
+    "section": "14.3 What LLMs do well",
+    "text": "14.3 What LLMs do well",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Using Large Language Models as Data Analysis Assistants</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/14-llm-assistants.html#what-llms-get-wrong",
+    "href": "part2-week2/14-llm-assistants.html#what-llms-get-wrong",
+    "title": "14  Using Large Language Models as Data Analysis Assistants",
+    "section": "14.4 What LLMs get wrong",
+    "text": "14.4 What LLMs get wrong",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Using Large Language Models as Data Analysis Assistants</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/14-llm-assistants.html#live-comparison",
+    "href": "part2-week2/14-llm-assistants.html#live-comparison",
+    "title": "14  Using Large Language Models as Data Analysis Assistants",
+    "section": "14.5 Live comparison",
+    "text": "14.5 Live comparison",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Using Large Language Models as Data Analysis Assistants</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/14-llm-assistants.html#prompting-for-analysis",
+    "href": "part2-week2/14-llm-assistants.html#prompting-for-analysis",
+    "title": "14  Using Large Language Models as Data Analysis Assistants",
+    "section": "14.6 Prompting for analysis",
+    "text": "14.6 Prompting for analysis",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Using Large Language Models as Data Analysis Assistants</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/14-llm-assistants.html#data-privacy",
+    "href": "part2-week2/14-llm-assistants.html#data-privacy",
+    "title": "14  Using Large Language Models as Data Analysis Assistants",
+    "section": "14.7 Data privacy",
+    "text": "14.7 Data privacy",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Using Large Language Models as Data Analysis Assistants</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/14-llm-assistants.html#using-an-llm-with-the-report-template",
+    "href": "part2-week2/14-llm-assistants.html#using-an-llm-with-the-report-template",
+    "title": "14  Using Large Language Models as Data Analysis Assistants",
+    "section": "14.8 Using an LLM with the report template",
+    "text": "14.8 Using an LLM with the report template",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Using Large Language Models as Data Analysis Assistants</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/14-llm-assistants.html#exercise",
+    "href": "part2-week2/14-llm-assistants.html#exercise",
+    "title": "14  Using Large Language Models as Data Analysis Assistants",
+    "section": "14.9 Exercise",
+    "text": "14.9 Exercise\n\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Using Large Language Models as Data Analysis Assistants</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/14-llm-assistants.html#key-takeaways",
+    "href": "part2-week2/14-llm-assistants.html#key-takeaways",
+    "title": "14  Using Large Language Models as Data Analysis Assistants",
+    "section": "14.10 Key takeaways",
+    "text": "14.10 Key takeaways",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Using Large Language Models as Data Analysis Assistants</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/14-llm-assistants.html#references",
+    "href": "part2-week2/14-llm-assistants.html#references",
+    "title": "14  Using Large Language Models as Data Analysis Assistants",
+    "section": "14.11 References",
+    "text": "14.11 References",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Using Large Language Models as Data Analysis Assistants</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/15-selection-mutation-breeding.html",
+    "href": "part2-week2/15-selection-mutation-breeding.html",
+    "title": "15  Decision-Making and Selection Strategies in Mutation Breeding",
+    "section": "",
+    "text": "15.1 Learning objectives",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Decision-Making and Selection Strategies in Mutation Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/15-selection-mutation-breeding.html#learning-objectives",
+    "href": "part2-week2/15-selection-mutation-breeding.html#learning-objectives",
+    "title": "15  Decision-Making and Selection Strategies in Mutation Breeding",
+    "section": "",
+    "text": "To be defined by the author",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Decision-Making and Selection Strategies in Mutation Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/15-selection-mutation-breeding.html#planned-content",
+    "href": "part2-week2/15-selection-mutation-breeding.html#planned-content",
+    "title": "15  Decision-Making and Selection Strategies in Mutation Breeding",
+    "section": "15.2 Planned content",
+    "text": "15.2 Planned content\n\nSelection strategies\nInterpretation of statistical outputs\nVariety advancement decisions under uncertainty",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Decision-Making and Selection Strategies in Mutation Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/15-selection-mutation-breeding.html#key-concepts",
+    "href": "part2-week2/15-selection-mutation-breeding.html#key-concepts",
+    "title": "15  Decision-Making and Selection Strategies in Mutation Breeding",
+    "section": "15.3 Key concepts",
+    "text": "15.3 Key concepts",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Decision-Making and Selection Strategies in Mutation Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/15-selection-mutation-breeding.html#worked-demo-in-r",
+    "href": "part2-week2/15-selection-mutation-breeding.html#worked-demo-in-r",
+    "title": "15  Decision-Making and Selection Strategies in Mutation Breeding",
+    "section": "15.4 Worked demo in R",
+    "text": "15.4 Worked demo in R\n\n# Use the shared course datasets in data/ where possible",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Decision-Making and Selection Strategies in Mutation Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/15-selection-mutation-breeding.html#interpretation-for-breeding-decisions",
+    "href": "part2-week2/15-selection-mutation-breeding.html#interpretation-for-breeding-decisions",
+    "title": "15  Decision-Making and Selection Strategies in Mutation Breeding",
+    "section": "15.5 Interpretation for breeding decisions",
+    "text": "15.5 Interpretation for breeding decisions",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Decision-Making and Selection Strategies in Mutation Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/15-selection-mutation-breeding.html#exercise",
+    "href": "part2-week2/15-selection-mutation-breeding.html#exercise",
+    "title": "15  Decision-Making and Selection Strategies in Mutation Breeding",
+    "section": "15.6 Exercise",
+    "text": "15.6 Exercise\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Decision-Making and Selection Strategies in Mutation Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/15-selection-mutation-breeding.html#key-takeaways",
+    "href": "part2-week2/15-selection-mutation-breeding.html#key-takeaways",
+    "title": "15  Decision-Making and Selection Strategies in Mutation Breeding",
+    "section": "15.7 Key takeaways",
+    "text": "15.7 Key takeaways",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Decision-Making and Selection Strategies in Mutation Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/15-selection-mutation-breeding.html#references",
+    "href": "part2-week2/15-selection-mutation-breeding.html#references",
+    "title": "15  Decision-Making and Selection Strategies in Mutation Breeding",
+    "section": "15.8 References",
+    "text": "15.8 References",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Decision-Making and Selection Strategies in Mutation Breeding</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/16-participant-projects.html",
+    "href": "part2-week2/16-participant-projects.html",
+    "title": "16  Participant Projects and Final Presentations",
+    "section": "",
+    "text": "16.1 Learning objectives",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Participant Projects and Final Presentations</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/16-participant-projects.html#learning-objectives",
+    "href": "part2-week2/16-participant-projects.html#learning-objectives",
+    "title": "16  Participant Projects and Final Presentations",
+    "section": "",
+    "text": "Apply the course methods to your own dataset\nProduce a reproducible selection report\nPresent and defend your breeding decisions",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Participant Projects and Final Presentations</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/16-participant-projects.html#daily-checkpoints",
+    "href": "part2-week2/16-participant-projects.html#daily-checkpoints",
+    "title": "16  Participant Projects and Final Presentations",
+    "section": "16.2 Daily checkpoints",
+    "text": "16.2 Daily checkpoints",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Participant Projects and Final Presentations</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/16-participant-projects.html#report-template",
+    "href": "part2-week2/16-participant-projects.html#report-template",
+    "title": "16  Participant Projects and Final Presentations",
+    "section": "16.3 Report template",
+    "text": "16.3 Report template",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Participant Projects and Final Presentations</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/16-participant-projects.html#presentation-guidelines",
+    "href": "part2-week2/16-participant-projects.html#presentation-guidelines",
+    "title": "16  Participant Projects and Final Presentations",
+    "section": "16.4 Presentation guidelines",
+    "text": "16.4 Presentation guidelines",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Participant Projects and Final Presentations</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/16-participant-projects.html#evaluation-rubric",
+    "href": "part2-week2/16-participant-projects.html#evaluation-rubric",
+    "title": "16  Participant Projects and Final Presentations",
+    "section": "16.5 Evaluation rubric",
+    "text": "16.5 Evaluation rubric",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Participant Projects and Final Presentations</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/16-participant-projects.html#exercise",
+    "href": "part2-week2/16-participant-projects.html#exercise",
+    "title": "16  Participant Projects and Final Presentations",
+    "section": "16.6 Exercise",
+    "text": "16.6 Exercise\n\n\n\n\n\n\n\nTipSolution",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Participant Projects and Final Presentations</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/16-participant-projects.html#key-takeaways",
+    "href": "part2-week2/16-participant-projects.html#key-takeaways",
+    "title": "16  Participant Projects and Final Presentations",
+    "section": "16.7 Key takeaways",
+    "text": "16.7 Key takeaways",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Participant Projects and Final Presentations</span>"
+    ]
+  },
+  {
+    "objectID": "part2-week2/16-participant-projects.html#references",
+    "href": "part2-week2/16-participant-projects.html#references",
+    "title": "16  Participant Projects and Final Presentations",
+    "section": "16.8 References",
+    "text": "16.8 References",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Participant Projects and Final Presentations</span>"
+    ]
+  }
+]

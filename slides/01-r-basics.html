@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="01-r-basics_files/libs/clipboard/clipboard.min.js"></script>
+<script src="01-r-basics_files/libs/quarto-html/tabby.min.js"></script>
+<script src="01-r-basics_files/libs/quarto-html/popper.min.js"></script>
+<script src="01-r-basics_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="01-r-basics_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="01-r-basics_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="01-r-basics_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <meta name="author" content="Luis Fernando Delgado Muñoz">
+  <meta name="dcterms.date" content="2026-10-28">
+  <title>Pre-course Session 1: Software Setup and R Basics</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="01-r-basics_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="01-r-basics_files/libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="01-r-basics_files/libs/revealjs/dist/theme/quarto-8f256d708726d40fbff7d707db68e007.css">
+  <link rel="stylesheet" href="rtc_style.css">
+  <link href="01-r-basics_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="01-r-basics_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="01-r-basics_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="01-r-basics_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="01-r-basics_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="01-r-basics_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Pre-course Session 1: Software Setup and R Basics</h1>
+  <p class="subtitle">Regional Training Course on Experimental Design and Data Analysis for the Advancement of Mutant Populations (RER5030)</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Luis Fernando Delgado Muñoz
+</div>
+</div>
+</div>
+
+  <p class="date">28 October 2026</p>
+</section>
+<section id="about-me" class="slide level2">
+<h2>About me</h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<div class="photo tall">
+<p><img data-src="images/lfdelgadom.jpeg"></p>
+</div>
+</div><div class="column" style="width:65%;">
+<p><strong>Luis Fernando Delgado Muñoz</strong>, Cali, Colombia</p>
+<ul>
+<li>Agroindustrial Engineer and <strong>MSc in Agricultural Sciences</strong>, Universidad Nacional de Colombia, Palmira (Best Master Thesis Award, 2019)</li>
+<li><strong>Associate Professor</strong>, Universidad de San Buenaventura Cali, Faculty of Engineering</li>
+<li><strong>Director of the Biological Engineering Program</strong>, Universidad de San Buenaventura Cali</li>
+<li><strong>Lecturer of Experimental Design with R Programming</strong>, Universidad Central del Valle del Cauca (since 2020)</li>
+<li>Working areas: experimental design, statistical modelling, data science and AI for agriculture</li>
+</ul>
+</div></div>
+</section>
+<section id="before-data-science-at-ciat" class="slide level2">
+<h2>Before: data science at CIAT</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Data Scientist, Cassava Program</strong>, Alliance of Bioversity International and CIAT (2022 to 2025)</p>
+<ul>
+<li><strong>50 years of historical trials</strong> curated and analysed</li>
+<li><strong>Genetic gain</strong> of all breeding populations (cassava, beans, rice and forages for CGIAR)</li>
+<li><strong>Standard analysis pipelines</strong> from early trials to advanced yield trials</li>
+<li><strong>BioFlow</strong>, analysis tools of the OneCG Breeding Analytics group</li>
+</ul>
+<p><strong>Postharvest Quality Lab</strong> (2020 to 2022): cassava cooking quality and the first sensory panel of the program</p>
+</div><div class="column" style="width:40%;">
+<div class="photo short">
+<p><img data-src="images/IMG_20221014_121105.jpg"></p>
+</div>
+</div></div>
+</section>
+<section id="iaea-mission-pakistan-2023" class="slide level2">
+<h2>IAEA mission: Pakistan, 2023</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Invited trainer of the <strong>IAEA</strong> in <strong>Faisalabad</strong> (November 2023)</li>
+<li>Short course on <strong>Experimental Design and Data Analysis for advancing mutant plant breeding populations</strong></li>
+<li>Participants from <strong>Southeast Asia, Samoa and Papua New Guinea</strong></li>
+<li>Same goal as this course: from field data to selection decisions in mutant populations</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<div class="photo">
+<p><img data-src="images/IMG_20231120_101301.jpg"></p>
+</div>
+</div></div>
+</section>
+<section id="now-it-is-your-turn" class="slide level2 scrollable">
+<h2>Now it is your turn</h2>
+<p>In one minute, tell us:</p>
+<ol type="1">
+<li class="fragment">Your <strong>name, institution and country</strong></li>
+<li class="fragment">The <strong>crop</strong> you work with</li>
+<li class="fragment">What <strong>generation</strong> of mutant material you are evaluating (M2, M3, M4…)</li>
+<li class="fragment"><strong>One problem</strong> you have with your data today</li>
+</ol>
+</section>
+<section id="the-course-at-a-glance" class="slide level2">
+<h2>The course at a glance</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>When</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>28 October</strong>, online</td>
+<td>Session 1: software setup and R basics (today)</td>
+</tr>
+<tr class="even">
+<td><strong>4 November</strong>, online</td>
+<td>Session 2: tidy data and digital data collection apps</td>
+</tr>
+<tr class="odd">
+<td><strong>9 to 13 November</strong>, Skopje</td>
+<td>Week 1: field data, designs, ANOVA, mixed models, spatial analysis, imaging, G×E, machine learning</td>
+</tr>
+<tr class="even">
+<td><strong>16 to 20 November</strong>, Skopje</td>
+<td>Week 2: analysis pipeline, mutation breeding and <strong>your own dataset</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>The goal: at the end you analyse <strong>your own data</strong> and present a selection decision supported by statistics.</p>
+</blockquote>
+</section>
+<section id="plan-for-today-1500-to-1700-cest" class="slide level2">
+<h2>Plan for today (15:00 to 17:00 CEST)</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Activity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Introductions</td>
+</tr>
+<tr class="even">
+<td><strong>Block 1.</strong> Installation check</td>
+</tr>
+<tr class="odd">
+<td><strong>Blocks 2 to 5.</strong> R concepts with plant breeding examples</td>
+</tr>
+<tr class="even">
+<td><strong>Live coding</strong> in RStudio with the course data</td>
+</tr>
+<tr class="odd">
+<td>Homework and questions</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="block-1" class="slide level2 divider">
+<h2>Block 1</h2>
+<p>Installation check</p>
+</section>
+<section id="what-you-need-before-we-start" class="slide level2">
+<h2>What you need before we start</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" checked=""><strong>R</strong> (version 4.3 or newer) from <a href="https://cran.r-project.org" class="uri">https://cran.r-project.org</a></label></li>
+<li><label><input type="checkbox" checked=""><strong>RStudio Desktop</strong> from <a href="https://docs.posit.co/ide/user/download.html" class="uri">https://docs.posit.co/ide/user/download.html</a></label></li>
+<li><label><input type="checkbox" checked="">The <strong>course packages</strong> installed with <code>R/install_packages.R</code></label></li>
+<li><label><input type="checkbox" checked="">The <strong>course repository</strong> downloaded (datasets and scripts)</label></li>
+<li><label><input type="checkbox" checked="">Free accounts in <strong>two AI assistants</strong> (ChatGPT, Claude, Gemini, DeepSeek or Qwen), used in week 2</label></li>
+</ul>
+<div class="keybox">
+<p>Something failed? Write the error message in the chat. We solve it together after the session or on Day 1 at 08:00 (installation help desk).</p>
+</div>
+</section>
+<section id="installing-the-course-packages" class="slide level2">
+<h2>Installing the course packages</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-label="1"></a><span class="fu">source</span>(<span class="st">"R/install_packages.R"</span>)   <span class="co"># installs only the missing packages</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The script prints <code>OK</code> or <code>FAILED</code> for each package. The first installation can take 10 to 20 minutes.</p>
+<div class="fragment">
+<p><strong>A plant breeding analogy:</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 41%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Analogy</th>
+<th>How often</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>install.packages("dplyr")</code></td>
+<td>buying the seed</td>
+<td>once per computer</td>
+</tr>
+<tr class="even">
+<td><code>library(dplyr)</code></td>
+<td>sowing it in this season’s trial</td>
+<td>every R session</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="posit-cloud-rstudio-in-the-browser" class="slide level2 scrollable">
+<h2>Posit Cloud: RStudio in the browser</h2>
+<p>For computers with less than 4 GB of RAM or wit non administrator rights:</p>
+<ol type="1">
+<li>Create a free account at <a href="https://posit.cloud/plans/free" class="uri">https://posit.cloud/plans/free</a></li>
+<li><strong>New Project</strong> then <strong>New RStudio Project</strong></li>
+<li>Upload the course files with <strong>Upload</strong> (Files pane)</li>
+<li>Run <code>source("R/install_packages.R")</code></li>
+</ol>
+<p><strong>The free plan has limited memory and hours per month: enough for the course exercises, but it needs a stable internet connection.</strong></p>
+<p>48 hours/month with 32 GB RAM, reset at midnight UTC.</p>
+</section>
+<section id="block-2" class="slide level2 divider">
+<h2>Block 2</h2>
+<p>R and RStudio</p>
+</section>
+<section id="why-r-for-plant-breeding" class="slide level2 scrollable">
+<h2>Why R for plant breeding?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>Free and open source</strong>, used by breeding programs worldwide</li>
+<li><strong>Reproducible</strong>: the script is the record of your analysis</li>
+<li>Packages built for breeders:
+<ul>
+<li><code>FielDHub</code>: field designs and layouts</li>
+<li><code>lme4</code>, <code>emmeans</code>: mixed models, BLUEs and BLUPs</li>
+<li><code>SpATS</code>: spatial analysis of trials</li>
+<li><code>metan</code>, <code>statgenGxE</code>: G×E and stability</li>
+<li><code>pliman</code>: image analysis of plants</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>From field to decision in one script:</strong></p>
+<ol type="1">
+<li>Field book (CSV or Excel)</li>
+<li>Quality control</li>
+<li>Statistical model</li>
+<li>Genotype means or BLUPs</li>
+<li><strong>Selection decision</strong></li>
+</ol>
+</div></div>
+</section>
+<section id="r-for-plant-breeding" class="slide level2">
+<h2>R for plant breeding?</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div style="text-align: justify;">
+<p>Plant breeding is increasingly data-driven, leveraging multi-environment trials, genomic selection, QTL mapping, and mating designs like diallels and line × tester analyses.</p>
+<p>R has emerged as an essential platform for breeders offering robust analytics, visualization, and reproducible workflows.</p>
+<p>This document presents the top 10 R packages for plant breeding, including tools for correlations, heatmaps, plots, and regression trends in research.</p>
+</div>
+</div><div class="column" style="width:40%;">
+<p><a href="https://www.linkedin.com/pulse/top-r-packages-every-plant-breeder-should-know-essential-madhu-uxkfc/"><img data-src="images/linkedIn_post.png"></a> <a href="https://www.linkedin.com/pulse/top-r-packages-every-plant-breeder-should-know-essential-madhu-uxkfc/" class="uri">Linked In post</a></p>
+</div></div>
+</section>
+<section id="the-rstudio-interface" class="slide level2">
+<h2>The RStudio interface</h2>
+
+<img data-src="images/R_panel.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%"><p>Write your code in a <strong>script</strong> (File, New File, R Script) and run a line with <strong>Ctrl + Enter</strong> (Windows) or <strong>Cmd + Enter</strong> (macOS).</p>
+</section>
+<section id="projects-and-the-working-directory" class="slide level2">
+<h2>Projects and the working directory</h2>
+<p>The most common error for beginners:</p>
+<pre><code>Error: cannot open file 'data.csv': No such file or directory</code></pre>
+<p>R is looking in the wrong folder. <strong>Solution: always work inside an RStudio project.</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<pre><code>rtc-course/
+├── rtc-course.Rproj
+├── data/      # raw data
+├── R/         # scripts
+└── output/    # tables and figures</code></pre>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>File, New Project, New Directory</li>
+<li>Use <strong>relative paths</strong>: <code>"data/trial.csv"</code></li>
+<li>Avoid <code>setwd("C:/Users/maria/Desktop")</code>: it only works on one computer</li>
+</ul>
+</div></div>
+</section>
+<section id="block-3" class="slide level2 divider">
+<h2>Block 3</h2>
+<p>Objects and data structures</p>
+</section>
+<section id="objects-and-functions" class="slide level2">
+<h2>Objects and functions</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><strong>Objects</strong> store values. Create them with <code>&lt;-</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-label="1"></a>plot_area_m2  <span class="ot">&lt;-</span> <span class="dv">6</span>     <span class="co"># harvested area of the plot</span></span>
+<span id="cb4-2"><a href="" aria-label="2"></a>grain_kg      <span class="ot">&lt;-</span> <span class="fl">2.7</span>   <span class="co"># grain harvested in the plot</span></span>
+<span id="cb4-3"><a href="" aria-label="3"></a>kg_m2_to_t_ha <span class="ot">&lt;-</span> <span class="dv">10</span>    <span class="co"># 1 kg/m² = 10 t/ha</span></span>
+<span id="cb4-4"><a href="" aria-label="4"></a></span>
+<span id="cb4-5"><a href="" aria-label="5"></a>yield_t_ha <span class="ot">&lt;-</span> grain_kg <span class="sc">/</span> plot_area_m2 <span class="sc">*</span> kg_m2_to_t_ha</span>
+<span id="cb4-6"><a href="" aria-label="6"></a>yield_t_ha</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.5</code></pre>
+</div>
+</div>
+<p><strong>Functions</strong> do something with objects:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-label="1"></a><span class="fu">round</span>(yield_t_ha, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.5</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<p><strong>Your own function</strong>, for every plot of the trial:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-label="1"></a>to_t_ha <span class="ot">&lt;-</span> <span class="cf">function</span>(grain_kg, area_m2) {</span>
+<span id="cb8-2"><a href="" aria-label="2"></a>  grain_kg <span class="sc">/</span> area_m2 <span class="sc">*</span> <span class="dv">10</span></span>
+<span id="cb8-3"><a href="" aria-label="3"></a>}</span>
+<span id="cb8-4"><a href="" aria-label="4"></a></span>
+<span id="cb8-5"><a href="" aria-label="5"></a>plots_kg <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.7</span>, <span class="fl">3.1</span>, <span class="fl">2.2</span>, <span class="fl">2.9</span>)   <span class="co"># four plots</span></span>
+<span id="cb8-6"><a href="" aria-label="6"></a><span class="fu">to_t_ha</span>(plots_kg, <span class="at">area_m2 =</span> <span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.500000 5.166667 3.666667 4.833333</code></pre>
+</div>
+</div>
+<div class="keybox">
+<p>Write the calculation <strong>once</strong>, apply it to <strong>all plots</strong>: no copying cells as in Excel.</p>
+</div>
+</div></div>
+</section>
+<section id="vectors-one-trait-many-plants" class="slide level2">
+<h2>Vectors: one trait, many plants</h2>
+<p>A <strong>vector</strong> holds values of the same type. Each column of a field book is a vector.</p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-label="1"></a>plant  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"M3-01"</span>, <span class="st">"M3-02"</span>, <span class="st">"M3-03"</span>, <span class="st">"M3-04"</span>, <span class="st">"M3-05"</span>)  <span class="co"># character</span></span>
+<span id="cb10-2"><a href="" aria-label="2"></a>height <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">92.5</span>, <span class="fl">88.0</span>, <span class="fl">101.3</span>, <span class="fl">95.1</span>, <span class="fl">84.7</span>)                 <span class="co"># numeric (cm)</span></span>
+<span id="cb10-3"><a href="" aria-label="3"></a></span>
+<span id="cb10-4"><a href="" aria-label="4"></a><span class="fu">mean</span>(height)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 92.32</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-label="1"></a>short <span class="ot">&lt;-</span> height <span class="sc">&lt;</span> <span class="dv">90</span>    <span class="co"># logical: TRUE / FALSE for each plant</span></span>
+<span id="cb12-2"><a href="" aria-label="2"></a>short</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE  TRUE FALSE FALSE  TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-label="1"></a>plant[short]            <span class="co"># candidate semi-dwarf mutants</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "M3-02" "M3-05"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-label="1"></a><span class="fu">mean</span>(short)             <span class="co"># proportion selected</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>numeric</td>
+<td><code>92.5</code>, <code>88.0</code></td>
+</tr>
+<tr class="even">
+<td>character</td>
+<td><code>"M3-01"</code>, <code>"Parent"</code></td>
+</tr>
+<tr class="odd">
+<td>logical</td>
+<td><code>TRUE</code>, <code>FALSE</code></td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<div class="keybox">
+<p><strong>Truncation selection</strong> in one line: keep the plants that pass a threshold. Here, 2 of 5 plants (<strong>40%</strong>) are selected.</p>
+</div>
+</div>
+</div></div>
+</section>
+<section id="factors-genotypes-replicates-and-blocks" class="slide level2">
+<h2>Factors: genotypes, replicates and blocks</h2>
+<p>A <strong>factor</strong> is a vector of categories. Genotype, replicate, block, row and column <strong>must be factors</strong> in a model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-label="1"></a>rep <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb18-2"><a href="" aria-label="2"></a><span class="fu">class</span>(rep)          <span class="co"># numeric: R would treat replicate 3 as "three times" replicate 1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-label="1"></a>rep <span class="ot">&lt;-</span> <span class="fu">factor</span>(rep)</span>
+<span id="cb20-2"><a href="" aria-label="2"></a><span class="fu">levels</span>(rep)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1" "2" "3"</code></pre>
+</div>
+</div>
+<div class="keybox">
+<p>If replicate is numeric, an ANOVA estimates <strong>one slope</strong> (1 degree of freedom) instead of <strong>one effect per replicate</strong> (2 degrees of freedom). The results are wrong without any error message.</p>
+</div>
+</section>
+<section id="matrices-a-genotype-environment-table" class="slide level2">
+<h2>Matrices: a genotype × environment table</h2>
+<p>All values of the same type, arranged in rows and columns.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-label="1"></a>gxe <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">4.1</span>, <span class="fl">3.8</span>, <span class="fl">4.5</span>,</span>
+<span id="cb22-2"><a href="" aria-label="2"></a>                <span class="fl">3.6</span>, <span class="fl">3.9</span>, <span class="fl">4.0</span>,</span>
+<span id="cb22-3"><a href="" aria-label="3"></a>                <span class="fl">4.4</span>, <span class="fl">3.2</span>, <span class="fl">4.9</span>),</span>
+<span id="cb22-4"><a href="" aria-label="4"></a>              <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb22-5"><a href="" aria-label="5"></a>              <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"M4-01"</span>, <span class="st">"M4-02"</span>, <span class="st">"Parent"</span>),</span>
+<span id="cb22-6"><a href="" aria-label="6"></a>                              <span class="fu">c</span>(<span class="st">"Skopje"</span>, <span class="st">"Bitola"</span>, <span class="st">"Strumica"</span>)))</span>
+<span id="cb22-7"><a href="" aria-label="7"></a>gxe</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Skopje Bitola Strumica
+M4-01     4.1    3.8      4.5
+M4-02     3.6    3.9      4.0
+Parent    4.4    3.2      4.9</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-label="1"></a><span class="fu">rowMeans</span>(gxe)    <span class="co"># mean yield of each genotype across environments</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   M4-01    M4-02   Parent 
+4.133333 3.833333 4.166667 </code></pre>
+</div>
+</div>
+</section>
+<section id="data-frames-your-field-book-in-r" class="slide level2">
+<h2>Data frames: your field book in R</h2>
+<p>Each <strong>row is a plot</strong>, each <strong>column is a variable</strong>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-label="1"></a>field_book <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb26-2"><a href="" aria-label="2"></a>  <span class="at">plot  =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb26-3"><a href="" aria-label="3"></a>  <span class="at">rep   =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)),</span>
+<span id="cb26-4"><a href="" aria-label="4"></a>  <span class="at">geno  =</span> <span class="fu">c</span>(<span class="st">"M4-01"</span>, <span class="st">"Parent"</span>, <span class="st">"Parent"</span>, <span class="st">"M4-01"</span>),</span>
+<span id="cb26-5"><a href="" aria-label="5"></a>  <span class="at">yield =</span> <span class="fu">c</span>(<span class="fl">4.6</span>, <span class="fl">4.3</span>, <span class="fl">4.1</span>, <span class="fl">4.9</span>)</span>
+<span id="cb26-6"><a href="" aria-label="6"></a>)</span>
+<span id="cb26-7"><a href="" aria-label="7"></a>field_book</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  plot rep   geno yield
+1    1   1  M4-01   4.6
+2    2   1 Parent   4.3
+3    3   2 Parent   4.1
+4    4   2  M4-01   4.9</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-label="1"></a>field_book[field_book<span class="sc">$</span>geno <span class="sc">==</span> <span class="st">"M4-01"</span>, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  plot rep  geno yield
+1    1   1 M4-01   4.6
+4    4   2 M4-01   4.9</code></pre>
+</div>
+</div>
+</section>
+<section id="block-4" class="slide level2 divider">
+<h2>Block 4</h2>
+<p>Importing field data</p>
+</section>
+<section id="the-course-datasets" class="slide level2">
+<h2>The course datasets</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 35%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Content</th>
+<th>Why we use it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>precourse_trial.csv</code></td>
+<td>10 M4 lines + parent + check, RCBD, 3 reps</td>
+<td>Learning the basics</td>
+</tr>
+<tr class="even">
+<td><code>precourse_trial_eu.csv</code></td>
+<td>Same data, <code>;</code> and decimal comma</td>
+<td>European Excel files</td>
+</tr>
+<tr class="odd">
+<td><code>precourse_trial.xlsx</code></td>
+<td>Same data, Excel</td>
+<td>Reading Excel</td>
+</tr>
+<tr class="even">
+<td><code>Example_Beans.csv</code></td>
+<td>Real bean trial, 380 lines, 792 plots</td>
+<td>Real data problems</td>
+</tr>
+<tr class="odd">
+<td><code>Example_rice.csv</code></td>
+<td>Rice trial, Latin-1 encoding</td>
+<td>Accents and special letters</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="comma-semicolon-and-decimal-mark" class="slide level2">
+<h2>Comma, semicolon and decimal mark</h2>
+<p>Many European versions of Excel save CSV files like this:</p>
+<pre><code>"location";"year";"generation";"plot";"rep";...;"yield_t_ha"
+"Skopje";2025;"M4";1;1;...;4,6</code></pre>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Comma separator, decimal point</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-label="1"></a>trial <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/precourse_trial.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Semicolon separator, decimal comma</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-label="1"></a>trial <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"data/precourse_trial_eu.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div></div>
+<p>Other combinations: <code>read_delim(file, delim = "\t", locale = locale(decimal_mark = ","))</code></p>
+</section>
+<section id="reading-and-checking-the-practice-trial" class="slide level2">
+<h2>Reading and checking the practice trial</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-label="1"></a>trial <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/precourse_trial.csv"</span>)</span>
+<span id="cb33-2"><a href="" aria-label="2"></a><span class="fu">glimpse</span>(trial)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 36
+Columns: 13
+$ location          &lt;chr&gt; "Skopje", "Skopje", "Skopje", "Skopje", "Skopje", "S…
+$ year              &lt;dbl&gt; 2025, 2025, 2025, 2025, 2025, 2025, 2025, 2025, 2025…
+$ generation        &lt;chr&gt; "M4", "M4", "M4", "M4", "M4", "M4", "M4", "M4", "M4"…
+$ plot              &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1…
+$ rep               &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2…
+$ row               &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2…
+$ col               &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5…
+$ geno              &lt;chr&gt; "M4-01", "M4-10", "M4-06", "M4-02", "Parent", "M4-09…
+$ check             &lt;chr&gt; "no", "no", "no", "no", "yes", "no", "no", "no", "no…
+$ yield_t_ha        &lt;dbl&gt; 4.60, 3.77, 3.24, 4.04, 4.31, 3.92, 4.20, NA, 4.75, …
+$ plant_height_cm   &lt;dbl&gt; 86.3, 93.4, 84.3, 88.8, 96.5, 82.8, 94.0, 85.0, 88.1…
+$ days_to_flowering &lt;dbl&gt; 64, 63, 63, 61, 62, 62, 62, 63, 63, 63, 59, 59, 60, …
+$ disease_score     &lt;dbl&gt; 2, 5, 6, 5, 3, 6, 6, 6, 4, 4, 3, 3, 3, 1, 3, 5, NA, …</code></pre>
+</div>
+</div>
+</section>
+<section id="accents-and-special-letters-encoding" class="slide level2">
+<h2>Accents and special letters: encoding</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-label="1"></a>rice <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Example_rice.csv"</span>)</span>
+<span id="cb35-2"><a href="" aria-label="2"></a><span class="fu">unique</span>(rice<span class="sc">$</span>TRAT)        <span class="co"># accents are not displayed correctly</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Irrigaci\xf3n" "Sequ\xeda"    </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-label="1"></a>rice <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Example_rice.csv"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"latin1"</span>))</span>
+<span id="cb37-2"><a href="" aria-label="2"></a><span class="fu">unique</span>(rice<span class="sc">$</span>TRAT)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Irrigación" "Sequía"    </code></pre>
+</div>
+</div>
+<p>For names with č, š, ž or ğ saved in Central European Windows, use <code>encoding = "windows-1250"</code>. Best solution: save from Excel as <strong>CSV UTF-8</strong>.</p>
+</section>
+<section id="a-real-trial-common-bean-colombia-2016" class="slide level2">
+<h2>A real trial: common bean, Colombia, 2016</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-label="1"></a>beans <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Example_Beans.csv"</span>)</span>
+<span id="cb39-2"><a href="" aria-label="2"></a><span class="fu">dim</span>(beans)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 792  18</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-label="1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(beans))[<span class="dv">10</span><span class="sc">:</span><span class="dv">18</span>]   <span class="co"># missing values per trait</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        DF        DPM       PLHA     POM_c2      SW100        TSW       YDHA 
+         0          6          4          0          4          3          4 
+     YDHPL YdHa_clean 
+         4          4 </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>380 lines</strong>, alpha-lattice with <strong>2 replicates</strong>, 18 incomplete blocks of 22 plots</li>
+<li>Field grid of <strong>66 rows × 12 columns</strong></li>
+<li>16 lines repeated in each replicate as <strong>checks</strong></li>
+</ul>
+</section>
+<section id="checklist-for-any-new-data-file" class="slide level2 scrollable">
+<h2>Checklist for any new data file</h2>
+<ol type="1">
+<li class="fragment">Read the file and check the dimensions: <code>dim()</code></li>
+<li class="fragment">Check column names and types: <code>glimpse()</code></li>
+<li class="fragment">Count missing values per column: <code>colSums(is.na())</code></li>
+<li class="fragment">Convert design variables to factors</li>
+<li class="fragment">Check repeated genotypes and balance across replicates</li>
+<li class="fragment">Check that names and accents are displayed correctly</li>
+</ol>
+</section>
+<section id="block-5" class="slide level2 divider">
+<h2>Block 5</h2>
+<p>Data manipulation and a first plot</p>
+</section>
+<section id="five-verbs-of-dplyr" class="slide level2">
+<h2>Five verbs of <code>dplyr</code></h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 36%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Verb</th>
+<th>What it does</th>
+<th>Breeding example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>select()</code></td>
+<td>keep columns</td>
+<td>keep design columns and yield</td>
+</tr>
+<tr class="even">
+<td><code>filter()</code></td>
+<td>keep rows</td>
+<td>plots of the parent only</td>
+</tr>
+<tr class="odd">
+<td><code>mutate()</code></td>
+<td>create columns</td>
+<td>yield in kg/ha</td>
+</tr>
+<tr class="even">
+<td><code>arrange()</code></td>
+<td>sort rows</td>
+<td>rank genotypes by yield</td>
+</tr>
+<tr class="odd">
+<td><code>group_by()</code> + <code>summarise()</code></td>
+<td>summaries by group</td>
+<td>mean yield per genotype</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>pipe</strong> <code>|&gt;</code> reads as “and then” (Ctrl/Cmd + Shift + M).</p>
+</section>
+<section id="which-lines-beat-the-parent" class="slide level2">
+<h2>Which lines beat the parent?</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-label="1"></a>geno_means <span class="ot">&lt;-</span> trial <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a href="" aria-label="2"></a>  <span class="fu">group_by</span>(geno, check) <span class="sc">|&gt;</span></span>
+<span id="cb43-3"><a href="" aria-label="3"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(yield_t_ha)),</span>
+<span id="cb43-4"><a href="" aria-label="4"></a>            <span class="at">yield =</span> <span class="fu">mean</span>(yield_t_ha, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb43-5"><a href="" aria-label="5"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(yield))</span>
+<span id="cb43-6"><a href="" aria-label="6"></a></span>
+<span id="cb43-7"><a href="" aria-label="7"></a>parent_yield <span class="ot">&lt;-</span> geno_means <span class="sc">|&gt;</span> <span class="fu">filter</span>(geno <span class="sc">==</span> <span class="st">"Parent"</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(yield)</span>
+<span id="cb43-8"><a href="" aria-label="8"></a></span>
+<span id="cb43-9"><a href="" aria-label="9"></a>geno_means <span class="sc">|&gt;</span> <span class="fu">filter</span>(check <span class="sc">==</span> <span class="st">"no"</span>, yield <span class="sc">&gt;</span> parent_yield)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  geno  check     n yield
+  &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;dbl&gt;
+1 M4-03 no        3  5.28
+2 M4-07 no        3  4.96
+3 M4-01 no        2  4.38</code></pre>
+</div>
+</div>
+<div class="fragment">
+<blockquote>
+<p>Two of these lines have more than 0.5 t/ha over the parent. <strong>Is the difference real or noise?</strong> That question is the reason for Days 2 and 3 (ANOVA, Dunnett test and mixed models).</p>
+</blockquote>
+</div>
+</section>
+<section id="a-first-plot-with-ggplot2" class="slide level2">
+<h2>A first plot with <code>ggplot2</code></h2>
+<p><strong>data</strong> + <strong>aesthetics</strong> <code>aes()</code> + <strong>geometry</strong> <code>geom_...()</code></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-label="1"></a><span class="fu">ggplot</span>(trial, <span class="fu">aes</span>(<span class="at">x =</span> geno, <span class="at">y =</span> yield_t_ha)) <span class="sc">+</span></span>
+<span id="cb45-2"><a href="" aria-label="2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"#EAD9BC"</span>) <span class="sc">+</span></span>
+<span id="cb45-3"><a href="" aria-label="3"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#1F3A5F"</span>) <span class="sc">+</span></span>
+<span id="cb45-4"><a href="" aria-label="4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Genotype"</span>, <span class="at">y =</span> <span class="st">"Grain yield (t/ha)"</span>) <span class="sc">+</span></span>
+<span id="cb45-5"><a href="" aria-label="5"></a>  theme_rtc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="01-r-basics_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<section id="the-bean-trial-as-a-field-map" class="slide level2">
+<h2>The bean trial as a field map</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-label="1"></a>beans <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a href="" aria-label="2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> row, <span class="at">y =</span> col, <span class="at">fill =</span> YdHa_clean)) <span class="sc">+</span></span>
+<span id="cb46-3"><a href="" aria-label="3"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb46-4"><a href="" aria-label="4"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb46-5"><a href="" aria-label="5"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb46-6"><a href="" aria-label="6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Row"</span>, <span class="at">y =</span> <span class="st">"Column"</span>, <span class="at">fill =</span> <span class="st">"Yield</span><span class="sc">\n</span><span class="st">(kg/ha)"</span>) <span class="sc">+</span></span>
+<span id="cb46-7"><a href="" aria-label="7"></a>  theme_rtc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="01-r-basics_files/figure-revealjs/unnamed-chunk-18-1.png" width="1056" class="r-stretch"><p>Patterns in the field are the reason to use <strong>blocks</strong> (Day 2) and <strong>spatial models</strong> (Day 4).</p>
+</section>
+<section id="live-coding" class="slide level2 divider">
+<h2>Live coding</h2>
+<p>Let’s open RStudio</p>
+<p><span class="small-note">We now run the code of the course manual, chapter 1, step by step with the course data.</span></p>
+</section>
+<section id="homework-before-session-2" class="slide level2 scrollable">
+<h2>Homework before Session 2</h2>
+<p>Use <code>data/precourse_trial.csv</code> inside an RStudio project:</p>
+<ol type="1">
+<li>Import <code>precourse_trial_eu.csv</code> and check that <code>yield_t_ha</code> is numeric</li>
+<li>How many plots have a missing <code>disease_score</code>?</li>
+<li>Mean days to flowering per genotype, sorted from early to late</li>
+<li>Mutant lines (not the parent or check) with a mean yield higher than the parent</li>
+<li>A boxplot of disease score by replicate</li>
+</ol>
+<p>Solutions are in the course manual, chapter 1.</p>
+</section>
+<section id="next-session-4-november" class="slide level2">
+<h2>Next session: 4 November</h2>
+<ul>
+<li><strong>15:00 to 17:00 CEST</strong>, online</li>
+<li><strong>Preparing your data in tidy format</strong>: one row per plot, one column per variable</li>
+<li>Mandatory metadata: location, year, generation, design, replicate, block, row, column, genotype, check</li>
+<li><strong>Field Book</strong> and <strong>GridScore NEXT</strong> apps for digital data collection</li>
+<li><strong>Bring one of your datasets</strong>: we review real examples together</li>
+</ul>
+</section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<ul>
+<li><strong>R for Data Science</strong>, 2nd edition: <a href="https://r4ds.hadley.nz" class="uri">https://r4ds.hadley.nz</a></li>
+<li><strong>RStudio User Guide</strong>: <a href="https://docs.posit.co/ide/user" class="uri">https://docs.posit.co/ide/user</a></li>
+</ul>
+</div><div class="column" style="width:45%;">
+<p><img data-src="images/RforDataCience.png" style="width:70.0%"></p>
+</div></div>
+</section>
+<section id="thank-you" class="slide level2 divider">
+<h2>Thank you!</h2>
+<p><strong>Luis Fernando Delgado Muñoz</strong></p>
+<p><span class="small-note">📧 <a href="mailto:lfdelgadom@unal.edu.co">lfdelgadom@unal.edu.co</a></span></p>
+<p><span class="small-note">💼 <a href="https://www.linkedin.com/in/lfdelgadom">linkedin.com/in/lfdelgadom</a></span></p>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>Luis Fernando Delgado Muñoz | RTC RER5030 | Pre-course Session 1</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="01-r-basics_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="01-r-basics_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="01-r-basics_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="01-r-basics_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="01-r-basics_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="01-r-basics_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="01-r-basics_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="01-r-basics_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="01-r-basics_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="01-r-basics_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="01-r-basics_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

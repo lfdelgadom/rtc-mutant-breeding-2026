@@ -1,0 +1,132 @@
+/* RTC RER5030 slide style (temporary, until the IAEA or USB Cali style is available) */
+:root {
+  --rtc-navy: #1F3A5F;
+  --rtc-blue: #3E6FA8;
+  --rtc-earth: #7A5C4F;
+  --rtc-sand: #EAD9BC;
+  --rtc-paper: #F4F4F2;
+  --rtc-green: #4F7A3A;
+}
+
+.reveal {
+  background-color: var(--rtc-paper);
+  color: var(--rtc-navy);
+}
+
+.reveal .slides section {
+  text-align: left;
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+  color: var(--rtc-navy);
+  font-weight: 600;
+}
+
+.reveal h1 {
+  border-bottom: 4px solid var(--rtc-blue);
+  padding-bottom: 12px;
+}
+
+.reveal h2 {
+  border-left: 8px solid var(--rtc-green);
+  padding-left: 14px;
+}
+
+.reveal strong, .reveal b {
+  color: var(--rtc-earth);
+  font-weight: 700;
+}
+
+.reveal a { color: var(--rtc-blue); }
+.reveal a:hover { color: var(--rtc-earth); }
+
+/* inline code */
+.reveal code {
+  background-color: var(--rtc-sand);
+  color: var(--rtc-navy);
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* code blocks */
+.reveal pre {
+  border-left: 5px solid var(--rtc-blue);
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(31, 58, 95, 0.12);
+}
+.reveal pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* tables */
+.reveal table {
+  border-collapse: collapse;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(31, 58, 95, 0.10);
+}
+.reveal thead { background-color: var(--rtc-navy); color: #ffffff; }
+.reveal thead th { color: #ffffff; }
+.reveal th, .reveal td { padding: 8px 12px; }
+.reveal td { border-bottom: 1px solid var(--rtc-sand); }
+.reveal tbody tr:nth-child(even) { background-color: rgba(234, 217, 188, 0.35); }
+
+.reveal blockquote {
+  border-left: 5px solid var(--rtc-earth);
+  background-color: rgba(234, 217, 188, 0.35);
+  padding: 12px 18px;
+  box-shadow: none;
+  width: 95%;
+}
+
+.reveal .footer { color: var(--rtc-blue); font-size: 0.55em; }
+
+/* photo placeholders: replace with ![](images/your_photo.jpg) */
+.reveal .photo {
+  border: 3px dashed var(--rtc-blue);
+  border-radius: 10px;
+  background-color: rgba(62, 111, 168, 0.06);
+  color: var(--rtc-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.7em;
+  min-height: 230px;
+  margin: 6px;
+  padding: 10px;
+}
+.reveal .photo.tall { min-height: 430px; }
+.reveal .photo.short { min-height: 170px; }
+
+/* small highlighted box */
+.reveal .keybox {
+  background-color: #ffffff;
+  border-left: 6px solid var(--rtc-green);
+  border-radius: 6px;
+  padding: 12px 18px;
+  box-shadow: 0 2px 8px rgba(31, 58, 95, 0.10);
+}
+
+/* section divider slides: ## Title {.divider} */
+.reveal .slides section.divider h2 {
+  border-left: none;
+  padding-left: 0;
+  margin-top: 170px;
+  text-align: center;
+  font-size: 2.6em;
+  color: var(--rtc-blue);
+}
+.reveal .slides section.divider p {
+  text-align: center;
+  font-size: 1.5em;
+  color: var(--rtc-navy);
+}
+.reveal .slides section.divider .small-note { font-size: 0.6em; color: var(--rtc-earth); }
+
+/* title slide */
+.reveal #title-slide .title { font-size: 1.9em; line-height: 1.15; }
+.reveal #title-slide .subtitle { font-size: 0.95em; color: var(--rtc-earth); }
+.reveal #title-slide { text-align: center; }
