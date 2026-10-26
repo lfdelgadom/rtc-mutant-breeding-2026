@@ -1,0 +1,47 @@
+# Multi-Environment Trials and G×E Interaction {#sec-met-gxe}
+
+::: {.chapter-info}
+**Author:** Mirjana Jankulovska\
+**Session:** Day 5 – Friday 13 November
+:::
+
+::: {.callout-note}
+## Chapter in preparation
+This chapter will be written by Mirjana Jankulovska. The outline below follows the course agenda.
+:::
+
+## Learning objectives
+
+- Explain G×E and the need for multi-environment testing
+- Fit a MET model
+- Interpret stability indices, AMMI and GGE biplots
+
+## Planned content
+
+- G×E interaction, stability vs adaptability, mega-environments
+- Foundations of PCA with a toy example
+- MET data structure and model fitting
+- Stability indices, AMMI and GGE biplot
+
+## Key concepts
+
+<!-- Author: theory, formulas and figures -->
+
+## Worked demo in R
+
+```{r}
+#| eval: false
+# Use the shared course datasets in data/ where possible
+```
+
+## Interpretation for breeding decisions
+
+## Exercise
+
+::: {.callout-tip collapse="true"}
+## Solution
+:::
+
+## Key takeaways
+
+## References

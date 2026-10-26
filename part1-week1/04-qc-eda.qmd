@@ -1,0 +1,48 @@
+# Data Quality Control and Exploratory Analysis {#sec-qc-eda}
+
+::: {.chapter-info}
+**Author:** Mirjana Jankulovska\
+**Session:** Day 1 – Monday 9 November
+:::
+
+::: {.callout-note}
+## Chapter in preparation
+This chapter will be written by Mirjana Jankulovska. The outline below follows the course agenda.
+:::
+
+## Learning objectives
+
+- Detect and handle missing values and outliers
+- Summarize traits by genotype and replicate
+- Use plots to separate biological and technical variation
+
+## Planned content
+
+- Importing Field Book / CSV data
+- Data summaries
+- Missing values and outlier detection
+- Exploratory data analysis: biological vs technical variation
+- Visualization with ggplot2: distributions, boxplots, genotype comparisons
+
+## Key concepts
+
+<!-- Author: theory, formulas and figures -->
+
+## Worked demo in R
+
+```{r}
+#| eval: false
+# Use the shared course datasets in data/ where possible
+```
+
+## Interpretation for breeding decisions
+
+## Exercise
+
+::: {.callout-tip collapse="true"}
+## Solution
+:::
+
+## Key takeaways
+
+## References

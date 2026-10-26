@@ -1,0 +1,35 @@
+---
+title: "Experimental Designs for Plant Breeding Trials"
+subtitle: "RTC Experimental Design and Data Analysis for Mutant Populations · Day 2"
+author: "Luis Fernando Delgado Muñoz"
+format:
+  revealjs:
+    theme: [simple, custom.scss]
+    slide-number: true
+    code-copy: true
+execute:
+  echo: true
+  eval: false
+---
+
+## Learning objectives
+
+<!-- Copy from the book chapter -->
+
+## Key concept 1
+
+<!-- One idea per slide. Reuse figures saved in ../figures/ -->
+
+## Demo
+
+```{r}
+# Short version of the chapter demo
+```
+
+## What a breeder decides from this
+
+## Key takeaways
+
+## Read more
+
+Full notes: course manual, chapter "Experimental Designs for Plant Breeding Trials"

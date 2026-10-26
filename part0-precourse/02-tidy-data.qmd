@@ -1,0 +1,68 @@
+# Preparing Your Data in Tidy Format {#sec-tidy-data}
+
+::: {.chapter-info}
+**Author:** Mirjana Jankulovska and Luis Fernando Delgado Muñoz\
+**Session:** Pre-course Session 2 (online, 2 h)
+:::
+
+## Learning objectives
+
+- Organize field data as one row per plot and one column per variable
+- Record the metadata needed for analysis
+- Write a data dictionary
+- Avoid the most common spreadsheet problems
+
+## Tidy data principles
+
+<!-- TODO: Messy vs tidy examples from breeding trials. -->
+
+
+## Mandatory metadata
+
+<!-- TODO: location, year, generation (M2–M5), design, rep, block, row, col, genotype, check/parent. -->
+
+
+## Data dictionary
+
+<!-- TODO: trait, unit, scale, date of measurement. -->
+
+
+## Common spreadsheet problems
+
+<!-- TODO: Merged cells, colours as data, decimals, units in cells, missing-value codes. -->
+
+
+## Checking your file in R
+
+<!-- TODO: Quick validation script participants run before the course. -->
+
+```{r}
+#| eval: false
+source("R/check_dataset.R")
+check_dataset("data/my_trial.csv")
+```
+
+## Field Book app
+
+<!-- TODO: Installation (Android only); link to Day 1. -->
+
+
+## Exercise
+
+<!-- TODO: one exercise on the shared data -->
+
+::: {.callout-tip collapse="true"}
+## Solution
+
+```{r}
+#| eval: false
+```
+:::
+
+## Key takeaways
+
+-
+-
+-
+
+## References

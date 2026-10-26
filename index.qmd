@@ -1,0 +1,24 @@
+# Welcome {.unnumbered}
+
+This manual accompanies the **Regional Training Course on Experimental Design and Data Analysis for the Advancement of Mutant Populations** (IAEA project RER5030), held at the Faculty of Agricultural Sciences and Food, Skopje, North Macedonia, 9–20 November 2026.
+
+## How to use this manual
+
+- Each chapter matches one or more sessions of the agenda.
+- Every chapter follows the same structure: learning objectives, key concepts, a worked demo in R, interpretation for breeding decisions, an exercise and key takeaways.
+- All code uses the shared datasets in the `data/` folder of the course repository.
+- Slides for each session are condensed versions of the chapters.
+
+## Setup
+
+Run `R/install_packages.R` once to install all course packages. Participants with older computers can use [Posit Cloud](https://posit.cloud/plans/free).
+
+## Authors
+
+- Luis Fernando Delgado Muñoz – external expert
+- Mirjana Jankulovska – local expert and host
+- Anand Badigannavar – mutation breeding expert
+
+## Acknowledgements
+
+FAO/IAEA Centre of Nuclear Techniques in Food and Agriculture – Plant Breeding and Genetics Section.

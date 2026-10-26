@@ -1,0 +1,47 @@
+# Heritability and Selection Decisions {#sec-heritability}
+
+::: {.chapter-info}
+**Author:** Mirjana Jankulovska\
+**Session:** Day 3 – Wednesday 11 November
+:::
+
+::: {.callout-note}
+## Chapter in preparation
+This chapter will be written by Mirjana Jankulovska. The outline below follows the course agenda.
+:::
+
+## Learning objectives
+
+- Estimate and interpret broad-sense and generalized heritability
+- Rank genotypes from BLUPs
+- Build a multi-trait selection index
+
+## Planned content
+
+- Broad-sense and generalized (Cullis) heritability
+- Misunderstandings of heritability; effect of design
+- Model diagnostics
+- Ranking genotypes and multi-trait selection indices
+
+## Key concepts
+
+<!-- Author: theory, formulas and figures -->
+
+## Worked demo in R
+
+```{r}
+#| eval: false
+# Use the shared course datasets in data/ where possible
+```
+
+## Interpretation for breeding decisions
+
+## Exercise
+
+::: {.callout-tip collapse="true"}
+## Solution
+:::
+
+## Key takeaways
+
+## References

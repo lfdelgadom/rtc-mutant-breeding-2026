@@ -1,0 +1,15 @@
+_book/
+_freeze/
+.quarto/
+.Rproj.user/
+.Rhistory
+*_files/
+slides/*.html
+
+/.quarto/
+**/*.quarto_ipynb
+
+# Mac system files and render leftovers
+.DS_Store
+site_libs/
+.Rhistory

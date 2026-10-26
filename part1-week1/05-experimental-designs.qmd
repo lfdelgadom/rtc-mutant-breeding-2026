@@ -1,0 +1,85 @@
+# Experimental Designs for Plant Breeding Trials {#sec-designs}
+
+::: {.chapter-info}
+**Author:** Luis Fernando Delgado Muñoz\
+**Session:** Day 2 – Tuesday 10 November, 08:30–12:30
+:::
+
+## Learning objectives
+
+- Choose a design according to breeding stage, number of entries and seed availability
+- Generate and randomize a field layout with FielDHub
+- Read a layout and identify its sources of variation
+- Write the statistical model implied by a design
+
+## Why design matters
+
+<!-- TODO: Replication, randomization, local control. Error variance and selection accuracy. -->
+
+
+## Classical designs: CRD and RCBD
+
+<!-- TODO: When blocking helps; limits with many entries. -->
+
+
+## Augmented designs
+
+<!-- TODO: Unreplicated entries + replicated checks; typical for early generations. -->
+
+
+## Incomplete block designs: alpha-lattice
+
+<!-- TODO: Resolvable designs for many entries. -->
+
+
+## Row-column and resolvable row-column designs
+
+<!-- TODO: Two-directional blocking. -->
+
+
+## Partially replicated (p-rep) designs
+
+<!-- TODO: Limited seed in early generations. -->
+
+
+## Choosing a design by breeding stage
+
+<!-- TODO: Single row → PYT → AYT; cassava case; modernized breeding scheme. Preview of mutant-population designs (developed in Topic 10). -->
+
+
+## Generating layouts with FielDHub
+
+<!-- TODO: Shiny app and R package; exporting field books. -->
+
+```{r}
+#| eval: false
+library(FielDHub)
+alpha <- alpha_lattice(t = 60, k = 6, r = 3, seed = 2026)
+head(alpha$fieldBook)
+plot(alpha)
+```
+
+## From layout to statistical model
+
+<!-- TODO: Model terms from the layout: treatment, rep, block within rep, row, column. -->
+
+
+## Exercise
+
+<!-- TODO: one exercise on the shared data -->
+
+::: {.callout-tip collapse="true"}
+## Solution
+
+```{r}
+#| eval: false
+```
+:::
+
+## Key takeaways
+
+-
+-
+-
+
+## References

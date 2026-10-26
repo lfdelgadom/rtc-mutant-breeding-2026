@@ -1,0 +1,52 @@
+# Participant Projects and Final Presentations {#sec-projects}
+
+::: {.chapter-info}
+**Author:** Luis Fernando Delgado Muñoz, Anand Badigannavar and Mirjana Jankulovska\
+**Session:** Days 7–10 (Topic 12)
+:::
+
+## Learning objectives
+
+- Apply the course methods to your own dataset
+- Produce a reproducible selection report
+- Present and defend your breeding decisions
+
+## Daily checkpoints
+
+<!-- TODO: Day 7: cleaned dataset and design identified. Day 8: models fitted and diagnostics checked. Day 9: selection report and peer review. -->
+
+
+## Report template
+
+<!-- TODO: See `templates/report-template.qmd`. -->
+
+
+## Presentation guidelines
+
+<!-- TODO: 10 min + 5 min questions. -->
+
+
+## Evaluation rubric
+
+<!-- TODO: Clarity of analysis, correctness of models, interpretation quality, decision justification. -->
+
+
+## Exercise
+
+<!-- TODO: one exercise on the shared data -->
+
+::: {.callout-tip collapse="true"}
+## Solution
+
+```{r}
+#| eval: false
+```
+:::
+
+## Key takeaways
+
+-
+-
+-
+
+## References

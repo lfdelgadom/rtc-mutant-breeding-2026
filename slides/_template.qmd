@@ -1,0 +1,17 @@
+---
+title: "Session title"
+subtitle: "RTC Experimental Design and Data Analysis for Mutant Populations"
+author: "Author name"
+format:
+  revealjs:
+    theme: [simple, custom.scss]
+    slide-number: true
+---
+
+## Learning objectives
+
+## Key concept
+
+## Demo
+
+## Key takeaways

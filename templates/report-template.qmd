@@ -1,0 +1,26 @@
+---
+title: "Genotype selection report"
+author: "Participant name, institution, country"
+date: today
+format: html
+---
+
+## 1. Objective and material
+Crop, generation, number of lines, mutagen and dose.
+
+## 2. Experimental design
+Design, layout, checks/parent.
+
+## 3. Data quality control
+Missing values, outliers, corrections made.
+
+## 4. Statistical analysis
+Model(s) used and why. Diagnostics.
+
+## 5. Results
+Variance components, heritability, BLUPs/BLUEs, figures.
+
+## 6. Selection decision
+Lines advanced or rejected, with justification.
+
+## 7. Limitations and next steps

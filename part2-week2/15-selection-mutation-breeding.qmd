@@ -1,0 +1,44 @@
+# Decision-Making and Selection Strategies in Mutation Breeding {#sec-selection-mutation}
+
+::: {.chapter-info}
+**Author:** Anand Badigannavar\
+**Session:** Day 9 – Thursday 19 November, 08:30–10:00 (Topic 11)
+:::
+
+::: {.callout-note}
+## Chapter in preparation
+This chapter will be written by Anand Badigannavar. The outline below follows the course agenda.
+:::
+
+## Learning objectives
+
+- To be defined by the author
+
+## Planned content
+
+- Selection strategies
+- Interpretation of statistical outputs
+- Variety advancement decisions under uncertainty
+
+## Key concepts
+
+<!-- Author: theory, formulas and figures -->
+
+## Worked demo in R
+
+```{r}
+#| eval: false
+# Use the shared course datasets in data/ where possible
+```
+
+## Interpretation for breeding decisions
+
+## Exercise
+
+::: {.callout-tip collapse="true"}
+## Solution
+:::
+
+## Key takeaways
+
+## References

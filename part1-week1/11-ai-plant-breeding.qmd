@@ -1,0 +1,68 @@
+# Artificial Intelligence in Plant Breeding {#sec-ai-breeding}
+
+::: {.chapter-info}
+**Author:** Luis Fernando Delgado Muñoz\
+**Session:** Day 5 – Friday 13 November, 15:00–16:15
+:::
+
+## Learning objectives
+
+- Identify applications of machine learning in breeding and agricultural data
+- Decide when ML adds value over classical statistics
+- Recognize the main limitations of ML in breeding programs
+
+## Applications
+
+<!-- TODO: Drone imagery (plant height and initial vigour case study), greenhouse scanning, NIRS, yellow colour intensity for β-carotene and total carotenoids. -->
+
+
+## AI vs classical statistics
+
+<!-- TODO: Prediction, classification, trait estimation vs interpretability. -->
+
+
+## Role in mutation breeding
+
+<!-- TODO: High-throughput screening of large M2/M3 populations. -->
+
+
+## Limitations
+
+<!-- TODO: Data quality, small/unbalanced data, overfitting, transfer across crops, environments and seasons. -->
+
+
+## Mini demo: random forest vs linear model
+
+<!-- TODO: Cross-validated comparison. -->
+
+```{r}
+#| eval: false
+library(tidymodels)
+# rf <- rand_forest(mode = "regression") |> set_engine("ranger")
+# compare with linear_reg() using vfold_cv()
+```
+
+## Breeder knowledge remains essential
+
+<!-- TODO: ML supports, not replaces, expert judgement. -->
+
+
+## Exercise
+
+<!-- TODO: one exercise on the shared data -->
+
+::: {.callout-tip collapse="true"}
+## Solution
+
+```{r}
+#| eval: false
+```
+:::
+
+## Key takeaways
+
+-
+-
+-
+
+## References

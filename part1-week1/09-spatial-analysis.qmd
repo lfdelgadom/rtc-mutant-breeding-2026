@@ -1,0 +1,82 @@
+# Spatial Analysis and Trial Precision {#sec-spatial}
+
+::: {.chapter-info}
+**Author:** Luis Fernando Delgado Muñoz\
+**Session:** Day 4 – Thursday 12 November
+:::
+
+## Learning objectives
+
+- Recognize field heterogeneity and its effect on genotype ranking
+- Diagnose spatial patterns in residuals
+- Fit a spatial model with SpATS and interpret its outputs
+- Quantify the gain of spatial correction
+
+## Field heterogeneity
+
+<!-- TODO: Didactic figures: tree lines along a road, a trial divided by a highway, a field crossed by a river, soil moisture gradients. -->
+
+
+## Residual diagnostics
+
+<!-- TODO: Residual heatmaps and variograms from the Day 3 mixed model. -->
+
+```{r}
+#| eval: false
+library(ggplot2)
+ggplot(trial, aes(col, row, fill = resid)) + geom_tile() + coord_equal()
+```
+
+## Spatial models with 2D P-splines
+
+<!-- TODO: SpATS: spatial trend, row/column effects, BLUPs/BLUEs. -->
+
+```{r}
+#| eval: false
+library(SpATS)
+m_sp <- SpATS(response = "yield", genotype = "geno", genotype.as.random = TRUE,
+              spatial = ~ PSANOVA(col, row, nseg = c(10, 10)),
+              fixed = ~ rep, random = ~ rowf + colf, data = trial)
+plot(m_sp)
+getHeritability(m_sp)
+```
+
+## Mr.Bean: spatial analysis without code
+
+<!-- TODO: Shiny app walkthrough. -->
+
+
+## Spatial vs non-spatial comparison
+
+<!-- TODO: AIC, error variance, generalized heritability, rank correlation of BLUPs, coincidence of selected genotypes. -->
+
+
+## Design vs statistical correction
+
+<!-- TODO: What to fix with design and what with analysis. -->
+
+
+## Full single-trial workflow
+
+<!-- TODO: Raw data → QC → spatial model → BLUPs → selection-ready table. -->
+
+
+## Exercise
+
+<!-- TODO: one exercise on the shared data -->
+
+::: {.callout-tip collapse="true"}
+## Solution
+
+```{r}
+#| eval: false
+```
+:::
+
+## Key takeaways
+
+-
+-
+-
+
+## References

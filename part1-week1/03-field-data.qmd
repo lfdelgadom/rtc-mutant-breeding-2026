@@ -1,0 +1,49 @@
+# Collecting and Structuring Field Data {#sec-field-data}
+
+::: {.chapter-info}
+**Author:** Mirjana Jankulovska\
+**Session:** Day 1 – Monday 9 November
+:::
+
+::: {.callout-note}
+## Chapter in preparation
+This chapter will be written by Mirjana Jankulovska. The outline below follows the course agenda.
+:::
+
+## Learning objectives
+
+- Use the Field Book app to record standardized traits
+- Define traits and scoring scales
+- Recognize phenotyping challenges in mutant populations
+- Transform raw field data into an analysis-ready dataset
+
+## Planned content
+
+- Field Book app: creating a trial from an existing layout
+- Trait definition, scoring scales and standardization across environments
+- Phenotyping challenges in mutant populations (segregation, off-types)
+- Structure of breeding trial data: traits, environments, replications
+- From messy to tidy data; metadata integration and validation
+
+## Key concepts
+
+<!-- Author: theory, formulas and figures -->
+
+## Worked demo in R
+
+```{r}
+#| eval: false
+# Use the shared course datasets in data/ where possible
+```
+
+## Interpretation for breeding decisions
+
+## Exercise
+
+::: {.callout-tip collapse="true"}
+## Solution
+:::
+
+## Key takeaways
+
+## References

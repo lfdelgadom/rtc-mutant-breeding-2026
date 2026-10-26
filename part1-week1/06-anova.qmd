@@ -1,0 +1,88 @@
+# ANOVA and Mean Comparison in Breeding Trials {#sec-anova}
+
+::: {.chapter-info}
+**Author:** Luis Fernando Delgado Muñoz\
+**Session:** Day 2 – Tuesday 10 November, 13:30–17:00
+:::
+
+## Learning objectives
+
+- Fit ANOVA models for CRD, RCBD and augmented designs
+- Check model assumptions with residual diagnostics
+- Compare genotypes with the appropriate post-hoc test
+- Distinguish statistical from practical significance
+
+## The ANOVA model
+
+<!-- TODO: Model structure, sources of variation, degrees of freedom. -->
+
+```{r}
+#| eval: false
+fit <- lm(yield ~ rep + geno, data = trial)
+anova(fit)
+```
+
+## Assumptions and residual diagnostics
+
+<!-- TODO: Residuals vs fitted, QQ-plot, homogeneity, model-based outliers; transformations. -->
+
+```{r}
+#| eval: false
+library(performance)
+check_model(fit)
+```
+
+## Augmented designs
+
+<!-- TODO: Adjusted means for unreplicated entries. -->
+
+```{r}
+#| eval: false
+library(augmentedRCBD)
+# augmentedRCBD(block, treatment, y, checks = c("Parent", "Check1"))
+```
+
+## Mean comparison
+
+<!-- TODO: Tukey, LSD and grouping letters. -->
+
+```{r}
+#| eval: false
+library(emmeans)
+em <- emmeans(fit, ~ geno)
+multcomp::cld(em, Letters = letters)
+```
+
+## Mutant lines vs parent: Dunnett test
+
+<!-- TODO: The key comparison in mutation breeding. -->
+
+```{r}
+#| eval: false
+contrast(em, method = "trt.vs.ctrl", ref = "Parent")
+```
+
+## Interpreting results for selection
+
+<!-- TODO: Effect size, CV, common pitfalls. Link to Day 3: why ANOVA is not enough. -->
+
+
+## Exercise
+
+<!-- TODO: one exercise on the shared data -->
+
+::: {.callout-tip collapse="true"}
+## Solution
+
+```{r}
+#| eval: false
+```
+:::
+
+## Key takeaways
+
+-
+-
+-
+
+## References

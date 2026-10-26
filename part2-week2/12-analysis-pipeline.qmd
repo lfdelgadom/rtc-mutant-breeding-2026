@@ -1,0 +1,70 @@
+# An End-to-End Analysis Pipeline {#sec-pipeline}
+
+::: {.chapter-info}
+**Author:** Luis Fernando Delgado Muñoz\
+**Session:** Day 6 – Monday 16 November, 08:30–12:30
+:::
+
+## Learning objectives
+
+- Run a complete, reproducible analysis from raw data to a selection report
+- Adapt the pipeline to crop, trial structure, traits and environments
+- Analyse quantitative and qualitative traits
+
+## Pipeline overview
+
+<!-- TODO: Raw data → QC → design-based model → spatial correction → BLUPs/BLUEs → heritability → selection index → report. -->
+
+
+## Case 1: cassava breeding data
+
+
+## Case 2: bean breeding data
+
+
+## Case 3: a mutant population dataset
+
+<!-- TODO: Quantitative and qualitative traits. -->
+
+
+## Qualitative traits
+
+<!-- TODO: Binary and ordinal scores with GLMMs. -->
+
+```{r}
+#| eval: false
+library(glmmTMB)
+# glmmTMB(disease ~ rep + (1 | geno), family = binomial, data = trial)
+library(ordinal)
+# clmm(score ~ rep + (1 | geno), data = trial)
+```
+
+## How the pipeline changes
+
+<!-- TODO: Crop, trial structure, traits, environments, breeding objectives. -->
+
+
+## Reproducibility
+
+<!-- TODO: RStudio projects, renv, Git/GitHub, Quarto reports. Reference: doi 10.1186/s13007-022-00845-7. -->
+
+
+## Exercise
+
+<!-- TODO: one exercise on the shared data -->
+
+::: {.callout-tip collapse="true"}
+## Solution
+
+```{r}
+#| eval: false
+```
+:::
+
+## Key takeaways
+
+-
+-
+-
+
+## References

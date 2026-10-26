@@ -1,0 +1,66 @@
+# Using Large Language Models as Data Analysis Assistants {#sec-llm}
+
+::: {.chapter-info}
+**Author:** Luis Fernando Delgado Muñoz\
+**Session:** Day 7 – Tuesday 17 November, 08:30–09:45
+:::
+
+## Learning objectives
+
+- Use free LLMs to write, debug and explain R code
+- Recognize typical LLM errors in statistical analysis
+- Write effective prompts for breeding data analysis
+- Protect unpublished research data
+
+## Free tools
+
+<!-- TODO: ChatGPT, Claude, Gemini, DeepSeek, Qwen; local models with Ollama. Availability varies by country. -->
+
+
+## What LLMs do well
+
+<!-- TODO: Writing and debugging R code, explaining errors and outputs, drafting reports, small Shiny apps. -->
+
+
+## What LLMs get wrong
+
+<!-- TODO: Invented results, wrong model structure, non-existent functions, confident misinterpretation. -->
+
+
+## Live comparison
+
+<!-- TODO: Same task in 2–3 models (alpha-lattice mixed model + BLUPs); run and compare the code. -->
+
+
+## Prompting for analysis
+
+<!-- TODO: Describe design, variables and objective; ask for code, not results; always run and verify. -->
+
+
+## Data privacy
+
+<!-- TODO: Unpublished breeding data, institutional policies, where data are stored. -->
+
+
+## Using an LLM with the report template
+
+
+## Exercise
+
+<!-- TODO: one exercise on the shared data -->
+
+::: {.callout-tip collapse="true"}
+## Solution
+
+```{r}
+#| eval: false
+```
+:::
+
+## Key takeaways
+
+-
+-
+-
+
+## References

@@ -1,0 +1,65 @@
+project:
+  type: book
+  execute-dir: project
+  output-dir: _book
+  # copy the rendered slides into the book website
+  # (render the slides first: quarto render slides/<file>.qmd)
+  resources:
+    - "slides/*.html"
+    - "slides/*.css"
+    - "slides/*_files/**"
+    - "slides/images/**"
+
+book:
+  title: "Experimental Design and Data Analysis for the Advancement of Mutant Populations"
+  subtitle: "Course manual, IAEA Regional Training Course RER5030, Skopje, 9 to 20 November 2026"
+  author:
+    - "Luis Fernando Delgado Munoz"
+    - "Mirjana Jankulovska"
+    - "Anand Badigannavar"
+  date: today
+  repo-url: https://github.com/lfdelgadom/rtc-mutant-breeding-2026
+  repo-actions: [issue]
+  downloads: [pdf]
+  chapters:
+    - index.qmd
+    - part: "Before the course"
+      chapters:
+        - part0-precourse/01-r-basics.qmd
+        - part0-precourse/02-tidy-data.qmd
+    - part: "Week 1: Concepts and methods"
+      chapters:
+        - part1-week1/03-field-data.qmd
+        - part1-week1/04-qc-eda.qmd
+        - part1-week1/05-experimental-designs.qmd
+        - part1-week1/06-anova.qmd
+        - part1-week1/07-mixed-models.qmd
+        - part1-week1/08-heritability-selection.qmd
+        - part1-week1/09-spatial-analysis.qmd
+        - part1-week1/10-met-gxe.qmd
+        - part1-week1/11-ai-plant-breeding.qmd
+    - part: "Week 2: Mutation breeding applications"
+      chapters:
+        - part2-week2/12-analysis-pipeline.qmd
+        - part2-week2/13-mutant-populations.qmd
+        - part2-week2/14-llm-assistants.qmd
+        - part2-week2/15-selection-mutation-breeding.qmd
+        - part2-week2/16-participant-projects.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+execute:
+  freeze: auto
+  warning: false
+  message: false
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    code-fold: false
+    code-copy: true
+    toc: true
+  pdf:
+    documentclass: scrreprt

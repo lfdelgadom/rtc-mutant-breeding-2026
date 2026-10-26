@@ -1,0 +1,47 @@
+# Mixed Models in Plant Breeding {#sec-mixed-models}
+
+::: {.chapter-info}
+**Author:** Mirjana Jankulovska\
+**Session:** Day 3 – Wednesday 11 November
+:::
+
+::: {.callout-note}
+## Chapter in preparation
+This chapter will be written by Mirjana Jankulovska. The outline below follows the course agenda.
+:::
+
+## Learning objectives
+
+- Explain the limitations of ANOVA for breeding data
+- Distinguish fixed and random effects
+- Estimate variance components, BLUEs and BLUPs
+
+## Planned content
+
+- Limitations of ANOVA: unbalanced data, incomplete designs
+- Fixed vs random effects; variance components
+- BLUEs vs BLUPs
+- Mixed model fitting and extraction of BLUEs and BLUPs
+
+## Key concepts
+
+<!-- Author: theory, formulas and figures -->
+
+## Worked demo in R
+
+```{r}
+#| eval: false
+# Use the shared course datasets in data/ where possible
+```
+
+## Interpretation for breeding decisions
+
+## Exercise
+
+::: {.callout-tip collapse="true"}
+## Solution
+:::
+
+## Key takeaways
+
+## References

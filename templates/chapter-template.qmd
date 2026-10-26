@@ -1,0 +1,40 @@
+# Chapter title {#sec-short-id}
+
+::: {.chapter-info}
+**Author:** Your name\
+**Session:** Day X – date, time
+:::
+
+## Learning objectives
+
+-
+-
+-
+
+## Key concepts
+
+Short theory. One formula or figure per idea.
+
+## Worked demo in R
+
+```{r}
+library(tidyverse)
+trial <- read_csv("data/single_trial.csv")
+```
+
+## Interpretation for breeding decisions
+
+What does a breeder decide from this output?
+
+## Exercise
+
+::: {.callout-tip collapse="true"}
+## Solution
+:::
+
+## Key takeaways
+
+-
+-
+
+## References
