@@ -1,0 +1,14 @@
+variable,description,type,unit,values_or_scale,how_measured
+location,Site of the trial,text,,Skopje,
+year,Year of planting,integer,,2025,
+generation,Generation of the mutant material,text,,M4,
+plot,Plot number,integer,,1 to 36,
+rep,Replicate (complete block),integer,,1 to 3,
+row,Row position in the field,integer,,1 to 3,
+col,Column position in the field,integer,,1 to 12,
+geno,"Mutant line, parent or check",text,,"M4-01 to M4-10, Parent, Check",
+check,Is the entry the parent or a check?,text,,yes / no,
+yield_t_ha,Grain yield adjusted to plot area,numeric,t/ha,,Grain weight per plot converted to t/ha
+plant_height_cm,Plant height,numeric,cm,,"Ground to top of the main stem, mean of 5 plants"
+days_to_flowering,Days from sowing to 50% flowering,integer,days,,Counted from sowing date
+disease_score,Disease severity,integer,score,1 (no symptoms) to 9 (very severe),Visual score of the whole plot

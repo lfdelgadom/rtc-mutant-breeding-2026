@@ -13,3 +13,8 @@ slides/*.html
 .DS_Store
 site_libs/
 .Rhistory
+
+# iCloud conflict copies and Office lock files
+* 2.*
+* 2
+~$*
