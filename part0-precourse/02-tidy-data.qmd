@@ -2,7 +2,7 @@
 
 ::: chapter-info
 **Author:** Luis Fernando Delgado Muñoz\
-**Session:** Pre-course Session 2 (online, 2 h), with Mirjana Jankulovska
+**Session:** Pre-course Session 2 (online, 2 h)
 :::
 
 ::: callout-note
@@ -40,7 +40,7 @@ The file `data/messy_trial.xlsx` contains the same M4 mutant trial that we used 
 The sheet is clear for a person, but it contains seven problems that prevent R from reading it correctly:
 
 | Problem | Where in @fig-messy | Why it is a problem |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | **Title above the header** | Row 1 | R takes the title as the column name |
 | **Double header** | Rows 3 and 4: replicate on top, trait below | R needs one row of column names |
 | **Merged cells** | `Location`, and `Rep 1`, `Rep 2`, `Rep 3` | Only the first cell has a value; the others are read as empty |
@@ -250,7 +250,7 @@ To avoid all these problems, organize your data with the template `data/template
 The `field_book` sheet has one row of column names and **one row per plot**:
 
 | Column | Content | Example | Required |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | `location` | Site of the trial | Skopje | yes |
 | `year` | Year of planting | 2025 | yes |
 | `trial` | Trial name or code | M4_yield_2025 | yes |
@@ -283,7 +283,7 @@ The `field_book` sheet has one row of column names and **one row per plot**:
 The design columns are not decoration: each one becomes a term of the statistical model.
 
 | Column | Used for |
-|----|----|
+|------------------------------------|------------------------------------|
 | `rep`, `block` | Separating environmental variation from genetic variation (Day 2 and Day 3) |
 | `row`, `col` | Spatial analysis of field trends (Day 4) |
 | `location`, `year` | Multi-environment trials and G×E (Day 5) |
@@ -337,7 +337,7 @@ Run it on your own file and correct each `[!]` line before sending your data.
 Recording data directly on a phone or tablet avoids transcription errors and produces files that are already close to tidy: one row per plot, with the plot identifier and its position.
 
 |   | Field Book | GridScore NEXT |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Developed by | PhenoApps (open source) | James Hutton Institute (open source) |
 | Devices | Android phones and tablets | Any device with a web browser (Android, iPhone, computer); works offline |
 | Field layout | Imported from a CSV file | Defined as a grid of rows and columns |
