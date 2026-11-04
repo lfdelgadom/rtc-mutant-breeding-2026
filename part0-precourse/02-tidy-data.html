@@ -305,15 +305,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">2.1</span> Learning objectives</a></li>
-  <li><a href="#tidy-data-principles" id="toc-tidy-data-principles" class="nav-link" data-scroll-target="#tidy-data-principles"><span class="header-section-number">2.2</span> Tidy data principles</a></li>
-  <li><a href="#mandatory-metadata" id="toc-mandatory-metadata" class="nav-link" data-scroll-target="#mandatory-metadata"><span class="header-section-number">2.3</span> Mandatory metadata</a></li>
-  <li><a href="#data-dictionary" id="toc-data-dictionary" class="nav-link" data-scroll-target="#data-dictionary"><span class="header-section-number">2.4</span> Data dictionary</a></li>
-  <li><a href="#common-spreadsheet-problems" id="toc-common-spreadsheet-problems" class="nav-link" data-scroll-target="#common-spreadsheet-problems"><span class="header-section-number">2.5</span> Common spreadsheet problems</a></li>
-  <li><a href="#checking-your-file-in-r" id="toc-checking-your-file-in-r" class="nav-link" data-scroll-target="#checking-your-file-in-r"><span class="header-section-number">2.6</span> Checking your file in R</a></li>
-  <li><a href="#field-book-app" id="toc-field-book-app" class="nav-link" data-scroll-target="#field-book-app"><span class="header-section-number">2.7</span> Field Book app</a></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">2.8</span> Exercise</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">2.9</span> Key takeaways</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">2.10</span> References</a></li>
+  <li><a href="#why-data-organization-matters" id="toc-why-data-organization-matters" class="nav-link" data-scroll-target="#why-data-organization-matters"><span class="header-section-number">2.2</span> Why data organization matters</a></li>
+  <li><a href="#what-messy-data-looks-like" id="toc-what-messy-data-looks-like" class="nav-link" data-scroll-target="#what-messy-data-looks-like"><span class="header-section-number">2.3</span> What messy data looks like</a></li>
+  <li><a href="#the-three-rules-of-tidy-data" id="toc-the-three-rules-of-tidy-data" class="nav-link" data-scroll-target="#the-three-rules-of-tidy-data"><span class="header-section-number">2.4</span> The three rules of tidy data</a></li>
+  <li><a href="#from-messy-to-tidy-in-r" id="toc-from-messy-to-tidy-in-r" class="nav-link" data-scroll-target="#from-messy-to-tidy-in-r"><span class="header-section-number">2.5</span> From messy to tidy in R</a>
+  <ul class="collapse">
+  <li><a href="#step-1.-look-at-the-sheet-as-r-sees-it" id="toc-step-1.-look-at-the-sheet-as-r-sees-it" class="nav-link" data-scroll-target="#step-1.-look-at-the-sheet-as-r-sees-it"><span class="header-section-number">2.5.1</span> Step 1. Look at the sheet as R sees it</a></li>
+  <li><a href="#step-2.-read-only-the-data-with-clear-column-names" id="toc-step-2.-read-only-the-data-with-clear-column-names" class="nav-link" data-scroll-target="#step-2.-read-only-the-data-with-clear-column-names"><span class="header-section-number">2.5.2</span> Step 2. Read only the data, with clear column names</a></li>
+  <li><a href="#step-3.-fill-the-merged-cells" id="toc-step-3.-fill-the-merged-cells" class="nav-link" data-scroll-target="#step-3.-fill-the-merged-cells"><span class="header-section-number">2.5.3</span> Step 3. Fill the merged cells</a></li>
+  <li><a href="#step-4.-remove-the-units-typed-inside-the-cells" id="toc-step-4.-remove-the-units-typed-inside-the-cells" class="nav-link" data-scroll-target="#step-4.-remove-the-units-typed-inside-the-cells"><span class="header-section-number">2.5.4</span> Step 4. Remove the units typed inside the cells</a></li>
+  <li><a href="#step-5.-separate-two-variables-stored-in-one-column" id="toc-step-5.-separate-two-variables-stored-in-one-column" class="nav-link" data-scroll-target="#step-5.-separate-two-variables-stored-in-one-column"><span class="header-section-number">2.5.5</span> Step 5. Separate two variables stored in one column</a></li>
+  <li><a href="#step-6.-one-row-per-plot-from-wide-to-long" id="toc-step-6.-one-row-per-plot-from-wide-to-long" class="nav-link" data-scroll-target="#step-6.-one-row-per-plot-from-wide-to-long"><span class="header-section-number">2.5.6</span> Step 6. One row per plot: from wide to long</a></li>
+  <li><a href="#step-7.-check-the-result" id="toc-step-7.-check-the-result" class="nav-link" data-scroll-target="#step-7.-check-the-result"><span class="header-section-number">2.5.7</span> Step 7. Check the result</a></li>
+  <li><a href="#the-opposite-from-long-to-wide" id="toc-the-opposite-from-long-to-wide" class="nav-link" data-scroll-target="#the-opposite-from-long-to-wide"><span class="header-section-number">2.5.8</span> The opposite: from long to wide</a></li>
+  </ul></li>
+  <li><a href="#the-course-field-book-template" id="toc-the-course-field-book-template" class="nav-link" data-scroll-target="#the-course-field-book-template"><span class="header-section-number">2.6</span> The course field book template</a>
+  <ul class="collapse">
+  <li><a href="#why-the-metadata-matter" id="toc-why-the-metadata-matter" class="nav-link" data-scroll-target="#why-the-metadata-matter"><span class="header-section-number">2.6.1</span> Why the metadata matter?</a></li>
+  </ul></li>
+  <li><a href="#the-data-dictionary" id="toc-the-data-dictionary" class="nav-link" data-scroll-target="#the-data-dictionary"><span class="header-section-number">2.7</span> The data dictionary</a></li>
+  <li><a href="#checking-your-file-in-r" id="toc-checking-your-file-in-r" class="nav-link" data-scroll-target="#checking-your-file-in-r"><span class="header-section-number">2.8</span> Checking your file in R</a></li>
+  <li><a href="#digital-data-collection-field-book-and-gridscore-next" id="toc-digital-data-collection-field-book-and-gridscore-next" class="nav-link" data-scroll-target="#digital-data-collection-field-book-and-gridscore-next"><span class="header-section-number">2.9</span> Digital data collection: Field Book and GridScore NEXT</a></li>
+  <li><a href="#exercise-homework-before-arriving-in-skopje" id="toc-exercise-homework-before-arriving-in-skopje" class="nav-link" data-scroll-target="#exercise-homework-before-arriving-in-skopje"><span class="header-section-number">2.10</span> Exercise (homework before arriving in Skopje)</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">2.11</span> Key takeaways</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">2.12</span> References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lfdelgadom/rtc-mutant-breeding-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -340,76 +355,972 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="chapter-info">
-<p><strong>Author:</strong> Mirjana Jankulovska and Luis Fernando Delgado Muñoz<br>
-<strong>Session:</strong> Pre-course Session 2 (online, 2 h)</p>
+<p><strong>Author:</strong> Luis Fernando Delgado Muñoz<br>
+<strong>Session:</strong> Pre-course Session 2 (online, 2 h), with Mirjana Jankulovska</p>
 </div>
-<section id="learning-objectives" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">2.1</span> Learning objectives</h2>
-<ul>
-<li>Organize field data as one row per plot and one column per variable</li>
-<li>Record the metadata needed for analysis</li>
-<li>Write a data dictionary</li>
-<li>Avoid the most common spreadsheet problems</li>
-</ul>
-</section>
-<section id="tidy-data-principles" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="tidy-data-principles"><span class="header-section-number">2.2</span> Tidy data principles</h2>
-<!-- TODO: Messy vs tidy examples from breeding trials. -->
-</section>
-<section id="mandatory-metadata" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="mandatory-metadata"><span class="header-section-number">2.3</span> Mandatory metadata</h2>
-<!-- TODO: location, year, generation (M2–M5), design, rep, block, row, col, genotype, check/parent. -->
-</section>
-<section id="data-dictionary" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="data-dictionary"><span class="header-section-number">2.4</span> Data dictionary</h2>
-<!-- TODO: trait, unit, scale, date of measurement. -->
-</section>
-<section id="common-spreadsheet-problems" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="common-spreadsheet-problems"><span class="header-section-number">2.5</span> Common spreadsheet problems</h2>
-<!-- TODO: Merged cells, colours as data, decimals, units in cells, missing-value codes. -->
-</section>
-<section id="checking-your-file-in-r" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="checking-your-file-in-r"><span class="header-section-number">2.6</span> Checking your file in R</h2>
-<!-- TODO: Quick validation script participants run before the course. -->
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/check_dataset.R"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">check_dataset</span>(<span class="st">"data/my_trial.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="field-book-app" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="field-book-app"><span class="header-section-number">2.7</span> Field Book app</h2>
-<!-- TODO: Installation (Android only); link to Day 1. -->
-</section>
-<section id="exercise" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="exercise"><span class="header-section-number">2.8</span> Exercise</h2>
-<!-- TODO: one exercise on the shared data -->
-<div class="callout callout-style-default callout-tip callout-empty-content callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solution
+<span class="screen-reader-only">Note</span>Slides for this session
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="../slides/02-tidy-data.html" target="_blank">Open the slides of Pre-course Session 2</a></p>
+</div>
+</div>
+<section id="learning-objectives" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">2.1</span> Learning objectives</h2>
+<ul>
+<li>Recognize the most common problems of field data stored in spreadsheets</li>
+<li>Apply the three rules of tidy data to a breeding trial</li>
+<li>Turn a messy field book into a tidy dataset in R</li>
+<li>Organize your own data with the course template, metadata and a data dictionary</li>
+<li>Check your file in R before sending it</li>
+</ul>
+</section>
+<section id="why-data-organization-matters" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="why-data-organization-matters"><span class="header-section-number">2.2</span> Why data organization matters</h2>
+<p>Most of the time spent on a data analysis is not spent on the statistics, but on preparing the data. A field book that is easy to read for a person (titles, merged cells, colours, totals) is usually very hard to read for a computer. The consequences are:</p>
+<ul>
+<li><strong>Lost time:</strong> hours of copying, deleting and reshaping before any analysis.</li>
+<li><strong>Silent errors:</strong> a missing plot typed as <code>0</code> is analysed as a real zero yield; a replicate written as text is not recognized; a value with its unit (<code>4.2 t/ha</code>) turns the whole column into text.</li>
+<li><strong>Results that cannot be repeated:</strong> manual changes in Excel leave no record, so nobody (including you, six months later) can know exactly what was done.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/pareto_data_cleaning_EN.png" class="img-fluid figure-img"></p>
+<figcaption>The 80/20 Rule of Data Work: Preparing vs.&nbsp;Analyzing Data.</figcaption>
+</figure>
+</div>
+<p>If the data are organized well <strong>from the moment they are recorded</strong>, the analysis in R becomes a few lines of code. That is the goal of this chapter, and the reason why every participant prepares their dataset before the course.</p>
+</section>
+<section id="what-messy-data-looks-like" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="what-messy-data-looks-like"><span class="header-section-number">2.3</span> What messy data looks like</h2>
+<p>The file <code>data/messy_trial.xlsx</code> contains the same M4 mutant trial that we used in <a href="01-r-basics.html" class="quarto-xref"><span>Chapter 1</span></a>, but written the way many field books are written in practice:</p>
+<div id="fig-messy" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-messy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/messy_trial.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-messy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: The practice trial stored as a typical field book in Excel.
+</figcaption>
+</figure>
+</div>
+<p>The sheet is clear for a person, but it contains seven problems that prevent R from reading it correctly:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>Where in <a href="#fig-messy" class="quarto-xref">Figure&nbsp;<span>2.1</span></a></th>
+<th>Why it is a problem</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Title above the header</strong></td>
+<td>Row 1</td>
+<td>R takes the title as the column name</td>
+</tr>
+<tr class="even">
+<td><strong>Double header</strong></td>
+<td>Rows 3 and 4: replicate on top, trait below</td>
+<td>R needs one row of column names</td>
+</tr>
+<tr class="odd">
+<td><strong>Merged cells</strong></td>
+<td><code>Location</code>, and <code>Rep 1</code>, <code>Rep 2</code>, <code>Rep 3</code></td>
+<td>Only the first cell has a value; the others are read as empty</td>
+</tr>
+<tr class="even">
+<td><strong>One variable spread over several columns</strong></td>
+<td>Yield and height repeated for each replicate</td>
+<td>The replicate is a variable, but it is hidden in the column names</td>
+</tr>
+<tr class="odd">
+<td><strong>Two variables in one column</strong></td>
+<td><code>Entry</code>: <code>M4-01_mutant</code> (genotype and type)</td>
+<td>You cannot filter or group by each one separately</td>
+</tr>
+<tr class="even">
+<td><strong>Units and codes inside cells</strong></td>
+<td><code>4.2 t/ha</code>; missing plots as <code>.</code> and <code>-</code></td>
+<td>The column becomes text instead of numbers</td>
+</tr>
+<tr class="odd">
+<td><strong>Information only in colours, comments and summary rows</strong></td>
+<td>Red row, the comment on M4-08, the <code>Mean</code> row</td>
+<td>Colours and comments are lost when reading; the mean row is read as a plot</td>
+</tr>
+</tbody>
+</table>
+<p>Other frequent problems are a missing plot written as <code>0</code> (it looks like real data), dates written in different formats in the same column, several tables in one sheet, and the same genotype written in different ways (<code>M4-01</code>, <code>M4 01</code>, <code>m4-01</code>).</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Never save a course CSV file from Excel
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Opening a CSV file in Excel and saving it again can change the separators and destroy the numbers (for example, <code>938.067907</code> becomes <code>938.067.907</code> with some regional settings). To look at a CSV file, open it in RStudio (<em>View File</em>) or close Excel <strong>without saving</strong>.</p>
+</div>
+</div>
+</section>
+<section id="the-three-rules-of-tidy-data" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="the-three-rules-of-tidy-data"><span class="header-section-number">2.4</span> The three rules of tidy data</h2>
+<p>In <em>R for Data Science</em>, Wickham, Çetinkaya-Rundel and Grolemund describe a consistent way to organize data, called <strong>tidy data</strong>. A dataset is tidy when it follows three rules:</p>
+<ol type="1">
+<li><strong>Each variable is a column</strong>, and each column is one variable.</li>
+<li><strong>Each observation is a row</strong>, and each row is one observation.</li>
+<li><strong>Each value is a cell</strong>, and each cell contains one value.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tidy-1.png" class="img-fluid figure-img"></p>
+<figcaption>Three rules make a dataset tidy: variables are columns, observations are rows, and values are cells.</figcaption>
+</figure>
+</div>
+<p>In a field trial, the observation is usually <strong>the plot</strong>. So a tidy field book has <strong>one row per plot</strong> and one column for each variable: the design variables (location, replicate, block, row, column, genotype) and the traits.</p>
+<p>This is the tidy version of the trial in <a href="#fig-messy" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>trial <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/precourse_trial.csv"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>trial <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(location, rep, row, col, geno, check, yield_t_ha, plant_height_cm) <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 8
+  location   rep   row   col geno   check yield_t_ha plant_height_cm
+  &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt;           &lt;dbl&gt;
+1 Skopje       1     1     1 M4-01  no          4.6             86.3
+2 Skopje       1     1     2 M4-10  no          3.77            93.4
+3 Skopje       1     1     3 M4-06  no          3.24            84.3
+4 Skopje       1     1     4 M4-02  no          4.04            88.8
+5 Skopje       1     1     5 Parent yes         4.31            96.5
+6 Skopje       1     1     6 M4-09  no          3.92            82.8
+7 Skopje       1     1     7 M4-05  no          4.2             94  
+8 Skopje       1     1     8 M4-08  no         NA               85  </code></pre>
+</div>
+</div>
+<p>The replicate, which was hidden in the column names of the messy file, is now a column. The 12 genotypes × 3 replicates are 36 rows, one per plot.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why tidy data works so well in R
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>dplyr</code>, <code>ggplot2</code> and the model functions (<code>lm()</code>, <code>lmer()</code>, <code>SpATS()</code>…) all expect one row per observation and one column per variable. With a tidy dataset, the formula of the model is written directly from the column names: <code>yield_t_ha ~ rep + geno</code>.</p>
+</div>
+</div>
+<p>Read more in the chapter <em>Data tidying</em> of <em>R for Data Science</em> (2nd edition): <a href="https://r4ds.hadley.nz/data-tidy.html" class="uri">https://r4ds.hadley.nz/data-tidy.html</a></p>
+</section>
+<section id="from-messy-to-tidy-in-r" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="from-messy-to-tidy-in-r"><span class="header-section-number">2.5</span> From messy to tidy in R</h2>
+<p>Sometimes you receive a messy file that you cannot correct by hand (for example, historical data). Here we fix <code>messy_trial.xlsx</code> step by step, with the <code>readxl</code>, <code>tidyr</code> and <code>dplyr</code> packages.</p>
+<section id="step-1.-look-at-the-sheet-as-r-sees-it" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="step-1.-look-at-the-sheet-as-r-sees-it"><span class="header-section-number">2.5.1</span> Step 1. Look at the sheet as R sees it</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/messy_trial.xlsx"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">.name_repair =</span> <span class="st">"minimal"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>raw</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 19 × 8
+   ``                                  ``    ``    ``    ``    ``    ``    ``   
+   &lt;chr&gt;                               &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+ 1 Mutant trial M4 - Skopje 2025 - RC… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+ 2 &lt;NA&gt;                                &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+ 3 Location                            Entry Rep 1 &lt;NA&gt;  Rep 2 &lt;NA&gt;  Rep 3 &lt;NA&gt; 
+ 4 &lt;NA&gt;                                &lt;NA&gt;  Yiel… Heig… Yiel… Heig… Yiel… Heig…
+ 5 Skopje                              M4-0… 4.6   86.3  4.16  103.1 .     91.7 
+ 6 &lt;NA&gt;                                M4-0… 4.04  88.8  3.61  86    3.14  90.2 
+ 7 &lt;NA&gt;                                M4-0… 5.9   104.3 4.86  102.3 5.08  100.2
+ 8 &lt;NA&gt;                                M4-0… 4.75  88.0… 3.99  93.5  3.52  97.4…
+ 9 &lt;NA&gt;                                M4-0… 4.2 … 94    4.19  95.7  3.51  90.0…
+10 &lt;NA&gt;                                M4-0… 3.24  84.3  3.14  83.5  2.93  93.0…
+11 &lt;NA&gt;                                M4-0… 5.68  103.6 4.85  103.4 4.36  106.5
+12 &lt;NA&gt;                                M4-0… -     85    3.62  90.8  3.42  92.7 
+13 &lt;NA&gt;                                M4-0… 3.92  82.8  2.98  89.3  2.66  84.3 
+14 &lt;NA&gt;                                M4-1… 3.77  93.4… 4.07  93.5  3.27  93.8 
+15 &lt;NA&gt;                                Pare… 4.31  96.5  4.38  90.2  3.92  91.5 
+16 &lt;NA&gt;                                Chec… 5.2   97.8  4.94  89.7  4.58  98.7 
+17 &lt;NA&gt;                                Mean  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+18 &lt;NA&gt;                                &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+19 Red = damaged plots. Missing plots… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </code></pre>
+</div>
+</div>
+<p>The title, the empty row, the two header rows, the merged cells (shown as <code>NA</code>), the mean row and the note at the bottom are all visible.</p>
+</section>
+<section id="step-2.-read-only-the-data-with-clear-column-names" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="step-2.-read-only-the-data-with-clear-column-names"><span class="header-section-number">2.5.2</span> Step 2. Read only the data, with clear column names</h3>
+<p><code>range</code> reads only the block with plot data (cells A5 to H16), which leaves out the title, the headers, the mean row and the note. <code>na</code> declares the codes used for missing values. The column names are written once, combining the replicate and the trait.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>trial_wide <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/messy_trial.xlsx"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">range     =</span> <span class="st">"A5:H16"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"location"</span>, <span class="st">"entry"</span>,     <span class="co"># rename colnames</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">"R1_yield"</span>, <span class="st">"R1_height"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">"R2_yield"</span>, <span class="st">"R2_height"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"R3_yield"</span>, <span class="st">"R3_height"</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">na        =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"."</span>, <span class="st">"-"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>trial_wide</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 8
+   location entry       R1_yield R1_height R2_yield R2_height R3_yield R3_height
+   &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+ 1 Skopje   M4-01_muta… 4.6           86.3     4.16     103.     NA         91.7
+ 2 &lt;NA&gt;     M4-02_muta… 4.04          88.8     3.61      86       3.14      90.2
+ 3 &lt;NA&gt;     M4-03_muta… 5.9          104.      4.86     102.      5.08     100. 
+ 4 &lt;NA&gt;     M4-04_muta… 4.75          88.1     3.99      93.5     3.52      97.4
+ 5 &lt;NA&gt;     M4-05_muta… 4.2 t/ha      94       4.19      95.7     3.51      90.1
+ 6 &lt;NA&gt;     M4-06_muta… 3.24          84.3     3.14      83.5     2.93      93.1
+ 7 &lt;NA&gt;     M4-07_muta… 5.68         104.      4.85     103.      4.36     106. 
+ 8 &lt;NA&gt;     M4-08_muta… &lt;NA&gt;          85       3.62      90.8     3.42      92.7
+ 9 &lt;NA&gt;     M4-09_muta… 3.92          82.8     2.98      89.3     2.66      84.3
+10 &lt;NA&gt;     M4-10_muta… 3.77          93.4     4.07      93.5     3.27      93.8
+11 &lt;NA&gt;     Parent_par… 4.31          96.5     4.38      90.2     3.92      91.5
+12 &lt;NA&gt;     Check_check 5.2           97.8     4.94      89.7     4.58      98.7</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Building the names from the double header automatically
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<p>With many columns, writing the names by hand is slow. You can read the two header rows and combine them. Merged cells appear as <code>NA</code>, so the replicate is first filled to the right:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>header <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/messy_trial.xlsx"</span>, <span class="at">range =</span> <span class="st">"C3:H4"</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">col_names =</span> <span class="cn">FALSE</span>, <span class="at">.name_repair =</span> <span class="st">"minimal"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Row 1: rep labels. Fill empty cells (from merged cells) with the value before them</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>rep_row   <span class="ot">&lt;-</span> vctrs<span class="sc">::</span><span class="fu">vec_fill_missing</span>(<span class="fu">unlist</span>(header[<span class="dv">1</span>, ]), <span class="at">direction =</span> <span class="st">"down"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Row 2: trait names</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>trait_row <span class="ot">&lt;-</span> <span class="fu">unlist</span>(header[<span class="dv">2</span>, ])</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Join them into column names, e.g. "Rep1_height"</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(rep_row, trait_row, <span class="at">sep =</span> <span class="st">"_"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Rep 1_Yield (t/ha)" "Rep 1_Height (cm)"  "Rep 2_Yield (t/ha)"
+[4] "Rep 2_Height (cm)"  "Rep 3_Yield (t/ha)" "Rep 3_Height (cm)" </code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 </section>
-<section id="key-takeaways" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">2.9</span> Key takeaways</h2>
+<section id="step-3.-fill-the-merged-cells" class="level3" data-number="2.5.3">
+<h3 data-number="2.5.3" class="anchored" data-anchor-id="step-3.-fill-the-merged-cells"><span class="header-section-number">2.5.3</span> Step 3. Fill the merged cells</h3>
+<p>Only the first row has the location; the merged cells were read as <code>NA</code>. <code>fill()</code> copies the last value down:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the location column before the fix (it has empty cells / NA)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>trial_wide<span class="sc">$</span>location</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Skopje" NA       NA       NA       NA       NA       NA       NA      
+ [9] NA       NA       NA       NA      </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill each NA with the last location above it</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>trial_wide <span class="ot">&lt;-</span> trial_wide <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(location)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the location column again (now every row has a location)</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>trial_wide<span class="sc">$</span>location</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Skopje" "Skopje" "Skopje" "Skopje" "Skopje" "Skopje" "Skopje" "Skopje"
+ [9] "Skopje" "Skopje" "Skopje" "Skopje"</code></pre>
+</div>
+</div>
+</section>
+<section id="step-4.-remove-the-units-typed-inside-the-cells" class="level3" data-number="2.5.4">
+<h3 data-number="2.5.4" class="anchored" data-anchor-id="step-4.-remove-the-units-typed-inside-the-cells"><span class="header-section-number">2.5.4</span> Step 4. Remove the units typed inside the cells</h3>
+<p>Because of <code>4.2 t/ha</code>, the column <code>R1_yield</code> was read as text. <code>parse_number()</code> keeps only the number:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the type of R1_yield before the fix</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(trial_wide<span class="sc">$</span>R1_yield)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract only the number from each value and turn the column into numeric</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>trial_wide <span class="ot">&lt;-</span> trial_wide <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">R1_yield =</span> <span class="fu">parse_number</span>(R1_yield))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the type again (now "numeric")</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(trial_wide<span class="sc">$</span>R1_yield)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+</div>
+</section>
+<section id="step-5.-separate-two-variables-stored-in-one-column" class="level3" data-number="2.5.5">
+<h3 data-number="2.5.5" class="anchored" data-anchor-id="step-5.-separate-two-variables-stored-in-one-column"><span class="header-section-number">2.5.5</span> Step 5. Separate two variables stored in one column</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the "entry" column into two new columns at the "_" separator</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (the original "entry" column is removed)</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>trial_wide <span class="ot">&lt;-</span> trial_wide <span class="sc">|&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_delim</span>(entry, <span class="at">delim =</span> <span class="st">"_"</span>, <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"geno"</span>, <span class="st">"type"</span>))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Show only the location, geno and type columns, first 3 rows,</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># to check that fill() and separate_wider_delim() worked</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>trial_wide <span class="sc">|&gt;</span> <span class="fu">select</span>(location, geno, type) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  location geno  type  
+  &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; 
+1 Skopje   M4-01 mutant
+2 Skopje   M4-02 mutant
+3 Skopje   M4-03 mutant</code></pre>
+</div>
+</div>
+</section>
+<section id="step-6.-one-row-per-plot-from-wide-to-long" class="level3" data-number="2.5.6">
+<h3 data-number="2.5.6" class="anchored" data-anchor-id="step-6.-one-row-per-plot-from-wide-to-long"><span class="header-section-number">2.5.6</span> Step 6. One row per plot: from wide to long</h3>
+<p>The replicate is hidden in the column names (<code>R1_yield</code>, <code>R2_height</code>…). <code>pivot_longer()</code> moves it into its own column. With <code>names_sep = "_"</code>, the first part of the name (<code>R1</code>) goes to the column <code>rep</code> and the second part (<code>yield</code>, <code>height</code>) becomes a column of values (<code>.value</code>).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the table long: one row per genotype and rep</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>trial_tidy <span class="ot">&lt;-</span> trial_wide <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="fu">starts_with</span>(<span class="st">"R"</span>),      <span class="co"># columns R1_yield, R1_height, ...</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to  =</span> <span class="fu">c</span>(<span class="st">"rep"</span>, <span class="st">".value"</span>),    <span class="co"># "R1" goes to rep; yield/height stay as columns</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_sep =</span> <span class="st">"_"</span>) <span class="sc">|&gt;</span>                <span class="co"># split names at "_"</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rep =</span> <span class="fu">parse_number</span>(rep)) <span class="sc">|&gt;</span>              <span class="co"># "R1" becomes 1</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">yield_t_ha =</span> yield, <span class="at">plant_height_cm =</span> height)  <span class="co"># add units to the names</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>trial_tidy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 36 × 6
+   location geno  type     rep yield_t_ha plant_height_cm
+   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;           &lt;dbl&gt;
+ 1 Skopje   M4-01 mutant     1       4.6             86.3
+ 2 Skopje   M4-01 mutant     2       4.16           103. 
+ 3 Skopje   M4-01 mutant     3      NA               91.7
+ 4 Skopje   M4-02 mutant     1       4.04            88.8
+ 5 Skopje   M4-02 mutant     2       3.61            86  
+ 6 Skopje   M4-02 mutant     3       3.14            90.2
+ 7 Skopje   M4-03 mutant     1       5.9            104. 
+ 8 Skopje   M4-03 mutant     2       4.86           102. 
+ 9 Skopje   M4-03 mutant     3       5.08           100. 
+10 Skopje   M4-04 mutant     1       4.75            88.1
+# ℹ 26 more rows</code></pre>
+</div>
+</div>
+<p>36 rows: one per plot. This is the same information as the clean file.</p>
+</section>
+<section id="step-7.-check-the-result" class="level3" data-number="2.5.7">
+<h3 data-number="2.5.7" class="anchored" data-anchor-id="step-7.-check-the-result"><span class="header-section-number">2.5.7</span> Step 7. Check the result</h3>
+<p>Compare the tidy data with the clean file used in Session 1. No rows should differ:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clean file used in Session 1.</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>clean <span class="ot">&lt;-</span> trial <span class="sc">|&gt;</span> <span class="fu">select</span>(geno, rep, yield_t_ha, plant_height_cm)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Find rows in "clean" that are NOT in "trial_tidy" (matching on all 4 columns)</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 rows = our cleaned version matches the original</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">anti_join</span>(clean, trial_tidy, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"geno"</span>, <span class="st">"rep"</span>, <span class="st">"yield_t_ha"</span>, <span class="st">"plant_height_cm"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 4
+# ℹ 4 variables: geno &lt;chr&gt;, rep &lt;dbl&gt;, yield_t_ha &lt;dbl&gt;, plant_height_cm &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>An empty result means that the two datasets are identical.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What about the colours and the comment?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The red row and the comment on M4-08 (<em>damaged by hail</em>) cannot be read by R. That information must be stored as data, for example in a column <code>damaged</code> with the values <code>yes</code> / <code>no</code>. Information that exists only as a colour is usually lost.</p>
+</div>
+</div>
+</section>
+<section id="the-opposite-from-long-to-wide" class="level3" data-number="2.5.8">
+<h3 data-number="2.5.8" class="anchored" data-anchor-id="the-opposite-from-long-to-wide"><span class="header-section-number">2.5.8</span> The opposite: from long to wide</h3>
+<p>Sometimes a wide table is useful, for example to present yield per replicate in a report. <code>pivot_wider()</code> does the opposite of <code>pivot_longer()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the opposite of pivot_longer(). It gives a table that's easier for people to read, </span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># with each genotype's reps side by side.</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>trial <span class="sc">|&gt;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(geno, rep, yield_t_ha) <span class="sc">|&gt;</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> rep, <span class="at">values_from =</span> yield_t_ha, <span class="at">names_prefix =</span> <span class="st">"rep_"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  geno  rep_1 rep_2 rep_3
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 M4-01  4.6   4.16 NA   
+2 M4-10  3.77  4.07  3.27
+3 M4-06  3.24  3.14  2.93
+4 M4-02  4.04  3.61  3.14</code></pre>
+</div>
+</div>
+<p>The rule is: <strong>store and analyse the data in long format; make wide tables only to present results.</strong></p>
+</section>
+</section>
+<section id="the-course-field-book-template" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="the-course-field-book-template"><span class="header-section-number">2.6</span> The course field book template</h2>
+<p>To avoid all these problems, organize your data with the template <code>data/template_field_book.xlsx</code>. It has three sheets: <code>instructions</code>, <code>field_book</code> and <code>dictionary</code>.</p>
+<p>The <code>field_book</code> sheet has one row of column names and <strong>one row per plot</strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Content</th>
+<th>Example</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>location</code></td>
+<td>Site of the trial</td>
+<td>Skopje</td>
+<td>yes</td>
+</tr>
+<tr class="even">
+<td><code>year</code></td>
+<td>Year of planting</td>
+<td>2025</td>
+<td>yes</td>
+</tr>
+<tr class="odd">
+<td><code>trial</code></td>
+<td>Trial name or code</td>
+<td>M4_yield_2025</td>
+<td>yes</td>
+</tr>
+<tr class="even">
+<td><code>generation</code></td>
+<td>Generation of the mutant material</td>
+<td>M4</td>
+<td>yes</td>
+</tr>
+<tr class="odd">
+<td><code>design</code></td>
+<td>Experimental design</td>
+<td>RCBD</td>
+<td>yes</td>
+</tr>
+<tr class="even">
+<td><code>plot</code></td>
+<td>Plot number</td>
+<td>17</td>
+<td>yes</td>
+</tr>
+<tr class="odd">
+<td><code>rep</code></td>
+<td>Replicate</td>
+<td>2</td>
+<td>yes</td>
+</tr>
+<tr class="even">
+<td><code>block</code></td>
+<td>Incomplete block (if the design has them)</td>
+<td>5</td>
+<td>if any</td>
+</tr>
+<tr class="odd">
+<td><code>row</code>, <code>col</code></td>
+<td>Position of the plot in the field</td>
+<td>3, 8</td>
+<td>recommended</td>
+</tr>
+<tr class="even">
+<td><code>geno</code></td>
+<td>Genotype, mutant line or variety</td>
+<td>M4-07</td>
+<td>yes</td>
+</tr>
+<tr class="odd">
+<td><code>check</code></td>
+<td>Is the entry a parent or check?</td>
+<td>yes / no</td>
+<td>yes</td>
+</tr>
+<tr class="even">
+<td>traits</td>
+<td>One column per trait, with the unit in the name</td>
+<td><code>yield_t_ha</code></td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Rules for the template
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li></li>
-<li></li>
-<li></li>
+<li>One table per sheet. The header in <strong>row 1 only</strong>, with no titles or empty rows above it.</li>
+<li><strong>No merged cells.</strong> Repeat the value in every row (for example, the location).</li>
+<li><strong>Only numbers</strong> in trait columns. Put the unit in the column name (<code>yield_t_ha</code>), not in the cell.</li>
+<li><strong>Leave missing values empty.</strong> Do not use <code>.</code>, <code>-</code>, <code>NA</code> or <code>0</code>.</li>
+<li><strong>No colours or comments</strong> as information: add a column (<code>damaged</code>, <code>notes</code>).</li>
+<li><strong>No totals or means</strong> inside the data: calculate them in R.</li>
+<li><strong>Simple column names:</strong> lower case, no spaces or accents (<code>plant_height_cm</code>).</li>
+<li>Write genotype names <strong>always the same way</strong> (<code>M4-01</code>, never <code>M4 01</code> or <code>m4-01</code>).</li>
+<li>Save the sheet as <strong>CSV UTF-8</strong> when you send it.</li>
+</ul>
+</div>
+</div>
+<section id="why-the-metadata-matter" class="level3" data-number="2.6.1">
+<h3 data-number="2.6.1" class="anchored" data-anchor-id="why-the-metadata-matter"><span class="header-section-number">2.6.1</span> Why the metadata matter?</h3>
+<p>The design columns are not decoration: each one becomes a term of the statistical model.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>rep</code>, <code>block</code></td>
+<td>Separating environmental variation from genetic variation (Day 2 and Day 3)</td>
+</tr>
+<tr class="even">
+<td><code>row</code>, <code>col</code></td>
+<td>Spatial analysis of field trends (Day 4)</td>
+</tr>
+<tr class="odd">
+<td><code>location</code>, <code>year</code></td>
+<td>Multi-environment trials and G×E (Day 5)</td>
+</tr>
+<tr class="even">
+<td><code>generation</code>, <code>check</code></td>
+<td>Comparing mutant lines with the parent (Dunnett test, Day 2) and decisions on advancement (week 2)</td>
+</tr>
+</tbody>
+</table>
+<p>A trial without <code>row</code> and <code>col</code> cannot be corrected for spatial trends; a trial without <code>rep</code> cannot be analysed as a designed experiment. <strong>Record them in the field from the beginning.</strong></p>
+</section>
+</section>
+<section id="the-data-dictionary" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="the-data-dictionary"><span class="header-section-number">2.7</span> The data dictionary</h2>
+<p>A column name such as <code>DF</code> or <code>SW100</code> is clear for the person who recorded it, but not for a colleague or for you two years later. A <strong>data dictionary</strong> describes every column of the field book: what it is, its type, its unit and its possible values. It is the <code>dictionary</code> sheet of the template.</p>
+<p>This is the dictionary of the practice trial, stored in <code>data/precourse_trial_dictionary.csv</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dictionary <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/precourse_trial_dictionary.csv"</span>, <span class="at">na =</span> <span class="fu">character</span>())</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(dictionary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 23%">
+<col style="width: 5%">
+<col style="width: 3%">
+<col style="width: 23%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">description</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: left;">unit</th>
+<th style="text-align: left;">values_or_scale</th>
+<th style="text-align: left;">how_measured</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">location</td>
+<td style="text-align: left;">Site of the trial</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Skopje</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">year</td>
+<td style="text-align: left;">Year of planting</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2025</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">generation</td>
+<td style="text-align: left;">Generation of the mutant material</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">M4</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">plot</td>
+<td style="text-align: left;">Plot number</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1 to 36</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rep</td>
+<td style="text-align: left;">Replicate (complete block)</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1 to 3</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">row</td>
+<td style="text-align: left;">Row position in the field</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1 to 3</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">col</td>
+<td style="text-align: left;">Column position in the field</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1 to 12</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">geno</td>
+<td style="text-align: left;">Mutant line, parent or check</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">M4-01 to M4-10, Parent, Check</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">check</td>
+<td style="text-align: left;">Is the entry the parent or a check?</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">yes / no</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">yield_t_ha</td>
+<td style="text-align: left;">Grain yield adjusted to plot area</td>
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">t/ha</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Grain weight per plot converted to t/ha</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">plant_height_cm</td>
+<td style="text-align: left;">Plant height</td>
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">cm</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Ground to top of the main stem, mean of 5 plants</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">days_to_flowering</td>
+<td style="text-align: left;">Days from sowing to 50% flowering</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;">days</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Counted from sowing date</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">disease_score</td>
+<td style="text-align: left;">Disease severity</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;">score</td>
+<td style="text-align: left;">1 (no symptoms) to 9 (very severe)</td>
+<td style="text-align: left;">Visual score of the whole plot</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Scales and scores
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For traits scored on a scale (disease, vigour, lodging), write in the dictionary what each value means, for example <em>1 = no symptoms, 9 = very severe</em>. Two people using different scales on the same trial is one of the most frequent and least visible errors in field data.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://cgspace.cgiar.org/server/api/core/bitstreams/24d9d3ab-c917-49ae-83a8-7ea44916eaa8/content"><img src="images/plant_type_cassava.png" class="img-fluid figure-img"></a></p>
+<figcaption>Cassava Plant type</figcaption>
+</figure>
+</div>
+</section>
+<section id="checking-your-file-in-r" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="checking-your-file-in-r"><span class="header-section-number">2.8</span> Checking your file in R</h2>
+<p>The function <code>check_dataset()</code> reads a CSV or Excel file and reports the problems described in this chapter. It does not change your file.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/check_dataset.R"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The clean practice trial passes the check:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_dataset</span>(<span class="st">"data/precourse_trial.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Rows: 36 | Columns: 13 
+[i] Genotypes: 12 | Replicates: 1, 2, 3 
+
+Missing values per column:
+         location              year        generation              plot 
+                0                 0                 0                 0 
+              rep               row               col              geno 
+                0                 0                 0                 0 
+            check        yield_t_ha   plant_height_cm days_to_flowering 
+                0                 2                 0                 0 
+    disease_score 
+                1 
+
+No problems found. Your file looks tidy.</code></pre>
+</div>
+</div>
+<p>The messy field book does not:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_dataset</span>(<span class="st">"data/messy_trial.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Rows: 18 | Columns: 8 
+Column names cleaned, for example: 'Mutant trial M4 - Skopje 2025 - RCBD with 3 replicates' -&gt; 'mutant_trial_m4_skopje_2025_rcbd_with_3_replicates'; '...2' -&gt; '2'; '...3' -&gt; '3' 
+
+[!] Missing required columns: location, year, rep, geno 
+[!] Very long column name: is there a title or note above the header?
+    Delete it, or read the file with read_excel(file, skip = 1)
+[!] Empty or unnamed columns (merged cells or double header?): 2, 3, 4, 5, 6, 7, 8 
+[!] Column '4' is almost all numbers but has text: Height (cm)
+[!] Column '5' is almost all numbers but has text: Rep 2 | Yield (t/ha)
+[!] Column '6' is almost all numbers but has text: Height (cm)
+[!] Column '8' is almost all numbers but has text: Height (cm)
+[!] Missing values typed as codes (leave the cell empty instead):
+3 7 
+1 1 
+[i] No row/col coordinates: spatial analysis will not be possible
+
+Missing values per column:
+mutant_trial_m4_skopje_2025_rcbd_with_3_replicates 
+                                                15 
+                                                 2 
+                                                 4 
+                                                 3 
+                                                 4 
+                                                 4 
+                                                 5 
+                                                 5 
+                                                 4 
+                                                 6 
+                                                 5 
+                                                 7 
+                                                 4 
+                                                 8 
+                                                 5 
+
+8 problem(s) found. See the [!] lines above.</code></pre>
+</div>
+</div>
+<p>Run it on your own file and correct each <code>[!]</code> line before sending your data.</p>
+</section>
+<section id="digital-data-collection-field-book-and-gridscore-next" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="digital-data-collection-field-book-and-gridscore-next"><span class="header-section-number">2.9</span> Digital data collection: Field Book and GridScore NEXT</h2>
+<p>Recording data directly on a phone or tablet avoids transcription errors and produces files that are already close to tidy: one row per plot, with the plot identifier and its position.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Field Book</th>
+<th>GridScore NEXT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Developed by</td>
+<td>PhenoApps (open source)</td>
+<td>James Hutton Institute (open source)</td>
+</tr>
+<tr class="even">
+<td>Devices</td>
+<td>Android phones and tablets</td>
+<td>Any device with a web browser (Android, iPhone, computer); works offline</td>
+</tr>
+<tr class="odd">
+<td>Field layout</td>
+<td>Imported from a CSV file</td>
+<td>Defined as a grid of rows and columns</td>
+</tr>
+<tr class="even">
+<td>Data export</td>
+<td>CSV</td>
+<td>Excel and other formats</td>
+</tr>
+<tr class="odd">
+<td>Installation</td>
+<td><a href="https://github.com/PhenoApps/Field-Book/releases">Install Field Book app (only for Android device)</a></td>
+<td><a href="https://www.installpwa.com/from/gridscore.hutton.ac.uk">Install Gridscore NEXT</a></td>
+</tr>
+<tr class="even">
+<td>Documentation</td>
+<td><a href="https://fieldbook.phenoapps.org/#/">Field Book Documentation</a></td>
+<td><a href="https://cropgeeks.github.io/gridscore-next-client/">Gridscore Documentation</a></td>
+</tr>
+</tbody>
+</table>
+<p>The general workflow is the same in both apps:</p>
+<ol type="1">
+<li><strong>Generate the field layout</strong> (randomization) with FielDHub (Day 2) or your own tool, with one row per plot and the columns <code>plot</code>, <code>rep</code>, <code>row</code>, <code>col</code> and <code>geno</code>.</li>
+<li><strong>Import the layout</strong> into the app.</li>
+<li><strong>Define the traits</strong> with their type, unit and valid range, using the data dictionary. A valid range prevents typing errors in the field (for example, a plant height of 950 cm instead of 95.0).</li>
+<li><strong>Collect the data</strong> plot by plot in the field.</li>
+<li><strong>Export</strong> the data and read them in R. Check them with <code>check_dataset()</code>.</li>
+</ol>
+</section>
+<section id="exercise-homework-before-arriving-in-skopje" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="exercise-homework-before-arriving-in-skopje"><span class="header-section-number">2.10</span> Exercise (homework before arriving in Skopje)</h2>
+<p><strong>Part 1.</strong> Using <code>trial_tidy</code> from this chapter:</p>
+<ol type="1">
+<li>Calculate the mean yield of each genotype across the three replicates.</li>
+<li>Make a wide table of plant height with one column per replicate.</li>
+<li>Add a column <code>damaged</code> with the value <code>yes</code> for M4-08 and <code>no</code> for all other genotypes.</li>
+</ol>
+<p><strong>Part 2.</strong> Prepare one dataset of your own:</p>
+<ol type="1">
+<li>Organize it with <code>template_field_book.xlsx</code> (one row per plot) and complete the <code>dictionary</code> sheet.</li>
+<li>Save the field book as CSV UTF-8 and run <code>check_dataset()</code> on it.</li>
+<li>Correct every <code>[!]</code> line and send the file and the dictionary to the instructors before the course.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution (Part 1)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Mean yield per genotype</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>trial_tidy <span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geno) <span class="sc">|&gt;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">yield =</span> <span class="fu">mean</span>(yield_t_ha, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(yield))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 2
+   geno   yield
+   &lt;chr&gt;  &lt;dbl&gt;
+ 1 M4-03   5.28
+ 2 M4-07   4.96
+ 3 Check   4.91
+ 4 M4-01   4.38
+ 5 Parent  4.20
+ 6 M4-04   4.09
+ 7 M4-05   3.97
+ 8 M4-10   3.70
+ 9 M4-02   3.60
+10 M4-08   3.52
+11 M4-09   3.19
+12 M4-06   3.10</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Plant height, one column per replicate</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>trial_tidy <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(geno, rep, plant_height_cm) <span class="sc">|&gt;</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> rep, <span class="at">values_from =</span> plant_height_cm, <span class="at">names_prefix =</span> <span class="st">"rep_"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 4
+   geno   rep_1 rep_2 rep_3
+   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 M4-01   86.3 103.   91.7
+ 2 M4-02   88.8  86    90.2
+ 3 M4-03  104.  102.  100. 
+ 4 M4-04   88.1  93.5  97.4
+ 5 M4-05   94    95.7  90.1
+ 6 M4-06   84.3  83.5  93.1
+ 7 M4-07  104.  103.  106. 
+ 8 M4-08   85    90.8  92.7
+ 9 M4-09   82.8  89.3  84.3
+10 M4-10   93.4  93.5  93.8
+11 Parent  96.5  90.2  91.5
+12 Check   97.8  89.7  98.7</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. A column instead of a colour</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>trial_tidy <span class="ot">&lt;-</span> trial_tidy <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">damaged =</span> <span class="fu">if_else</span>(geno <span class="sc">==</span> <span class="st">"M4-08"</span>, <span class="st">"yes"</span>, <span class="st">"no"</span>))</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(trial_tidy, damaged)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  damaged     n
+  &lt;chr&gt;   &lt;int&gt;
+1 no         33
+2 yes         3</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="key-takeaways" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">2.11</span> Key takeaways</h2>
+<ul>
+<li>A tidy dataset has <strong>one column per variable, one row per observation (plot) and one value per cell</strong>.</li>
+<li>Merged cells, double headers, units inside cells, missing-value codes, colours and summary rows are the most common problems of field books.</li>
+<li><code>read_excel(range, na)</code>, <code>fill()</code>, <code>parse_number()</code>, <code>separate_wider_delim()</code> and <code>pivot_longer()</code> fix most of them in R; but it is better to <strong>record the data tidy from the beginning</strong>.</li>
+<li>Design columns (<code>rep</code>, <code>block</code>, <code>row</code>, <code>col</code>, <code>location</code>, <code>year</code>) become terms of the statistical model: record them in the field.</li>
+<li>A <strong>data dictionary</strong> makes your data understandable for others and for yourself in the future.</li>
+<li>Check every file with <code>check_dataset()</code> before the analysis.</li>
 </ul>
 </section>
-<section id="references" class="level2" data-number="2.10">
-<h2 data-number="2.10" class="anchored" data-anchor-id="references"><span class="header-section-number">2.10</span> References</h2>
+<section id="references" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="references"><span class="header-section-number">2.12</span> References</h2>
+<ul>
+<li>Wickham, H., Çetinkaya-Rundel, M. &amp; Grolemund, G. (2023). <em>R for Data Science</em>, 2nd edition, chapter “Data tidying”. O’Reilly. <a href="https://r4ds.hadley.nz/data-tidy.html" class="uri">https://r4ds.hadley.nz/data-tidy.html</a></li>
+<li>Wickham, H. (2014). Tidy data. <em>Journal of Statistical Software</em>, 59(10), 1-23. <a href="https://doi.org/10.18637/jss.v059.i10" class="uri">https://doi.org/10.18637/jss.v059.i10</a></li>
+<li>Broman, K. W. &amp; Woo, K. H. (2018). Data organization in spreadsheets. <em>The American Statistician</em>, 72(1), 2-10. <a href="https://doi.org/10.1080/00031305.2017.1375989" class="uri">https://doi.org/10.1080/00031305.2017.1375989</a></li>
+<li>Field Book: <a href="https://github.com/PhenoApps/Field-Book" class="uri">https://github.com/PhenoApps/Field-Book</a></li>
+<li>GridScore NEXT: <a href="https://github.com/cropgeeks/gridscore-next-client" class="uri">https://github.com/cropgeeks/gridscore-next-client</a></li>
+</ul>
 
 
 </section>
