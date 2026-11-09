@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>10&nbsp; Multi-Environment Trials and G×E Interaction – Experimental Design and Data Analysis for the Advancement of Mutant Populations</title>
+<title>11&nbsp; Multi-Environment Trials and G×E Interaction – Experimental Design and Data Analysis for the Advancement of Mutant Populations</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../part1-week1/11-ai-plant-breeding.html" rel="next">
-<link href="../part1-week1/09-spatial-analysis.html" rel="prev">
+<link href="../part1-week1/09b-image-analysis.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -111,6 +111,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -124,7 +153,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part1-week1/03-field-data.html">Week 1: Concepts and methods</a></li><li class="breadcrumb-item"><a href="../part1-week1/10-met-gxe.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part1-week1/03-field-data.html">Week 1: Concepts and methods</a></li><li class="breadcrumb-item"><a href="../part1-week1/10-met-gxe.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -194,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/03-field-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Collecting and Structuring Field Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Collecting and Validating Field Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -218,13 +247,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/07-mixed-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models in Plant Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models, BLUEs, BLUPs and Heritability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/08-heritability-selection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heritability and Selection Decisions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Selection Decisions: Ranking, Expected Gain and Selection Indices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -235,14 +264,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../part1-week1/09b-image-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Low-Cost High-Throughput Phenotyping: Image Analysis in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../part1-week1/10-met-gxe.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/11-ai-plant-breeding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Artificial Intelligence in Plant Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Machine Learning for Prediction in Plant Breeding</span></span></a>
   </div>
 </li>
       </ul>
@@ -259,31 +294,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/12-analysis-pipeline.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/13-mutant-populations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/14-llm-assistants.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Using Large Language Models as Data Analysis Assistants</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Using Large Language Models as Data Analysis Assistants</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/15-selection-mutation-breeding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Decision-Making and Selection Strategies in Mutation Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Decision-Making and Selection Strategies in Mutation Breeding</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/16-participant-projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Participant Projects and Final Presentations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Participant Projects and Final Presentations</span></span></a>
   </div>
 </li>
       </ul>
@@ -304,23 +339,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">10.1</span> Learning objectives</a></li>
-  <li><a href="#planned-content" id="toc-planned-content" class="nav-link" data-scroll-target="#planned-content"><span class="header-section-number">10.2</span> Planned content</a></li>
-  <li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts"><span class="header-section-number">10.3</span> Key concepts</a></li>
-  <li><a href="#worked-demo-in-r" id="toc-worked-demo-in-r" class="nav-link" data-scroll-target="#worked-demo-in-r"><span class="header-section-number">10.4</span> Worked demo in R</a></li>
-  <li><a href="#interpretation-for-breeding-decisions" id="toc-interpretation-for-breeding-decisions" class="nav-link" data-scroll-target="#interpretation-for-breeding-decisions"><span class="header-section-number">10.5</span> Interpretation for breeding decisions</a></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">10.6</span> Exercise</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">10.7</span> Key takeaways</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">10.8</span> References</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">11.1</span> Learning objectives</a></li>
+  <li><a href="#why-test-in-several-environments" id="toc-why-test-in-several-environments" class="nav-link" data-scroll-target="#why-test-in-several-environments"><span class="header-section-number">11.2</span> Why test in several environments</a></li>
+  <li><a href="#the-data-durum-wheat-in-algeria" id="toc-the-data-durum-wheat-in-algeria" class="nav-link" data-scroll-target="#the-data-durum-wheat-in-algeria"><span class="header-section-number">11.3</span> The data: durum wheat in Algeria</a>
+  <ul class="collapse">
+  <li><a href="#do-the-lines-change-rank" id="toc-do-the-lines-change-rank" class="nav-link" data-scroll-target="#do-the-lines-change-rank"><span class="header-section-number">11.3.1</span> Do the lines change rank?</a></li>
+  </ul></li>
+  <li><a href="#how-much-is-ge-the-analysis-of-variance-of-a-met" id="toc-how-much-is-ge-the-analysis-of-variance-of-a-met" class="nav-link" data-scroll-target="#how-much-is-ge-the-analysis-of-variance-of-a-met"><span class="header-section-number">11.4</span> How much is G×E? The analysis of variance of a MET</a>
+  <ul class="collapse">
+  <li><a href="#where-does-ge-come-from" id="toc-where-does-ge-come-from" class="nav-link" data-scroll-target="#where-does-ge-come-from"><span class="header-section-number">11.4.1</span> Where does G×E come from?</a></li>
+  </ul></li>
+  <li><a href="#variance-components-and-heritability-across-environments" id="toc-variance-components-and-heritability-across-environments" class="nav-link" data-scroll-target="#variance-components-and-heritability-across-environments"><span class="header-section-number">11.5</span> Variance components and heritability across environments</a></li>
+  <li><a href="#stability-and-adaptability" id="toc-stability-and-adaptability" class="nav-link" data-scroll-target="#stability-and-adaptability"><span class="header-section-number">11.6</span> Stability and adaptability</a>
+  <ul class="collapse">
+  <li><a href="#simple-stability-statistics" id="toc-simple-stability-statistics" class="nav-link" data-scroll-target="#simple-stability-statistics"><span class="header-section-number">11.6.1</span> Simple stability statistics</a></li>
+  </ul></li>
+  <li><a href="#pca-on-a-small-example" id="toc-pca-on-a-small-example" class="nav-link" data-scroll-target="#pca-on-a-small-example"><span class="header-section-number">11.7</span> PCA on a small example</a></li>
+  <li><a href="#the-ammi-model" id="toc-the-ammi-model" class="nav-link" data-scroll-target="#the-ammi-model"><span class="header-section-number">11.8</span> The AMMI model</a>
+  <ul class="collapse">
+  <li><a href="#ammi1-biplot-mean-against-ipca1" id="toc-ammi1-biplot-mean-against-ipca1" class="nav-link" data-scroll-target="#ammi1-biplot-mean-against-ipca1"><span class="header-section-number">11.8.1</span> AMMI1 biplot: mean against IPCA1</a></li>
+  <li><a href="#ammi2-biplot-the-two-interaction-axes" id="toc-ammi2-biplot-the-two-interaction-axes" class="nav-link" data-scroll-target="#ammi2-biplot-the-two-interaction-axes"><span class="header-section-number">11.8.2</span> AMMI2 biplot: the two interaction axes</a></li>
+  </ul></li>
+  <li><a href="#the-gge-biplot" id="toc-the-gge-biplot" class="nav-link" data-scroll-target="#the-gge-biplot"><span class="header-section-number">11.9</span> The GGE biplot</a>
+  <ul class="collapse">
+  <li><a href="#which-won-where" id="toc-which-won-where" class="nav-link" data-scroll-target="#which-won-where"><span class="header-section-number">11.9.1</span> Which-won-where</a></li>
+  <li><a href="#mean-performance-and-stability" id="toc-mean-performance-and-stability" class="nav-link" data-scroll-target="#mean-performance-and-stability"><span class="header-section-number">11.9.2</span> Mean performance and stability</a></li>
+  </ul></li>
+  <li><a href="#putting-performance-and-stability-together" id="toc-putting-performance-and-stability-together" class="nav-link" data-scroll-target="#putting-performance-and-stability-together"><span class="header-section-number">11.10</span> Putting performance and stability together</a></li>
+  <li><a href="#mega-environments-and-targeting" id="toc-mega-environments-and-targeting" class="nav-link" data-scroll-target="#mega-environments-and-targeting"><span class="header-section-number">11.11</span> Mega-environments and targeting</a></li>
+  <li><a href="#multi-environment-trials-in-a-mutation-breeding-programme" id="toc-multi-environment-trials-in-a-mutation-breeding-programme" class="nav-link" data-scroll-target="#multi-environment-trials-in-a-mutation-breeding-programme"><span class="header-section-number">11.12</span> Multi-environment trials in a mutation breeding programme</a></li>
+  <li><a href="#sec-met-shortcuts" id="toc-sec-met-shortcuts" class="nav-link" data-scroll-target="#sec-met-shortcuts"><span class="header-section-number">11.13</span> Shortcuts: <code>metan</code> and <code>statgenGxE</code></a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">11.14</span> Exercise</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">11.15</span> Key takeaways</a></li>
+  <li><a href="#sec-met-gxe-refs" id="toc-sec-met-gxe-refs" class="nav-link" data-scroll-target="#sec-met-gxe-refs"><span class="header-section-number">11.16</span> References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lfdelgadom/rtc-mutant-breeding-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part1-week1/03-field-data.html">Week 1: Concepts and methods</a></li><li class="breadcrumb-item"><a href="../part1-week1/10-met-gxe.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part1-week1/03-field-data.html">Week 1: Concepts and methods</a></li><li class="breadcrumb-item"><a href="../part1-week1/10-met-gxe.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-met-gxe" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></span></h1>
+<h1 class="title"><span id="sec-met-gxe" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></span></h1>
 </div>
 
 
@@ -338,8 +398,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="chapter-info">
-<p><strong>Author:</strong> Mirjana Jankulovska<br>
-<strong>Session:</strong> Day 5 – Friday 13 November</p>
+<p><strong>Author:</strong> Luis Fernando Delgado Muñoz<br>
+<strong>Session:</strong> Day 5, Friday 13 November (morning and early afternoon, led by Mirjana Jankulovska)</p>
+</div>
+<section id="learning-objectives" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">11.1</span> Learning objectives</h2>
+<ul>
+<li>Explain what the genotype by environment interaction (G×E) is and why one environment is not enough to choose a line</li>
+<li>Split the variation of a multi-environment trial (MET) into genotype, environment and G×E</li>
+<li>Estimate variance components and the heritability of a line mean across environments</li>
+<li>Describe stability and adaptability, and compute simple stability statistics</li>
+<li>Read a principal component analysis (PCA) of a small table, and use the same idea for the AMMI and GGE biplots</li>
+<li>Interpret an AMMI1 biplot, a GGE “which-won-where” biplot and the mean against stability view</li>
+<li>Combine performance and stability in a selection decision</li>
+</ul>
+<p>Until now we compared lines <strong>inside one trial</strong>. A breeder never sells a line to one field in one year. The line will be grown on many farms and in many seasons, and a line that wins in one trial can be average in another. This chapter uses trials run in several environments to answer a different question: <strong>which lines are good on average, which are stable, and which are good only somewhere?</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -347,47 +426,781 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Chapter in preparation
+<span class="screen-reader-only">Note</span>Packages
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This chapter will be written by Mirjana Jankulovska. The outline below follows the course agenda.</p>
+<p>The chapter uses only <code>lme4</code> and <code>ggplot2</code> and base R, so the AMMI and GGE biplots are built step by step and you can see what they do. At the end (<a href="#sec-met-shortcuts">Shortcuts</a>) we show the same analyses with <code>metan</code> and <code>statgenGxE</code>, which are part of the course installation (<code>R/install_packages.R</code>).</p>
 </div>
 </div>
-<section id="learning-objectives" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">10.1</span> Learning objectives</h2>
-<ul>
-<li>Explain G×E and the need for multi-environment testing</li>
-<li>Fit a MET model</li>
-<li>Interpret stability indices, AMMI and GGE biplots</li>
-</ul>
 </section>
-<section id="planned-content" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="planned-content"><span class="header-section-number">10.2</span> Planned content</h2>
-<ul>
-<li>G×E interaction, stability vs adaptability, mega-environments</li>
-<li>Foundations of PCA with a toy example</li>
-<li>MET data structure and model fitting</li>
-<li>Stability indices, AMMI and GGE biplot</li>
-</ul>
+<section id="why-test-in-several-environments" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="why-test-in-several-environments"><span class="header-section-number">11.2</span> Why test in several environments</h2>
+<p>Take two lines. In a good year, line A yields more than line B. In a dry year, B is better. If we had tested only in the good year, we would have kept A and lost the line that tolerates drought. That change of ranking, or of the size of the difference, from one environment to another is the <strong>genotype by environment interaction (G×E)</strong>.</p>
+<p>There are three situations, and they have different consequences for the breeder:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>What it looks like</th>
+<th>Consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No G×E</td>
+<td>Lines keep the same differences everywhere</td>
+<td>One good environment is enough to rank lines</td>
+</tr>
+<tr class="even">
+<td>Scale G×E (no crossing)</td>
+<td>Differences get bigger or smaller, but the order is kept</td>
+<td>Ranking is safe, the size of the gain changes</td>
+</tr>
+<tr class="odd">
+<td>Crossover G×E</td>
+<td>The order of lines changes</td>
+<td>The best line depends on where it will be grown</td>
+</tr>
+</tbody>
+</table>
+<p>The crossover case is the one that makes selection hard. We will now see how common it is in real data.</p>
 </section>
-<section id="key-concepts" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="key-concepts"><span class="header-section-number">10.3</span> Key concepts</h2>
-<!-- Author: theory, formulas and figures -->
-</section>
-<section id="worked-demo-in-r" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="worked-demo-in-r"><span class="header-section-number">10.4</span> Worked demo in R</h2>
+<section id="the-data-durum-wheat-in-algeria" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="the-data-durum-wheat-in-algeria"><span class="header-section-number">11.3</span> The data: durum wheat in Algeria</h2>
+<p>We use a real multi-environment trial of durum wheat (Algeria). It is a complete and balanced data set, which makes it ideal to learn the methods.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the shared course datasets in data/ where possible</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>met <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Durum_wheat_Algeria.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Genotype =</span> <span class="fu">factor</span>(<span class="fu">trimws</span>(Genotype)),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Env      =</span> <span class="fu">factor</span>(Environment),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Loc      =</span> <span class="fu">factor</span>(Location),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">Year     =</span> <span class="fu">factor</span>(Year),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">Block    =</span> <span class="fu">factor</span>(Block),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">region   =</span> <span class="fu">factor</span>(region),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">Group    =</span> <span class="fu">factor</span>(<span class="fu">trimws</span>(GenoGroup)))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>met <span class="sc">|&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">plots =</span> <span class="fu">n</span>(),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">genotypes =</span> <span class="fu">n_distinct</span>(Genotype),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">locations =</span> <span class="fu">n_distinct</span>(Loc),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">years =</span> <span class="fu">n_distinct</span>(Year),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">environments =</span> <span class="fu">n_distinct</span>(Env),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">blocks =</span> <span class="fu">n_distinct</span>(Block),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_yield =</span> <span class="fu">mean</span>(yield))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 7
+  plots genotypes locations years environments blocks mean_yield
+  &lt;int&gt;     &lt;int&gt;     &lt;int&gt; &lt;int&gt;        &lt;int&gt;  &lt;int&gt;      &lt;dbl&gt;
+1  2112        24        11     2           22      4       1.87</code></pre>
+</div>
+</div>
+<p>There are 24 genotypes, 11 locations and 2 years, which gives 22 <strong>environments</strong> (an environment is one location in one year). Each genotype appears once in each of the 4 blocks of each environment, so every line has 4 plots per environment, and the data is balanced. The locations belong to two regions (<code>A</code> and <code>B</code>), and the lines belong to two groups (<code>A</code> and <code>B</code>). Yield is in t/ha.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>env_means <span class="ot">&lt;-</span> met <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Env, region) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">yield =</span> <span class="fu">mean</span>(yield), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Env =</span> <span class="fu">reorder</span>(Env, yield))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(env_means, <span class="fu">aes</span>(yield, Env, <span class="at">fill =</span> region)) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">A =</span> <span class="st">"#c0392b"</span>, <span class="at">B =</span> <span class="st">"#2c7fb8"</span>)) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Mean yield (t/ha)"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="st">"Region"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-env-means" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-env-means-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-met-gxe_files/figure-html/fig-env-means-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-env-means-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.1: Mean yield of the 22 environments. Environments are the dominant source of variation: the best environment yields almost five times more than the worst.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Mean yield goes from 0.66 to 3.24 t/ha across environments. Region does not explain this difference by itself: the two regions have almost the same mean (1.86 and 1.88 t/ha).</p>
+<section id="do-the-lines-change-rank" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="do-the-lines-change-rank"><span class="header-section-number">11.3.1</span> Do the lines change rank?</h3>
+<p>The next figure draws the mean of each line in each environment, with environments ordered from the poorest to the best. Each line is one grey line, and four lines are in colour. If there were no G×E, all the lines would be parallel.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gm <span class="ot">&lt;-</span> met <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Genotype, Env) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">yield =</span> <span class="fu">mean</span>(yield), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>env_order <span class="ot">&lt;-</span> gm <span class="sc">|&gt;</span> <span class="fu">group_by</span>(Env) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">m =</span> <span class="fu">mean</span>(yield)) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(m) <span class="sc">|&gt;</span> <span class="fu">pull</span>(Env)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>gm <span class="ot">&lt;-</span> <span class="fu">mutate</span>(gm, <span class="at">Env =</span> <span class="fu">factor</span>(Env, <span class="at">levels =</span> env_order),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">hl =</span> <span class="fu">ifelse</span>(Genotype <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"GTADUR"</span>, <span class="st">"O.ZENADI"</span>, <span class="st">"SAHEL77"</span>, <span class="st">"MBBACHIR"</span>),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">as.character</span>(Genotype), <span class="st">"other"</span>))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gm, <span class="fu">aes</span>(Env, yield, <span class="at">group =</span> Genotype)) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> <span class="fu">filter</span>(gm, hl <span class="sc">==</span> <span class="st">"other"</span>), <span class="at">colour =</span> <span class="st">"grey75"</span>) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> <span class="fu">filter</span>(gm, hl <span class="sc">!=</span> <span class="st">"other"</span>), <span class="fu">aes</span>(<span class="at">colour =</span> hl), <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">GTADUR =</span> <span class="st">"#1b9e77"</span>, <span class="at">O.ZENADI =</span> <span class="st">"#d95f02"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">SAHEL77 =</span> <span class="st">"#7570b3"</span>, <span class="at">MBBACHIR =</span> <span class="st">"#e7298a"</span>)) <span class="sc">+</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Environment (from poorest to best)"</span>, <span class="at">y =</span> <span class="st">"Yield (t/ha)"</span>, <span class="at">colour =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">8</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-reaction" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reaction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-met-gxe_files/figure-html/fig-reaction-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reaction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.2: Reaction of the 24 lines across the 22 environments (ordered by environment mean). Lines that are not parallel show G×E; lines that cross change their rank.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The lines are not parallel and they cross many times. The best line in the poorest environments is not always the best in the richest ones. This is G×E in real data.</p>
+</section>
+</section>
+<section id="how-much-is-ge-the-analysis-of-variance-of-a-met" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="how-much-is-ge-the-analysis-of-variance-of-a-met"><span class="header-section-number">11.4</span> How much is G×E? The analysis of variance of a MET</h2>
+<p>The first look at a MET is an analysis of variance that separates three sources: environments (E), genotypes (G) and their interaction (G×E). Blocks are nested in environments, because “block 1” of one location has nothing to do with “block 1” of another.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fit_met <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> Env <span class="sc">+</span> Env<span class="sc">:</span>Block <span class="sc">+</span> Genotype <span class="sc">+</span> Genotype<span class="sc">:</span>Env, <span class="at">data =</span> met)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>an <span class="ot">&lt;-</span> <span class="fu">anova</span>(fit_met)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>an</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: yield
+               Df Sum Sq Mean Sq  F value    Pr(&gt;F)    
+Env            21 935.95  44.569 537.1651 &lt; 2.2e-16 ***
+Genotype       23  80.84   3.515  42.3627 &lt; 2.2e-16 ***
+Env:Block      66 117.69   1.783  21.4909 &lt; 2.2e-16 ***
+Env:Genotype  483 151.66   0.314   3.7845 &lt; 2.2e-16 ***
+Residuals    1518 125.95   0.083                       
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">source =</span> <span class="fu">c</span>(<span class="st">"Environment"</span>, <span class="st">"Block within environment"</span>, <span class="st">"Genotype"</span>, <span class="st">"G×E"</span>, <span class="st">"Residual"</span>),</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">share_of_SS =</span> <span class="fu">round</span>(pct[<span class="fu">c</span>(<span class="st">"Env"</span>, <span class="st">"Env:Block"</span>, <span class="st">"Genotype"</span>, <span class="st">"Env:Genotype"</span>, <span class="st">"Residuals"</span>)], <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                               source share_of_SS
+Env                       Environment        66.3
+Env:Block    Block within environment         8.3
+Genotype                     Genotype         5.7
+Env:Genotype                      G×E        10.7
+Residuals                    Residual         8.9</code></pre>
+</div>
+</div>
+<p>Environments explain 66 % of the total variation, genotypes only 6 %, and G×E 11 %. Two things follow:</p>
+<ol type="1">
+<li>The environment effect is huge but <strong>irrelevant for selection</strong>: the breeder cannot choose the year. What matters is the share of G and G×E, and here G×E is about <strong>twice</strong> the genotype effect.</li>
+<li>The genotype effect cannot be tested against the residual. The environments of the trial are a sample of the environments where the line will be grown, so the right denominator is the G×E mean square.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ms <span class="ot">&lt;-</span> an[[<span class="st">"Mean Sq"</span>]]; <span class="fu">names</span>(ms) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(an)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>F_g <span class="ot">&lt;-</span> ms[<span class="st">"Genotype"</span>] <span class="sc">/</span> ms[<span class="st">"Env:Genotype"</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df_g <span class="ot">&lt;-</span> an[<span class="st">"Genotype"</span>, <span class="st">"Df"</span>]; df_ge <span class="ot">&lt;-</span> an[<span class="st">"Env:Genotype"</span>, <span class="st">"Df"</span>]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">F =</span> <span class="fu">unname</span>(F_g), <span class="at">p =</span> <span class="fu">unname</span>(<span class="fu">pf</span>(F_g, df_g, df_ge, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           F            p 
+1.119373e+01 2.886352e-32 </code></pre>
+</div>
+</div>
+<p>Against G×E, the genotype effect is still significant (F = 11.2), but the evidence is much weaker than the F value of 42 that we would get against the residual. This is a common mistake in published METs.</p>
+<section id="where-does-ge-come-from" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="where-does-ge-come-from"><span class="header-section-number">11.4.1</span> Where does G×E come from?</h3>
+<p>G×E can be split by the structure of the environments (a location and a year). In this data there are the same 11 locations in both years, so we can separate the part of G×E that <strong>repeats</strong> from year to year at a location from the part that does not.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fit_parts <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> Env <span class="sc">+</span> Env<span class="sc">:</span>Block <span class="sc">+</span> Genotype <span class="sc">+</span> Genotype<span class="sc">:</span>Loc <span class="sc">+</span> Genotype<span class="sc">:</span>Year <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                  Genotype<span class="sc">:</span>Env, <span class="at">data =</span> met)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ap <span class="ot">&lt;-</span> <span class="fu">anova</span>(fit_parts)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ssp <span class="ot">&lt;-</span> ap[[<span class="st">"Sum Sq"</span>]]; <span class="fu">names</span>(ssp) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(ap)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ge_total <span class="ot">&lt;-</span> <span class="fu">sum</span>(ssp[<span class="fu">c</span>(<span class="st">"Genotype:Loc"</span>, <span class="st">"Genotype:Year"</span>, <span class="st">"Env:Genotype"</span>)])</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">part_of_GxE =</span> <span class="fu">c</span>(<span class="st">"Genotype × Location (repeatable)"</span>, <span class="st">"Genotype × Year"</span>, <span class="st">"Genotype × Location × Year (not repeatable)"</span>),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">percent =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> ssp[<span class="fu">c</span>(<span class="st">"Genotype:Loc"</span>, <span class="st">"Genotype:Year"</span>, <span class="st">"Env:Genotype"</span>)] <span class="sc">/</span> ge_total, <span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                              part_of_GxE percent
+Genotype:Loc             Genotype × Location (repeatable)      50
+Genotype:Year                             Genotype × Year       6
+Env:Genotype  Genotype × Location × Year (not repeatable)      44</code></pre>
+</div>
+</div>
+<p>About half of G×E is a <strong>genotype by location</strong> effect. This part is a property of the location, and it will appear again next year, so it is useful: we can choose lines for locations, or for groups of similar locations. The other half is genotype by location by year, which changes every season and cannot be predicted. The same logic is behind the idea of <strong>mega-environments</strong> at the end of the chapter.</p>
+</section>
+</section>
+<section id="variance-components-and-heritability-across-environments" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="variance-components-and-heritability-across-environments"><span class="header-section-number">11.5</span> Variance components and heritability across environments</h2>
+<p>With the environments as a sample, genotypes, environments, G×E and blocks are all random, and we estimate their variances.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fit_vc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Genotype) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Env) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Genotype<span class="sc">:</span>Env) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Env<span class="sc">:</span>Block),</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> met, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>vc <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(fit_vc))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>vc <span class="ot">&lt;-</span> <span class="fu">setNames</span>(vc<span class="sc">$</span>vcov, vc<span class="sc">$</span>grp)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(vc, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Genotype:Env    Env:Block     Genotype          Env     Residual 
+      0.0578       0.0708       0.0364       0.4433       0.0830 </code></pre>
+</div>
+</div>
+<p>The variance of G×E (0.058) is 1.6 times the genotype variance (0.036). The <strong>heritability of a line mean</strong> (the quantity that tells how well the mean of a line predicts its true value) depends on how many environments and replicates were used:</p>
+<p><span class="math display">\[
+H^2 = \frac{\sigma^2_G}{\sigma^2_G + \dfrac{\sigma^2_{GE}}{e} + \dfrac{\sigma^2_\varepsilon}{e\,r}}
+\]</span></p>
+<p>where <span class="math inline">\(e\)</span> is the number of environments and <span class="math inline">\(r\)</span> the number of replicates per environment.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>h2_tab <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">environments =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">H2 =</span> <span class="fu">H2</span>(environments))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(h2_tab, <span class="fu">aes</span>(environments, H2)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"#2c7fb8"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">filter</span>(h2_tab, environments <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">22</span>)), <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> <span class="fu">filter</span>(h2_tab, environments <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">22</span>)),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(H2, <span class="dv">2</span>)), <span class="at">vjust =</span> <span class="fl">1.8</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of environments"</span>, <span class="at">y =</span> <span class="fu">expression</span>(H<span class="sc">^</span><span class="dv">2</span><span class="sc">~</span><span class="st">"of the line mean"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-h2-env" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-h2-env-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-met-gxe_files/figure-html/fig-h2-env-1.png" class="img-fluid figure-img" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-h2-env-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.3: Heritability of the line mean as a function of the number of environments (4 replicates per environment). Each extra environment helps, with decreasing returns.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In a <strong>single environment</strong> the heritability is only 0.32. With 4 environments it reaches 0.65, and with the 22 environments of the trial it is 0.91. This is the quantitative argument for a MET: most of what looks like a difference between lines in one trial is G×E and error, and only repeated testing separates the genotype effect from them.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Replicates or environments?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Look at the formula. Adding replicates only reduces the error term (<span class="math inline">\(\sigma^2_\varepsilon / e r\)</span>). Adding environments reduces <strong>both</strong> the G×E and the error term. When G×E is as large as here, it is almost always better to test in more environments with fewer replicates, than the opposite.</p>
+</div>
 </div>
 </section>
-<section id="interpretation-for-breeding-decisions" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="interpretation-for-breeding-decisions"><span class="header-section-number">10.5</span> Interpretation for breeding decisions</h2>
+<section id="stability-and-adaptability" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="stability-and-adaptability"><span class="header-section-number">11.6</span> Stability and adaptability</h2>
+<p>Two words are often mixed:</p>
+<ul>
+<li><strong>Adaptability</strong>: how well a line performs in a given set of environments (its mean, or its response to the quality of the environment).</li>
+<li><strong>Stability</strong>: how little the line’s performance changes from one environment to another.</li>
+</ul>
+<p>A line can be stable and poor (always low yield), or high yielding in good environments only. The breeder looks for lines that are <strong>high and stable</strong>, or for lines adapted to a specific group of environments.</p>
+<section id="simple-stability-statistics" class="level3" data-number="11.6.1">
+<h3 data-number="11.6.1" class="anchored" data-anchor-id="simple-stability-statistics"><span class="header-section-number">11.6.1</span> Simple stability statistics</h3>
+<p>We compute three classic statistics from the table of line means by environment.</p>
+<ul>
+<li><strong>Ecovalence</strong> (Wricke): the contribution of the line to the G×E sum of squares. Low is stable.</li>
+<li><strong>Regression slope</strong> (Finlay and Wilkinson): the slope of the line yield on the environment mean. A slope of 1 means average response; above 1 the line responds more to good environments; below 1 it is less affected.</li>
+<li><strong>Coefficient of variation</strong> of the line across environments.</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">with</span>(met, <span class="fu">tapply</span>(yield, <span class="fu">list</span>(Genotype, Env), mean))   <span class="co"># genotype x environment table of means</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">nrow</span>(M); e <span class="ot">&lt;-</span> <span class="fu">ncol</span>(M)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>dc <span class="ot">&lt;-</span> M <span class="sc">-</span> <span class="fu">rowMeans</span>(M) <span class="sc">-</span> <span class="fu">matrix</span>(<span class="fu">colMeans</span>(M), g, e, <span class="at">byrow =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">mean</span>(M)   <span class="co"># G×E effects (double centred)</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>env_index <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(M) <span class="sc">-</span> <span class="fu">mean</span>(M)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>stab <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean  =</span> <span class="fu">rowMeans</span>(M),</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">W     =</span> <span class="fu">rowSums</span>(dc<span class="sc">^</span><span class="dv">2</span>),                                                    <span class="co"># Wricke ecovalence</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">slope =</span> <span class="fu">apply</span>(M, <span class="dv">1</span>, <span class="cf">function</span>(y) <span class="fu">unname</span>(<span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> env_index))[<span class="dv">2</span>])),      <span class="co"># Finlay-Wilkinson</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">cv    =</span> <span class="fu">apply</span>(M, <span class="dv">1</span>, <span class="cf">function</span>(y) <span class="dv">100</span> <span class="sc">*</span> <span class="fu">sd</span>(y) <span class="sc">/</span> <span class="fu">mean</span>(y))</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(mean))</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>stab<span class="sc">$</span>rank_mean <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(g)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(stab, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         mean    W slope    cv rank_mean
+GTADUR   2.17 1.05  1.20 38.59         1
+CHENS    2.11 0.84  1.13 37.37         2
+SAHEL77  2.10 2.77  1.07 38.55         3
+BID/WAHA 2.06 0.74  1.11 37.58         4
+SIMETO   2.06 2.37  1.10 39.78         5
+B.DUR194 2.03 1.80  1.11 39.86         6
+WAHA     2.02 1.12  1.08 37.98         7
+OFANTO   2.02 1.98  0.94 35.24         8
+MEXICALI 1.99 2.15  1.04 38.94         9
+DUILIO   1.96 1.59  1.01 37.73        10
+VITRON   1.96 1.57  1.08 39.88        11
+BELIKH02 1.96 1.48  1.06 39.15        12
+OUMRABI9 1.95 0.95  0.98 35.88        13
+EIDER    1.93 0.66  0.99 36.06        14
+KEBIR    1.81 0.68  1.02 39.55        15
+ARDENTE  1.78 1.67  1.11 45.21        16
+INRAT69  1.77 1.16  0.99 40.44        17
+HEBD/GDO 1.73 1.04  1.07 43.96        18
+BIDI17   1.65 1.63  0.90 40.47        19
+POLONICU 1.63 2.71  0.70 34.61        20
+POLON/ZB 1.63 1.30  0.93 41.65        21
+MBBACHIR 1.57 2.36  0.84 41.84        22
+HEBDA03  1.54 1.77  0.78 37.90        23
+O.ZENADI 1.53 2.53  0.79 40.91        24</code></pre>
+</div>
+</div>
+<p>The statistics tell different stories. The line mean and the slope are strongly related (rank correlation 0.79): the lines that yield more are also the ones that respond more to good environments. The ecovalence is almost independent of the mean (-0.18), so a line can be high yielding and stable, or high and unstable. This is why <strong>no single number</strong> describes stability, and why graphical methods help.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>stab<span class="sc">$</span>Genotype <span class="ot">&lt;-</span> <span class="fu">rownames</span>(stab)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stab, <span class="fu">aes</span>(W, mean, <span class="at">label =</span> Genotype)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">median</span>(stab<span class="sc">$</span>mean), <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">median</span>(stab<span class="sc">$</span>W), <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#2c7fb8"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">max.overlaps =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Wricke ecovalence (lower = more stable)"</span>, <span class="at">y =</span> <span class="st">"Mean yield (t/ha)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-mean-stab" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mean-stab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-met-gxe_files/figure-html/fig-mean-stab-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mean-stab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.4: Mean yield against ecovalence. Lines in the upper left are high yielding and stable. The dashed lines are the medians.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="exercise" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="exercise"><span class="header-section-number">10.6</span> Exercise</h2>
-<div class="callout callout-style-default callout-tip callout-empty-content callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+</section>
+<section id="pca-on-a-small-example" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="pca-on-a-small-example"><span class="header-section-number">11.7</span> PCA on a small example</h2>
+<p>AMMI and GGE are built on the <strong>principal component analysis (PCA)</strong> of a table of line means. We first see the idea in a table small enough to read: five lines in four environments.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>small <span class="ot">&lt;-</span> M[<span class="fu">c</span>(<span class="st">"GTADUR"</span>, <span class="st">"SAHEL77"</span>, <span class="st">"O.ZENADI"</span>, <span class="st">"MBBACHIR"</span>, <span class="st">"CHENS"</span>),</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">c</span>(<span class="st">"loc01_year1"</span>, <span class="st">"loc14_year2"</span>, <span class="st">"loc05_year1"</span>, <span class="st">"loc07_year2"</span>)]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(small, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         loc01_year1 loc14_year2 loc05_year1 loc07_year2
+GTADUR          4.12        3.51        1.29        0.88
+SAHEL77         3.68        3.40        1.44        0.72
+O.ZENADI        2.44        3.16        1.09        0.43
+MBBACHIR        2.67        2.91        0.97        0.26
+CHENS           3.75        3.63        1.50        0.90</code></pre>
+</div>
+</div>
+<p>PCA looks for the directions in which the lines differ most. First we centre the columns (subtract the environment mean), because we want differences among lines inside an environment.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pc <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(small, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">mean</span>(pc<span class="sc">$</span>rotation[, <span class="dv">1</span>]) <span class="sc">&lt;</span> <span class="dv">0</span>) { pc<span class="sc">$</span>rotation[, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="sc">-</span>pc<span class="sc">$</span>rotation[, <span class="dv">1</span>]; pc<span class="sc">$</span>x[, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="sc">-</span>pc<span class="sc">$</span>x[, <span class="dv">1</span>] }  <span class="co"># the sign is arbitrary: make PC1 point to higher yield</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(pc<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>(pc<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)       <span class="co"># % of variation of each component</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 94.4  4.8  0.8  0.0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(pc<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="dv">2</span>)                             <span class="co"># scores of the lines</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           PC1   PC2
+GTADUR    0.83  0.17
+SAHEL77   0.39  0.00
+O.ZENADI -0.92 -0.18
+MBBACHIR -0.89  0.20
+CHENS     0.60 -0.20</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(pc<span class="sc">$</span>rotation[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="dv">2</span>)                      <span class="co"># loadings of the environments</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             PC1   PC2
+loc01_year1 0.86  0.49
+loc14_year2 0.31 -0.61
+loc05_year1 0.23 -0.50
+loc07_year2 0.33 -0.37</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sc <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pc<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]); sc<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="fu">rownames</span>(sc)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>ld <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pc<span class="sc">$</span>rotation[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">*</span> <span class="fl">1.3</span>); ld<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="fu">short</span>(<span class="fu">rownames</span>(ld))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey70"</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey70"</span>) <span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> ld, <span class="fu">aes</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="at">xend =</span> PC1, <span class="at">yend =</span> PC2), <span class="at">colour =</span> <span class="st">"#c0392b"</span>,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>))) <span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> ld, <span class="fu">aes</span>(PC1, PC2, <span class="at">label =</span> name), <span class="at">colour =</span> <span class="st">"#c0392b"</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sc, <span class="fu">aes</span>(PC1, PC2), <span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">colour =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> sc, <span class="fu">aes</span>(PC1, PC2, <span class="at">label =</span> name), <span class="at">size =</span> <span class="fl">3.3</span>, <span class="at">vjust =</span> <span class="fl">1.8</span>, <span class="at">colour =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.2</span>, <span class="fl">1.4</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.9</span>, <span class="fl">0.9</span>)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"PC1"</span>, <span class="at">y =</span> <span class="st">"PC2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-toy-pca" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-toy-pca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-met-gxe_files/figure-html/fig-toy-pca-1.png" class="img-fluid figure-img" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-toy-pca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.5: PCA of the small example. Lines (dots) are placed by their scores. Environments (arrows) are placed by their loadings: an arrow points to where that environment gives high yield.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In the plot, environments are named <code>location-year</code> (for example <code>01-1</code> is <code>loc01_year1</code>). How to read it:</p>
+<ul>
+<li><strong>A score</strong> says where a line is. Lines far apart differ a lot; lines close together behave similarly.</li>
+<li><strong>A loading</strong> says how an environment relates to the axes. Two environments with arrows in the same direction rank the lines in the same way; arrows at 90° are unrelated; opposite arrows rank the lines in the opposite way (crossover).</li>
+<li>The first component takes the largest part of the variation; the second takes the largest part of what remains, and is perpendicular to the first.</li>
+</ul>
+<p>With a few components we summarize a large table. Two special tables give the two famous biplots:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Table analysed</th>
+<th>What is removed first</th>
+<th>Biplot</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Interaction effects only</td>
+<td>Genotype and environment means</td>
+<td><strong>AMMI</strong></td>
+</tr>
+<tr class="even">
+<td>Genotype + interaction</td>
+<td>Environment means only</td>
+<td><strong>GGE</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-ammi-model" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="the-ammi-model"><span class="header-section-number">11.8</span> The AMMI model</h2>
+<p><strong>AMMI</strong> (additive main effects and multiplicative interaction) fits the additive part (G and E) with an analysis of variance, and then fits the <strong>interaction</strong> with a PCA. We already have the double-centred table <code>dc</code> (the G×E effects of every line in every environment), so we apply the PCA to it. The PCA of a matrix is its singular value decomposition, <code>svd()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sv <span class="ot">&lt;-</span> <span class="fu">svd</span>(dc)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>ipca <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">IPCA =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">percent_of_GxE =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> sv<span class="sc">$</span>d[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>(sv<span class="sc">$</span>d<span class="sc">^</span><span class="dv">2</span>), <span class="dv">1</span>))</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>ipca<span class="sc">$</span>cumulative <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(ipca<span class="sc">$</span>percent_of_GxE)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>ipca</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  IPCA percent_of_GxE cumulative
+1    1           32.9       32.9
+2    2           12.1       45.0
+3    3           10.8       55.8
+4    4            8.3       64.1
+5    5            7.5       71.6
+6    6            6.7       78.3
+7    7            4.6       82.9
+8    8            3.9       86.8</code></pre>
+</div>
+</div>
+<p>The first interaction axis (IPCA1) captures 33 % of the G×E and the first two 45 %. G×E here is spread over many axes (the table has no “dominant” pattern), so the biplots below show only part of the story. The usual F test of each axis (Gollob) calls all the first axes significant, because it is very liberal with a large number of environments; we use the percentage and common sense instead.</p>
+<section id="ammi1-biplot-mean-against-ipca1" class="level3" data-number="11.8.1">
+<h3 data-number="11.8.1" class="anchored" data-anchor-id="ammi1-biplot-mean-against-ipca1"><span class="header-section-number">11.8.1</span> AMMI1 biplot: mean against IPCA1</h3>
+<p>The AMMI1 biplot puts the <strong>mean</strong> on the horizontal axis and the first <strong>interaction axis</strong> on the vertical axis, for lines and for environments.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>G1 <span class="ot">&lt;-</span> sv<span class="sc">$</span>u[, <span class="dv">1</span>] <span class="sc">*</span> <span class="fu">sqrt</span>(sv<span class="sc">$</span>d[<span class="dv">1</span>]); E1 <span class="ot">&lt;-</span> sv<span class="sc">$</span>v[, <span class="dv">1</span>] <span class="sc">*</span> <span class="fu">sqrt</span>(sv<span class="sc">$</span>d[<span class="dv">1</span>])</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(G1) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(M)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>ammi1 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">name =</span> <span class="fu">rownames</span>(M), <span class="at">type =</span> <span class="st">"Line"</span>, <span class="at">mean =</span> <span class="fu">rowMeans</span>(M), <span class="at">ipca1 =</span> G1),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">name =</span> <span class="fu">short</span>(<span class="fu">colnames</span>(M)), <span class="at">type =</span> <span class="st">"Environment"</span>, <span class="at">mean =</span> <span class="fu">colMeans</span>(M), <span class="at">ipca1 =</span> E1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ammi1, <span class="fu">aes</span>(mean, ipca1, <span class="at">shape =</span> type, <span class="at">colour =</span> type, <span class="at">label =</span> name)) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(M), <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="at">size =</span> <span class="fl">2.8</span>, <span class="at">max.overlaps =</span> <span class="dv">40</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">Line =</span> <span class="st">"#2c7fb8"</span>, <span class="at">Environment =</span> <span class="st">"#c0392b"</span>)) <span class="sc">+</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">Line =</span> <span class="dv">16</span>, <span class="at">Environment =</span> <span class="dv">17</span>)) <span class="sc">+</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Mean yield (t/ha)"</span>, <span class="at">y =</span> <span class="st">"IPCA1"</span>, <span class="at">colour =</span> <span class="cn">NULL</span>, <span class="at">shape =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-ammi1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ammi1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-met-gxe_files/figure-html/fig-ammi1-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ammi1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.6: AMMI1 biplot. Lines (circles) and environments (triangles, named location-year). A line close to the horizontal line (IPCA1 near 0) is stable; a line on the right has a high mean. Lines and environments on the same side of the horizontal line interact positively.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>How to read it:</p>
+<ul>
+<li><strong>Horizontal position = main effect.</strong> Lines to the right of the dashed line yield more than the average.</li>
+<li><strong>Vertical position = interaction.</strong> Lines close to zero on IPCA1 are stable in the sense of the IPCA1 axis. Lines far from zero interact strongly.</li>
+<li><strong>Same side = positive interaction.</strong> A line above the horizontal line does better than expected in the environments above it, and worse than expected in those below.</li>
+</ul>
+<p>On this data the lines with the highest IPCA1 are O.ZENADI, POLONICU, MBBACHIR and those with the lowest are VITRON, SAHEL77, WAHA. Lines with an above average yield and an IPCA1 close to zero (here GTADUR, B.DUR194, OFANTO, BELIKH02) are the safest candidates in this view.</p>
+</section>
+<section id="ammi2-biplot-the-two-interaction-axes" class="level3" data-number="11.8.2">
+<h3 data-number="11.8.2" class="anchored" data-anchor-id="ammi2-biplot-the-two-interaction-axes"><span class="header-section-number">11.8.2</span> AMMI2 biplot: the two interaction axes</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>G2 <span class="ot">&lt;-</span> sv<span class="sc">$</span>u[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">%*%</span> <span class="fu">diag</span>(<span class="fu">sqrt</span>(sv<span class="sc">$</span>d[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])); <span class="fu">rownames</span>(G2) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(M)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>E2 <span class="ot">&lt;-</span> sv<span class="sc">$</span>v[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">%*%</span> <span class="fu">diag</span>(<span class="fu">sqrt</span>(sv<span class="sc">$</span>d[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])); <span class="fu">rownames</span>(E2) <span class="ot">&lt;-</span> <span class="fu">short</span>(<span class="fu">colnames</span>(M))</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>gg2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(G2, <span class="at">name =</span> <span class="fu">rownames</span>(G2)); ee2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(E2, <span class="at">name =</span> <span class="fu">rownames</span>(E2))</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey70"</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey70"</span>) <span class="sc">+</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> ee2, <span class="fu">aes</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="at">xend =</span> X1, <span class="at">yend =</span> X2), <span class="at">colour =</span> <span class="st">"#c0392b"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.15</span>, <span class="st">"cm"</span>))) <span class="sc">+</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="at">data =</span> ee2, <span class="fu">aes</span>(X1, X2, <span class="at">label =</span> name), <span class="at">colour =</span> <span class="st">"#c0392b"</span>, <span class="at">size =</span> <span class="fl">2.6</span>,</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">max.overlaps =</span> <span class="dv">40</span>) <span class="sc">+</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> gg2, <span class="fu">aes</span>(X1, X2), <span class="at">colour =</span> <span class="st">"#2c7fb8"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="at">data =</span> gg2, <span class="fu">aes</span>(X1, X2, <span class="at">label =</span> name), <span class="at">colour =</span> <span class="st">"#2c7fb8"</span>, <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">max.overlaps =</span> <span class="dv">40</span>) <span class="sc">+</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"IPCA1"</span>, <span class="at">y =</span> <span class="st">"IPCA2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-ammi2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ammi2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-met-gxe_files/figure-html/fig-ammi2-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ammi2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.7: AMMI2 biplot with the first two interaction axes. Environments (location-year) are shown as arrows from the origin: environments with arrows in the same direction rank the lines in the same way.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A line is good <strong>in an environment</strong> when it lies in the direction of the environment arrow, far from the origin. Lines near the origin have small interaction: they behave as the additive model predicts everywhere.</p>
+</section>
+</section>
+<section id="the-gge-biplot" class="level2" data-number="11.9">
+<h2 data-number="11.9" class="anchored" data-anchor-id="the-gge-biplot"><span class="header-section-number">11.9</span> The GGE biplot</h2>
+<p>The <strong>GGE</strong> biplot (genotype main effect plus G×E) removes only the environment means, because the environment effect is not a property of the line. What is left is the part that matters for choosing a line: its genotype effect and its interaction. The PCA of this table gives PC1, which is mostly the genotype effect, and PC2, which is mostly G×E.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>gc <span class="ot">&lt;-</span> <span class="fu">sweep</span>(M, <span class="dv">2</span>, <span class="fu">colMeans</span>(M))        <span class="co"># centre by environment</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>sg <span class="ot">&lt;-</span> <span class="fu">svd</span>(gc)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>Gs <span class="ot">&lt;-</span> sg<span class="sc">$</span>u[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">%*%</span> <span class="fu">diag</span>(<span class="fu">sqrt</span>(sg<span class="sc">$</span>d[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])); <span class="fu">rownames</span>(Gs) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(M)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>Es <span class="ot">&lt;-</span> sg<span class="sc">$</span>v[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">%*%</span> <span class="fu">diag</span>(<span class="fu">sqrt</span>(sg<span class="sc">$</span>d[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])); <span class="fu">rownames</span>(Es) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(M)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">mean</span>(Es[, <span class="dv">1</span>]) <span class="sc">&lt;</span> <span class="dv">0</span>) { Gs[, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="sc">-</span>Gs[, <span class="dv">1</span>]; Es[, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="sc">-</span>Es[, <span class="dv">1</span>] }   <span class="co"># PC1 positive for the average environment</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>gge_pct <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> sg<span class="sc">$</span>d[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>(sg<span class="sc">$</span>d<span class="sc">^</span><span class="dv">2</span>), <span class="dv">1</span>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>gge_pct</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 52.8  8.5</code></pre>
+</div>
+</div>
+<p>PC1 explains 52.8 % and PC2 8.5 % of G + G×E, together 61.3 %, a good representation.</p>
+<section id="which-won-where" class="level3" data-number="11.9.1">
+<h3 data-number="11.9.1" class="anchored" data-anchor-id="which-won-where"><span class="header-section-number">11.9.1</span> Which-won-where</h3>
+<p>The lines at the corners of the polygon that contains all the lines are the best (or the worst) in some environments. The lines drawn perpendicular to the sides of the polygon divide the plot in <strong>sectors</strong>: the corner line of a sector is the winner for all the environments that fall in it.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>gg <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Gs, <span class="at">name =</span> <span class="fu">rownames</span>(Gs)); ee <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Es, <span class="at">name =</span> <span class="fu">rownames</span>(Es))</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>ee<span class="sc">$</span>region <span class="ot">&lt;-</span> env_region[ee<span class="sc">$</span>name, <span class="st">"region"</span>]</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>hull <span class="ot">&lt;-</span> <span class="fu">chull</span>(Gs)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>gg<span class="sc">$</span>vertex <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(gg)) <span class="sc">%in%</span> hull</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>poly <span class="ot">&lt;-</span> gg[<span class="fu">c</span>(hull, hull[<span class="dv">1</span>]), ]</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co"># perpendicular sector lines through the origin</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>sect <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">seq_along</span>(hull), <span class="cf">function</span>(i) {</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> Gs[hull[i], ]; q <span class="ot">&lt;-</span> Gs[hull[<span class="fu">ifelse</span>(i <span class="sc">==</span> <span class="fu">length</span>(hull), <span class="dv">1</span>, i <span class="sc">+</span> <span class="dv">1</span>)], ]</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">c</span>(q[<span class="dv">2</span>] <span class="sc">-</span> p[<span class="dv">2</span>], <span class="sc">-</span>(q[<span class="dv">1</span>] <span class="sc">-</span> p[<span class="dv">1</span>])); <span class="cf">if</span> (<span class="fu">sum</span>(n <span class="sc">*</span> p) <span class="sc">&lt;</span> <span class="dv">0</span>) n <span class="ot">&lt;-</span> <span class="sc">-</span>n</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> n <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(n<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">*</span> <span class="dv">3</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">xend =</span> n[<span class="dv">1</span>], <span class="at">yend =</span> n[<span class="dv">2</span>])</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> sect, <span class="fu">aes</span>(x, y, <span class="at">xend =</span> xend, <span class="at">yend =</span> yend), <span class="at">colour =</span> <span class="st">"grey55"</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">data =</span> poly, <span class="fu">aes</span>(X1, X2), <span class="at">colour =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> gg, <span class="fu">aes</span>(X1, X2), <span class="at">colour =</span> <span class="st">"#2c7fb8"</span>, <span class="at">size =</span> <span class="fl">1.8</span>) <span class="sc">+</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> ee, <span class="fu">aes</span>(X1, X2, <span class="at">colour =</span> region), <span class="at">shape =</span> <span class="dv">17</span>, <span class="at">size =</span> <span class="fl">2.4</span>) <span class="sc">+</span></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="at">data =</span> <span class="fu">filter</span>(gg, vertex), <span class="fu">aes</span>(X1, X2, <span class="at">label =</span> name), <span class="at">colour =</span> <span class="st">"#1f5f8b"</span>,</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="fl">3.4</span>, <span class="at">max.overlaps =</span> <span class="dv">40</span>) <span class="sc">+</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">A =</span> <span class="st">"#c0392b"</span>, <span class="at">B =</span> <span class="st">"#e08a00"</span>)) <span class="sc">+</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.3</span>, <span class="fl">1.5</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.1</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">paste0</span>(<span class="st">"PC1 ("</span>, gge_pct[<span class="dv">1</span>], <span class="st">"%)"</span>), <span class="at">y =</span> <span class="fu">paste0</span>(<span class="st">"PC2 ("</span>, gge_pct[<span class="dv">2</span>], <span class="st">"%)"</span>),</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"Environment region"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-gge-www" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gge-www-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-met-gxe_files/figure-html/fig-gge-www-1.png" class="img-fluid figure-img" width="720">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gge-www-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.8: GGE biplot, which-won-where view. The polygon joins the lines farthest from the origin. Each sector has a winning line (the vertex) for the environments inside it.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Only the lines at the corners of the polygon are labelled; the other lines are the blue points inside. Environments are the triangles, coloured by region. Counting the environments of each sector gives:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>sector_tab</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         region
+sector     A  B
+  GTADUR   7  3
+  SAHEL77  1 11</code></pre>
+</div>
+</div>
+<p>All 22 environments fall in <strong>2 sectors</strong>, those of GTADUR and SAHEL77. The sectors are related to the regions (most environments of one sector belong to region B, and the other sector has more environments of region A), but they do not coincide with them. The environments of a sector share the same best line, so these are two <strong>candidate mega-environments</strong>. The next step is to ask whether it pays to treat them separately:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">sector_winner =</span> sec_names,</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">environments =</span> sec_mean[<span class="st">"n"</span>, ],</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">yield_of_sector_winner =</span> <span class="fu">round</span>(sec_mean[<span class="st">"winner"</span>, ], <span class="dv">2</span>),</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">yield_of_overall_best =</span> <span class="fu">round</span>(sec_mean[<span class="st">"best_overall"</span>, ], <span class="dv">2</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gain_t_ha =</span> <span class="fu">round</span>(yield_of_sector_winner <span class="sc">-</span> yield_of_overall_best, <span class="dv">2</span>),</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">gain_percent =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> gain_t_ha <span class="sc">/</span> yield_of_overall_best, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        sector_winner environments yield_of_sector_winner yield_of_overall_best
+GTADUR         GTADUR           10                   2.28                  2.28
+SAHEL77       SAHEL77           12                   2.17                  2.07
+        gain_t_ha gain_percent
+GTADUR        0.0          0.0
+SAHEL77       0.1          4.8</code></pre>
+</div>
+</div>
+<p>The overall best line (GTADUR) is also the winner of one sector (gain of zero in that row). In the other sector the sector winner gives a modest gain over it. Splitting the target area in two would help in one half and give nothing in the other, so a wide-adaptation line is a reasonable choice, and the second candidate is kept as an alternative for the environments of its sector.</p>
+</section>
+<section id="mean-performance-and-stability" class="level3" data-number="11.9.2">
+<h3 data-number="11.9.2" class="anchored" data-anchor-id="mean-performance-and-stability"><span class="header-section-number">11.9.2</span> Mean performance and stability</h3>
+<p>The second view of the same biplot answers “which line is best on average and how stable is it?”. The <strong>average environment axis</strong> (AEA) is the arrow from the origin to the mean of all the environment points. The projection of a line on this axis gives its performance; the distance to the axis gives its instability.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>aea <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(Es[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]); aea_u <span class="ot">&lt;-</span> aea <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(aea<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>perf <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Gs[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">%*%</span> aea_u)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>inst <span class="ot">&lt;-</span> <span class="fu">abs</span>(Gs[, <span class="dv">1</span>] <span class="sc">*</span> aea_u[<span class="dv">2</span>] <span class="sc">-</span> Gs[, <span class="dv">2</span>] <span class="sc">*</span> aea_u[<span class="dv">1</span>])</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gg, <span class="fu">aes</span>(X1, X2, <span class="at">label =</span> name)) <span class="sc">+</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> aea_u[<span class="dv">2</span>] <span class="sc">/</span> aea_u[<span class="dv">1</span>], <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#c0392b"</span>, <span class="at">linewidth =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="sc">-</span>aea_u[<span class="dv">1</span>] <span class="sc">/</span> aea_u[<span class="dv">2</span>], <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#2c7fb8"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">colour =</span> <span class="st">"#2c7fb8"</span>, <span class="at">max.overlaps =</span> <span class="dv">40</span>) <span class="sc">+</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">xend =</span> <span class="fl">1.6</span> <span class="sc">*</span> aea_u[<span class="dv">1</span>], <span class="at">yend =</span> <span class="fl">1.6</span> <span class="sc">*</span> aea_u[<span class="dv">2</span>], <span class="at">colour =</span> <span class="st">"#c0392b"</span>,</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.25</span>, <span class="st">"cm"</span>))) <span class="sc">+</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">paste0</span>(<span class="st">"PC1 ("</span>, gge_pct[<span class="dv">1</span>], <span class="st">"%)"</span>), <span class="at">y =</span> <span class="fu">paste0</span>(<span class="st">"PC2 ("</span>, gge_pct[<span class="dv">2</span>], <span class="st">"%)"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-gge-mean" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gge-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-met-gxe_files/figure-html/fig-gge-mean-1.png" class="img-fluid figure-img" width="720">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gge-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.9: GGE biplot, mean against stability. The arrow is the average environment axis: lines further along it yield more. The distance from the axis measures instability.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>gge_tab <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">line =</span> <span class="fu">rownames</span>(M), <span class="at">performance =</span> perf, <span class="at">instability =</span> inst) <span class="sc">|&gt;</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(performance))</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gge_tab, <span class="dv">8</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), \(x) <span class="fu">round</span>(x, <span class="dv">2</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             line performance instability
+GTADUR     GTADUR        0.64        0.43
+CHENS       CHENS        0.54        0.01
+SAHEL77   SAHEL77        0.53        0.35
+BID/WAHA BID/WAHA        0.43        0.06
+WAHA         WAHA        0.41        0.12
+SIMETO     SIMETO        0.40        0.44
+OFANTO     OFANTO        0.34        0.33
+BELIKH02 BELIKH02        0.29        0.36</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="putting-performance-and-stability-together" class="level2" data-number="11.10">
+<h2 data-number="11.10" class="anchored" data-anchor-id="putting-performance-and-stability-together"><span class="header-section-number">11.10</span> Putting performance and stability together</h2>
+<p>A decision needs both. We gather the statistics for the best lines in one table.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>decision <span class="ot">&lt;-</span> stab <span class="sc">|&gt;</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">line =</span> <span class="fu">rownames</span>(stab)) <span class="sc">|&gt;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(gge_tab, <span class="at">by =</span> <span class="st">"line"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank_gge =</span> <span class="fu">rank</span>(<span class="sc">-</span>performance), <span class="at">rank_W =</span> <span class="fu">rank</span>(W)) <span class="sc">|&gt;</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(line, mean, rank_mean, slope, W, rank_W, instability) <span class="sc">|&gt;</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>decision <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), \(x) <span class="fu">round</span>(x, <span class="dv">2</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       line mean rank_mean slope    W rank_W instability
+1    GTADUR 2.17         1  1.20 1.05      7        0.43
+2     CHENS 2.11         2  1.13 0.84      4        0.01
+3   SAHEL77 2.10         3  1.07 2.77     24        0.35
+4  BID/WAHA 2.06         4  1.11 0.74      3        0.06
+5    SIMETO 2.06         5  1.10 2.37     21        0.44
+6  B.DUR194 2.03         6  1.11 1.80     17        0.33
+7      WAHA 2.02         7  1.08 1.12      8        0.12
+8    OFANTO 2.02         8  0.94 1.98     18        0.33
+9  MEXICALI 1.99         9  1.04 2.15     19        0.48
+10   DUILIO 1.96        10  1.01 1.59     13        0.39</code></pre>
+</div>
+</div>
+<p>Among the 10 highest yielding lines, GTADUR, CHENS, BID/WAHA, WAHA have an ecovalence <strong>below the median</strong>, so they are high and stable. SAHEL77, SIMETO, B.DUR194, OFANTO, MEXICALI, DUILIO have a high mean but a high ecovalence: they are good in some environments and disappoint in others. The reading is:</p>
+<ul>
+<li><strong>High mean and stable</strong>: candidates for wide release. They make the shortlist.</li>
+<li><strong>High mean and unstable</strong>: candidates for a <strong>specific</strong> group of environments, only if the environments where they win can be identified and are common.</li>
+<li><strong>Low mean</strong>: out, however stable. Stability is not a virtue by itself.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Stability does not replace the mean
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Stability statistics are secondary criteria. First rank the lines by their mean across environments (a BLUP of the genotype when the data is unbalanced), and then use stability to separate lines that are close. A line that is “very stable” at a low yield is not a good variety.</p>
+</div>
+</div>
+</section>
+<section id="mega-environments-and-targeting" class="level2" data-number="11.11">
+<h2 data-number="11.11" class="anchored" data-anchor-id="mega-environments-and-targeting"><span class="header-section-number">11.11</span> Mega-environments and targeting</h2>
+<p>If the environments fall in groups where the <strong>same</strong> line wins inside a group but <strong>different</strong> lines win between groups, the target area can be divided into <strong>mega-environments</strong>, and one variety is selected for each. If the groups do not exist, the aim is a wide-adaptation line.</p>
+<p>In our data the regions are a natural candidate. How much G×E do they explain?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>fit_reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> Env <span class="sc">+</span> Env<span class="sc">:</span>Block <span class="sc">+</span> Genotype <span class="sc">+</span> Genotype<span class="sc">:</span>region <span class="sc">+</span> Genotype<span class="sc">:</span>Env, <span class="at">data =</span> met)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>ar <span class="ot">&lt;-</span> <span class="fu">anova</span>(fit_reg)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>ge_all <span class="ot">&lt;-</span> an[<span class="st">"Env:Genotype"</span>, <span class="st">"Sum Sq"</span>]</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>share_reg <span class="ot">&lt;-</span> ar[<span class="st">"Genotype:region"</span>, <span class="st">"Sum Sq"</span>] <span class="sc">/</span> ge_all</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>cor_regions <span class="ot">&lt;-</span> <span class="fu">with</span>(met, <span class="fu">cor</span>(<span class="fu">tapply</span>(yield[region <span class="sc">==</span> <span class="st">"A"</span>], Genotype[region <span class="sc">==</span> <span class="st">"A"</span>], mean),</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">tapply</span>(yield[region <span class="sc">==</span> <span class="st">"B"</span>], Genotype[region <span class="sc">==</span> <span class="st">"B"</span>], mean)))</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">share_of_GxE_explained_by_region =</span> <span class="fu">round</span>(share_reg, <span class="dv">2</span>), <span class="at">correlation_of_line_means_between_regions =</span> <span class="fu">round</span>(cor_regions, <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         share_of_GxE_explained_by_region 
+                                     0.11 
+correlation_of_line_means_between_regions 
+                                     0.68 </code></pre>
+</div>
+</div>
+<p>The region separates only 11 % of the total G×E, and the line means in the two regions are correlated (0.68). Region is a <strong>weak</strong> mega-environment here: it changes the ranking of some lines (G×region is significant), but most of the G×E is inside the regions, between locations and years.</p>
+<p>This is a useful negative result. Dividing the target area in two would not remove most of the G×E, so the breeding strategy should be to test in more locations and to use the stability criteria above.</p>
+</section>
+<section id="multi-environment-trials-in-a-mutation-breeding-programme" class="level2" data-number="11.12">
+<h2 data-number="11.12" class="anchored" data-anchor-id="multi-environment-trials-in-a-mutation-breeding-programme"><span class="header-section-number">11.12</span> Multi-environment trials in a mutation breeding programme</h2>
+<p>In a mutation breeding programme, the early generations (M2, M3) are grown in <strong>one</strong> environment with little seed, and the aim is only to select. The MET starts later, with the <strong>advanced mutant lines</strong> that have shown interest, in preliminary and advanced yield trials in several locations and seasons. At that stage, the methods of this chapter apply directly:</p>
+<ul>
+<li>The parent and the checks are included in every environment, so that every environment is connected to the others and the mutants can be compared with the parent everywhere.</li>
+<li>The number of environments matters more than the number of replicates, as in <a href="#fig-h2-env" class="quarto-xref">Figure&nbsp;<span>11.3</span></a>.</li>
+<li>A mutant with a clear advantage over the parent in most environments (and not only in the best ones) is the one to propose for release or to enter in the Mutant Variety Database.</li>
+</ul>
+</section>
+<section id="sec-met-shortcuts" class="level2" data-number="11.13">
+<h2 data-number="11.13" class="anchored" data-anchor-id="sec-met-shortcuts"><span class="header-section-number">11.13</span> Shortcuts: <code>metan</code> and <code>statgenGxE</code></h2>
+<p>Both packages are part of the course installation and run the analyses of this chapter with a few lines. We show the code but do not run it here, to keep the chapter independent of package versions; check the result against the step-by-step version above.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(metan)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co"># AMMI and GGE biplots</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>ammi_model <span class="ot">&lt;-</span> <span class="fu">performs_ammi</span>(met, <span class="at">env =</span> Env, <span class="at">gen =</span> Genotype, <span class="at">rep =</span> Block, <span class="at">resp =</span> yield)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_scores</span>(ammi_model)                       <span class="co"># AMMI1 and AMMI2 biplots</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>gge_model <span class="ot">&lt;-</span> <span class="fu">gge</span>(met, <span class="at">env =</span> Env, <span class="at">gen =</span> Genotype, <span class="at">resp =</span> yield)</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gge_model, <span class="at">type =</span> <span class="dv">3</span>)                     <span class="co"># which-won-where</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gge_model, <span class="at">type =</span> <span class="dv">2</span>)                     <span class="co"># mean performance and stability</span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Stability indices and a combined index (WAASB)</span></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>stab_model <span class="ot">&lt;-</span> <span class="fu">waasb</span>(met, <span class="at">env =</span> Env, <span class="at">gen =</span> Genotype, <span class="at">rep =</span> Block, <span class="at">resp =</span> yield)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statgenGxE)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># one data frame with columns genotype, trial, and the trait</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>td <span class="ot">&lt;-</span> statgenSTA<span class="sc">::</span><span class="fu">createTD</span>(<span class="at">data =</span> met, <span class="at">genotype =</span> <span class="st">"Genotype"</span>, <span class="at">trial =</span> <span class="st">"Env"</span>)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>gxe_ammi <span class="ot">&lt;-</span> <span class="fu">gxeAmmi</span>(td, <span class="at">trait =</span> <span class="st">"yield"</span>)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gxe_ammi, <span class="at">plotType =</span> <span class="st">"AMMI2"</span>)</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>gxe_fw <span class="ot">&lt;-</span> <span class="fu">gxeFw</span>(td, <span class="at">trait =</span> <span class="st">"yield"</span>)          <span class="co"># Finlay-Wilkinson</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>When the data is <strong>unbalanced</strong> (not every line in every environment, as is normal in breeding programmes), do not use <code>svd()</code> on a table with holes. Fit a mixed model with a factor analytic structure, or use the two-stage approach: first a model per trial (BLUEs, as in <a href="09-spatial-analysis.html" class="quarto-xref"><span>Chapter 9</span></a>), and then a MET model with the BLUEs and their weights (Möhring and Piepho 2009). The <code>sommer</code> and <code>statgenGxE</code> packages do this.</p>
+</section>
+<section id="exercise" class="level2" data-number="11.14">
+<h2 data-number="11.14" class="anchored" data-anchor-id="exercise"><span class="header-section-number">11.14</span> Exercise</h2>
+<p>Use only <strong>region A</strong> (4 locations, 8 environments).</p>
+<ol type="1">
+<li>Fit the variance component model of this chapter to region A, and compute the heritability of the line mean with all its environments and with 4 replicates.</li>
+<li>Compute the mean of each line in region A, and the ecovalence. List the three lines with the highest mean and say if they are stable.</li>
+<li>Compare with the result of the whole trial: are the top three the same?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -396,18 +1209,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>dA <span class="ot">&lt;-</span> <span class="fu">droplevels</span>(<span class="fu">filter</span>(met, region <span class="sc">==</span> <span class="st">"A"</span>))</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>mA <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Genotype) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Env) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Genotype<span class="sc">:</span>Env) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Env<span class="sc">:</span>Block), <span class="at">data =</span> dA)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>vA <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(mA)); vA <span class="ot">&lt;-</span> <span class="fu">setNames</span>(vA<span class="sc">$</span>vcov, vA<span class="sc">$</span>grp)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>eA <span class="ot">&lt;-</span> <span class="fu">nlevels</span>(dA<span class="sc">$</span>Env)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>H2A <span class="ot">&lt;-</span> vA[[<span class="st">"Genotype"</span>]] <span class="sc">/</span> (vA[[<span class="st">"Genotype"</span>]] <span class="sc">+</span> vA[[<span class="st">"Genotype:Env"</span>]] <span class="sc">/</span> eA <span class="sc">+</span> vA[[<span class="st">"Residual"</span>]] <span class="sc">/</span> (eA <span class="sc">*</span> n_r))</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>MA <span class="ot">&lt;-</span> <span class="fu">with</span>(dA, <span class="fu">tapply</span>(yield, <span class="fu">list</span>(Genotype, Env), mean))</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>dcA <span class="ot">&lt;-</span> MA <span class="sc">-</span> <span class="fu">rowMeans</span>(MA) <span class="sc">-</span> <span class="fu">matrix</span>(<span class="fu">colMeans</span>(MA), <span class="fu">nrow</span>(MA), <span class="fu">ncol</span>(MA), <span class="at">byrow =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">mean</span>(MA)</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>tabA <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">mean =</span> <span class="fu">rowMeans</span>(MA), <span class="at">W =</span> <span class="fu">rowSums</span>(dcA<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(mean))</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>tabA<span class="sc">$</span>stable <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(tabA<span class="sc">$</span>W <span class="sc">&lt;</span> <span class="fu">median</span>(tabA<span class="sc">$</span>W), <span class="st">"yes"</span>, <span class="st">"no"</span>)</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">round</span>(tabA[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="dv">2</span>), <span class="dv">3</span>) <span class="sc">|&gt;</span> <span class="fu">cbind</span>(<span class="at">stable =</span> <span class="fu">head</span>(tabA<span class="sc">$</span>stable, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         mean    W stable
+GTADUR   2.14 0.13    yes
+CHENS    2.07 0.18    yes
+B.DUR194 2.06 0.27     no</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>In region A the variance components are 0.016 for the line and 0.022 for G×E, and the heritability of the line mean with its 8 environments is 0.74. It is lower than in the whole trial (0.91) because the lines differ less in this region (the genotype variance is smaller) and there are fewer environments.</li>
+<li>The three best lines in region A are GTADUR, CHENS, B.DUR194. The table shows if each one has an ecovalence below the median of region A.</li>
+<li>The top three of the whole trial are GTADUR, CHENS, SAHEL77. The best lines of a subset of environments are not necessarily the best of the whole trial: this is the practical meaning of G×E.</li>
+</ol>
 </div>
 </div>
 </div>
 </section>
-<section id="key-takeaways" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">10.7</span> Key takeaways</h2>
+<section id="key-takeaways" class="level2" data-number="11.15">
+<h2 data-number="11.15" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">11.15</span> Key takeaways</h2>
+<ul>
+<li>G×E is the change in the performance or in the ranking of lines across environments. In the durum wheat MET its share of the sum of squares is about twice that of the genotype effect.</li>
+<li>Environments explain most of the variation, but the breeder works with G and G×E. Test the genotype effect against G×E, not against the residual.</li>
+<li>Heritability of the line mean grows with the number of environments: from 0.32 in one environment to 0.91 in 22. When G×E is large, add environments before adding replicates.</li>
+<li>About half of the G×E is repeatable across years at a location; the rest is not predictable.</li>
+<li>AMMI (interaction only) and GGE (genotype plus interaction) are PCA of the table of means. Use AMMI1 for mean against interaction, which-won-where for mega-environments and the average environment axis for mean against stability.</li>
+<li>Select first by the mean across environments and then use stability to choose between similar lines. Stability without yield is not a goal.</li>
+</ul>
 </section>
-<section id="references" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="references"><span class="header-section-number">10.8</span> References</h2>
+<section id="sec-met-gxe-refs" class="level2" data-number="11.16">
+<h2 data-number="11.16" class="anchored" data-anchor-id="sec-met-gxe-refs"><span class="header-section-number">11.16</span> References</h2>
+<ul>
+<li>Finlay, K. W. and Wilkinson, G. N. (1963). The analysis of adaptation in a plant-breeding programme. <em>Australian Journal of Agricultural Research</em> 14: 742-754.</li>
+<li>Gauch, H. G. (2006). Statistical analysis of yield trials by AMMI and GGE. <em>Crop Science</em> 46: 1488-1500.</li>
+<li>Olivoto, T. and Lúcio, A. D. (2020). metan: an R package for multi-environment trial analysis. <em>Methods in Ecology and Evolution</em> 11: 783-789.</li>
+<li>Möhring, J. and Piepho, H. P. (2009). Comparison of weighting in two-stage analysis of plant breeding trials. <em>Crop Science</em> 49: 1977-1988.</li>
+<li>Wricke, G. (1962). Über eine Methode zur Erfassung der ökologischen Streubreite in Feldversuchen. <em>Zeitschrift für Pflanzenzüchtung</em> 47: 92-96.</li>
+<li>Yan, W. and Kang, M. S. (2003). <em>GGE Biplot Analysis: A Graphical Tool for Breeders, Geneticists, and Agronomists</em>. CRC Press.</li>
+<li>Yan, W., Hunt, L. A., Sheng, Q. and Szlavnics, Z. (2000). Cultivar evaluation and mega-environment investigation based on the GGE biplot. <em>Crop Science</em> 40: 597-605.</li>
+</ul>
 
 
 </section>
@@ -815,13 +1668,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part1-week1/09-spatial-analysis.html" class="pagination-link" aria-label="Spatial Analysis and Trial Precision">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spatial Analysis and Trial Precision</span></span>
+      <a href="../part1-week1/09b-image-analysis.html" class="pagination-link" aria-label="Low-Cost High-Throughput Phenotyping: Image Analysis in R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Low-Cost High-Throughput Phenotyping: Image Analysis in R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part1-week1/11-ai-plant-breeding.html" class="pagination-link" aria-label="Artificial Intelligence in Plant Breeding">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Artificial Intelligence in Plant Breeding</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part1-week1/11-ai-plant-breeding.html" class="pagination-link" aria-label="Machine Learning for Prediction in Plant Breeding">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Machine Learning for Prediction in Plant Breeding</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

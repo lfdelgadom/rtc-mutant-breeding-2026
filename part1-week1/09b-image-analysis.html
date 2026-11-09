@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; Low-Cost High-Throughput Phenotyping: Image Analysis in R – Experimental Design and Data Analysis for the Advancement of Mutant Populations</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../part1-week1/10-met-gxe.html" rel="next">
+<link href="../part1-week1/09-spatial-analysis.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-36f2db2e0c24a8dfe38894d2c7306603.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part1-week1/03-field-data.html">Week 1: Concepts and methods</a></li><li class="breadcrumb-item"><a href="../part1-week1/09b-image-analysis.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Low-Cost High-Throughput Phenotyping: Image Analysis in R</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Experimental Design and Data Analysis for the Advancement of Mutant Populations</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/lfdelgadom/rtc-mutant-breeding-2026" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="../Experimental-Design-and-Data-Analysis-for-the-Advancement-of-Mutant-Populations.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Before the course</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part0-precourse/01-r-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R and RStudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part0-precourse/02-tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing Your Data in Tidy Format</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 1: Concepts and methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part1-week1/03-field-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Collecting and Validating Field Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part1-week1/04-qc-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Quality Control and Exploratory Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part1-week1/05-experimental-designs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Experimental Designs for Plant Breeding Trials</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part1-week1/06-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ANOVA and Mean Comparison in Breeding Trials</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part1-week1/07-mixed-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models, BLUEs, BLUPs and Heritability</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part1-week1/08-heritability-selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Selection Decisions: Ranking, Expected Gain and Selection Indices</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part1-week1/09-spatial-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spatial Analysis and Trial Precision</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part1-week1/09b-image-analysis.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Low-Cost High-Throughput Phenotyping: Image Analysis in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part1-week1/10-met-gxe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part1-week1/11-ai-plant-breeding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Machine Learning for Prediction in Plant Breeding</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 2: Mutation breeding applications</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part2-week2/12-analysis-pipeline.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part2-week2/13-mutant-populations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part2-week2/14-llm-assistants.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Using Large Language Models as Data Analysis Assistants</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part2-week2/15-selection-mutation-breeding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Decision-Making and Selection Strategies in Mutation Breeding</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../part2-week2/16-participant-projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Participant Projects and Final Presentations</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">10.1</span> Learning objectives</a></li>
+  <li><a href="#from-a-photograph-to-a-number" id="toc-from-a-photograph-to-a-number" class="nav-link" data-scroll-target="#from-a-photograph-to-a-number"><span class="header-section-number">10.2</span> From a photograph to a number</a></li>
+  <li><a href="#taking-images-that-can-be-analysed" id="toc-taking-images-that-can-be-analysed" class="nav-link" data-scroll-target="#taking-images-that-can-be-analysed"><span class="header-section-number">10.3</span> Taking images that can be analysed</a></li>
+  <li><a href="#reading-an-image-and-its-colour" id="toc-reading-an-image-and-its-colour" class="nav-link" data-scroll-target="#reading-an-image-and-its-colour"><span class="header-section-number">10.4</span> Reading an image and its colour</a></li>
+  <li><a href="#counting-and-measuring-seeds" id="toc-counting-and-measuring-seeds" class="nav-link" data-scroll-target="#counting-and-measuring-seeds"><span class="header-section-number">10.5</span> Counting and measuring seeds</a></li>
+  <li><a href="#from-pixels-to-centimetres" id="toc-from-pixels-to-centimetres" class="nav-link" data-scroll-target="#from-pixels-to-centimetres"><span class="header-section-number">10.6</span> From pixels to centimetres</a>
+  <ul class="collapse">
+  <li><a href="#many-small-seeds" id="toc-many-small-seeds" class="nav-link" data-scroll-target="#many-small-seeds"><span class="header-section-number">10.6.1</span> Many small seeds</a></li>
+  </ul></li>
+  <li><a href="#colour-as-a-trait" id="toc-colour-as-a-trait" class="nav-link" data-scroll-target="#colour-as-a-trait"><span class="header-section-number">10.7</span> Colour as a trait</a></li>
+  <li><a href="#shape-and-leaf-colour-the-flax-leaves" id="toc-shape-and-leaf-colour-the-flax-leaves" class="nav-link" data-scroll-target="#shape-and-leaf-colour-the-flax-leaves"><span class="header-section-number">10.8</span> Shape and leaf colour: the flax leaves</a></li>
+  <li><a href="#disease-severity" id="toc-disease-severity" class="nav-link" data-scroll-target="#disease-severity"><span class="header-section-number">10.9</span> Disease severity</a></li>
+  <li><a href="#many-images-at-once" id="toc-many-images-at-once" class="nav-link" data-scroll-target="#many-images-at-once"><span class="header-section-number">10.10</span> Many images at once</a></li>
+  <li><a href="#is-the-image-trait-good-enough" id="toc-is-the-image-trait-good-enough" class="nav-link" data-scroll-target="#is-the-image-trait-good-enough"><span class="header-section-number">10.11</span> Is the image trait good enough?</a></li>
+  <li><a href="#near-infrared-and-drones-briefly" id="toc-near-infrared-and-drones-briefly" class="nav-link" data-scroll-target="#near-infrared-and-drones-briefly"><span class="header-section-number">10.12</span> Near infrared and drones, briefly</a></li>
+  <li><a href="#pitfalls" id="toc-pitfalls" class="nav-link" data-scroll-target="#pitfalls"><span class="header-section-number">10.13</span> Pitfalls</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">10.14</span> Exercise</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">10.15</span> Key takeaways</a></li>
+  <li><a href="#sec-images-refs" id="toc-sec-images-refs" class="nav-link" data-scroll-target="#sec-images-refs"><span class="header-section-number">10.16</span> References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lfdelgadom/rtc-mutant-breeding-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part1-week1/03-field-data.html">Week 1: Concepts and methods</a></li><li class="breadcrumb-item"><a href="../part1-week1/09b-image-analysis.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Low-Cost High-Throughput Phenotyping: Image Analysis in R</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-images" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Low-Cost High-Throughput Phenotyping: Image Analysis in R</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="chapter-info">
+<p><strong>Author:</strong> Luis Fernando Delgado Muñoz<br>
+<strong>Session:</strong> Day 4, Thursday 12 November (afternoon)</p>
+</div>
+<section id="learning-objectives" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">10.1</span> Learning objectives</h2>
+<ul>
+<li>Explain how a photograph becomes a trait value, and where this fits in the analysis of a breeding trial</li>
+<li>Take images that can be analysed: background, light, scale and naming</li>
+<li>Count and measure seeds and leaves with <code>pliman</code>, and convert pixels to centimetres</li>
+<li>Describe colour with vegetation indices and use it to classify seeds and leaves</li>
+<li>Measure disease severity from a leaf image</li>
+<li>Process a folder of images in one call and build a table with one row per plot</li>
+<li>Check an image-based trait against a manual measurement before using it for selection</li>
+</ul>
+<p>In the morning (<a href="09-spatial-analysis.html" class="quarto-xref"><span>Chapter 9</span></a>) we saw that the quality of a trial depends on the precision of every plot value. This afternoon we look at the other end of the problem: <strong>how the plot value is measured</strong>. Counting seeds, scoring colour, measuring leaves or rating disease by eye is slow, tiring and different from person to person. A photograph and a few lines of R can do the same work for hundreds of samples, in the same way every time.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Install the image package
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>pliman</code> is part of the course installation, but it also needs <code>EBImage</code>, a package from Bioconductor that the CRAN installer does not bring. Run this once, with internet:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"BiocManager"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"EBImage"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If <code>library(pliman)</code> prints “Package EBImage is required”, this is the step that is missing.</p>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pliman)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>All images in this chapter are the sample images installed with <code>pliman</code> (Olivoto 2022), so every example runs on any computer. <code>image_pliman()</code> reads them by name.</p>
+</section>
+<section id="from-a-photograph-to-a-number" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="from-a-photograph-to-a-number"><span class="header-section-number">10.2</span> From a photograph to a number</h2>
+<p>An image is a table of numbers. A colour image has three tables (red, green and blue), one value per pixel. To measure something we follow the same steps every time:</p>
+<ol type="1">
+<li><strong>Capture</strong> the image under controlled conditions.</li>
+<li><strong>Segment</strong>: separate the objects of interest (seeds, leaves, lesions) from the background.</li>
+<li><strong>Measure</strong>: count the objects, compute their size, shape and colour.</li>
+<li><strong>Tabulate</strong>: one row per plot, with the plot identifier.</li>
+<li><strong>Analyse</strong>: the table enters the same workflow as any other trait (<a href="09-spatial-analysis.html" class="quarto-xref"><span>Chapter 9</span></a>, <a href="07-mixed-models.html" class="quarto-xref"><span>Chapter 7</span></a>).</li>
+</ol>
+<p>“High-throughput phenotyping” (HTP) means doing this for many samples quickly. It does not need expensive equipment. The platforms below go from the cheapest to the most expensive; the first ones are enough to start.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Platform</th>
+<th style="text-align: left;">Typical use</th>
+<th style="text-align: left;">Cost and effort</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Smartphone with a stand and a plain tray</td>
+<td style="text-align: left;">Seed number, size and colour; leaf area; disease on detached leaves</td>
+<td style="text-align: left;">Very low. The same phone used for field books</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Flatbed scanner</td>
+<td style="text-align: left;">Seeds, grains, leaves, roots, with a known resolution (dpi)</td>
+<td style="text-align: left;">Low. Scale is automatic</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fixed RGB camera on a pole or frame</td>
+<td style="text-align: left;">Canopy cover and greenness of a plot, repeated over time</td>
+<td style="text-align: left;">Low to medium</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RGB camera modified for near infrared (NIR)</td>
+<td style="text-align: left;">Vegetation indices that need NIR, such as NDVI</td>
+<td style="text-align: left;">Medium</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Drone with RGB or multispectral camera</td>
+<td style="text-align: left;">Plant height, canopy cover and vigour for the whole trial</td>
+<td style="text-align: left;">High. See the last section</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="taking-images-that-can-be-analysed" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="taking-images-that-can-be-analysed"><span class="header-section-number">10.3</span> Taking images that can be analysed</h2>
+<p>The best segmentation is the one you do not need to fix later. Most of the work of a good image analysis is done <strong>before</strong> the photograph.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Decision</th>
+<th style="text-align: left;">What to do</th>
+<th style="text-align: left;">What goes wrong otherwise</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Background</td>
+<td style="text-align: left;">One plain colour that the objects do not have: blue or white for green or yellow seeds, white for dark leaves</td>
+<td style="text-align: left;">Objects and background cannot be separated</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Light</td>
+<td style="text-align: left;">Even, diffuse light, the same for all images. A box or a cloudy day, no direct sun</td>
+<td style="text-align: left;">Shadows are read as objects, and colour changes among images</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Scale</td>
+<td style="text-align: left;">A reference object of known size in every image, or a fixed distance and a known dpi</td>
+<td style="text-align: left;">Sizes are in pixels and cannot be compared among images</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Objects</td>
+<td style="text-align: left;">Separated, flat, not overlapping. Seeds can touch slightly</td>
+<td style="text-align: left;">Overlapping objects are counted as one</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Resolution</td>
+<td style="text-align: left;">Enough pixels per object for its shape to be clear</td>
+<td style="text-align: left;">Small objects become noise</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">File name</td>
+<td style="text-align: left;">The plot identifier, for example <code>plot_101.jpg</code></td>
+<td style="text-align: left;">The table cannot be joined to the trial</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Format</td>
+<td style="text-align: left;">The same camera and settings in all images; keep the original files</td>
+<td style="text-align: left;">Colour differences that are not biological</td>
+</tr>
+</tbody>
+</table>
+<p>The sample image <code>shadow.jpg</code> shows what happens with uneven light: a dark leaf on a background that goes from light to shadow.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>shadow <span class="ot">&lt;-</span> <span class="fu">image_pliman</span>(<span class="st">"shadow.jpg"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(shadow)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>bad <span class="ot">&lt;-</span> <span class="fu">analyze_objects</span>(shadow, <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="at">show_original =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-shadow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-shadow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09b-image-analysis_files/figure-html/fig-shadow-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-shadow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.1: Left: a leaf photographed with a shadow on the background. Right: the mask that the default segmentation produces. The shadow is read as part of the object and half of the leaf is lost.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>No setting of the software repairs this reliably. The adaptive threshold option of <code>analyze_objects()</code> did not fix it with default values either: it returned 43 small fragments. The fix is a photograph with even light.</p>
+</section>
+<section id="reading-an-image-and-its-colour" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="reading-an-image-and-its-colour"><span class="header-section-number">10.4</span> Reading an image and its colour</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>soy <span class="ot">&lt;-</span> <span class="fu">image_pliman</span>(<span class="st">"soy_green.jpg"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(soy)      <span class="co"># height, width and three colour channels</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 794 410   3</code></pre>
+</div>
+</div>
+<p>A <strong>vegetation index</strong> combines the three channels in one number that highlights something. For example, the <em>green leaf index</em> (GLI) is high for green tissue, and the <em>normalized green-red difference index</em> (NGRDI) separates green from red and yellow. <code>pliman</code> has more than a hundred indices, listed by <code>pliman_indexes()</code>. <code>image_index()</code> draws them:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image_index</span>(soy, <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"GLI"</span>, <span class="st">"NGRDI"</span>), <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-indices" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-indices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09b-image-analysis_files/figure-html/fig-indices-1.png" class="img-fluid figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-indices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.2: Soybean seeds (<code>soy_green.jpg</code>) seen through three indices: the red channel (R), the green leaf index (GLI) and NGRDI. The two seeds that are greener than the others stand out in GLI.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The choice of index is a decision, not a default. We choose the one that separates what we want to separate, and we check it on a few images before running the whole set.</p>
+</section>
+<section id="counting-and-measuring-seeds" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="counting-and-measuring-seeds"><span class="header-section-number">10.5</span> Counting and measuring seeds</h2>
+<p><code>analyze_objects()</code> does the segmentation and the measurement in one call. The image <code>soybean_touch.jpg</code> has soybean seeds on a blue background, some of them touching.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>touch <span class="ot">&lt;-</span> <span class="fu">image_pliman</span>(<span class="st">"soybean_touch.jpg"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>seeds <span class="ot">&lt;-</span> <span class="fu">analyze_objects</span>(touch, <span class="at">marker =</span> <span class="st">"id"</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>seeds<span class="sc">$</span>statistics</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       stat        value
+1         n 3.000000e+01
+2  min_area 1.366000e+03
+3 mean_area 2.051300e+03
+4  max_area 2.436000e+03
+5   sd_area 2.300703e+02
+6  sum_area 6.153900e+04
+7  coverage 1.151122e-01</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-soy-count" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-soy-count-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09b-image-analysis_files/figure-html/fig-soy-count-1.png" class="img-fluid figure-img" width="624">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-soy-count-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.3: Seeds detected by <code>analyze_objects()</code>, with their identifier. The default settings separate the touching seeds.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The first line, <code>n</code>, is the count: <strong>30 seeds</strong>. We counted the labels of the figure one by one and the number is correct. This is the minimum check that every automatic count needs before it is trusted.</p>
+<p>Each object has more than thirty measurements: area, perimeter, length, width, shape descriptors such as circularity and eccentricity.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>seeds<span class="sc">$</span>results <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, area, perimeter, length, width, circularity) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id area perimeter   length    width circularity
+1  1 2279  183.5097 56.57747 51.54190    14.77657
+2  2 2289  178.1960 56.53366 52.36854    13.87235
+3  3 2310  181.0244 57.20139 51.99249    14.18607
+4  4 2436  185.6102 61.02182 51.02160    14.14250
+5  5 2159  171.7107 54.01135 50.53687    13.65658</code></pre>
+</div>
+</div>
+<p>All sizes are in <strong>pixels</strong> for now. To compare images we need a scale.</p>
+</section>
+<section id="from-pixels-to-centimetres" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="from-pixels-to-centimetres"><span class="header-section-number">10.6</span> From pixels to centimetres</h2>
+<p>There are two ways to give the scale.</p>
+<p><strong>1. A known resolution (dpi).</strong> A flatbed scanner gives a fixed number of dots per inch. The sample image <code>objects_300dpi.jpg</code> was made at 300 dpi and contains a square of 10 x 10 cm.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>objects <span class="ot">&lt;-</span> <span class="fu">image_pliman</span>(<span class="st">"objects_300dpi.jpg"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">analyze_objects</span>(objects, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09b-image-analysis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cm <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">unclass</span>(<span class="fu">get_measures</span>(obj, <span class="at">dpi =</span> <span class="dv">300</span>)))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cm <span class="sc">|&gt;</span> <span class="fu">select</span>(id, area, width, length)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id     area    width   length
+1  1 99.81199 11.10659 11.12135
+2  2 24.99414  6.50271  6.51376
+3  3  7.00615  2.99284  2.99197
+4  4  7.93396  1.98532  3.98985</code></pre>
+</div>
+</div>
+<p>The largest object (<code>id</code> 1) is the square of 10 x 10 cm, and the software finds 11.11 x 11.12 cm and an area of 99.8 cm², an error of about 0.3%. This is how an image analysis is <strong>validated</strong>: measure something whose size you know.</p>
+<p><strong>2. A reference object in the image.</strong> With a phone there is no dpi, but we can put an object of known area in every photograph. The image <code>la_leaves.jpg</code> has five leaves and a square sample of 2 x 2 cm (4 cm²):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>leaves <span class="ot">&lt;-</span> <span class="fu">image_pliman</span>(<span class="st">"la_leaves.jpg"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>la <span class="ot">&lt;-</span> <span class="fu">analyze_objects</span>(leaves, <span class="at">marker =</span> <span class="st">"id"</span>, <span class="at">reference =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">reference_area =</span> <span class="dv">4</span>, <span class="at">reference_smaller =</span> <span class="cn">TRUE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>la<span class="sc">$</span>results <span class="sc">|&gt;</span> <span class="fu">select</span>(id, area, length, width)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id      area   length    width
+1  1 43.429695 9.923322 6.320010
+2  2 37.242871 8.706688 6.069490
+3  3 32.920354 9.223013 5.533824
+4  4 28.837758 8.217528 5.271185
+5  5  8.900688 4.418591 2.839530</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-leaf-area" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-leaf-area-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09b-image-analysis_files/figure-html/fig-leaf-area-1.png" class="img-fluid figure-img" width="480">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-leaf-area-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.4: Leaf area with a reference object. The red square is the reference (4 cm²); the leaves are labelled.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The areas are now in cm². <code>reference_smaller = TRUE</code> tells the function that the reference is the <strong>smallest</strong> object; with <code>reference_larger = TRUE</code> it is the largest, as with the black rectangle in the flax seeds image. The same photograph, in any distance or camera, gives the same area, because the reference object travels with the sample.</p>
+<section id="many-small-seeds" class="level3" data-number="10.6.1">
+<h3 data-number="10.6.1" class="anchored" data-anchor-id="many-small-seeds"><span class="header-section-number">10.6.1</span> Many small seeds</h3>
+<p>The image <code>flax_grains.jpg</code> has hundreds of small flax seeds and a black rectangle of 6 cm² as reference.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>flax <span class="ot">&lt;-</span> <span class="fu">image_pliman</span>(<span class="st">"flax_grains.jpg"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>fx <span class="ot">&lt;-</span> <span class="fu">analyze_objects</span>(flax, <span class="at">index =</span> <span class="st">"GRAY"</span>, <span class="at">reference =</span> <span class="cn">TRUE</span>, <span class="at">reference_area =</span> <span class="dv">6</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">reference_larger =</span> <span class="cn">TRUE</span>, <span class="at">show_contour =</span> <span class="cn">FALSE</span>, <span class="at">marker =</span> <span class="st">"point"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">seeds =</span> <span class="fu">nrow</span>(fx<span class="sc">$</span>results), <span class="at">mean_area_cm2 =</span> <span class="fu">round</span>(<span class="fu">mean</span>(fx<span class="sc">$</span>results<span class="sc">$</span>area), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        seeds mean_area_cm2 
+      268.000         0.063 </code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-flax" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-flax-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09b-image-analysis_files/figure-html/fig-flax-1.png" class="img-fluid figure-img" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-flax-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.5: Flax seeds with a reference rectangle (red). Seeds and reference are detected, and the sizes are in cm².
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>A parameter can change the count
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>lower_noise</code> argument removes small objects that are probably noise. With <code>lower_noise = 0.3</code> the same image gives <strong>211 seeds</strong> instead of 268: <strong>57 seeds disappear from the count</strong>. The parameter is useful when there is dust or small fragments, and harmful when the seeds themselves are small. <strong>Always look at the labelled image of a few samples before running a batch.</strong></p>
+</div>
+</div>
+</section>
+</section>
+<section id="colour-as-a-trait" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="colour-as-a-trait"><span class="header-section-number">10.7</span> Colour as a trait</h2>
+<p>Colour is often the trait of interest: the yellow of a root or a grain as a proxy for carotenoids, the green of a leaf for chlorophyll, the brown of a seed coat. With <code>object_index</code> the function returns the mean value of an index inside each object.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>colour <span class="ot">&lt;-</span> <span class="fu">analyze_objects</span>(soy, <span class="at">marker =</span> <span class="st">"id"</span>, <span class="at">object_index =</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"G"</span>, <span class="st">"B"</span>, <span class="st">"NGRDI"</span>, <span class="st">"GLI"</span>),</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>colour<span class="sc">$</span>object_index <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="sc">-</span>id, \(x) <span class="fu">round</span>(x, <span class="dv">3</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id     R     G     B  NGRDI   GLI
+1  1 0.670 0.569 0.326 -0.082 0.066
+2  2 0.667 0.574 0.352 -0.077 0.058
+3  3 0.696 0.603 0.374 -0.071 0.060
+4  4 0.672 0.580 0.362 -0.073 0.057
+5  5 0.492 0.465 0.248 -0.028 0.115
+6  6 0.672 0.577 0.342 -0.076 0.064
+7  7 0.645 0.560 0.351 -0.072 0.058
+8  8 0.647 0.551 0.319 -0.081 0.065
+9  9 0.505 0.476 0.274 -0.031 0.100</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-soy-colour" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-soy-colour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09b-image-analysis_files/figure-html/fig-soy-colour-1.png" class="img-fluid figure-img" width="624">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-soy-colour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.6: Soybean seeds of <code>soy_green.jpg</code>. Seeds 5 and 9 are greener than the rest.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Seeds 5 and 9 have a higher GLI (0.115 and 0.100) and an NGRDI close to zero (-0.03), while the seven yellow seeds have a GLI near 0.06 and an NGRDI near -0.07. A single threshold on one of these indices classifies the seeds:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>colour<span class="sc">$</span>object_index <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">class =</span> <span class="fu">if_else</span>(NGRDI <span class="sc">&gt;</span> <span class="sc">-</span><span class="fl">0.05</span>, <span class="st">"green"</span>, <span class="st">"yellow"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(class)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   class n
+1  green 2
+2 yellow 7</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>The threshold must come from data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We placed the threshold by looking at nine seeds. In a real study we would fix it on a set of seeds that were classified by an expert, and check the percentage of agreement on another set. The same applies when colour is a <strong>proxy</strong> for a trait that is expensive to measure. To use the yellow intensity of a root as a proxy for carotenoids, we first measure the carotenoids in the laboratory on a sample, build a model that predicts them from the image colour, and check the prediction on samples that were not used to build it. This is a prediction problem, and the machine learning chapter uses the same logic (<a href="11-ai-plant-breeding.html" class="quarto-xref"><span>Chapter 12</span></a>).</p>
+</div>
+</div>
+</section>
+<section id="shape-and-leaf-colour-the-flax-leaves" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="shape-and-leaf-colour-the-flax-leaves"><span class="header-section-number">10.8</span> Shape and leaf colour: the flax leaves</h2>
+<p>Elongated objects need one change in the settings. The image <code>flax_leaves.jpg</code> has 15 flax leaves, two of them yellow.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fleaves <span class="ot">&lt;-</span> <span class="fu">image_pliman</span>(<span class="st">"flax_leaves.jpg"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>split_default <span class="ot">&lt;-</span> <span class="fu">analyze_objects</span>(fleaves, <span class="at">marker =</span> <span class="st">"id"</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>whole <span class="ot">&lt;-</span> <span class="fu">analyze_objects</span>(fleaves, <span class="at">marker =</span> <span class="st">"id"</span>, <span class="at">watershed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">object_index =</span> <span class="fu">c</span>(<span class="st">"NGRDI"</span>, <span class="st">"GLI"</span>), <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">default =</span> <span class="fu">nrow</span>(split_default<span class="sc">$</span>results), <span class="at">without_watershed =</span> <span class="fu">nrow</span>(whole<span class="sc">$</span>results))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          default without_watershed 
+               35                15 </code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-flax-leaves" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-flax-leaves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09b-image-analysis_files/figure-html/fig-flax-leaves-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-flax-leaves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.7: Left: default settings, where the watershed splits each long leaf into several pieces (28 objects). Right: <code>watershed = FALSE</code>, 15 objects.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The default separates touching round objects (like the soybean seeds) using a <em>watershed</em> algorithm, and for long, thin objects it cuts them into pieces. With <code>watershed = FALSE</code> we get one object per leaf, and now we can measure and classify:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>whole<span class="sc">$</span>results <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, area, length, width) <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(whole<span class="sc">$</span>object_index, <span class="at">by =</span> <span class="st">"id"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yellow =</span> NGRDI <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(yellow)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id area   length    width       NGRDI       GLI yellow
+1 15 1779 146.8624 16.14967 -0.04648931 0.1809757   TRUE
+2 17 1839 134.0336 18.95190 -0.03120197 0.1769517   TRUE</code></pre>
+</div>
+</div>
+<p>Two of the 15 leaves have an NGRDI below zero: the two yellow leaves. In a breeding trial the same logic gives a <strong>senescence score</strong> or a <strong>stay-green</strong> measure without a colour chart.</p>
+</section>
+<section id="disease-severity" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="disease-severity"><span class="header-section-number">10.9</span> Disease severity</h2>
+<p>Severity is the percentage of leaf area with symptoms. <code>measure_disease()</code> needs three small images that act as colour palettes: healthy tissue, symptoms and background (here the leaf has no background).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)   <span class="co"># the palettes are sampled at random: this makes the result repeatable</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>leaf    <span class="ot">&lt;-</span> <span class="fu">image_pliman</span>(<span class="st">"sev_leaf_nb.jpg"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>healthy <span class="ot">&lt;-</span> <span class="fu">image_pliman</span>(<span class="st">"sev_healthy.jpg"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>lesions <span class="ot">&lt;-</span> <span class="fu">image_pliman</span>(<span class="st">"sev_sympt.jpg"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>sev <span class="ot">&lt;-</span> <span class="fu">measure_disease</span>(<span class="at">img =</span> leaf, <span class="at">img_healthy =</span> healthy, <span class="at">img_symptoms =</span> lesions,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">lesion_size =</span> <span class="st">"large"</span>, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>sev<span class="sc">$</span>severity</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   healthy symptomatic
+1 89.29372    10.70628</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-severity" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-severity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09b-image-analysis_files/figure-html/fig-severity-1.png" class="img-fluid figure-img" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-severity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.8: Soybean leaf with lesions. The software outlines the symptomatic area.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The leaf has <strong>10.7%</strong> of symptomatic area. The palettes define what “healthy” and “symptom” mean, so the same palettes must be used for all images of a study. The software samples pixels of the palettes at random, so the percentage changes slightly from run to run unless we fix the seed, as above. In mutation breeding this is useful to screen large M2 populations for the response to a disease without rating each leaf by eye.</p>
+</section>
+<section id="many-images-at-once" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="many-images-at-once"><span class="header-section-number">10.10</span> Many images at once</h2>
+<p>A folder of images is processed with the same call. The function looks for files whose name contains a <code>pattern</code> in the folder <code>dir_original</code>, and returns the results of <strong>all</strong> the images in one table. Here we put three sample images in a folder, named as if they were three plots:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">"plots"</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>src <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"tmp_images"</span>, <span class="at">package =</span> <span class="st">"pliman"</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">file.copy</span>(<span class="fu">file.path</span>(src, <span class="fu">c</span>(<span class="st">"soybean_touch.jpg"</span>, <span class="st">"soy_green.jpg"</span>, <span class="st">"flax_grains.jpg"</span>)),</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">file.path</span>(dir, <span class="fu">c</span>(<span class="st">"plot_101.jpg"</span>, <span class="st">"plot_102.jpg"</span>, <span class="st">"plot_103.jpg"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE TRUE TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>batch <span class="ot">&lt;-</span> <span class="fu">analyze_objects</span>(<span class="at">pattern =</span> <span class="st">"plot_"</span>, <span class="at">dir_original =</span> dir, <span class="at">plot =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>batch<span class="sc">$</span>statistics</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 7
+  img          n area_mean area_min area_max area_sum area_sd
+  &lt;chr&gt;    &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1 plot_101    30    2051.      1366     2436    61539    230.
+2 plot_102     9    7079.      5707     8370    63713    865.
+3 plot_103   156      44.5        5     4679     6937    374.</code></pre>
+</div>
+</div>
+<p>(The three images are not three plots of a trial: they only show the structure of the output. The name of each file is in the column <code>img</code>.)</p>
+<p>The result has <strong>one row per image</strong>, which is one row per plot when the file name is the plot identifier. The last step is to join it to the field book:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 'trial' is the field book: one row per plot, with the column "plot"</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>image_traits <span class="ot">&lt;-</span> batch<span class="sc">$</span>statistics <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plot =</span> <span class="fu">as.integer</span>(<span class="fu">sub</span>(<span class="st">"plot_"</span>, <span class="st">""</span>, img))) <span class="sc">|&gt;</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(plot, <span class="at">seed_number =</span> n, <span class="at">seed_area =</span> area_mean)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>trial <span class="ot">&lt;-</span> trial <span class="sc">|&gt;</span> <span class="fu">left_join</span>(image_traits, <span class="at">by =</span> <span class="st">"plot"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>From here the image traits are <strong>traits like any other</strong>. They go to the single-trial analysis of <a href="09-spatial-analysis.html" class="quarto-xref"><span>Chapter 9</span></a> (mixed model with the design and, if justified, the spatial correction), and their heritability tells us if they are precise enough to select on.</p>
+</section>
+<section id="is-the-image-trait-good-enough" class="level2" data-number="10.11">
+<h2 data-number="10.11" class="anchored" data-anchor-id="is-the-image-trait-good-enough"><span class="header-section-number">10.11</span> Is the image trait good enough?</h2>
+<p>A trait from an image is useful only if it is <strong>precise</strong> and <strong>valid</strong>.</p>
+<ul>
+<li><strong>Valid:</strong> it measures what we want. Compare it with the manual or laboratory measurement on a subset of plots (20 to 50 is a start): correlation, and a plot of one against the other. If the correlation is low, the image trait cannot replace the manual one.</li>
+<li><strong>Precise:</strong> its heritability in the trial is high enough. An image trait can be perfectly valid and still not heritable (for example, the colour of a very variable environment).</li>
+<li><strong>Reproducible:</strong> two photographs of the same sample give the same value. Repeat 10 samples and compare.</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 'check' has one row per plot: the image value and the manual value</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(check<span class="sc">$</span>seed_number_image, check<span class="sc">$</span>seed_number_manual)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(check<span class="sc">$</span>seed_number_manual, check<span class="sc">$</span>seed_number_image); <span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The line <code>abline(0, 1)</code> shows where the values would fall if the two methods agreed exactly. Systematic distance from that line is a <strong>bias</strong> that can be corrected; scatter around it is <strong>error</strong> that cannot.</p>
+</section>
+<section id="near-infrared-and-drones-briefly" class="level2" data-number="10.12">
+<h2 data-number="10.12" class="anchored" data-anchor-id="near-infrared-and-drones-briefly"><span class="header-section-number">10.12</span> Near infrared and drones, briefly</h2>
+<p><strong>Near infrared (NIR).</strong> Healthy leaves reflect much more NIR than visible red, and stressed leaves less. An RGB camera with the infrared filter removed, or a multispectral camera, records this. With the NIR band, indices such as NDVI (normalized difference vegetation index) measure vigour and stress better than RGB indices. In <code>pliman</code> the functions that read a band declare it with the arguments <code>re</code> (red edge) and <code>nir</code>.</p>
+<p><strong>Drones.</strong> A drone takes hundreds of images that are joined in an orthomosaic. The field is then divided in plots by a shapefile, and the indices are extracted per plot. The result is again one row per plot with plant height, canopy cover or vigour. It gives the whole trial in a few minutes, but it needs a flight plan, ground control points and processing software, and the plots need to be well marked. <code>pliman</code> has a family of functions for orthomosaics (<code>mosaic_*</code>) that work with the same logic. For a programme that is starting, we suggest to learn the steps of this chapter with photographs on a tray first: the segmentation, the scale, the validation and the join with the trial are the same.</p>
+</section>
+<section id="pitfalls" class="level2" data-number="10.13">
+<h2 data-number="10.13" class="anchored" data-anchor-id="pitfalls"><span class="header-section-number">10.13</span> Pitfalls</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Pitfall</th>
+<th style="text-align: left;">Consequence</th>
+<th style="text-align: left;">What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Uneven light or shadows</td>
+<td style="text-align: left;">Wrong mask, wrong size and colour</td>
+<td style="text-align: left;">Diffuse light, a box or a cloudy day; same set-up in all images</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">One set of parameters for all images</td>
+<td style="text-align: left;">Counts and sizes change between images</td>
+<td style="text-align: left;">Test the parameters on 5 to 10 images, and then keep them</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">No scale</td>
+<td style="text-align: left;">Sizes in pixels, not comparable</td>
+<td style="text-align: left;">Reference object or known dpi</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Not looking at the labelled image</td>
+<td style="text-align: left;">Wrong counts go unnoticed</td>
+<td style="text-align: left;">Save and inspect the labelled image of a sample</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Colour threshold from 9 seeds</td>
+<td style="text-align: left;">Poor classification in a new set</td>
+<td style="text-align: left;">Fix thresholds on a training set and check on another</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Image trait without validation</td>
+<td style="text-align: left;">We select on a number that does not measure the trait</td>
+<td style="text-align: left;">Compare with manual measurements on a subset</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Different cameras or settings between trials</td>
+<td style="text-align: left;">Differences that are not biological</td>
+<td style="text-align: left;">Same camera and settings; keep the originals</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Overlapping objects</td>
+<td style="text-align: left;">Several objects counted as one</td>
+<td style="text-align: left;">Separate the objects; use <code>watershed</code> for round ones</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exercise" class="level2" data-number="10.14">
+<h2 data-number="10.14" class="anchored" data-anchor-id="exercise"><span class="header-section-number">10.14</span> Exercise</h2>
+<p>Use the image <code>flax_leaves.jpg</code>.</p>
+<ol type="1">
+<li>Count the leaves with the default settings and with <code>watershed = FALSE</code>. Which one is correct?</li>
+<li>Using <code>watershed = FALSE</code>, obtain the length and the width of each leaf, in pixels.</li>
+<li>The leaves have three rows of five. Identify the leaves with the lowest NGRDI. How many are there, and in which row do they appear?</li>
+<li>Process the image <code>flax_grains.jpg</code> as in the chapter, and compute the <strong>total</strong> area of the seeds in cm². Why does the result change if you use <code>lower_noise = 0.3</code>?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. default and without watershed</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">default =</span> <span class="fu">nrow</span>(split_default<span class="sc">$</span>results), <span class="at">without_watershed =</span> <span class="fu">nrow</span>(whole<span class="sc">$</span>results))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          default without_watershed 
+               35                15 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># there are 15 leaves, so watershed = FALSE is correct</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. length and width in pixels</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>whole<span class="sc">$</span>results <span class="sc">|&gt;</span> <span class="fu">select</span>(id, length, width) <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id   length    width
+1  1 147.6561 15.21670
+2  2 141.5090 16.26211
+3  3 141.0806 18.96657
+4  4 113.1921 17.43738
+5  5 127.6750 21.60350
+6  6 156.9104 15.09458</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. leaves with the lowest NGRDI (x and y are the position of the centre)</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>whole<span class="sc">$</span>results <span class="sc">|&gt;</span> <span class="fu">select</span>(id, x, y) <span class="sc">|&gt;</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(whole<span class="sc">$</span>object_index, <span class="at">by =</span> <span class="st">"id"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(NGRDI) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id        x        y       NGRDI       GLI
+1 15 598.0716 550.7603 -0.04648931 0.1809757
+2 17 204.4565 555.6280 -0.03120197 0.1769517
+3 14 453.4047 547.9372  0.08286309 0.3084939</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. total area of the flax seeds in cm2</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(fx<span class="sc">$</span>results<span class="sc">$</span>area)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16.75108</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(fx_noise<span class="sc">$</span>results<span class="sc">$</span>area)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13.6795</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>There are 15 leaves: the correct count is the one without watershed (the default gives 28 pieces).</li>
+<li>The table gives the length and the width of each leaf.</li>
+<li>Two leaves have an NGRDI below zero: the two yellow ones. Their <code>y</code> values (about 550 in an image of 680 pixels high, where <code>y</code> grows from the top to the bottom) show that both are in the <strong>bottom</strong> row.</li>
+<li>The total area is 16.8 cm² with the default and 13.7 cm² with <code>lower_noise = 0.3</code>: the filter removes 57 seeds, so the total is lower.</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="key-takeaways" class="level2" data-number="10.15">
+<h2 data-number="10.15" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">10.15</span> Key takeaways</h2>
+<ul>
+<li>An image is a table of numbers. Segment, measure, tabulate and analyse: the table enters the same workflow as any other trait.</li>
+<li>A good photograph (plain background, even light, a reference object, the plot as file name) is worth more than any software option.</li>
+<li><code>pliman</code> counts, measures size and shape, describes colour with indices, and measures severity, for one image or a folder.</li>
+<li>Validate with something of known size, and check the labelled image before trusting a batch.</li>
+<li>Fix colour thresholds on a training set. A colour proxy needs a laboratory calibration.</li>
+<li>An image trait is useful only if it is valid (agrees with the manual measure) and precise (heritable).</li>
+<li>Start with a phone and a tray; drones and NIR come after the basic steps work.</li>
+</ul>
+</section>
+<section id="sec-images-refs" class="level2" data-number="10.16">
+<h2 data-number="10.16" class="anchored" data-anchor-id="sec-images-refs"><span class="header-section-number">10.16</span> References</h2>
+<ul>
+<li>Olivoto T (2022). Lights, camera, pliman! An R package for plant image analysis. <em>Methods in Ecology and Evolution</em> 13: 789 to 798.</li>
+<li>Olivoto T, Andrade SMP, Del Ponte EM (2022). Measuring plant disease severity in R: introducing and evaluating the pliman package. <em>Tropical Plant Pathology</em> 47: 95 to 104.</li>
+<li>Gupta S, Rosenthal DM, Stinchcombe JR, Baucom RS (2020). The remarkable morphological diversity of leaf shape in sweet potato (<em>Ipomoea batatas</em>): the influence of genetics, environment, and G x E. <em>New Phytologist</em> 225: 2183 to 2195.</li>
+<li>Package website: <code>https://olivoto.github.io/pliman/</code></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../part1-week1/09-spatial-analysis.html" class="pagination-link" aria-label="Spatial Analysis and Trial Precision">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spatial Analysis and Trial Precision</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../part1-week1/10-met-gxe.html" class="pagination-link" aria-label="Multi-Environment Trials and G×E Interaction">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lfdelgadom/rtc-mutant-breeding-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

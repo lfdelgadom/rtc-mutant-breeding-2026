@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Mixed Models in Plant Breeding – Experimental Design and Data Analysis for the Advancement of Mutant Populations</title>
+<title>7&nbsp; Mixed Models, BLUEs, BLUPs and Heritability – Experimental Design and Data Analysis for the Advancement of Mutant Populations</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -111,6 +111,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -124,7 +153,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part1-week1/03-field-data.html">Week 1: Concepts and methods</a></li><li class="breadcrumb-item"><a href="../part1-week1/07-mixed-models.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models in Plant Breeding</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part1-week1/03-field-data.html">Week 1: Concepts and methods</a></li><li class="breadcrumb-item"><a href="../part1-week1/07-mixed-models.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models, BLUEs, BLUPs and Heritability</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -194,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/03-field-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Collecting and Structuring Field Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Collecting and Validating Field Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -218,13 +247,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/07-mixed-models.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models in Plant Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models, BLUEs, BLUPs and Heritability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/08-heritability-selection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heritability and Selection Decisions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Selection Decisions: Ranking, Expected Gain and Selection Indices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -235,14 +264,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../part1-week1/09b-image-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Low-Cost High-Throughput Phenotyping: Image Analysis in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../part1-week1/10-met-gxe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/11-ai-plant-breeding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Artificial Intelligence in Plant Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Machine Learning for Prediction in Plant Breeding</span></span></a>
   </div>
 </li>
       </ul>
@@ -259,31 +294,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/12-analysis-pipeline.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/13-mutant-populations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/14-llm-assistants.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Using Large Language Models as Data Analysis Assistants</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Using Large Language Models as Data Analysis Assistants</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/15-selection-mutation-breeding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Decision-Making and Selection Strategies in Mutation Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Decision-Making and Selection Strategies in Mutation Breeding</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/16-participant-projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Participant Projects and Final Presentations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Participant Projects and Final Presentations</span></span></a>
   </div>
 </li>
       </ul>
@@ -305,22 +340,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">7.1</span> Learning objectives</a></li>
-  <li><a href="#planned-content" id="toc-planned-content" class="nav-link" data-scroll-target="#planned-content"><span class="header-section-number">7.2</span> Planned content</a></li>
-  <li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts"><span class="header-section-number">7.3</span> Key concepts</a></li>
-  <li><a href="#worked-demo-in-r" id="toc-worked-demo-in-r" class="nav-link" data-scroll-target="#worked-demo-in-r"><span class="header-section-number">7.4</span> Worked demo in R</a></li>
-  <li><a href="#interpretation-for-breeding-decisions" id="toc-interpretation-for-breeding-decisions" class="nav-link" data-scroll-target="#interpretation-for-breeding-decisions"><span class="header-section-number">7.5</span> Interpretation for breeding decisions</a></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">7.6</span> Exercise</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">7.7</span> Key takeaways</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">7.8</span> References</a></li>
+  <li><a href="#the-bean-trial" id="toc-the-bean-trial" class="nav-link" data-scroll-target="#the-bean-trial"><span class="header-section-number">7.2</span> The bean trial</a></li>
+  <li><a href="#why-the-anova-is-not-enough" id="toc-why-the-anova-is-not-enough" class="nav-link" data-scroll-target="#why-the-anova-is-not-enough"><span class="header-section-number">7.3</span> Why the ANOVA is not enough</a></li>
+  <li><a href="#fixed-and-random-effects" id="toc-fixed-and-random-effects" class="nav-link" data-scroll-target="#fixed-and-random-effects"><span class="header-section-number">7.4</span> Fixed and random effects</a></li>
+  <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model"><span class="header-section-number">7.5</span> The model</a>
+  <ul class="collapse">
+  <li><a href="#do-the-variance-components-differ-from-zero" id="toc-do-the-variance-components-differ-from-zero" class="nav-link" data-scroll-target="#do-the-variance-components-differ-from-zero"><span class="header-section-number">7.5.1</span> Do the variance components differ from zero?</a></li>
+  </ul></li>
+  <li><a href="#blues-and-blups" id="toc-blues-and-blups" class="nav-link" data-scroll-target="#blues-and-blups"><span class="header-section-number">7.6</span> BLUEs and BLUPs</a></li>
+  <li><a href="#sec-heritability" id="toc-sec-heritability" class="nav-link" data-scroll-target="#sec-heritability"><span class="header-section-number">7.7</span> Heritability</a>
+  <ul class="collapse">
+  <li><a href="#generalized-heritability-cullis" id="toc-generalized-heritability-cullis" class="nav-link" data-scroll-target="#generalized-heritability-cullis"><span class="header-section-number">7.7.1</span> Generalized heritability (Cullis)</a></li>
+  <li><a href="#heritability-of-each-trait" id="toc-heritability-of-each-trait" class="nav-link" data-scroll-target="#heritability-of-each-trait"><span class="header-section-number">7.7.2</span> Heritability of each trait</a></li>
+  </ul></li>
+  <li><a href="#heritability-is-not-a-property-of-the-trait" id="toc-heritability-is-not-a-property-of-the-trait" class="nav-link" data-scroll-target="#heritability-is-not-a-property-of-the-trait"><span class="header-section-number">7.8</span> Heritability is not a property of the trait</a>
+  <ul class="collapse">
+  <li><a href="#how-the-design-changes-the-heritability" id="toc-how-the-design-changes-the-heritability" class="nav-link" data-scroll-target="#how-the-design-changes-the-heritability"><span class="header-section-number">7.8.1</span> How the design changes the heritability</a></li>
+  </ul></li>
+  <li><a href="#one-stage-or-two-stages" id="toc-one-stage-or-two-stages" class="nav-link" data-scroll-target="#one-stage-or-two-stages"><span class="header-section-number">7.9</span> One stage or two stages</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">7.10</span> Exercise</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">7.11</span> Key takeaways</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">7.12</span> References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lfdelgadom/rtc-mutant-breeding-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part1-week1/03-field-data.html">Week 1: Concepts and methods</a></li><li class="breadcrumb-item"><a href="../part1-week1/07-mixed-models.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models in Plant Breeding</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part1-week1/03-field-data.html">Week 1: Concepts and methods</a></li><li class="breadcrumb-item"><a href="../part1-week1/07-mixed-models.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models, BLUEs, BLUPs and Heritability</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-mixed-models" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models in Plant Breeding</span></span></h1>
+<h1 class="title"><span id="sec-mixed-models" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models, BLUEs, BLUPs and Heritability</span></span></h1>
 </div>
 
 
@@ -338,56 +387,549 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="chapter-info">
-<p><strong>Author:</strong> Mirjana Jankulovska<br>
-<strong>Session:</strong> Day 3 – Wednesday 11 November</p>
+<p><strong>Author:</strong> Luis Fernando Delgado Muñoz<br>
+<strong>Session:</strong> Day 3, Wednesday 11 November</p>
 </div>
+<section id="learning-objectives" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">7.1</span> Learning objectives</h2>
+<ul>
+<li>Explain why the ANOVA of <a href="06-anova.html" class="quarto-xref"><span>Chapter 6</span></a> is not enough for incomplete block designs and for unbalanced data</li>
+<li>Distinguish fixed and random effects, and choose them for a breeding trial</li>
+<li>Fit a mixed model with <code>lme4</code>, extract the variance components and test them</li>
+<li>Extract and compare BLUEs and BLUPs, and know which one to use</li>
+<li>Estimate the heritability of a trial (classical and generalized) and understand what it depends on</li>
+</ul>
+<p>In <a href="05-experimental-designs.html" class="quarto-xref"><span>Chapter 5</span></a> we wrote the model that follows from the layout, and in <a href="06-anova.html" class="quarto-xref"><span>Chapter 6</span></a> we fitted it as a fixed ANOVA. That works well in a complete block design. This chapter explains what changes when the design has <strong>incomplete blocks</strong>, when some plots are lost, or when we want to <strong>predict</strong> the performance of lines and measure how much of the variation is genetic.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="the-bean-trial" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="the-bean-trial"><span class="header-section-number">7.2</span> The bean trial</h2>
+<p>We use the alpha-lattice bean trial of <a href="05-experimental-designs.html" class="quarto-xref"><span>Chapter 5</span></a> and <a href="04-qc-eda.html" class="quarto-xref"><span>Chapter 4</span></a>: 380 lines in 2 replicates, each replicate divided into 18 incomplete blocks of 22 plots. Sixteen lines are repeated twice in each replicate (<strong>checks</strong>), the other 364 lines appear once per replicate. The yield is <code>YdHa_clean</code>, the cleaned and recalculated yield of <a href="04-qc-eda.html" class="quarto-xref"><span>Chapter 4</span></a>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>beans <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Example_Beans.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rep  =</span> <span class="fu">factor</span>(rep),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">line =</span> <span class="fu">factor</span>(line),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         <span class="co"># the labels B1 to B18 are used again in each replicate: the block is "rep:block"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">rb   =</span> <span class="fu">factor</span>(<span class="fu">paste</span>(rep, block, <span class="at">sep =</span> <span class="st">":"</span>)))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>n_plots <span class="ot">&lt;-</span> beans <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(YdHa_clean)) <span class="sc">|&gt;</span> <span class="fu">count</span>(line, <span class="at">name =</span> <span class="st">"n"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>checks  <span class="ot">&lt;-</span> n_plots <span class="sc">|&gt;</span> <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(line)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>yield <span class="ot">&lt;-</span> beans <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(YdHa_clean))     <span class="co"># 788 plots (4 plots have no yield)</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">plots =</span> <span class="fu">nrow</span>(yield), <span class="at">lines =</span> <span class="fu">nlevels</span>(<span class="fu">droplevels</span>(yield<span class="sc">$</span>line)), <span class="at">blocks =</span> <span class="fu">nlevels</span>(yield<span class="sc">$</span>rb))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> plots  lines blocks 
+   788    380     36 </code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Blocks must be nested in the replicate
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The block labels <code>B1</code> to <code>B18</code> are repeated in the two replicates. If we write <code>(1 | block)</code>, the model treats <code>B1</code> of replicate 1 and <code>B1</code> of replicate 2 as the <strong>same</strong> block, which is wrong. We create <code>rb</code>, the block inside its replicate, and use it. This is a very common mistake in resolvable designs.</p>
+</div>
+</div>
+</section>
+<section id="why-the-anova-is-not-enough" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="why-the-anova-is-not-enough"><span class="header-section-number">7.3</span> Why the ANOVA is not enough</h2>
+<p>The ANOVA of <a href="06-anova.html" class="quarto-xref"><span>Chapter 6</span></a> can be fitted to this trial:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fit_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(YdHa_clean <span class="sc">~</span> rep <span class="sc">+</span> rb <span class="sc">+</span> line, <span class="at">data =</span> yield)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit_lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: YdHa_clean
+           Df   Sum Sq Mean Sq F value    Pr(&gt;F)    
+rep         1  1774601 1774601 22.0750 3.693e-06 ***
+rb         34 37594755 1105728 13.7546 &lt; 2.2e-16 ***
+line      379 66960815  176678  2.1978 2.613e-14 ***
+Residuals 373 29985316   80390                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>It runs, and the genotype line is significant. But it has four limitations that matter in breeding:</p>
+<ol type="1">
+<li><strong>Blocks are as important as genotypes.</strong> In a moment we will see that the variance among incomplete blocks is as large as the genetic variance. A line that happened to be sown in a good block looks better than it is.</li>
+<li><strong>Fixed blocks use only part of the information.</strong> With blocks as fixed effects each line is compared only within the blocks where it appears. A mixed model also uses the differences <strong>between</strong> blocks (recovery of inter-block information).</li>
+<li><strong>The ANOVA gives no genetic parameters.</strong> For heritability we need the variance of the genotypes, not the test of their differences.</li>
+<li><strong>Lines with different replication are treated alike.</strong> In this trial 16 lines have 4 plots and 364 have 2 (and 4 lines have a single plot because of lost yields). The precision of their means is different, and the ranking should take it into account.</li>
+</ol>
+<p>The raw means show the problem. Compare the 20% best lines by raw mean with the 20% best lines after adjusting for the blocks:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fit_fix <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YdHa_clean <span class="sc">~</span> rep <span class="sc">+</span> line <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rb), <span class="at">data =</span> yield)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>blue <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit_fix, <span class="sc">~</span> line, <span class="at">lmer.df =</span> <span class="st">"asymptotic"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(line, <span class="at">BLUE =</span> emmean, <span class="at">SE_BLUE =</span> SE)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> yield <span class="sc">|&gt;</span> <span class="fu">group_by</span>(line) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">raw_mean =</span> <span class="fu">mean</span>(YdHa_clean), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>cmp <span class="ot">&lt;-</span> <span class="fu">left_join</span>(raw, blue, <span class="at">by =</span> <span class="st">"line"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>top20 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) x <span class="sc">&gt;=</span> <span class="fu">quantile</span>(x, <span class="fl">0.80</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(cmp<span class="sc">$</span>raw_mean, cmp<span class="sc">$</span>BLUE),</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">best_20pct_by_raw  =</span> <span class="fu">sum</span>(<span class="fu">top20</span>(cmp<span class="sc">$</span>raw_mean)),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">also_best_by_BLUE  =</span> <span class="fu">sum</span>(<span class="fu">top20</span>(cmp<span class="sc">$</span>raw_mean) <span class="sc">&amp;</span> <span class="fu">top20</span>(cmp<span class="sc">$</span>BLUE)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      correlation best_20pct_by_raw also_best_by_BLUE 
+        0.9019176        76.0000000        61.0000000 </code></pre>
+</div>
+</div>
+<p>The correlation between the two is 0.90, but 15 of the 76 lines chosen by raw mean (one in five) would not be chosen after adjusting for the incomplete blocks. In the next section we build the model that does the adjustment.</p>
+</section>
+<section id="fixed-and-random-effects" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="fixed-and-random-effects"><span class="header-section-number">7.4</span> Fixed and random effects</h2>
+<p>A factor is <strong>fixed</strong> when its levels are the ones we are interested in and we want an estimate for each of them. It is <strong>random</strong> when its levels are a sample from a larger population and we want to know how much they vary.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 27%">
+<col style="width: 16%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Factor</th>
+<th>In the bean trial</th>
+<th>Usual choice</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Replicate</td>
+<td>2 replicates</td>
+<td>Fixed</td>
+<td>Only two levels; a variance would be badly estimated</td>
+</tr>
+<tr class="even">
+<td>Incomplete block</td>
+<td>36 blocks</td>
+<td><strong>Random</strong></td>
+<td>Many blocks, sample of the field; we want to recover inter-block information</td>
+</tr>
+<tr class="odd">
+<td>Genotype (compare lines)</td>
+<td>380 lines</td>
+<td><strong>Fixed</strong></td>
+<td>We want an adjusted mean for every line: <strong>BLUE</strong></td>
+</tr>
+<tr class="even">
+<td>Genotype (predict, heritability)</td>
+<td>380 lines</td>
+<td><strong>Random</strong></td>
+<td>Lines are a sample of a breeding population; we want their variance and a prediction for each: <strong>BLUP</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The same factor, the genotype, is fixed or random depending on the question. The rest of the chapter uses both.</p>
+</section>
+<section id="the-model" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="the-model"><span class="header-section-number">7.5</span> The model</h2>
+<p>For the alpha-lattice, the yield of line <span class="math inline">\(i\)</span> in block <span class="math inline">\(k\)</span> of replicate <span class="math inline">\(j\)</span> is:</p>
+<pre><code>yield = overall mean + replicate effect + block effect (random)
+        + genotype effect + error (random)</code></pre>
+<p>The random effects have a variance each: <span class="math inline">\(\sigma^2_b\)</span> for the blocks, <span class="math inline">\(\sigma^2_g\)</span> for the genotypes (when it is random) and <span class="math inline">\(\sigma^2_e\)</span> for the plot error. In <code>lme4</code> the random terms go in parentheses:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fit_rand <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YdHa_clean <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rb) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> line), <span class="at">data =</span> yield)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>vc <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(fit_rand))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>vc <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">component =</span> <span class="fu">c</span>(<span class="st">"Genotype"</span>, <span class="st">"Incomplete block"</span>, <span class="st">"Residual (plot error)"</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">variance  =</span> <span class="fu">round</span>(vc<span class="sc">$</span>vcov),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">percent   =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> vc<span class="sc">$</span>vcov <span class="sc">/</span> <span class="fu">sum</span>(vc<span class="sc">$</span>vcov), <span class="dv">1</span>))</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>vc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              component variance percent
+1              Genotype    48762    27.8
+2      Incomplete block    46942    26.8
+3 Residual (plot error)    79473    45.4</code></pre>
+</div>
+</div>
+<p>The incomplete blocks carry <strong>as much variance as the genotypes</strong> (28% and 27% of the total, with 45% for the plot error). This is the reason for the large difference between raw means and adjusted means.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Chapter in preparation
+<span class="screen-reader-only">Note</span>Link with the ANOVA
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This chapter will be written by Mirjana Jankulovska. The outline below follows the course agenda.</p>
+<p>In a balanced design the variance components can be obtained from the mean squares of the ANOVA (expected mean squares, as we did for the durum wheat in <a href="06-anova.html" class="quarto-xref"><span>Chapter 6</span></a>). With incomplete blocks, unbalanced data or several random terms, the mean squares do not give the components directly, and the mixed model, fitted by REML (restricted maximum likelihood), is the tool.</p>
 </div>
 </div>
-<section id="learning-objectives" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">7.1</span> Learning objectives</h2>
-<ul>
-<li>Explain the limitations of ANOVA for breeding data</li>
-<li>Distinguish fixed and random effects</li>
-<li>Estimate variance components, BLUEs and BLUPs</li>
-</ul>
-</section>
-<section id="planned-content" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="planned-content"><span class="header-section-number">7.2</span> Planned content</h2>
-<ul>
-<li>Limitations of ANOVA: unbalanced data, incomplete designs</li>
-<li>Fixed vs random effects; variance components</li>
-<li>BLUEs vs BLUPs</li>
-<li>Mixed model fitting and extraction of BLUEs and BLUPs</li>
-</ul>
-</section>
-<section id="key-concepts" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="key-concepts"><span class="header-section-number">7.3</span> Key concepts</h2>
-<!-- Author: theory, formulas and figures -->
-</section>
-<section id="worked-demo-in-r" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="worked-demo-in-r"><span class="header-section-number">7.4</span> Worked demo in R</h2>
+<section id="do-the-variance-components-differ-from-zero" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="do-the-variance-components-differ-from-zero"><span class="header-section-number">7.5.1</span> Do the variance components differ from zero?</h3>
+<p>The likelihood ratio test compares the model with and without the term. The models are fitted by maximum likelihood (<code>REML = FALSE</code>) for the comparison. Because a variance cannot be negative, the null hypothesis is on the boundary and the p-value of the usual chi-square is <strong>conservative</strong>: divide it by two.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the shared course datasets in data/ where possible</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>m_full <span class="ot">&lt;-</span> <span class="fu">update</span>(fit_rand, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>m_nog  <span class="ot">&lt;-</span> <span class="fu">update</span>(m_full, . <span class="sc">~</span> . <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">|</span> line))     <span class="co"># without genotype variance</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>m_nob  <span class="ot">&lt;-</span> <span class="fu">update</span>(m_full, . <span class="sc">~</span> . <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">|</span> rb))       <span class="co"># without block variance</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>chisq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">anova</span>(m_nog, m_full)<span class="sc">$</span>Chisq[<span class="dv">2</span>], <span class="fu">anova</span>(m_nob, m_full)<span class="sc">$</span>Chisq[<span class="dv">2</span>])</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">term =</span> <span class="fu">c</span>(<span class="st">"Genotype"</span>, <span class="st">"Incomplete block"</span>),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">chisq =</span> <span class="fu">round</span>(chisq, <span class="dv">1</span>),</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">p_value_halved =</span> <span class="fu">format.pval</span>(<span class="fu">pchisq</span>(chisq, <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">eps =</span> <span class="fl">1e-16</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              term chisq p_value_halved
+1         Genotype  64.3     5.4318e-16
+2 Incomplete block 177.8        &lt; 1e-16</code></pre>
+</div>
+</div>
+<p>Both variances are clearly different from zero. As a check of the residuals we use the plot of the model, as in <a href="06-anova.html" class="quarto-xref"><span>Chapter 6</span></a>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">fitted =</span> <span class="fu">fitted</span>(fit_rand), <span class="at">resid =</span> <span class="fu">resid</span>(fit_rand))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(res, <span class="fu">aes</span>(fitted, resid)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fitted values (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"Residuals"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(res, <span class="fu">aes</span>(<span class="at">sample =</span> resid)) <span class="sc">+</span> <span class="fu">stat_qq</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Theoretical quantiles"</span>, <span class="at">y =</span> <span class="st">"Residual quantiles"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-resid-mm-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-resid-mm-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-mixed-models_files/figure-html/fig-resid-mm-1.png" class="img-fluid figure-img" width="480">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-resid-mm-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: Residuals of the mixed model for bean yield. Left: residuals against fitted values. Right: normal QQ plot.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="fig-resid-mm-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-resid-mm-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-mixed-models_files/figure-html/fig-resid-mm-2.png" class="img-fluid figure-img" width="480">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-resid-mm-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.2: Residuals of the mixed model for bean yield. Left: residuals against fitted values. Right: normal QQ plot.
+</figcaption>
+</figure>
+</div>
+</div>
 </div>
 </section>
-<section id="interpretation-for-breeding-decisions" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="interpretation-for-breeding-decisions"><span class="header-section-number">7.5</span> Interpretation for breeding decisions</h2>
 </section>
-<section id="exercise" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="exercise"><span class="header-section-number">7.6</span> Exercise</h2>
-<div class="callout callout-style-default callout-tip callout-empty-content callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<section id="blues-and-blups" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="blues-and-blups"><span class="header-section-number">7.6</span> BLUEs and BLUPs</h2>
+<p>The two acronyms describe two kinds of estimate of the genotype value:</p>
+<ul>
+<li><strong>BLUE</strong> (best linear unbiased estimate): the genotype is <strong>fixed</strong>. The estimate is the mean of the line adjusted for blocks and replicates, with no other correction. It is the value we computed above with <code>emmeans</code>.</li>
+<li><strong>BLUP</strong> (best linear unbiased prediction): the genotype is <strong>random</strong>. The estimate is a weighted combination of the line’s own data and the population mean. Lines with little or noisy information are pulled toward the mean: they are <strong>shrunk</strong>.</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">fixef</span>(fit_rand)[<span class="st">"(Intercept)"</span>] <span class="sc">+</span> <span class="fu">fixef</span>(fit_rand)[<span class="st">"repR2"</span>] <span class="sc">/</span> <span class="dv">2</span>   <span class="co"># mean of the 2 replicates</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>blup <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">line =</span> <span class="fu">rownames</span>(<span class="fu">ranef</span>(fit_rand)<span class="sc">$</span>line),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">BLUP =</span> mu <span class="sc">+</span> <span class="fu">ranef</span>(fit_rand)<span class="sc">$</span>line[, <span class="dv">1</span>])</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>est <span class="ot">&lt;-</span> blue <span class="sc">|&gt;</span> <span class="fu">left_join</span>(blup, <span class="at">by =</span> <span class="st">"line"</span>) <span class="sc">|&gt;</span> <span class="fu">left_join</span>(n_plots, <span class="at">by =</span> <span class="st">"line"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plots =</span> <span class="fu">factor</span>(n))</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">sd_BLUE =</span> <span class="fu">sd</span>(est<span class="sc">$</span>BLUE), <span class="at">sd_BLUP =</span> <span class="fu">sd</span>(est<span class="sc">$</span>BLUP), <span class="at">correlation =</span> <span class="fu">cor</span>(est<span class="sc">$</span>BLUE, est<span class="sc">$</span>BLUP))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    sd_BLUE     sd_BLUP correlation 
+296.9985284 162.6427027   0.9955397 </code></pre>
+</div>
+</div>
+<p>The BLUEs and BLUPs are almost perfectly correlated, but the BLUPs are much less spread: the standard deviation of the BLUEs includes the plot error, the BLUPs are corrected for it.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(est, <span class="fu">aes</span>(BLUE, BLUP, <span class="at">colour =</span> plots)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"BLUE (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"BLUP (kg/ha)"</span>, <span class="at">colour =</span> <span class="st">"Plots per line"</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-shrink" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-shrink-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-mixed-models_files/figure-html/fig-shrink-1.png" class="img-fluid figure-img" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-shrink-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.3: BLUE against BLUP of the 380 bean lines. The dashed line is y = x. Lines with fewer plots (colour) are shrunk more toward the mean.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>How much each group is shrunk can be measured as the slope of the BLUP deviations on the BLUE deviations:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>est <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(plots) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">lines =</span> <span class="fu">n</span>(),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">shrinkage_slope =</span> <span class="fu">coef</span>(<span class="fu">lm</span>(<span class="fu">I</span>(BLUP <span class="sc">-</span> <span class="fu">mean</span>(est<span class="sc">$</span>BLUP)) <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> <span class="fu">I</span>(BLUE <span class="sc">-</span> <span class="fu">mean</span>(est<span class="sc">$</span>BLUE))))[[<span class="dv">1</span>]],</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">shrinkage_slope =</span> <span class="fu">round</span>(shrinkage_slope, <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  plots lines shrinkage_slope
+  &lt;fct&gt; &lt;int&gt;           &lt;dbl&gt;
+1 1         4            0.38
+2 2       360            0.54
+3 4        16            0.7 </code></pre>
+</div>
+</div>
+<p>A slope of 1 would mean no shrinkage. The lines with a single plot keep only 38% of their deviation from the mean, those with two plots 54%, and those with four plots 70%. The shrinkage factor is the <strong>reliability</strong>: the part of the variation of the estimate that is genetic. It grows with the number of plots and with the heritability.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Which one to use?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 33%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Use</th>
+<th>BLUE</th>
+<th>BLUP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ranking and selecting lines in one trial</td>
+<td>Possible, but noisy for lines with few plots</td>
+<td><strong>Preferred</strong>: corrects for the unequal precision</td>
+</tr>
+<tr class="even">
+<td>Comparison with a parent or a check (Dunnett, <a href="06-anova.html" class="quarto-xref"><span>Chapter 6</span></a>)</td>
+<td><strong>Yes</strong>: the genotype is fixed</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Input to a second stage (multi-environment analysis, <a href="10-met-gxe.html" class="quarto-xref"><span>Chapter 11</span></a>)</td>
+<td><strong>Yes</strong>, with its standard error as weight</td>
+<td>Not as input (the shrinkage would be applied twice)</td>
+</tr>
+<tr class="even">
+<td>Heritability and genetic parameters</td>
+<td>No</td>
+<td><strong>Yes</strong> (random genotype)</td>
+</tr>
+</tbody>
+</table>
+<p>BLUPs rank lines more fairly, BLUEs are unbiased estimates of each line. A line with a high BLUE and little data can be a lucky line; the BLUP tells us how much to trust it.</p>
+</div>
+</div>
+</section>
+<section id="sec-heritability" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="sec-heritability"><span class="header-section-number">7.7</span> Heritability</h2>
+<p>The <strong>broad-sense heritability</strong> is the proportion of the variance of the phenotypic values that is genetic. Its value depends on <strong>what</strong> we call a phenotypic value. For the variance components of a trial there are two common bases:</p>
+<pre><code>Plot basis:        H2 = Vg / (Vg + Ve)
+Entry-mean basis:  H2 = Vg / (Vg + Ve / r)       r = replicates per line</code></pre>
+<p>The first is the heritability of a single plot, and the second is the heritability of the mean of <span class="math inline">\(r\)</span> plots. The second is the one that matters for selecting lines <strong>on their means</strong>. In this trial <span class="math inline">\(r\)</span> is about 2.07, the mean number of plots per line:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>vcs <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(fit_rand))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>Vg <span class="ot">&lt;-</span> vcs<span class="sc">$</span>vcov[vcs<span class="sc">$</span>grp <span class="sc">==</span> <span class="st">"line"</span>]; Ve <span class="ot">&lt;-</span> vcs<span class="sc">$</span>vcov[vcs<span class="sc">$</span>grp <span class="sc">==</span> <span class="st">"Residual"</span>]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>r  <span class="ot">&lt;-</span> <span class="fu">nrow</span>(yield) <span class="sc">/</span> <span class="fu">nlevels</span>(<span class="fu">droplevels</span>(yield<span class="sc">$</span>line))</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">r =</span> r, <span class="at">H2_plot =</span> Vg <span class="sc">/</span> (Vg <span class="sc">+</span> Ve), <span class="at">H2_mean =</span> Vg <span class="sc">/</span> (Vg <span class="sc">+</span> Ve <span class="sc">/</span> r))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        r   H2_plot   H2_mean 
+2.0736842 0.3802532 0.5599239 </code></pre>
+</div>
+</div>
+<section id="generalized-heritability-cullis" class="level3" data-number="7.7.1">
+<h3 data-number="7.7.1" class="anchored" data-anchor-id="generalized-heritability-cullis"><span class="header-section-number">7.7.1</span> Generalized heritability (Cullis)</h3>
+<p>The classical formula assumes a balanced design with the same number of plots per line, and it ignores the blocks. In an incomplete block or unbalanced trial we use the <strong>generalized heritability</strong> of Cullis et al.&nbsp;(2006) and Piepho and Möhring (2007), based on the precision of the BLUPs: the mean variance of the difference between two BLUPs (the PEV, prediction error variance):</p>
+<pre><code>H2 (Cullis) = 1 - (mean variance of a difference between two BLUPs) / (2 Vg)</code></pre>
+<p><code>lme4</code> does not report it directly. The function below builds it from the model matrices (the mixed model equations), for models with random intercept terms:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>h2_cullis <span class="ot">&lt;-</span> <span class="cf">function</span>(model, genotype) {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">getME</span>(model, <span class="st">"X"</span>); Z <span class="ot">&lt;-</span> <span class="fu">getME</span>(model, <span class="st">"Z"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  s2 <span class="ot">&lt;-</span> <span class="fu">sigma</span>(model)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  vc <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(model))</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  fl <span class="ot">&lt;-</span> <span class="fu">getME</span>(model, <span class="st">"flist"</span>); Gp <span class="ot">&lt;-</span> <span class="fu">getME</span>(model, <span class="st">"Gp"</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># variance of each random effect column, in the order of Z</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">lapply</span>(<span class="fu">names</span>(fl), <span class="cf">function</span>(g) <span class="fu">rep</span>(vc<span class="sc">$</span>vcov[vc<span class="sc">$</span>grp <span class="sc">==</span> g], <span class="fu">nlevels</span>(fl[[g]]))))</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  W <span class="ot">&lt;-</span> <span class="fu">cbind</span>(X, Z)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  C <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(W) <span class="sc">/</span> s2</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  idx <span class="ot">&lt;-</span> <span class="fu">ncol</span>(X) <span class="sc">+</span> <span class="fu">seq_along</span>(v)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  C[<span class="fu">cbind</span>(idx, idx)] <span class="ot">&lt;-</span> C[<span class="fu">cbind</span>(idx, idx)] <span class="sc">+</span> <span class="dv">1</span> <span class="sc">/</span> v</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  Cinv <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">as.matrix</span>(C))</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="fu">match</span>(genotype, <span class="fu">names</span>(fl))</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  gi <span class="ot">&lt;-</span> <span class="fu">ncol</span>(X) <span class="sc">+</span> (Gp[k] <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>Gp[k <span class="sc">+</span> <span class="dv">1</span>]</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  P <span class="ot">&lt;-</span> Cinv[gi, gi]                                   <span class="co"># PEV matrix of the genotype BLUPs</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(P)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  vdiff <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (n <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">diag</span>(P)) <span class="sc">-</span> <span class="fu">sum</span>(P)) <span class="sc">/</span> (n <span class="sc">*</span> (n <span class="sc">-</span> <span class="dv">1</span>))   <span class="co"># mean variance of a difference</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  Vg <span class="ot">&lt;-</span> vc<span class="sc">$</span>vcov[vc<span class="sc">$</span>grp <span class="sc">==</span> genotype]</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">-</span> vdiff <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> Vg)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="fu">h2_cullis</span>(fit_rand, <span class="st">"line"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5424861</code></pre>
+</div>
+</div>
+<p>The Cullis value (0.54) is slightly lower than the classical one (0.56) because the unbalanced replication and the incomplete blocks are taken into account. We can check that the function is correct in a case where both must agree: a balanced RCBD, such as one durum wheat environment of <a href="06-anova.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>durum <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Durum_wheat_Algeria.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Genotype =</span> <span class="fu">factor</span>(Genotype), <span class="at">Block =</span> <span class="fu">factor</span>(Block))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>e10 <span class="ot">&lt;-</span> durum <span class="sc">|&gt;</span> <span class="fu">filter</span>(Environment <span class="sc">==</span> <span class="st">"loc10_year1"</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>m_e10 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">|</span> Block) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Genotype), <span class="at">data =</span> e10)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>v10 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(m_e10))</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">classical =</span> v10<span class="sc">$</span>vcov[v10<span class="sc">$</span>grp <span class="sc">==</span> <span class="st">"Genotype"</span>] <span class="sc">/</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>              (v10<span class="sc">$</span>vcov[v10<span class="sc">$</span>grp <span class="sc">==</span> <span class="st">"Genotype"</span>] <span class="sc">+</span> v10<span class="sc">$</span>vcov[v10<span class="sc">$</span>grp <span class="sc">==</span> <span class="st">"Residual"</span>] <span class="sc">/</span> <span class="dv">4</span>),</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">cullis    =</span> <span class="fu">h2_cullis</span>(m_e10, <span class="st">"Genotype"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>classical    cullis 
+0.7313521 0.7313521 </code></pre>
+</div>
+</div>
+</section>
+<section id="heritability-of-each-trait" class="level3" data-number="7.7.2">
+<h3 data-number="7.7.2" class="anchored" data-anchor-id="heritability-of-each-trait"><span class="header-section-number">7.7.2</span> Heritability of each trait</h3>
+<p>The same model fitted to each trait gives the heritability of each one. This is the information needed for the selection indices of <a href="08-heritability-selection.html" class="quarto-xref"><span>Chapter 8</span></a>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>trait_h2 <span class="ot">&lt;-</span> <span class="cf">function</span>(trait) {</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> beans <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(.data[[trait]])) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">y =</span> .data[[trait]])</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rb) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> line), <span class="at">data =</span> x)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(m))</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">trait =</span> trait, <span class="at">mean =</span> <span class="fu">round</span>(<span class="fu">mean</span>(x<span class="sc">$</span>y), <span class="dv">1</span>),</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">Vg =</span> <span class="fu">round</span>(v<span class="sc">$</span>vcov[v<span class="sc">$</span>grp <span class="sc">==</span> <span class="st">"line"</span>], <span class="dv">2</span>),</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">Ve =</span> <span class="fu">round</span>(v<span class="sc">$</span>vcov[v<span class="sc">$</span>grp <span class="sc">==</span> <span class="st">"Residual"</span>], <span class="dv">2</span>),</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">H2_cullis =</span> <span class="fu">round</span>(<span class="fu">h2_cullis</span>(m, <span class="st">"line"</span>), <span class="dv">2</span>))</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>traits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">yield =</span> <span class="st">"YdHa_clean"</span>, <span class="at">flowering_days =</span> <span class="st">"DF"</span>, <span class="at">maturity_days =</span> <span class="st">"DPM"</span>,</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">plant_height =</span> <span class="st">"PLHA"</span>, <span class="at">seed_weight_100 =</span> <span class="st">"SW100"</span>)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(<span class="fu">lapply</span>(traits, trait_h2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       trait   mean       Vg       Ve H2_cullis
+1 YdHa_clean 1370.3 48761.81 79473.28      0.54
+2         DF   41.5     4.69     5.03      0.65
+3        DPM   81.6     1.09     1.17      0.64
+4       PLHA   27.5     0.73    10.39      0.12
+5      SW100   53.3    42.43    13.23      0.86</code></pre>
+</div>
+</div>
+<p>Seed weight is the most heritable trait (0.86), days to flowering and maturity are intermediate (0.65 and 0.64), yield is 0.54, and plant height is low (0.12): in this trial, most of the differences in plant height among lines are plot error, and selecting on it would be little better than random.</p>
+</section>
+</section>
+<section id="heritability-is-not-a-property-of-the-trait" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="heritability-is-not-a-property-of-the-trait"><span class="header-section-number">7.8</span> Heritability is not a property of the trait</h2>
+<p>The value of <span class="math inline">\(H^2\)</span> belongs to a <strong>population, a set of environments and a design</strong>. The same trait gives different values in another trial. The durum wheat data show it with real numbers. In each of the 22 environments, a balanced RCBD with 4 replicates, the entry-mean heritability is:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>h2_env <span class="ot">&lt;-</span> durum <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Environment) <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_modify</span>(\(d, key) {</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    a <span class="ot">&lt;-</span> <span class="fu">anova</span>(<span class="fu">lm</span>(yield <span class="sc">~</span> Block <span class="sc">+</span> Genotype, <span class="at">data =</span> d))</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">H2 =</span> <span class="dv">1</span> <span class="sc">-</span> a[[<span class="st">"Mean Sq"</span>]][<span class="dv">3</span>] <span class="sc">/</span> a[[<span class="st">"Mean Sq"</span>]][<span class="dv">2</span>])</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">|&gt;</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(h2_env, <span class="fu">aes</span>(H2, <span class="fu">reorder</span>(Environment, H2))) <span class="sc">+</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Heritability (entry-mean basis)"</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(h2_env<span class="sc">$</span>H2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.2856  0.6697  0.7973  0.7478  0.9100  0.9783 </code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-h2-env" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-h2-env-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-mixed-models_files/figure-html/fig-h2-env-1.png" class="img-fluid figure-img" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-h2-env-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.4: Heritability (entry-mean basis, 4 replicates) of durum wheat yield in the 22 environments of the Algerian trial.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The same 24 genotypes, the same design and the same crop give a heritability from 0.29 to 0.98, with a median of 0.80. An environment with a low heritability does not say that yield is “not heritable” but that in that trial the plot error was large compared with the genetic differences.</p>
+<section id="how-the-design-changes-the-heritability" class="level3" data-number="7.8.1">
+<h3 data-number="7.8.1" class="anchored" data-anchor-id="how-the-design-changes-the-heritability"><span class="header-section-number">7.8.1</span> How the design changes the heritability</h3>
+<p>With several environments the heritability of a line mean over all of them also depends on the genotype by environment variance and on the number of environments and replicates (<a href="10-met-gxe.html" class="quarto-xref"><span>Chapter 11</span></a>):</p>
+<pre><code>H2 = Vg / (Vg + Vge / e + Ve / (e r))          e = environments, r = replicates</code></pre>
+<p>With the variance components of the 22 environments of the durum wheat we can see what each additional replicate or environment adds. This is a <strong>planning table</strong>, calculated from the model, not new data:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>m_met <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">|</span> Environment <span class="sc">/</span> Block) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Genotype) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Genotype<span class="sc">:</span>Environment),</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> durum)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(m_met))</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>Vg_m  <span class="ot">&lt;-</span> v<span class="sc">$</span>vcov[v<span class="sc">$</span>grp <span class="sc">==</span> <span class="st">"Genotype"</span>]</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>Vge_m <span class="ot">&lt;-</span> v<span class="sc">$</span>vcov[v<span class="sc">$</span>grp <span class="sc">==</span> <span class="st">"Genotype:Environment"</span>]</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>Ve_m  <span class="ot">&lt;-</span> v<span class="sc">$</span>vcov[v<span class="sc">$</span>grp <span class="sc">==</span> <span class="st">"Residual"</span>]</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">expand.grid</span>(<span class="at">environments =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">22</span>), <span class="at">replicates =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">H2 =</span> <span class="fu">round</span>(Vg_m <span class="sc">/</span> (Vg_m <span class="sc">+</span> Vge_m <span class="sc">/</span> environments <span class="sc">+</span> Ve_m <span class="sc">/</span> (environments <span class="sc">*</span> replicates)), <span class="dv">2</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> replicates, <span class="at">values_from =</span> H2, <span class="at">names_prefix =</span> <span class="st">"r = "</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+  environments `r = 1` `r = 2` `r = 4`
+         &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1            1    0.21    0.27    0.32
+2            2    0.34    0.42    0.48
+3            5    0.56    0.65    0.7 
+4           10    0.72    0.79    0.82
+5           22    0.85    0.89    0.91</code></pre>
+</div>
+</div>
+<p>A single environment with 2 replicates gives a heritability of 0.27. Moving from 2 to 4 replicates in that environment adds only 0.05 (to 0.32), while moving from 1 to 5 environments, keeping 2 replicates, adds 0.38 (to 0.65). <strong>When G×E is large, more environments are worth more than more replicates.</strong> (The variance components are those of <a href="06-anova.html" class="quarto-xref"><span>Chapter 6</span></a>: genotype 0.036, G×E 0.058, error 0.083.)</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Common misunderstandings
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>A high heritability does not mean that the trait is “controlled by genes” in general, but that in this trial and population the genetic differences are large compared with the error.</li>
+<li>A low heritability does not mean that selection is impossible: with more replicates and environments the heritability of the mean increases.</li>
+<li>Heritabilities of different trials are not comparable if the design, the number of replicates or the population differ.</li>
+<li>The heritability is an estimate: it has a standard error that is large when there are few lines or few environments.</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="one-stage-or-two-stages" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="one-stage-or-two-stages"><span class="header-section-number">7.9</span> One stage or two stages</h2>
+<p>In a multi-environment trial there are two ways of fitting the model. In a <strong>one-stage</strong> analysis, all the plots of all the trials go in a single model. In a <strong>two-stage</strong> analysis, the first stage fits each trial separately (the model of its design, with the BLUEs of the lines), and the second stage fits the model over environments using these BLUEs. The second stage must <strong>weight</strong> the BLUEs by their precision (the weight is <span class="math inline">\(1 / sem^2\)</span>, the inverse of the squared standard error of the BLUE): without weights the residual variance is not identifiable and the result is wrong. Piepho and Möhring (2009) compared several weighting methods and found that a weighted two-stage analysis gives results close to the one-stage analysis. We use this in <a href="10-met-gxe.html" class="quarto-xref"><span>Chapter 11</span></a>. The standard errors that we saved in <code>blue</code> above (<code>SE_BLUE</code>) are the ones used for the weights.</p>
+</section>
+<section id="exercise" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="exercise"><span class="header-section-number">7.10</span> Exercise</h2>
+<p>Use the bean trial and the trait <strong>days to maturity</strong> (<code>DPM</code>).</p>
+<ol type="1">
+<li>Fit the model with random blocks (<code>rb</code>) and random lines. What percentage of the variance is genotype, block and residual?</li>
+<li>Test the genotype variance with the likelihood ratio test.</li>
+<li>Calculate the classical entry-mean heritability and the Cullis heritability. Why do they differ?</li>
+<li>Extract the BLUPs and list the 5 earliest lines (lowest days to maturity) among the test lines (not the checks).</li>
+<li>How many of those 5 lines are also among the 5 earliest by BLUE?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -396,18 +938,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> beans <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(DPM))</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Variance components</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(DPM <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rb) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> line), <span class="at">data =</span> x)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(m))</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">component =</span> v<span class="sc">$</span>grp, <span class="at">variance =</span> <span class="fu">round</span>(v<span class="sc">$</span>vcov, <span class="dv">2</span>),</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">percent =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> v<span class="sc">$</span>vcov <span class="sc">/</span> <span class="fu">sum</span>(v<span class="sc">$</span>vcov), <span class="dv">1</span>))</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. LRT for genotype (p-value halved)</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>m_ml  <span class="ot">&lt;-</span> <span class="fu">update</span>(m, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>m_no  <span class="ot">&lt;-</span> <span class="fu">update</span>(m_ml, . <span class="sc">~</span> . <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">|</span> line))</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">anova</span>(m_no, m_ml)</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">chisq =</span> a<span class="sc">$</span>Chisq[<span class="dv">2</span>], <span class="at">p_halved =</span> a<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;Chisq)</span><span class="st">`</span>[<span class="dv">2</span>] <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Heritability</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>r  <span class="ot">&lt;-</span> <span class="fu">nrow</span>(x) <span class="sc">/</span> <span class="fu">nlevels</span>(<span class="fu">droplevels</span>(x<span class="sc">$</span>line))</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>Vg <span class="ot">&lt;-</span> v<span class="sc">$</span>vcov[v<span class="sc">$</span>grp <span class="sc">==</span> <span class="st">"line"</span>]; Ve <span class="ot">&lt;-</span> v<span class="sc">$</span>vcov[v<span class="sc">$</span>grp <span class="sc">==</span> <span class="st">"Residual"</span>]</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">classical =</span> Vg <span class="sc">/</span> (Vg <span class="sc">+</span> Ve <span class="sc">/</span> r), <span class="at">cullis =</span> <span class="fu">h2_cullis</span>(m, <span class="st">"line"</span>))</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Five earliest test lines by BLUP</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">fixef</span>(m)[<span class="st">"(Intercept)"</span>] <span class="sc">+</span> <span class="fu">fixef</span>(m)[<span class="st">"repR2"</span>] <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>blup_dpm <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">line =</span> <span class="fu">rownames</span>(<span class="fu">ranef</span>(m)<span class="sc">$</span>line), <span class="at">BLUP =</span> mu <span class="sc">+</span> <span class="fu">ranef</span>(m)<span class="sc">$</span>line[, <span class="dv">1</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>line <span class="sc">%in%</span> checks) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(BLUP)</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(blup_dpm, <span class="dv">5</span>)</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Same by BLUE</span></span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>mf <span class="ot">&lt;-</span> <span class="fu">lmer</span>(DPM <span class="sc">~</span> rep <span class="sc">+</span> line <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rb), <span class="at">data =</span> x)</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>blue_dpm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mf, <span class="sc">~</span> line, <span class="at">lmer.df =</span> <span class="st">"asymptotic"</span>) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>line <span class="sc">%in%</span> checks) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(emmean)</span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">intersect</span>(<span class="fu">head</span>(blup_dpm<span class="sc">$</span>line, <span class="dv">5</span>), <span class="fu">head</span>(blue_dpm<span class="sc">$</span>line, <span class="dv">5</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Genotype is 44% of the variance, incomplete blocks 8% and the residual 47%: the blocks matter much less for maturity than for yield. The genotype variance is highly significant (chi-square 112). The classical heritability is 0.66 and the Cullis heritability 0.64; the difference comes from the unequal replication (checks have 4 plots, a few lines have 1) and from the block adjustment. The five earliest test lines by BLUP are <code>LPA_530</code>, <code>DAA_014</code>, <code>ACC_022</code>, <code>DAA_015</code> and <code>DAB_555</code>; four of them are also in the BLUE list (the BLUE list has <code>DAB_489</code> instead of <code>DAB_555</code>).</p>
 </div>
 </div>
 </div>
 </section>
-<section id="key-takeaways" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">7.7</span> Key takeaways</h2>
+<section id="key-takeaways" class="level2" data-number="7.11">
+<h2 data-number="7.11" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">7.11</span> Key takeaways</h2>
+<ul>
+<li>An incomplete block design needs the blocks as <strong>random</strong> effects; the mixed model recovers the information between blocks and gives genetic parameters. In the bean trial the block variance was as large as the genetic variance.</li>
+<li>Blocks nested in replicates must be coded as <code>replicate:block</code> when their labels are repeated.</li>
+<li><strong>BLUE</strong> (genotype fixed) for comparing lines and as input to a second stage; <strong>BLUP</strong> (genotype random) for ranking and for heritability. BLUPs shrink the lines with little data toward the mean.</li>
+<li>The <strong>heritability</strong> is the proportion of the variance that is genetic on a defined basis (plot or entry mean). In unbalanced or incomplete designs use the generalized (Cullis) heritability.</li>
+<li>Heritability belongs to a trial, not to a trait: the same durum wheat gave 0.29 to 0.98 across environments. When G×E is large, more environments increase it more than more replicates.</li>
+<li>Test variance components with the likelihood ratio test, halving the p-value.</li>
+<li>For a multi-environment analysis in two stages, weight the BLUEs by <span class="math inline">\(1 / sem^2\)</span>.</li>
+</ul>
 </section>
-<section id="references" class="level2" data-number="7.8">
-<h2 data-number="7.8" class="anchored" data-anchor-id="references"><span class="header-section-number">7.8</span> References</h2>
+<section id="references" class="level2" data-number="7.12">
+<h2 data-number="7.12" class="anchored" data-anchor-id="references"><span class="header-section-number">7.12</span> References</h2>
+<ul>
+<li>Bates, D., Mächler, M., Bolker, B., &amp; Walker, S. (2015). Fitting linear mixed-effects models using lme4. <em>Journal of Statistical Software</em>, 67(1), 1-48. <a href="https://doi.org/10.18637/jss.v067.i01" class="uri">https://doi.org/10.18637/jss.v067.i01</a></li>
+<li>Bustos-Korts, D., Adams, J., &amp; van Eeuwijk, F. (2021). <em>Genotype to phenotype modelling of multi-environment trials</em>, course materials. Biometris, Wageningen University and Research. The Algerian durum wheat data are used with permission.</li>
+<li>Cullis, B. R., Smith, A. B., &amp; Coombes, N. E. (2006). On the design of early generation variety trials with correlated data. <em>Journal of Agricultural, Biological, and Environmental Statistics</em>, 11(4), 381-393. <a href="https://doi.org/10.1198/108571106X154443" class="uri">https://doi.org/10.1198/108571106X154443</a></li>
+<li>Holland, J. B., Nyquist, W. E., &amp; Cervantes-Martínez, C. T. (2003). Estimating and interpreting heritability for plant breeding: an update. <em>Plant Breeding Reviews</em>, 22, 9-112.</li>
+<li>Patterson, H. D., &amp; Williams, E. R. (1976). A new class of resolvable incomplete block designs. <em>Biometrika</em>, 63(1), 83-92. <a href="https://doi.org/10.1093/biomet/63.1.83" class="uri">https://doi.org/10.1093/biomet/63.1.83</a></li>
+<li>Piepho, H. P., &amp; Möhring, J. (2007). Computing heritability and selection response from unbalanced plant breeding trials. <em>Genetics</em>, 177(3), 1881-1888. <a href="https://doi.org/10.1534/genetics.107.074229" class="uri">https://doi.org/10.1534/genetics.107.074229</a></li>
+<li>Piepho, H. P., &amp; Möhring, J. (2009). Comparison of weighting in two-stage analysis of plant breeding trials. <em>Crop Science</em>, 49(6), 1977-1988. <a href="https://doi.org/10.2135/cropsci2009.02.0083" class="uri">https://doi.org/10.2135/cropsci2009.02.0083</a></li>
+<li>Piepho, H. P., Möhring, J., Melchinger, A. E., &amp; Büchse, A. (2008). BLUP for phenotypic selection in plant breeding and variety testing. <em>Euphytica</em>, 161, 209-228. <a href="https://doi.org/10.1007/s10681-007-9449-8" class="uri">https://doi.org/10.1007/s10681-007-9449-8</a></li>
+</ul>
 
 
 </section>
@@ -820,8 +1413,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part1-week1/08-heritability-selection.html" class="pagination-link" aria-label="Heritability and Selection Decisions">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heritability and Selection Decisions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part1-week1/08-heritability-selection.html" class="pagination-link" aria-label="Selection Decisions: Ranking, Expected Gain and Selection Indices">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Selection Decisions: Ranking, Expected Gain and Selection Indices</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

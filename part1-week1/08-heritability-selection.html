@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Heritability and Selection Decisions – Experimental Design and Data Analysis for the Advancement of Mutant Populations</title>
+<title>8&nbsp; Selection Decisions: Ranking, Expected Gain and Selection Indices – Experimental Design and Data Analysis for the Advancement of Mutant Populations</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -111,6 +111,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -124,7 +153,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part1-week1/03-field-data.html">Week 1: Concepts and methods</a></li><li class="breadcrumb-item"><a href="../part1-week1/08-heritability-selection.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heritability and Selection Decisions</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part1-week1/03-field-data.html">Week 1: Concepts and methods</a></li><li class="breadcrumb-item"><a href="../part1-week1/08-heritability-selection.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Selection Decisions: Ranking, Expected Gain and Selection Indices</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -194,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/03-field-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Collecting and Structuring Field Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Collecting and Validating Field Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -218,13 +247,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/07-mixed-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models in Plant Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models, BLUEs, BLUPs and Heritability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/08-heritability-selection.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heritability and Selection Decisions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Selection Decisions: Ranking, Expected Gain and Selection Indices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -235,14 +264,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../part1-week1/09b-image-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Low-Cost High-Throughput Phenotyping: Image Analysis in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../part1-week1/10-met-gxe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/11-ai-plant-breeding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Artificial Intelligence in Plant Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Machine Learning for Prediction in Plant Breeding</span></span></a>
   </div>
 </li>
       </ul>
@@ -259,31 +294,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/12-analysis-pipeline.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/13-mutant-populations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/14-llm-assistants.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Using Large Language Models as Data Analysis Assistants</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Using Large Language Models as Data Analysis Assistants</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/15-selection-mutation-breeding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Decision-Making and Selection Strategies in Mutation Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Decision-Making and Selection Strategies in Mutation Breeding</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/16-participant-projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Participant Projects and Final Presentations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Participant Projects and Final Presentations</span></span></a>
   </div>
 </li>
       </ul>
@@ -305,10 +340,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">8.1</span> Learning objectives</a></li>
-  <li><a href="#planned-content" id="toc-planned-content" class="nav-link" data-scroll-target="#planned-content"><span class="header-section-number">8.2</span> Planned content</a></li>
-  <li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts"><span class="header-section-number">8.3</span> Key concepts</a></li>
-  <li><a href="#worked-demo-in-r" id="toc-worked-demo-in-r" class="nav-link" data-scroll-target="#worked-demo-in-r"><span class="header-section-number">8.4</span> Worked demo in R</a></li>
-  <li><a href="#interpretation-for-breeding-decisions" id="toc-interpretation-for-breeding-decisions" class="nav-link" data-scroll-target="#interpretation-for-breeding-decisions"><span class="header-section-number">8.5</span> Interpretation for breeding decisions</a></li>
+  <li><a href="#from-estimates-to-a-ranking" id="toc-from-estimates-to-a-ranking" class="nav-link" data-scroll-target="#from-estimates-to-a-ranking"><span class="header-section-number">8.2</span> From estimates to a ranking</a></li>
+  <li><a href="#expected-genetic-gain" id="toc-expected-genetic-gain" class="nav-link" data-scroll-target="#expected-genetic-gain"><span class="header-section-number">8.3</span> Expected genetic gain</a>
+  <ul class="collapse">
+  <li><a href="#predicted-and-realized-gain-with-real-data" id="toc-predicted-and-realized-gain-with-real-data" class="nav-link" data-scroll-target="#predicted-and-realized-gain-with-real-data"><span class="header-section-number">8.3.1</span> Predicted and realized gain, with real data</a></li>
+  </ul></li>
+  <li><a href="#why-one-trait-is-not-enough" id="toc-why-one-trait-is-not-enough" class="nav-link" data-scroll-target="#why-one-trait-is-not-enough"><span class="header-section-number">8.4</span> Why one trait is not enough</a></li>
+  <li><a href="#the-selection-index" id="toc-the-selection-index" class="nav-link" data-scroll-target="#the-selection-index"><span class="header-section-number">8.5</span> The selection index</a>
+  <ul class="collapse">
+  <li><a href="#a-function-for-the-index-and-its-pca-plot" id="toc-a-function-for-the-index-and-its-pca-plot" class="nav-link" data-scroll-target="#a-function-for-the-index-and-its-pca-plot"><span class="header-section-number">8.5.1</span> A function for the index and its PCA plot</a></li>
+  <li><a href="#running-the-index" id="toc-running-the-index" class="nav-link" data-scroll-target="#running-the-index"><span class="header-section-number">8.5.2</span> Running the index</a></li>
+  <li><a href="#how-much-do-the-weights-matter" id="toc-how-much-do-the-weights-matter" class="nav-link" data-scroll-target="#how-much-do-the-weights-matter"><span class="header-section-number">8.5.3</span> How much do the weights matter?</a></li>
+  <li><a href="#traits-with-low-heritability" id="toc-traits-with-low-heritability" class="nav-link" data-scroll-target="#traits-with-low-heritability"><span class="header-section-number">8.5.4</span> Traits with low heritability</a></li>
+  </ul></li>
   <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">8.6</span> Exercise</a></li>
   <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">8.7</span> Key takeaways</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">8.8</span> References</a></li>
@@ -318,9 +362,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part1-week1/03-field-data.html">Week 1: Concepts and methods</a></li><li class="breadcrumb-item"><a href="../part1-week1/08-heritability-selection.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heritability and Selection Decisions</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part1-week1/03-field-data.html">Week 1: Concepts and methods</a></li><li class="breadcrumb-item"><a href="../part1-week1/08-heritability-selection.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Selection Decisions: Ranking, Expected Gain and Selection Indices</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-heritability" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heritability and Selection Decisions</span></span></h1>
+<h1 class="title"><span id="sec-selection" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Selection Decisions: Ranking, Expected Gain and Selection Indices</span></span></h1>
 </div>
 
 
@@ -338,55 +382,404 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="chapter-info">
-<p><strong>Author:</strong> Mirjana Jankulovska<br>
-<strong>Session:</strong> Day 3 – Wednesday 11 November</p>
+<p><strong>Author:</strong> Luis Fernando Delgado Muñoz<br>
+<strong>Session:</strong> Day 3, Wednesday 11 November</p>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="learning-objectives" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">8.1</span> Learning objectives</h2>
+<ul>
+<li>Rank lines from BLUEs and BLUPs and compare them with the checks</li>
+<li>Predict the genetic gain of a selection with the breeder’s equation, and compare the prediction with a realized gain</li>
+<li>Explain why selecting on one trait is not enough and build a multi-trait selection index</li>
+<li>Choose and justify the weights of an index, and know the limits of a base index</li>
+</ul>
+<p><a href="07-mixed-models.html" class="quarto-xref"><span>Chapter 7</span></a> gave us the estimates (BLUEs and BLUPs) and the heritability of each trait. This chapter uses them to <strong>decide</strong>: which lines to advance, how much gain to expect, and how to select on several traits at the same time. We continue with the bean trial and keep the same data preparation.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>beans <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Example_Beans.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rep =</span> <span class="fu">factor</span>(rep), <span class="at">line =</span> <span class="fu">factor</span>(line),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">rb  =</span> <span class="fu">factor</span>(<span class="fu">paste</span>(rep, block, <span class="at">sep =</span> <span class="st">":"</span>)))      <span class="co"># block inside replicate</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>checks <span class="ot">&lt;-</span> beans <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(YdHa_clean)) <span class="sc">|&gt;</span> <span class="fu">count</span>(line) <span class="sc">|&gt;</span> <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(line)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="from-estimates-to-a-ranking" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="from-estimates-to-a-ranking"><span class="header-section-number">8.2</span> From estimates to a ranking</h2>
+<p>For each of five traits we fit the two models of <a href="07-mixed-models.html" class="quarto-xref"><span>Chapter 7</span></a>: the model with fixed lines (BLUEs) and the model with random lines (BLUPs and the genetic standard deviation).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fit_trait <span class="ot">&lt;-</span> <span class="cf">function</span>(trait) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> beans <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(.data[[trait]])) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">y =</span> .data[[trait]])</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  m_fix <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> rep <span class="sc">+</span> line <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rb), <span class="at">data =</span> x)                    <span class="co"># BLUE</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  be <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">emmeans</span>(m_fix, <span class="sc">~</span> line, <span class="at">lmer.df =</span> <span class="st">"asymptotic"</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  m_ran <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rb) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> line), <span class="at">data =</span> x)              <span class="co"># BLUP</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">fixef</span>(m_ran)[<span class="st">"(Intercept)"</span>] <span class="sc">+</span> <span class="fu">fixef</span>(m_ran)[<span class="st">"repR2"</span>] <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">blue =</span> <span class="fu">data.frame</span>(<span class="at">line =</span> be<span class="sc">$</span>line, <span class="at">BLUE =</span> be<span class="sc">$</span>emmean),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">blup =</span> <span class="fu">data.frame</span>(<span class="at">line =</span> <span class="fu">rownames</span>(<span class="fu">ranef</span>(m_ran)<span class="sc">$</span>line),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">BLUP =</span> mu <span class="sc">+</span> <span class="fu">ranef</span>(m_ran)<span class="sc">$</span>line[, <span class="dv">1</span>]),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">sd_g =</span> <span class="fu">sqrt</span>(<span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(m_ran))<span class="sc">$</span>vcov[<span class="dv">1</span>]))</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>traits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Yield =</span> <span class="st">"YdHa_clean"</span>, <span class="at">DF =</span> <span class="st">"DF"</span>, <span class="at">DPM =</span> <span class="st">"DPM"</span>, <span class="at">PLHA =</span> <span class="st">"PLHA"</span>, <span class="at">SW100 =</span> <span class="st">"SW100"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>fits   <span class="ot">&lt;-</span> <span class="fu">lapply</span>(traits, fit_trait)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>collect <span class="ot">&lt;-</span> <span class="cf">function</span>(what) {            <span class="co"># one table, one column per trait</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Reduce</span>(\(a, b) <span class="fu">inner_join</span>(a, b, <span class="at">by =</span> <span class="st">"line"</span>),</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>         <span class="fu">lapply</span>(<span class="fu">names</span>(fits), \(t) <span class="fu">setNames</span>(fits[[t]][[what]], <span class="fu">c</span>(<span class="st">"line"</span>, t))))</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>blue <span class="ot">&lt;-</span> <span class="fu">collect</span>(<span class="st">"blue"</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>blup <span class="ot">&lt;-</span> <span class="fu">collect</span>(<span class="st">"blup"</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>sd_g <span class="ot">&lt;-</span> <span class="fu">sapply</span>(fits, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="st">"sd_g"</span>)        <span class="co"># genetic standard deviation of each trait</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(blue, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     line     Yield       DF      DPM     PLHA    SW100
+1 ACC_002 1456.3823 39.24864 79.94415 28.51760 49.64092
+2 ACC_003  908.1405 46.99363 83.32727 24.30038 48.93574
+3 ACC_004  712.0953 40.28507 81.69511 23.92066 53.51706</code></pre>
+</div>
+</div>
+<p>We select among the <strong>test lines</strong>. The 16 checks are not candidates; they are the reference.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>test_blue <span class="ot">&lt;-</span> blue <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>line <span class="sc">%in%</span> checks)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>test_blup <span class="ot">&lt;-</span> blup <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>line <span class="sc">%in%</span> checks)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>n_plots   <span class="ot">&lt;-</span> beans <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(YdHa_clean)) <span class="sc">|&gt;</span> <span class="fu">count</span>(line, <span class="at">name =</span> <span class="st">"plots"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>test_blup <span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(line, <span class="at">BLUP =</span> Yield) <span class="sc">|&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">select</span>(test_blue, line, <span class="at">BLUE =</span> Yield), <span class="at">by =</span> <span class="st">"line"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(n_plots, <span class="at">by =</span> <span class="st">"line"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(BLUP)) <span class="sc">|&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(BLUP, BLUE), round))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      line BLUP BLUE plots
+1  SEF_060 1936 2424     2
+2  DAB_366 1855 2267     2
+3  DAB_577 1817 2184     2
+4  DOR_390 1783 2122     2
+5  DOR_364 1772 2121     2
+6  LPA_435 1721 1992     2
+7  DAN_012 1704 1988     2
+8  DAA_001 1671 1947     2
+9  DAB_049 1668 1924     2
+10 SER_118 1660 1901     2</code></pre>
+</div>
+</div>
+<p>A selection of the best 20% of the 364 test lines is 73 lines. The lists by BLUP and by BLUE share 70 of them: for a trait like yield, with similar replication in most lines, they agree. They differ in only 3 lines, those where the replication or the block makes the BLUE and the BLUP disagree.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fl">0.20</span> <span class="sc">*</span> <span class="fu">nrow</span>(test_blue))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>top_blue <span class="ot">&lt;-</span> test_blue<span class="sc">$</span>line[<span class="fu">order</span>(<span class="sc">-</span>test_blue<span class="sc">$</span>Yield)][<span class="dv">1</span><span class="sc">:</span>k]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>top_blup <span class="ot">&lt;-</span> test_blup<span class="sc">$</span>line[<span class="fu">order</span>(<span class="sc">-</span>test_blup<span class="sc">$</span>Yield)][<span class="dv">1</span><span class="sc">:</span>k]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">selected =</span> k, <span class="at">shared_by_BLUE_and_BLUP =</span> <span class="fu">length</span>(<span class="fu">intersect</span>(top_blue, top_blup)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               selected shared_by_BLUE_and_BLUP 
+                     73                      70 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the checks as reference</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">checks_mean_BLUE =</span> <span class="fu">mean</span>(blue<span class="sc">$</span>Yield[blue<span class="sc">$</span>line <span class="sc">%in%</span> checks]),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">test_lines_mean_BLUE =</span> <span class="fu">mean</span>(test_blue<span class="sc">$</span>Yield),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">best_check_BLUP =</span> <span class="fu">max</span>(blup<span class="sc">$</span>Yield[blup<span class="sc">$</span>line <span class="sc">%in%</span> checks]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    checks_mean_BLUE test_lines_mean_BLUE      best_check_BLUP 
+            1516.856             1357.573             1757.469 </code></pre>
+</div>
+</div>
+<p>The mean of the checks (1517 kg/ha) is above the mean of the test lines (1358 kg/ha): the checks are good varieties, so a test line must be compared with them and not only with the trial mean. As in <a href="06-anova.html" class="quarto-xref"><span>Chapter 6</span></a>, a reference decided before the trial and the confidence interval of the difference are what turn a ranking into a decision.</p>
+</section>
+<section id="expected-genetic-gain" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="expected-genetic-gain"><span class="header-section-number">8.3</span> Expected genetic gain</h2>
+<p>How much will the next generation improve if we select the best 20%? The <strong>breeder’s equation</strong> gives the answer:</p>
+<pre><code>R = i × h² × σP
+
+R   = response to selection (gain per cycle), in the units of the trait
+i   = selection intensity (standardized selection differential)
+h²  = heritability on the basis of the selection unit
+σP  = phenotypic standard deviation of the selection unit</code></pre>
+<p>It is the same equation as the genetic gain equation of the Wageningen course, <span class="math inline">\(R = i \, r \, \sigma_A / t\)</span>, where <span class="math inline">\(r\)</span> is the accuracy of selection (the square root of the heritability for a selection on means) and <span class="math inline">\(t\)</span> the length of the cycle. The selection intensity depends only on the proportion selected:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.10</span>, <span class="fl">0.20</span>, <span class="fl">0.50</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">proportion_selected =</span> p,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">intensity_i =</span> <span class="fu">round</span>(<span class="fu">dnorm</span>(<span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> p)) <span class="sc">/</span> p, <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  proportion_selected intensity_i
+1                0.05        2.06
+2                0.10        1.75
+3                0.20        1.40
+4                0.50        0.80</code></pre>
+</div>
+</div>
+<p>For the bean yield, with the entry-mean heritability of <a href="07-mixed-models.html" class="quarto-xref"><span>Chapter 7</span></a> (0.54) and the genetic standard deviation (221 kg/ha), selecting 20% gives:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>i  <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(<span class="fu">qnorm</span>(<span class="fl">0.80</span>)) <span class="sc">/</span> <span class="fl">0.20</span>             <span class="co"># 1.40</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>H2 <span class="ot">&lt;-</span> <span class="fl">0.54</span>                                  <span class="co"># Cullis heritability of yield (chapter 7)</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>R  <span class="ot">&lt;-</span> i <span class="sc">*</span> <span class="fu">sqrt</span>(H2) <span class="sc">*</span> sd_g[<span class="st">"Yield"</span>]          <span class="co"># i * H2 * sigma_P = i * sqrt(H2) * sigma_g</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">gain_kg_ha =</span> <span class="fu">unname</span>(R), <span class="at">gain_percent =</span> <span class="fu">unname</span>(<span class="dv">100</span> <span class="sc">*</span> R <span class="sc">/</span> <span class="fu">mean</span>(test_blue<span class="sc">$</span>Yield)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  gain_kg_ha gain_percent 
+   227.14634     16.73179 </code></pre>
+</div>
+</div>
+<p>An expected gain of about 227 kg/ha, 17% of the mean yield, in the <strong>same environment</strong>. The gain in other environments is smaller when there is G×E (<a href="10-met-gxe.html" class="quarto-xref"><span>Chapter 11</span></a>).</p>
+<section id="predicted-and-realized-gain-with-real-data" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="predicted-and-realized-gain-with-real-data"><span class="header-section-number">8.3.1</span> Predicted and realized gain, with real data</h3>
+<p>We can test the equation with the data. Each test line is in two replicates. We select the best 20% by their yield in replicate 1 only, and measure how much better they are in replicate 2, which was not used for the selection. The prediction uses the heritability of a single plot:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> beans <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(YdHa_clean)) <span class="sc">|&gt;</span> <span class="fu">group_by</span>(line) <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="fu">ungroup</span>()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>j <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="fu">filter</span>(w, rep <span class="sc">==</span> <span class="st">"R1"</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(line, <span class="at">y1 =</span> YdHa_clean),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">filter</span>(w, rep <span class="sc">==</span> <span class="st">"R2"</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(line, <span class="at">y2 =</span> YdHa_clean), <span class="at">by =</span> <span class="st">"line"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>selected <span class="ot">&lt;-</span> j<span class="sc">$</span>y1 <span class="sc">&gt;=</span> <span class="fu">quantile</span>(j<span class="sc">$</span>y1, <span class="fl">0.80</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>vcw <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(<span class="fu">lmer</span>(YdHa_clean <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rb) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> line), <span class="at">data =</span> w)))</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>Vg <span class="ot">&lt;-</span> vcw<span class="sc">$</span>vcov[<span class="dv">1</span>]; Vb <span class="ot">&lt;-</span> vcw<span class="sc">$</span>vcov[<span class="dv">2</span>]; Ve <span class="ot">&lt;-</span> vcw<span class="sc">$</span>vcov[<span class="dv">3</span>]</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>h2_plot <span class="ot">&lt;-</span> Vg <span class="sc">/</span> (Vg <span class="sc">+</span> Vb <span class="sc">+</span> Ve)                 <span class="co"># one raw plot: blocks and error are "noise"</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">lines =</span> <span class="fu">nrow</span>(j),</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">observed_in_selection =</span> <span class="fu">mean</span>(j<span class="sc">$</span>y1[selected]) <span class="sc">-</span> <span class="fu">mean</span>(j<span class="sc">$</span>y1),</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">predicted_gain        =</span> i <span class="sc">*</span> h2_plot <span class="sc">*</span> <span class="fu">sqrt</span>(Vg <span class="sc">+</span> Vb <span class="sc">+</span> Ve),</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">realized_gain         =</span> <span class="fu">mean</span>(j<span class="sc">$</span>y2[selected]) <span class="sc">-</span> <span class="fu">mean</span>(j<span class="sc">$</span>y2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                lines observed_in_selection        predicted_gain 
+             360.0000              604.9570              166.1910 
+        realized_gain 
+             147.4172 </code></pre>
+</div>
+</div>
+<p>The equation predicts a gain of 166 kg/ha, and the realized gain in the independent replicate is 147 kg/ha: the prediction is close, slightly optimistic. But look at the first number: in the replicate where we selected, the chosen lines looked <strong>605 kg/ha</strong> better than the mean. Only about a quarter of that advantage (147 kg/ha) was real. This is the selection bias of <a href="06-anova.html" class="quarto-xref"><span>Chapter 6</span></a>, now measured on one trial. A selection on a single plot overestimates the gain by a factor of four; this is why we select on BLUPs of several plots and, when we can, in several environments.</p>
+</section>
+</section>
+<section id="why-one-trait-is-not-enough" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="why-one-trait-is-not-enough"><span class="header-section-number">8.4</span> Why one trait is not enough</h2>
+<p>Breeders do not select only for yield. A line must also flower and mature at the right time, have the right seed size and the right plant type. If we select on yield alone, the other traits change <strong>as a side effect</strong>, in a direction that we did not choose.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>index_traits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Yield"</span>, <span class="st">"SW100"</span>, <span class="st">"DPM"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>yield_only <span class="ot">&lt;-</span> test_blue<span class="sc">$</span>line[<span class="fu">order</span>(<span class="sc">-</span>test_blue<span class="sc">$</span>Yield)][<span class="dv">1</span><span class="sc">:</span>k]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># selection differential: mean of the selected lines minus mean of all test lines</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>diff_sel <span class="ot">&lt;-</span> <span class="cf">function</span>(lines, <span class="at">vars =</span> index_traits) {</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colMeans</span>(test_blue[test_blue<span class="sc">$</span>line <span class="sc">%in%</span> lines, vars]) <span class="sc">-</span> <span class="fu">colMeans</span>(test_blue[, vars])</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">diff_sel</span>(yield_only), <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Yield SW100   DPM 
+415.8  -1.0  -0.2 </code></pre>
+</div>
+</div>
+<p>Selecting on yield gives 416 kg/ha more yield, and almost no change in seed weight or maturity. In this trial yield is nearly independent of the other traits, so a selection on yield alone does no harm but does not improve earliness or seed weight either. Where traits are correlated the side effects are larger: days to flowering and days to maturity have a correlation of 0.78.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(test_blue[, <span class="fu">c</span>(<span class="st">"Yield"</span>, <span class="st">"DF"</span>, <span class="st">"DPM"</span>, <span class="st">"PLHA"</span>, <span class="st">"SW100"</span>)]), <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Yield    DF   DPM  PLHA SW100
+Yield  1.00 -0.12 -0.11  0.23 -0.03
+DF    -0.12  1.00  0.78 -0.03 -0.06
+DPM   -0.11  0.78  1.00 -0.06 -0.11
+PLHA   0.23 -0.03 -0.06  1.00 -0.24
+SW100 -0.03 -0.06 -0.11 -0.24  1.00</code></pre>
+</div>
+</div>
+</section>
+<section id="the-selection-index" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="the-selection-index"><span class="header-section-number">8.5</span> The selection index</h2>
+<p>A <strong>selection index</strong> combines several traits in one number per line, and we select the lines with the highest value. The simplest is the <strong>base index</strong>:</p>
+<pre><code>I = b1 × z1 + b2 × z2 + ... + bk × zk
+
+zj = standardized trait j  (value minus mean, divided by the standard deviation)
+bj = weight of trait j</code></pre>
+<p>Three rules make it usable:</p>
+<ul>
+<li><strong>The sign of the weight sets the direction.</strong> Positive when higher is better (yield, seed weight), <strong>negative when lower is better</strong> (days to maturity, disease score, lodging).</li>
+<li><strong>Only the ratios between the weights matter.</strong> Weights of 1, 0.5 and 0.5 give the same ranking as 10, 5 and 5. They are <strong>relative importances</strong> that the breeder decides, not economic values unless we define them so.</li>
+<li><strong>Weights are for traits in standard deviation units.</strong> Because the traits are standardized, a trait with a large range does not dominate just because of its units.</li>
+</ul>
+<p>The base index ignores the <strong>covariances</strong> among traits and the <strong>heritabilities</strong>. The Smith-Hazel index (Smith, 1936; Hazel, 1943) uses them: the weights that maximize the correlation between the index and the true breeding value are <span class="math inline">\(\mathbf{b} = \mathbf{P}^{-1}\mathbf{G}\mathbf{a}\)</span>, with <span class="math inline">\(\mathbf{P}\)</span> the phenotypic and <span class="math inline">\(\mathbf{G}\)</span> the genetic covariance matrix and <span class="math inline">\(\mathbf{a}\)</span> the economic weights. It is more efficient, but it needs good estimates of <span class="math inline">\(\mathbf{G}\)</span> and <span class="math inline">\(\mathbf{P}\)</span>, which require a multi-trait mixed model and many lines. For the first selection stages and for this course, the base index with weights that the breeder understands is the practical choice (Williams, 1962).</p>
+<section id="a-function-for-the-index-and-its-pca-plot" class="level3" data-number="8.5.1">
+<h3 data-number="8.5.1" class="anchored" data-anchor-id="a-function-for-the-index-and-its-pca-plot"><span class="header-section-number">8.5.1</span> A function for the index and its PCA plot</h3>
+<p>The function below calculates the index, selects a percentage of the lines and draws a PCA that shows where the selected lines are. It has been adapted from the selection index function that we use in our own breeding work, with the following changes with respect to a basic version:</p>
+<ul>
+<li><strong>The weights are a named vector</strong>, so that a change in the column order cannot send a weight to the wrong trait.</li>
+<li><strong>Lines with a missing trait are reported</strong> with a warning (a line without one value cannot be ranked, and silently putting it last means it is never selected).</li>
+<li><strong>The index is a supplementary variable of the PCA</strong>: it is shown as an arrow, but it does not shape the axes that it is supposed to explain.</li>
+<li><strong>An optional <code>sd_ref</code></strong> allows standardizing by a reference standard deviation (for example the genetic standard deviation) instead of the standard deviation of the data.</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>selIndex <span class="ot">&lt;-</span> <span class="cf">function</span>(Y, b, <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">sd_ref =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># b: named vector of weights (positive: higher is better; negative: lower is better)</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  b <span class="ot">&lt;-</span> b[<span class="fu">colnames</span>(Y)]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">anyNA</span>(b)) <span class="fu">stop</span>(<span class="st">"Every column of Y needs a weight in b (named vector)."</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(sd_ref)) {                 <span class="co"># standardize by a reference SD (e.g. genetic SD)</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    Z <span class="ot">&lt;-</span> <span class="fu">sweep</span>(<span class="fu">sweep</span>(Y, <span class="dv">2</span>, <span class="fu">colMeans</span>(Y), <span class="st">"-"</span>), <span class="dv">2</span>, sd_ref[<span class="fu">colnames</span>(Y)], <span class="st">"/"</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (scale) Z <span class="ot">&lt;-</span> <span class="fu">scale</span>(Y) <span class="cf">else</span> Z <span class="ot">&lt;-</span> Y</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop</span>(Z <span class="sc">%*%</span> b)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>pca_index <span class="ot">&lt;-</span> <span class="cf">function</span>(data, id, b, <span class="at">percentage =</span> <span class="fl">0.20</span>, <span class="at">sd_ref =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(data)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  traits <span class="ot">&lt;-</span> <span class="fu">names</span>(b)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">all</span>(traits <span class="sc">%in%</span> <span class="fu">names</span>(data))) <span class="fu">stop</span>(<span class="st">"Some traits of b are not columns of data."</span>)</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># lines with a missing trait cannot be ranked: report them, do not drop them silently</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  miss <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">complete.cases</span>(data[, traits])</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">any</span>(miss)) {</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="fu">sum</span>(miss), <span class="st">" line(s) with missing values were removed: "</span>,</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>            <span class="fu">paste</span>(data[[id]][miss], <span class="at">collapse =</span> <span class="st">", "</span>))</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> data[<span class="sc">!</span>miss, ]</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>  Y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(data[, traits]); <span class="fu">rownames</span>(Y) <span class="ot">&lt;-</span> data[[id]]</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Y, <span class="at">index =</span> <span class="fu">selIndex</span>(Y, b, <span class="at">sd_ref =</span> sd_ref))</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> res[<span class="fu">order</span>(<span class="sc">-</span>res<span class="sc">$</span>index), ]</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>  n_sel <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="dv">1</span>, <span class="fu">round</span>(percentage <span class="sc">*</span> <span class="fu">nrow</span>(res)))</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>  res<span class="sc">$</span>selected <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(res)) <span class="sc">&lt;=</span> n_sel, <span class="at">levels =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>),</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"not selected"</span>, <span class="st">"selected"</span>))</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the index is a supplementary variable: it does not shape the axes</span></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>  pca <span class="ot">&lt;-</span> FactoMineR<span class="sc">::</span><span class="fu">PCA</span>(res, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>, <span class="at">graph =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>                         <span class="at">quanti.sup =</span> <span class="fu">which</span>(<span class="fu">names</span>(res) <span class="sc">==</span> <span class="st">"index"</span>),</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>                         <span class="at">quali.sup  =</span> <span class="fu">which</span>(<span class="fu">names</span>(res) <span class="sc">==</span> <span class="st">"selected"</span>))</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>  p1 <span class="ot">&lt;-</span> factoextra<span class="sc">::</span><span class="fu">fviz_pca_var</span>(pca, <span class="at">col.var =</span> <span class="st">"black"</span>, <span class="at">repel =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>  p2 <span class="ot">&lt;-</span> factoextra<span class="sc">::</span><span class="fu">fviz_pca_ind</span>(pca, <span class="at">label =</span> <span class="st">"none"</span>, <span class="at">habillage =</span> res<span class="sc">$</span>selected,</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#FC4E07"</span>), <span class="at">addEllipses =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">pca =</span> pca, <span class="at">figure =</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(p1, p2, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>)),</span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">results =</span> res, <span class="at">selection =</span> res[res<span class="sc">$</span>selected <span class="sc">==</span> <span class="st">"selected"</span>, ])</span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="running-the-index" class="level3" data-number="8.5.2">
+<h3 data-number="8.5.2" class="anchored" data-anchor-id="running-the-index"><span class="header-section-number">8.5.2</span> Running the index</h3>
+<p>We choose three traits: yield (weight 1), seed weight (weight 0.5) and days to maturity (weight -0.5, because earlier lines are preferred). Days to flowering are left out because they are strongly correlated with maturity (0.78): including both would count the same information twice.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>b_index <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Yield =</span> <span class="dv">1</span>, <span class="at">SW100 =</span> <span class="fl">0.5</span>, <span class="at">DPM =</span> <span class="sc">-</span><span class="fl">0.5</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">pca_index</span>(test_blue, <span class="at">id =</span> <span class="st">"line"</span>, <span class="at">b =</span> b_index, <span class="at">percentage =</span> <span class="fl">0.20</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>figure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-index" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-index-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="08-heritability-selection_files/figure-html/fig-index-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-index-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.1: PCA of the 364 test lines for the three traits of the index. A: the traits and the index (dashed arrow, supplementary). The index points opposite to days to maturity because its weight is negative. B: the lines; the 73 selected lines (orange) are at the side of high yield and seed weight and early maturity.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure explains the result. In <strong>A</strong>, yield and seed weight point toward the index, and days to maturity points in the opposite direction, as it should with a negative weight. In <strong>B</strong>, the selected lines are grouped on the side where the index grows.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res<span class="sc">$</span>selection, <span class="dv">6</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(Yield, SW100, DPM, index), \(x) <span class="fu">round</span>(x, <span class="dv">1</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Yield SW100  DPM index selected
+DAB_577 2183.6  66.5 81.1   3.9 selected
+DAB_366 2267.1  57.4 82.0   3.2 selected
+DAA_166 1817.1  62.8 80.3   2.7 selected
+DAA_014 1551.8  66.4 78.8   2.7 selected
+DAB_591 1853.3  56.4 79.6   2.7 selected
+DAA_062 1758.6  68.7 81.2   2.6 selected</code></pre>
+</div>
+</div>
+<p>What did this selection change, compared with selecting on yield alone?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">trait         =</span> index_traits,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">yield_only    =</span> <span class="fu">round</span>(<span class="fu">diff_sel</span>(yield_only), <span class="dv">1</span>),</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">index_of_3    =</span> <span class="fu">round</span>(<span class="fu">diff_sel</span>(<span class="fu">rownames</span>(res<span class="sc">$</span>selection)), <span class="dv">1</span>),</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names     =</span> <span class="cn">NULL</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  trait yield_only index_of_3
+1 Yield      415.8      349.3
+2 SW100       -1.0        3.7
+3   DPM       -0.2       -0.8</code></pre>
+</div>
+</div>
+<p>The index gives up 67 kg/ha of yield gain (349 instead of 416) to gain 3.7 g in the weight of 100 seeds and to bring maturity forward by 0.8 days. That is the price of the other traits, and it is explicit. The mean yield of the selected lines is 1707 kg/ha, above the mean of the checks (1517 kg/ha).</p>
+</section>
+<section id="how-much-do-the-weights-matter" class="level3" data-number="8.5.3">
+<h3 data-number="8.5.3" class="anchored" data-anchor-id="how-much-do-the-weights-matter"><span class="header-section-number">8.5.3</span> How much do the weights matter?</h3>
+<p>The weights are a decision, so it is worth knowing how sensitive the selection is to them. We compare the lines selected by other sets of weights with the base set:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>scenarios <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"base (1, 0.5, -0.5)"</span>            <span class="ot">=</span> <span class="fu">c</span>(<span class="at">Yield =</span> <span class="dv">1</span>, <span class="at">SW100 =</span> <span class="fl">0.5</span>, <span class="at">DPM =</span> <span class="sc">-</span><span class="fl">0.5</span>),</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"base x 10 (10, 5, -5)"</span>          <span class="ot">=</span> <span class="fu">c</span>(<span class="at">Yield =</span> <span class="dv">10</span>, <span class="at">SW100 =</span> <span class="dv">5</span>, <span class="at">DPM =</span> <span class="sc">-</span><span class="dv">5</span>),</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"equal importance (1, 1, -1)"</span>    <span class="ot">=</span> <span class="fu">c</span>(<span class="at">Yield =</span> <span class="dv">1</span>, <span class="at">SW100 =</span> <span class="dv">1</span>, <span class="at">DPM =</span> <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"yield counts double (2, 0.5, -0.5)"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="at">Yield =</span> <span class="dv">2</span>, <span class="at">SW100 =</span> <span class="fl">0.5</span>, <span class="at">DPM =</span> <span class="sc">-</span><span class="fl">0.5</span>),</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"no earliness (1, 0.5, 0)"</span>       <span class="ot">=</span> <span class="fu">c</span>(<span class="at">Yield =</span> <span class="dv">1</span>, <span class="at">SW100 =</span> <span class="fl">0.5</span>, <span class="at">DPM =</span> <span class="dv">0</span>),</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"yield only (1, 0, 0)"</span>           <span class="ot">=</span> <span class="fu">c</span>(<span class="at">Yield =</span> <span class="dv">1</span>, <span class="at">SW100 =</span> <span class="dv">0</span>, <span class="at">DPM =</span> <span class="dv">0</span>))</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>base_sel <span class="ot">&lt;-</span> <span class="fu">rownames</span>(res<span class="sc">$</span>selection)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">names</span>(scenarios),</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">shared_with_base =</span> <span class="fu">sapply</span>(scenarios, \(b) {</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">&lt;-</span> <span class="fu">pca_index</span>(test_blue, <span class="at">id =</span> <span class="st">"line"</span>, <span class="at">b =</span> b, <span class="at">percentage =</span> <span class="fl">0.20</span>)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">length</span>(<span class="fu">intersect</span>(<span class="fu">rownames</span>(s<span class="sc">$</span>selection), base_sel))</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>  }),</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                             weights shared_with_base
+1                base (1, 0.5, -0.5)               73
+2              base x 10 (10, 5, -5)               73
+3        equal importance (1, 1, -1)               62
+4 yield counts double (2, 0.5, -0.5)               65
+5           no earliness (1, 0.5, 0)               61
+6               yield only (1, 0, 0)               53</code></pre>
+</div>
+</div>
+<p>Multiplying all the weights by 10 selects exactly the same 73 lines. Changing the <strong>ratios</strong> changes between 8 and 20 of the 73 lines. A selection that changes a few lines when the weights change slightly is robust; the lines that appear in every scenario are the safest candidates.</p>
+</section>
+<section id="traits-with-low-heritability" class="level3" data-number="8.5.4">
+<h3 data-number="8.5.4" class="anchored" data-anchor-id="traits-with-low-heritability"><span class="header-section-number">8.5.4</span> Traits with low heritability</h3>
+<p>Plant height has a heritability of only 0.12 (<a href="07-mixed-models.html" class="quarto-xref"><span>Chapter 7</span></a>). If we give it a weight in the index with BLUEs standardized by their standard deviation, a trait that is mostly plot error gets the same importance as a trait that is mostly genetic. We can see the effect by adding plant height with the same weight as yield, and counting how many of the 73 lines chosen by yield alone remain:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>b_h <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Yield =</span> <span class="dv">1</span>, <span class="at">PLHA =</span> <span class="dv">1</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>yield_alone <span class="ot">&lt;-</span> <span class="fu">rownames</span>(<span class="fu">pca_index</span>(test_blue, <span class="at">id =</span> <span class="st">"line"</span>, <span class="at">b =</span> <span class="fu">c</span>(<span class="at">Yield =</span> <span class="dv">1</span>, <span class="at">PLHA =</span> <span class="dv">0</span>))<span class="sc">$</span>selection)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>with_blue <span class="ot">&lt;-</span> <span class="fu">pca_index</span>(test_blue, <span class="at">id =</span> <span class="st">"line"</span>, <span class="at">b =</span> b_h)                   <span class="co"># BLUEs, z-scores</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>with_blup <span class="ot">&lt;-</span> <span class="fu">pca_index</span>(test_blup, <span class="at">id =</span> <span class="st">"line"</span>, <span class="at">b =</span> b_h, <span class="at">sd_ref =</span> sd_g)    <span class="co"># BLUPs / genetic SD</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">BLUE_zscores =</span> <span class="fu">length</span>(<span class="fu">intersect</span>(yield_alone, <span class="fu">rownames</span>(with_blue<span class="sc">$</span>selection))),</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">BLUP_over_genetic_sd =</span> <span class="fu">length</span>(<span class="fu">intersect</span>(yield_alone, <span class="fu">rownames</span>(with_blup<span class="sc">$</span>selection))))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        BLUE_zscores BLUP_over_genetic_sd 
+                  46                   58 </code></pre>
+</div>
+</div>
+<p>With the BLUE z-scores, only 46 of the 73 lines chosen by yield alone remain: the noisy plant height reshuffles the selection. With the BLUPs divided by the genetic standard deviation, 58 remain: the BLUP of a trait of low heritability is shrunk, and it contributes less to the index, which is what we want. <strong>If a trait has a low heritability, either give it a low weight or use BLUPs.</strong></p>
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Chapter in preparation
+<span class="screen-reader-only">Warning</span>Do not standardize BLUPs by their own standard deviation
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This chapter will be written by Mirjana Jankulovska. The outline below follows the course agenda.</p>
+<p>If we apply <code>scale()</code> to a column of BLUPs, the shrinkage is undone: the BLUPs of plant height have a standard deviation of 0.30 cm and the BLUEs of 2.5 cm, but after <code>scale()</code> both have a standard deviation of 1. Use the BLUEs, or standardize the BLUPs by the genetic standard deviation (<code>sd_ref</code>), as above.</p>
 </div>
 </div>
-<section id="learning-objectives" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">8.1</span> Learning objectives</h2>
-<ul>
-<li>Estimate and interpret broad-sense and generalized heritability</li>
-<li>Rank genotypes from BLUPs</li>
-<li>Build a multi-trait selection index</li>
-</ul>
 </section>
-<section id="planned-content" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="planned-content"><span class="header-section-number">8.2</span> Planned content</h2>
-<ul>
-<li>Broad-sense and generalized (Cullis) heritability</li>
-<li>Misunderstandings of heritability; effect of design</li>
-<li>Model diagnostics</li>
-<li>Ranking genotypes and multi-trait selection indices</li>
-</ul>
-</section>
-<section id="key-concepts" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="key-concepts"><span class="header-section-number">8.3</span> Key concepts</h2>
-<!-- Author: theory, formulas and figures -->
-</section>
-<section id="worked-demo-in-r" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="worked-demo-in-r"><span class="header-section-number">8.4</span> Worked demo in R</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the shared course datasets in data/ where possible</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="interpretation-for-breeding-decisions" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="interpretation-for-breeding-decisions"><span class="header-section-number">8.5</span> Interpretation for breeding decisions</h2>
 </section>
 <section id="exercise" class="level2" data-number="8.6">
 <h2 data-number="8.6" class="anchored" data-anchor-id="exercise"><span class="header-section-number">8.6</span> Exercise</h2>
-<div class="callout callout-style-default callout-tip callout-empty-content callout-titled">
+<p>You want an <strong>early</strong> bean line. Build an index with yield (weight 1), days to flowering (weight -0.5) and days to maturity (weight -0.5), and select the best <strong>10%</strong> of the test lines.</p>
+<ol type="1">
+<li>How many lines are selected? Which are the five best?</li>
+<li>What is the selection differential of each of the three traits?</li>
+<li>How many of the lines are also in the 20% selected by the base index of this chapter?</li>
+<li>What is the mean yield of the selected lines compared with the mean of the checks?</li>
+<li>Days to flowering and maturity have a correlation of 0.78. What does this do to the weights of the index?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -398,16 +791,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>b_early <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Yield =</span> <span class="dv">1</span>, <span class="at">DF =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">DPM =</span> <span class="sc">-</span><span class="fl">0.5</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>early <span class="ot">&lt;-</span> <span class="fu">pca_index</span>(test_blue, <span class="at">id =</span> <span class="st">"line"</span>, <span class="at">b =</span> b_early, <span class="at">percentage =</span> <span class="fl">0.10</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Number and five best lines</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(early<span class="sc">$</span>selection)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rownames</span>(early<span class="sc">$</span>selection), <span class="dv">5</span>)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Selection differentials</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">names</span>(b_early)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">colMeans</span>(early<span class="sc">$</span>selection[, vars]) <span class="sc">-</span> <span class="fu">colMeans</span>(test_blue[, vars]), <span class="dv">1</span>)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Overlap with the base index (20%)</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">intersect</span>(<span class="fu">rownames</span>(early<span class="sc">$</span>selection), <span class="fu">rownames</span>(res<span class="sc">$</span>selection)))</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Mean yield of the selected lines and of the checks</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">selected =</span> <span class="fu">mean</span>(early<span class="sc">$</span>selection<span class="sc">$</span>Yield),</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">checks =</span> <span class="fu">mean</span>(blue<span class="sc">$</span>Yield[blue<span class="sc">$</span>line <span class="sc">%in%</span> checks]))</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Compare with an index that uses only maturity</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>only_dpm <span class="ot">&lt;-</span> <span class="fu">pca_index</span>(test_blue, <span class="at">id =</span> <span class="st">"line"</span>, <span class="at">b =</span> <span class="fu">c</span>(<span class="at">Yield =</span> <span class="dv">1</span>, <span class="at">DPM =</span> <span class="sc">-</span><span class="dv">1</span>), <span class="at">percentage =</span> <span class="fl">0.10</span>)</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">intersect</span>(<span class="fu">rownames</span>(early<span class="sc">$</span>selection), <span class="fu">rownames</span>(only_dpm<span class="sc">$</span>selection)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The 36 selected lines (10% of 364) include <code>SEF_060</code>, <code>DAB_577</code>, <code>DAB_591</code>, <code>DAB_520</code> and <code>DAB_366</code>. Compared with the mean of the test lines they have +428 kg/ha of yield, 2.3 days less to flowering and 1.3 days less to maturity. Thirty-three of the 36 are also in the 20% of the base index. Their mean yield is 1786 kg/ha, against 1517 kg/ha for the checks. Because flowering and maturity are correlated, giving a negative weight to both <strong>doubles the importance of earliness</strong> in the index: the total weight on earliness (-1) is the same as the weight on yield. If earliness is meant to count half as much as yield, use weights of -0.25 for each of the two traits, or only one of them. An index with only maturity (weight -1) shares 29 of the 36 lines with this one, so using both traits does change the selection.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="key-takeaways" class="level2" data-number="8.7">
 <h2 data-number="8.7" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">8.7</span> Key takeaways</h2>
+<ul>
+<li>Select test lines from BLUPs (or BLUEs with their precision) and compare them with the checks, not only with the trial mean.</li>
+<li>The breeder’s equation, <span class="math inline">\(R = i \, h^2 \, \sigma_P\)</span>, predicts the gain; in the bean trial it predicted 166 kg/ha and the realized gain was 147 kg/ha.</li>
+<li>The advantage seen in the selected lines is mostly selection bias: 605 kg/ha observed, 147 kg/ha real. Select on BLUPs of several plots and confirm.</li>
+<li>Selecting on one trait changes the others as a side effect. A <strong>base index</strong> combines standardized traits with weights; the <strong>sign</strong> gives the direction and only the <strong>ratios</strong> matter.</li>
+<li>Check how sensitive the selection is to the weights, and do not give a low-heritability trait the same weight as a reliable one, unless the index uses BLUPs standardized by the genetic standard deviation.</li>
+<li>Do not put correlated traits in the index with the same sign without thinking: the information is counted twice.</li>
+<li>The Smith-Hazel index uses the covariance matrices and is more efficient, but it needs reliable estimates of them; for early stages the base index is the practical choice.</li>
+</ul>
 </section>
 <section id="references" class="level2" data-number="8.8">
 <h2 data-number="8.8" class="anchored" data-anchor-id="references"><span class="header-section-number">8.8</span> References</h2>
+<ul>
+<li>Falconer, D. S., &amp; Mackay, T. F. C. (1996). <em>Introduction to Quantitative Genetics</em> (4th ed.). Longman.</li>
+<li>Hazel, L. N. (1943). The genetic basis for constructing selection indices. <em>Genetics</em>, 28(6), 476-490. <a href="https://doi.org/10.1093/genetics/28.6.476" class="uri">https://doi.org/10.1093/genetics/28.6.476</a></li>
+<li>Husson, F., Lê, S., &amp; Pagès, J. (2017). <em>Exploratory Multivariate Analysis by Example Using R</em> (2nd ed.). CRC Press. (FactoMineR)</li>
+<li>Kassambara, A., &amp; Mundt, F. (2020). <em>factoextra: Extract and Visualize the Results of Multivariate Data Analyses</em>. R package. <a href="https://CRAN.R-project.org/package=factoextra" class="uri">https://CRAN.R-project.org/package=factoextra</a></li>
+<li>Smith, H. F. (1936). A discriminant function for plant selection. <em>Annals of Eugenics</em>, 7(3), 240-250. <a href="https://doi.org/10.1111/j.1469-1809.1936.tb02143.x" class="uri">https://doi.org/10.1111/j.1469-1809.1936.tb02143.x</a></li>
+<li>Williams, J. S. (1962). The evaluation of a selection index. <em>Biometrics</em>, 18(3), 375-393. <a href="https://doi.org/10.2307/2527479" class="uri">https://doi.org/10.2307/2527479</a></li>
+<li>Bustos-Korts, D., Adams, J., &amp; van Eeuwijk, F. (2021). <em>Genotype to phenotype modelling of multi-environment trials</em>, course materials. Biometris, Wageningen University and Research.</li>
+</ul>
 
 
 </section>
@@ -815,8 +1249,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part1-week1/07-mixed-models.html" class="pagination-link" aria-label="Mixed Models in Plant Breeding">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models in Plant Breeding</span></span>
+      <a href="../part1-week1/07-mixed-models.html" class="pagination-link" aria-label="Mixed Models, BLUEs, BLUPs and Heritability">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models, BLUEs, BLUPs and Heritability</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

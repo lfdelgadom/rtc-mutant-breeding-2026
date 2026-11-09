@@ -111,6 +111,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -194,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/03-field-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Collecting and Structuring Field Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Collecting and Validating Field Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -218,13 +247,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/07-mixed-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models in Plant Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models, BLUEs, BLUPs and Heritability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/08-heritability-selection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heritability and Selection Decisions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Selection Decisions: Ranking, Expected Gain and Selection Indices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -235,14 +264,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../part1-week1/09b-image-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Low-Cost High-Throughput Phenotyping: Image Analysis in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../part1-week1/10-met-gxe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/11-ai-plant-breeding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Artificial Intelligence in Plant Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Machine Learning for Prediction in Plant Breeding</span></span></a>
   </div>
 </li>
       </ul>
@@ -259,31 +294,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/12-analysis-pipeline.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/13-mutant-populations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/14-llm-assistants.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Using Large Language Models as Data Analysis Assistants</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Using Large Language Models as Data Analysis Assistants</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/15-selection-mutation-breeding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Decision-Making and Selection Strategies in Mutation Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Decision-Making and Selection Strategies in Mutation Breeding</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/16-participant-projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Participant Projects and Final Presentations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Participant Projects and Final Presentations</span></span></a>
   </div>
 </li>
       </ul>
@@ -305,13 +340,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">4.1</span> Learning objectives</a></li>
-  <li><a href="#planned-content" id="toc-planned-content" class="nav-link" data-scroll-target="#planned-content"><span class="header-section-number">4.2</span> Planned content</a></li>
-  <li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts"><span class="header-section-number">4.3</span> Key concepts</a></li>
-  <li><a href="#worked-demo-in-r" id="toc-worked-demo-in-r" class="nav-link" data-scroll-target="#worked-demo-in-r"><span class="header-section-number">4.4</span> Worked demo in R</a></li>
-  <li><a href="#interpretation-for-breeding-decisions" id="toc-interpretation-for-breeding-decisions" class="nav-link" data-scroll-target="#interpretation-for-breeding-decisions"><span class="header-section-number">4.5</span> Interpretation for breeding decisions</a></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">4.6</span> Exercise</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">4.7</span> Key takeaways</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">4.8</span> References</a></li>
+  <li><a href="#the-qc-workflow" id="toc-the-qc-workflow" class="nav-link" data-scroll-target="#the-qc-workflow"><span class="header-section-number">4.2</span> The QC workflow</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><span class="header-section-number">4.3</span> The data</a></li>
+  <li><a href="#missing-values" id="toc-missing-values" class="nav-link" data-scroll-target="#missing-values"><span class="header-section-number">4.4</span> Missing values</a>
+  <ul class="collapse">
+  <li><a href="#where-are-they" id="toc-where-are-they" class="nav-link" data-scroll-target="#where-are-they"><span class="header-section-number">4.4.1</span> Where are they?</a></li>
+  <li><a href="#what-to-do-with-them" id="toc-what-to-do-with-them" class="nav-link" data-scroll-target="#what-to-do-with-them"><span class="header-section-number">4.4.2</span> What to do with them</a></li>
+  </ul></li>
+  <li><a href="#possible-values" id="toc-possible-values" class="nav-link" data-scroll-target="#possible-values"><span class="header-section-number">4.5</span> Possible values</a></li>
+  <li><a href="#consistency-between-traits" id="toc-consistency-between-traits" class="nav-link" data-scroll-target="#consistency-between-traits"><span class="header-section-number">4.6</span> Consistency between traits</a></li>
+  <li><a href="#outliers" id="toc-outliers" class="nav-link" data-scroll-target="#outliers"><span class="header-section-number">4.7</span> Outliers</a>
+  <ul class="collapse">
+  <li><a href="#flagging-with-the-iqr-rule" id="toc-flagging-with-the-iqr-rule" class="nav-link" data-scroll-target="#flagging-with-the-iqr-rule"><span class="header-section-number">4.7.1</span> Flagging with the IQR rule</a></li>
+  <li><a href="#biology-or-error-look-at-the-other-replicate" id="toc-biology-or-error-look-at-the-other-replicate" class="nav-link" data-scroll-target="#biology-or-error-look-at-the-other-replicate"><span class="header-section-number">4.7.2</span> Biology or error? Look at the other replicate</a></li>
+  <li><a href="#look-at-the-position-in-the-field" id="toc-look-at-the-position-in-the-field" class="nav-link" data-scroll-target="#look-at-the-position-in-the-field"><span class="header-section-number">4.7.3</span> Look at the position in the field</a></li>
+  <li><a href="#deciding" id="toc-deciding" class="nav-link" data-scroll-target="#deciding"><span class="header-section-number">4.7.4</span> Deciding</a></li>
+  </ul></li>
+  <li><a href="#summaries-by-replicate-and-genotype" id="toc-summaries-by-replicate-and-genotype" class="nav-link" data-scroll-target="#summaries-by-replicate-and-genotype"><span class="header-section-number">4.8</span> Summaries by replicate and genotype</a>
+  <ul class="collapse">
+  <li><a href="#replicates" id="toc-replicates" class="nav-link" data-scroll-target="#replicates"><span class="header-section-number">4.8.1</span> Replicates</a></li>
+  <li><a href="#the-cv-as-a-quality-indicator" id="toc-the-cv-as-a-quality-indicator" class="nav-link" data-scroll-target="#the-cv-as-a-quality-indicator"><span class="header-section-number">4.8.2</span> The CV as a quality indicator</a></li>
+  <li><a href="#checks-and-agreement-between-replicates" id="toc-checks-and-agreement-between-replicates" class="nav-link" data-scroll-target="#checks-and-agreement-between-replicates"><span class="header-section-number">4.8.3</span> Checks and agreement between replicates</a></li>
+  </ul></li>
+  <li><a href="#exploratory-plots" id="toc-exploratory-plots" class="nav-link" data-scroll-target="#exploratory-plots"><span class="header-section-number">4.9</span> Exploratory plots</a>
+  <ul class="collapse">
+  <li><a href="#distributions" id="toc-distributions" class="nav-link" data-scroll-target="#distributions"><span class="header-section-number">4.9.1</span> Distributions</a></li>
+  <li><a href="#correlations-between-traits" id="toc-correlations-between-traits" class="nav-link" data-scroll-target="#correlations-between-traits"><span class="header-section-number">4.9.2</span> Correlations between traits</a></li>
+  <li><a href="#field-maps" id="toc-field-maps" class="nav-link" data-scroll-target="#field-maps"><span class="header-section-number">4.9.3</span> Field maps</a></li>
+  </ul></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">4.10</span> Exercise</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">4.11</span> Key takeaways</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">4.12</span> References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lfdelgadom/rtc-mutant-breeding-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -338,56 +397,675 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="chapter-info">
-<p><strong>Author:</strong> Mirjana Jankulovska<br>
-<strong>Session:</strong> Day 1 – Monday 9 November</p>
+<p><strong>Author:</strong> Luis Fernando Delgado Muñoz<br>
+<strong>Session:</strong> Day 1, Monday 9 November</p>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="learning-objectives" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">4.1</span> Learning objectives</h2>
+<ul>
+<li>Detect missing values and decide what they mean</li>
+<li>Check that values are possible and consistent between traits</li>
+<li>Find outliers and decide whether they are errors or biology</li>
+<li>Summarize traits by genotype and replicate, and use the CV as a quality indicator</li>
+<li>Use plots and field maps to separate biological from technical variation</li>
+</ul>
+<p>In <a href="03-field-data.html" class="quarto-xref"><span>Chapter 3</span></a> we checked that the field book matches the field plan. Now we check the <strong>values</strong>. Quality control (QC) and exploratory data analysis (EDA) are the last steps before the statistical analysis of the next days: they do not produce results for a report, but they decide whether the results of the analysis can be trusted.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agridat)   <span class="co"># install.packages("agridat") if needed, see @sec-field-data</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="the-qc-workflow" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="the-qc-workflow"><span class="header-section-number">4.2</span> The QC workflow</h2>
+<p>The same questions are asked, in this order, for every trial:</p>
+<ol type="1">
+<li><strong>Missing values.</strong> How many, in which traits, in which plots? Is there a pattern?</li>
+<li><strong>Possible values.</strong> Is every value inside the biological limits of the trait?</li>
+<li><strong>Consistency between traits.</strong> Do traits that depend on each other agree?</li>
+<li><strong>Outliers.</strong> Which values are unusual, and are they errors or real?</li>
+<li><strong>Summaries and plots.</strong> Means and CV by replicate and genotype, distributions, correlations and field maps.</li>
+</ol>
+<p>Every decision is written in the R script, never made by hand in Excel. The raw file is not changed: corrections are made in code, so that anyone can see and repeat them.</p>
+</section>
+<section id="the-data" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="the-data"><span class="header-section-number">4.3</span> The data</h2>
+<p>We use the common bean trial <code>Dar16C_hiP</code> introduced in <a href="../part0-precourse/01-r-basics.html" class="quarto-xref"><span>Chapter 1</span></a>: 380 lines in an alpha-lattice with 2 replicates, 792 plots in a field of 66 rows and 12 columns. Replicate R1 occupies columns 1 to 6 and R2 columns 7 to 12.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>beans <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Example_Beans.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>traits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"DF"</span>, <span class="st">"DPM"</span>, <span class="st">"PLHA"</span>, <span class="st">"POM_c2"</span>, <span class="st">"SW100"</span>, <span class="st">"TSW"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">"YDHA"</span>, <span class="st">"YDHPL"</span>, <span class="st">"YdHa_clean"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># one row per plot and trait: convenient for checks on all traits at once</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>beans_long <span class="ot">&lt;-</span> beans <span class="sc">|&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">all_of</span>(traits), <span class="at">names_to =</span> <span class="st">"trait"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trait =</span> <span class="fu">factor</span>(trait, <span class="at">levels =</span> traits))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A first overview of all traits in one table:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>overview <span class="ot">&lt;-</span> beans_long <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trait) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n       =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(value)),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(value)),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">min     =</span> <span class="fu">min</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median  =</span> <span class="fu">median</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">max     =</span> <span class="fu">max</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">cv      =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">sd</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">mean</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(min<span class="sc">:</span>cv, \(x) <span class="fu">round</span>(x, <span class="dv">1</span>)))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>overview</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 7
+  trait          n missing   min median    max    cv
+  &lt;fct&gt;      &lt;int&gt;   &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1 DF           792       0  37     40     49     8  
+2 DPM          786       6  77     81     86     2  
+3 PLHA         788       4  17     27     47    12.7
+4 POM_c2       792       0  10.9   11.6   14.2   3.3
+5 SW100        788       4  22     54     79    14.6
+6 TSW          789       3  31.8  295.   566.   30.5
+7 YDHA         788       4 272   2493.  4752.   29.9
+8 YDHPL        788       4 343   1970.  4476.   31.9
+9 YdHa_clean   788       4 147   1357.  2608    30.4</code></pre>
+</div>
+</div>
+<p>This table already answers several questions: there are few missing values, no negative values, and the CV is very different between traits. We go through each point.</p>
+</section>
+<section id="missing-values" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="missing-values"><span class="header-section-number">4.4</span> Missing values</h2>
+<section id="where-are-they" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="where-are-they"><span class="header-section-number">4.4.1</span> Where are they?</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>beans <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_any</span>(<span class="fu">all_of</span>(traits), is.na)) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(plot, line, rep, row, col, <span class="fu">all_of</span>(traits))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 14
+    plot line       rep     row   col    DF   DPM  PLHA POM_c2 SW100   TSW  YDHA
+   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1  4540 LPA_512    R2       12     9    40    81    29   12.2    57 467.    NA 
+ 2  4252 DAB_607    R1       13     4    44    82    NA   11.6    NA  NA     NA 
+ 3  4151 SEQ_1003   R1       19     3    43    82    NA   11.6    NA 259.  2215.
+ 4  4506 DAN_011    R2       23     8    40    82    NA   11.6    NA  NA     NA 
+ 5  4625 NUA_184    R2       36    10    48    86    24   12.1    52 506.  3883.
+ 6  4039 DAB_053    R1       39     1    47    NA    28   11.6    58 219.  1876.
+ 7  4047 SAB_576    R1       47     1    46    NA    31   11.6    44 160.  1365.
+ 8  4051 CAL_096    R1       51     1    40    NA    28   11.8    69 246.  2106.
+ 9  4082 NUA_398    R1       51     2    48    NA    20   11.6    50  54.8  507.
+10  4068 DAA_151    R1       65     2    42    NA    26   11.6    50  86.7  741.
+11  4197 TIO_CANEL… R1       65     3    49    NA    32   12.3    22 327.  2775.
+12  4463 SAB_576    R2       66     8    40    82    NA   11.6    NA  NA     NA 
+# ℹ 2 more variables: YDHPL &lt;dbl&gt;, YdHa_clean &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Only 12 of the 792 plots have a missing value, but they are not all of the same kind:</p>
+<ul>
+<li><strong>Lost plots.</strong> Plots 4252, 4506 and 4463 have flowering and maturity dates, but no harvest data (<code>PLHA</code>, <code>SW100</code>, <code>TSW</code>). The plot existed in the field but was not harvested, or the harvest bag was lost.</li>
+<li><strong>One trait not recorded.</strong> Six plots have no <code>DPM</code> (days to maturity). All are in R1, columns 1 to 3, rows 39 to 65: a group of neighbouring plots, probably not visited on the day maturity was scored.</li>
+<li><strong>Derived trait not calculated.</strong> Plot 4540 has <code>TSW</code> and <code>POM_c2</code> but no <code>YDHA</code>, and plot 4625 has no <code>YdHa_clean</code>. The raw data are there; the calculation was not done. These values can be <strong>recovered</strong> by calculating them again (see below).</li>
+</ul>
+<p>A field map shows whether missing values are scattered or grouped:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>beans_long <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(row, col) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">missing =</span> <span class="fu">any</span>(<span class="fu">is.na</span>(value)), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> row, <span class="at">y =</span> col, <span class="at">fill =</span> missing)) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">6.5</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"grey85"</span>, <span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"firebrick"</span>),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"complete"</span>, <span class="st">"with missing"</span>)) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">3.5</span>, <span class="fl">9.5</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"R1"</span>, <span class="st">"R2"</span>)) <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Field row"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-missing-map" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-missing-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-qc-eda_files/figure-html/fig-missing-map-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-missing-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Plots with at least one missing value. Each tile is a plot; R1 occupies columns 1 to 6 and R2 columns 7 to 12.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="what-to-do-with-them" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="what-to-do-with-them"><span class="header-section-number">4.4.2</span> What to do with them</h3>
+<ul>
+<li><strong>Never replace a missing value with 0.</strong> A plot that was not harvested did not yield zero; a zero would pull down the mean of the genotype. Leave the cell empty (<code>NA</code>).</li>
+<li><strong>Do not delete whole plots for one missing trait.</strong> <code>na.omit()</code> keeps only complete rows:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(beans)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 792</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">na.omit</span>(beans))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 780</code></pre>
+</div>
+</div>
+<p>Twelve plots are lost for all traits, although most of them have only one value missing. Remove missing values trait by trait, inside each analysis (<code>na.rm = TRUE</code>, or the mixed models of <a href="07-mixed-models.html" class="quarto-xref"><span>Chapter 7</span></a>, which use all available plots).</p>
+<ul>
+<li><strong>Ask why they are missing.</strong> If missing values are linked to the genotype (for example, a mutant line that never flowered, or plants that died), they are information, not noise. Record the reason in a notes column: “not flowered” is a result; “not recorded” is not.</li>
+</ul>
+</section>
+</section>
+<section id="possible-values" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="possible-values"><span class="header-section-number">4.5</span> Possible values</h2>
+<p>Each trait has biological limits. A value outside them is an error, whatever the statistics say. The limits are set by the breeder before looking at the data:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>limits <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>trait,   <span class="sc">~</span>low, <span class="sc">~</span>high,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"DF"</span>,       <span class="dv">25</span>,    <span class="dv">70</span>,   <span class="co"># days to flowering, common bean</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"DPM"</span>,      <span class="dv">60</span>,   <span class="dv">110</span>,   <span class="co"># days to maturity</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"PLHA"</span>,      <span class="dv">1</span>,    <span class="dv">60</span>,   <span class="co"># plants harvested per plot</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"POM_c2"</span>,    <span class="dv">5</span>,    <span class="dv">25</span>,   <span class="co"># grain moisture, %</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"SW100"</span>,    <span class="dv">10</span>,    <span class="dv">90</span>,   <span class="co"># g per 100 seeds</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"TSW"</span>,       <span class="dv">0</span>,  <span class="dv">1500</span>    <span class="co"># g per plot</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>beans_long <span class="sc">|&gt;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(limits, <span class="at">by =</span> <span class="st">"trait"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(value <span class="sc">&lt;</span> low <span class="sc">|</span> value <span class="sc">&gt;</span> high)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 13
+# ℹ 13 variables: dataset &lt;chr&gt;, unique_identifier &lt;chr&gt;, plot &lt;dbl&gt;,
+#   line &lt;chr&gt;, rep &lt;chr&gt;, treatment &lt;chr&gt;, block &lt;chr&gt;, row &lt;dbl&gt;, col &lt;dbl&gt;,
+#   trait &lt;chr&gt;, value &lt;dbl&gt;, low &lt;dbl&gt;, high &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>No value is impossible. Some checks involve two traits; for example, a plant cannot mature before it flowers:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>beans <span class="sc">|&gt;</span> <span class="fu">filter</span>(DPM <span class="sc">&lt;=</span> DF) <span class="sc">|&gt;</span> <span class="fu">nrow</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(beans<span class="sc">$</span>DPM <span class="sc">-</span> beans<span class="sc">$</span>DF, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)   <span class="co"># days from flowering to maturity</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 32 45</code></pre>
+</div>
+</div>
+<p>Passing these checks does not mean that the data are correct, only that they are not impossible. A plot height of 95 cm typed as 59 cm is inside the limits; only the next checks can find it.</p>
+</section>
+<section id="consistency-between-traits" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="consistency-between-traits"><span class="header-section-number">4.6</span> Consistency between traits</h2>
+<p><code>YDHA</code>, <code>YDHPL</code> and <code>YdHa_clean</code> are not measured: they are calculated from <code>TSW</code>, <code>POM_c2</code> and <code>PLHA</code> with the formulas given in <a href="../part0-precourse/01-r-basics.html" class="quarto-xref"><span>Chapter 1</span></a>. If we calculate them again, the result must be the same as the stored value:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>beans_check <span class="ot">&lt;-</span> beans <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mcf        =</span> (<span class="dv">100</span> <span class="sc">-</span> POM_c2) <span class="sc">/</span> <span class="dv">86</span>,           <span class="co"># moisture correction to 14%</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">YDHA_new   =</span> TSW <span class="sc">*</span> mcf <span class="sc">*</span> <span class="dv">10</span> <span class="sc">/</span> <span class="fl">1.2</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">clean_new  =</span> TSW <span class="sc">*</span> mcf <span class="sc">*</span> <span class="dv">10</span> <span class="sc">/</span> <span class="fl">2.22</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ratio_YDHA =</span> YDHA <span class="sc">/</span> YDHA_new,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ratio_clean =</span> YdHa_clean <span class="sc">/</span> clean_new</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>beans_check <span class="sc">|&gt;</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">YDHA_disagree  =</span> <span class="fu">sum</span>(<span class="fu">abs</span>(ratio_YDHA <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">&gt;</span> <span class="fl">0.02</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">clean_disagree =</span> <span class="fu">sum</span>(<span class="fu">abs</span>(ratio_clean <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">&gt;</span> <span class="fl">0.02</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  YDHA_disagree clean_disagree
+          &lt;int&gt;          &lt;int&gt;
+1            37              0</code></pre>
+</div>
+</div>
+<p><code>YdHa_clean</code> agrees with its formula in every plot, but <code>YDHA</code> differs by more than 2% in 37 plots:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>beans_check <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">agrees =</span> <span class="fu">abs</span>(ratio_YDHA <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">&lt;=</span> <span class="fl">0.02</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> YDHA_new, <span class="at">y =</span> YDHA, <span class="at">colour =</span> agrees)) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"grey60"</span>, <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"firebrick"</span>)) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"YDHA calculated again (kg/ha)"</span>, <span class="at">y =</span> <span class="st">"YDHA stored in the file (kg/ha)"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"Agrees"</span>) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-ydha-check" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ydha-check-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-qc-eda_files/figure-html/fig-ydha-check-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ydha-check-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: Stored YDHA against YDHA calculated again from TSW and grain moisture. Points away from the line are plots where the stored value is inconsistent with the raw data.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Most of these plots have a stored value lower than the calculated one, as if <code>TSW</code> had been changed (for example, after weighing the seed again) and <code>YDHA</code> was not updated. We cannot know which number is right without the original field book, but the lesson is general:</p>
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Chapter in preparation
+<span class="screen-reader-only">Important</span>Derived traits
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This chapter will be written by Mirjana Jankulovska. The outline below follows the course agenda.</p>
+<p>Store the raw measurements (weights, counts, dates) and <strong>calculate derived traits in R</strong>, every time, from those measurements. A value calculated once in Excel and pasted into the file is not updated when a raw value is corrected. In this trial we use <code>YdHa_clean</code>, which is consistent with <code>TSW</code>, and leave <code>YDHA</code> out.</p>
 </div>
 </div>
-<section id="learning-objectives" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">4.1</span> Learning objectives</h2>
-<ul>
-<li>Detect and handle missing values and outliers</li>
-<li>Summarize traits by genotype and replicate</li>
-<li>Use plots to separate biological and technical variation</li>
-</ul>
 </section>
-<section id="planned-content" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="planned-content"><span class="header-section-number">4.2</span> Planned content</h2>
-<ul>
-<li>Importing Field Book / CSV data</li>
-<li>Data summaries</li>
-<li>Missing values and outlier detection</li>
-<li>Exploratory data analysis: biological vs technical variation</li>
-<li>Visualization with ggplot2: distributions, boxplots, genotype comparisons</li>
-</ul>
-</section>
-<section id="key-concepts" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="key-concepts"><span class="header-section-number">4.3</span> Key concepts</h2>
-<!-- Author: theory, formulas and figures -->
-</section>
-<section id="worked-demo-in-r" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="worked-demo-in-r"><span class="header-section-number">4.4</span> Worked demo in R</h2>
+<section id="outliers" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="outliers"><span class="header-section-number">4.7</span> Outliers</h2>
+<p>An outlier is a value far from the others. It can be an <strong>error</strong> (a typing mistake, a wrong unit, a damaged plot) or a <strong>real</strong> value (a genotype that is truly different). In a mutant population, real outliers are exactly what we are looking for, so outliers are <strong>flagged and examined, never deleted automatically</strong>.</p>
+<section id="flagging-with-the-iqr-rule" class="level3" data-number="4.7.1">
+<h3 data-number="4.7.1" class="anchored" data-anchor-id="flagging-with-the-iqr-rule"><span class="header-section-number">4.7.1</span> Flagging with the IQR rule</h3>
+<p>A common rule, the one used by boxplots, flags values more than 1.5 times the interquartile range (IQR) below the first quartile or above the third quartile:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the shared course datasets in data/ where possible</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>flag_iqr <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  q   <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x, <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  iqr <span class="ot">&lt;-</span> q[<span class="dv">2</span>] <span class="sc">-</span> q[<span class="dv">1</span>]</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">&lt;</span> q[<span class="dv">1</span>] <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr <span class="sc">|</span> x <span class="sc">&gt;</span> q[<span class="dv">2</span>] <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>beans_long <span class="sc">|&gt;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trait) <span class="sc">|&gt;</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">outlier =</span> <span class="fu">flag_iqr</span>(value)) <span class="sc">|&gt;</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">flagged =</span> <span class="fu">sum</span>(outlier, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 2
+  trait      flagged
+  &lt;fct&gt;        &lt;int&gt;
+1 DF               0
+2 DPM              2
+3 PLHA            18
+4 POM_c2          22
+5 SW100           27
+6 TSW              6
+7 YDHA             3
+8 YDHPL           10
+9 YdHa_clean       6</code></pre>
 </div>
+</div>
+<p>The rule flags dozens of values. A flag is only the start: each one must be examined in context.</p>
 </section>
-<section id="interpretation-for-breeding-decisions" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="interpretation-for-breeding-decisions"><span class="header-section-number">4.5</span> Interpretation for breeding decisions</h2>
+<section id="biology-or-error-look-at-the-other-replicate" class="level3" data-number="4.7.2">
+<h3 data-number="4.7.2" class="anchored" data-anchor-id="biology-or-error-look-at-the-other-replicate"><span class="header-section-number">4.7.2</span> Biology or error? Look at the other replicate</h3>
+<p>Seed size (<code>SW100</code>) has 27 flagged values. If a value is real, the same line should show it in the other replicate:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sw_flagged <span class="ot">&lt;-</span> beans <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">flag_iqr</span>(SW100)) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(line)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>beans <span class="sc">|&gt;</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(line <span class="sc">%in%</span> sw_flagged<span class="sc">$</span>line) <span class="sc">|&gt;</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(line, rep) <span class="sc">|&gt;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">SW100 =</span> <span class="fu">mean</span>(SW100, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> rep, <span class="at">values_from =</span> SW100)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 3
+   line             R1    R2
+   &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;
+ 1 AMADEUS        28      29
+ 2 DAA_014        75      59
+ 3 DAA_021        79      65
+ 4 DAA_045        74      66
+ 5 DAB_049        28      29
+ 6 DAB_052        27      26
+ 7 DAB_187        35      43
+ 8 DAB_574        72      64
+ 9 DAN_032        73      64
+10 DOR_364        23      22
+11 DOR_390        26      23
+12 LPA_467        23      50
+13 SEF_060        29      28
+14 SEN_056        22      27
+15 SER_118        32      27
+16 TIO_CANELA_75  22.5    24</code></pre>
+</div>
+</div>
+<p>Almost every line is small-seeded (around 22 to 30 g, for example <code>TIO_CANELA_75</code> and the <code>DOR</code> lines) or large-seeded (around 60 to 79 g, for example the <code>DAA</code> lines) <strong>in both replicates</strong>. These are real differences between genotypes: they are kept. The exception is <code>LPA_467</code>: 23 g in R1 and 50 g in R2. The same plot in R1 has only 17 plants and a yield of 147 kg/ha, the lowest of the trial. That plot was damaged; it is a candidate to be set to <code>NA</code>.</p>
 </section>
-<section id="exercise" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="exercise"><span class="header-section-number">4.6</span> Exercise</h2>
-<div class="callout callout-style-default callout-tip callout-empty-content callout-titled">
+<section id="look-at-the-position-in-the-field" class="level3" data-number="4.7.3">
+<h3 data-number="4.7.3" class="anchored" data-anchor-id="look-at-the-position-in-the-field"><span class="header-section-number">4.7.3</span> Look at the position in the field</h3>
+<p>Plants harvested (<code>PLHA</code>) has 14 values flagged as too high. Their positions:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>beans <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">flag_iqr</span>(PLHA), PLHA <span class="sc">&gt;</span> <span class="fu">median</span>(PLHA, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(line, rep, row, col, PLHA) <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(row)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 14 × 5
+   line    rep     row   col  PLHA
+   &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 AFR_735 R1        1     4    37
+ 2 SEN_056 R1        1     6    43
+ 3 NUA_365 R2        1     8    37
+ 4 NDZ_002 R2        1    10    37
+ 5 DAA_145 R2        1    11    40
+ 6 LPA_772 R2        5    10    38
+ 7 DOR_390 R1       30     4    39
+ 8 DAB_489 R1       31     1    36
+ 9 NDZ_008 R1       33     1    37
+10 LPA_771 R1       36     5    36
+11 DAB_938 R1       40     3    36
+12 DOR_364 R1       54     2    36
+13 AMADEUS R1       66     3    47
+14 SER_118 R1       66     6    40</code></pre>
+</div>
+</div>
+<p>Seven of the 14 are in row 1 or row 66, the two ends of the field. Border plots often have more plants or bigger plants, because they have more space and light. This is a <strong>technical</strong> effect of the position, not of the genotype, and it is one reason for the spatial analysis of <a href="09-spatial-analysis.html" class="quarto-xref"><span>Chapter 9</span></a>.</p>
+</section>
+<section id="deciding" class="level3" data-number="4.7.4">
+<h3 data-number="4.7.4" class="anchored" data-anchor-id="deciding"><span class="header-section-number">4.7.4</span> Deciding</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 58%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>What you find</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Confirmed error (typing, unit, wrong plot) and the true value is known</td>
+<td>Correct it in the script, with a comment</td>
+</tr>
+<tr class="even">
+<td>Confirmed error, true value unknown, or plot damaged</td>
+<td>Set it to <code>NA</code>, with a comment</td>
+</tr>
+<tr class="odd">
+<td>Real value, consistent across replicates</td>
+<td>Keep it</td>
+</tr>
+<tr class="even">
+<td>Not sure</td>
+<td>Keep it, flag it, and run the analysis with and without it</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>beans_qc <span class="ot">&lt;-</span> beans <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># LPA_467, R1: damaged plot (17 plants, 147 kg/ha, seed weight half of R2)</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="fu">c</span>(SW100, TSW, YDHPL, YdHa_clean),</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>           \(x) <span class="fu">if_else</span>(plot <span class="sc">==</span> <span class="dv">4186</span>, <span class="cn">NA</span>, x))</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>YDHA)   <span class="co"># inconsistent with TSW, see above</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>After the analysis model is fitted (Days 2 and 3), outliers are checked again on the <strong>residuals</strong>: a value can look normal for the whole trial but be unusual for its genotype and block.</p>
+</section>
+</section>
+<section id="summaries-by-replicate-and-genotype" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="summaries-by-replicate-and-genotype"><span class="header-section-number">4.8</span> Summaries by replicate and genotype</h2>
+<section id="replicates" class="level3" data-number="4.8.1">
+<h3 data-number="4.8.1" class="anchored" data-anchor-id="replicates"><span class="header-section-number">4.8.1</span> Replicates</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>beans_qc <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rep) <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">plots =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(YdHa_clean)),</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean  =</span> <span class="fu">mean</span>(YdHa_clean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd    =</span> <span class="fu">sd</span>(YdHa_clean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">cv    =</span> <span class="dv">100</span> <span class="sc">*</span> sd <span class="sc">/</span> mean</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  rep   plots  mean    sd    cv
+  &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 R1      394 1326.  430.  32.4
+2 R2      393 1418.  393.  27.7</code></pre>
+</div>
+</div>
+<p>The replicates have similar means: there is no large difference between the two halves of the field. Within each replicate, the incomplete blocks also differ:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>beans_qc <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">block =</span> <span class="fu">factor</span>(block, <span class="at">levels =</span> <span class="fu">paste0</span>(<span class="st">"B"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">18</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> block, <span class="at">y =</span> YdHa_clean)) <span class="sc">+</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"grey90"</span>) <span class="sc">+</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>rep, <span class="at">scales =</span> <span class="st">"free_x"</span>) <span class="sc">+</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Incomplete block"</span>, <span class="at">y =</span> <span class="st">"Yield (kg/ha)"</span>) <span class="sc">+</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">size =</span> <span class="dv">7</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-blocks" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-blocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-qc-eda_files/figure-html/fig-blocks-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-blocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.3: Yield by incomplete block within each replicate.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This variation between blocks is the reason the trial was laid out as an alpha-lattice, and the blocks will be part of the model (<a href="05-experimental-designs.html" class="quarto-xref"><span>Chapter 5</span></a>).</p>
+</section>
+<section id="the-cv-as-a-quality-indicator" class="level3" data-number="4.8.2">
+<h3 data-number="4.8.2" class="anchored" data-anchor-id="the-cv-as-a-quality-indicator"><span class="header-section-number">4.8.2</span> The CV as a quality indicator</h3>
+<p>The coefficient of variation, <span class="math inline">\(CV = 100 \times SD / \text{mean}\)</span>, compares variability between traits measured in different units. It is a first indicator of trial quality:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>overview <span class="sc">|&gt;</span> <span class="fu">select</span>(trait, cv) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(cv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 2
+  trait         cv
+  &lt;fct&gt;      &lt;dbl&gt;
+1 DPM          2  
+2 POM_c2       3.3
+3 DF           8  
+4 PLHA        12.7
+5 SW100       14.6
+6 YDHA        29.9
+7 YdHa_clean  30.4
+8 TSW         30.5
+9 YDHPL       31.9</code></pre>
+</div>
+</div>
+<ul>
+<li>Days to maturity (2%) and grain moisture (3%) vary little, as expected.</li>
+<li>Yield and total seed weight have a CV around 30%. This CV contains both the differences between genotypes and the error, so it is not yet the error CV of the ANOVA (<a href="06-anova.html" class="quarto-xref"><span>Chapter 6</span></a>), but it is high. It warns that much of the yield variation could come from the field.</li>
+</ul>
+</section>
+<section id="checks-and-agreement-between-replicates" class="level3" data-number="4.8.3">
+<h3 data-number="4.8.3" class="anchored" data-anchor-id="checks-and-agreement-between-replicates"><span class="header-section-number">4.8.3</span> Checks and agreement between replicates</h3>
+<p>Sixteen lines appear in 4 plots (twice in each replicate): they are the checks. Because a check is the same genotype everywhere, its variation is <strong>only</strong> field variation:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>checks <span class="ot">&lt;-</span> beans_qc <span class="sc">|&gt;</span> <span class="fu">count</span>(line) <span class="sc">|&gt;</span> <span class="fu">filter</span>(n <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(line)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>beans_qc <span class="sc">|&gt;</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(line <span class="sc">%in%</span> checks) <span class="sc">|&gt;</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(line) <span class="sc">|&gt;</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(YdHa_clean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">cv   =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">sd</span>(YdHa_clean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> mean) <span class="sc">|&gt;</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(cv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 3
+   line           mean    cv
+   &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;
+ 1 SAB_686       1443.  5.74
+ 2 DAB_494       1359.  8.84
+ 3 AFR_722       1542. 10.5 
+ 4 CAL_096       1240. 10.7 
+ 5 SAB_560       1725. 13.7 
+ 6 SEQ_1003      1408. 17.5 
+ 7 DAB_295       1643. 19.1 
+ 8 DAB_251       1748. 21.8 
+ 9 TIO_CANELA_75 1924. 22.7 
+10 AFR_298       1523. 23.3 
+11 DAA_153       1679. 30.2 
+12 SAB_659       1417. 30.5 
+13 CAL_143       1068. 31.6 
+14 RAA_034       1738. 39.3 
+15 DAB_932       1176. 45.6 
+16 DAB_614       1128. 48.1 </code></pre>
+</div>
+</div>
+<p>The same genotype varies from 6% to almost 50% depending on the check. The same idea applies to all lines: if a trait is mostly genetic, a line that is high in R1 is also high in R2.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>rep_means <span class="ot">&lt;-</span> beans_qc <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(line, rep) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(SW100, YdHa_clean), \(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(SW100, YdHa_clean), <span class="at">names_to =</span> <span class="st">"trait"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> rep, <span class="at">values_from =</span> value)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>rep_means <span class="sc">|&gt;</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trait) <span class="sc">|&gt;</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">r =</span> <span class="fu">cor</span>(R1, R2, <span class="at">use =</span> <span class="st">"complete.obs"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  trait          r
+  &lt;chr&gt;      &lt;dbl&gt;
+1 SW100      0.760
+2 YdHa_clean 0.284</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rep_means, <span class="fu">aes</span>(R1, R2)) <span class="sc">+</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">formula =</span> y <span class="sc">~</span> x) <span class="sc">+</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>trait, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-rep-agreement" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rep-agreement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-qc-eda_files/figure-html/fig-rep-agreement-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rep-agreement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.4: Line means in R1 against R2. Seed size agrees well between replicates; yield much less.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The correlation between replicates is high for seed size and low for yield. This is a first, rough view of heritability (<a href="07-mixed-models.html#sec-heritability" class="quarto-xref"><span>Section 7.7</span></a>): for yield in this trial, a single plot says little about the genotype, and the analysis must remove as much field variation as possible.</p>
+</section>
+</section>
+<section id="exploratory-plots" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="exploratory-plots"><span class="header-section-number">4.9</span> Exploratory plots</h2>
+<section id="distributions" class="level3" data-number="4.9.1">
+<h3 data-number="4.9.1" class="anchored" data-anchor-id="distributions"><span class="header-section-number">4.9.1</span> Distributions</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>beans_qc <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(DF, DPM, PLHA, POM_c2, SW100, TSW, YdHa_clean),</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"trait"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>trait, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Plots"</span>) <span class="sc">+</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-distributions" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-distributions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-qc-eda_files/figure-html/fig-distributions-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-distributions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.5: Distribution of each trait.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Things to look for: long tails, groups separated from the rest, spikes at round numbers (a sign of estimated rather than measured values), and two peaks. Days to flowering has two groups, around 39 and 46 days: early and late lines. In a mutant population, two peaks in a trait can be the first sign of a mutation with a large effect.</p>
+</section>
+<section id="correlations-between-traits" class="level3" data-number="4.9.2">
+<h3 data-number="4.9.2" class="anchored" data-anchor-id="correlations-between-traits"><span class="header-section-number">4.9.2</span> Correlations between traits</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>cor_mat <span class="ot">&lt;-</span> beans_qc <span class="sc">|&gt;</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(DF, DPM, PLHA, POM_c2, SW100, TSW, YdHa_clean) <span class="sc">|&gt;</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(<span class="fu">as.table</span>(cor_mat)) <span class="sc">|&gt;</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Var1, Var2, <span class="at">fill =</span> Freq)) <span class="sc">+</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(Freq, <span class="dv">2</span>)), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"firebrick"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"steelblue"</span>,</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="st">"r"</span>) <span class="sc">+</span></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-correlations" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-correlations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-qc-eda_files/figure-html/fig-correlations-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-correlations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.6: Correlations between traits (Pearson, plot level).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><code>TSW</code> and <code>YdHa_clean</code> have a correlation of 1: one is calculated from the other, so they are the same information. Days to flowering and to maturity go together. Correlations that are absent where biology expects them, or present where it does not, are worth a second look at the data.</p>
+</section>
+<section id="field-maps" class="level3" data-number="4.9.3">
+<h3 data-number="4.9.3" class="anchored" data-anchor-id="field-maps"><span class="header-section-number">4.9.3</span> Field maps</h3>
+<p>A field map is the most useful QC plot. It shows technical variation that no table can show:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(beans_qc, <span class="fu">aes</span>(<span class="at">x =</span> row, <span class="at">y =</span> col, <span class="at">fill =</span> YdHa_clean)) <span class="sc">+</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">6.5</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">na.value =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">3.5</span>, <span class="fl">9.5</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"R1"</span>, <span class="st">"R2"</span>)) <span class="sc">+</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Field row"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="st">"kg/ha"</span>) <span class="sc">+</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-field-map-beans" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-field-map-beans-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-qc-eda_files/figure-html/fig-field-map-beans-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-field-map-beans-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.7: Yield of each plot in the field. White tiles are missing values.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Since genotypes are randomized, a genotype effect looks like random noise on the map. Patches, stripes or gradients are field effects: soil, water, border, management. In this trial yields are higher in some areas of the field and the lowest plots of the trial are close together in R1 (rows 51 to 56, columns 2 and 3), around the damaged plot of <code>LPA_467</code> (now white). A small patch of poor soil or water damage there is more likely than several weak genotypes side by side.</p>
+<p>A clearer example is the Nebraska wheat trial of Stroup et al.&nbsp;(1994), in <code>agridat</code>: 56 genotypes in 4 complete blocks.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stroup.nin, <span class="fu">aes</span>(<span class="at">x =</span> col, <span class="at">y =</span> row, <span class="at">fill =</span> yield)) <span class="sc">+</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">na.value =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>() <span class="sc">+</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Column"</span>, <span class="at">y =</span> <span class="st">"Row"</span>, <span class="at">fill =</span> <span class="st">"bu/ac"</span>) <span class="sc">+</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-field-map-stroup" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-field-map-stroup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-qc-eda_files/figure-html/fig-field-map-stroup-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-field-map-stroup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.8: Wheat yield (bu/ac) in the Nebraska Intrastate Nursery trial. Data: Stroup et al.&nbsp;(1994), via agridat.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The low yields are clustered in one corner of the field. The authors explain it by a low rise in that part of the field, exposed to winter kill from wind. The genotype <code>Buckskin</code>, a known superior variety, was disadvantaged in this trial by the unfavourable positions of its plots. A plain RCBD analysis cannot correct this, because the patch is smaller than a block; <a href="09-spatial-analysis.html" class="quarto-xref"><span>Chapter 9</span></a> shows how spatial models do.</p>
+</section>
+</section>
+<section id="exercise" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="exercise"><span class="header-section-number">4.10</span> Exercise</h2>
+<p>Use the <code>stroup.nin</code> data from <code>agridat</code>.</p>
+<ol type="1">
+<li>How many plots have no yield? Which genotype and replicate are they coded with? (Recall the exercise of <a href="03-field-data.html" class="quarto-xref"><span>Chapter 3</span></a>.)</li>
+<li>Calculate the mean, SD and CV of yield for each replicate. Are the replicates similar?</li>
+<li>Flag the outliers of yield with <code>flag_iqr()</code>. Where are they in the field?</li>
+<li>Calculate the mean yield of <code>Buckskin</code> and its rank among the 56 genotypes. In which rows and columns are its plots?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -399,16 +1077,102 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>nin <span class="ot">&lt;-</span> stroup.nin <span class="sc">|&gt;</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gen =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(rep), <span class="cn">NA</span>, <span class="fu">as.character</span>(gen)))</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Missing plots</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(nin<span class="sc">$</span>yield))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Replicates</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>nin <span class="sc">|&gt;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(yield)) <span class="sc">|&gt;</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rep) <span class="sc">|&gt;</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(yield), <span class="at">sd =</span> <span class="fu">sd</span>(yield), <span class="at">cv =</span> <span class="dv">100</span> <span class="sc">*</span> sd <span class="sc">/</span> mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  rep    mean    sd    cv
+  &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 R1     27.6  4.82  17.5
+2 R2     28.6  3.94  13.8
+3 R3     24.6  9.41  38.3
+4 R4     21.3  8.05  37.8</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Outliers and their position</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>nin <span class="sc">|&gt;</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">flag_iqr</span>(yield)) <span class="sc">|&gt;</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gen, rep, row, col, yield)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       gen rep row col yield
+1  NE86503  R1   2  18 42.00
+2  NE87457  R3   8   3  9.55
+3  NE84557  R3   8   4  1.50
+4  NE83T12  R3   8   5 12.75
+5    Brule  R3   8  22 40.90
+6  NE83406  R3   9   2  2.15
+7  NE87409  R3   9   3  3.75
+8  NE87499  R3   9   4  2.95
+9  Centura  R3   9   5  8.70
+10 NE83432  R3   9   6 11.05
+11 NE87512  R3   9   7 12.35
+12 NE87612  R4  10   1  9.25
+13 NE85556  R4  10   3  4.95
+14   Brule  R4  10   4  3.70
+15    Vona  R4  10   7 12.30
+16 NE86482  R4  11   2  6.05
+17 NE85623  R4  11   3  1.05
+18 NE86527  R4  11   4  6.40
+19 NE87451  R4  11   5  5.10
+20 NE87615  R4  11   9 12.00</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Buckskin</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>nin <span class="sc">|&gt;</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(gen)) <span class="sc">|&gt;</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gen) <span class="sc">|&gt;</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">yield =</span> <span class="fu">mean</span>(yield)) <span class="sc">|&gt;</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">rank</span>(<span class="sc">-</span>yield)) <span class="sc">|&gt;</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gen <span class="sc">==</span> <span class="st">"Buckskin"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  gen      yield  rank
+  &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
+1 Buckskin  25.6    28</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>nin <span class="sc">|&gt;</span> <span class="fu">filter</span>(gen <span class="sc">==</span> <span class="st">"Buckskin"</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(rep, row, col, yield)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  rep row col yield
+1  R1   3   1 29.85
+2  R2   5   4 30.10
+3  R3   9   1 18.00
+4  R4  10   2 24.30</code></pre>
+</div>
+</div>
+<p>R3 and R4 have lower means and a CV more than twice that of R1 and R2. Apart from two high values, the outliers are all in R3 and R4, rows 8 to 11 and columns 1 to 9: the corner with low yields seen in <a href="#fig-field-map-stroup" class="quarto-xref">Figure&nbsp;<span>4.8</span></a>. Two of the four Buckskin plots (R3 and R4) are in that corner; it ranks only 28th of 56, pulled down by the field, not by its genetics.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="key-takeaways" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">4.7</span> Key takeaways</h2>
+<section id="key-takeaways" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">4.11</span> Key takeaways</h2>
+<ul>
+<li>QC follows a fixed order: missing values, possible values, consistency between traits, outliers, summaries and plots.</li>
+<li>Missing values are left empty, never set to zero, and removed trait by trait, not plot by plot. Their pattern tells you why they are missing.</li>
+<li>Calculate derived traits in R from the raw measurements; do not trust values calculated once in a spreadsheet.</li>
+<li>Outliers are flagged and examined, not deleted. Consistency across replicates points to biology; a damaged plot, a field border or a patch points to error or field effects.</li>
+<li>The CV, the checks and the agreement between replicates show how much of the variation is field and how much is genotype.</li>
+<li>Always draw a field map. Technical variation is spatial, and the next days of the course show how to model it.</li>
+</ul>
 </section>
-<section id="references" class="level2" data-number="4.8">
-<h2 data-number="4.8" class="anchored" data-anchor-id="references"><span class="header-section-number">4.8</span> References</h2>
+<section id="references" class="level2" data-number="4.12">
+<h2 data-number="4.12" class="anchored" data-anchor-id="references"><span class="header-section-number">4.12</span> References</h2>
+<ul>
+<li>Stroup, W. W., Baenziger, P. S., &amp; Mulitze, D. K. (1994). Removing spatial variation from wheat yield trials: a comparison of methods. <em>Crop Science</em>, 34(1), 62-66. <a href="https://doi.org/10.2135/cropsci1994.0011183X003400010011x" class="uri">https://doi.org/10.2135/cropsci1994.0011183X003400010011x</a></li>
+<li>Wright, K. (2024). <em>agridat: Agricultural Datasets</em>. R package version 1.27. <a href="https://kwstat.github.io/agridat/" class="uri">https://kwstat.github.io/agridat/</a></li>
+<li>Wickham, H., Çetinkaya-Rundel, M., &amp; Grolemund, G. (2023). <em>R for Data Science</em> (2nd ed.), chapters on missing values and exploratory data analysis. <a href="https://r4ds.hadley.nz" class="uri">https://r4ds.hadley.nz</a></li>
+<li>Common bean trial <code>Dar16C_hiP</code>: Bean Breeding Program, Alliance of Bioversity International and CIAT (see <a href="../part0-precourse/01-r-basics.html" class="quarto-xref"><span>Chapter 1</span></a>).</li>
+</ul>
 
 
 </section>
@@ -816,8 +1580,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part1-week1/03-field-data.html" class="pagination-link" aria-label="Collecting and Structuring Field Data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Collecting and Structuring Field Data</span></span>
+      <a href="../part1-week1/03-field-data.html" class="pagination-link" aria-label="Collecting and Validating Field Data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Collecting and Validating Field Data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

@@ -111,6 +111,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -194,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/03-field-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Collecting and Structuring Field Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Collecting and Validating Field Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -218,13 +247,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/07-mixed-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models in Plant Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mixed Models, BLUEs, BLUPs and Heritability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/08-heritability-selection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heritability and Selection Decisions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Selection Decisions: Ranking, Expected Gain and Selection Indices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -235,14 +264,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../part1-week1/09b-image-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Low-Cost High-Throughput Phenotyping: Image Analysis in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../part1-week1/10-met-gxe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multi-Environment Trials and G×E Interaction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-week1/11-ai-plant-breeding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Artificial Intelligence in Plant Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Machine Learning for Prediction in Plant Breeding</span></span></a>
   </div>
 </li>
       </ul>
@@ -259,31 +294,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/12-analysis-pipeline.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/13-mutant-populations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Experimental Design and Statistical Pipelines for Mutation Breeding Applications</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/14-llm-assistants.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Using Large Language Models as Data Analysis Assistants</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Using Large Language Models as Data Analysis Assistants</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/15-selection-mutation-breeding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Decision-Making and Selection Strategies in Mutation Breeding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Decision-Making and Selection Strategies in Mutation Breeding</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/16-participant-projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Participant Projects and Final Presentations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Participant Projects and Final Presentations</span></span></a>
   </div>
 </li>
       </ul>
@@ -305,18 +340,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">5.1</span> Learning objectives</a></li>
-  <li><a href="#why-design-matters" id="toc-why-design-matters" class="nav-link" data-scroll-target="#why-design-matters"><span class="header-section-number">5.2</span> Why design matters</a></li>
-  <li><a href="#classical-designs-crd-and-rcbd" id="toc-classical-designs-crd-and-rcbd" class="nav-link" data-scroll-target="#classical-designs-crd-and-rcbd"><span class="header-section-number">5.3</span> Classical designs: CRD and RCBD</a></li>
-  <li><a href="#augmented-designs" id="toc-augmented-designs" class="nav-link" data-scroll-target="#augmented-designs"><span class="header-section-number">5.4</span> Augmented designs</a></li>
-  <li><a href="#incomplete-block-designs-alpha-lattice" id="toc-incomplete-block-designs-alpha-lattice" class="nav-link" data-scroll-target="#incomplete-block-designs-alpha-lattice"><span class="header-section-number">5.5</span> Incomplete block designs: alpha-lattice</a></li>
-  <li><a href="#row-column-and-resolvable-row-column-designs" id="toc-row-column-and-resolvable-row-column-designs" class="nav-link" data-scroll-target="#row-column-and-resolvable-row-column-designs"><span class="header-section-number">5.6</span> Row-column and resolvable row-column designs</a></li>
-  <li><a href="#partially-replicated-p-rep-designs" id="toc-partially-replicated-p-rep-designs" class="nav-link" data-scroll-target="#partially-replicated-p-rep-designs"><span class="header-section-number">5.7</span> Partially replicated (p-rep) designs</a></li>
-  <li><a href="#choosing-a-design-by-breeding-stage" id="toc-choosing-a-design-by-breeding-stage" class="nav-link" data-scroll-target="#choosing-a-design-by-breeding-stage"><span class="header-section-number">5.8</span> Choosing a design by breeding stage</a></li>
-  <li><a href="#generating-layouts-with-fieldhub" id="toc-generating-layouts-with-fieldhub" class="nav-link" data-scroll-target="#generating-layouts-with-fieldhub"><span class="header-section-number">5.9</span> Generating layouts with FielDHub</a></li>
-  <li><a href="#from-layout-to-statistical-model" id="toc-from-layout-to-statistical-model" class="nav-link" data-scroll-target="#from-layout-to-statistical-model"><span class="header-section-number">5.10</span> From layout to statistical model</a></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">5.11</span> Exercise</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">5.12</span> Key takeaways</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">5.13</span> References</a></li>
+  <li><a href="#why-design-matters" id="toc-why-design-matters" class="nav-link" data-scroll-target="#why-design-matters"><span class="header-section-number">5.2</span> Why design matters</a>
+  <ul class="collapse">
+  <li><a href="#what-a-field-looks-like-without-genotypes" id="toc-what-a-field-looks-like-without-genotypes" class="nav-link" data-scroll-target="#what-a-field-looks-like-without-genotypes"><span class="header-section-number">5.2.1</span> What a field looks like without genotypes</a></li>
+  <li><a href="#complications-in-breeding-trials" id="toc-complications-in-breeding-trials" class="nav-link" data-scroll-target="#complications-in-breeding-trials"><span class="header-section-number">5.2.2</span> Complications in breeding trials</a></li>
+  </ul></li>
+  <li><a href="#the-main-designs" id="toc-the-main-designs" class="nav-link" data-scroll-target="#the-main-designs"><span class="header-section-number">5.3</span> The main designs</a>
+  <ul class="collapse">
+  <li><a href="#classical-designs" id="toc-classical-designs" class="nav-link" data-scroll-target="#classical-designs"><span class="header-section-number">5.3.1</span> Classical designs</a></li>
+  <li><a href="#designs-with-incomplete-blocks" id="toc-designs-with-incomplete-blocks" class="nav-link" data-scroll-target="#designs-with-incomplete-blocks"><span class="header-section-number">5.3.2</span> Designs with incomplete blocks</a></li>
+  </ul></li>
+  <li><a href="#comparing-designs-on-a-real-field" id="toc-comparing-designs-on-a-real-field" class="nav-link" data-scroll-target="#comparing-designs-on-a-real-field"><span class="header-section-number">5.4</span> Comparing designs on a real field</a>
+  <ul class="collapse">
+  <li><a href="#generating-the-layouts-with-fieldhub" id="toc-generating-the-layouts-with-fieldhub" class="nav-link" data-scroll-target="#generating-the-layouts-with-fieldhub"><span class="header-section-number">5.4.1</span> Generating the layouts with FielDHub</a></li>
+  <li><a href="#fitting-the-model-of-each-design" id="toc-fitting-the-model-of-each-design" class="nav-link" data-scroll-target="#fitting-the-model-of-each-design"><span class="header-section-number">5.4.2</span> Fitting the model of each design</a></li>
+  </ul></li>
+  <li><a href="#real-trials-and-their-designs" id="toc-real-trials-and-their-designs" class="nav-link" data-scroll-target="#real-trials-and-their-designs"><span class="header-section-number">5.5</span> Real trials and their designs</a>
+  <ul class="collapse">
+  <li><a href="#an-alpha-lattice-the-bean-trial" id="toc-an-alpha-lattice-the-bean-trial" class="nav-link" data-scroll-target="#an-alpha-lattice-the-bean-trial"><span class="header-section-number">5.5.1</span> An alpha-lattice: the bean trial</a></li>
+  <li><a href="#a-resolvable-row-column-design-australian-wheat" id="toc-a-resolvable-row-column-design-australian-wheat" class="nav-link" data-scroll-target="#a-resolvable-row-column-design-australian-wheat"><span class="header-section-number">5.5.2</span> A resolvable row-column design: Australian wheat</a></li>
+  </ul></li>
+  <li><a href="#early-generations-augmented-and-p-rep-designs" id="toc-early-generations-augmented-and-p-rep-designs" class="nav-link" data-scroll-target="#early-generations-augmented-and-p-rep-designs"><span class="header-section-number">5.6</span> Early generations: augmented and p-rep designs</a>
+  <ul class="collapse">
+  <li><a href="#both-designs-on-the-mercer-and-hall-field" id="toc-both-designs-on-the-mercer-and-hall-field" class="nav-link" data-scroll-target="#both-designs-on-the-mercer-and-hall-field"><span class="header-section-number">5.6.1</span> Both designs on the Mercer and Hall field</a></li>
+  </ul></li>
+  <li><a href="#choosing-a-design-by-breeding-stage" id="toc-choosing-a-design-by-breeding-stage" class="nav-link" data-scroll-target="#choosing-a-design-by-breeding-stage"><span class="header-section-number">5.7</span> Choosing a design by breeding stage</a></li>
+  <li><a href="#generating-layouts-with-fieldhub" id="toc-generating-layouts-with-fieldhub" class="nav-link" data-scroll-target="#generating-layouts-with-fieldhub"><span class="header-section-number">5.8</span> Generating layouts with FielDHub</a></li>
+  <li><a href="#sec-model-from-layout" id="toc-sec-model-from-layout" class="nav-link" data-scroll-target="#sec-model-from-layout"><span class="header-section-number">5.9</span> From layout to statistical model</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">5.10</span> Exercise</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">5.11</span> Key takeaways</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">5.12</span> References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lfdelgadom/rtc-mutant-breeding-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -344,64 +397,774 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="chapter-info">
 <p><strong>Author:</strong> Luis Fernando Delgado Muñoz<br>
-<strong>Session:</strong> Day 2 – Tuesday 10 November, 08:30–12:30</p>
+<strong>Session:</strong> Day 2, Tuesday 10 November</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Slides for this session
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="../slides/05-experimental-designs.html" target="_blank">Open the slides of Day 2, Experimental designs</a></p>
+</div>
 </div>
 <section id="learning-objectives" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">5.1</span> Learning objectives</h2>
 <ul>
-<li>Choose a design according to breeding stage, number of entries and seed availability</li>
-<li>Generate and randomize a field layout with FielDHub</li>
-<li>Read a layout and identify its sources of variation</li>
+<li>Explain the three principles of design: replication, randomization and local control</li>
+<li>Recognize the main designs used in breeding trials and when to use each one</li>
+<li>Generate and randomize field layouts with FielDHub</li>
+<li>Compare the precision of designs on a real field</li>
 <li>Write the statistical model implied by a design</li>
 </ul>
+<p>In <a href="04-qc-eda.html" class="quarto-xref"><span>Chapter 4</span></a> we saw that much of the variation in a trial comes from the field, not from the genotypes. This chapter is about the decisions taken <strong>before</strong> sowing that control that variation. A good design does not make the field more uniform; it arranges the plots so that the field effects can be separated from the genotype effects in the analysis (<a href="06-anova.html" class="quarto-xref"><span>Chapter 6</span></a> and <a href="07-mixed-models.html" class="quarto-xref"><span>Chapter 7</span></a>).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agridat)    <span class="co"># install.packages("agridat") if needed</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FielDHub)   <span class="co"># install.packages("FielDHub") if needed</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 <section id="why-design-matters" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="why-design-matters"><span class="header-section-number">5.2</span> Why design matters</h2>
-<!-- TODO: Replication, randomization, local control. Error variance and selection accuracy. -->
-</section>
-<section id="classical-designs-crd-and-rcbd" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="classical-designs-crd-and-rcbd"><span class="header-section-number">5.3</span> Classical designs: CRD and RCBD</h2>
-<!-- TODO: When blocking helps; limits with many entries. -->
-</section>
-<section id="augmented-designs" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="augmented-designs"><span class="header-section-number">5.4</span> Augmented designs</h2>
-<!-- TODO: Unreplicated entries + replicated checks; typical for early generations. -->
-</section>
-<section id="incomplete-block-designs-alpha-lattice" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="incomplete-block-designs-alpha-lattice"><span class="header-section-number">5.5</span> Incomplete block designs: alpha-lattice</h2>
-<!-- TODO: Resolvable designs for many entries. -->
-</section>
-<section id="row-column-and-resolvable-row-column-designs" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="row-column-and-resolvable-row-column-designs"><span class="header-section-number">5.6</span> Row-column and resolvable row-column designs</h2>
-<!-- TODO: Two-directional blocking. -->
-</section>
-<section id="partially-replicated-p-rep-designs" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="partially-replicated-p-rep-designs"><span class="header-section-number">5.7</span> Partially replicated (p-rep) designs</h2>
-<!-- TODO: Limited seed in early generations. -->
-</section>
-<section id="choosing-a-design-by-breeding-stage" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="choosing-a-design-by-breeding-stage"><span class="header-section-number">5.8</span> Choosing a design by breeding stage</h2>
-<!-- TODO: Single row → PYT → AYT; cassava case; modernized breeding scheme. Preview of mutant-population designs (developed in Topic 10). -->
-</section>
-<section id="generating-layouts-with-fieldhub" class="level2" data-number="5.9">
-<h2 data-number="5.9" class="anchored" data-anchor-id="generating-layouts-with-fieldhub"><span class="header-section-number">5.9</span> Generating layouts with FielDHub</h2>
-<!-- TODO: Shiny app and R package; exporting field books. -->
+<p>Three principles, proposed by R. A. Fisher in the 1920s, are the basis of every field design:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Principle</th>
+<th>What it means</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Replication</strong></td>
+<td>Each genotype in more than one plot</td>
+<td>Estimates the error; more plots per genotype give more precise means</td>
+</tr>
+<tr class="even">
+<td><strong>Randomization</strong></td>
+<td>Genotypes allocated to plots at random</td>
+<td>Avoids systematic advantages; makes the error estimate valid</td>
+</tr>
+<tr class="odd">
+<td><strong>Local control (blocking)</strong></td>
+<td>Similar plots grouped into blocks</td>
+<td>Removes field variation from the comparison of genotypes</td>
+</tr>
+</tbody>
+</table>
+<section id="what-a-field-looks-like-without-genotypes" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="what-a-field-looks-like-without-genotypes"><span class="header-section-number">5.2.1</span> What a field looks like without genotypes</h3>
+<p>The best way to see field variation is a <strong>uniformity trial</strong>: one single variety sown over the whole field and harvested plot by plot. Every difference between plots is then field, not genotype. The barley uniformity trial of Williams and Luckett (1988) has 720 plots in 15 rows and 48 columns:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FielDHub)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fu">alpha_lattice</span>(<span class="at">t =</span> <span class="dv">60</span>, <span class="at">k =</span> <span class="dv">6</span>, <span class="at">r =</span> <span class="dv">3</span>, <span class="at">seed =</span> <span class="dv">2026</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(alpha<span class="sc">$</span>fieldBook)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(alpha)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>williams <span class="ot">&lt;-</span> williams.barley.uniformity <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yield =</span> yield <span class="sc">/</span> <span class="dv">100</span>)   <span class="co"># kg/ha divided by 10, converted to t/ha</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(williams, <span class="fu">aes</span>(<span class="at">x =</span> col, <span class="at">y =</span> row, <span class="at">fill =</span> yield)) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Column"</span>, <span class="at">y =</span> <span class="st">"Row"</span>, <span class="at">fill =</span> <span class="st">"t/ha"</span>) <span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>williams <span class="sc">|&gt;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">min =</span> <span class="fu">min</span>(yield), <span class="at">max =</span> <span class="fu">max</span>(yield),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">variance =</span> <span class="fu">var</span>(yield), <span class="at">sd =</span> <span class="fu">sd</span>(yield))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   min  max   variance        sd
+1 1.45 3.29 0.08360067 0.2891378</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-williams-map" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-williams-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-experimental-designs_files/figure-html/fig-williams-map-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-williams-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: Uniformity trial of barley: one variety, 720 plots. All the variation is due to the field. Data: Williams and Luckett (1988), via agridat.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>With a single variety, yield goes from 1.45 to 3.29 t/ha, with a standard deviation of 0.29 t/ha. Two genotypes that differ by 0.3 t/ha could swap positions just by the plots they happen to fall on. The map also shows that neighbouring plots are more similar than distant ones, and that the variation is not the same in both directions. There is even a systematic pattern linked to groups of three columns:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>williams <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(col) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">yield =</span> <span class="fu">mean</span>(yield)) <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">position =</span> <span class="fu">factor</span>((col <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(col, yield)) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"grey60"</span>) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> position), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Column"</span>, <span class="at">y =</span> <span class="st">"Mean yield (t/ha)"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"Position in</span><span class="sc">\n</span><span class="st">seeder pass"</span>) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>williams <span class="sc">|&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">position =</span> (col <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">yield =</span> <span class="fu">mean</span>(yield))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  position yield
+     &lt;dbl&gt; &lt;dbl&gt;
+1        1  2.32
+2        2  2.45
+3        3  2.53</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-williams-cols" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-williams-cols-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-experimental-designs_files/figure-html/fig-williams-cols-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-williams-cols-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.2: Mean yield of each column of the uniformity trial, coloured by the position of the column in each group of three (the width of the three-plot seeder).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The trial was sown with a three-plot seeder, and Williams noted that the yield depends on the position of the plot in each pass. Columns in the first position of each group of three yield on average about 0.1 to 0.2 t/ha less than the other two. This is <strong>extraneous variation</strong>: it comes from how the trial was managed, not from the soil. Blocks that follow the columns will capture it; large blocks will not.</p>
+</section>
+<section id="complications-in-breeding-trials" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="complications-in-breeding-trials"><span class="header-section-number">5.2.2</span> Complications in breeding trials</h3>
+<p>Classical designs were developed for experiments with a few treatments. Breeding trials are different:</p>
+<ul>
+<li>There is one factor, the genotype, with <strong>many levels</strong> (from 100 to several thousand lines).</li>
+<li>Replication is <strong>costly</strong>, and in early generations there is often seed for only one plot.</li>
+<li>The field is <strong>heterogeneous in more than one direction</strong>, as the uniformity trial shows.</li>
+</ul>
+<p>With 300 genotypes, a complete block has 300 plots: it is too large to be uniform. The solution is <strong>incomplete blocks</strong>: blocks smaller than the number of genotypes.</p>
+</section>
+</section>
+<section id="the-main-designs" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="the-main-designs"><span class="header-section-number">5.3</span> The main designs</h2>
+<section id="classical-designs" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="classical-designs"><span class="header-section-number">5.3.1</span> Classical designs</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Design</th>
+<th>Structure</th>
+<th>Use in breeding</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>CRD</strong>, completely randomized</td>
+<td>Genotypes allocated at random to all plots, no blocks</td>
+<td>Uniform conditions only: growth chambers, some greenhouse trials</td>
+</tr>
+<tr class="even">
+<td><strong>RCBD</strong>, randomized complete blocks</td>
+<td>Each block contains every genotype once</td>
+<td>Few genotypes (up to about 20 to 30), for example advanced yield trials</td>
+</tr>
+<tr class="odd">
+<td><strong>Augmented</strong></td>
+<td>New lines in one plot each; checks replicated in every block</td>
+<td>Early generations with seed for one plot, many lines</td>
+</tr>
+</tbody>
+</table>
+<p>The RCBD was used in <a href="04-qc-eda.html" class="quarto-xref"><span>Chapter 4</span></a> for the Nebraska wheat trial (<code>stroup.nin</code>): 56 genotypes in blocks of 56 plots. Its low-yield corner was smaller than a block, so the blocks could not remove it. The augmented design was introduced in <a href="03-field-data.html" class="quarto-xref"><span>Chapter 3</span></a> with <code>kling.augmented</code>.</p>
+</section>
+<section id="designs-with-incomplete-blocks" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="designs-with-incomplete-blocks"><span class="header-section-number">5.3.2</span> Designs with incomplete blocks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Design</th>
+<th>Blocks formed in</th>
+<th>Blocks grouped in complete replicates (resolvable)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Alpha-lattice</strong></td>
+<td>One direction (for example columns)</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Row-column</strong></td>
+<td>Two directions (rows and columns)</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><strong>Resolvable row-column</strong></td>
+<td>Two directions (rows and columns)</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Partially replicated (p-rep)</strong></td>
+<td>Usually analysed with rows, columns and spatial terms</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Alpha-lattice</strong> (Patterson and Williams, 1976). Each replicate is divided into <span class="math inline">\(s\)</span> incomplete blocks of <span class="math inline">\(k\)</span> plots, so the number of genotypes is <span class="math inline">\(t = s \times k\)</span>. Each replicate contains all the genotypes. Pairs of genotypes occur together in a block once or never (an <span class="math inline">\(\alpha(0,1)\)</span> design), and the allocation is chosen to give the lowest average variance of the differences between genotypes. The bean trial of this course is an alpha-lattice: 380 lines in 2 replicates of 396 plots (16 checks appear twice in each replicate), each replicate with 18 blocks of 22 plots (11 rows by 2 columns).</p>
+<p><strong>Row-column designs</strong> block in two directions at the same time: every row and every column is an incomplete block. In the <strong>resolvable</strong> version, the field is first divided into complete replicates, and rows and columns are blocks <strong>within</strong> each replicate. Randomization is not simple, because the design must be balanced in both directions; software such as FielDHub searches for a good allocation.</p>
+<p><strong>Partially replicated (p-rep) designs</strong> (Cullis et al., 2006) replicate only a fraction of the test lines (for example 20%) and sow the rest in one plot. The replicated lines provide the estimate of error, instead of repeating the same check many times.</p>
+</section>
+</section>
+<section id="comparing-designs-on-a-real-field" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="comparing-designs-on-a-real-field"><span class="header-section-number">5.4</span> Comparing designs on a real field</h2>
+<p>How much does each design gain? We can answer this with real data: <strong>lay each design over the uniformity trial</strong> as if 360 genotypes had been sown in 2 replicates (720 plots), and analyse the blank field with the model of each design. Because there is only one variety, the true differences between “genotypes” are zero: everything the model attributes to error is real field variation that the design did not remove.</p>
+<p>This approach follows the course <em>Genotype to phenotype modelling of multi-environment trials</em> (Biometris, Wageningen University and Research, 2021), which used the same uniformity trial. There, simulated genetic effects were added on top of the field; here we do not simulate anything.</p>
+<section id="generating-the-layouts-with-fieldhub" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="generating-the-layouts-with-fieldhub"><span class="header-section-number">5.4.1</span> Generating the layouts with FielDHub</h3>
+<p>All layouts have 360 entries in 2 replicates. Replicate 1 occupies columns 1 to 24 and replicate 2 columns 25 to 48 (15 rows by 24 columns each).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>nt <span class="ot">&lt;-</span> <span class="dv">360</span>   <span class="co"># number of entries</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>crd   <span class="ot">&lt;-</span> <span class="fu">CRD</span>(<span class="at">t =</span> nt, <span class="at">reps =</span> <span class="dv">2</span>, <span class="at">seed =</span> <span class="dv">2026</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>rcbd  <span class="ot">&lt;-</span> <span class="fu">RCBD</span>(<span class="at">t =</span> nt, <span class="at">reps =</span> <span class="dv">2</span>, <span class="at">seed =</span> <span class="dv">2026</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fu">alpha_lattice</span>(<span class="at">t =</span> nt, <span class="at">k =</span> <span class="dv">15</span>, <span class="at">r =</span> <span class="dv">2</span>, <span class="at">seed =</span> <span class="dv">2026</span>)       <span class="co"># 24 blocks of 15 per rep</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>rowcol <span class="ot">&lt;-</span> <span class="fu">row_column</span>(<span class="at">t =</span> nt, <span class="at">nrows =</span> <span class="dv">15</span>, <span class="at">r =</span> <span class="dv">2</span>, <span class="at">iterations =</span> <span class="dv">50</span>, <span class="at">seed =</span> <span class="dv">2026</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(alpha<span class="sc">$</span>fieldBook)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID LOCATION PLOT REP IBLOCK UNIT ENTRY TREATMENT
+1  1        1  101   1      1    1   344     G-344
+2  2        1  102   1      1    2   162     G-162
+3  3        1  103   1      1    3   133     G-133
+4  4        1  104   1      1    4   131     G-131
+5  5        1  105   1      1    5    63      G-63
+6  6        1  106   1      1    6   237     G-237</code></pre>
+</div>
+</div>
+<p>Each design returns a <strong>field book</strong>: one row per plot, with the replicate, the block and the entry. We place the plots on the field (each incomplete block of the alpha-lattice is one column of 15 plots) and join them with the uniformity yields:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fill_columns <span class="ot">&lt;-</span> <span class="cf">function</span>(fb) {   <span class="co"># plots in order, column by column within each rep</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  fb <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(REP) <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">i =</span> <span class="fu">row_number</span>(),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span> (REP <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">24</span> <span class="sc">+</span> <span class="fu">ceiling</span>(i <span class="sc">/</span> <span class="dv">15</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">row =</span> (i <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">%%</span> <span class="dv">15</span> <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>on_field <span class="ot">&lt;-</span> <span class="cf">function</span>(fb) {</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  fb <span class="sc">|&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">inner_join</span>(williams, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"row"</span>, <span class="st">"col"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(REP, TREATMENT), factor),</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">rowf =</span> <span class="fu">factor</span>(row), <span class="at">colf =</span> <span class="fu">factor</span>(col))</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>d_crd    <span class="ot">&lt;-</span> crd<span class="sc">$</span>fieldBook <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">REP =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">fill_columns</span>() <span class="sc">|&gt;</span> <span class="fu">on_field</span>()  <span class="co"># one 15 x 48 field</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>d_rcbd   <span class="ot">&lt;-</span> rcbd<span class="sc">$</span>fieldBook <span class="sc">|&gt;</span> <span class="fu">fill_columns</span>() <span class="sc">|&gt;</span> <span class="fu">on_field</span>()</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>d_alpha  <span class="ot">&lt;-</span> alpha<span class="sc">$</span>fieldBook <span class="sc">|&gt;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col =</span> (REP <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">24</span> <span class="sc">+</span> IBLOCK, <span class="at">row =</span> UNIT) <span class="sc">|&gt;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">on_field</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">IBLOCK =</span> <span class="fu">factor</span>(IBLOCK))</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>d_rowcol <span class="ot">&lt;-</span> rowcol<span class="sc">$</span>fieldBook <span class="sc">|&gt;</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col =</span> (REP <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">24</span> <span class="sc">+</span> COLUMN, <span class="at">row =</span> ROW) <span class="sc">|&gt;</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">on_field</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d_alpha, <span class="fu">aes</span>(col, row, <span class="at">fill =</span> <span class="fu">factor</span>(<span class="fu">as.integer</span>(IBLOCK) <span class="sc">%%</span> <span class="dv">2</span>))) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">24.5</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"grey70"</span>, <span class="st">"grey88"</span>), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Column"</span>, <span class="at">y =</span> <span class="st">"Row"</span>) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-alpha-layout" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-alpha-layout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-experimental-designs_files/figure-html/fig-alpha-layout-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-alpha-layout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.3: The alpha-lattice laid over the uniformity trial: 2 replicates, each with 24 incomplete blocks of 15 plots (one block per column). Block colours alternate to show the boundaries.
+</figcaption>
+</figure>
+</div>
+</div>
 </div>
 </section>
-<section id="from-layout-to-statistical-model" class="level2" data-number="5.10">
-<h2 data-number="5.10" class="anchored" data-anchor-id="from-layout-to-statistical-model"><span class="header-section-number">5.10</span> From layout to statistical model</h2>
-<!-- TODO: Model terms from the layout: treatment, rep, block within rep, row, column. -->
+<section id="fitting-the-model-of-each-design" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="fitting-the-model-of-each-design"><span class="header-section-number">5.4.2</span> Fitting the model of each design</h3>
+<p>Each design implies its own model. Genotypes are fixed here, because we want to compare their means; incomplete blocks, rows and columns are random (see <a href="#sec-model-from-layout" class="quarto-xref"><span>Section 5.9</span></a>).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fit_crd    <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> TREATMENT, <span class="at">data =</span> d_crd)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fit_rcbd   <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> REP <span class="sc">+</span> TREATMENT, <span class="at">data =</span> d_rcbd)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>fit_alpha  <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> REP <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> REP<span class="sc">:</span>IBLOCK) <span class="sc">+</span> TREATMENT, <span class="at">data =</span> d_alpha)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>fit_rowcol <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> REP <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> REP<span class="sc">:</span>rowf) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> REP<span class="sc">:</span>colf) <span class="sc">+</span> TREATMENT,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> d_rowcol)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The precision of a design is measured by the <strong>standard error of the difference</strong> (SED) between two genotype means: the smaller, the smaller the differences the trial can detect. With incomplete blocks the SED is not the same for every pair (it depends on whether two genotypes shared a block), so we use the average over all pairs:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>average_sed <span class="ot">&lt;-</span> <span class="cf">function</span>(fit) {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  V <span class="ot">&lt;-</span> <span class="fu">vcov</span>(<span class="fu">emmeans</span>(fit, <span class="st">"TREATMENT"</span>, <span class="at">lmer.df =</span> <span class="st">"asymptotic"</span>))  <span class="co"># covariance of the means</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(V)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  mean_var <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">diag</span>(V))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  mean_cov <span class="ot">&lt;-</span> (<span class="fu">sum</span>(V) <span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">diag</span>(V))) <span class="sc">/</span> (n <span class="sc">*</span> (n <span class="sc">-</span> <span class="dv">1</span>))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="dv">2</span> <span class="sc">*</span> (mean_var <span class="sc">-</span> mean_cov))   <span class="co"># average variance of a difference = 2 (var - cov)</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>designs <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> <span class="fu">c</span>(<span class="st">"CRD"</span>, <span class="st">"RCBD"</span>, <span class="st">"Alpha-lattice"</span>, <span class="st">"Resolvable row-column"</span>),</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">sed    =</span> <span class="fu">c</span>(<span class="fu">average_sed</span>(fit_crd), <span class="fu">average_sed</span>(fit_rcbd),</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>             <span class="fu">average_sed</span>(fit_alpha), <span class="fu">average_sed</span>(fit_rowcol))</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">LSD =</span> <span class="dv">2</span> <span class="sc">*</span> sed,   <span class="co"># approximate least significant difference (5%)</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">relative_to_RCBD =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> (sed[<span class="dv">2</span>] <span class="sc">/</span> sed)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>designs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  design                  sed   LSD relative_to_RCBD
+  &lt;chr&gt;                 &lt;dbl&gt; &lt;dbl&gt;            &lt;dbl&gt;
+1 CRD                   0.291 0.582               96
+2 RCBD                  0.285 0.570              100
+3 Alpha-lattice         0.256 0.512              124
+4 Resolvable row-column 0.196 0.393              211</code></pre>
+</div>
+</div>
+<p>On the same field, with the same number of plots, the average SED goes from 0.285 t/ha in the RCBD to 0.256 in the alpha-lattice and 0.196 in the resolvable row-column design. The last column is the <strong>relative efficiency</strong>: the resolvable row-column design is as precise as an RCBD with about 2.1 times as many replicates, at no extra cost in land or seed.</p>
+<p>Three lessons:</p>
+<ul>
+<li><strong>The RCBD gains nothing over the CRD here.</strong> The two halves of this field have almost the same mean yield, so the two large blocks remove almost no variation. A different randomization changes the numbers slightly, but not this conclusion.</li>
+<li><strong>Small blocks help.</strong> The alpha blocks follow the columns, so they capture the column-to-column variation, including the seeder pattern of <a href="#fig-williams-cols" class="quarto-xref">Figure&nbsp;<span>5.2</span></a>.</li>
+<li><strong>Blocking in two directions helps most</strong>, because this field varies along rows and along columns.</li>
+</ul>
+<p>The Wageningen course obtained the same ranking with simulated genotypes on the same field (LSD of 0.57, 0.41 and 0.36 t/ha for RCBD, alpha and resolvable row-column). The gain of a design depends on the field: in a field without trends the incomplete blocks gain little, but they rarely lose, and the model can tell how much they helped (the block variance).</p>
 </section>
-<section id="exercise" class="level2" data-number="5.11">
-<h2 data-number="5.11" class="anchored" data-anchor-id="exercise"><span class="header-section-number">5.11</span> Exercise</h2>
-<!-- TODO: one exercise on the shared data -->
-<div class="callout callout-style-default callout-tip callout-empty-content callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+</section>
+<section id="real-trials-and-their-designs" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="real-trials-and-their-designs"><span class="header-section-number">5.5</span> Real trials and their designs</h2>
+<section id="an-alpha-lattice-the-bean-trial" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="an-alpha-lattice-the-bean-trial"><span class="header-section-number">5.5.1</span> An alpha-lattice: the bean trial</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>beans <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/Example_Beans.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>beans <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">block_n =</span> <span class="fu">as.integer</span>(<span class="fu">sub</span>(<span class="st">"B"</span>, <span class="st">""</span>, block))) <span class="sc">|&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(row, col, <span class="at">fill =</span> <span class="fu">factor</span>((block_n <span class="sc">+</span> (block_n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">%/%</span> <span class="dv">6</span>) <span class="sc">%%</span> <span class="dv">2</span>))) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">6.5</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"grey70"</span>, <span class="st">"grey88"</span>), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">3.5</span>, <span class="fl">9.5</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"R1"</span>, <span class="st">"R2"</span>)) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Field row"</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-beans-blocks" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-beans-blocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-experimental-designs_files/figure-html/fig-beans-blocks-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-beans-blocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.4: Incomplete blocks of the bean trial Dar16C_hiP: each block is 11 rows by 2 columns (22 plots). Colours alternate between neighbouring blocks.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The model of an alpha-lattice has replicates and blocks within replicates:</p>
+<p><span class="math display">\[
+y_{ijk} = \mu + R_j + b_{k(j)} + G_i + \varepsilon_{ijk},
+\qquad b_{k(j)} \sim N(0, \sigma^2_b), \quad \varepsilon_{ijk} \sim N(0, \sigma^2_\varepsilon)
+\]</span></p>
+<p>where <span class="math inline">\(R_j\)</span> is replicate <span class="math inline">\(j\)</span>, <span class="math inline">\(b_{k(j)}\)</span> is block <span class="math inline">\(k\)</span> within replicate <span class="math inline">\(j\)</span>, and <span class="math inline">\(G_i\)</span> is genotype <span class="math inline">\(i\)</span>. Note that <code>B1</code> in R1 and <code>B1</code> in R2 are different blocks: the term must be written <code>rep:block</code>, not <code>block</code>.</p>
+</section>
+<section id="a-resolvable-row-column-design-australian-wheat" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="a-resolvable-row-column-design-australian-wheat"><span class="header-section-number">5.5.2</span> A resolvable row-column design: Australian wheat</h3>
+<p>The second dataset comes from 14 wheat trials in Australia (7 locations in 2008 and 2009), each laid out as a resolvable row-column design. It was used in the Wageningen course and is used here with permission. We look at the trial <code>WH09</code> (Wongan Hills, 2009):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>wheat <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/wheat_Australia_2008_2009_7loc.csv"</span>,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>wh09 <span class="ot">&lt;-</span> wheat <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Trial <span class="sc">==</span> <span class="st">"WH09"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(rep, row, col, geno), factor))</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>wh09 <span class="sc">|&gt;</span> <span class="fu">count</span>(rep)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  rep       n
+  &lt;fct&gt; &lt;int&gt;
+1 1       203
+2 2       203</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>wh09 <span class="sc">|&gt;</span> <span class="fu">count</span>(geno, <span class="at">name =</span> <span class="st">"plots"</span>) <span class="sc">|&gt;</span> <span class="fu">count</span>(plots, <span class="at">name =</span> <span class="st">"genotypes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  plots genotypes
+  &lt;int&gt;     &lt;int&gt;
+1     1         2
+2     2       178
+3     4        12</code></pre>
+</div>
+</div>
+<p>The trial has 406 plots in 2 replicates; most genotypes have 2 plots, 12 have 4 and 2 have only one. Each replicate occupies 6 columns and 34 rows:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wh09, <span class="fu">aes</span>(<span class="fu">as.integer</span>(row), <span class="fu">as.integer</span>(col), <span class="at">fill =</span> yield)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">6.5</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Row"</span>, <span class="at">y =</span> <span class="st">"Column"</span>, <span class="at">fill =</span> <span class="st">"t/ha"</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-wh09-map" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wh09-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-experimental-designs_files/figure-html/fig-wh09-map-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wh09-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.5: Yield of the wheat trial WH09 (Wongan Hills, 2009). Replicate 1 occupies columns 1 to 6 and replicate 2 columns 7 to 12.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The model of a resolvable row-column design has replicates, and rows and columns <strong>within</strong> replicates:</p>
+<p><span class="math display">\[
+y_{ijkm} = \mu + Rep_m + r_{j(m)} + c_{k(m)} + G_i + \varepsilon_{ijkm}
+\]</span></p>
+<p>Rows and columns are incomplete blocks, so they are random. If we ignore them and analyse the trial as an RCBD (replicates only), the field variation stays in the error:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>m_rcbd   <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> geno), <span class="at">data =</span> wh09)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>m_rowcol <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rep<span class="sc">:</span>row) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rep<span class="sc">:</span>col) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> geno),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> wh09)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">VarCorr</span>(m_rcbd), <span class="at">comp =</span> <span class="st">"Variance"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Groups   Name        Variance
+ geno     (Intercept) 0.058336
+ Residual             0.300582</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">VarCorr</span>(m_rowcol), <span class="at">comp =</span> <span class="st">"Variance"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Groups   Name        Variance
+ geno     (Intercept) 0.087010
+ rep:row  (Intercept) 0.011957
+ rep:col  (Intercept) 0.107317
+ Residual             0.174646</code></pre>
+</div>
+</div>
+<p>With the row-column model the residual variance falls from about 0.30 to 0.17, and most of the field variation is between <strong>columns</strong> (0.107), much less between rows (0.012). The genotype variance becomes larger, because part of what looked like error was field. How this translates into heritability is the topic of <a href="07-mixed-models.html#sec-heritability" class="quarto-xref"><span>Section 7.7</span></a>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><code>row</code> or <code>rep:row</code>?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In WH09 the row numbers 1 to 34 are used in both replicates. <code>(1 | row)</code> would treat row 5 of replicate 1 and row 5 of replicate 2 as the same block, although they are in different parts of the field. In a resolvable design, rows and columns are nested within replicates: write <code>(1 | rep:row) + (1 | rep:col)</code>, or number the rows and columns so that each one is unique in the field.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="early-generations-augmented-and-p-rep-designs" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="early-generations-augmented-and-p-rep-designs"><span class="header-section-number">5.6</span> Early generations: augmented and p-rep designs</h2>
+<p>In M2 to M4 populations there are hundreds or thousands of lines, seed is limited, and most lines can be sown in <strong>one plot only</strong>. Two designs are used:</p>
+<ul>
+<li><strong>Augmented designs</strong>: the test lines are not replicated; a few checks (in mutation breeding, at least the <strong>parent</strong> variety) are repeated many times. The error is estimated only from the checks.</li>
+<li><strong>p-rep designs</strong>: a fraction of the test lines (for example 10% to 30%) is sown in two plots, the rest in one. The replicated test lines estimate the error, and no plots are spent on repeating checks (although checks can be included).</li>
+</ul>
+<section id="both-designs-on-the-mercer-and-hall-field" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="both-designs-on-the-mercer-and-hall-field"><span class="header-section-number">5.6.1</span> Both designs on the Mercer and Hall field</h3>
+<p>We compare them again on a real uniformity trial: the wheat trial of Mercer and Hall (1911) at Rothamsted, 500 plots in 20 rows and 25 columns. Both designs test <strong>460 entries in 500 plots</strong>:</p>
+<ul>
+<li><strong>Augmented</strong> (FielDHub <code>diagonal_arrangement()</code>): 460 unreplicated lines plus 4 checks in 39 plots, placed on diagonals across the field.</li>
+<li><strong>p-rep</strong> (FielDHub <code>partially_replicated()</code>): 40 lines in 2 plots and 420 lines in 1 plot.</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mercer <span class="ot">&lt;-</span> mercer.wheat.uniformity <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">ROW =</span> row, <span class="at">COLUMN =</span> col)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>prep <span class="ot">&lt;-</span> <span class="fu">partially_replicated</span>(<span class="at">nrows =</span> <span class="dv">20</span>, <span class="at">ncols =</span> <span class="dv">25</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">repGens =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">420</span>), <span class="at">repUnits =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                             <span class="at">seed =</span> <span class="dv">2026</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>aug  <span class="ot">&lt;-</span> <span class="fu">diagonal_arrangement</span>(<span class="at">nrows =</span> <span class="dv">20</span>, <span class="at">ncols =</span> <span class="dv">25</span>, <span class="at">lines =</span> <span class="dv">460</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>                             <span class="at">checks =</span> <span class="dv">4</span>, <span class="at">seed =</span> <span class="dv">2026</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>prep<span class="sc">$</span>fieldBook <span class="sc">|&gt;</span> <span class="fu">count</span>(TREATMENT, <span class="at">name =</span> <span class="st">"plots"</span>) <span class="sc">|&gt;</span> <span class="fu">count</span>(plots)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  plots     n
+  &lt;int&gt; &lt;int&gt;
+1     1   420
+2     2    40</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>aug<span class="sc">$</span>fieldBook  <span class="sc">|&gt;</span> <span class="fu">count</span>(<span class="at">is_check =</span> CHECKS <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  is_check   n
+1    FALSE 461
+2     TRUE  39</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  prep<span class="sc">$</span>fieldBook <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_count</span>(TREATMENT) <span class="sc">|&gt;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transmute</span>(ROW, COLUMN, <span class="at">design =</span> <span class="st">"p-rep"</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">type =</span> <span class="fu">if_else</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="st">"replicated"</span>, <span class="st">"single plot"</span>)),</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  aug<span class="sc">$</span>fieldBook <span class="sc">|&gt;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transmute</span>(ROW, COLUMN, <span class="at">design =</span> <span class="st">"augmented"</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">type =</span> <span class="fu">if_else</span>(CHECKS <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"replicated"</span>, <span class="st">"single plot"</span>))</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(COLUMN, ROW, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>design) <span class="sc">+</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">replicated =</span> <span class="st">"grey25"</span>, <span class="st">`</span><span class="at">single plot</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"grey85"</span>)) <span class="sc">+</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Column"</span>, <span class="at">y =</span> <span class="st">"Row"</span>, <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-prep-aug" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-prep-aug-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-experimental-designs_files/figure-html/fig-prep-aug-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prep-aug-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.6: The p-rep and augmented layouts on the Mercer and Hall field (20 rows by 25 columns). Dark plots are replicated test lines (p-rep) or checks (augmented).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Both trials are analysed with the same model: entries fixed, rows and columns random. Because the field is blank, we can measure two things for the unreplicated lines:</p>
+<ul>
+<li>the <strong>SED reported by the model</strong>, which is what the breeder would see;</li>
+<li>the <strong>true SED</strong>: the true differences between entries are zero, so the observed spread of the estimated means of the unreplicated lines is pure error (<span class="math inline">\(\sqrt{2 \times \text{variance of the means}}\)</span>).</li>
+</ul>
+<p>One randomization can be lucky or unlucky, so we repeat both designs with 10 different seeds:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sed_single_plots <span class="ot">&lt;-</span> <span class="cf">function</span>(fb) {</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> fb <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(TREATMENT <span class="sc">!=</span> <span class="st">"Filler"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">inner_join</span>(mercer, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"ROW"</span>, <span class="st">"COLUMN"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">TREATMENT =</span> <span class="fu">factor</span>(TREATMENT),</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">rowf =</span> <span class="fu">factor</span>(ROW), <span class="at">colf =</span> <span class="fu">factor</span>(COLUMN))</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">lmer</span>(grain <span class="sc">~</span> TREATMENT <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rowf) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> colf), <span class="at">data =</span> d)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  em  <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit, <span class="st">"TREATMENT"</span>, <span class="at">lmer.df =</span> <span class="st">"asymptotic"</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  single <span class="ot">&lt;-</span> <span class="fu">table</span>(d<span class="sc">$</span>TREATMENT)[<span class="fu">as.character</span>(<span class="fu">summary</span>(em)<span class="sc">$</span>TREATMENT)] <span class="sc">==</span> <span class="dv">1</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  V <span class="ot">&lt;-</span> <span class="fu">vcov</span>(em)[single, single]</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(V)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">model_sed =</span> <span class="fu">sqrt</span>(<span class="dv">2</span> <span class="sc">*</span> (<span class="fu">mean</span>(<span class="fu">diag</span>(V)) <span class="sc">-</span> (<span class="fu">sum</span>(V) <span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">diag</span>(V))) <span class="sc">/</span> (n <span class="sc">*</span> (n <span class="sc">-</span> <span class="dv">1</span>)))),</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">true_sed  =</span> <span class="fu">sqrt</span>(<span class="dv">2</span> <span class="sc">*</span> <span class="fu">var</span>(<span class="fu">summary</span>(em)<span class="sc">$</span>emmean[single])))</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>seeds <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(seeds, \(s) <span class="fu">sed_single_plots</span>(</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">partially_replicated</span>(<span class="at">nrows =</span> <span class="dv">20</span>, <span class="at">ncols =</span> <span class="dv">25</span>, <span class="at">repGens =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">420</span>),</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>                         <span class="at">repUnits =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>), <span class="at">seed =</span> s)<span class="sc">$</span>fieldBook)) <span class="sc">|&gt;</span></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">design =</span> <span class="st">"p-rep"</span>),</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(seeds, \(s) <span class="fu">sed_single_plots</span>(</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">diagonal_arrangement</span>(<span class="at">nrows =</span> <span class="dv">20</span>, <span class="at">ncols =</span> <span class="dv">25</span>, <span class="at">lines =</span> <span class="dv">460</span>,</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>                         <span class="at">checks =</span> <span class="dv">4</span>, <span class="at">seed =</span> s)<span class="sc">$</span>fieldBook)) <span class="sc">|&gt;</span></span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">design =</span> <span class="st">"augmented"</span>)</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>results <span class="sc">|&gt;</span></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(design) <span class="sc">|&gt;</span></span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(model_sed, true_sed), mean))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  design    model_sed true_sed
+  &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;
+1 augmented     0.455    0.633
+2 p-rep         0.557    0.644</code></pre>
+</div>
+</div>
+<p>The result is a warning more than a winner:</p>
+<ul>
+<li><strong>The true precision is the same</strong> for both designs (true SED close to 0.63 t/ha). With one plot per line, a line’s value is its single plot, whatever the design.</li>
+<li><strong>The augmented design reports a precision that is too optimistic.</strong> Its error is estimated from only 39 check plots, and the model SED is clearly smaller than the true SED. The p-rep design estimates the error from 40 pairs of test lines spread over the field, and its model SED is closer to the truth.</li>
+<li>In the p-rep design the replicated plots are <strong>test lines</strong>, so 40 candidates get two observations instead of repeating 4 checks; in the augmented design the checks give information about the field, but none about the candidates.</li>
+<li>For both designs, rows and columns remove little variation from single plots. Unreplicated trials need the <strong>spatial models</strong> of <a href="09-spatial-analysis.html" class="quarto-xref"><span>Chapter 9</span></a> to use the information of neighbouring plots.</li>
+</ul>
+<p>Mutation-specific designs (how many M2 plants, how to place the parent, family structure) are developed in <a href="../part2-week2/13-mutant-populations.html" class="quarto-xref"><span>Chapter 14</span></a>.</p>
+</section>
+</section>
+<section id="choosing-a-design-by-breeding-stage" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="choosing-a-design-by-breeding-stage"><span class="header-section-number">5.7</span> Choosing a design by breeding stage</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stage</th>
+<th>Entries</th>
+<th>Seed and replicates</th>
+<th>Recommended design</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>M2 to M3, early generations</td>
+<td>Hundreds to thousands</td>
+<td>One plot per line</td>
+<td>Augmented with the parent as check, or p-rep if some lines have seed for 2 plots; spatial analysis</td>
+</tr>
+<tr class="even">
+<td>Preliminary yield trial</td>
+<td>100 to 400</td>
+<td>2 replicates</td>
+<td>Alpha-lattice or resolvable row-column</td>
+</tr>
+<tr class="odd">
+<td>Advanced yield trial</td>
+<td>20 to 60</td>
+<td>3 or 4 replicates</td>
+<td>Alpha-lattice; RCBD only with few entries in a uniform field</td>
+</tr>
+<tr class="even">
+<td>Multi-location trials</td>
+<td>10 to 50</td>
+<td>2 to 4 replicates per location</td>
+<td>Alpha-lattice or resolvable row-column at each location</td>
+</tr>
+<tr class="odd">
+<td>Greenhouse or phenotyping platform</td>
+<td>Any</td>
+<td>Benches, trays, conveyor positions</td>
+<td>Row-column: rows and columns of the bench are real blocks</td>
+</tr>
+</tbody>
+</table>
+<p>Two practical rules:</p>
+<ul>
+<li><strong>Choose the block size from the field, not from the number of entries.</strong> Blocks should be small enough to be uniform: in field trials, blocks of 5 to 20 plots are common.</li>
+<li><strong>Write down the layout before sowing</strong> (field book with replicate, block, row and column), and keep the row and column of every plot. Without coordinates, the field effects cannot be modelled later (<a href="09-spatial-analysis.html" class="quarto-xref"><span>Chapter 9</span></a>).</li>
+</ul>
+</section>
+<section id="generating-layouts-with-fieldhub" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="generating-layouts-with-fieldhub"><span class="header-section-number">5.8</span> Generating layouts with FielDHub</h2>
+<p>FielDHub (Murillo et al., 2021) generates and randomizes all the designs of this chapter, as an R package and as a Shiny app:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>FielDHub<span class="sc">::</span><span class="fu">run_app</span>()   <span class="co"># opens the app in the browser</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The app has one tab per design. You enter the number of entries, replicates, block size or field dimensions, and it returns the layout map and the field book, which can be downloaded as a CSV file.</p>
+<p>In R, the same is done with one function per design:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Design</th>
+<th>FielDHub function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CRD</td>
+<td><code>CRD(t, reps)</code></td>
+</tr>
+<tr class="even">
+<td>RCBD</td>
+<td><code>RCBD(t, reps)</code></td>
+</tr>
+<tr class="odd">
+<td>Augmented RCBD</td>
+<td><code>RCBD_augmented(lines, checks, b)</code></td>
+</tr>
+<tr class="even">
+<td>Augmented, diagonal checks</td>
+<td><code>diagonal_arrangement(nrows, ncols, lines, checks)</code></td>
+</tr>
+<tr class="odd">
+<td>Alpha-lattice</td>
+<td><code>alpha_lattice(t, k, r)</code></td>
+</tr>
+<tr class="even">
+<td>Resolvable row-column</td>
+<td><code>row_column(t, nrows, r)</code></td>
+</tr>
+<tr class="odd">
+<td>p-rep</td>
+<td><code>partially_replicated(nrows, ncols, repGens, repUnits)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Always set <code>seed</code>: the same seed gives the same layout, so the randomization can be reproduced and documented. Use real names for the entries with the argument <code>data</code>, and give the field book the column names of the course template (<a href="../part0-precourse/02-tidy-data.html" class="quarto-xref"><span>Chapter 2</span></a>) before taking it to the field:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>entries <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ENTRY =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">NAME  =</span> <span class="fu">c</span>(<span class="st">"Parent"</span>, <span class="fu">paste0</span>(<span class="st">"M3-"</span>, <span class="fu">sprintf</span>(<span class="st">"%03d"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">29</span>))))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">alpha_lattice</span>(<span class="at">t =</span> <span class="dv">30</span>, <span class="at">k =</span> <span class="dv">5</span>, <span class="at">r =</span> <span class="dv">3</span>, <span class="at">seed =</span> <span class="dv">2026</span>, <span class="at">data =</span> entries)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>field_book <span class="ot">&lt;-</span> design<span class="sc">$</span>fieldBook <span class="sc">|&gt;</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">location =</span> <span class="st">"Skopje"</span>, <span class="at">year =</span> <span class="dv">2027</span>, <span class="at">rep =</span> REP, <span class="at">block =</span> IBLOCK,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> PLOT, <span class="at">geno =</span> TREATMENT)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(field_book)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  location year rep block plot   geno
+1   Skopje 2027   1     1  101 M3-027
+2   Skopje 2027   1     1  102 M3-015
+3   Skopje 2027   1     1  103 M3-012
+4   Skopje 2027   1     1  104 M3-020
+5   Skopje 2027   1     1  105 M3-022
+6   Skopje 2027   1     2  106 M3-001</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(design)                                    <span class="co"># layout map</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(field_book, <span class="st">"my_alpha_field_book.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="sec-model-from-layout" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="sec-model-from-layout"><span class="header-section-number">5.9</span> From layout to statistical model</h2>
+<p>The design determines the model. Every restriction of the randomization (replicate, block, row, column) becomes a term:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># genotypes fixed; incomplete blocks, rows and columns random</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> geno)                                                  <span class="co"># CRD</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> rep <span class="sc">+</span> geno)                                            <span class="co"># RCBD</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> block <span class="sc">+</span> geno)                                          <span class="co"># Augmented (or rows and columns random)</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(y <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rep<span class="sc">:</span>block) <span class="sc">+</span> geno)                        <span class="co"># Alpha-lattice</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(y <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">|</span> row) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> col) <span class="sc">+</span> geno)                        <span class="co"># Row-column</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(y <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rep<span class="sc">:</span>row) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rep<span class="sc">:</span>col) <span class="sc">+</span> geno)          <span class="co"># Resolvable row-column</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(y <span class="sc">~</span> geno <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> row) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> col))                        <span class="co"># p-rep, usually with a spatial term</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Three rules:</p>
+<ul>
+<li><strong>Complete blocks (replicates) can be fixed or random</strong>: every genotype is in every block, so blocks and genotypes are independent.</li>
+<li><strong>Incomplete blocks, rows and columns should be random.</strong> A genotype is not in every block, so part of the information about genotypes is between blocks; random blocks recover it.</li>
+<li><strong>Genotypes are fixed</strong> to compare and select them (BLUEs), and <strong>random</strong> to estimate the genetic variance and heritability (BLUPs). Both models are fitted, as shown in <a href="07-mixed-models.html" class="quarto-xref"><span>Chapter 7</span></a>.</li>
+</ul>
+</section>
+<section id="exercise" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="exercise"><span class="header-section-number">5.10</span> Exercise</h2>
+<p>The dataset <code>john.alpha</code> in <code>agridat</code> is a real spring oats trial from Craibstone, near Aberdeen (John and Williams, 1995): 24 varieties in an alpha-lattice with 3 replicates, each with 6 incomplete blocks of 4 plots.</p>
+<ol type="1">
+<li>Check the design: how many plots per replicate, how many blocks per replicate, how many plots per block?</li>
+<li>Fit the model of an RCBD (replicates only) and the model of the alpha-lattice (blocks within replicates, random). Compare the residual variance and the average SED of the two models.</li>
+<li>Generate a new alpha-lattice for the same trial (24 entries, blocks of 4, 3 replicates) with FielDHub, and look at its field book.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -410,23 +1173,91 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Check the design</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>john.alpha <span class="sc">|&gt;</span> <span class="fu">count</span>(rep)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  rep  n
+1  R1 24
+2  R2 24
+3  R3 24</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>john.alpha <span class="sc">|&gt;</span> <span class="fu">count</span>(rep, block) <span class="sc">|&gt;</span> <span class="fu">count</span>(rep, <span class="at">plots_per_block =</span> n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  rep plots_per_block n
+1  R1               4 6
+2  R2               4 6
+3  R3               4 6</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. RCBD model vs alpha model</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>oats_rcbd  <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> rep <span class="sc">+</span> gen, <span class="at">data =</span> john.alpha)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>oats_alpha <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rep<span class="sc">:</span>block) <span class="sc">+</span> gen, <span class="at">data =</span> john.alpha)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(oats_rcbd)<span class="sc">^</span><span class="dv">2</span>    <span class="co"># residual variance, RCBD model</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.134586</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">VarCorr</span>(oats_alpha), <span class="at">comp =</span> <span class="st">"Variance"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Groups    Name        Variance
+ rep:block (Intercept) 0.061944
+ Residual              0.085225</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>average_sed_gen <span class="ot">&lt;-</span> <span class="cf">function</span>(fit) {</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  V <span class="ot">&lt;-</span> <span class="fu">vcov</span>(<span class="fu">emmeans</span>(fit, <span class="st">"gen"</span>, <span class="at">lmer.df =</span> <span class="st">"asymptotic"</span>))</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(V)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="dv">2</span> <span class="sc">*</span> (<span class="fu">mean</span>(<span class="fu">diag</span>(V)) <span class="sc">-</span> (<span class="fu">sum</span>(V) <span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">diag</span>(V))) <span class="sc">/</span> (n <span class="sc">*</span> (n <span class="sc">-</span> <span class="dv">1</span>))))</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">rcbd =</span> <span class="fu">average_sed_gen</span>(oats_rcbd), <span class="at">alpha =</span> <span class="fu">average_sed_gen</span>(oats_alpha))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     rcbd     alpha 
+0.2995396 0.2647806 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. A new randomization of the same design</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>new_alpha <span class="ot">&lt;-</span> <span class="fu">alpha_lattice</span>(<span class="at">t =</span> <span class="dv">24</span>, <span class="at">k =</span> <span class="dv">4</span>, <span class="at">r =</span> <span class="dv">3</span>, <span class="at">seed =</span> <span class="dv">2026</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(new_alpha<span class="sc">$</span>fieldBook)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID LOCATION PLOT REP IBLOCK UNIT ENTRY TREATMENT
+1  1        1  101   1      1    1    12      G-12
+2  2        1  102   1      1    2    19      G-19
+3  3        1  103   1      1    3    11      G-11
+4  4        1  104   1      1    4     1       G-1
+5  5        1  105   1      2    1    22      G-22
+6  6        1  106   1      2    2    20      G-20</code></pre>
+</div>
+</div>
+<p>The block variance is a large part of the field variation. With the blocks in the model, the residual variance falls from 0.135 to 0.085, and the average SED from about 0.30 to 0.26 t/ha. Analysing an alpha-lattice as an RCBD throws away the information of the blocks.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="key-takeaways" class="level2" data-number="5.12">
-<h2 data-number="5.12" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">5.12</span> Key takeaways</h2>
+<section id="key-takeaways" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">5.11</span> Key takeaways</h2>
 <ul>
-<li></li>
-<li></li>
-<li></li>
+<li>Replication estimates the error, randomization makes it valid, and blocking removes field variation from the comparisons.</li>
+<li>Fields vary at short distances and in more than one direction. Breeding trials, with many entries, need <strong>incomplete blocks</strong>: alpha-lattice or row-column designs.</li>
+<li>On a real uniformity field, the resolvable row-column design was about twice as efficient as the RCBD, with the same plots and seed.</li>
+<li>For early generations with limited seed, augmented and p-rep designs have the same true precision, but the augmented design overstates it; analyse both with spatial models.</li>
+<li>The design determines the model: replicates, blocks within replicates, rows and columns within replicates. Incomplete blocks are random.</li>
+<li>Generate layouts with FielDHub, set the seed, and keep the row and column of every plot.</li>
 </ul>
 </section>
-<section id="references" class="level2" data-number="5.13">
-<h2 data-number="5.13" class="anchored" data-anchor-id="references"><span class="header-section-number">5.13</span> References</h2>
+<section id="references" class="level2" data-number="5.12">
+<h2 data-number="5.12" class="anchored" data-anchor-id="references"><span class="header-section-number">5.12</span> References</h2>
+<ul>
+<li>Cullis, B. R., Smith, A. B., &amp; Coombes, N. E. (2006). On the design of early generation variety trials with correlated data. <em>Journal of Agricultural, Biological, and Environmental Statistics</em>, 11(4), 381-393. <a href="https://doi.org/10.1198/108571106X154443" class="uri">https://doi.org/10.1198/108571106X154443</a></li>
+<li>Bustos-Korts, D., Adams, J., &amp; van Eeuwijk, F. (2021). <em>Genotype to phenotype modelling of multi-environment trials</em>, course materials (lecture “Analysis of advanced experimental designs” and Practical 1). Biometris, Wageningen University and Research. Australian wheat data used with permission.</li>
+<li>Federer, W. T. (1956). Augmented (or hoonuiaku) designs. <em>Hawaiian Planters’ Record</em>, 55, 191-208.</li>
+<li>John, J. A., &amp; Williams, E. R. (1995). <em>Cyclic and Computer Generated Designs</em> (2nd ed.). Chapman and Hall. Data: <code>agridat::john.alpha</code>.</li>
+<li>Mercer, W. B., &amp; Hall, A. D. (1911). The experimental error of field trials. <em>The Journal of Agricultural Science</em>, 4(2), 107-132. <a href="https://doi.org/10.1017/S002185960000160X" class="uri">https://doi.org/10.1017/S002185960000160X</a>. Data: <code>agridat::mercer.wheat.uniformity</code>.</li>
+<li>Murillo, D. A., Gezan, S. A., Heilman, A. M., Walk, T. C., Aparicio, J. S., &amp; Horsley, R. D. (2021). FielDHub: a Shiny app for design of experiments in life sciences. <em>Journal of Open Source Software</em>, 6(61), 3122. <a href="https://doi.org/10.21105/joss.03122" class="uri">https://doi.org/10.21105/joss.03122</a></li>
+<li>Patterson, H. D., &amp; Williams, E. R. (1976). A new class of resolvable incomplete block designs. <em>Biometrika</em>, 63(1), 83-92. <a href="https://doi.org/10.1093/biomet/63.1.83" class="uri">https://doi.org/10.1093/biomet/63.1.83</a></li>
+<li>Stroup, W. W., Baenziger, P. S., &amp; Mulitze, D. K. (1994). Removing spatial variation from wheat yield trials: a comparison of methods. <em>Crop Science</em>, 34(1), 62-66. <a href="https://doi.org/10.2135/cropsci1994.0011183X003400010011x" class="uri">https://doi.org/10.2135/cropsci1994.0011183X003400010011x</a></li>
+<li>Williams, E. R., &amp; Luckett, D. J. (1988). The use of uniformity data in the design and analysis of cotton and barley variety trials. <em>Australian Journal of Agricultural Research</em>, 39(3), 339-350. <a href="https://doi.org/10.1071/AR9880339" class="uri">https://doi.org/10.1071/AR9880339</a>. Data: <code>agridat::williams.barley.uniformity</code>.</li>
+<li>Wright, K. (2024). <em>agridat: Agricultural Datasets</em>. R package version 1.27. <a href="https://kwstat.github.io/agridat/" class="uri">https://kwstat.github.io/agridat/</a></li>
+</ul>
 
 
 </section>
