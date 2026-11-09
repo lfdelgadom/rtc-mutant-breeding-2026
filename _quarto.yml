@@ -22,6 +22,7 @@ book:
   downloads: [pdf]
   chapters:
     - index.qmd
+    - setup.qmd
     - part: "Before the course"
       chapters:
         - part0-precourse/01-r-basics.qmd

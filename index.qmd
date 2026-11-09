@@ -11,6 +11,7 @@ This manual accompanies the **Regional Training Course on Experimental Design an
 
 ## Setup
 
+Start with [Getting started](setup.qmd): it explains how to download the course project, install the packages and get the updates.
 Run `R/install_packages.R` once to install all course packages. Participants with older computers can use [Posit Cloud](https://posit.cloud/plans/free).
 
 ## Authors

@@ -21,3 +21,6 @@ site_libs/
 
 # Slide render caches
 slides/*_cache/
+
+# participants' own work folder
+my-work/

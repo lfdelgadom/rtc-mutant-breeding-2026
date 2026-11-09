@@ -1,0 +1,84 @@
+# Getting started: install and update the course materials {.unnumbered}
+
+This page takes about 10 minutes. Do it once, on the first day, and keep it open: you will use the update steps again every time new content is added to the course.
+
+::: {.callout-warning}
+## Important: never edit the course files
+
+The course files are updated by the instructors during the two weeks. If you change a chapter, a slide file or a data file inside the project, the next update will stop with a conflict and you will not get the new content.
+
+**Do your own work in a separate folder.** Inside the project, create a folder called `my-work`, copy any file you want to change into it, and work on the copy. Nothing in `my-work` is ever touched by an update.
+:::
+
+## What you need
+
+- A computer with R 4.3 or newer and RStudio (already prepared for the course).
+- Git, a free program that downloads the course files and their updates. You do **not** need a GitHub account, a username or a password.
+- An internet connection for the first download and for each update.
+
+## Step 1: install Git (once)
+
+| Computer | What to do |
+|---|---|
+| Windows | Download from <https://git-scm.com/download/win>, run the installer and accept all the default options. |
+| Mac | Open the Terminal and type `git --version`. If Git is missing, the Mac offers to install it: click Install. Or download it from <https://git-scm.com/download/mac>. |
+
+Close RStudio completely and open it again, so that it finds Git.
+
+## Step 2: download the course project (once)
+
+1. In RStudio, choose **File**, then **New Project**, then **Version Control**, then **Git**.
+2. In *Repository URL*, paste:
+
+   ```
+   https://github.com/lfdelgadom/rtc-mutant-breeding-2026.git
+   ```
+
+3. Leave the project directory name as it is. Under *Create project as subdirectory of*, choose a folder you will remember, for example Documents.
+4. Click **Create Project**. RStudio downloads everything and opens the project.
+
+## Step 3: install the R packages (once)
+
+In the RStudio Console, run:
+
+```r
+source("R/install_packages.R")
+```
+
+Wait until every package shows `OK`. This can take several minutes. If a line says `FAILED`, run the command again, and if it still fails, ask an instructor.
+
+## Step 4: create your own work folder (once)
+
+In the RStudio Console, run:
+
+```r
+dir.create("my-work")
+```
+
+Put your own scripts and copies of exercises there.
+
+## Every time new content is added: update
+
+Open the course project in RStudio, then use one of these two ways.
+
+- **Button:** open the **Git** tab (top right panel) and click the blue arrow **Pull**.
+- **Terminal:** open the Terminal tab and type `git pull`.
+
+New chapters, slides and data files appear in the project. The online version of the book, at <https://lfdelgadom.github.io/rtc-mutant-breeding-2026/>, is updated at the same time.
+
+## If the update fails
+
+The most common cause is that a course file was edited. In the Terminal, type:
+
+```
+git stash
+git pull
+```
+
+`git stash` sets your changes aside and `git pull` then brings the new content. Your edits are not lost, but from now on do your work in `my-work`.
+
+## If Git does not work on your computer
+
+Some computers do not allow installing programs. In that case, open <https://github.com/lfdelgadom/rtc-mutant-breeding-2026>, click the green **Code** button, choose **Download ZIP**, and unzip it. Repeat this each time the instructors announce new content, into a new folder.
+
+If you only want to read the book, no installation is needed: use the online version.
