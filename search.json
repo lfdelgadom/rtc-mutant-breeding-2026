@@ -24,7 +24,7 @@
     "href": "index.html#setup",
     "title": "Experimental Design and Data Analysis for the Advancement of Mutant Populations",
     "section": "Setup",
-    "text": "Setup\nRun R/install_packages.R once to install all course packages. Participants with older computers can use Posit Cloud.",
+    "text": "Setup\nStart with Getting started: it explains how to download the course project, install the packages and get the updates. Run R/install_packages.R once to install all course packages. Participants with older computers can use Posit Cloud.",
     "crumbs": [
       "Welcome"
     ]
@@ -47,6 +47,96 @@
     "text": "Acknowledgements\nFAO/IAEA Centre of Nuclear Techniques in Food and Agriculture – Plant Breeding and Genetics Section.",
     "crumbs": [
       "Welcome"
+    ]
+  },
+  {
+    "objectID": "setup.html",
+    "href": "setup.html",
+    "title": "Getting started: install and update the course materials",
+    "section": "",
+    "text": "What you need\nThis page takes about 10 minutes. Do it once, on the first day, and keep it open: you will use the update steps again every time new content is added to the course.",
+    "crumbs": [
+      "Getting started: install and update the course materials"
+    ]
+  },
+  {
+    "objectID": "setup.html#what-you-need",
+    "href": "setup.html#what-you-need",
+    "title": "Getting started: install and update the course materials",
+    "section": "",
+    "text": "A computer with R 4.3 or newer and RStudio (already prepared for the course).\nGit, a free program that downloads the course files and their updates. You do not need a GitHub account, a username or a password.\nAn internet connection for the first download and for each update.",
+    "crumbs": [
+      "Getting started: install and update the course materials"
+    ]
+  },
+  {
+    "objectID": "setup.html#step-1-install-git-once",
+    "href": "setup.html#step-1-install-git-once",
+    "title": "Getting started: install and update the course materials",
+    "section": "Step 1: install Git (once)",
+    "text": "Step 1: install Git (once)\n\n\n\nComputer\nWhat to do\n\n\n\n\nWindows\nDownload from https://git-scm.com/download/win, run the installer and accept all the default options.\n\n\nMac\nOpen the Terminal and type git --version. If Git is missing, the Mac offers to install it: click Install. Or download it from https://git-scm.com/download/mac.\n\n\n\nClose RStudio completely and open it again, so that it finds Git.",
+    "crumbs": [
+      "Getting started: install and update the course materials"
+    ]
+  },
+  {
+    "objectID": "setup.html#step-2-download-the-course-project-once",
+    "href": "setup.html#step-2-download-the-course-project-once",
+    "title": "Getting started: install and update the course materials",
+    "section": "Step 2: download the course project (once)",
+    "text": "Step 2: download the course project (once)\n\nIn RStudio, choose File, then New Project, then Version Control, then Git.\nIn Repository URL, paste:\nhttps://github.com/lfdelgadom/rtc-mutant-breeding-2026.git\nLeave the project directory name as it is. Under Create project as subdirectory of, choose a folder you will remember, for example Documents.\nClick Create Project. RStudio downloads everything and opens the project.",
+    "crumbs": [
+      "Getting started: install and update the course materials"
+    ]
+  },
+  {
+    "objectID": "setup.html#step-3-install-the-r-packages-once",
+    "href": "setup.html#step-3-install-the-r-packages-once",
+    "title": "Getting started: install and update the course materials",
+    "section": "Step 3: install the R packages (once)",
+    "text": "Step 3: install the R packages (once)\nIn the RStudio Console, run:\nsource(\"R/install_packages.R\")\nWait until every package shows OK. This can take several minutes. If a line says FAILED, run the command again, and if it still fails, ask an instructor.",
+    "crumbs": [
+      "Getting started: install and update the course materials"
+    ]
+  },
+  {
+    "objectID": "setup.html#step-4-create-your-own-work-folder-once",
+    "href": "setup.html#step-4-create-your-own-work-folder-once",
+    "title": "Getting started: install and update the course materials",
+    "section": "Step 4: create your own work folder (once)",
+    "text": "Step 4: create your own work folder (once)\nIn the RStudio Console, run:\ndir.create(\"my-work\")\nPut your own scripts and copies of exercises there.",
+    "crumbs": [
+      "Getting started: install and update the course materials"
+    ]
+  },
+  {
+    "objectID": "setup.html#every-time-new-content-is-added-update",
+    "href": "setup.html#every-time-new-content-is-added-update",
+    "title": "Getting started: install and update the course materials",
+    "section": "Every time new content is added: update",
+    "text": "Every time new content is added: update\nOpen the course project in RStudio, then use one of these two ways.\n\nButton: open the Git tab (top right panel) and click the blue arrow Pull.\nTerminal: open the Terminal tab and type git pull.\n\nNew chapters, slides and data files appear in the project. The online version of the book, at https://lfdelgadom.github.io/rtc-mutant-breeding-2026/, is updated at the same time.",
+    "crumbs": [
+      "Getting started: install and update the course materials"
+    ]
+  },
+  {
+    "objectID": "setup.html#if-the-update-fails",
+    "href": "setup.html#if-the-update-fails",
+    "title": "Getting started: install and update the course materials",
+    "section": "If the update fails",
+    "text": "If the update fails\nThe most common cause is that a course file was edited. In the Terminal, type:\ngit stash\ngit pull\ngit stash sets your changes aside and git pull then brings the new content. Your edits are not lost, but from now on do your work in my-work.",
+    "crumbs": [
+      "Getting started: install and update the course materials"
+    ]
+  },
+  {
+    "objectID": "setup.html#if-git-does-not-work-on-your-computer",
+    "href": "setup.html#if-git-does-not-work-on-your-computer",
+    "title": "Getting started: install and update the course materials",
+    "section": "If Git does not work on your computer",
+    "text": "If Git does not work on your computer\nSome computers do not allow installing programs. In that case, open https://github.com/lfdelgadom/rtc-mutant-breeding-2026, click the green Code button, choose Download ZIP, and unzip it. Repeat this each time the instructors announce new content, into a new folder.\nIf you only want to read the book, no installation is needed: use the online version.",
+    "crumbs": [
+      "Getting started: install and update the course materials"
     ]
   },
   {
