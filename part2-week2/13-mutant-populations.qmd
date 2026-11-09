@@ -1,13 +1,13 @@
 # Experimental Design and Statistical Pipelines for Mutation Breeding Applications {#sec-mutant-populations}
 
 ::: {.chapter-info}
-**Author:** Anand Badigannavar\
+**Author:** Luis Fernando Delgado Muñoz\
 **Session:** Day 6 – Monday 16 November, 13:30–17:00 (Topic 10)
 :::
 
 ::: {.callout-note}
 ## Chapter in preparation
-This chapter will be written by Anand Badigannavar. The outline below follows the course agenda.
+This chapter will be written by Luis Fernando Delgado Muñoz. The outline below follows the course agenda.
 :::
 
 ## Learning objectives

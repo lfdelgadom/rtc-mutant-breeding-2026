@@ -1,0 +1,498 @@
+---
+title: "Day 4: Low-Cost High-Throughput Phenotyping with Images"
+subtitle: "Regional Training Course on Experimental Design and Data Analysis for the Advancement of Mutant Populations (RER5030)"
+author: "Luis Fernando Delgado Muñoz"
+date: "2026-11-12"
+date-format: "D MMMM YYYY"
+format:
+  revealjs:
+    theme: simple
+    css: rtc_style.css
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    transition: none
+    background-transition: fade
+    smaller: true
+    scrollable: true
+    code-copy: true
+    footer: "Luis Fernando Delgado Muñoz | RTC RER5030 | Day 4: Image analysis"
+execute:
+  echo: true
+  warning: false
+  message: false
+  cache: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+knitr::opts_knit$set(root.dir = if (dir.exists("data")) "." else "..")
+library(pliman)
+library(dplyr)
+```
+
+```{r}
+#| label: images
+#| include: false
+soy     <- image_pliman("soy_green.jpg", plot = FALSE)
+touch   <- image_pliman("soybean_touch.jpg", plot = FALSE)
+objects <- image_pliman("objects_300dpi.jpg", plot = FALSE)
+leaves  <- image_pliman("la_leaves.jpg", plot = FALSE)
+flax    <- image_pliman("flax_grains.jpg", plot = FALSE)
+fleaves <- image_pliman("flax_leaves.jpg", plot = FALSE)
+shadow  <- image_pliman("shadow.jpg", plot = FALSE)
+```
+
+## Plan for the afternoon
+
+| Block | Topic |
+|-----------------|-------------------------------------------------------|
+| 1 | From a photograph to a number |
+| 2 | Taking images that can be analysed |
+| 3 | Counting, measuring and scale with `pliman` |
+| 4 | Colour, leaves and disease severity |
+| 5 | Many images at once, and is the trait good enough? |
+| 6 | Near infrared and drones (briefly), exercise and discussion |
+
+::: keybox
+**Goal:** leave able to turn a photograph taken with a phone into trait values for a trial, and to check that those values can be trusted.
+:::
+
+------------------------------------------------------------------------
+
+## Block 1 {.divider}
+
+From a photograph to a number
+
+------------------------------------------------------------------------
+
+## An image is a table of numbers
+
+1. **Capture** under controlled conditions
+2. **Segment**: separate seeds, leaves or lesions from the background
+3. **Measure**: count, size, shape, colour
+4. **Tabulate**: one row per plot, with the plot identifier
+5. **Analyse**: the table enters the same workflow as any other trait (Days 3 and 4)
+
+::: keybox
+High-throughput phenotyping does not need expensive equipment: a phone, a tray and R are enough to start.
+:::
+
+------------------------------------------------------------------------
+
+## Low-cost platforms
+
+| Platform | Typical use |
+|:--------------|:-----------------------------------------------|
+| Smartphone, stand and plain tray | Seed number, size and colour; leaf area; disease on detached leaves |
+| Flatbed scanner | Seeds, grains, leaves, roots; known resolution (dpi) |
+| Fixed RGB camera on a frame | Canopy cover and greenness of a plot, over time |
+| Camera modified for near infrared | Indices that need NIR (NDVI) |
+| Drone with RGB or multispectral camera | Plant height, canopy cover and vigour of the whole trial |
+
+[From the cheapest to the most expensive. Drones: only briefly, at the end.]{.small-note}
+
+------------------------------------------------------------------------
+
+## Block 2 {.divider}
+
+Taking images that can be analysed
+
+------------------------------------------------------------------------
+
+## Most of the work is before the photograph
+
+| Decision | What to do |
+|:-----------|:------------------------------------------------------|
+| Background | One plain colour that the objects do not have |
+| Light | Even and diffuse, the same for all images; no direct sun |
+| Scale | A reference object of known size in every image, or a known dpi |
+| Objects | Separated, flat, not overlapping |
+| File name | The plot identifier: `plot_101.jpg` |
+| Camera | Same camera and settings; keep the original files |
+
+------------------------------------------------------------------------
+
+## What uneven light does
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 3.6
+par(mfrow = c(1, 2), mar = c(0, 0, 0, 0))
+plot(shadow)
+invisible(analyze_objects(shadow, plot = TRUE, show_original = FALSE, verbose = FALSE))
+```
+
+- Left: a leaf with a shadow on the background. Right: the default mask
+- The shadow is read as part of the object and half of the leaf is lost
+- No setting repairs this reliably: **fix it at capture**
+
+------------------------------------------------------------------------
+
+## Block 3 {.divider}
+
+Counting, measuring and scale with `pliman`
+
+------------------------------------------------------------------------
+
+## Setting up
+
+```{r}
+#| eval: false
+install.packages("pliman")        # in the course installation
+BiocManager::install("EBImage")   # also required: from Bioconductor
+library(pliman)
+```
+
+::: keybox
+If `library(pliman)` prints "Package EBImage is required", the Bioconductor step is missing.
+:::
+
+- All images today are the **sample images** installed with `pliman` (Olivoto 2022)
+- `image_pliman("name.jpg")` reads them: the examples run on any computer
+
+------------------------------------------------------------------------
+
+## An image and an index
+
+```{r}
+dim(soy)      # height, width, and three colour channels
+```
+
+```{r}
+#| echo: false
+#| fig-width: 11
+#| fig-height: 2.7
+image_index(soy, index = c("R", "GLI", "NGRDI"), ncol = 3, nrow = 1)
+```
+
+- A **vegetation index** combines the channels in one number that highlights something
+- GLI is high for green tissue; NGRDI separates green from yellow and red
+- We choose the index that separates what we want, and check it on a few images
+
+------------------------------------------------------------------------
+
+## Counting seeds
+
+```{r}
+#| fig-width: 6
+#| fig-height: 4.6
+seeds <- analyze_objects(touch, marker = "id", verbose = FALSE)
+```
+
+```{r}
+seeds$statistics[1:3, ]
+```
+
+::: keybox
+**30 seeds**, touching seeds separated. We counted the labels one by one: correct. Every automatic count needs this check.
+:::
+
+------------------------------------------------------------------------
+
+## What is measured
+
+```{r}
+seeds$results |>
+  select(id, area, perimeter, length, width, circularity) |>
+  head(5)
+```
+
+- More than thirty measurements per object: area, perimeter, length, width, shape descriptors
+- All in **pixels**. To compare images we need a **scale**
+
+------------------------------------------------------------------------
+
+## Scale 1: a known resolution (dpi)
+
+```{r}
+obj <- analyze_objects(objects, verbose = FALSE)
+cm  <- as.data.frame(unclass(get_measures(obj, dpi = 300)))
+cm |> select(id, area, width, length)
+```
+
+```{r}
+#| include: false
+sq <- cm[1, ]
+```
+
+::: keybox
+`objects_300dpi.jpg` contains a square of 10 x 10 cm. The software finds `r round(sq$width, 2)` x `r round(sq$length, 2)` cm, `r round(sq$area, 1)` cm²: an error of about 0.3%. **Validate with something of known size.**
+:::
+
+------------------------------------------------------------------------
+
+## Scale 2: a reference object
+
+```{r}
+#| fig-width: 5
+#| fig-height: 5
+la <- analyze_objects(leaves, marker = "id", reference = TRUE,
+                      reference_area = 4, reference_smaller = TRUE, verbose = FALSE)
+```
+
+```{r}
+la$results |> select(id, area, length, width)
+```
+
+- A square of 2 x 2 cm (4 cm²) travels with the sample: areas in cm² at any distance or camera
+
+------------------------------------------------------------------------
+
+## Many small seeds
+
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 4.8
+fx <- analyze_objects(flax, index = "GRAY", reference = TRUE, reference_area = 6,
+                      reference_larger = TRUE, show_contour = FALSE, marker = "point",
+                      verbose = FALSE)
+fx_noise <- analyze_objects(flax, index = "GRAY", reference = TRUE, reference_area = 6,
+                            reference_larger = TRUE, lower_noise = 0.3, plot = FALSE,
+                            verbose = FALSE)
+```
+
+```{r}
+#| eval: false
+analyze_objects(flax, index = "GRAY", reference = TRUE, reference_area = 6,
+                reference_larger = TRUE)
+```
+
+::: keybox
+`r nrow(fx$results)` seeds. With `lower_noise = 0.3` the same image gives `r nrow(fx_noise$results)`: **a parameter can change the count.** Look at the labelled image of a few samples before running a batch.
+:::
+
+------------------------------------------------------------------------
+
+## Block 4 {.divider}
+
+Colour, leaves and disease severity
+
+------------------------------------------------------------------------
+
+## Colour as a trait
+
+```{r}
+#| fig-width: 6.5
+#| fig-height: 3.2
+colour <- analyze_objects(soy, marker = "id", object_index = c("NGRDI", "GLI"),
+                          verbose = FALSE)
+```
+
+```{r}
+colour$object_index |> mutate(across(-id, \(x) round(x, 3)))
+```
+
+- Seeds 5 and 9 are greener: higher GLI, NGRDI close to zero
+
+------------------------------------------------------------------------
+
+## Classifying by a threshold
+
+```{r}
+colour$object_index |>
+  mutate(class = if_else(NGRDI > -0.05, "green", "yellow")) |>
+  count(class)
+```
+
+::: keybox
+The threshold must come from **data**: fix it on seeds classified by an expert, check it on another set. If colour is a **proxy** (yellow intensity for carotenoids), calibrate against laboratory values and test on new samples. That is a prediction problem: tomorrow's machine learning session.
+:::
+
+------------------------------------------------------------------------
+
+## Elongated objects: the flax leaves
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 5
+par(mfrow = c(1, 2), mar = c(0, 0, 0, 0))
+split_default <- analyze_objects(fleaves, marker = "id", verbose = FALSE)
+whole <- analyze_objects(fleaves, marker = "id", watershed = FALSE,
+                         object_index = c("NGRDI", "GLI"), verbose = FALSE)
+```
+
+- **Left:** default settings, `r nrow(split_default$results)` objects: the *watershed* cuts long leaves in pieces
+- **Right:** `watershed = FALSE`, `r nrow(whole$results)` objects: one per leaf
+- Now we can measure and classify
+
+------------------------------------------------------------------------
+
+## A senescence score
+
+```{r}
+whole$results |>
+  select(id, area, length, width) |>
+  left_join(whole$object_index, by = "id") |>
+  mutate(yellow = NGRDI < 0) |>
+  filter(yellow)
+```
+
+::: keybox
+Two of the 15 leaves have NGRDI below zero: the two yellow ones. The same logic gives a **stay-green** or **senescence** score without a colour chart.
+:::
+
+------------------------------------------------------------------------
+
+## Disease severity
+
+```{r}
+#| fig-width: 5.5
+#| fig-height: 3.6
+set.seed(10)
+leaf    <- image_pliman("sev_leaf_nb.jpg", plot = FALSE)
+healthy <- image_pliman("sev_healthy.jpg", plot = FALSE)
+lesions <- image_pliman("sev_sympt.jpg", plot = FALSE)
+sev <- measure_disease(img = leaf, img_healthy = healthy, img_symptoms = lesions,
+                       lesion_size = "large", plot = TRUE)
+```
+
+```{r}
+sev$severity
+```
+
+- Three palettes define "healthy" and "symptom": use the **same palettes** for the whole study
+- Useful to screen large M2 populations without rating each leaf by eye
+
+------------------------------------------------------------------------
+
+## Block 5 {.divider}
+
+Many images at once, and is the trait good enough?
+
+------------------------------------------------------------------------
+
+## A folder of images
+
+```{r}
+dir <- file.path(tempdir(), "plots")
+dir.create(dir, showWarnings = FALSE)
+src <- system.file("tmp_images", package = "pliman")
+invisible(file.copy(file.path(src, c("soybean_touch.jpg", "soy_green.jpg", "flax_grains.jpg")),
+                    file.path(dir, c("plot_101.jpg", "plot_102.jpg", "plot_103.jpg"))))
+
+batch <- analyze_objects(pattern = "plot_", dir_original = dir, plot = FALSE, verbose = FALSE)
+batch$statistics
+```
+
+[The three images only show the structure: they are not three plots of a trial.]{.small-note}
+
+------------------------------------------------------------------------
+
+## Join with the trial
+
+```{r}
+#| eval: false
+# 'trial' is the field book: one row per plot, with the column "plot"
+image_traits <- batch$statistics |>
+  mutate(plot = as.integer(sub("plot_", "", img))) |>
+  select(plot, seed_number = n, seed_area = area_mean)
+
+trial <- trial |> left_join(image_traits, by = "plot")
+```
+
+::: keybox
+From here the image traits are **traits like any other**: they go to the single-trial analysis of this morning (mixed model, spatial correction if justified), and their heritability tells us if they are precise enough to select on.
+:::
+
+------------------------------------------------------------------------
+
+## Is the image trait good enough?
+
+- **Valid:** it agrees with the manual or laboratory measurement on a subset of plots (20 to 50 is a start)
+- **Precise:** its heritability in the trial is high enough to select on
+- **Reproducible:** two photographs of the same sample give the same value
+
+```{r}
+#| eval: false
+cor(check$seed_number_image, check$seed_number_manual)
+plot(check$seed_number_manual, check$seed_number_image); abline(0, 1)
+```
+
+::: keybox
+Distance from the line `abline(0, 1)` that is the same for all samples is a **bias** that can be corrected. Scatter around it is **error** that cannot.
+:::
+
+------------------------------------------------------------------------
+
+## Near infrared and drones, briefly
+
+**Near infrared.** Healthy leaves reflect much more NIR than visible red. A camera with the infrared filter removed, or a multispectral camera, records it. NDVI measures vigour and stress better than RGB indices.
+
+**Drones.** Images are joined in an orthomosaic, the field is divided in plots with a shapefile, and indices are extracted per plot: again one row per plot. `pliman` has `mosaic_*` functions for this.
+
+::: keybox
+For a programme that is starting: learn the steps of this session with photographs on a tray first. Segmentation, scale, validation and the join with the trial are the same.
+:::
+
+------------------------------------------------------------------------
+
+## Pitfalls
+
+| Pitfall | What to do |
+|:--------------------------|:------------------------------------------------|
+| Uneven light or shadows | Diffuse light, same set-up in all images |
+| One set of parameters for all images | Test on 5 to 10 images, then keep them |
+| No scale | Reference object or known dpi |
+| Not looking at the labelled image | Inspect the labelled image of a sample |
+| Colour threshold from 9 seeds | Fix on a training set, check on another |
+| Image trait without validation | Compare with manual measurements |
+| Different cameras between trials | Same camera and settings; keep the originals |
+
+------------------------------------------------------------------------
+
+## Exercise
+
+With the image `flax_leaves.jpg`:
+
+1. Count the leaves with the default settings and with `watershed = FALSE`. Which one is correct?
+2. Get the length and the width of each leaf, in pixels
+3. Which leaves have the lowest NGRDI? How many, and in which row of the picture?
+4. With `flax_grains.jpg`: total seed area in cm². Why does it change with `lower_noise = 0.3`?
+
+::: keybox
+Hint: `whole$results`, `whole$object_index` and `fx$results` have what you need.
+:::
+
+------------------------------------------------------------------------
+
+## Questions for discussion
+
+- Which trait of your programme is measured by eye today and could be measured from a photograph?
+- What would you put in the photograph as reference object, and on which background?
+- How would you validate the image trait before using it for selection?
+- Where would an image trait help in the M2 and M3 generations, when populations are large?
+
+------------------------------------------------------------------------
+
+## Key takeaways
+
+- An image is a table of numbers: segment, measure, tabulate, analyse
+- A good photograph (plain background, even light, reference object, plot as file name) is worth more than any option in the software
+- `pliman` counts, measures size and shape, describes colour and severity, for one image or a folder
+- **Validate** with something of known size; **look** at the labelled image before trusting a batch
+- A colour proxy needs a laboratory calibration; an image trait must be valid and heritable
+- Start with a phone and a tray
+
+------------------------------------------------------------------------
+
+## Resources
+
+- **Course manual**, chapter 10: theory, code and the solved exercise
+- Olivoto, T. (2022). Lights, camera, pliman! An R package for plant image analysis. *Methods in Ecology and Evolution*, 13, 789-798.
+- Olivoto, T., Andrade, S. M. P. & Del Ponte, E. M. (2022). Measuring plant disease severity in R: introducing and evaluating the pliman package. *Tropical Plant Pathology*, 47, 95-104.
+- Package website: `olivoto.github.io/pliman`
+
+------------------------------------------------------------------------
+
+## Thank you! {.divider}
+
+**Luis Fernando Delgado Muñoz**
+
+[📧 [lfdelgadom@unal.edu.co](mailto:lfdelgadom@unal.edu.co)]{.small-note}
+
+[💼 [linkedin.com/in/lfdelgadom](https://www.linkedin.com/in/lfdelgadom)]{.small-note}

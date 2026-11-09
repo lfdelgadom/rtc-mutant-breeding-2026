@@ -15,10 +15,10 @@ Quarto book and slides for the IAEA Regional Training Course (RER5030), Skopje, 
 
 | Chapter | Author |
 |---|---|
-| 01 R basics, 05 designs, 06 ANOVA, 09 spatial, 11 AI, 12 pipeline, 14 LLMs | Luis Fernando Delgado Muñoz |
+| 01 R basics, 05 designs, 06 ANOVA, 09 spatial, 09b image analysis, 10 MET/G×E (book only, taught by Mirjana), 11 machine learning, 12 pipeline, 14 LLMs | Luis Fernando Delgado Muñoz |
 | 02 tidy data | Mirjana Jankulovska and Luis Fernando Delgado Muñoz |
-| 03 field data, 04 QC/EDA, 07 mixed models, 08 heritability, 10 MET/G×E | Mirjana Jankulovska |
-| 13 mutant populations (Topic 10), 15 selection in mutation breeding (Topic 11) | Anand Badigannavar |
+| 03 field data, 04 QC/EDA, 07 mixed models, 08 heritability | Mirjana Jankulovska |
+| 13 mutant populations (Topic 10: radiosensitivity and M2 to M5 pipeline by Luis Fernando, 1-hour lecture by Mirjana), 15 selection in mutation breeding (Topic 11) | Luis Fernando Delgado Muñoz (Anand Badigannavar will not attend) |
 | 16 participant projects | all experts |
 
 ## Build

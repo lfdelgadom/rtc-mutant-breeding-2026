@@ -1,48 +1,496 @@
 # Data Quality Control and Exploratory Analysis {#sec-qc-eda}
 
-::: {.chapter-info}
-**Author:** Mirjana Jankulovska\
-**Session:** Day 1 – Monday 9 November
-:::
-
-::: {.callout-note}
-## Chapter in preparation
-This chapter will be written by Mirjana Jankulovska. The outline below follows the course agenda.
+::: chapter-info
+**Author:** Luis Fernando Delgado Muñoz\
+**Session:** Day 1, Monday 9 November
 :::
 
 ## Learning objectives
 
-- Detect and handle missing values and outliers
-- Summarize traits by genotype and replicate
-- Use plots to separate biological and technical variation
+- Detect missing values and decide what they mean
+- Check that values are possible and consistent between traits
+- Find outliers and decide whether they are errors or biology
+- Summarize traits by genotype and replicate, and use the CV as a quality indicator
+- Use plots and field maps to separate biological from technical variation
 
-## Planned content
-
-- Importing Field Book / CSV data
-- Data summaries
-- Missing values and outlier detection
-- Exploratory data analysis: biological vs technical variation
-- Visualization with ggplot2: distributions, boxplots, genotype comparisons
-
-## Key concepts
-
-<!-- Author: theory, formulas and figures -->
-
-## Worked demo in R
+In @sec-field-data we checked that the field book matches the field plan. Now we check the **values**. Quality control (QC) and exploratory data analysis (EDA) are the last steps before the statistical analysis of the next days: they do not produce results for a report, but they decide whether the results of the analysis can be trusted.
 
 ```{r}
-#| eval: false
-# Use the shared course datasets in data/ where possible
+#| message: false
+library(readr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(agridat)   # install.packages("agridat") if needed, see @sec-field-data
 ```
 
-## Interpretation for breeding decisions
+## The QC workflow
+
+The same questions are asked, in this order, for every trial:
+
+1.  **Missing values.** How many, in which traits, in which plots? Is there a pattern?
+2.  **Possible values.** Is every value inside the biological limits of the trait?
+3.  **Consistency between traits.** Do traits that depend on each other agree?
+4.  **Outliers.** Which values are unusual, and are they errors or real?
+5.  **Summaries and plots.** Means and CV by replicate and genotype, distributions, correlations and field maps.
+
+Every decision is written in the R script, never made by hand in Excel. The raw file is not changed: corrections are made in code, so that anyone can see and repeat them.
+
+## The data
+
+We use the common bean trial `Dar16C_hiP` introduced in @sec-r-basics: 380 lines in an alpha-lattice with 2 replicates, 792 plots in a field of 66 rows and 12 columns. Replicate R1 occupies columns 1 to 6 and R2 columns 7 to 12.
+
+```{r}
+beans <- read_csv("data/Example_Beans.csv", show_col_types = FALSE)
+
+traits <- c("DF", "DPM", "PLHA", "POM_c2", "SW100", "TSW",
+            "YDHA", "YDHPL", "YdHa_clean")
+
+# one row per plot and trait: convenient for checks on all traits at once
+beans_long <- beans |>
+  pivot_longer(all_of(traits), names_to = "trait", values_to = "value") |>
+  mutate(trait = factor(trait, levels = traits))
+```
+
+A first overview of all traits in one table:
+
+```{r}
+overview <- beans_long |>
+  group_by(trait) |>
+  summarise(
+    n       = sum(!is.na(value)),
+    missing = sum(is.na(value)),
+    min     = min(value, na.rm = TRUE),
+    median  = median(value, na.rm = TRUE),
+    max     = max(value, na.rm = TRUE),
+    cv      = 100 * sd(value, na.rm = TRUE) / mean(value, na.rm = TRUE)
+  ) |>
+  mutate(across(min:cv, \(x) round(x, 1)))
+overview
+```
+
+This table already answers several questions: there are few missing values, no negative values, and the CV is very different between traits. We go through each point.
+
+## Missing values
+
+### Where are they?
+
+```{r}
+beans |>
+  filter(if_any(all_of(traits), is.na)) |>
+  select(plot, line, rep, row, col, all_of(traits))
+```
+
+Only 12 of the 792 plots have a missing value, but they are not all of the same kind:
+
+- **Lost plots.** Plots 4252, 4506 and 4463 have flowering and maturity dates, but no harvest data (`PLHA`, `SW100`, `TSW`). The plot existed in the field but was not harvested, or the harvest bag was lost.
+- **One trait not recorded.** Six plots have no `DPM` (days to maturity). All are in R1, columns 1 to 3, rows 39 to 65: a group of neighbouring plots, probably not visited on the day maturity was scored.
+- **Derived trait not calculated.** Plot 4540 has `TSW` and `POM_c2` but no `YDHA`, and plot 4625 has no `YdHa_clean`. The raw data are there; the calculation was not done. These values can be **recovered** by calculating them again (see below).
+
+A field map shows whether missing values are scattered or grouped:
+
+```{r}
+#| fig-height: 3.2
+#| label: fig-missing-map
+#| fig-cap: "Plots with at least one missing value. Each tile is a plot; R1 occupies columns 1 to 6 and R2 columns 7 to 12."
+beans_long |>
+  group_by(row, col) |>
+  summarise(missing = any(is.na(value)), .groups = "drop") |>
+  ggplot(aes(x = row, y = col, fill = missing)) +
+  geom_tile(colour = "white") +
+  geom_hline(yintercept = 6.5, linewidth = 1) +
+  scale_fill_manual(values = c(`FALSE` = "grey85", `TRUE` = "firebrick"),
+                    labels = c("complete", "with missing")) +
+  scale_y_continuous(breaks = c(3.5, 9.5), labels = c("R1", "R2")) +
+  labs(x = "Field row", y = NULL, fill = NULL) +
+  theme_minimal()
+```
+
+### What to do with them
+
+- **Never replace a missing value with 0.** A plot that was not harvested did not yield zero; a zero would pull down the mean of the genotype. Leave the cell empty (`NA`).
+- **Do not delete whole plots for one missing trait.** `na.omit()` keeps only complete rows:
+
+```{r}
+nrow(beans)
+nrow(na.omit(beans))
+```
+
+Twelve plots are lost for all traits, although most of them have only one value missing. Remove missing values trait by trait, inside each analysis (`na.rm = TRUE`, or the mixed models of @sec-mixed-models, which use all available plots).
+
+- **Ask why they are missing.** If missing values are linked to the genotype (for example, a mutant line that never flowered, or plants that died), they are information, not noise. Record the reason in a notes column: "not flowered" is a result; "not recorded" is not.
+
+## Possible values
+
+Each trait has biological limits. A value outside them is an error, whatever the statistics say. The limits are set by the breeder before looking at the data:
+
+```{r}
+limits <- tribble(
+  ~trait,   ~low, ~high,
+  "DF",       25,    70,   # days to flowering, common bean
+  "DPM",      60,   110,   # days to maturity
+  "PLHA",      1,    60,   # plants harvested per plot
+  "POM_c2",    5,    25,   # grain moisture, %
+  "SW100",    10,    90,   # g per 100 seeds
+  "TSW",       0,  1500    # g per plot
+)
+
+beans_long |>
+  inner_join(limits, by = "trait") |>
+  filter(value < low | value > high)
+```
+
+No value is impossible. Some checks involve two traits; for example, a plant cannot mature before it flowers:
+
+```{r}
+beans |> filter(DPM <= DF) |> nrow()
+range(beans$DPM - beans$DF, na.rm = TRUE)   # days from flowering to maturity
+```
+
+Passing these checks does not mean that the data are correct, only that they are not impossible. A plot height of 95 cm typed as 59 cm is inside the limits; only the next checks can find it.
+
+## Consistency between traits
+
+`YDHA`, `YDHPL` and `YdHa_clean` are not measured: they are calculated from `TSW`, `POM_c2` and `PLHA` with the formulas given in @sec-r-basics. If we calculate them again, the result must be the same as the stored value:
+
+```{r}
+beans_check <- beans |>
+  mutate(
+    mcf        = (100 - POM_c2) / 86,           # moisture correction to 14%
+    YDHA_new   = TSW * mcf * 10 / 1.2,
+    clean_new  = TSW * mcf * 10 / 2.22,
+    ratio_YDHA = YDHA / YDHA_new,
+    ratio_clean = YdHa_clean / clean_new
+  )
+
+beans_check |>
+  summarise(
+    YDHA_disagree  = sum(abs(ratio_YDHA - 1) > 0.02, na.rm = TRUE),
+    clean_disagree = sum(abs(ratio_clean - 1) > 0.02, na.rm = TRUE)
+  )
+```
+
+`YdHa_clean` agrees with its formula in every plot, but `YDHA` differs by more than 2% in 37 plots:
+
+```{r}
+#| label: fig-ydha-check
+#| fig-cap: "Stored YDHA against YDHA calculated again from TSW and grain moisture. Points away from the line are plots where the stored value is inconsistent with the raw data."
+#| warning: false
+beans_check |>
+  mutate(agrees = abs(ratio_YDHA - 1) <= 0.02) |>
+  ggplot(aes(x = YDHA_new, y = YDHA, colour = agrees)) +
+  geom_abline(linetype = "dashed") +
+  geom_point(alpha = 0.6) +
+  scale_colour_manual(values = c(`TRUE` = "grey60", `FALSE` = "firebrick")) +
+  labs(x = "YDHA calculated again (kg/ha)", y = "YDHA stored in the file (kg/ha)",
+       colour = "Agrees") +
+  theme_minimal()
+```
+
+Most of these plots have a stored value lower than the calculated one, as if `TSW` had been changed (for example, after weighing the seed again) and `YDHA` was not updated. We cannot know which number is right without the original field book, but the lesson is general:
+
+::: callout-important
+## Derived traits
+
+Store the raw measurements (weights, counts, dates) and **calculate derived traits in R**, every time, from those measurements. A value calculated once in Excel and pasted into the file is not updated when a raw value is corrected. In this trial we use `YdHa_clean`, which is consistent with `TSW`, and leave `YDHA` out.
+:::
+
+## Outliers
+
+An outlier is a value far from the others. It can be an **error** (a typing mistake, a wrong unit, a damaged plot) or a **real** value (a genotype that is truly different). In a mutant population, real outliers are exactly what we are looking for, so outliers are **flagged and examined, never deleted automatically**.
+
+### Flagging with the IQR rule
+
+A common rule, the one used by boxplots, flags values more than 1.5 times the interquartile range (IQR) below the first quartile or above the third quartile:
+
+```{r}
+flag_iqr <- function(x) {
+  q   <- quantile(x, c(0.25, 0.75), na.rm = TRUE)
+  iqr <- q[2] - q[1]
+  x < q[1] - 1.5 * iqr | x > q[2] + 1.5 * iqr
+}
+
+beans_long |>
+  group_by(trait) |>
+  mutate(outlier = flag_iqr(value)) |>
+  summarise(flagged = sum(outlier, na.rm = TRUE))
+```
+
+The rule flags dozens of values. A flag is only the start: each one must be examined in context.
+
+### Biology or error? Look at the other replicate
+
+Seed size (`SW100`) has 27 flagged values. If a value is real, the same line should show it in the other replicate:
+
+```{r}
+sw_flagged <- beans |>
+  filter(flag_iqr(SW100)) |>
+  distinct(line)
+
+beans |>
+  filter(line %in% sw_flagged$line) |>
+  group_by(line, rep) |>
+  summarise(SW100 = mean(SW100, na.rm = TRUE), .groups = "drop") |>
+  pivot_wider(names_from = rep, values_from = SW100)
+```
+
+Almost every line is small-seeded (around 22 to 30 g, for example `TIO_CANELA_75` and the `DOR` lines) or large-seeded (around 60 to 79 g, for example the `DAA` lines) **in both replicates**. These are real differences between genotypes: they are kept. The exception is `LPA_467`: 23 g in R1 and 50 g in R2. The same plot in R1 has only 17 plants and a yield of 147 kg/ha, the lowest of the trial. That plot was damaged; it is a candidate to be set to `NA`.
+
+### Look at the position in the field
+
+Plants harvested (`PLHA`) has 14 values flagged as too high. Their positions:
+
+```{r}
+beans |>
+  filter(flag_iqr(PLHA), PLHA > median(PLHA, na.rm = TRUE)) |>
+  select(line, rep, row, col, PLHA) |>
+  arrange(row)
+```
+
+Seven of the 14 are in row 1 or row 66, the two ends of the field. Border plots often have more plants or bigger plants, because they have more space and light. This is a **technical** effect of the position, not of the genotype, and it is one reason for the spatial analysis of @sec-spatial.
+
+### Deciding
+
+| What you find | Decision |
+|------------------------------|------------------------------------------|
+| Confirmed error (typing, unit, wrong plot) and the true value is known | Correct it in the script, with a comment |
+| Confirmed error, true value unknown, or plot damaged | Set it to `NA`, with a comment |
+| Real value, consistent across replicates | Keep it |
+| Not sure | Keep it, flag it, and run the analysis with and without it |
+
+```{r}
+beans_qc <- beans |>
+  mutate(
+    # LPA_467, R1: damaged plot (17 plants, 147 kg/ha, seed weight half of R2)
+    across(c(SW100, TSW, YDHPL, YdHa_clean),
+           \(x) if_else(plot == 4186, NA, x))
+  ) |>
+  select(-YDHA)   # inconsistent with TSW, see above
+```
+
+After the analysis model is fitted (Days 2 and 3), outliers are checked again on the **residuals**: a value can look normal for the whole trial but be unusual for its genotype and block.
+
+## Summaries by replicate and genotype
+
+### Replicates
+
+```{r}
+beans_qc |>
+  group_by(rep) |>
+  summarise(
+    plots = sum(!is.na(YdHa_clean)),
+    mean  = mean(YdHa_clean, na.rm = TRUE),
+    sd    = sd(YdHa_clean, na.rm = TRUE),
+    cv    = 100 * sd / mean
+  )
+```
+
+The replicates have similar means: there is no large difference between the two halves of the field. Within each replicate, the incomplete blocks also differ:
+
+```{r}
+#| fig-height: 4
+#| label: fig-blocks
+#| fig-cap: "Yield by incomplete block within each replicate."
+#| warning: false
+beans_qc |>
+  mutate(block = factor(block, levels = paste0("B", 1:18))) |>
+  ggplot(aes(x = block, y = YdHa_clean)) +
+  geom_boxplot(fill = "grey90") +
+  facet_wrap(~rep, scales = "free_x") +
+  labs(x = "Incomplete block", y = "Yield (kg/ha)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, size = 7))
+```
+
+This variation between blocks is the reason the trial was laid out as an alpha-lattice, and the blocks will be part of the model (@sec-designs).
+
+### The CV as a quality indicator
+
+The coefficient of variation, $CV = 100 \times SD / \text{mean}$, compares variability between traits measured in different units. It is a first indicator of trial quality:
+
+```{r}
+overview |> select(trait, cv) |> arrange(cv)
+```
+
+- Days to maturity (2%) and grain moisture (3%) vary little, as expected.
+- Yield and total seed weight have a CV around 30%. This CV contains both the differences between genotypes and the error, so it is not yet the error CV of the ANOVA (@sec-anova), but it is high. It warns that much of the yield variation could come from the field.
+
+### Checks and agreement between replicates
+
+Sixteen lines appear in 4 plots (twice in each replicate): they are the checks. Because a check is the same genotype everywhere, its variation is **only** field variation:
+
+```{r}
+checks <- beans_qc |> count(line) |> filter(n == 4) |> pull(line)
+
+beans_qc |>
+  filter(line %in% checks) |>
+  group_by(line) |>
+  summarise(mean = mean(YdHa_clean, na.rm = TRUE),
+            cv   = 100 * sd(YdHa_clean, na.rm = TRUE) / mean) |>
+  arrange(cv)
+```
+
+The same genotype varies from 6% to almost 50% depending on the check. The same idea applies to all lines: if a trait is mostly genetic, a line that is high in R1 is also high in R2.
+
+```{r}
+#| label: fig-rep-agreement
+#| fig-cap: "Line means in R1 against R2. Seed size agrees well between replicates; yield much less."
+#| fig-height: 3.8
+#| warning: false
+rep_means <- beans_qc |>
+  group_by(line, rep) |>
+  summarise(across(c(SW100, YdHa_clean), \(x) mean(x, na.rm = TRUE)),
+            .groups = "drop") |>
+  pivot_longer(c(SW100, YdHa_clean), names_to = "trait") |>
+  pivot_wider(names_from = rep, values_from = value)
+
+rep_means |>
+  group_by(trait) |>
+  summarise(r = cor(R1, R2, use = "complete.obs"))
+
+ggplot(rep_means, aes(R1, R2)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", se = FALSE, formula = y ~ x) +
+  facet_wrap(~trait, scales = "free") +
+  theme_minimal()
+```
+
+The correlation between replicates is high for seed size and low for yield. This is a first, rough view of heritability (@sec-heritability): for yield in this trial, a single plot says little about the genotype, and the analysis must remove as much field variation as possible.
+
+## Exploratory plots
+
+### Distributions
+
+```{r}
+#| label: fig-distributions
+#| fig-cap: "Distribution of each trait."
+#| warning: false
+beans_qc |>
+  pivot_longer(c(DF, DPM, PLHA, POM_c2, SW100, TSW, YdHa_clean),
+               names_to = "trait") |>
+  ggplot(aes(x = value)) +
+  geom_histogram(bins = 30, fill = "steelblue", colour = "white") +
+  facet_wrap(~trait, scales = "free") +
+  labs(x = NULL, y = "Plots") +
+  theme_minimal()
+```
+
+Things to look for: long tails, groups separated from the rest, spikes at round numbers (a sign of estimated rather than measured values), and two peaks. Days to flowering has two groups, around 39 and 46 days: early and late lines. In a mutant population, two peaks in a trait can be the first sign of a mutation with a large effect.
+
+### Correlations between traits
+
+```{r}
+#| label: fig-correlations
+#| fig-cap: "Correlations between traits (Pearson, plot level)."
+#| fig-height: 4
+cor_mat <- beans_qc |>
+  select(DF, DPM, PLHA, POM_c2, SW100, TSW, YdHa_clean) |>
+  cor(use = "pairwise.complete.obs")
+
+as.data.frame(as.table(cor_mat)) |>
+  ggplot(aes(Var1, Var2, fill = Freq)) +
+  geom_tile(colour = "white") +
+  geom_text(aes(label = round(Freq, 2)), size = 3) +
+  scale_fill_gradient2(low = "firebrick", mid = "white", high = "steelblue",
+                       limits = c(-1, 1)) +
+  labs(x = NULL, y = NULL, fill = "r") +
+  theme_minimal()
+```
+
+`TSW` and `YdHa_clean` have a correlation of 1: one is calculated from the other, so they are the same information. Days to flowering and to maturity go together. Correlations that are absent where biology expects them, or present where it does not, are worth a second look at the data.
+
+### Field maps
+
+A field map is the most useful QC plot. It shows technical variation that no table can show:
+
+```{r}
+#| label: fig-field-map-beans
+#| fig-cap: "Yield of each plot in the field. White tiles are missing values."
+#| fig-height: 3.2
+ggplot(beans_qc, aes(x = row, y = col, fill = YdHa_clean)) +
+  geom_tile(colour = "white") +
+  geom_hline(yintercept = 6.5, linewidth = 1) +
+  scale_fill_viridis_c(na.value = "white") +
+  scale_y_continuous(breaks = c(3.5, 9.5), labels = c("R1", "R2")) +
+  labs(x = "Field row", y = NULL, fill = "kg/ha") +
+  theme_minimal()
+```
+
+Since genotypes are randomized, a genotype effect looks like random noise on the map. Patches, stripes or gradients are field effects: soil, water, border, management. In this trial yields are higher in some areas of the field and the lowest plots of the trial are close together in R1 (rows 51 to 56, columns 2 and 3), around the damaged plot of `LPA_467` (now white). A small patch of poor soil or water damage there is more likely than several weak genotypes side by side.
+
+A clearer example is the Nebraska wheat trial of Stroup et al. (1994), in `agridat`: 56 genotypes in 4 complete blocks.
+
+```{r}
+#| label: fig-field-map-stroup
+#| fig-cap: "Wheat yield (bu/ac) in the Nebraska Intrastate Nursery trial. Data: Stroup et al. (1994), via agridat."
+#| fig-height: 4
+ggplot(stroup.nin, aes(x = col, y = row, fill = yield)) +
+  geom_tile(colour = "white") +
+  scale_fill_viridis_c(na.value = "white") +
+  scale_y_reverse() +
+  coord_equal() +
+  labs(x = "Column", y = "Row", fill = "bu/ac") +
+  theme_minimal()
+```
+
+The low yields are clustered in one corner of the field. The authors explain it by a low rise in that part of the field, exposed to winter kill from wind. The genotype `Buckskin`, a known superior variety, was disadvantaged in this trial by the unfavourable positions of its plots. A plain RCBD analysis cannot correct this, because the patch is smaller than a block; @sec-spatial shows how spatial models do.
 
 ## Exercise
 
+Use the `stroup.nin` data from `agridat`.
+
+1.  How many plots have no yield? Which genotype and replicate are they coded with? (Recall the exercise of @sec-field-data.)
+2.  Calculate the mean, SD and CV of yield for each replicate. Are the replicates similar?
+3.  Flag the outliers of yield with `flag_iqr()`. Where are they in the field?
+4.  Calculate the mean yield of `Buckskin` and its rank among the 56 genotypes. In which rows and columns are its plots?
+
 ::: {.callout-tip collapse="true"}
 ## Solution
+
+```{r}
+nin <- stroup.nin |>
+  mutate(gen = if_else(is.na(rep), NA, as.character(gen)))
+
+# 1. Missing plots
+sum(is.na(nin$yield))
+
+# 2. Replicates
+nin |>
+  filter(!is.na(yield)) |>
+  group_by(rep) |>
+  summarise(mean = mean(yield), sd = sd(yield), cv = 100 * sd / mean)
+
+# 3. Outliers and their position
+nin |>
+  filter(flag_iqr(yield)) |>
+  select(gen, rep, row, col, yield)
+
+# 4. Buckskin
+nin |>
+  filter(!is.na(gen)) |>
+  group_by(gen) |>
+  summarise(yield = mean(yield)) |>
+  mutate(rank = rank(-yield)) |>
+  filter(gen == "Buckskin")
+
+nin |> filter(gen == "Buckskin") |> select(rep, row, col, yield)
+```
+
+R3 and R4 have lower means and a CV more than twice that of R1 and R2. Apart from two high values, the outliers are all in R3 and R4, rows 8 to 11 and columns 1 to 9: the corner with low yields seen in @fig-field-map-stroup. Two of the four Buckskin plots (R3 and R4) are in that corner; it ranks only 28th of 56, pulled down by the field, not by its genetics.
 :::
 
 ## Key takeaways
 
+- QC follows a fixed order: missing values, possible values, consistency between traits, outliers, summaries and plots.
+- Missing values are left empty, never set to zero, and removed trait by trait, not plot by plot. Their pattern tells you why they are missing.
+- Calculate derived traits in R from the raw measurements; do not trust values calculated once in a spreadsheet.
+- Outliers are flagged and examined, not deleted. Consistency across replicates points to biology; a damaged plot, a field border or a patch points to error or field effects.
+- The CV, the checks and the agreement between replicates show how much of the variation is field and how much is genotype.
+- Always draw a field map. Technical variation is spatial, and the next days of the course show how to model it.
+
 ## References
+
+- Stroup, W. W., Baenziger, P. S., & Mulitze, D. K. (1994). Removing spatial variation from wheat yield trials: a comparison of methods. *Crop Science*, 34(1), 62-66. <https://doi.org/10.2135/cropsci1994.0011183X003400010011x>
+- Wright, K. (2024). *agridat: Agricultural Datasets*. R package version 1.27. <https://kwstat.github.io/agridat/>
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* (2nd ed.), chapters on missing values and exploratory data analysis. <https://r4ds.hadley.nz>
+- Common bean trial `Dar16C_hiP`: Bean Breeding Program, Alliance of Bioversity International and CIAT (see @sec-r-basics).

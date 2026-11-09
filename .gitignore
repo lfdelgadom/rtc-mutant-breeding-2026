@@ -18,3 +18,6 @@ site_libs/
 * 2.*
 * 2
 ~$*
+
+# Slide render caches
+slides/*_cache/

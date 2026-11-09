@@ -1,35 +1,688 @@
 ---
-title: "Spatial Analysis and Trial Precision"
-subtitle: "RTC Experimental Design and Data Analysis for Mutant Populations · Day 4"
+title: "Day 4: Spatial Analysis and Trial Precision"
+subtitle: "Regional Training Course on Experimental Design and Data Analysis for the Advancement of Mutant Populations (RER5030)"
 author: "Luis Fernando Delgado Muñoz"
+date: "2026-11-12"
+date-format: "D MMMM YYYY"
 format:
   revealjs:
-    theme: [simple, custom.scss]
+    theme: simple
+    css: rtc_style.css
     slide-number: true
+    chalkboard: true
+    preview-links: auto
+    transition: none
+    background-transition: fade
+    smaller: true
+    scrollable: true
     code-copy: true
+    footer: "Luis Fernando Delgado Muñoz | RTC RER5030 | Day 4: Spatial analysis"
 execute:
   echo: true
-  eval: false
+  warning: false
+  message: false
+  cache: true
 ---
 
-## Learning objectives
-
-<!-- Copy from the book chapter -->
-
-## Key concept 1
-
-<!-- One idea per slide. Reuse figures saved in ../figures/ -->
-
-## Demo
-
 ```{r}
-# Short version of the chapter demo
+#| label: setup
+#| include: false
+knitr::opts_knit$set(root.dir = if (dir.exists("data")) "." else "..")
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+library(lme4)
+library(SpATS)
+theme_set(theme_minimal(base_size = 14))
+fmt <- function(x, d = 0) format(round(x, d), big.mark = ",", scientific = FALSE, nsmall = d)
 ```
 
-## What a breeder decides from this
+```{r}
+#| label: data
+#| include: false
+beans <- read_csv("data/Example_Beans.csv", show_col_types = FALSE) |>
+  mutate(rep   = factor(rep),
+         line  = factor(line),
+         rb    = factor(paste(rep, block, sep = ":")),
+         rowf  = factor(row),
+         colf  = factor(col),
+         yield = YdHa_clean)
+
+m_block  <- lmer(yield ~ rep + (1 | line) + (1 | rb), data = beans)
+resid_df <- beans |> filter(!is.na(yield)) |> mutate(res = resid(m_block))
+
+fit_spats <- function(data, trait = "yield", genotype_random = TRUE,
+                      nseg = c(6, 32), random = ~ rowf + colf + rb) {
+  d <- data
+  d$y <- d[[trait]]
+  SpATS(response = "y", genotype = "line", genotype.as.random = genotype_random,
+        spatial = ~ PSANOVA(col, row, nseg = nseg, nest.div = 2),
+        fixed = ~ rep, random = random, data = d,
+        control = list(tolerance = 1e-03, monitoring = 0))
+}
+m_sp <- fit_spats(beans)
+
+h2_cullis <- function(model, genotype) {
+  X <- getME(model, "X"); Z <- getME(model, "Z"); s2 <- sigma(model)^2
+  vc <- as.data.frame(VarCorr(model)); fl <- getME(model, "flist"); Gp <- getME(model, "Gp")
+  v <- unlist(lapply(names(fl), function(g) rep(vc$vcov[vc$grp == g], nlevels(fl[[g]]))))
+  W <- cbind(X, Z); C <- crossprod(W) / s2; idx <- ncol(X) + seq_along(v)
+  C[cbind(idx, idx)] <- C[cbind(idx, idx)] + 1 / v
+  Cinv <- solve(as.matrix(C)); k <- match(genotype, names(fl))
+  gi <- ncol(X) + (Gp[k] + 1):Gp[k + 1]; P <- Cinv[gi, gi]; n <- nrow(P)
+  vdiff <- 2 * (n * sum(diag(P)) - sum(P)) / (n * (n - 1))
+  1 - vdiff / (2 * vc$vcov[vc$grp == genotype])
+}
+
+single_trial <- function(data, trait, spatial = TRUE) {
+  d <- data |> mutate(y = .data[[trait]]) |> filter(!is.na(y)) |> droplevels()
+  if (spatial) {
+    m <- SpATS(response = "y", genotype = "line", genotype.as.random = TRUE,
+               spatial = ~ PSANOVA(col, row, nseg = c(6, 32), nest.div = 2),
+               fixed = ~ rep, random = ~ rowf + colf + rb, data = d,
+               control = list(tolerance = 1e-03, monitoring = 0))
+    p  <- predict(m, which = "line")
+    sg <- m$var.comp[["line"]]
+    tab <- tibble(line = as.character(p$line),
+                  BLUP = p$predicted.values + m$coeff[["repR2"]] / 2,
+                  SE   = p$standard.errors)
+    h2 <- m$eff.dim[["line"]] / (nlevels(d$line) - 1)
+  } else {
+    m  <- lmer(y ~ rep + (1 | line) + (1 | rb), data = d)
+    sg <- as.data.frame(VarCorr(m))$vcov[1]
+    pv <- as.data.frame(ranef(m, condVar = TRUE))
+    tab <- tibble(line = as.character(pv$grp[pv$grpvar == "line"]),
+                  BLUP = fixef(m)[1] + fixef(m)["repR2"] / 2 + pv$condval[pv$grpvar == "line"],
+                  SE   = pv$condsd[pv$grpvar == "line"])
+    h2 <- h2_cullis(m, "line")
+  }
+  n_pl <- count(d, line)
+  tab <- tab |>
+    mutate(reliability = 1 - SE^2 / sg,
+           rank = rank(-BLUP, ties.method = "first"),
+           check = line %in% n_pl$line[n_pl$n > 2]) |>
+    arrange(rank)
+  list(model = m, table = tab, h2 = h2)
+}
+```
+
+## Plan for the day
+
+| Block | Topic |
+|-----------------|-------------------------------------------------------|
+| 1 | Why the position of a plot matters |
+| 2 | Looking for spatial patterns: residual maps and variograms |
+| 3 | **Spatial models with SpATS** (2D P-splines) |
+| 4 | Mr.Bean: the same analysis without code |
+| 5 | Spatial against non-spatial: does it pay? |
+| 6 | Design or analysis? |
+| 7 | A complete single-trial workflow, exercise and discussion |
+
+::: keybox
+**Goal:** leave able to look at a trial as a **map**, decide if a spatial model is needed, fit it, and report how much precision it adds.
+:::
+
+------------------------------------------------------------------------
+
+## Block 1 {.divider}
+
+Why the position of a plot matters
+
+------------------------------------------------------------------------
+
+## Fields are not uniform
+
+- A line of trees or a road along one side of the trial
+- A trial split by a road or a canal
+- A river or a drainage line crossing the field
+- A slope: the top is drier than the bottom
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4
+g <- expand.grid(row = 1:60, col = 1:12)
+g$`Moisture gradient`      <- -0.8 * g$row / 60 * 10
+g$`Tree line (edge)`       <- -8 * exp(-(g$col - 1) / 2)
+g$`Road through the trial` <- ifelse(g$row > 30, -5, 0)
+g$`River (diagonal band)`  <- -7 * exp(-((g$row - 5 * g$col - 5) / 6)^2)
+pivot_longer(g, 3:6, names_to = "source", values_to = "effect") |>
+  mutate(source = factor(source, levels = names(g)[3:6])) |>
+  ggplot(aes(row, col, fill = effect)) +
+  geom_tile() + facet_wrap(~ source, nrow = 1) +
+  scale_fill_viridis_c(guide = "none") +
+  labs(x = "Row", y = "Column")
+```
+
+[Schematic surfaces, not data. Darker is lower yield.]{.small-note}
+
+------------------------------------------------------------------------
+
+## What it does to selection
+
+- The environmental effect is **added** to the genetic effect
+- A line in a good patch looks better than it is; a line in a poor patch looks worse
+- Blocks remove the **average** difference among pieces of the field
+- The variation **inside** a block stays in the residual
+
+::: keybox
+If the ranking mixes genes and soil, the selection gain is lower than expected, and the best lines are not always the ones we advance.
+:::
+
+------------------------------------------------------------------------
+
+## Our data: the bean trial of Day 3
+
+- 380 lines, 2 replicates, **792 plots** in a field of **66 rows x 12 columns**
+- Columns 1 to 6 are replicate 1, columns 7 to 12 are replicate 2
+- Incomplete blocks of 22 plots: 11 rows x 2 columns
+- 16 checks repeated 4 times; yield `YdHa_clean` (kg/ha)
+
+```{r}
+#| echo: false
+#| fig-width: 11
+#| fig-height: 3
+ggplot(beans, aes(row, col, fill = yield)) +
+  geom_tile(colour = "white", linewidth = 0.2) +
+  geom_hline(yintercept = 6.5, linewidth = 0.8) +
+  scale_fill_viridis_c(na.value = "grey80") +
+  scale_y_continuous(breaks = c(1, 6, 7, 12)) +
+  coord_equal() +
+  labs(x = "Row", y = "Column", fill = "Yield")
+```
+
+------------------------------------------------------------------------
+
+## First diagnostic: mean yield by column
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 3.6
+check_lines <- beans |> filter(!is.na(yield)) |> count(line) |> filter(n > 2) |> pull(line)
+profile <- bind_rows(
+  beans |> filter(!is.na(yield)) |> group_by(col) |>
+    summarise(yield = mean(yield), .groups = "drop") |> mutate(set = "All lines (66 plots per column)"),
+  beans |> filter(!is.na(yield), line %in% check_lines) |> group_by(col) |>
+    summarise(yield = mean(yield), .groups = "drop") |> mutate(set = "Checks only (same lines everywhere)")
+)
+ggplot(profile, aes(col, yield)) +
+  geom_col(width = 0.8) + geom_vline(xintercept = 6.5, linewidth = 0.8) +
+  scale_x_continuous(breaks = 1:12) + facet_wrap(~ set) +
+  labs(x = "Column", y = "Mean yield (kg/ha)")
+```
+
+```{r}
+#| include: false
+cm <- filter(profile, grepl("^All", set))
+```
+
+::: keybox
+Lines are randomized, so this is **environment**: from `r fmt(cm$yield[1])` kg/ha in column 1 to `r fmt(cm$yield[6])` in column 6. An edge-to-centre gradient of `r fmt(cm$yield[6] - cm$yield[1])` kg/ha.
+:::
+
+------------------------------------------------------------------------
+
+## Block 2 {.divider}
+
+Looking for spatial patterns
+
+------------------------------------------------------------------------
+
+## Start from the Day 3 model
+
+```{r}
+m_block <- lmer(yield ~ rep + (1 | line) + (1 | rb), data = beans)
+resid_df <- beans |> filter(!is.na(yield)) |> mutate(res = resid(m_block))
+```
+
+- Replicate fixed; lines and incomplete blocks random
+- Question: **did the blocks capture the whole field?**
+- If yes, the residuals look like noise on the map. If not, we see patches or bands
+
+------------------------------------------------------------------------
+
+## Residual map
+
+```{r}
+#| echo: false
+#| fig-width: 11
+#| fig-height: 3.3
+ggplot(resid_df, aes(row, col, fill = res)) +
+  geom_tile(colour = "white", linewidth = 0.2) +
+  geom_hline(yintercept = 6.5, linewidth = 0.8) +
+  scale_fill_gradient2(low = "#2166ac", mid = "white", high = "#b2182b", midpoint = 0) +
+  scale_y_continuous(breaks = c(1, 6, 7, 12)) +
+  coord_equal() +
+  labs(x = "Row", y = "Column", fill = "Residual\n(kg/ha)")
+```
+
+- More red plots near columns 6 and 7, more blue plots in columns 1 and 3
+- Not pure noise: the blocks took most of the gradient, **not all of it**
+
+------------------------------------------------------------------------
+
+## What is left inside the blocks
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 3.4
+col_res <- resid_df |> group_by(col) |> summarise(res = mean(res), .groups = "drop")
+ggplot(col_res, aes(col, res)) +
+  geom_col(width = 0.8) + geom_vline(xintercept = 6.5, linewidth = 0.8) +
+  scale_x_continuous(breaks = 1:12) +
+  labs(x = "Column", y = "Mean residual (kg/ha)")
+```
+
+::: keybox
+Blocks of two columns (1-2, 3-4, 5-6): the residual still rises from `r fmt(col_res$res[1])` to `r fmt(col_res$res[2])`, from `r fmt(col_res$res[3])` to `r fmt(col_res$res[4])` and from `r fmt(col_res$res[5])` to `r fmt(col_res$res[6])` kg/ha. A block cannot remove a gradient that runs inside it.
+:::
+
+------------------------------------------------------------------------
+
+## The semivariogram
+
+- Compares the residuals of two plots as a function of **the distance** between them
+- Plots that are close are more alike than distant plots: the semivariance **increases** with distance
+- Independent residuals: a flat line (the dashed line is the residual variance)
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 3.4
+semivariogram <- function(d, max_lag = 25) {
+  same <- outer(d$col, d$col, "==")
+  lag  <- abs(outer(d$row, d$row, "-"))
+  half <- 0.5 * outer(d$res, d$res, "-")^2
+  keep <- same & lag > 0 & lag <= max_lag & upper.tri(same)
+  tibble(lag = lag[keep], gamma = half[keep]) |>
+    group_by(lag) |> summarise(gamma = mean(gamma), .groups = "drop")
+}
+vg <- semivariogram(resid_df)
+ggplot(vg, aes(lag, gamma)) +
+  geom_hline(yintercept = var(resid_df$res), linetype = 2) +
+  geom_point() + geom_line() +
+  labs(x = "Distance between plots along the rows", y = "Semivariance")
+```
+
+[Weak local correlation along the rows: the main structure is the gradient across the columns.]{.small-note}
+
+------------------------------------------------------------------------
+
+## When is a spatial correction justified?
+
+Use it when **at least two** of these are true:
+
+1. The residual map shows patches or bands
+2. The semivariogram increases with distance
+3. Row or column effects are a sizeable part of the genetic variance
+4. The spatial model improves the fit (AIC) or the heritability by a useful amount
+
+::: keybox
+If the residuals look random, the extra model buys nothing and costs complexity.
+:::
+
+------------------------------------------------------------------------
+
+## Block 3 {.divider}
+
+Spatial models with SpATS
+
+------------------------------------------------------------------------
+
+## The idea: a smooth surface of the field
+
+- A spline is a flexible curve made of small pieces joined smoothly. In 2D it is a flexible **surface**
+- The **penalty** keeps the surface smooth: it follows a gradient or a patch, not the noise of one plot
+- The data decide how smooth the surface is: no correlation structure to choose by hand
+- Added to the mixed model, with random row, column and block effects
+
+[Rodriguez-Alvarez, Boer, van Eeuwijk & Eilers (2018). *Spatial Statistics* 23: 52-71.]{.small-note}
+
+------------------------------------------------------------------------
+
+## The model in R
+
+```{r}
+#| eval: false
+SpATS(response = "yield",
+      genotype = "line", genotype.as.random = TRUE,
+      spatial  = ~ PSANOVA(col, row, nseg = c(6, 32), nest.div = 2),
+      fixed    = ~ rep,
+      random   = ~ rowf + colf + rb,
+      data     = beans)
+```
+
+| Argument | Meaning |
+|:--|:----------------------------------------------|
+| `genotype.as.random` | `TRUE` gives BLUPs, `FALSE` gives BLUEs |
+| `PSANOVA(col, row, nseg)` | the surface; `nseg` about half the number of columns and rows |
+| `fixed` | the replicate |
+| `random` | row, column and block as **factors** |
+
+::: keybox
+`col` and `row` as numbers go in `PSANOVA()` (distance). `rowf` and `colf` as factors go in `random`.
+:::
+
+------------------------------------------------------------------------
+
+## Reading the output: effective dimensions
+
+```{r}
+#| echo: false
+ed <- m_sp$eff.dim
+ed_smooth <- sum(ed[grepl("^f\\(|^col:f", names(ed))])
+tibble(Term = c("Lines", "Smooth surface", "Rows", "Columns", "Incomplete blocks"),
+       `Effective dimension` = round(c(ed[["line"]], ed_smooth, ed[["rowf"]], ed[["colf"]], ed[["rb"]]), 1),
+       `Number of levels` = c(380, NA, 66, 12, 36))
+```
+
+- The effective dimension is how many parameters a term **effectively** uses
+- Once the surface is in the model, the blocks have little left to explain
+
+------------------------------------------------------------------------
+
+## What was removed from the plots
+
+```{r}
+#| echo: false
+#| fig-width: 11
+#| fig-height: 3.6
+tr <- obtain.spatialtrend(m_sp)
+trend <- expand.grid(col = tr$col.p, row = tr$row.p) |> mutate(trend = as.vector(tr$fit))
+p1 <- ggplot(trend, aes(row, col, fill = trend)) +
+  geom_raster() +
+  scale_fill_gradient2(low = "#2166ac", mid = "white", high = "#b2182b", midpoint = 0) +
+  scale_y_continuous(breaks = c(1, 6, 7, 12)) + coord_equal() +
+  labs(x = "Row", y = "Column", fill = "Trend")
+row_eff <- tibble(row = 1:66, effect = m_sp$coeff[paste0("rowf", 1:66)])
+p2 <- ggplot(row_eff, aes(row, effect)) + geom_col(width = 0.8) +
+  labs(x = "Row", y = "Row effect (kg/ha)")
+cowplot::plot_grid(p1, p2, nrow = 1, rel_widths = c(1.2, 1))
+```
+
+- **Left:** the estimated surface: high yield in the middle, low yield in the outer columns
+- **Right:** row effects, small by comparison (mostly under 100 kg/ha)
+
+------------------------------------------------------------------------
+
+## The standard SpATS plot
+
+```{r}
+#| echo: false
+#| fig-width: 11
+#| fig-height: 6.2
+plot(m_sp, all.in.one = TRUE)
+```
+
+------------------------------------------------------------------------
+
+## BLUEs and BLUPs
+
+```{r}
+blup_sp <- predict(m_sp, which = "line") |>
+  select(line, BLUP = predicted.values, SE = standard.errors) |>
+  mutate(BLUP = BLUP + m_sp$coeff[["repR2"]] / 2)
+
+m_sp_fix <- fit_spats(beans, genotype_random = FALSE)
+blue_sp <- predict(m_sp_fix, which = "line") |>
+  select(line, BLUE = predicted.values, SE_BLUE = standard.errors) |>
+  mutate(BLUE = BLUE + m_sp_fix$coeff[["repR2"]] / 2)
+
+left_join(blue_sp, blup_sp, by = "line") |> arrange(desc(BLUP)) |> head(5)
+```
+
+- BLUEs for a next stage (multi-environment analysis); BLUPs to rank within this trial
+
+------------------------------------------------------------------------
+
+## Block 4 {.divider}
+
+Mr.Bean: SpATS without code
+
+------------------------------------------------------------------------
+
+## Mr.Bean
+
+- Free Shiny application from the Alliance of Bioversity International and CIAT (Aparicio et al. 2024)
+- Has a module that fits **the same SpATS model**: BLUEs, BLUPs and heritability without writing R
+
+1. **Import** the trial file (`Example_Beans.csv` is ready: one row per plot)
+2. **Tell the app** which column is the genotype, row, column, replicate, block and trait
+3. **Choose the model**: spatial (SpATS) or without space; genotype fixed or random
+4. **Run, inspect, download**: heritability, variance components, spatial trend, residuals, BLUEs or BLUPs
+
+::: keybox
+Good to share an analysis with colleagues who do not use R, and to check your own code. Limit: the analysis is not saved as a script.
+:::
+
+------------------------------------------------------------------------
+
+## Running Mr.Bean
+
+- Web version on shinyapps.io (needs internet; may be slow with many users)
+- Or in R: `remotes::install_github("AparicioJohan/MrBeanApp")`, then `library(MrBean)` and `run_app()`
+- Project page: `apariciojohan.github.io/MrBeanApp`
+
+**Practical:** run the beans file in the app and in R, and compare the heritability and the top 5 lines.
+
+------------------------------------------------------------------------
+
+## Block 5 {.divider}
+
+Spatial against non-spatial: does it pay?
+
+------------------------------------------------------------------------
+
+## Four ways to analyse the same trial
+
+```{r}
+#| echo: false
+m_rowcol  <- lmer(yield ~ rep + (1 | line) + (1 | rb) + (1 | rowf) + (1 | colf), data = beans)
+m_rc_only <- lmer(yield ~ rep + (1 | line) + (1 | rowf) + (1 | colf), data = beans)
+comp <- tibble(
+  Model = c("Incomplete blocks (Day 3)", "Blocks + rows + columns",
+            "Rows + columns, no blocks", "SpATS"),
+  `Residual SD` = c(sigma(m_block), sigma(m_rowcol), sigma(m_rc_only), sqrt(m_sp$psi[1])),
+  Heritability = c(h2_cullis(m_block, "line"), h2_cullis(m_rowcol, "line"),
+                   h2_cullis(m_rc_only, "line"), m_sp$eff.dim[["line"]] / (nlevels(beans$line) - 1)),
+  AIC = c(AIC(m_block), AIC(m_rowcol), AIC(m_rc_only), NA)
+)
+comp |> mutate(across(where(is.numeric), \(x) round(x, 2)))
+```
+
+- **Residual SD:** unexplained plot-to-plot variation, smaller is better
+- **Heritability:** generalized (Cullis); for SpATS, effective dimension of the lines over their number minus one
+- **AIC:** only among the `lme4` models, lower is better
+
+::: keybox
+Residual SD from `r fmt(comp[[2]][1])` to `r fmt(comp[[2]][4])` kg/ha; heritability of yield from `r round(comp[[3]][1], 2)` to `r round(comp[[3]][4], 2)`.
+:::
+
+------------------------------------------------------------------------
+
+## Does the ranking change?
+
+```{r}
+#| echo: false
+rn <- rownames(ranef(m_block)$line)
+rank_cmp <- tibble(line = rn, BLUP_block = ranef(m_block)$line[, 1],
+                   BLUP_spats = blup_sp$BLUP[match(rn, blup_sp$line)] - mean(blup_sp$BLUP))
+k <- round(0.10 * nrow(rank_cmp))
+top <- \(x) rank_cmp$line[order(-x)][1:k]
+round(c(correlation = cor(rank_cmp$BLUP_block, rank_cmp$BLUP_spats),
+        selected = k,
+        in_both = length(intersect(top(rank_cmp$BLUP_block), top(rank_cmp$BLUP_spats)))), 2)
+```
+
+- The rankings are similar, but **`r k - length(intersect(top(rank_cmp$BLUP_block), top(rank_cmp$BLUP_spats)))` of the `r k` selected lines change**
+- Which list is better? We cannot know the true values, but we can test the predictions
+
+------------------------------------------------------------------------
+
+## A check with the other replicate
+
+- Fit each model with **replicate 1 only**, predict the line means of **replicate 2**, and the other way round
+- The replicates are in different columns: two independent samples of the field
+
+```{r}
+#| echo: false
+check_one <- function(train, test) {
+  train <- droplevels(train)
+  truth <- tapply(test$yield, test$line, mean, na.rm = TRUE)
+  raw <- tapply(train$yield, train$line, mean, na.rm = TRUE)
+  m1 <- lmer(yield ~ (1 | line) + (1 | rb), data = train)
+  b1 <- setNames(ranef(m1)$line[, 1], rownames(ranef(m1)$line))
+  m2 <- lmer(yield ~ (1 | line) + (1 | rb) + (1 | rowf) + (1 | colf), data = train)
+  b2 <- setNames(ranef(m2)$line[, 1], rownames(ranef(m2)$line))
+  m3 <- SpATS(response = "yield", genotype = "line", genotype.as.random = TRUE,
+              spatial = ~ PSANOVA(col, row, nseg = c(4, 32), nest.div = 2),
+              random = ~ rowf + colf + rb, data = train,
+              control = list(tolerance = 1e-03, monitoring = 0))
+  p3 <- predict(m3, which = "line")
+  b3 <- setNames(p3$predicted.values, p3$line)
+  common <- Reduce(intersect, list(names(truth), names(raw), names(b1), names(b2), names(b3)))
+  ok <- common[!is.na(truth[common])]
+  out <- sapply(list(`Raw means` = raw, `Incomplete blocks` = b1,
+                     `Blocks + rows + columns` = b2, SpATS = b3),
+                function(s) cor(s[ok], truth[ok]))
+  tibble(Model = names(out), correlation = out)
+}
+r1 <- filter(beans, rep == "R1"); r2 <- filter(beans, rep == "R2")
+cv <- bind_rows(check_one(r1, r2), check_one(r2, r1)) |>
+  group_by(Model) |> summarise(`Correlation with the other replicate` = mean(correlation), .groups = "drop") |>
+  arrange(desc(`Correlation with the other replicate`))
+cv |> mutate(across(where(is.numeric), \(x) round(x, 3)))
+```
+
+::: keybox
+Adjusting for the field beats raw means, and the spatial model is slightly better than the blocks alone. With two replicates, do not over-read small differences.
+:::
+
+------------------------------------------------------------------------
+
+## When does it pay? Five traits
+
+```{r}
+#| echo: false
+traits <- c(Yield = "yield", `Days to flowering` = "DF", `Days to maturity` = "DPM",
+            `Plant height` = "PLHA", `100-seed weight` = "SW100")
+gain <- bind_rows(lapply(names(traits), function(nm) {
+  a <- single_trial(beans, traits[[nm]], spatial = FALSE)$h2
+  b <- single_trial(beans, traits[[nm]], spatial = TRUE)$h2
+  tibble(Trait = nm, `Incomplete blocks` = a, SpATS = b, Gain = b - a)
+}))
+gain |> mutate(across(where(is.numeric), \(x) round(x, 3)))
+```
+
+::: keybox
+Large gain for **yield**, the trait most affected by soil and water. Almost nothing for flowering, maturity and seed weight. The spatial model is a tool for the traits that need it, not a default.
+:::
+
+------------------------------------------------------------------------
+
+## Block 6 {.divider}
+
+Design or analysis?
+
+------------------------------------------------------------------------
+
+## Fix it in the field or in the model?
+
+| Problem | Design | Analysis |
+|:------------|:-----------------------|:-----------------------|
+| Known gradient | Blocks across the gradient | Row/column effects, SpATS surface |
+| Unknown patches | Small incomplete blocks, row-column | Spatial model, residual map |
+| Border competition | Border plots, plot size | Do not analyse borders as data |
+| Unreplicated or p-rep | Checks spread over the field | Checks as reference, surface |
+| Large plot noise | Larger plots, more replicates | Not recoverable |
+
+::: keybox
+**Design for the precision you need; analyse for the heterogeneity that remains.**
+:::
+
+------------------------------------------------------------------------
+
+## In the bean trial
+
+- The gradient runs **across the width** of the field
+- Blocks of 2 columns cut it in 3 strips per replicate: the block variance is as large as the genetic variance
+- But each block still holds two columns at different yield levels
+- **Design fixes that cost less than the analysis:**
+  - blocks 1 column wide and 22 rows long, following the contours of the gradient
+  - border plots in the outer columns (the lowest yield: columns 1 and 12)
+
+------------------------------------------------------------------------
+
+## Block 7 {.divider}
+
+Single-trial workflow, exercise and discussion
+
+------------------------------------------------------------------------
+
+## A single-trial workflow
+
+1. **Raw data and QC** (Day 1) → 2. **Design and model** (Days 2 and 4) → 3. **BLUPs and heritability** (Day 3) → 4. **Selection-ready table** → 5. **Decision**
+
+```{r}
+res <- single_trial(beans, "yield")
+round(res$h2, 3)
+head(res$table, 5)
+```
+
+[A high BLUP with low reliability is a candidate to retest; with high reliability, a solid advance.]{.small-note}
+
+------------------------------------------------------------------------
+
+## Exercise
+
+With the same trial:
+
+1. Draw the residual map of **days to maturity (DPM)** from the incomplete-block model. Bands or patches?
+2. Run `single_trial()` for DPM with and without space. Is the correction justified?
+3. How many of the 38 best lines for yield (10%) by the spatial model are among the 38 best by the Day 3 model? Which is the first line that enters only with the spatial model?
+
+::: keybox
+Hint: compare the heritability gain with the rule of this morning.
+:::
+
+------------------------------------------------------------------------
+
+## Questions for discussion
+
+- Look at the map of **your own trial**. Do you see a gradient, patches or an edge effect?
+- Your trial has no coordinates. What would you record next season, and how?
+- A spatial model changes 8 of 38 selected lines. How do you decide which list to trust?
+- Where would you place border plots and checks in your next trial?
+
+------------------------------------------------------------------------
 
 ## Key takeaways
 
-## Read more
+- Plots that are close are more alike than plots that are far; blocks capture part of it, the rest stays in the residual
+- **Look before you model:** map of the raw data, map of the residuals, semivariogram
+- `SpATS` fits a smooth surface with random row, column and block effects, and returns BLUEs, BLUPs and heritability; Mr.Bean does it without code
+- The gain depends on the trait: large for yield here, almost nothing for DF, DPM and SW100
+- Check against an independent replicate; report the heritability of the model you use
+- **Design first, analysis second**
 
-Full notes: course manual, chapter "Spatial Analysis and Trial Precision"
+------------------------------------------------------------------------
+
+## Resources
+
+- **Course manual**, chapter 9: theory, code and the solved exercise
+- Rodriguez-Alvarez, M. X., Boer, M. P., van Eeuwijk, F. A. & Eilers, P. H. C. (2018). Correcting for spatial heterogeneity in plant breeding experiments with P-splines. *Spatial Statistics*, 23, 52-71.
+- Aparicio, J. et al. (2024). Mr.Bean: a comprehensive statistical and visualization application for modeling agricultural field trials data. *Frontiers in Plant Science*, 14, 1290078.
+- Velazco, J. G. et al. (2017). Modelling spatial trends in sorghum breeding field trials using a two-dimensional P-spline mixed model. *Theoretical and Applied Genetics*, 130, 1375-1392.
+
+------------------------------------------------------------------------
+
+## Thank you! {.divider}
+
+**Luis Fernando Delgado Muñoz**
+
+[📧 [lfdelgadom@unal.edu.co](mailto:lfdelgadom@unal.edu.co)]{.small-note}
+
+[💼 [linkedin.com/in/lfdelgadom](https://www.linkedin.com/in/lfdelgadom)]{.small-note}

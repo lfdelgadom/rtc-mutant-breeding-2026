@@ -1,7 +1,7 @@
 # Participant Projects and Final Presentations {#sec-projects}
 
 ::: {.chapter-info}
-**Author:** Luis Fernando Delgado Muñoz, Anand Badigannavar and Mirjana Jankulovska\
+**Author:** Luis Fernando Delgado Muñoz and Mirjana Jankulovska\
 **Session:** Days 7–10 (Topic 12)
 :::
 

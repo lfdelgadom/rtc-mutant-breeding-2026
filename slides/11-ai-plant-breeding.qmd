@@ -1,35 +1,548 @@
 ---
-title: "Artificial Intelligence in Plant Breeding"
-subtitle: "RTC Experimental Design and Data Analysis for Mutant Populations · Day 5"
+title: "Day 5: Machine Learning for Prediction in Plant Breeding"
+subtitle: "Regional Training Course on Experimental Design and Data Analysis for the Advancement of Mutant Populations (RER5030)"
 author: "Luis Fernando Delgado Muñoz"
+date: "2026-11-13"
+date-format: "D MMMM YYYY"
 format:
   revealjs:
-    theme: [simple, custom.scss]
+    theme: simple
+    css: rtc_style.css
     slide-number: true
+    chalkboard: true
+    preview-links: auto
+    transition: none
+    background-transition: fade
+    smaller: true
+    scrollable: true
     code-copy: true
+    footer: "Luis Fernando Delgado Muñoz | RTC RER5030 | Day 5: Machine learning"
 execute:
   echo: true
-  eval: false
+  warning: false
+  message: false
+  cache: true
 ---
 
-## Learning objectives
-
-<!-- Copy from the book chapter -->
-
-## Key concept 1
-
-<!-- One idea per slide. Reuse figures saved in ../figures/ -->
-
-## Demo
-
 ```{r}
-# Short version of the chapter demo
+#| label: setup
+#| include: false
+knitr::opts_knit$set(root.dir = if (dir.exists("data")) "." else "..")
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+library(glmnet)
+library(pls)
+library(ranger)
+library(gbm)
+library(e1071)
+theme_set(theme_minimal(base_size = 14))
+fmt <- function(x, d = 0) format(round(x, d), big.mark = ",", scientific = FALSE, nsmall = d)
 ```
 
-## What a breeder decides from this
+```{r}
+#| label: data
+#| include: false
+nir <- read_csv("data/cassava_nir.csv", show_col_types = FALSE)
+wl_cols <- grep("^w", names(nir))
+wl <- as.numeric(sub("w", "", names(nir)[wl_cols]))
+X  <- as.matrix(nir[, wl_cols])
+y  <- nir$pigment
+is_cal <- nir$set == "calibration"
+
+snv <- function(X) t(apply(X, 1, function(s) (s - mean(s)) / sd(s)))
+first_derivative <- function(X, k = 5) {
+  Xs <- t(apply(X, 1, function(s) stats::filter(s, rep(1 / k, k), sides = 2)))
+  Xs <- Xs[, !apply(Xs, 2, anyNA), drop = FALSE]
+  t(apply(Xs, 1, diff))
+}
+prep <- function(X) { Z <- first_derivative(snv(X)); colnames(Z) <- paste0("v", seq_len(ncol(Z))); Z }
+Z <- prep(X)
+wl_d <- (wl[3:(length(wl) - 3)] + wl[4:(length(wl) - 2)]) / 2
+
+rmse <- function(o, p) sqrt(mean((o - p)^2))
+r2   <- function(o, p) 1 - sum((o - p)^2) / sum((o - mean(o))^2)
+metrics <- function(o, p) c(RMSE = rmse(o, p), R2 = r2(o, p), bias = mean(p - o), RPD = sd(o) / rmse(o, p))
+
+A <- Z[is_cal, ];  yA <- y[is_cal]
+B <- Z[!is_cal, ]; yB <- y[!is_cal]
+baseline <- metrics(yB, rep(mean(yA), length(yB)))
+
+fit_predict <- function(model, A, y, B) {
+  switch(model,
+    PLS = {
+      d <- data.frame(y = y); d$X <- I(A)
+      set.seed(1)
+      m <- plsr(y ~ X, ncomp = 15, data = d, validation = "CV", segments = 10)
+      nc <- which.min(RMSEP(m)$val[1, 1, -1])
+      as.numeric(predict(m, ncomp = nc, newdata = data.frame(X = I(B))))
+    },
+    Ridge = { set.seed(1); cv <- cv.glmnet(A, y, alpha = 0);   as.numeric(predict(cv, B, s = "lambda.min")) },
+    Lasso = { set.seed(1); cv <- cv.glmnet(A, y, alpha = 1);   as.numeric(predict(cv, B, s = "lambda.min")) },
+    ENet  = { set.seed(1); cv <- cv.glmnet(A, y, alpha = 0.5); as.numeric(predict(cv, B, s = "lambda.min")) },
+    RF = { set.seed(1); predict(ranger(x = A, y = y, num.trees = 500), B)$predictions },
+    GBM = {
+      set.seed(1)
+      d <- as.data.frame(A); d$y <- y
+      g <- gbm(y ~ ., data = d, distribution = "gaussian", n.trees = 1500, shrinkage = 0.02,
+               interaction.depth = 3, cv.folds = 5, verbose = FALSE)
+      nt <- gbm.perf(g, method = "cv", plot.it = FALSE)
+      predict(g, as.data.frame(B), n.trees = nt)
+    },
+    SVM = {
+      tu <- tune.svm(A, y, gamma = 10^(-4:-2), cost = c(1, 10, 100), tunecontrol = tune.control(cross = 5))
+      predict(tu$best.model, B)
+    })
+}
+
+models <- c("PLS", "Ridge", "Lasso", "ENet", "RF", "GBM", "SVM")
+pred_test <- sapply(models, function(m) fit_predict(m, A, yA, B))
+perf <- t(apply(pred_test, 2, function(p) metrics(yB, p))) |> as.data.frame()
+perf$model <- rownames(perf)
+
+set.seed(2)
+fold_random <- sample(rep(1:10, length.out = nrow(A)))
+yr_cal <- nir$year[is_cal]
+cv_error <- function(model, groups) {
+  p <- numeric(nrow(A))
+  for (g in unique(groups)) {
+    i <- groups == g
+    p[i] <- fit_predict(model, A[!i, , drop = FALSE], yA[!i], A[i, , drop = FALSE])
+  }
+  rmse(yA, p)
+}
+cv_tab <- data.frame(model = c("PLS", "ENet", "SVM"))
+cv_tab$random_10_fold <- sapply(cv_tab$model, cv_error, groups = fold_random)
+cv_tab$leave_one_year_out <- sapply(cv_tab$model, cv_error, groups = yr_cal)
+cv_tab$test_2013 <- perf$RMSE[match(cv_tab$model, perf$model)]
+opt <- mean(cv_tab$leave_one_year_out / cv_tab$random_10_fold)
+
+i_test <- which(!is_cal); i_cal <- which(is_cal)
+upd <- do.call(rbind, lapply(c(0, 10, 20, 40), function(n) {
+  r <- sapply(1:12, function(s) {
+    set.seed(s)
+    add <- if (n > 0) sample(i_test, n) else integer(0)
+    trn <- c(i_cal, add); tst <- setdiff(i_test, add)
+    p <- fit_predict("ENet", Z[trn, ], y[trn], Z[tst, ])
+    c(rmse(y[tst], p), mean(p - y[tst]))
+  })
+  data.frame(added = n, RMSE = mean(r[1, ]), bias = mean(r[2, ]))
+}))
+```
+
+## Plan for the session
+
+| Block | Topic |
+|-----------------|-------------------------------------------------------|
+| 1 | Prediction, not explanation |
+| 2 | The data: NIR spectra of cassava |
+| 3 | The models and how they perform |
+| 4 | Honest validation and data leakage |
+| 5 | When the next season is different |
+| 6 | Limits, the breeder, exercise |
+
+::: keybox
+**Goal:** leave able to build a prediction model from many cheap measurements, compare it with a baseline, and report an **honest** error.
+:::
+
+------------------------------------------------------------------------
+
+## Block 1 {.divider}
+
+Prediction, not explanation
+
+------------------------------------------------------------------------
+
+## Two different questions
+
+| | Classical statistics | Machine learning |
+|------------------|----------------------------|-------------------------|
+| Goal | Explain, estimate effects, test | **Predict** new observations |
+| Data | Designed trials, few variables | More variables than samples |
+| Model | Specified from the design | Learned from the data |
+| Output | Effects with uncertainty | A prediction and its error |
+| Main risk | Wrong model structure | Overfitting, no transfer |
+
+::: keybox
+They are not rivals: the design and the mixed model give **clean phenotypes**; ML turns **cheap** measurements into predictions of **expensive** ones.
+:::
+
+------------------------------------------------------------------------
+
+## Where it pays in a breeding programme
+
+| Application | Predictors | Target |
+|----------------------|--------------------------|------------------------|
+| Chemical composition | NIR spectra | Protein, oil, starch, carotenoids |
+| Disease and vigour | Image features (Day 4) | Severity, biomass |
+| Yield and traits | Drone and sensor indices | Yield, height |
+| Genomic prediction | Thousands of markers | Breeding value |
+| G×E prediction | Environmental covariates | Performance in a new environment |
+
+------------------------------------------------------------------------
+
+## In a mutation breeding programme
+
+- M2 and M3 populations have **thousands of plants**: the laboratory cannot measure them one by one
+- A prediction from an image or a spectrum **ranks every plant**
+- The laboratory measures only the promising ones
+
+::: keybox
+The prediction does not replace the measurement. It decides **where to spend it**.
+:::
+
+------------------------------------------------------------------------
+
+## Block 2 {.divider}
+
+The data: NIR spectra of cassava
+
+------------------------------------------------------------------------
+
+## A real data set from the CIAT cassava programme
+
+- Part of a large calibration database to predict **carotenoids in fresh cassava roots** (Davrieux et al. 2016)
+- The laboratory method (HPLC) analyses only a few samples per day; NIR is cheap and fast
+- Spectra from 400 to 2498 nm every 2 nm: **`r length(wl)` variables**
+- **`r sum(is_cal)` calibration samples** (2009 to 2012) and **`r sum(!is_cal)` test samples** (2013)
+
+::: keybox
+More variables than samples: a standard multiple regression cannot be fitted.
+:::
+
+------------------------------------------------------------------------
+
+## The spectra
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4.2
+set.seed(1)
+show <- sample(which(is_cal), 60)
+grp <- cut(y, quantile(y[is_cal], c(0, 1/3, 2/3, 1)), labels = c("low", "medium", "high"), include.lowest = TRUE)
+long <- data.frame(sample = rep(show, each = length(wl)), wavelength = rep(wl, times = length(show)),
+                   absorbance = as.vector(t(X[show, ])), pigment = rep(grp[show], each = length(wl)))
+ggplot(long, aes(wavelength, absorbance, group = sample, colour = pigment)) +
+  geom_line(alpha = 0.6) +
+  scale_colour_manual(values = c(low = "#1b9e77", medium = "#e6ab02", high = "#d95f02")) +
+  labs(x = "Wavelength (nm)", y = "Absorbance", colour = "Pigment")
+```
+
+The spectra look alike: the information is in **small differences**.
+
+------------------------------------------------------------------------
+
+## The population is evolving
+
+```{r}
+#| echo: false
+#| fig-width: 9
+#| fig-height: 4
+ggplot(nir, aes(factor(year), pigment, fill = set)) +
+  geom_boxplot(outlier.shape = NA, alpha = 0.7) +
+  geom_jitter(width = 0.15, size = 1, alpha = 0.5) +
+  scale_fill_manual(values = c(calibration = "#9ecae1", test = "#fdae6b")) +
+  labs(x = "Year", y = "Pigment concentration", fill = NULL)
+```
+
+::: keybox
+The test year has a mean of **`r fmt(mean(y[!is_cal]), 1)`**; the calibration years have **`r fmt(mean(y[is_cal]), 1)`**. The next season is **not like the previous ones**.
+:::
+
+------------------------------------------------------------------------
+
+## Preparing the spectra
+
+- **SNV**: subtract the mean of each spectrum and divide by its standard deviation (removes level and scale)
+- **First derivative** after light smoothing (removes the baseline slope, sharpens peaks)
+- Applied to **each spectrum separately**: no information from other samples
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4.4
+i15 <- show[1:15]
+mk <- function(M, w, lab) data.frame(sample = rep(i15, each = length(w)), wavelength = rep(w, times = 15),
+                                     value = as.vector(t(M[i15, ])), step = lab)
+bind_rows(mk(X, wl, "1. Raw"), mk(snv(X), wl, "2. SNV"), mk(Z, wl_d, "3. SNV + derivative")) |>
+  ggplot(aes(wavelength, value, group = sample)) +
+  geom_line(alpha = 0.6, colour = "#2c7fb8") +
+  facet_wrap(~ step, nrow = 1, scales = "free_y") +
+  labs(x = "Wavelength (nm)", y = NULL)
+```
+
+------------------------------------------------------------------------
+
+## Block 3 {.divider}
+
+The models and how they perform
+
+------------------------------------------------------------------------
+
+## Measuring prediction quality
+
+On samples the model has **not seen**:
+
+- **RMSE**: typical error, in the units of the trait
+- **R²** of the prediction
+- **Bias**: mean of (prediction minus observed), should be near 0
+- **RPD**: standard deviation of observed values divided by RMSE (above 2: useful for screening)
+
+::: keybox
+Always compare with a **baseline**: predict the calibration mean for every new sample. Here the RMSE of the baseline is **`r fmt(baseline["RMSE"], 2)`**.
+:::
+
+------------------------------------------------------------------------
+
+## The model families
+
+| Model | Idea | Tuning |
+|------------------|--------------------------------------|---------------------|
+| **Ridge** | Linear, shrinks all coefficients | Amount of shrinkage |
+| **Lasso** | Shrinks, sets many coefficients to 0 | Amount of shrinkage |
+| **Elastic net** | Mix of ridge and lasso | Shrinkage and mix |
+| **PLS** | Few components that covary with the trait | Components |
+| **Random forest** | Average of many trees | Variables per split |
+| **Boosting** | Trees built one after another | Trees, rate, depth |
+| **SVM** | Flexible curve, margin of tolerance | Cost, kernel width |
+
+::: keybox
+Tune by **cross-validation inside the calibration set**, never with the test set.
+:::
+
+------------------------------------------------------------------------
+
+## One function to fit them all
+
+```{r}
+#| eval: false
+fit_predict <- function(model, A, y, B) {
+  switch(model,
+    PLS   = { ... plsr(y ~ X, ncomp = 15, validation = "CV") ... },
+    Lasso = { cv <- cv.glmnet(A, y, alpha = 1);   predict(cv, B, s = "lambda.min") },
+    ENet  = { cv <- cv.glmnet(A, y, alpha = 0.5); predict(cv, B, s = "lambda.min") },
+    RF    = { predict(ranger(x = A, y = y, num.trees = 500), B)$predictions },
+    GBM   = { ... gbm(..., cv.folds = 5) ... },
+    SVM   = { tu <- tune.svm(A, y, gamma = 10^(-4:-2), cost = c(1, 10, 100)); predict(tu$best.model, B) })
+}
+pred_test <- sapply(models, function(m) fit_predict(m, A, yA, B))
+```
+
+Full function in the course manual.
+
+------------------------------------------------------------------------
+
+## Performance in the test year
+
+```{r}
+#| echo: false
+perf |> arrange(RMSE) |> select(model, RMSE, R2, bias, RPD) |>
+  mutate(across(where(is.numeric), \(x) round(x, 2)))
+```
+
+- All models beat the baseline (**`r fmt(baseline["RMSE"], 2)`**)
+- **No model is best for every problem**: compare with your own data
+- **All biases are negative**: the models predict too low in the new year
+
+------------------------------------------------------------------------
+
+## Predicted against observed
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 5
+po <- as.data.frame(pred_test) |> mutate(observed = yB) |>
+  pivot_longer(-observed, names_to = "model", values_to = "predicted") |>
+  mutate(model = factor(model, levels = models))
+ggplot(po, aes(observed, predicted)) +
+  annotate("rect", xmin = -Inf, xmax = Inf, ymin = min(yA), ymax = max(yA), fill = "grey85", alpha = 0.6) +
+  geom_abline(linetype = 2) +
+  geom_point(colour = "#2c7fb8", alpha = 0.7, size = 1.4) +
+  facet_wrap(~ model, nrow = 2) +
+  labs(x = "Observed", y = "Predicted")
+```
+
+[Shaded band: range of the calibration set. A tree never predicts above the maximum it has seen.]{.small-note}
+
+------------------------------------------------------------------------
+
+## What the lasso selected
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 3.8
+set.seed(1)
+cv_l <- cv.glmnet(A, yA, alpha = 1)
+b <- as.matrix(coef(cv_l, s = "lambda.min"))[-1, 1]
+sel <- data.frame(wavelength = wl_d[b != 0], coefficient = b[b != 0])
+ggplot(sel, aes(wavelength, coefficient)) +
+  geom_col(width = 6, fill = "#2c7fb8") +
+  labs(x = "Wavelength (nm)", y = "Lasso coefficient")
+```
+
+**`r nrow(sel)`** of **`r ncol(A)`** variables kept. Neighbouring wavelengths can replace each other: not "the only wavelengths that matter".
+
+------------------------------------------------------------------------
+
+## Block 4 {.divider}
+
+Honest validation and data leakage
+
+------------------------------------------------------------------------
+
+## Three sets, three roles
+
+| Set | Used for | Rule |
+|------------|-------------------------------------|---------------------|
+| Training | Fit the model | Many samples |
+| Validation / CV folds | Choose tuning and the model | Taken from the training data |
+| Test | Report the final error | Used **once**, at the end |
+
+::: keybox
+The way you split must follow the **question**: new year, split by year. New genotype, split by genotype. New location, split by location.
+:::
+
+------------------------------------------------------------------------
+
+## Random against by-year validation
+
+```{r}
+#| echo: false
+#| fig-width: 9
+#| fig-height: 4
+cv_tab |>
+  pivot_longer(-model, names_to = "validation", values_to = "RMSE") |>
+  mutate(validation = factor(validation, levels = c("random_10_fold", "leave_one_year_out", "test_2013"),
+                             labels = c("Random 10-fold", "Leave one year out", "Test year 2013"))) |>
+  ggplot(aes(model, RMSE, fill = validation)) +
+  geom_col(position = "dodge") +
+  scale_fill_manual(values = c("#9ecae1", "#4292c6", "#08519c")) +
+  labs(x = NULL, y = "RMSE", fill = NULL)
+```
+
+::: keybox
+The error for a new year is **`r fmt(100 * (opt - 1), 0)` %** larger than random cross-validation reports: samples of the same year share conditions that the model learns.
+:::
+
+------------------------------------------------------------------------
+
+## Data leakage
+
+Information from validation or test samples reaches the model **before** the evaluation. The error looks smaller than it is.
+
+- The same genotype, plant or sample (or replicates) in training and test
+- Choosing variables (wavelengths, markers) with **all** the data, then cross-validating only the model
+- Scaling or transforming with means computed on all samples
+- Tuning on the test set and reporting the same test set
+- A predictor that is a consequence of the target
+
+::: keybox
+Every step that learns something from the data belongs **inside** the validation loop.
+:::
+
+------------------------------------------------------------------------
+
+## Wrong and right
+
+```{r}
+#| eval: false
+# WRONG: variables chosen with all the samples
+top <- order(-abs(cor(A, yA)))[1:30]
+cv_error_wrong <- cross_validate(model, A[, top], yA)
+
+# RIGHT: inside each fold, choose with the training part only
+for (k in 1:10) {
+  train <- fold != k
+  top <- order(-abs(cor(A[train, ], yA[train])))[1:30]
+  fit <- fit_model(A[train, top], yA[train])
+  pred[!train] <- predict(fit, A[!train, top])
+}
+```
+
+------------------------------------------------------------------------
+
+## Block 5 {.divider}
+
+When the next season is different
+
+------------------------------------------------------------------------
+
+## A calibration is a living tool
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 3.8
+ggplot(upd, aes(added, RMSE)) +
+  geom_line(colour = "#2c7fb8") + geom_point(size = 3, colour = "#2c7fb8") +
+  scale_x_continuous(breaks = c(0, 10, 20, 40)) +
+  labs(x = "Samples of 2013 added to the calibration", y = "RMSE on the rest of 2013")
+```
+
+::: keybox
+With no new sample the error is **`r fmt(upd$RMSE[1], 2)`**. Adding **20** laboratory measurements of the new year: **`r fmt(upd$RMSE[3], 2)`**. Check each season with a few reference samples and update.
+:::
+
+------------------------------------------------------------------------
+
+## The same workflow for other data
+
+- **Image features** (Day 4): area, colour indices, shape as predictors; a visual or laboratory score as the target
+- **Markers**: ridge is the model behind GBLUP; validate by genotype and by environment
+- **G×E**: predicting a **new** environment needs a description of it (soil, weather); without covariates, use the mean of the line
+- **Early generations**: predictions on thousands of M2 plants, then a check of the best ones
+
+------------------------------------------------------------------------
+
+## Block 6 {.divider}
+
+Limits, the breeder, exercise
+
+------------------------------------------------------------------------
+
+## Limitations
+
+- **Small data sets**: the error estimate is itself uncertain; prefer simple models
+- **Overfitting**: more flexible models understate the real error
+- **Interpretability**: forests and boosting do not give effects to explain
+- **Transfer**: other crop, season, instrument or laboratory needs a new check
+- **Label quality**: noisy laboratory values limit the best possible prediction
+
+::: keybox
+ML does not know the biology. The breeder knows if a prediction makes sense, which samples are unusual and which errors matter.
+:::
+
+------------------------------------------------------------------------
+
+## Exercise
+
+Use the cassava data.
+
+1. Calibration: samples of **2009 to 2011**. Validation: samples of **2012**
+2. Fit **PLS** and the **elastic net**; compute RMSE and bias on 2012
+3. Compare with random 10-fold cross-validation inside 2009 to 2011
+
+Which error would you report as the expected error for next season?
+
+------------------------------------------------------------------------
 
 ## Key takeaways
 
+- ML is for **prediction**: cheap measurements into estimates of expensive ones
+- Always compare with a **baseline**; there is **no best model** in general
+- The honest error comes from data the model never saw, split the way the model will be used
+- Avoid **leakage**: every learning step belongs inside the validation loop
+- A calibration **drifts**: update it every season with a few reference samples
+- The breeder **decides**; the prediction ranks and prioritizes
+
+------------------------------------------------------------------------
+
 ## Read more
 
-Full notes: course manual, chapter "Artificial Intelligence in Plant Breeding"
+Full notes: course manual, chapter "Machine Learning for Prediction in Plant Breeding"
+
+Data: Davrieux et al. (2016), *J. Near Infrared Spectroscopy* 24: 109, distributed with the `rchemo` package (CIAT cassava programme)

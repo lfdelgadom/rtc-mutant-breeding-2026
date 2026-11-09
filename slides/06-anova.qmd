@@ -1,35 +1,688 @@
 ---
-title: "ANOVA and Mean Comparison"
-subtitle: "RTC Experimental Design and Data Analysis for Mutant Populations · Day 2"
+title: "Day 2: ANOVA and Mean Comparison in Breeding Trials"
+subtitle: "Regional Training Course on Experimental Design and Data Analysis for the Advancement of Mutant Populations (RER5030)"
 author: "Luis Fernando Delgado Muñoz"
+date: "2026-11-10"
+date-format: "D MMMM YYYY"
 format:
   revealjs:
-    theme: [simple, custom.scss]
+    theme: simple
+    css: rtc_style.css
     slide-number: true
+    chalkboard: true
+    preview-links: auto
+    transition: none
+    background-transition: fade
+    smaller: true
+    scrollable: true
     code-copy: true
+    footer: "Luis Fernando Delgado Muñoz | RTC RER5030 | Day 2: ANOVA and mean comparison"
 execute:
   echo: true
-  eval: false
+  warning: false
+  message: false
+  cache: true
 ---
 
-## Learning objectives
-
-<!-- Copy from the book chapter -->
-
-## Key concept 1
-
-<!-- One idea per slide. Reuse figures saved in ../figures/ -->
-
-## Demo
-
 ```{r}
-# Short version of the chapter demo
+#| label: setup
+#| include: false
+knitr::opts_knit$set(root.dir = if (dir.exists("data")) "." else "..")
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+library(emmeans)
+library(agridat)
+library(agricolae)
+theme_set(theme_minimal(base_size = 14))
 ```
 
-## What a breeder decides from this
+```{r}
+#| label: data
+#| include: false
+durum <- read_csv("data/Durum_wheat_Algeria.csv", show_col_types = FALSE) |>
+  mutate(Genotype = factor(Genotype), Block = factor(Block))
+e10 <- durum |> filter(Environment == "loc10_year1")
+
+rice <- read_csv("data/Example_rice.csv",
+                 locale = locale(encoding = "latin1"), show_col_types = FALSE) |>
+  mutate(env  = if_else(grepl("^Irri", TRAT), "Irrigated", "Drought"),
+         GEN  = relevel(factor(GEN), ref = "centinela"),
+         Bloq = factor(Bloq))
+irr <- rice |> filter(env == "Irrigated")
+fit_irr <- lm(REND ~ Bloq + GEN, data = irr)
+em <- emmeans(fit_irr, ~ GEN)
+```
+
+## Plan for the afternoon
+
+| Block | Topic |
+|-----------------|-------------------------------------------------------|
+| 1 | The ANOVA of an RCBD: partition of the variation, by hand |
+| 2 | Assumptions: residual diagnostics and transformations |
+| 3 | Comparing means: LSD, Tukey and **Dunnett against a control** |
+| 4 | **Statistical vs practical significance** |
+| 5 | Augmented designs and several environments |
+| 6 | **Identifying superior genotypes**: from significance to selection, pitfalls |
+| 7 | Exercise on durum wheat, discussion and Q&A |
+
+::: keybox
+**Goal:** leave able to fit the ANOVA of your trial, check it, and answer the breeder's question: **which lines are better than the parent or the check, by how much, and which ones do we advance?**
+:::
+
+------------------------------------------------------------------------
+
+## Block 1 {.divider}
+
+The ANOVA of an RCBD
+
+------------------------------------------------------------------------
+
+## Our data: durum wheat in Algeria
+
+- 24 genotypes, 22 environments (11 locations, 2 years); each environment is an RCBD with 4 blocks
+- Real data, used with permission (Biometris, Wageningen University and Research; CIP course 2021)
+- Today: **one environment** (`loc10_year1`), 96 plots
+
+```{r}
+e10 |> select(Environment, Block, Genotype, yield) |> head(6)
+```
+
+Model of the RCBD (chapter 5 of the manual):
+
+```
+yield = overall mean + block effect + genotype effect + error
+```
+
+------------------------------------------------------------------------
+
+## Fit the model
+
+```{r}
+fit <- lm(yield ~ Block + Genotype, data = e10)
+anova(fit)
+```
+
+- **Block**: variation among the 4 blocks (field effect)
+- **Genotype**: variation among the 24 genotype means
+- **Residuals**: plot to plot differences within the same genotype and block; its mean square is the **error variance**
+
+::: keybox
+F genotype = ratio of the variance among genotype means to the error variance. If all genotypes were equal, F would be near 1.
+:::
+
+------------------------------------------------------------------------
+
+## The same table, by hand
+
+```{r}
+y <- e10$yield; mu <- mean(y)
+b <- nlevels(e10$Block); g <- nlevels(e10$Genotype)
+
+ss_total <- sum((y - mu)^2)
+ss_block <- g * sum((tapply(y, e10$Block, mean) - mu)^2)
+ss_geno  <- b * sum((tapply(y, e10$Genotype, mean) - mu)^2)
+ss_error <- ss_total - ss_block - ss_geno
+
+data.frame(source = c("Block", "Genotype", "Error", "Total"),
+           df = c(b - 1, g - 1, (b - 1) * (g - 1), b * g - 1),
+           SS = round(c(ss_block, ss_geno, ss_error, ss_total), 3))
+```
+
+Report always: the **residual mean square**, the **CV** and the **residual df**.
+
+```{r}
+c(MSE = deviance(fit) / df.residual(fit), CV = 100 * sigma(fit) / mu, df = df.residual(fit))
+```
+
+------------------------------------------------------------------------
+
+::: keybox
+A significant F says **at least one genotype is different**. It does not say which.
+:::
+
+For that we need the comparisons of means (Block 3).
+
+------------------------------------------------------------------------
+
+## Block 2 {.divider}
+
+Assumptions
+
+------------------------------------------------------------------------
+
+## What we assume
+
+The errors are **independent**, have **equal variance** for all genotypes, and are **approximately normal**.
+
+Check the **residuals**, not the raw data (the raw data contain genotype and block effects).
+
+```{r}
+#| fig-height: 3.6
+#| fig-width: 9
+par(mfrow = c(1, 2))
+plot(fit, which = 1:2)
+par(mfrow = c(1, 1))
+```
+
+------------------------------------------------------------------------
+
+## How to read the plots
+
+- **Residuals vs fitted:** a random cloud is good. A **funnel** means variance depends on the mean. A **curve** means a missing term.
+- **QQ plot:** points on the line. Small departures in the tails matter little.
+- **Tests** (support only, few plots per genotype):
+
+```{r}
+shapiro.test(resid(fit))$p.value
+levene <- function(y, group) anova(lm(abs(y - ave(y, group, FUN = median)) ~ group))
+levene(e10$yield, e10$Genotype)$`Pr(>F)`[1]
+```
+
+- **Outliers:** a residual above about 3 residual SD: check the field book, correct or remove **with a note**, never silently.
+
+------------------------------------------------------------------------
+
+## When variance grows with the mean
+
+Real counts of webworms in a beet field: 13 blocks, 4 insecticide treatments (Beall, 1940). One value per plot = sum of the 25 unit areas.
+
+```{r}
+worms <- beall.webworms |>
+  group_by(block, trt) |> summarise(count = sum(y), .groups = "drop")
+worms |> group_by(trt) |> summarise(mean = mean(count), variance = var(count))
+```
+
+The treatment with the highest mean has also the highest variance.
+
+------------------------------------------------------------------------
+
+## The square root stabilizes the variance
+
+```{r}
+#| fig-height: 3.4
+#| fig-width: 9
+f_raw  <- lm(count ~ block + trt, data = worms)
+f_sqrt <- lm(sqrt(count) ~ block + trt, data = worms)
+bind_rows(
+  data.frame(scale = "Raw count",   fitted = fitted(f_raw),  resid = resid(f_raw)),
+  data.frame(scale = "Square root", fitted = fitted(f_sqrt), resid = resid(f_sqrt))) |>
+  mutate(scale = factor(scale, levels = c("Raw count", "Square root"))) |>
+  ggplot(aes(fitted, resid)) + geom_hline(yintercept = 0, linetype = 2) +
+  geom_point(alpha = 0.7) + facet_wrap(~scale, scales = "free")
+```
+
+------------------------------------------------------------------------
+
+## Which transformation?
+
+| Data | Transformation |
+|------------------------|------------------------------------------|
+| Counts | square root (y + 0.5 if zeros) |
+| Variance proportional to mean squared | logarithm |
+| Proportions | arcsine of square root, or a binomial model (chapter 7) |
+
+------------------------------------------------------------------------
+
+## Block 3 {.divider}
+
+Comparing means
+
+------------------------------------------------------------------------
+
+## A rice trial with a control
+
+- 11 genotypes: lines G1 to G9, the variety **centinela** (parent, 2 plots per block) and a **check**
+- Irrigated, RCBD with 3 blocks
+
+```{r}
+anova(fit_irr)
+```
+
+```{r}
+c(CV = 100 * sigma(fit_irr) / mean(irr$REND), df = df.residual(fit_irr))
+```
+
+------------------------------------------------------------------------
+
+## The multiple comparison problem
+
+11 genotypes = **55 pairs**. With no real differences, at 5% each, we expect about **3 false positives**.
+
+| Procedure | Controls | Use |
+|-----------------|--------------------------------|-----------------------|
+| **LSD** | nothing (5% each) | After a significant F; screening |
+| **Tukey HSD** | the error of **all pairs** together | All against all; conservative |
+| **Dunnett** | the error of the comparisons **with one control** | New lines vs parent or check |
+
+------------------------------------------------------------------------
+
+## LSD groups
+
+```{r}
+LSD.test(fit_irr, "GEN", console = FALSE)$groups
+```
+
+Same letter = not significantly different. `G4` is separated from **six** genotypes by LSD.
+
+------------------------------------------------------------------------
+
+## Tukey groups
+
+```{r}
+HSD.test(fit_irr, "GEN", console = FALSE)$groups
+```
+
+Tukey separates `G4` from only **two** genotypes (`G7` and the check): protected against the 55 comparisons.
+
+------------------------------------------------------------------------
+
+## Duncan: common, but weakly protected
+
+```{r}
+duncan.test(fit_irr, "GEN", console = FALSE)$groups
+```
+
+Groups between LSD and Tukey, but **no control of the error of all comparisons**. If a paper reports Duncan letters, read them as screening. For decisions use **Tukey** (all pairs) or **Dunnett** (against a control).
+
+::: small-note
+Letters hide the size of the differences and the uncertainty. Report differences with confidence intervals.
+:::
+
+------------------------------------------------------------------------
+
+## Dunnett: lines against the control
+
+The breeder's question: **is any line better than the parent?** 10 comparisons, not 55.
+
+```{r}
+dun_tab <- summary(contrast(em, method = "trt.vs.ctrl", ref = 1), infer = TRUE)
+dun_tab |> select(contrast, estimate, SE, lower.CL, upper.CL, p.value) |>
+  mutate(across(where(is.numeric), \(x) round(x, 3)))
+```
+
+------------------------------------------------------------------------
+
+## Protected or not?
+
+```{r}
+unadj <- summary(contrast(em, "trt.vs.ctrl", ref = 1), adjust = "none")
+c(unadjusted = sum(unadj$p.value < 0.05), dunnett = sum(dun_tab$p.value < 0.05))
+```
+
+Without protection, **4 of 10** lines look different from the control. Dunnett confirms **one** (the check, lower than the parent).
+
+------------------------------------------------------------------------
+
+## Differences to the control
+
+```{r}
+#| echo: false
+#| fig-height: 5
+#| fig-width: 9
+dun_tab |> mutate(contrast = reorder(contrast, estimate)) |>
+  ggplot(aes(estimate, contrast)) + geom_vline(xintercept = 0, linetype = 2) +
+  geom_pointrange(aes(xmin = lower.CL, xmax = upper.CL)) +
+  labs(x = "Difference to centinela (t/ha)", y = NULL)
+```
+
+------------------------------------------------------------------------
+
+## Block 4 {.divider}
+
+Statistical vs practical significance
+
+------------------------------------------------------------------------
+
+## Three numbers, read together
+
+- The **size** of the difference (t/ha and % of the control)
+- The **confidence interval**
+- The **smallest difference that matters**, decided before the trial (e.g. 10% of the parent)
+
+```{r}
+ctrl_mean <- summary(em) |> filter(GEN == "centinela") |> pull(emmean)
+dun_tab |> mutate(gain_percent = 100 * estimate / ctrl_mean) |>
+  select(contrast, estimate, lower.CL, upper.CL, gain_percent, p.value) |>
+  arrange(desc(estimate)) |> head(3) |>
+  mutate(across(where(is.numeric), \(x) round(x, 2)))
+```
+
+------------------------------------------------------------------------
+
+## What can we say about G4?
+
+`G4`: **+1.7 t/ha (+22%)**, Dunnett p = 0.08, interval from -0.1 to +3.6 t/ha.
+
+- "There is no difference": **wrong**. The trial *failed to detect* it.
+- "G4 is 22% better": **too strong**. Compatible with almost no gain, and with more than 3 t/ha.
+
+::: keybox
+A promising line that needs **more replication or more environments**.
+:::
+
+```{r}
+lsd_value <- qt(0.975, df.residual(fit_irr)) * sqrt(2 * sigma(fit_irr)^2 / 3)
+c(LSD_t_ha = lsd_value, percent_of_mean = 100 * lsd_value / mean(irr$REND))
+```
+
+With 3 replicates and CV 11%, differences below about **1.5 t/ha (19%)** cannot be confirmed.
+
+------------------------------------------------------------------------
+
+## Block 5 {.divider}
+
+Augmented designs and several environments
+
+------------------------------------------------------------------------
+
+## Augmented design: the error comes from the checks
+
+Real meadowfoam trial: 50 new lines (1 plot) + 3 checks in every one of 6 blocks (`kling.augmented`).
+
+```{r}
+aug <- kling.augmented |> mutate(gen = droplevels(gen))
+fit_aug <- lm(tsw ~ block + gen, data = aug)
+anova(fit_aug)
+```
+
+- Same model as an RCBD, fitted with `lm()`
+- Residual df = (6 - 1) x (3 - 1) = **10**: only the checks estimate the error
+- New lines are **adjusted for blocks** (`emmeans`)
+
+------------------------------------------------------------------------
+
+## Precision depends on the comparison
+
+```{r}
+em_aug <- emmeans(fit_aug, ~ gen)
+chk <- c("G89", "G90", "G91")
+pw <- as.data.frame(pairs(em_aug, adjust = "none"))
+pw$a <- sub(" - .*", "", pw$contrast); pw$b <- sub(".* - ", "", pw$contrast)
+pw$type <- case_when(pw$a %in% chk & pw$b %in% chk ~ "check vs check",
+                     pw$a %in% chk | pw$b %in% chk ~ "new vs check",
+                     TRUE ~ "new vs new")
+pw |> group_by(type) |> summarise(SED = round(mean(SE), 3))
+```
+
+For selection, compare new lines with the **checks** and remember the large SED between two unreplicated lines.
+
+------------------------------------------------------------------------
+
+## Two water regimes (rice)
+
+```{r}
+anova(lm(REND ~ env / Bloq + GEN * env, data = rice))
+```
+
+Environment dominates. Genotypes differ. **G x E not significant** (p = 0.24): similar ranking under irrigation and drought.
+
+------------------------------------------------------------------------
+
+## 22 environments (durum wheat)
+
+```{r}
+fit_met <- lm(yield ~ Environment / Block + Genotype * Environment, data = durum)
+a <- anova(fit_met); a
+```
+
+Genotypes are tested against **G x E**, not the residual: environments are a sample.
+
+------------------------------------------------------------------------
+
+## Variance components from the mean squares
+
+```{r}
+ms <- setNames(a$`Mean Sq`, rownames(a)); r <- 4; e <- 22
+round(c(genotype = unname((ms["Genotype"] - ms["Environment:Genotype"]) / (r * e)),
+        GxE      = unname((ms["Environment:Genotype"] - ms["Residuals"]) / r),
+        error    = unname(ms["Residuals"])), 4)
+```
+
+::: keybox
+**G x E variance > genotype variance:** one environment is not enough to choose lines. This leads to mixed models (chapter 7) and G x E (chapter 10).
+:::
+
+------------------------------------------------------------------------
+
+## Block 6 {.divider}
+
+Identifying superior genotypes
+
+------------------------------------------------------------------------
+
+## A decision rule, written before the trial
+
+1. **Reference:** the parent or the best check
+2. **Smallest gain that matters:** e.g. 10% over the parent
+3. **Evidence:** the Dunnett interval of the difference to the reference
+
+| Class | Rule | Decision |
+|--------------------|-----------------------------------|--------------------|
+| **Confirmed superior** | interval above zero | Advance |
+| **Promising** | gain at least 10%, interval includes zero | Test again |
+| **Not different** | gain below 10%, interval includes zero | Drop |
+| **Confirmed inferior** | interval below zero | Drop |
+
+------------------------------------------------------------------------
+
+## Classify the lines (rice, two regimes)
+
+```{r}
+classify <- function(d, env_name) {
+  fit  <- lm(REND ~ Bloq + GEN, data = d)
+  em   <- emmeans(fit, ~ GEN)
+  ctrl <- summary(em)$emmean[1]
+  summary(contrast(em, "trt.vs.ctrl", ref = 1), infer = TRUE) |>
+    mutate(env = env_name, line = sub(" - centinela", "", contrast),
+           pct = 100 * estimate / ctrl,
+           pct_lower = 100 * lower.CL / ctrl, pct_upper = 100 * upper.CL / ctrl,
+           class = case_when(lower.CL > 0 ~ "confirmed superior",
+                             upper.CL < 0 ~ "confirmed inferior",
+                             pct >= 10 ~ "promising", TRUE ~ "not different"))
+}
+sel <- bind_rows(classify(filter(rice, env == "Irrigated"), "Irrigated"),
+                 classify(filter(rice, env == "Drought"), "Drought"))
+```
+
+------------------------------------------------------------------------
+
+## Gain over the parent, with the class
+
+```{r}
+#| echo: false
+#| fig-height: 5
+#| fig-width: 10
+sel |>
+  mutate(class = factor(class, levels = c("confirmed superior", "promising",
+                                          "not different", "confirmed inferior")),
+         env = factor(env, levels = c("Irrigated", "Drought"))) |>
+  ggplot(aes(pct, reorder(line, pct), colour = class)) +
+  geom_vline(xintercept = 0, colour = "grey60") + geom_vline(xintercept = 10, linetype = 3) +
+  geom_pointrange(aes(xmin = pct_lower, xmax = pct_upper)) + facet_wrap(~env) +
+  scale_colour_manual(values = c("confirmed superior" = "#1b7837", "promising" = "#e08214",
+                                 "not different" = "grey50", "confirmed inferior" = "#b2182b")) +
+  labs(x = "Gain over centinela (%)", y = NULL, colour = NULL) + theme(legend.position = "bottom")
+```
+
+------------------------------------------------------------------------
+
+## What the figure says
+
+- **G9 and G4:** promising under irrigation (+19%, +22%), **confirmed superior under drought** (+34%, +32%). Same direction in two environments: first candidates to advance
+- **G8:** confirmed superior under drought (+43%), equal to the parent under irrigation. A candidate for drought-prone sites
+- **G6:** promising in both, not confirmed in either: retest
+- **Check:** confirmed inferior under irrigation
+
+::: keybox
+The same direction in **more than one environment** is stronger evidence than a p-value in one.
+:::
+
+------------------------------------------------------------------------
+
+## Superior everywhere? Durum, 22 environments
+
+Dunnett against `WAHA` **in each environment**, then count.
+
+```{r}
+durum_w <- durum |> mutate(Genotype = relevel(Genotype, ref = "WAHA"))
+vs_waha <- durum_w |> group_split(Environment) |>
+  lapply(function(e) {
+    f <- lm(yield ~ Block + Genotype, data = e); em <- emmeans(f, ~ Genotype)
+    s <- as.data.frame(summary(contrast(em, "trt.vs.ctrl", ref = 1)))
+    s$Environment <- e$Environment[1]; s$waha <- summary(em)$emmean[1]; s }) |>
+  bind_rows() |> mutate(line = gsub("[()]", "", sub(" - WAHA$", "", contrast)))
+consistency <- vs_waha |> group_by(line) |>
+  summarise(better_in = sum(estimate > 0),
+            sig_higher = sum(p.value < 0.05 & estimate > 0),
+            sig_lower = sum(p.value < 0.05 & estimate < 0),
+            mean_gain_pct = round(mean(100 * estimate / waha), 1), .groups = "drop") |>
+  arrange(desc(better_in), desc(sig_higher))
+head(consistency, 6)
+```
+
+------------------------------------------------------------------------
+
+## No line beats WAHA everywhere
+
+- Best line, `GTADUR`: above `WAHA` in **16 of 22** environments, average gain **+9%**, significantly higher in 2 and **significantly lower in 2**
+- `OFANTO`: **+45%** in `loc07_year1` (the exercise), but only **+3%** on average over 22 environments
+
+::: keybox
+One environment can show a spectacular difference that the rest do not confirm.
+:::
+
+------------------------------------------------------------------------
+
+## Selection bias (winner's curse)
+
+The best lines **because** they were the best include a part of luck. Select the 3 best in each environment; compare with their performance in the other 21.
+
+```{r}
+env_means <- durum |> group_by(Environment, Genotype) |>
+  summarise(y = mean(yield), .groups = "drop") |>
+  group_by(Environment) |> mutate(dev = y - mean(y)) |> ungroup()
+bias <- bind_rows(lapply(unique(env_means$Environment), function(en) {
+  top <- env_means |> filter(Environment == en) |> slice_max(y, n = 3) |> pull(Genotype)
+  data.frame(where_selected = mean(env_means$dev[env_means$Environment == en & env_means$Genotype %in% top]),
+             other_envs = mean(env_means$dev[env_means$Environment != en & env_means$Genotype %in% top]))
+}))
+colMeans(bias)
+```
+
+------------------------------------------------------------------------
+
+## About two thirds of the advantage disappears
+
+Advantage over the environment mean: **+0.48 t/ha** where selected, **+0.15 t/ha** in the other environments.
+
+Still above average elsewhere in 91% of the cases: the selection is useful, but the gain you see at selection is **not** the gain you will get.
+
+- Select **more lines than you need** at the first stage
+- Use adjusted means and intervals, not the raw ranking
+- Confirm in other environments or seasons before releasing a line
+
+------------------------------------------------------------------------
+
+## From the trial to the decision
+
+1. Fix the **reference** and the **smallest gain that matters** before the trial
+2. Fit the model of the design, check the residuals, get adjusted means
+3. Dunnett against the reference; classify the lines
+4. **Advance** confirmed lines and promising lines that agree in more than one environment
+5. **Retest** other promising lines; **drop** the rest
+6. Keep more lines than the final number needed
+7. Report **difference, interval and % over the reference**, not only letters
+
+------------------------------------------------------------------------
+
+## Common interpretation pitfalls (1)
+
+| Pitfall | What to do |
+|----------------------------|-------------------------------------------|
+| Letters read as a ranking of true values | Report differences with intervals |
+| "Not significant" means "equal" (G4: +22%, p = 0.08) | Look at the interval and the minimum detectable difference |
+| Many unadjusted tests (55 pairs, about 3 false positives) | Tukey for all pairs, Dunnett against a control |
+| Wrong or undefined reference | Decide it before the trial |
+| One environment only | Several environments or seasons; check consistency |
+| Selection bias | Select more lines than needed; confirm |
+
+------------------------------------------------------------------------
+
+## Common interpretation pitfalls (2)
+
+| Pitfall | What to do |
+|----------------------------|-------------------------------------------|
+| Skipping the residual diagnostics | Check funnel and outliers first |
+| Transforming and not going back | Back-transform means, or model counts directly |
+| Subsamples treated as replicates (pseudoreplication) | One value per plot |
+| Missing plots ignored | Use adjusted means (`emmeans`) |
+| One p-value as the decision | Size + interval + smallest gain that matters |
+
+------------------------------------------------------------------------
+
+## Block 7 {.divider}
+
+Exercise
+
+------------------------------------------------------------------------
+
+## Exercise: durum wheat, `loc07_year1`
+
+1. Fit the RCBD and write the ANOVA table. CV and residual df?
+2. Check the assumptions (residual plot, QQ plot, Levene)
+3. LSD at 5% and Tukey groups
+4. Dunnett against `WAHA` (widely grown variety). Which genotypes are higher? How many would unadjusted tests declare?
+5. Express the best genotype as % of `WAHA`, with its interval. Is it above 10%?
+
+```{r}
+#| eval: false
+e7 <- durum |> filter(Environment == "loc07_year1") |>
+  mutate(Genotype = relevel(Genotype, ref = "WAHA"))
+```
+
+The solution is in the course manual, chapter 6.
+
+------------------------------------------------------------------------
 
 ## Key takeaways
 
-## Read more
+- The ANOVA partitions variation into blocks, genotypes and error. Report the **MSE, CV and residual df**
+- A significant F says there are differences, not where. **Dunnett** for lines against a control; Tukey for all pairs; LSD for screening
+- Check the **residuals**; a funnel calls for a transformation
+- **Statistical significance is not practical value:** size, confidence interval and the smallest difference that matters
+- Augmented designs: error from the checks only; adjust the new lines for blocks
+- Several environments: test genotypes against **G x E**; compare the variance components
+- **Superior genotypes:** decide the reference and the smallest gain first; classify with Dunnett intervals; trust agreement across environments
+- The advantage of selected lines **shrinks** in the next stage: select more than you need
 
-Full notes: course manual, chapter "ANOVA and Mean Comparison"
+------------------------------------------------------------------------
+
+## Questions for discussion
+
+1. What is the **reference** a new line must beat in your program: the parent, a check, or both?
+2. What is the **smallest gain** that makes you advance a line? Is it the same for yield and for disease resistance?
+3. How many replicates and environments do you have in the first trials of a mutant population? What difference could you detect?
+4. How many lines do you advance between stages, knowing the selection bias?
+5. Which of the pitfalls have you met in your own data?
+
+------------------------------------------------------------------------
+
+## Resources
+
+- **Course manual**, chapter 6: theory, code and the solved exercise
+- Dunnett, C. W. (1955). A multiple comparison procedure for comparing several treatments with a control. *JASA*, 50(272), 1096-1121.
+- Beall, G. (1940). The fit and significance of contagious distributions when applied to observations on larval insects. *Ecology*, 21(4), 460-474.
+- de Mendiburu, F. `agricolae`; Lenth, R. V. `emmeans`; Wright, K. `agridat`
+- Durum wheat data: Bustos-Korts, D., Adams, J. & van Eeuwijk, F. (2021). Biometris, Wageningen University and Research. Used with permission.
+
+------------------------------------------------------------------------
+
+## Thank you! {.divider}
+
+**Luis Fernando Delgado Muñoz**
+
+[📧 [lfdelgadom@unal.edu.co](mailto:lfdelgadom@unal.edu.co)]{.small-note}
+
+[💼 [linkedin.com/in/lfdelgadom](https://www.linkedin.com/in/lfdelgadom)]{.small-note}

@@ -17,6 +17,11 @@ set -e   # stop at the first error
 SLIDES=(
   "01-r-basics"
   "02-tidy-data"
+  "05-experimental-designs"
+  "06-anova"
+  "09-spatial-analysis"
+  "09b-image-analysis"
+  "11-ai-plant-breeding"
 )
 
 # 0. Optional: save and push the source files to GitHub (branch main)

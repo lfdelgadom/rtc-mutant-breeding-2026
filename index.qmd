@@ -17,7 +17,6 @@ Run `R/install_packages.R` once to install all course packages. Participants wit
 
 - Luis Fernando Delgado Muñoz – external expert
 - Mirjana Jankulovska – local expert and host
-- Anand Badigannavar – mutation breeding expert
 
 ## Acknowledgements
 

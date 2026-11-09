@@ -16,7 +16,6 @@ book:
   author:
     - "Luis Fernando Delgado Munoz"
     - "Mirjana Jankulovska"
-    - "Anand Badigannavar"
   date: today
   repo-url: https://github.com/lfdelgadom/rtc-mutant-breeding-2026
   repo-actions: [issue]
@@ -36,6 +35,7 @@ book:
         - part1-week1/07-mixed-models.qmd
         - part1-week1/08-heritability-selection.qmd
         - part1-week1/09-spatial-analysis.qmd
+        - part1-week1/09b-image-analysis.qmd
         - part1-week1/10-met-gxe.qmd
         - part1-week1/11-ai-plant-breeding.qmd
     - part: "Week 2: Mutation breeding applications"

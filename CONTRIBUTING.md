@@ -1,11 +1,10 @@
-# Note for co-authors (Mirjana Jankulovska and Anand Badigannavar)
+# Note for co-authors (Mirjana Jankulovska)
 
 Dear colleagues,
 
 To give participants one coherent set of notes, we are writing a shared course manual (Quarto book, published free on GitHub Pages) with one chapter per session. Your chapters are already in the book with the objectives and content from the agenda:
 
 - Mirjana: 03 Field data, 04 Quality control and EDA, 07 Mixed models, 08 Heritability and selection, 10 MET and G×E, and 02 Tidy data (shared with Luis).
-- Anand: 13 Experimental design and statistical pipelines for mutation breeding (Topic 10), 15 Decision-making and selection strategies in mutation breeding (Topic 11).
 
 How to contribute – choose what is easiest for you:
 
