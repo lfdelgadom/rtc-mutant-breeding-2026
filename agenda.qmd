@@ -1,0 +1,139 @@
+# Course agenda {.unnumbered}
+
+Regional Training Course on Experimental Design and Data Analysis for the Advancement of Mutant Populations (Project RER5030), Skopje, North Macedonia, 9 to 20 November 2026.
+
+**Venue:** Faculty of Agricultural Sciences and Food, Ss Cyril and Methodius University in Skopje, blvd "16-ta Makedonska brigada" no. 3, 1000 Skopje.
+
+Revised agenda, version 7, 7 November 2026. Times are local time in Skopje. Chapters for the later sessions are added as the course advances.
+
+**Trainers:** Mirjana Jankulovska (local organizer and expert, Faculty of Agricultural Sciences and Food, Skopje) and Luis Fernando Delgado Muñoz (international expert, Universidad San Buenaventura, Colombia). Technical officers: Cinthya Zorrilla and Pooja Mathur, FAO/IAEA Centre of Nuclear Techniques in Food and Agriculture.
+
+
+## Week 1
+
+
+### Day 1, Monday, 9 November 2026: Field data and exploratory analysis
+
+| Time | Session | Lead |
+|---|---|---|
+| 08:00 - 08:30 | Software installation help desk (for remaining problems) | Luis Fernando Delgado |
+| 08:30 - 09:00 | **Welcome and Opening Session**<br>• Opening remarks from local authorities<br>• Opening remarks from the Plant Breeding and Genetics Section<br>• Introduction of trainers and participants<br>• Group photo | Mirjana Jankulovska and Officer Cinthya Zorrilla |
+| 09:00 - 09:30 | Plant Breeding and Genetics at the IAEA | Cinthya Zorrilla |
+| 09:30 - 10:45 | **Lecture + Practical: Collecting Field Data in Plant Breeding Trials**<br>• Open source data app (Field Book and GridScore NEXT): creating a trial from an existing layout<br>• Trait definition, scoring scales and standardization across environments<br>• Phenotyping challenges in mutant populations (segregation, off-types)<br>• Common field data errors and their impact on analysis | Mirjana Jankulovska |
+| 10:45 - 11:15 | Break |  |
+| 11:15 - 12:00 | **Lecture: Structure of Plant Breeding Trial Data**<br>• Traits, environments, replications<br>• Single vs multi-environment trials<br>• Data organization for statistical analysis in R (from messy to tidy data) | Mirjana Jankulovska |
+| 12:00 - 12:30 | **Practical: From Field Data to Analysis Dataset**<br>• Transformation of raw field data into analysis-ready datasets<br>• Metadata integration and validation (plot IDs, genotypes, reps, rows and columns vs field plan)<br>• Data import and structuring in R | Mirjana Jankulovska |
+| 12:30 - 13:30 | Lunch |  |
+| 13:30 - 14:45 | **Practical: Data Quality Control and Cleaning**<br>• Importing Field Book / CSV data<br>• Data summaries<br>• Missing values and outlier detection in breeding data | Mirjana Jankulovska |
+| 14:45 - 15:00 | Break |  |
+| 15:00 - 15:45 | **Lecture: Exploratory Data Analysis in Plant Breeding**<br>• Biological vs technical variation prior to modelling<br>• Identifying trends, anomalies and experimental issues | Mirjana Jankulovska |
+| 15:45 - 17:00 | **Practical + Discussion: Visualization and Data Issues (outliers, missing data)**<br>• Visualization with ggplot2<br>• Trait distributions, boxplots and genotype comparisons<br>• Discussion: implications of data quality on breeding decisions | Mirjana Jankulovska |
+
+
+### Day 2, Tuesday, 10 November 2026: Experimental design and ANOVA
+
+| Time | Session | Lead |
+|---|---|---|
+| 08:30 - 09:00 | The Mutant Variety Database: how to use it and new features | Cinthya Zorrilla |
+| 09:00 - 10:00 | **Lecture: Experimental Designs for Plant Breeding Trials**<br>• CRD, RCBD, augmented, alpha-lattice, row-column and resolvable row-column designs<br>• Partially replicated (p-rep) designs for early generations with limited seed (one plant in some cases)<br>• Non-replicated trial designs for early generations with limited seed<br>• Blocking and error control<br>• Design selection by breeding stage (single row, PYT, AYT; cassava case); seed crop examples (bean, rice)<br>• Preview: design considerations for early-generation mutant populations | Luis Fernando Delgado |
+| 10:00 - 10:30 | Break |  |
+| 10:30 - 12:30 | **Practical: Design Generation, Field Layouts and Model Structure**<br>• Randomization and design creation with FieldHub<br>• Export of field layouts and field books<br>• Interpretation of layouts: factors, replications, sources of variation<br>• Model terms derived from the layout (treatment, block, row, column) | Luis Fernando Delgado |
+| 12:30 - 13:30 | Lunch |  |
+| 13:30 - 14:45 | **Lecture + Practical: ANOVA in Plant Breeding Trials**<br>• Model structure and assumptions<br>• Model fitting in R<br>• Residual diagnostics (residuals vs fitted, QQ-plot) and model-based outliers | Luis Fernando Delgado |
+| 14:45 - 15:00 | Break |  |
+| 15:00 - 16:15 | **Practical: Mean Comparison and Genotype Evaluation**<br>• Pairwise comparisons and grouping (Tukey, LSD, Duncan)<br>• Dunnett test: mutant lines vs parent or checks (main focus)<br>• Identification of superior genotypes (main focus) | Luis Fernando Delgado |
+| 16:15 - 17:00 | **Interpretation + Q&A**<br>• From statistical significance to practical selection decisions<br>• Common interpretation pitfalls<br>• Mutant database (how to submit the selections, what is available for the participants) | Luis Fernando Delgado |
+
+
+### Day 3, Wednesday, 11 November 2026: Mixed models and genetic parameters
+
+| Time | Session | Lead |
+|---|---|---|
+| 08:30 - 09:00 | The Atoms for Food Initiative | Cinthya Zorrilla |
+| 09:00 - 10:15 | **Lecture: From ANOVA to Mixed Models**<br>• Limitations of ANOVA: unbalanced data, incomplete designs<br>• Fixed vs random effects; variance components<br>• BLUEs vs BLUPs<br>• Role of mixed models in selection accuracy | Mirjana Jankulovska |
+| 10:15 - 10:45 | Break |  |
+| 10:45 - 12:30 | **Practical: Mixed Model Analysis**<br>• Model fitting<br>• Extraction of BLUEs and BLUPs | Mirjana Jankulovska |
+| 12:30 - 13:30 | Lunch |  |
+| 13:30 - 14:45 | **Lecture + Practical: Heritability and Genetic Parameters**<br>• Broad-sense and generalized (Cullis) heritability<br>• Misunderstandings of heritability<br>• How experimental design can increase heritability<br>• Model diagnostics | Mirjana Jankulovska |
+| 14:45 - 15:00 | Break |  |
+| 15:00 - 16:30 | **Practical: Interpreting BLUPs and Selection Decisions**<br>• Ranking genotypes<br>• Multi-trait selection indices<br>• Avoiding bias and over-interpretation of predictions | Mirjana Jankulovska |
+| 16:30 - 17:00 | **Q&A and Discussion: when to trust model outputs**<br>• Mutant database (how to submit the selections, what is available for the participants) | Mirjana Jankulovska |
+
+
+### Day 4, Thursday, 12 November 2026: Spatial analysis and low-cost high-throughput phenotyping
+
+| Time | Session | Lead |
+|---|---|---|
+| 08:30 - 10:00 | **Lecture + Demo: Spatial Variation and Trial Precision**<br>• Field heterogeneity with didactic cases: tree lines along a road, trials divided by a highway, fields crossed by a river, soil moisture gradients<br>• Residual patterns from mixed models and justification for spatial correction<br>• Design vs statistical correction | Luis Fernando Delgado |
+| 10:00 - 10:30 | Break |  |
+| 10:30 - 12:30 | **Practical: Spatial Analysis**<br>• Spatial model fitting with SpATS; Mr.Bean Shiny app<br>• Spatial vs non-spatial comparison: precision, heritability and ranking changes | Luis Fernando Delgado |
+| 12:30 - 13:30 | Lunch |  |
+| 13:30 - 14:45 | **Lecture: Low-Cost High-Throughput Phenotyping with Imaging**<br>• Low-cost equipment: smartphone and RGB cameras, modified near-infrared cameras<br>• Image acquisition protocols: lighting, background, scale and colour references<br>• Traits from images: disease lesion area and severity, leaf colour change (chlorosis, senescence), colour and vegetation indices, canopy cover, seed and fruit size and colour<br>• Validating image-based traits against visual scores; repeatability and heritability of image traits | Luis Fernando Delgado |
+| 14:45 - 15:00 | Break |  |
+| 15:00 - 16:30 | **Practical: Image Analysis in R**<br>• Measuring disease severity and leaf colour from RGB images (pliman package)<br>• Batch processing of images and linking results to the field book<br>• Using image-derived traits in the mixed model: comparison with visual scores | Luis Fernando Delgado |
+| 16:30 - 17:00 | Q&A and Discussion: imaging setups in participants’ programs | Luis Fernando Delgado |
+
+
+### Day 5, Friday, 13 November 2026: G×E, multi-environment trials and machine learning
+
+| Time | Session | Lead |
+|---|---|---|
+| 08:30 - 10:15 | **Lecture: G×E Interaction and Multi-Environment Trials**<br>• Limitations of single-environment evaluation<br>• Stability vs adaptability; mega-environments<br>• Foundations of PCA with a simple toy example | Mirjana Jankulovska |
+| 10:15 - 10:45 | Break |  |
+| 10:45 - 12:30 | **Practical: Multi-Environment Trial Analysis**<br>• Data structure and model fitting<br>• Genotype performance across environments | Mirjana Jankulovska |
+| 12:30 - 13:30 | Lunch |  |
+| 13:30 - 14:45 | **Lecture + Practical: Stability, AMMI and GGE Biplot**<br>• Stability indices<br>• AMMI and GGE biplot interpretation<br>• Integration of performance and stability in selection | Mirjana Jankulovska |
+| 14:45 - 15:00 | Break |  |
+| 15:00 - 16:15 | **Lecture: Machine Learning for Prediction in Plant Breeding**<br>• When machine learning improves prediction: large datasets from imaging, NIRS, multi-environment trials and environmental covariates<br>• Main models: penalized regression (ridge, LASSO, elastic net), random forest, gradient boosting, support vector machines; PLS for NIRS spectra<br>• Applications: predicting traits from image features and spectra, disease severity, yield and G×E prediction<br>• Validation: training and test sets, cross-validation across genotypes and environments, avoiding data leakage, prediction accuracy<br>• Limitations: small datasets, overfitting, interpretability, transfer across crops, environments and seasons; breeder knowledge remains essential | Luis Fernando Delgado |
+| 16:15 - 17:00 | **Week 1 wrap-up and dataset check-in**<br>• Q&A session<br>• Short review quiz<br>• Each participant confirms the dataset and analysis plan for week 2 | All experts |
+
+
+## Week 2
+
+
+### Day 6, Monday, 16 November 2026: Analysis pipeline, machine learning and mutation breeding
+
+| Time | Session | Lead |
+|---|---|---|
+| 08:30 - 10:15 | **Demonstration: End-to-End Data Analysis Pipeline**<br>• Case examples with cassava and bean breeding data<br>• Raw data → quality control → model → spatial correction → BLUPs → heritability → selection<br>• Quantitative and qualitative traits<br>• Reproducible, script-based workflows in R | Luis Fernando Delgado |
+| 10:15 - 10:45 | Break |  |
+| 10:45 - 12:30 | **Practical: Machine Learning Prediction Models in R**<br>• Predicting a trait from image-derived features (Day 4) and NIRS spectra<br>• Comparing linear models, elastic net, random forest and gradient boosting with cross-validation<br>• Variable importance and interpretation<br>• When machine learning outperforms classical models, and when it does not | Luis Fernando Delgado |
+| 12:30 - 13:30 | Lunch |  |
+| 13:30 - 15:00 | **Practical: Radiosensitivity Analysis (Topic 10)**<br>• Dose-response analysis using measurements taken on each plant (for example plant height or weight)<br>• LD50 vs GR50: why mutation breeding uses growth reduction rather than lethality<br>• Choosing the best dose: enough damage to create variability, with plants that survive<br>• Mutation breeding follows conventional breeding; only the way variability is produced differs | Luis Fernando Delgado |
+| 15:00 - 15:15 | Break |  |
+| 15:15 - 16:15 | **Lecture: Starting a Mutation Breeding Programme (Topic 10)**<br>• Generations M1 to M5: what is evaluated in each (growth, size, number of leaves, weight)<br>• Mutations affect a single copy of the genome: recessive and dominant effects, and how the mutated allele is revealed<br>• Crop biology (autogamous and allogamous) and its consequences for the programme | Mirjana Jankulovska |
+| 16:15 - 17:00 | **Statistical Pipelines for Mutation Breeding Applications (Topic 10)**<br>• Analysis of mutant populations (M2 to M5)<br>• Selection under high variability (unreplicated and replicated approaches at early generations)<br>• Application of statistical pipelines to mutation breeding of different types of crops (autogamous and allogamous) | Luis Fernando Delgado |
+
+
+### Day 7, Tuesday, 17 November 2026: Participants’ datasets
+
+| Time | Session | Lead |
+|---|---|---|
+| 08:30 - 09:15 | **Lecture + Demo: AI Assistants (LLMs) for Coding and Reporting**<br>• Free tools: ChatGPT, Claude, Gemini, DeepSeek, Qwen<br>• What they do well (writing and debugging R code, explaining outputs, drafting reports) and what they get wrong (invented results, wrong model structure)<br>• Good prompting: describe design, variables and objective; ask for code, not results; always run and verify<br>• How to transfer an answer from one model to another<br>• Data privacy: unpublished breeding data and institutional policies | Luis Fernando Delgado |
+| 09:15 - 09:45 | **Guideline for Participant Projects**<br>• General steps from raw data to selection report<br>• Report template (R Markdown / Quarto) | Luis Fernando Delgado |
+| 09:45 - 10:15 | Break |  |
+| 10:15 - 17:00 | **Supervised work on participants’ datasets (Topic 12)**<br>• Checkpoint: cleaned and validated dataset, design identified | Luis Fernando Delgado, Mirjana Jankulovska |
+
+
+### Day 8, Wednesday, 18 November 2026: Participants’ datasets
+
+| Time | Session | Lead |
+|---|---|---|
+| 08:30 - 09:00 | Common problems from Day 7 | Luis Fernando Delgado |
+| 09:00 - 17:00 | **Supervised work on participants’ datasets**<br>• Checkpoint: models fitted (ANOVA / mixed / spatial / MET / machine learning) and diagnostics checked | Luis Fernando Delgado, Mirjana Jankulovska |
+
+
+### Day 9, Thursday, 19 November 2026: Participants’ datasets
+
+| Time | Session | Lead |
+|---|---|---|
+| 08:30 - 10:00 | **Decision-Making and Selection Strategies in Mutation Breeding (Topic 11)**<br>• Selection strategies<br>• Defining the product profile and its thresholds with the NARs<br>• Interpretation of statistical outputs<br>• Variety advancement decisions under uncertainty | Luis Fernando Delgado |
+| 10:00 - 17:00 | **Supervised work and peer review**<br>• Checkpoint: genotype selection report with justification for advancement or rejection<br>• Peer review in pairs; presentations prepared | Luis Fernando Delgado, Mirjana Jankulovska |
+
+
+### Day 10, Friday, 20 November 2026: Presentations and closing
+
+| Time | Session | Lead |
+|---|---|---|
+| 08:30 - 16:00 | **Participant Presentations (10 min + 5 min questions)**<br>• Data analysis workflow, results and interpretation<br>• Breeding decisions supported by statistical evidence<br>• Evaluation: clarity of analysis, correctness of models, interpretation quality, decision justification<br>• Cross-participant feedback | All experts |
+| 16:30 - 17:00 | **Closing Ceremony**<br>• Evaluation and feedback from participants (course evaluation survey)<br>• Certificate distribution<br>• Closing remarks | Host (and local authorities, TBC) |
