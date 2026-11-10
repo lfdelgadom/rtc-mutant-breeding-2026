@@ -1,0 +1,97 @@
+---
+title: "Exercise 2: design a trial for my own material"
+author: "[Your name]"
+date: "10 November 2026"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = TRUE,
+                      fig.width = 8, fig.height = 4.5)
+```
+
+> **How to use this file.** This exercise is about **your own** trial. Work through the sections in order. Replace the `___` in the lines marked `# TODO`. Write your answers in the text boxes. Knit only at the end, if time allows.
+
+# Context
+
+Think of a trial you will sow in the next season: a population of lines, a parent and some checks. How many entries do you have? How much seed? Which design fits? Then generate the layout with a `seed`, and export the field book.
+
+```{r packages}
+library(FielDHub)
+library(dplyr)
+```
+
+# My trial
+
+Fill in (in the text, not in the code):
+
+-   Crop and generation: _...write here..._
+-   Number of entries (lines + parent + checks): _...write here..._
+-   Seed available: how many plots per line? _...write here..._
+-   How uniform is the field? (direction of the slope, trees, irrigation channel): _...write here..._
+
+# Which design?
+
+Use the table of the slides ("Choosing a design by breeding stage").
+
+-   Design chosen: _...write here..._
+-   Why? _...write here..._
+
+# Generate the layout
+
+Choose **one** of the three examples below, change its numbers to your trial, and run it. The other two boxes stay switched off (`eval = FALSE`). Use your own entries from `data/entries_template.csv` (replace the example names with yours).
+
+```{r entries}
+entries <- read.csv("data/entries_template.csv")
+head(entries)
+nrow(entries)
+```
+
+**Option A: alpha-lattice** (100 or fewer entries in a normal yield trial, 2 or more replicates)
+
+```{r alpha, eval = TRUE}
+# HINT: t = number of entries (30 in the template), k = plots per block (t must be divisible by k: 3, 5, 6 or 10), r = replicates
+design <- alpha_lattice(t = nrow(entries), k = ___, r = ___, seed = 2026, data = entries)   # TODO
+head(design$fieldBook)
+plot(design)
+```
+
+**Option B: augmented** (many lines, one plot each, checks repeated)
+
+```{r augmented, eval = FALSE}
+# HINT: nrows x ncols must be at least lines + checks (and repeated checks)
+design <- diagonal_arrangement(nrows = 20, ncols = 25, lines = 460, checks = 4, seed = 2026)
+head(design$fieldBook)
+plot(design)
+```
+
+**Option C: p-rep** (a fraction of the lines in two plots)
+
+```{r prep, eval = FALSE}
+design <- partially_replicated(nrows = 20, ncols = 25, repGens = c(40, 420),
+                               repUnits = c(2, 1), seed = 2026)
+head(design$fieldBook)
+plot(design)
+```
+
+# Export the field book
+
+```{r export}
+# Always keep the row and the column (or block) of every plot
+write.csv(design$fieldBook, "my_field_book.csv", row.names = FALSE)
+```
+
+# Restrictions of my layout
+
+List the restrictions of the randomization in your layout: replicate? incomplete blocks? rows? columns? This afternoon each of them becomes a term of the model.
+
+-   _...write here..._
+
+# Your findings
+
+-   What surprised you? _...write here..._
+-   What would you check in the field before sowing? _...write here..._

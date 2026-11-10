@@ -24,3 +24,6 @@ slides/*_cache/
 
 # participants' own work folder
 my-work/
+
+# exercise ZIPs are built by publish.sh
+downloads/

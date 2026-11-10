@@ -1,0 +1,119 @@
+---
+title: "Exercise 3: analysing an alpha-lattice (john.alpha)"
+author: "[Your name]"
+date: "10 November 2026"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = TRUE,
+                      fig.width = 8, fig.height = 4.5)
+```
+
+> **How to use this file.** Run each grey box with the green triangle, from top to bottom. Replace the `___` in the lines marked `# TODO`; the `# HINT` line above tells you where to look. Write your findings in the text boxes. Knit only at the end, if time allows.
+
+# Context
+
+A real spring oats trial from Craibstone, Aberdeen (John and Williams, 1995): **24 varieties** in an alpha-lattice with **3 replicates**, each with **6 incomplete blocks of 4 plots**.
+
+**Question:** what do we gain by analysing it as an alpha-lattice instead of as an RCBD?
+
+The model of an alpha-lattice is
+
+`Y_ijk = mu + R_i + B_j(i) + G_k + e_ijk`
+
+where `Y` is the yield of a plot, `mu` the overall mean, `R_i` the effect of replicate i, `B_j(i)` the effect of incomplete block j **within** replicate i, `G_k` the effect of genotype k (what we compare) and `e_ijk` the experimental error. The RCBD model has no `B_j(i)` term.
+
+```{r packages}
+library(agridat)
+library(dplyr)
+library(lme4)
+library(emmeans)
+library(FielDHub)
+```
+
+# The data and the design
+
+```{r data}
+data(john.alpha)
+glimpse(john.alpha)
+```
+
+```{r design-check}
+# HINT: the columns of john.alpha that hold the replicate and the block: see glimpse() above
+john.alpha %>% count(___)             # TODO: plots in each replicate
+john.alpha %>% count(rep, ___)        # TODO: plots in each block of each replicate
+
+# t, k, s, r from the data
+t <- n_distinct(john.alpha$gen)
+r <- n_distinct(john.alpha$rep)
+k <- john.alpha %>% count(rep, block) %>% pull(n) %>% unique()
+s <- n_distinct(john.alpha$block)
+c(t = t, k = k, s = s, r = r, total_plots = nrow(john.alpha))
+```
+
+**Your findings:** do t, k, s and r agree with the description above? Is s = t / k? _...write here..._
+
+# Two models for the same data
+
+```{r fit-rcbd}
+# HINT: the RCBD model has replicates and genotypes only. The replicate column is called rep, the genotype column gen
+m_rcbd <- lm(yield ~ ___ + gen, data = john.alpha)   # TODO
+```
+
+```{r fit-alpha}
+# HINT: block numbers repeat in each replicate (B1 appears in R1, R2 and R3), so write the block WITHIN replicate as rep:block
+m_alpha <- lmer(yield ~ rep + (1 | ___:block) + gen, data = john.alpha)   # TODO
+```
+
+**Your findings:** which terms of the alpha-lattice model are the ones we compare, and which one only removes field variation? Why `rep:block` and not `block`? _...write here..._
+
+# Residual variance
+
+```{r residual}
+c(RCBD = sigma(m_rcbd)^2, alpha_lattice = sigma(m_alpha)^2)
+```
+
+```{r varcorr}
+# Variance between blocks within replicates, and what is left (Residual)
+print(VarCorr(m_alpha), comp = "Variance")
+```
+
+**Your findings:** how much smaller is the residual variance with the alpha-lattice model? Where did the difference go? _...write here..._
+
+# SED and LSD
+
+```{r sed}
+sed_gen <- function(fit) {
+  V <- vcov(emmeans(fit, "gen", lmer.df = "asymptotic")); n <- nrow(V)
+  sqrt(2 * (mean(diag(V)) - (sum(V) - sum(diag(V))) / (n * (n - 1))))
+}
+
+# HINT: the same function for the two models
+sed <- c(RCBD = sed_gen(m_rcbd), alpha_lattice = sed_gen(___))   # TODO
+sed
+2 * sed      # approximate LSD (t/ha)
+```
+
+**Your findings:** two varieties differ by 0.4 t/ha. With the RCBD analysis, can you call them different? And with the alpha-lattice analysis? _...write here..._
+
+# A new alpha-lattice with FielDHub
+
+```{r fielddhub}
+# HINT: same trial: 24 entries, blocks of 4, 3 replicates. Choose your own seed
+new_design <- alpha_lattice(t = 24, k = 4, r = 3, seed = ___)   # TODO
+head(new_design$fieldBook)
+plot(new_design)
+```
+
+**Your findings:** is the new layout the same as the real one? Why does it not matter for the analysis model? _...write here..._
+
+# Final report: what we learned
+
+In 3 to 4 sentences: design of the trial, the model chosen, how much the residual variance and the SED changed, and what that means for selecting varieties.
+
+**Your text:** _...write here..._

@@ -1,0 +1,312 @@
+---
+title: "Day 2 (afternoon): Analysing Designs, from Layout to Model"
+subtitle: "Regional Training Course on Experimental Design and Data Analysis for the Advancement of Mutant Populations (RER5030)"
+author: "Luis Fernando Delgado Muñoz"
+date: "2026-11-10"
+date-format: "D MMMM YYYY"
+format:
+  revealjs:
+    theme: simple
+    css: rtc_style.css
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    transition: slide
+    background-transition: fade
+    smaller: true
+    scrollable: true
+    code-copy: true
+    footer: "Luis Fernando Delgado Muñoz | RTC RER5030 | Day 2 (afternoon): Analysing designs"
+execute:
+  echo: true
+  warning: false
+  message: false
+  cache: true
+---
+
+```{r}
+#| label: setup
+#| cache: false
+#| include: false
+knitr::opts_knit$set(root.dir = if (dir.exists("data")) "." else "..")
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(lme4)
+library(emmeans)
+library(agridat)
+library(FielDHub)
+theme_set(theme_minimal(base_size = 14))
+```
+
+
+## Content
+
+| Block | Topic |
+|------------------|------------------------------------------------------|
+| 1 | Real trials: beans (alpha-lattice) and wheat (row-column) |
+| 2 | Reading the model of each design |
+| 3 | Exercise: `john.alpha` |
+
+::: keybox
+**Goal:** write the model that goes with a design, and see in numbers what a good design gains.
+:::
+
+------------------------------------------------------------------------
+
+## Before we start
+
+1.  Download: [**Day 2 afternoon exercises (ZIP)**](../downloads/Day2_afternoon_analysing_designs.zip)
+2.  Unzip it, open `Day2_afternoon.Rproj`, run `00_install_packages.R`
+3.  We use `Exercise3_john_alpha.Rmd` at the end of this session
+
+::: keybox
+Reminder from the morning: **t** entries, **k** plots per block, **s = t / k** blocks per replicate, **r** replicates.
+:::
+
+------------------------------------------------------------------------
+
+## Block 1 {.divider}
+
+Real trials and their designs
+
+------------------------------------------------------------------------
+
+## An alpha-lattice: the bean trial
+
+```{r}
+#| label: beans-blocks
+#| fig-height: 3.2
+beans <- readr::read_csv("data/Example_Beans.csv", show_col_types = FALSE)
+
+beans |>
+  mutate(block_n = as.integer(sub("B", "", block))) |>
+  ggplot(aes(row, col, fill = factor((block_n + (block_n - 1) %/% 6) %% 2))) +
+  geom_tile(colour = "white") + geom_hline(yintercept = 6.5, linewidth = 1) +
+  scale_fill_manual(values = c("grey70", "grey88"), guide = "none") +
+  scale_y_continuous(breaks = c(3.5, 9.5), labels = c("R1", "R2")) +
+  labs(x = "Field row", y = NULL)
+```
+
+380 lines, 2 replicates, 18 blocks of 22 plots (11 rows by 2 columns) per replicate.
+
+------------------------------------------------------------------------
+
+## Reading the alpha-lattice model
+
+*Y*<sub>ijk</sub> = *μ* + *R*<sub>i</sub> + *B*<sub>j(i)</sub> + *G*<sub>k</sub> + *ε*<sub>ijk</sub>
+
+-   *Y*<sub>ijk</sub>: observed response (yield) of genotype k, in block j of replicate i
+-   *μ*: overall mean
+-   *R*<sub>i</sub>: effect of replicate i
+-   *B*<sub>j(i)</sub>: effect of incomplete block j **within** replicate i. It only removes field variation, so it goes in brackets in R
+-   *G*<sub>k</sub>: effect of genotype k, what we compare
+-   *ε*<sub>ijk</sub>: experimental error, what the model cannot explain
+
+```{r}
+#| eval: false
+lmer(yield ~ rep + (1 | rep:block) + gen, data = john.alpha)
+```
+
+-   `rep:block`: block 1 of replicate 1 is **not** block 1 of replicate 2
+
+::: keybox
+Write `rep:block`, never `block` alone.
+:::
+
+------------------------------------------------------------------------
+
+## A resolvable row-column design: Australian wheat
+
+14 trials, 7 locations, 2008 and 2009. We use `WH09`, Wongan Hills 2009.
+
+```{r}
+#| label: wh09
+wheat <- readr::read_csv("data/wheat_Australia_2008_2009_7loc.csv", show_col_types = FALSE)
+wh09 <- wheat |> filter(Trial == "WH09") |> mutate(across(c(rep, row, col, geno), factor))
+
+wh09 |> count(geno, name = "plots") |> count(plots, name = "genotypes")
+```
+
+406 plots, 2 replicates (columns 1 to 6 and 7 to 12), 34 rows each.
+
+------------------------------------------------------------------------
+
+## WH09 on the field
+
+```{r}
+#| label: wh09-map
+#| fig-height: 4
+ggplot(wh09, aes(as.integer(row), as.integer(col), fill = yield)) +
+  geom_tile(colour = "white") + geom_hline(yintercept = 6.5, linewidth = 1) +
+  scale_fill_viridis_c() + labs(x = "Row", y = "Column", fill = "t/ha")
+```
+
+------------------------------------------------------------------------
+
+## Does the row-column model remove field variation?
+
+```{r}
+#| label: wh09-fit
+m_rcbd   <- lm(yield ~ rep + geno, data = wh09)
+m_rowcol <- lmer(yield ~ rep + geno + (1 | rep:row) + (1 | rep:col), data = wh09)
+
+c(RCBD = sigma(m_rcbd)^2, row_column = sigma(m_rowcol)^2)   # residual variance
+print(VarCorr(m_rowcol), comp = "Variance")
+```
+
+- Residual variance falls from **0.31 to 0.16**
+- Most field variation is between **columns** (0.110); rows add less (0.035)
+- Part of what the RCBD called "error" was field variation. The row-column model removes it, so genotype comparisons are more precise.
+
+------------------------------------------------------------------------
+
+## `row` or `rep:row`?
+
+::: keybox
+In WH09 the row numbers 1 to 34 are used in **both** replicates.
+:::
+
+- `(1 | row)` treats row 5 of replicate 1 and row 5 of replicate 2 as **the same block**
+- They are in different parts of the field
+- In a resolvable design, rows and columns are **nested in replicates**:
+
+```{r}
+#| eval: false
+(1 | rep:row) + (1 | rep:col)
+```
+
+Or number rows and columns so that each is unique in the field.
+
+------------------------------------------------------------------------
+
+## Block 2 {.divider}
+
+From layout to model
+
+------------------------------------------------------------------------
+
+## The design determines the model
+
+| Design | Model |
+|--------------------|----------------------------------------------------|
+| CRD | *Y*<sub>ik</sub> = *μ* + *G*<sub>k</sub> + *ε*<sub>ik</sub> |
+| RCBD | *Y*<sub>ik</sub> = *μ* + *R*<sub>i</sub> + *G*<sub>k</sub> + *ε*<sub>ik</sub> |
+| Augmented | *Y*<sub>jk</sub> = *μ* + *B*<sub>j</sub> + *G*<sub>k</sub> + *ε*<sub>jk</sub> |
+| Alpha-lattice | *Y*<sub>ijk</sub> = *μ* + *R*<sub>i</sub> + *B*<sub>j(i)</sub> + *G*<sub>k</sub> + *ε*<sub>ijk</sub> |
+| Resolvable row-column | *Y*<sub>ijlk</sub> = *μ* + *R*<sub>i</sub> + *Row*<sub>j(i)</sub> + *Col*<sub>l(i)</sub> + *G*<sub>k</sub> + *ε*<sub>ijlk</sub> |
+| p-rep | *Y*<sub>jlk</sub> = *μ* + *Row*<sub>j</sub> + *Col*<sub>l</sub> + *G*<sub>k</sub> + *ε*<sub>jlk</sub> |
+
+*μ* overall mean, *G* genotype, *R* replicate, *B* incomplete block, *Row* and *Col* row and column, *ε* error. "j(i)": j within i.
+
+------------------------------------------------------------------------
+
+## The same models in R
+
+```{r}
+#| eval: false
+# a term in brackets only removes field variation (explained on Day 3)
+lm(y ~ geno)                                                  # CRD
+lm(y ~ rep + geno)                                            # RCBD
+lm(y ~ block + geno)                                          # Augmented
+lmer(y ~ rep + (1 | rep:block) + geno)                        # Alpha-lattice
+lmer(y ~ rep + (1 | rep:row) + (1 | rep:col) + geno)          # Resolvable row-column
+lmer(y ~ geno + (1 | row) + (1 | col))                        # p-rep (plus spatial term)
+```
+
+Each term of the equation is one term of the formula: `rep` is *R*, `rep:block` is *B*<sub>j(i)</sub>, `geno` is *G*.
+
+------------------------------------------------------------------------
+
+## One model per design
+
+-   **Genotypes** (`gen`, `TREATMENT`) and **replicates** (`rep`): the terms we use to compare
+-   `(1 | ...)`: blocks, rows and columns. They are only there to remove field variation; we never compare them. Models with a term like this are called mixed models (Day 3)
+-   Rows and columns are **nested in replicate**: `rep:row`
+
+```{r}
+#| eval: false
+fit_crd    <- lm(yield ~ TREATMENT, data = d_crd)
+fit_rcbd   <- lm(yield ~ REP + TREATMENT, data = d_rcbd)
+fit_alpha  <- lmer(yield ~ REP + (1 | REP:IBLOCK) + TREATMENT, data = d_alpha)
+fit_rowcol <- lmer(yield ~ REP + (1 | REP:rowf) + (1 | REP:colf) + TREATMENT, data = d_rowcol)
+```
+
+------------------------------------------------------------------------
+
+## Three rules
+
+- **Replicates** (complete blocks): every genotype is in every replicate, so they enter the model as ordinary terms
+- **Incomplete blocks, rows, columns**: a genotype is not in every block, so part of the information about genotypes is also *between* blocks. Writing them in brackets, `(1 | block)`, lets the model use it.
+- **Genotypes:** to compare and select them we keep them as ordinary terms. Tomorrow (Day 3) we see the other option and what it is good for.
+
+------------------------------------------------------------------------
+
+## Block 3 {.divider}
+
+Exercise
+
+------------------------------------------------------------------------
+
+## Exercise: `john.alpha`
+
+**Context.** A real spring oats trial from Craibstone, Aberdeen (John and Williams, 1995): 24 varieties, alpha-lattice, 3 replicates of 6 blocks of 4 plots. The question: **what do we gain by analysing it as an alpha-lattice instead of an RCBD?**
+
+1.  Check the design: plots per replicate, blocks, plots per block
+2.  Fit the **RCBD** model and the **alpha-lattice** model. Compare residual variance and average SED
+3.  Generate a new alpha-lattice for the same trial with FielDHub
+4.  Write your findings
+
+[File: `Exercise3_john_alpha.Rmd` in the ZIP]{.small-note}
+
+------------------------------------------------------------------------
+
+## Solution
+
+```{r}
+#| label: exercise
+john.alpha |> count(rep, block) |> count(rep, plots_per_block = n)
+
+oats_rcbd  <- lm(yield ~ rep + gen, data = john.alpha)
+oats_alpha <- lmer(yield ~ rep + (1 | rep:block) + gen, data = john.alpha)
+
+c(rcbd_residual_variance = sigma(oats_rcbd)^2, alpha_residual_variance = sigma(oats_alpha)^2)
+
+sed_gen <- function(fit) {
+  V <- vcov(emmeans(fit, "gen", lmer.df = "asymptotic")); n <- nrow(V)
+  sqrt(2 * (mean(diag(V)) - (sum(V) - sum(diag(V))) / (n * (n - 1))))
+}
+c(rcbd = sed_gen(oats_rcbd), alpha = sed_gen(oats_alpha))
+```
+
+Residual variance falls from 0.135 to 0.085, average SED from 0.30 to 0.26 t/ha. Ignoring the blocks throws away information.
+
+------------------------------------------------------------------------
+
+## Key takeaways
+
+- **A smaller residual variance gives a smaller SED**: the alpha-lattice and the row-column design detect smaller differences with the same plots
+- The design **determines the model**: replicates, blocks, rows and columns within replicates; incomplete blocks, rows and columns go in brackets, `(1 | ...)`
+- Write **`rep:block`**, never `block` alone, when block numbers repeat in each replicate
+- Keep the **row and column of every plot**: they are needed for the model
+
+------------------------------------------------------------------------
+
+## Resources
+
+- **Course manual**, chapter 5: theory, code and exercises of this session
+- Murillo, D. A. et al. (2021). FielDHub. *Journal of Open Source Software*, 6(61), 3122. <https://doi.org/10.21105/joss.03122>
+- Patterson, H. D. & Williams, E. R. (1976). A new class of resolvable incomplete block designs. *Biometrika*, 63(1), 83-92.
+- Cullis, B. R., Smith, A. B. & Coombes, N. E. (2006). On the design of early generation variety trials with correlated data. *JABES*, 11(4), 381-393.
+- Williams, E. R. & Luckett, D. J. (1988). Uniformity data in the design and analysis of cotton and barley variety trials. *Aust. J. Agric. Res.*, 39(3), 339-350.
+- FielDHub app and documentation: <https://didiermurillof.github.io/FielDHub/>
+
+------------------------------------------------------------------------
+
+## Thank you! {.divider}
+
+**Luis Fernando Delgado Muñoz**
+
+[📧 [lfdelgadom\@unal.edu.co](mailto:lfdelgadom@unal.edu.co)]{.small-note}
+
+[💼 [linkedin.com/in/lfdelgadom](https://www.linkedin.com/in/lfdelgadom)]{.small-note}

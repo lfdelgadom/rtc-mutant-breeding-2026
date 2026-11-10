@@ -1,0 +1,138 @@
+---
+title: "Exercise 1: generate experimental designs with FielDHub"
+author: "[Your name]"
+date: "10 November 2026"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+# error = TRUE: the file can be knitted even while some TODO lines are still open.
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = TRUE,
+                      fig.width = 8, fig.height = 4.5)
+```
+
+> **How to use this file.** Run each grey box with the green triangle, from top to bottom. Replace the `___` in the lines marked `# TODO`; the `# HINT` line above tells you where to look. Write what you see in the **Your findings** boxes. Knit only at the end, if time allows.
+
+# Context
+
+You have **24 entries** (genotypes) to test and room for **72 plots**: 3 plots for each entry. Which layouts can FielDHub produce for this trial, and what does each argument mean?
+
+Remember the words from the slides: **t** entries, **k** plots per incomplete block, **s = t / k** blocks per replicate, **r** replicates. Total plots = t x r.
+
+```{r packages}
+library(FielDHub)
+library(dplyr)
+library(ggplot2)
+```
+
+# Completely randomized design (CRD)
+
+```{r crd}
+# HINT: each entry appears 3 times (72 plots / 24 entries)
+crd <- CRD(t = 24, reps = ___, seed = 2026)   # TODO
+
+head(crd$fieldBook)
+nrow(crd$fieldBook)          # should be 72
+```
+
+```{r crd-plot}
+plot(crd)
+```
+
+**Your findings:** is there any block in a CRD? Where could a field gradient hide? _...write here..._
+
+# Randomized complete block design (RCBD)
+
+```{r rcbd}
+rcbd <- RCBD(t = 24, reps = 3, seed = 2026)
+
+# HINT: the column of the field book that holds the replicate (block) number: look at head(rcbd$fieldBook)
+rcbd$fieldBook %>% count(___)   # TODO: how many plots in each block?
+```
+
+```{r rcbd-plot}
+plot(rcbd)
+```
+
+**Your findings:** how many plots does one block have, and how many entries are in it? _...write here..._
+
+# Alpha-lattice
+
+```{r alpha}
+# HINT: k = plots per incomplete block. In the slides, the oat trial had k = 4
+alpha <- alpha_lattice(t = 24, k = ___, r = 3, seed = 2026)   # TODO
+
+head(alpha$fieldBook)
+```
+
+```{r alpha-check}
+# HINT: s = t / k, the number of blocks per replicate
+s <- 24 / ___    # TODO
+s
+
+# Plots in each incomplete block: should all be equal to k
+alpha$fieldBook %>% count(REP, IBLOCK) %>% head(8)
+```
+
+```{r alpha-plot}
+plot(alpha)
+```
+
+**Your findings:** how many incomplete blocks are there in total (s x r)? Does every replicate contain all 24 entries? Check with `alpha$fieldBook %>% count(REP)`. _...write here..._
+
+## What if k does not fit?
+
+```{r alpha-error}
+# This is expected to give an error. Read the message.
+alpha_bad <- alpha_lattice(t = 24, k = 5, r = 3, seed = 2026)
+```
+
+```{r alpha-divisors}
+# Which block sizes k are possible for t = 24? (t must be divisible by k)
+(1:24)[24 %% (1:24) == 0]
+```
+
+**Your findings:** why does k = 5 fail? Which k would you choose for 24 entries if the field is uniform only over small areas? _...write here..._
+
+# Row-column design
+
+```{r rowcol}
+# HINT: nrows = rows per replicate. With 24 entries, 6 rows x 4 columns = 24 plots per replicate
+rowcol <- row_column(t = 24, nrows = ___, r = 3, seed = 2026)   # TODO
+
+head(rowcol$fieldBook)
+```
+
+```{r rowcol-plot}
+plot(rowcol)
+```
+
+```{r rowcol-check}
+# Every row and every column of a replicate is an incomplete block
+rowcol$fieldBook %>% count(REP, ROW) %>% head(6)
+rowcol$fieldBook %>% count(REP, COLUMN) %>% head(6)
+```
+
+**Your findings:** how many plots are in each row and in each column of a replicate? _...write here..._
+
+# Compare the four layouts
+
+```{r compare}
+c(CRD = nrow(crd$fieldBook), RCBD = nrow(rcbd$fieldBook),
+  alpha_lattice = nrow(alpha$fieldBook), row_column = nrow(rowcol$fieldBook))
+```
+
+**Your findings:** all four use the same number of plots. What is different? Which restrictions on the randomization does each layout have (replicate, block, row, column)? This afternoon these restrictions become the terms of the model. _...write here..._
+
+# Export a field book
+
+```{r export}
+# The field book is what you take to the field. Keep the row and the column of every plot.
+write.csv(alpha$fieldBook, "alpha_field_book.csv", row.names = FALSE)
+```
+
+**Open questions to bring to Exercise 2 (optional):** _...write here..._

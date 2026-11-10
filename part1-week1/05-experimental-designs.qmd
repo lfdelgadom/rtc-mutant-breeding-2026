@@ -8,7 +8,8 @@
 ::: callout-note
 ## Slides for this session
 
-[Open the slides of Day 2, Experimental designs](../slides/05-experimental-designs.html){target="_blank"}
+[Morning: experimental designs](../slides/05-experimental-designs.html){target="_blank"}\
+[Afternoon: analysing designs](../slides/05b-analysing-designs.html){target="_blank"}
 :::
 
 ## Learning objectives
@@ -23,11 +24,14 @@ In @sec-qc-eda we saw that much of the variation in a trial comes from the field
 
 ```{r}
 #| message: false
+#| cache: false
 library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(lme4)
 library(emmeans)
+library(cowplot)
+source("R/design_schematics.R")   # schematic layouts of each design
 library(agridat)    # install.packages("agridat") if needed
 library(FielDHub)   # install.packages("FielDHub") if needed
 ```
@@ -109,6 +113,15 @@ With 300 genotypes, a complete block has 300 plots: it is too large to be unifor
 | **RCBD**, randomized complete blocks | Each block contains every genotype once | Few genotypes (up to about 20 to 30), for example advanced yield trials |
 | **Augmented** | New lines in one plot each; checks replicated in every block | Early generations with seed for one plot, many lines |
 
+```{r}
+#| label: fig-classical
+#| fig-cap: "Schematic layouts of the classical designs. Each box is a plot and the letters are genotypes. CRD: genotypes anywhere. RCBD: each block (here a row, outlined) has every genotype once. Augmented: checks A and B in every block, each new line (n) in one plot only."
+#| fig-width: 10
+#| fig-height: 3
+#| echo: false
+plot_grid(p_crd, p_rcbd, p_aug, nrow = 1, rel_widths = c(1, 1, 1.25))
+```
+
 The RCBD was used in @sec-qc-eda for the Nebraska wheat trial (`stroup.nin`): 56 genotypes in blocks of 56 plots. Its low-yield corner was smaller than a block, so the blocks could not remove it. The augmented design was introduced in @sec-field-data with `kling.augmented`.
 
 ### Designs with incomplete blocks
@@ -120,11 +133,52 @@ The RCBD was used in @sec-qc-eda for the Nebraska wheat trial (`stroup.nin`): 56
 | **Resolvable row-column** | Two directions (rows and columns) | Yes |
 | **Partially replicated (p-rep)** | Usually analysed with rows, columns and spatial terms | No |
 
+```{r}
+#| label: fig-incomplete
+#| fig-cap: "Schematic layouts of the designs with incomplete blocks. Numbers are entries. Thick black line: replicate. Thin blue line: incomplete block. Orange: one row and one column of the row-column designs. p-rep: dark plots are lines in two plots, light plots are lines in one plot."
+#| fig-width: 11
+#| fig-height: 3.1
+#| echo: false
+plot_grid(p_alpha, p_rowcol, p_rrc, p_prep, nrow = 1, rel_widths = c(1.15, 1.2, 1.1, 1.2))
+```
+
 **Alpha-lattice** (Patterson and Williams, 1976). Each replicate is divided into $s$ incomplete blocks of $k$ plots, so the number of genotypes is $t = s \times k$. Each replicate contains all the genotypes. Pairs of genotypes occur together in a block once or never (an $\alpha(0,1)$ design), and the allocation is chosen to give the lowest average variance of the differences between genotypes. The bean trial of this course is an alpha-lattice: 380 lines in 2 replicates of 396 plots (16 checks appear twice in each replicate), each replicate with 18 blocks of 22 plots (11 rows by 2 columns).
 
 **Row-column designs** block in two directions at the same time: every row and every column is an incomplete block. In the **resolvable** version, the field is first divided into complete replicates, and rows and columns are blocks **within** each replicate. Randomization is not simple, because the design must be balanced in both directions; software such as FielDHub searches for a good allocation.
 
 **Partially replicated (p-rep) designs** (Cullis et al., 2006) replicate only a fraction of the test lines (for example 20%) and sow the rest in one plot. The replicated lines provide the estimate of error, instead of repeating the same check many times.
+
+### Alpha-lattice in plain words
+
+-   **t**: number of entries (genotypes).
+-   **k**: number of plots in one incomplete block.
+-   **s = t / k**: number of incomplete blocks in one replicate.
+-   **r**: number of replicates.
+-   **Total plots = t × r.**
+-   **Incomplete block**: a block that holds only some of the genotypes, not all of them.
+-   **Resolvable**: the blocks are grouped in replicates, and every replicate contains all the genotypes.
+
+```{r}
+#| label: fig-john-alpha
+#| fig-cap: "A real alpha-lattice: the oat trial john.alpha, with t = 24 entries, r = 3 replicates and 72 plots in total. Each replicate has s = 6 incomplete blocks of k = 4 plots."
+#| fig-height: 3.4
+#| echo: false
+p_john
+```
+
+**Reading the model.** In `yield ~ rep + (1 | rep:block) + gen`, `gen` holds the genotypes we want to compare, `rep` the differences between replicates, and `(1 | rep:block)` removes the variation between incomplete blocks. We write `rep:block` and not `block` because block 1 of replicate 1 is not block 1 of replicate 2: they are different pieces of land.
+
+**In FielDHub:** `alpha_lattice(t = 24, k = 4, r = 3)`. The number of entries `t` must be divisible by the block size `k`; with 24 entries, `k = 5` is not possible.
+
+### Variance, residual variance and SED
+
+Three words are used from now on.
+
+-   **Variance** measures how much a set of values is spread around its mean: the average of the squared differences from the mean. The **standard deviation** is its square root, in the units of the measurement (t/ha).
+-   **Residual variance** is the variance that the model cannot explain with its terms (genotypes, replicates, blocks, rows, columns). Every term that captures real field variation takes variance out of the residual. A smaller residual variance means a more precise comparison.
+-   **SED** is the standard error of the difference between two genotype means. For equal replication, SED ≈ $\sqrt{2 \times \text{residual variance} / r}$. The **LSD** is approximately 2 × SED: two genotypes must differ by more than this value before we call them different.
+
+For example, with a residual variance of 0.16 and 4 replicates, SED = $\sqrt{2 \times 0.16 / 4}$ = 0.28 t/ha and LSD ≈ 0.57 t/ha. If a better design brings the residual variance to 0.08, the SED falls to 0.20 and the LSD to 0.40 t/ha: smaller differences become detectable with the same land and seed.
 
 ## Comparing designs on a real field
 
@@ -193,7 +247,7 @@ ggplot(d_alpha, aes(col, row, fill = factor(as.integer(IBLOCK) %% 2))) +
 
 ### Fitting the model of each design
 
-Each design implies its own model. Genotypes are fixed here, because we want to compare their means; incomplete blocks, rows and columns are random (see @sec-model-from-layout).
+Each design implies its own model. The genotypes (`TREATMENT`) and the replicates are ordinary terms of the model. Blocks, rows and columns are written inside brackets, `(1 | ...)`: they only remove field variation and we never compare them. Models with a term like this are called mixed models (see @sec-model-from-layout and @sec-mixed-models).
 
 ```{r}
 #| cache: true
@@ -306,18 +360,17 @@ $$
 y_{ijkm} = \mu + Rep_m + r_{j(m)} + c_{k(m)} + G_i + \varepsilon_{ijkm}
 $$
 
-Rows and columns are incomplete blocks, so they are random. If we ignore them and analyse the trial as an RCBD (replicates only), the field variation stays in the error:
+Rows and columns are incomplete blocks: they only remove field variation, so they go in brackets in the model. If we ignore them and analyse the trial as an RCBD (replicates only), the field variation stays in the error:
 
 ```{r}
-m_rcbd   <- lmer(yield ~ rep + (1 | geno), data = wh09)
-m_rowcol <- lmer(yield ~ rep + (1 | rep:row) + (1 | rep:col) + (1 | geno),
-                 data = wh09)
+m_rcbd   <- lm(yield ~ rep + geno, data = wh09)
+m_rowcol <- lmer(yield ~ rep + geno + (1 | rep:row) + (1 | rep:col), data = wh09)
 
-print(VarCorr(m_rcbd), comp = "Variance")
+c(RCBD = sigma(m_rcbd)^2, row_column = sigma(m_rowcol)^2)   # residual variance
 print(VarCorr(m_rowcol), comp = "Variance")
 ```
 
-With the row-column model the residual variance falls from about 0.30 to 0.17, and most of the field variation is between **columns** (0.107), much less between rows (0.012). The genotype variance becomes larger, because part of what looked like error was field. How this translates into heritability is the topic of @sec-heritability.
+With the row-column model the residual variance falls from about 0.31 to 0.16, and most of the field variation is between **columns** (0.110), less between rows (0.035). Part of what the RCBD called error was field variation, so the genotype comparisons are more precise. How this translates into heritability is the topic of @sec-heritability.
 
 ::: callout-note
 ## `row` or `rep:row`?
@@ -376,7 +429,7 @@ bind_rows(
   theme_minimal()
 ```
 
-Both trials are analysed with the same model: entries fixed, rows and columns random. Because the field is blank, we can measure two things for the unreplicated lines:
+Both trials are analysed with the same model: the entries are compared, and rows and columns only remove field variation. Because the field is blank, we can measure two things for the unreplicated lines:
 
 - the **SED reported by the model**, which is what the breeder would see;
 - the **true SED**: the true differences between entries are zero, so the observed spread of the estimated means of the unreplicated lines is pure error ($\sqrt{2 \times \text{variance of the means}}$).
@@ -489,11 +542,32 @@ write.csv(field_book, "my_alpha_field_book.csv", row.names = FALSE)
 
 ## From layout to statistical model {#sec-model-from-layout}
 
-The design determines the model. Every restriction of the randomization (replicate, block, row, column) becomes a term:
+The design determines the model. Every restriction of the randomization (replicate, block, row, column) becomes a term. We write the models with this notation:
+
+-   $Y$: observed response of a plot, for example yield (t/ha);
+-   $\mu$: overall mean of the trial;
+-   $G_k$: effect of genotype $k$. This is what we compare;
+-   $R_i$: effect of replicate $i$ (a complete block);
+-   $B_{j(i)}$: effect of incomplete block $j$ within replicate $i$ ("$j(i)$" reads "$j$ within $i$"). In the augmented design, $B_j$ is a block of the field;
+-   $Row_{j(i)}$ and $Col_{l(i)}$: effect of row $j$ and column $l$ within replicate $i$. In the p-rep design they are the rows and columns of the whole field, $Row_j$ and $Col_l$;
+-   $\varepsilon$: experimental error, what the model cannot explain.
+
+$G$ is what we compare. $R$, $B$, $Row$ and $Col$ only remove field variation, so the comparison between genotypes is fairer.
+
+| Design | Model |
+|--------------------|----------------------------------------------------|
+| CRD | $Y_{ik} = \mu + G_k + \varepsilon_{ik}$ |
+| RCBD | $Y_{ik} = \mu + R_i + G_k + \varepsilon_{ik}$ |
+| Augmented | $Y_{jk} = \mu + B_j + G_k + \varepsilon_{jk}$ |
+| Alpha-lattice | $Y_{ijk} = \mu + R_i + B_{j(i)} + G_k + \varepsilon_{ijk}$ |
+| Resolvable row-column | $Y_{ijlk} = \mu + R_i + Row_{j(i)} + Col_{l(i)} + G_k + \varepsilon_{ijlk}$ |
+| p-rep | $Y_{jlk} = \mu + Row_j + Col_l + G_k + \varepsilon_{jlk}$ |
+
+In R each term of the equation is a term of the formula (`rep` is $R$, `rep:block` is $B_{j(i)}$, `geno` is $G$):
 
 ```{r}
 #| eval: false
-# genotypes fixed; incomplete blocks, rows and columns random
+# a term in brackets only removes field variation (see @sec-mixed-models)
 lm(y ~ geno)                                                  # CRD
 lm(y ~ rep + geno)                                            # RCBD
 lm(y ~ block + geno)                                          # Augmented (or rows and columns random)
@@ -505,16 +579,16 @@ lmer(y ~ geno + (1 | row) + (1 | col))                        # p-rep, usually w
 
 Three rules:
 
-- **Complete blocks (replicates) can be fixed or random**: every genotype is in every block, so blocks and genotypes are independent.
-- **Incomplete blocks, rows and columns should be random.** A genotype is not in every block, so part of the information about genotypes is between blocks; random blocks recover it.
-- **Genotypes are fixed** to compare and select them (BLUEs), and **random** to estimate the genetic variance and heritability (BLUPs). Both models are fitted, as shown in @sec-mixed-models.
+- **Replicates (complete blocks)** enter the model as ordinary terms: every genotype is in every replicate.
+- **Incomplete blocks, rows and columns** go in brackets, `(1 | block)`. A genotype is not in every block, so part of the information about genotypes is also between blocks, and writing them in brackets lets the model use it.
+- **Genotypes** are kept as ordinary terms to compare and select them. The alternative, and what it is good for (BLUEs, BLUPs and heritability), is the topic of @sec-mixed-models.
 
 ## Exercise
 
 The dataset `john.alpha` in `agridat` is a real spring oats trial from Craibstone, near Aberdeen (John and Williams, 1995): 24 varieties in an alpha-lattice with 3 replicates, each with 6 incomplete blocks of 4 plots.
 
 1.  Check the design: how many plots per replicate, how many blocks per replicate, how many plots per block?
-2.  Fit the model of an RCBD (replicates only) and the model of the alpha-lattice (blocks within replicates, random). Compare the residual variance and the average SED of the two models.
+2.  Fit the model of an RCBD (replicates only) and the model of the alpha-lattice (blocks within replicates, in brackets). Compare the residual variance and the average SED of the two models.
 3.  Generate a new alpha-lattice for the same trial (24 entries, blocks of 4, 3 replicates) with FielDHub, and look at its field book.
 
 ::: {.callout-tip collapse="true"}
@@ -554,7 +628,7 @@ The block variance is a large part of the field variation. With the blocks in th
 - Fields vary at short distances and in more than one direction. Breeding trials, with many entries, need **incomplete blocks**: alpha-lattice or row-column designs.
 - On a real uniformity field, the resolvable row-column design was about twice as efficient as the RCBD, with the same plots and seed.
 - For early generations with limited seed, augmented and p-rep designs have the same true precision, but the augmented design overstates it; analyse both with spatial models.
-- The design determines the model: replicates, blocks within replicates, rows and columns within replicates. Incomplete blocks are random.
+- The design determines the model: replicates, blocks within replicates, rows and columns within replicates. Incomplete blocks, rows and columns go in brackets, `(1 | ...)`.
 - Generate layouts with FielDHub, set the seed, and keep the row and column of every plot.
 
 ## References

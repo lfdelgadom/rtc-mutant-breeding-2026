@@ -9,6 +9,7 @@ project:
     - "slides/*.css"
     - "slides/*_files/**"
     - "slides/images/**"
+    - "downloads/*.zip"
 
 book:
   title: "Experimental Design and Data Analysis for the Advancement of Mutant Populations"

@@ -1,0 +1,55 @@
+---
+title: "Exercise 4 (optional): a resolvable row-column design, Australian wheat"
+author: "[Your name]"
+date: "10 November 2026"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = TRUE,
+                      fig.width = 8, fig.height = 4.5)
+```
+
+> **Optional.** For those who finish Exercise 3 early. Replace the `___` in the lines marked `# TODO`.
+
+# Context
+
+Wheat trial WH09 (Wongan Hills, Western Australia, 2009): a resolvable row-column design with 2 replicates (columns 1 to 6 and 7 to 12) of 34 rows each. **Question:** does modelling rows and columns remove field variation?
+
+```{r packages}
+library(dplyr)
+library(lme4)
+library(ggplot2)
+```
+
+```{r data}
+wheat <- readr::read_csv("data/wheat_Australia_2008_2009_7loc.csv", show_col_types = FALSE)
+wh09 <- wheat %>% filter(Trial == "WH09") %>% mutate(across(c(rep, row, col, geno), factor))
+glimpse(wh09)
+```
+
+```{r map}
+ggplot(wh09, aes(as.integer(row), as.integer(col), fill = yield)) +
+  geom_tile(colour = "white") + geom_hline(yintercept = 6.5, linewidth = 1) +
+  scale_fill_viridis_c() + labs(x = "Row", y = "Column", fill = "t/ha")
+```
+
+**Your findings:** where is the field variation: along rows or along columns? _...write here..._
+
+# Two models
+
+```{r fit}
+m_rcbd <- lm(yield ~ rep + geno, data = wh09)
+
+# HINT: row and column numbers repeat in each replicate, so write them within replicate: rep:row and rep:col
+m_rowcol <- lmer(yield ~ rep + geno + (1 | rep:___) + (1 | rep:___), data = wh09)   # TODO
+
+c(RCBD = sigma(m_rcbd)^2, row_column = sigma(m_rowcol)^2)
+print(VarCorr(m_rowcol), comp = "Variance")
+```
+
+**Your findings:** how much smaller is the residual variance? Which is larger, the variance between rows or between columns? Does that agree with the map? _...write here..._

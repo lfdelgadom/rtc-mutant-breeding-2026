@@ -18,6 +18,7 @@ SLIDES=(
   "01-r-basics"
   "02-tidy-data"
   "05-experimental-designs"
+  "05b-analysing-designs"
   "06-anova"
   "09-spatial-analysis"
   "09b-image-analysis"
@@ -36,6 +37,17 @@ if [ -n "$1" ]; then
   fi
   git push
 fi
+
+# 0b. Build the exercise ZIP files (one per folder in exercises/) for the slides
+echo ""
+echo "==> Building exercise ZIP files (downloads/)"
+mkdir -p downloads
+for d in exercises/*/; do
+  name=$(basename "$d")
+  rm -f "downloads/${name}.zip"
+  (cd exercises && zip -qr "../downloads/${name}.zip" "$name" -x "*/.Rhistory" "*/.DS_Store" "*/Exercise*.html" "*/my_field_book.csv" "*/alpha_field_book.csv")
+  echo "    downloads/${name}.zip"
+done
 
 # 1. Render the slides
 for deck in "${SLIDES[@]}"; do

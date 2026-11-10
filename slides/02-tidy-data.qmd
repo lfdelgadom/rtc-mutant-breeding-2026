@@ -26,6 +26,7 @@ execute:
 
 ```{r}
 #| label: setup
+#| cache: false
 #| include: false
 # run the code from the project folder, so paths like "data/..." work
 knitr::opts_knit$set(root.dir = if (dir.exists("data")) "." else "..")

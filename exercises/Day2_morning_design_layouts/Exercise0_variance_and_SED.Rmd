@@ -1,0 +1,105 @@
+---
+title: "Exercise 0: variance, residual variance, SED and LSD"
+author: "[Your name]"
+date: "10 November 2026"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = TRUE,
+                      fig.width = 8, fig.height = 4.5)
+```
+
+> **How to use this file.** Run each grey box with the green triangle, from top to bottom. Replace the `___` in the lines marked `# TODO`; the `# HINT` line above tells you where to look. Every part says what result you should get, so you can check yourself. Write what you see in the **Your findings** boxes.
+
+# Context
+
+This afternoon we compare genotypes with models. Their precision depends on three numbers that we met in the lecture: the **variance**, the **residual variance** and the **SED** (the LSD is about twice the SED). Here you calculate them yourself, with a real field of barley in which every plot has the **same variety**: any difference between plots is field variation.
+
+```{r packages}
+library(dplyr)
+```
+
+# Variance by hand
+
+Eight plots of the field, yield in t/ha:
+
+```{r y8}
+y <- c(2.56, 1.98, 2.18, 2.27, 2.43, 2.35, 1.98, 2.33)
+
+m <- mean(y)
+m
+d <- y - m          # distance of each plot to the mean
+round(d, 2)
+```
+
+```{r var-hand}
+# HINT: variance = sum of the squared distances / (number of values - 1)
+v <- sum(d^2) / (length(y) - ___)    # TODO
+v
+
+sqrt(v)      # standard deviation, in t/ha
+var(y)       # R gives the same number: you should get about 0.042
+```
+
+**Your findings:** why do we square the distances before adding them? What are the units of the variance, and of the standard deviation? _...write here..._
+
+# Residual variance: what the model cannot explain
+
+```{r data}
+field <- read.csv("data/uniformity_barley.csv")
+c8 <- field %>% filter(col <= 8) %>% mutate(col = factor(col), row = factor(row))
+nrow(c8)     # 8 columns x 15 rows = 120 plots
+```
+
+```{r models}
+# Model 0: only the overall mean. Its residual variance is the variance of all plots
+m0 <- lm(yield ~ 1, data = c8)
+
+# HINT: model 1 adds the column position, model 2 adds the column and the row
+m1 <- lm(yield ~ ___, data = c8)            # TODO
+m2 <- lm(yield ~ col + ___, data = c8)      # TODO
+
+# Residual variance of each model
+c(overall_mean = sigma(m0)^2, with_columns = sigma(m1)^2, columns_and_rows = sigma(m2)^2)
+# You should get about 0.078, 0.063 and 0.028
+```
+
+```{r resid-plot}
+# The residuals of model 1: observed value - predicted value
+c8$res1 <- resid(m1)
+head(c8 %>% select(row, col, yield, res1))
+```
+
+**Your findings:** by how much did the residual variance fall when we added the columns? And when we added the rows too? Which direction has more field variation, columns or rows? _...write here..._
+
+# SED and LSD
+
+For equal replication, **SED = sqrt(2 x residual variance / r)** and **LSD is about 2 x SED**.
+
+```{r sed-table}
+tab <- expand.grid(resid_var = c(0.16, 0.08), r = c(2, 4))
+
+# HINT: write the formula of the SED with tab$resid_var and tab$r
+tab$SED <- sqrt(2 * tab$resid_var / ___)    # TODO
+tab$LSD <- 2 * tab$SED
+round(tab, 2)
+```
+
+**Your findings:** which two rows of the table have the same SED? What does that say about a design that halves the residual variance, compared with doubling the replicates? _...write here..._
+
+Now with the three models of the previous part, imagine a trial with r = 3 replicates:
+
+```{r sed-models}
+res_var <- c(overall_mean = sigma(m0)^2, with_columns = sigma(m1)^2, columns_and_rows = sigma(m2)^2)
+
+# HINT: the same formula, now with r = 3
+sed <- sqrt(2 * res_var / ___)    # TODO
+round(rbind(SED = sed, LSD = 2 * sed), 2)
+```
+
+**Your findings:** two genotypes differ by 0.4 t/ha. With the overall-mean model can you call them different (is 0.4 larger than the LSD)? And with the model that has columns and rows? What does this tell you about the value of a design that removes field variation? _...write here..._

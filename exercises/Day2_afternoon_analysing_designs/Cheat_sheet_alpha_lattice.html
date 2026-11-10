@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alpha-lattice cheat sheet</title>
+<style>
+body{font-family:system-ui,Arial,sans-serif;max-width:820px;margin:2rem auto;padding:0 1rem;line-height:1.5;color:#1d2b2a}
+h1{font-size:1.6rem;margin-bottom:.2rem} h2{font-size:1.2rem;margin-top:1.8rem;border-bottom:2px solid #2f7d6d;padding-bottom:.2rem}
+.box{background:#eef6f4;border-left:5px solid #2f7d6d;padding:.6rem 1rem;margin:1rem 0}
+.warn{background:#fdf3e3;border-left-color:#d98a1f}
+table{border-collapse:collapse;width:100%;margin:.6rem 0} td,th{border:1px solid #c5d3d0;padding:.35rem .6rem;text-align:left}
+th{background:#e1eeeb} code,pre{background:#f2f4f4;border-radius:4px} code{padding:0 .25rem} pre{padding:.7rem;overflow:auto}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;max-width:520px;margin:.5rem 0}
+.c{background:#cfe6e0;text-align:center;padding:.3rem 0;font-size:.8rem;border-radius:3px}
+.c.b{background:#9cc9be}
+</style></head><body>
+<h1>Alpha-lattice cheat sheet</h1>
+<p>RER5030, Day 2. One page, plain words.</p>
+
+<h2>1. The idea in one sentence</h2>
+<div class="box">An RCBD puts <b>all</b> entries in one big block. When there are many entries, that block is too large to be uniform. An alpha-lattice cuts each replicate into <b>small blocks</b>, so each entry is compared with neighbours in a small, more uniform area.</div>
+
+<h2>2. The letters</h2>
+<table>
+<tr><th>Letter</th><th>Meaning</th><th>Example (john.alpha oats)</th></tr>
+<tr><td><b>t</b></td><td>number of entries (genotypes)</td><td>24</td></tr>
+<tr><td><b>k</b></td><td>plots in one incomplete block</td><td>4</td></tr>
+<tr><td><b>s</b></td><td>incomplete blocks per replicate, <b>s = t / k</b></td><td>24 / 4 = 6</td></tr>
+<tr><td><b>r</b></td><td>number of replicates</td><td>3</td></tr>
+<tr><td>total plots</td><td><b>t x r</b> (also s x k x r)</td><td>24 x 3 = 72</td></tr>
+</table>
+
+<h2>3. Picture of one replicate (t = 24, k = 4, s = 6)</h2>
+<p>Each row is one incomplete block of 4 plots. The 6 blocks together hold all 24 entries once. That is one <b>replicate</b>.</p>
+<div class="grid" style="grid-template-columns:repeat(4,1fr);max-width:260px">
+<div class="c b">G01</div><div class="c b">G07</div><div class="c b">G13</div><div class="c b">G19</div>
+<div class="c">G02</div><div class="c">G08</div><div class="c">G14</div><div class="c">G20</div>
+<div class="c b">G03</div><div class="c b">G09</div><div class="c b">G15</div><div class="c b">G21</div>
+<div class="c">G04</div><div class="c">G10</div><div class="c">G16</div><div class="c">G22</div>
+<div class="c b">G05</div><div class="c b">G11</div><div class="c b">G17</div><div class="c b">G23</div>
+<div class="c">G06</div><div class="c">G12</div><div class="c">G18</div><div class="c">G24</div>
+</div>
+<p><small>Illustration only: in a real layout the entries inside blocks are randomized and differ in every replicate.</small></p>
+
+<h2>4. Two words</h2>
+<ul>
+<li><b>Incomplete block:</b> a block that holds only some of the entries (4 of 24), not all.</li>
+<li><b>Resolvable:</b> the blocks are grouped in replicates, and every replicate contains all entries. So you can still analyse the replicates as complete blocks if you need to.</li>
+</ul>
+
+<h2>5. Reading the model</h2>
+<pre>yield ~ rep + (1 | rep:block) + gen</pre>
+<table>
+<tr><td><code>gen</code></td><td>the entries: what we want to compare (fixed term, gives the means)</td></tr>
+<tr><td><code>rep</code></td><td>replicates: differences between the three big areas</td></tr>
+<tr><td><code>(1 | rep:block)</code></td><td>incomplete blocks: removes the variation between small blocks (random term)</td></tr>
+<tr><td>residual</td><td>what remains: the variance that the model cannot explain</td></tr>
+</table>
+<div class="box warn"><b>Why <code>rep:block</code> and not <code>block</code>?</b> Block numbers repeat in every replicate: B1 of rep 1 is a different piece of land than B1 of rep 2. <code>rep:block</code> says "block B1 <u>within</u> replicate R1". Using only <code>block</code> would wrongly join pieces of land that are far apart.</div>
+
+<h2>6. Does it pay? What to look at</h2>
+<ul>
+<li><b>Residual variance:</b> smaller with the alpha-lattice model than with the RCBD model.</li>
+<li><b>SED</b> (standard error of a difference between two entry means): smaller, so the same difference becomes easier to detect. <b>LSD &asymp; 2 x SED</b>.</li>
+<li>If the residual variance does not change, the blocks did not catch field variation, and the extra term was not needed.</li>
+</ul>
+
+<h2>7. In FielDHub</h2>
+<pre>library(FielDHub)
+d <- alpha_lattice(t = 24, k = 4, r = 3, seed = 2026)
+head(d$fieldBook)     # columns: REP, IBLOCK, UNIT, ENTRY, TREATMENT
+plot(d)</pre>
+<div class="box warn"><b>t must be divisible by k.</b> For t = 24 you can use k = 2, 3, 4, 6, 8, 12. Not k = 5: FielDHub stops with "Combinations for this amount of treatments do not exist". For 30 entries: k = 3, 5, 6, 10.</div>
+
+<h2>8. Choosing k</h2>
+<ul>
+<li>Smaller k: more uniform blocks, but more blocks to manage.</li>
+<li>Typical in breeding: k between 4 and 10.</li>
+<li>The block should match something real in the field (a few neighbouring rows, a part of a slope).</li>
+</ul>
+
+<h2>9. Four questions before sowing</h2>
+<ol>
+<li>How many entries (t) and how many plots do I have?</li>
+<li>Which k divides t and fits a uniform piece of land?</li>
+<li>How many replicates (r)? With limited seed, r = 2.</li>
+<li>Do I keep the row and the column of every plot in the field book? (You need them for the analysis.)</li>
+</ol>
+</body></html>

@@ -26,6 +26,7 @@ execute:
 
 ```{r}
 #| label: setup
+#| cache: false
 #| include: false
 knitr::opts_knit$set(root.dir = if (dir.exists("data")) "." else "..")
 library(pliman)

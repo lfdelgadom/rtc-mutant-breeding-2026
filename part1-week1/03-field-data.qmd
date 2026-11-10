@@ -38,7 +38,7 @@ install.packages("agridat")
 A column name such as `height` or `disease` is not enough. Two people can measure "plant height" in different ways (to the tip of the leaves or to the top of the stem; one plant or the mean of five) and obtain values that cannot be compared. A trait is completely defined when we know:
 
 | Element | Question | Example: plant height |
-|----------------|-------------------------|-------------------------------|
+|----|----|----|
 | **Name** | What is it called in the field book? | `plant_height_cm` |
 | **Method** | How is it measured? | From the ground to the top of the main stem |
 | **Scale or unit** | In what units, or with what scale? | Centimetres |
@@ -52,7 +52,7 @@ The **Crop Ontology** (<https://cropontology.org>) provides standard trait defin
 ### Types of scales
 
 | Type | Example | How to analyse it |
-|-----------------|---------------------------|-----------------------------|
+|----|----|----|
 | **Continuous** | Yield (t/ha), plant height (cm) | Means, ANOVA, mixed models |
 | **Count** | Number of pods, tillers | Means or count models (Poisson) |
 | **Ordinal score** | Disease 1 to 9, vigour 1 to 5 | The distance between scores is not equal; medians, ordinal models |
@@ -102,7 +102,7 @@ Besides the traits, record as columns: `m1_plant`, `m2_family`, `plant` (in M2),
 ## Common errors in field data
 
 | Error | Example | How to prevent it |
-|---------------------|-----------------------|----------------------------|
+|----|----|----|
 | **Plot recorded twice** | Plot 105 entered two times | Data collection app; check duplicates in R |
 | **Plot missing** | One plot skipped while walking the field | Check the number of plots against the plan |
 | **Wrong plot order** | Recording in serpentine order when the field book is in straight order | Record the plot number, not only the position; use barcodes |
