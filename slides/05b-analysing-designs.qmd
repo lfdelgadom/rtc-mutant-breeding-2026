@@ -46,7 +46,7 @@ theme_set(theme_minimal(base_size = 14))
 |------------------|------------------------------------------------------|
 | 1 | Real trials: beans (alpha-lattice) and wheat (row-column) |
 | 2 | Reading the model of each design |
-| 3 | Exercise: `john.alpha` |
+| 3 | Exercise (homework): `john.alpha` |
 
 ::: keybox
 **Goal:** write the model that goes with a design, and see in numbers what a good design gains.
@@ -58,7 +58,7 @@ theme_set(theme_minimal(base_size = 14))
 
 1.  Download: [**Day 2 afternoon exercises (ZIP)**](../downloads/Day2_afternoon_analysing_designs.zip)
 2.  Unzip it, open `Day2_afternoon.Rproj`, run `00_install_packages.R`
-3.  We use `Exercise3_john_alpha.Rmd` at the end of this session
+3.  The exercises of the afternoon, `Exercise5` (ANOVA and assumptions) and `Exercise6` (mean comparison), come with the next lecture. `Exercise3_john_alpha.Rmd` of this session is **homework**
 
 ::: keybox
 Reminder from the morning: **t** entries, **k** plots per block, **s = t / k** blocks per replicate, **r** replicates.
@@ -248,7 +248,7 @@ Exercise
 
 ------------------------------------------------------------------------
 
-## Exercise: `john.alpha`
+## Exercise (homework): `john.alpha`
 
 **Context.** A real spring oats trial from Craibstone, Aberdeen (John and Williams, 1995): 24 varieties, alpha-lattice, 3 replicates of 6 blocks of 4 plots. The question: **what do we gain by analysing it as an alpha-lattice instead of an RCBD?**
 
@@ -257,7 +257,7 @@ Exercise
 3.  Generate a new alpha-lattice for the same trial with FielDHub
 4.  Write your findings
 
-[File: `Exercise3_john_alpha.Rmd` in the ZIP]{.small-note}
+[Homework. File: `Exercise3_john_alpha.Rmd` in the ZIP]{.small-note}
 
 ------------------------------------------------------------------------
 

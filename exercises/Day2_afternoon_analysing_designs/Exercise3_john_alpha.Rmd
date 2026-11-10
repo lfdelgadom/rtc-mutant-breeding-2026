@@ -1,5 +1,5 @@
 ---
-title: "Exercise 3: analysing an alpha-lattice (john.alpha)"
+title: "Exercise 3 (homework): analysing an alpha-lattice (john.alpha)"
 author: "[Your name]"
 date: "10 November 2026"
 output:

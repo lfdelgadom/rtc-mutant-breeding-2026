@@ -1,0 +1,165 @@
+---
+title: "Exercise 5: ANOVA, assumptions and transformations"
+author: "[Your name]"
+date: "10 November 2026"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = TRUE,
+                      fig.width = 8, fig.height = 4.5)
+```
+
+> **How to use this file.** Run each grey box with the green triangle, from top to bottom. Replace the `___` in the lines marked `# TODO`; the `# HINT` line above tells you where to look. Every part says what result you should get, so you can check yourself. Write what you see in the **Your findings** boxes. Knit only at the end, if time allows.
+
+# Context
+
+Durum wheat trial in Algeria (real data, Biometris, Wageningen University and Research): **24 genotypes** in a randomized complete block design with **4 blocks**. We use one environment, `loc07_year1` (96 plots). This is the same data as in the lecture.
+
+**Questions:** (1) Is there evidence of differences among genotypes? (2) Can we trust that ANOVA? (3) What do we do when the assumptions fail?
+
+```{r packages}
+library(dplyr)
+library(ggplot2)
+library(car)
+library(lmerTest)
+library(agridat)
+```
+
+# ANOVA of the RCBD
+
+```{r data}
+durum <- read.csv("data/Durum_wheat_Algeria.csv")
+e7 <- durum %>%
+  filter(Environment == "loc07_year1") %>%
+  mutate(Genotype = factor(Genotype), Block = factor(Block))
+dim(e7)
+```
+
+```{r fit}
+# HINT: yield = overall mean + block + genotype + error. The genotype column is called Genotype
+fit <- lm(yield ~ Block + ___, data = e7)    # TODO
+anova(fit)
+```
+
+```{r report}
+# Always report: the residual mean square, the CV and the residual degrees of freedom
+c(MSE = deviance(fit) / df.residual(fit),
+  CV  = 100 * sigma(fit) / mean(e7$yield),
+  df  = df.residual(fit))
+# You should get about 0.020, 12.9 and 69
+```
+
+**Your findings:** is the effect of genotypes significant? What does a significant F tell you, and what does it not tell you? How many degrees of freedom do the blocks have, and why? _...write here..._
+
+# Checking the assumptions
+
+The errors should be independent, have equal variance and be approximately normal. We check the **residuals**, not the raw data.
+
+```{r diagnostics, fig.height = 4}
+par(mfrow = c(1, 2))
+plot(fit, which = 1:2)     # residuals vs fitted, and QQ plot
+par(mfrow = c(1, 1))
+```
+
+```{r tests}
+shapiro.test(resid(fit))$p.value          # normality; you should get about 0.16
+
+# HINT: Levene's test compares the variance among groups. The groups are the genotypes
+leveneTest(yield ~ ___, data = e7)        # TODO; p-value about 0.74
+
+# Possible outliers: standardized residuals above 3
+which(abs(rstandard(fit)) > 3)
+```
+
+**Your findings:** do the plots show a funnel or a curve? Do the tests agree with the plots? Is there any outlier? Remember that the tests are only a support: with 4 plots per genotype they have little power. _...write here..._
+
+# When the assumptions fail: a transformation
+
+Insecticide trial on rice (Gomez and Gomez, 1984): **9 treatments** (T9 is the untreated control) in **4 replicates**. The response is the number of living larvae per plot.
+
+```{r larvae-data}
+data(gomez.nonnormal1)
+larv <- gomez.nonnormal1
+head(larv)
+```
+
+```{r larvae-variance}
+# Mean and variance of each treatment
+larv %>% group_by(trt) %>% summarise(mean = mean(larvae), variance = var(larvae))
+```
+
+**Your findings:** what happens to the variance when the mean grows? _...write here..._
+
+```{r larvae-raw}
+f_raw <- lm(larvae ~ rep + trt, data = larv)
+
+par(mfrow = c(1, 2)); plot(f_raw, which = 1:2); par(mfrow = c(1, 1))
+c(shapiro = shapiro.test(resid(f_raw))$p.value,
+  levene  = leveneTest(larvae ~ trt, data = larv)$`Pr(>F)`[1])
+# Levene's p-value is about 0.006: the equal-variance assumption fails
+```
+
+For counts, the usual transformation is the **square root**. With zeros we add 0.5 first. Box-Cox suggests a power from the data (it needs positive values, so we add 1):
+
+```{r boxcox}
+larv$larvae1 <- larv$larvae + 1
+MASS::boxcox(lm(larvae1 ~ rep + trt, data = larv), lambda = seq(-1, 1.5, 0.1))
+# lambda close to 0.5 is a square root; close to 0 is a logarithm
+```
+
+```{r larvae-sqrt}
+# HINT: add 0.5 inside the square root
+f_sqrt <- lm(sqrt(larvae + ___) ~ rep + trt, data = larv)    # TODO
+anova(f_sqrt)
+```
+
+**After transforming, we must check the assumptions again:**
+
+```{r larvae-check}
+par(mfrow = c(1, 2)); plot(f_sqrt, which = 1:2); par(mfrow = c(1, 1))
+
+# HINT: the same test as before, now on the transformed response
+c(shapiro = shapiro.test(resid(f_sqrt))$p.value,
+  levene  = leveneTest(sqrt(larvae + 0.5) ~ ___, data = larv)$`Pr(>F)`[1])    # TODO
+# Levene's p-value should now be above 0.05 (about 0.10)
+```
+
+**Your findings:** do the assumptions hold now? Compare the residual plots before and after. Would a logarithm (`log(larvae + 1)`) also work? Try it by changing the formula. _...write here..._
+
+**Report in the original units.** The means of the transformed variable are back-transformed to larvae per plot:
+
+```{r larvae-means}
+library(emmeans)
+emmeans(f_sqrt, ~ trt, type = "response")
+```
+
+# Extra: the same ANOVA for the other designs
+
+If you have time. Every design has its own model (see the slides). Here we fit each one and compare the **residual variance** and the p-value of the genotypes.
+
+```{r designs}
+# CRD: ignore the blocks (the same wheat data, as if it were a completely randomized design)
+m_crd  <- lm(yield ~ Genotype, data = e7)
+# RCBD: the model of the first part
+m_rcbd <- fit
+
+# Alpha-lattice: oats, 24 varieties (john.alpha)
+data(john.alpha)
+# HINT: the block within replicate is written rep:block
+m_alpha <- lmer(yield ~ rep + (1 | rep:___) + gen, data = john.alpha)    # TODO
+
+res <- data.frame(
+  design = c("CRD (wheat)", "RCBD (wheat)", "Alpha-lattice (oats)"),
+  residual_variance = c(sigma(m_crd)^2, sigma(m_rcbd)^2, sigma(m_alpha)^2),
+  p_genotypes = c(anova(m_crd)["Genotype", "Pr(>F)"],
+                  anova(m_rcbd)["Genotype", "Pr(>F)"],
+                  anova(m_alpha)["gen", "Pr(>F)"]))
+res
+```
+
+**Your findings:** what happened to the residual variance of the wheat trial when we ignored the blocks (CRD)? _...write here..._

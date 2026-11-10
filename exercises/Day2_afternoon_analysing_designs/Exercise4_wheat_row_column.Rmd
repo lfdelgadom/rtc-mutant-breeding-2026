@@ -1,5 +1,5 @@
 ---
-title: "Exercise 4 (optional): a resolvable row-column design, Australian wheat"
+title: "Exercise 4 (homework, optional): a resolvable row-column design, Australian wheat"
 author: "[Your name]"
 date: "10 November 2026"
 output:

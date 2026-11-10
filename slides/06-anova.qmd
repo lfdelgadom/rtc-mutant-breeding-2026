@@ -74,6 +74,21 @@ em <- emmeans(fit_irr, ~ GEN)
 
 ------------------------------------------------------------------------
 
+## Before we start
+
+1.  Download: [**Day 2 afternoon exercises (ZIP)**](../downloads/Day2_afternoon_analysing_designs.zip)
+2.  Unzip it (do not work inside the ZIP) and open `Day2_afternoon.Rproj`
+3.  Run `00_install_packages.R` **once**, even if you did it this morning: it adds `agricolae`, `car` and `lmerTest`
+
+-   **13:30** `Exercise5_anova_and_assumptions.Rmd`: ANOVA, assumptions, transformation
+-   **15:00** `Exercise6_mean_comparison.Rmd`: LSD, Tukey, Duncan, Dunnett
+
+::: small-note
+Homework: Exercise 3 (john.alpha) and Exercise 4 (wheat row-column).
+:::
+
+------------------------------------------------------------------------
+
 ## Block 1 {.divider}
 
 The ANOVA of an RCBD
@@ -643,7 +658,7 @@ e7 <- durum |> filter(Environment == "loc07_year1") |>
   mutate(Genotype = relevel(Genotype, ref = "WAHA"))
 ```
 
-The solution is in the course manual, chapter 6.
+This is the practice of Exercise 5 and Exercise 6 in the ZIP, which guide you step by step. The solution is in the course manual, chapter 6.
 
 ------------------------------------------------------------------------
 

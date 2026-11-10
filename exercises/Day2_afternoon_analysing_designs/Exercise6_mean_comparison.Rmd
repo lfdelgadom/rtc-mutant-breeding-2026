@@ -1,0 +1,164 @@
+---
+title: "Exercise 6: mean comparison (LSD, Tukey, Duncan and Dunnett)"
+author: "[Your name]"
+date: "10 November 2026"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = TRUE,
+                      fig.width = 8, fig.height = 4.5)
+```
+
+> **How to use this file.** Run each grey box with the green triangle, from top to bottom. Replace the `___` in the lines marked `# TODO`; the `# HINT` line above tells you where to look. Every part says what result you should get, so you can check yourself. Write what you see in the **Your findings** boxes. Knit only at the end, if time allows.
+
+# Context
+
+The ANOVA of the durum wheat trial (`loc07_year1`, 24 genotypes, 4 blocks) says that **at least one genotype is different**. It does not say which. WAHA is a widely grown variety.
+
+**The breeder's question:** is any genotype better than WAHA, and by how much?
+
+Four procedures answer different questions: **LSD** controls nothing (5% in every pair), **Duncan** is in between but has no control of the error of all comparisons, **Tukey** controls the error of all pairs together, and **Dunnett** controls the error of the comparisons with one control.
+
+```{r packages}
+library(dplyr)
+library(ggplot2)
+library(agricolae)
+library(emmeans)
+```
+
+```{r data}
+durum <- read.csv("data/Durum_wheat_Algeria.csv")
+e7 <- durum %>%
+  filter(Environment == "loc07_year1") %>%
+  mutate(Genotype = relevel(factor(Genotype), ref = "WAHA"),   # WAHA is the control
+         Block = factor(Block))
+
+fit <- lm(yield ~ Block + Genotype, data = e7)
+c(MSE = deviance(fit) / df.residual(fit), df = df.residual(fit))
+```
+
+# LSD
+
+```{r lsd}
+lsd <- LSD.test(fit, "Genotype", console = FALSE)
+lsd$statistics$LSD       # about 0.20 t/ha
+lsd$groups               # same letter = not significantly different
+```
+
+The LSD is `t x SED`. Check it by hand:
+
+```{r lsd-hand}
+mse <- deviance(fit) / df.residual(fit)
+r <- 4                                  # replicates (blocks)
+sed <- sqrt(2 * mse / r)
+
+# HINT: the t value uses the error degrees of freedom of the model (df.residual(fit))
+qt(0.975, ___) * sed                    # TODO: should match lsd$statistics$LSD
+2 * sed                                 # the approximation LSD = 2 x SED
+```
+
+**Your findings:** how many different letters (groups) does the LSD give? Is `2 x SED` close to the exact LSD? _...write here..._
+
+# Tukey
+
+```{r tukey}
+# HINT: the same call as LSD.test, with HSD.test
+tk <- HSD.test(fit, "___", console = FALSE)    # TODO: the factor to compare is Genotype
+tk$statistics$MSD        # minimum significant difference, about 0.38 t/ha
+tk$groups
+```
+
+**Your findings:** why is the Tukey difference larger than the LSD? How many groups now? _...write here..._
+
+# Duncan
+
+```{r duncan}
+dn <- duncan.test(fit, "Genotype", console = FALSE)
+dn$groups
+```
+
+**Your findings:** is the number of groups between LSD and Tukey? Duncan is common in papers, but it does not control the error of all comparisons: read its letters as screening. _...write here..._
+
+# The three procedures side by side
+
+```{r side-by-side}
+n_groups <- function(x) length(unique(x$groups$groups))
+data.frame(procedure = c("LSD", "Duncan", "Tukey"),
+           groups = c(n_groups(lsd), n_groups(dn), n_groups(tk)),
+           min_difference = c(lsd$statistics$LSD, NA, tk$statistics$MSD))
+# You should get 12, 9 and 3 groups
+```
+
+```{r pairs}
+em <- emmeans(fit, ~ Genotype)
+n_pairs <- nrow(as.data.frame(pairs(em)))            # 24 genotypes: 276 pairs
+c(pairs = n_pairs,
+  unadjusted = sum(as.data.frame(pairs(em, adjust = "none"))$p.value < 0.05),
+  tukey      = sum(as.data.frame(pairs(em, adjust = "tukey"))$p.value < 0.05))
+```
+
+**Your findings:** how many pairs are called different without protection and with Tukey? With 276 pairs and no real differences, how many false positives would we expect at 5%? _...write here..._
+
+# Dunnett: genotypes against WAHA
+
+```{r dunnett}
+# HINT: WAHA is the first level of Genotype (we put it first with relevel)
+dun <- summary(contrast(em, method = "trt.vs.ctrl", ref = ___), infer = TRUE)    # TODO
+dun %>% select(contrast, estimate, SE, lower.CL, upper.CL, p.value) %>%
+  mutate(across(where(is.numeric), \(x) round(x, 3)))
+```
+
+```{r protected}
+unadj <- summary(contrast(em, "trt.vs.ctrl", ref = 1), adjust = "none")
+c(unadjusted = sum(unadj$p.value < 0.05), dunnett = sum(dun$p.value < 0.05))
+# You should get 8 without protection and 3 with Dunnett
+```
+
+```{r dunnett-plot}
+dun %>% mutate(contrast = reorder(contrast, estimate)) %>%
+  ggplot(aes(estimate, contrast)) + geom_vline(xintercept = 0, linetype = 2) +
+  geom_pointrange(aes(xmin = lower.CL, xmax = upper.CL)) +
+  labs(x = "Difference to WAHA (t/ha)", y = NULL)
+```
+
+**Your findings:** which genotypes are higher than WAHA, once the 23 comparisons are protected? How many would the unprotected tests have declared? _...write here..._
+
+# Statistical and practical significance
+
+A difference can be significant and still too small to matter. Express the best genotype as a percentage of WAHA:
+
+```{r percent}
+mean_waha <- mean(e7$yield[e7$Genotype == "WAHA"])
+
+best <- dun %>% slice_max(estimate, n = 1)
+best$contrast
+
+# HINT: percentage = 100 x difference / mean of WAHA (the same for the limits of the interval)
+100 * c(estimate = best$estimate, lower = best$lower.CL, upper = best$upper.CL) / ___    # TODO
+# You should get about 45% (interval about 12% to 77%)
+```
+
+**Your findings:** by what percentage is the best genotype above WAHA? Does the interval stay above 10%? What would the breeder decide? _...write here..._
+
+# Extra: comparing means after a transformation
+
+In Exercise 5 the larvae counts needed a square root. The comparison is done on the transformed scale and then reported in the original units. T9 is the untreated control:
+
+```{r larvae}
+library(agridat)
+data(gomez.nonnormal1)
+larv <- gomez.nonnormal1
+f_sqrt <- lm(sqrt(larvae + 0.5) ~ rep + trt, data = larv)
+
+em_l <- emmeans(f_sqrt, ~ trt)
+summary(contrast(em_l, "trt.vs.ctrl", ref = 9), infer = TRUE) %>%
+  select(contrast, estimate, lower.CL, upper.CL, p.value)
+# Only one treatment (T7) is clearly different from the control
+```
+
+**Your findings:** which insecticides reduce the larvae compared with the control, with the protection of Dunnett? The estimates are on the square-root scale; what does that mean for the interpretation? _...write here..._
