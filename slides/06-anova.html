@@ -221,43 +221,32 @@ Luis Fernando Delgado Muñoz
 <h2>Plan for the afternoon</h2>
 <table class="caption-top">
 <colgroup>
+<col style="width: 20%">
+<col style="width: 55%">
 <col style="width: 23%">
-<col style="width: 76%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Block</th>
+<th>Time</th>
 <th>Topic</th>
+<th>Practice</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td>The ANOVA of an RCBD: partition of the variation, by hand</td>
+<td>13:30</td>
+<td>ANOVA of an RCBD and its assumptions</td>
+<td><strong>Exercise 5</strong></td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td>Assumptions: residual diagnostics and transformations</td>
+<td>15:00</td>
+<td>Comparing means: LSD, Tukey, Duncan, <strong>Dunnett</strong></td>
+<td><strong>Exercise 6</strong></td>
 </tr>
 <tr class="odd">
-<td>3</td>
-<td>Comparing means: LSD, Tukey and <strong>Dunnett against a control</strong></td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td><strong>Statistical vs practical significance</strong></td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Augmented designs and several environments</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td><strong>Identifying superior genotypes</strong>: from significance to selection, pitfalls</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td>Exercise on durum wheat, discussion and Q&amp;A</td>
+<td>16:15</td>
+<td><strong>Statistical vs practical significance</strong> and the decision</td>
+<td>discussion</td>
 </tr>
 </tbody>
 </table>
@@ -280,10 +269,7 @@ Luis Fernando Delgado Muñoz
 <p>Homework: Exercise 3 (john.alpha) and Exercise 4 (wheat row-column).</p>
 </div>
 </section>
-<section id="block-1" class="slide level2 divider">
-<h2>Block 1</h2>
-<p>The ANOVA of an RCBD</p>
-</section>
+
 <section id="our-data-durum-wheat-in-algeria" class="slide level2">
 <h2>Our data: durum wheat in Algeria</h2>
 <ul>
@@ -334,37 +320,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>F genotype = ratio of the variance among genotype means to the error variance. If all genotypes were equal, F would be near 1.</p>
 </div>
 </section>
-<section id="the-same-table-by-hand" class="slide level2">
-<h2>The same table, by hand</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-label="1"></a>y <span class="ot">&lt;-</span> e10<span class="sc">$</span>yield; mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
-<span id="cb6-2"><a href="" aria-label="2"></a>b <span class="ot">&lt;-</span> <span class="fu">nlevels</span>(e10<span class="sc">$</span>Block); g <span class="ot">&lt;-</span> <span class="fu">nlevels</span>(e10<span class="sc">$</span>Genotype)</span>
-<span id="cb6-3"><a href="" aria-label="3"></a></span>
-<span id="cb6-4"><a href="" aria-label="4"></a>ss_total <span class="ot">&lt;-</span> <span class="fu">sum</span>((y <span class="sc">-</span> mu)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb6-5"><a href="" aria-label="5"></a>ss_block <span class="ot">&lt;-</span> g <span class="sc">*</span> <span class="fu">sum</span>((<span class="fu">tapply</span>(y, e10<span class="sc">$</span>Block, mean) <span class="sc">-</span> mu)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb6-6"><a href="" aria-label="6"></a>ss_geno  <span class="ot">&lt;-</span> b <span class="sc">*</span> <span class="fu">sum</span>((<span class="fu">tapply</span>(y, e10<span class="sc">$</span>Genotype, mean) <span class="sc">-</span> mu)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb6-7"><a href="" aria-label="7"></a>ss_error <span class="ot">&lt;-</span> ss_total <span class="sc">-</span> ss_block <span class="sc">-</span> ss_geno</span>
-<span id="cb6-8"><a href="" aria-label="8"></a></span>
-<span id="cb6-9"><a href="" aria-label="9"></a><span class="fu">data.frame</span>(<span class="at">source =</span> <span class="fu">c</span>(<span class="st">"Block"</span>, <span class="st">"Genotype"</span>, <span class="st">"Error"</span>, <span class="st">"Total"</span>),</span>
-<span id="cb6-10"><a href="" aria-label="10"></a>           <span class="at">df =</span> <span class="fu">c</span>(b <span class="sc">-</span> <span class="dv">1</span>, g <span class="sc">-</span> <span class="dv">1</span>, (b <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> (g <span class="sc">-</span> <span class="dv">1</span>), b <span class="sc">*</span> g <span class="sc">-</span> <span class="dv">1</span>),</span>
-<span id="cb6-11"><a href="" aria-label="11"></a>           <span class="at">SS =</span> <span class="fu">round</span>(<span class="fu">c</span>(ss_block, ss_geno, ss_error, ss_total), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    source df     SS
-1    Block  3  3.936
-2 Genotype 23  5.448
-3    Error 69  4.391
-4    Total 95 13.775</code></pre>
-</div>
-</div>
-<p>Report always: the <strong>residual mean square</strong>, the <strong>CV</strong> and the <strong>residual df</strong>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-label="1"></a><span class="fu">c</span>(<span class="at">MSE =</span> <span class="fu">deviance</span>(fit) <span class="sc">/</span> <span class="fu">df.residual</span>(fit), <span class="at">CV =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">sigma</span>(fit) <span class="sc">/</span> mu, <span class="at">df =</span> <span class="fu">df.residual</span>(fit))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        MSE          CV          df 
- 0.06363534 15.63406080 69.00000000 </code></pre>
-</div>
-</div>
-</section>
+
 <section class="slide level2">
 
 <div class="keybox">
@@ -372,10 +328,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>For that we need the comparisons of means (Block 3).</p>
 </section>
-<section id="block-2" class="slide level2 divider">
-<h2>Block 2</h2>
-<p>Assumptions</p>
-</section>
+
 <section id="what-we-assume" class="slide level2">
 <h2>What we assume</h2>
 <p>The errors are <strong>independent</strong>, have <strong>equal variance</strong> for all genotypes, and are <strong>approximately normal</strong>.</p>
@@ -428,20 +381,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>The treatment with the highest mean has also the highest variance.</p>
 </section>
-<section id="the-square-root-stabilizes-the-variance" class="slide level2">
-<h2>The square root stabilizes the variance</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-label="1"></a>f_raw  <span class="ot">&lt;-</span> <span class="fu">lm</span>(count <span class="sc">~</span> block <span class="sc">+</span> trt, <span class="at">data =</span> worms)</span>
-<span id="cb18-2"><a href="" aria-label="2"></a>f_sqrt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">sqrt</span>(count) <span class="sc">~</span> block <span class="sc">+</span> trt, <span class="at">data =</span> worms)</span>
-<span id="cb18-3"><a href="" aria-label="3"></a><span class="fu">bind_rows</span>(</span>
-<span id="cb18-4"><a href="" aria-label="4"></a>  <span class="fu">data.frame</span>(<span class="at">scale =</span> <span class="st">"Raw count"</span>,   <span class="at">fitted =</span> <span class="fu">fitted</span>(f_raw),  <span class="at">resid =</span> <span class="fu">resid</span>(f_raw)),</span>
-<span id="cb18-5"><a href="" aria-label="5"></a>  <span class="fu">data.frame</span>(<span class="at">scale =</span> <span class="st">"Square root"</span>, <span class="at">fitted =</span> <span class="fu">fitted</span>(f_sqrt), <span class="at">resid =</span> <span class="fu">resid</span>(f_sqrt))) <span class="sc">|&gt;</span></span>
-<span id="cb18-6"><a href="" aria-label="6"></a>  <span class="fu">mutate</span>(<span class="at">scale =</span> <span class="fu">factor</span>(scale, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Raw count"</span>, <span class="st">"Square root"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb18-7"><a href="" aria-label="7"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(fitted, resid)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb18-8"><a href="" aria-label="8"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>scale, <span class="at">scales =</span> <span class="st">"free"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
-</div>
-<img data-src="06-anova_files/figure-revealjs/unnamed-chunk-8-1.png" width="864" class="r-stretch"></section>
 <section id="which-transformation" class="slide level2">
 <h2>Which transformation?</h2>
 <table class="caption-top">
@@ -471,10 +411,20 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </tbody>
 </table>
 </section>
-<section id="block-3" class="slide level2 divider">
-<h2>Block 3</h2>
-<p>Comparing means</p>
+<section id="your-turn-exercise-5" class="slide level2 scrollable">
+<h2>Your turn: Exercise 5</h2>
+<p>Open <code>Exercise5_anova_and_assumptions.Rmd</code> from the ZIP.</p>
+<ol type="1">
+<li>ANOVA of the RCBD (durum wheat, <code>loc07_year1</code>): MSE, CV and residual df</li>
+<li>Residual plots, Shapiro and Levene</li>
+<li>Larvae counts: fail, transform with the square root, <strong>check again</strong></li>
+<li>Extra: the same ANOVA for other designs</li>
+</ol>
+<div class="keybox">
+<p>Run each box, replace the <code>___</code>, write your findings. About 50 minutes.</p>
+</div>
 </section>
+
 <section id="a-rice-trial-with-a-control" class="slide level2">
 <h2>A rice trial with a control</h2>
 <ul>
@@ -538,48 +488,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </tbody>
 </table>
 </section>
-<section id="lsd-groups" class="slide level2">
-<h2>LSD groups</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="" aria-label="1"></a><span class="fu">LSD.test</span>(fit_irr, <span class="st">"GEN"</span>, <span class="at">console =</span> <span class="cn">FALSE</span>)<span class="sc">$</span>groups</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>              REND groups
-G4        9.666667      a
-G9        9.433333      a
-G6        9.200000     ab
-G1        8.700000    abc
-G3        8.166667   abcd
-centinela 7.933333    bcd
-G8        7.866667   bcde
-G2        7.300000   cdef
-G5        7.133333    def
-G7        6.600000     ef
-check     6.000000      f</code></pre>
-</div>
-</div>
-<p>Same letter = not significantly different. <code>G4</code> is separated from <strong>six</strong> genotypes by LSD.</p>
-</section>
-<section id="tukey-groups" class="slide level2">
-<h2>Tukey groups</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-label="1"></a><span class="fu">HSD.test</span>(fit_irr, <span class="st">"GEN"</span>, <span class="at">console =</span> <span class="cn">FALSE</span>)<span class="sc">$</span>groups</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>              REND groups
-G4        9.666667      a
-G9        9.433333      a
-G6        9.200000      a
-G1        8.700000     ab
-G3        8.166667    abc
-centinela 7.933333    abc
-G8        7.866667    abc
-G2        7.300000    abc
-G5        7.133333    abc
-G7        6.600000     bc
-check     6.000000      c</code></pre>
-</div>
-</div>
-<p>Tukey separates <code>G4</code> from only <strong>two</strong> genotypes (<code>G7</code> and the check): protected against the 55 comparisons.</p>
-</section>
+
+
 <section id="duncan-common-but-weakly-protected" class="slide level2">
 <h2>Duncan: common, but weakly protected</h2>
 <div class="cell">
@@ -638,14 +548,21 @@ check     6.000000      e</code></pre>
 </div>
 <p>Without protection, <strong>4 of 10</strong> lines look different from the control. Dunnett confirms <strong>one</strong> (the check, lower than the parent).</p>
 </section>
-<section id="differences-to-the-control" class="slide level2">
-<h2>Differences to the control</h2>
 
-<img data-src="06-anova_files/figure-revealjs/unnamed-chunk-16-1.png" width="864" class="r-stretch"></section>
-<section id="block-4" class="slide level2 divider">
-<h2>Block 4</h2>
-<p>Statistical vs practical significance</p>
+<section id="your-turn-exercise-6" class="slide level2 scrollable">
+<h2>Your turn: Exercise 6</h2>
+<p>Open <code>Exercise6_mean_comparison.Rmd</code> from the ZIP.</p>
+<ol type="1">
+<li><strong>LSD</strong> by hand and with <code>agricolae</code>; <strong>Tukey</strong>; <strong>Duncan</strong></li>
+<li>Compare the number of groups and of significant pairs</li>
+<li><strong>Dunnett</strong> against <code>WAHA</code>: which genotypes are higher?</li>
+<li>The best genotype as % of <code>WAHA</code>, with its interval</li>
+</ol>
+<div class="keybox">
+<p>Same file structure as Exercise 5. About 55 minutes.</p>
+</div>
 </section>
+
 <section id="three-numbers-read-together" class="slide level2">
 <h2>Three numbers, read together</h2>
 <ul>
@@ -687,118 +604,13 @@ check     6.000000      e</code></pre>
 </div>
 <p>With 3 replicates and CV 11%, differences below about <strong>1.5 t/ha (19%)</strong> cannot be confirmed.</p>
 </section>
-<section id="block-5" class="slide level2 divider">
-<h2>Block 5</h2>
-<p>Augmented designs and several environments</p>
-</section>
-<section id="augmented-design-the-error-comes-from-the-checks" class="slide level2">
-<h2>Augmented design: the error comes from the checks</h2>
-<p>Real meadowfoam trial: 50 new lines (1 plot) + 3 checks in every one of 6 blocks (<code>kling.augmented</code>).</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-label="1"></a>aug <span class="ot">&lt;-</span> kling.augmented <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">gen =</span> <span class="fu">droplevels</span>(gen))</span>
-<span id="cb37-2"><a href="" aria-label="2"></a>fit_aug <span class="ot">&lt;-</span> <span class="fu">lm</span>(tsw <span class="sc">~</span> block <span class="sc">+</span> gen, <span class="at">data =</span> aug)</span>
-<span id="cb37-3"><a href="" aria-label="3"></a><span class="fu">anova</span>(fit_aug)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Variance Table
 
-Response: tsw
-          Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
-block      5  1.7112 0.34224  4.9028 0.0158408 *  
-gen       52 27.5185 0.52920  7.5811 0.0007876 ***
-Residuals 10  0.6981 0.06981                      
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-</div>
-<ul>
-<li>Same model as an RCBD, fitted with <code>lm()</code></li>
-<li>Residual df = (6 - 1) x (3 - 1) = <strong>10</strong>: only the checks estimate the error</li>
-<li>New lines are <strong>adjusted for blocks</strong> (<code>emmeans</code>)</li>
-</ul>
-</section>
-<section id="precision-depends-on-the-comparison" class="slide level2">
-<h2>Precision depends on the comparison</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-label="1"></a>em_aug <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit_aug, <span class="sc">~</span> gen)</span>
-<span id="cb39-2"><a href="" aria-label="2"></a>chk <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"G89"</span>, <span class="st">"G90"</span>, <span class="st">"G91"</span>)</span>
-<span id="cb39-3"><a href="" aria-label="3"></a>pw <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">pairs</span>(em_aug, <span class="at">adjust =</span> <span class="st">"none"</span>))</span>
-<span id="cb39-4"><a href="" aria-label="4"></a>pw<span class="sc">$</span>a <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">" - .*"</span>, <span class="st">""</span>, pw<span class="sc">$</span>contrast); pw<span class="sc">$</span>b <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">".* - "</span>, <span class="st">""</span>, pw<span class="sc">$</span>contrast)</span>
-<span id="cb39-5"><a href="" aria-label="5"></a>pw<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">case_when</span>(pw<span class="sc">$</span>a <span class="sc">%in%</span> chk <span class="sc">&amp;</span> pw<span class="sc">$</span>b <span class="sc">%in%</span> chk <span class="sc">~</span> <span class="st">"check vs check"</span>,</span>
-<span id="cb39-6"><a href="" aria-label="6"></a>                     pw<span class="sc">$</span>a <span class="sc">%in%</span> chk <span class="sc">|</span> pw<span class="sc">$</span>b <span class="sc">%in%</span> chk <span class="sc">~</span> <span class="st">"new vs check"</span>,</span>
-<span id="cb39-7"><a href="" aria-label="7"></a>                     <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"new vs new"</span>)</span>
-<span id="cb39-8"><a href="" aria-label="8"></a>pw <span class="sc">|&gt;</span> <span class="fu">group_by</span>(type) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">SED =</span> <span class="fu">round</span>(<span class="fu">mean</span>(SE), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  type             SED
-  &lt;chr&gt;          &lt;dbl&gt;
-1 check vs check 0.153
-2 new vs check   0.318
-3 new vs new     0.422</code></pre>
-</div>
-</div>
-<p>For selection, compare new lines with the <strong>checks</strong> and remember the large SED between two unreplicated lines.</p>
-</section>
-<section id="two-water-regimes-rice" class="slide level2">
-<h2>Two water regimes (rice)</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-label="1"></a><span class="fu">anova</span>(<span class="fu">lm</span>(REND <span class="sc">~</span> env <span class="sc">/</span> Bloq <span class="sc">+</span> GEN <span class="sc">*</span> env, <span class="at">data =</span> rice))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Variance Table
 
-Response: REND
-          Df  Sum Sq Mean Sq  F value    Pr(&gt;F)    
-env        1 228.267 228.267 390.4503 &lt; 2.2e-16 ***
-GEN       10  63.909   6.391  10.9315  3.24e-09 ***
-env:Bloq   4   2.349   0.587   1.0044    0.4150    
-env:GEN   10   7.789   0.779   1.3322    0.2424    
-Residuals 46  26.893   0.585                       
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-</div>
-<p>Environment dominates. Genotypes differ. <strong>G x E not significant</strong> (p = 0.24): similar ranking under irrigation and drought.</p>
-</section>
-<section id="environments-durum-wheat" class="slide level2">
-<h2>22 environments (durum wheat)</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-label="1"></a>fit_met <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> Environment <span class="sc">/</span> Block <span class="sc">+</span> Genotype <span class="sc">*</span> Environment, <span class="at">data =</span> durum)</span>
-<span id="cb43-2"><a href="" aria-label="2"></a>a <span class="ot">&lt;-</span> <span class="fu">anova</span>(fit_met); a</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Variance Table
 
-Response: yield
-                       Df Sum Sq Mean Sq  F value    Pr(&gt;F)    
-Environment            21 935.95  44.569 537.1651 &lt; 2.2e-16 ***
-Genotype               23  80.84   3.515  42.3627 &lt; 2.2e-16 ***
-Environment:Block      66 117.69   1.783  21.4909 &lt; 2.2e-16 ***
-Environment:Genotype  483 151.66   0.314   3.7845 &lt; 2.2e-16 ***
-Residuals            1518 125.95   0.083                       
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-</div>
-<p>Genotypes are tested against <strong>G x E</strong>, not the residual: environments are a sample.</p>
-</section>
-<section id="variance-components-from-the-mean-squares" class="slide level2">
-<h2>Variance components from the mean squares</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-label="1"></a>ms <span class="ot">&lt;-</span> <span class="fu">setNames</span>(a<span class="sc">$</span><span class="st">`</span><span class="at">Mean Sq</span><span class="st">`</span>, <span class="fu">rownames</span>(a)); r <span class="ot">&lt;-</span> <span class="dv">4</span>; e <span class="ot">&lt;-</span> <span class="dv">22</span></span>
-<span id="cb45-2"><a href="" aria-label="2"></a><span class="fu">round</span>(<span class="fu">c</span>(<span class="at">genotype =</span> <span class="fu">unname</span>((ms[<span class="st">"Genotype"</span>] <span class="sc">-</span> ms[<span class="st">"Environment:Genotype"</span>]) <span class="sc">/</span> (r <span class="sc">*</span> e)),</span>
-<span id="cb45-3"><a href="" aria-label="3"></a>        <span class="at">GxE      =</span> <span class="fu">unname</span>((ms[<span class="st">"Environment:Genotype"</span>] <span class="sc">-</span> ms[<span class="st">"Residuals"</span>]) <span class="sc">/</span> r),</span>
-<span id="cb45-4"><a href="" aria-label="4"></a>        <span class="at">error    =</span> <span class="fu">unname</span>(ms[<span class="st">"Residuals"</span>])), <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>genotype      GxE    error 
-  0.0364   0.0578   0.0830 </code></pre>
-</div>
-</div>
-<div class="keybox">
-<p><strong>G x E variance &gt; genotype variance:</strong> one environment is not enough to choose lines. This leads to mixed models (chapter 7) and G x E (chapter 10).</p>
-</div>
-</section>
-<section id="block-6" class="slide level2 divider">
-<h2>Block 6</h2>
-<p>Identifying superior genotypes</p>
-</section>
+
+
+
+
 <section id="a-decision-rule-written-before-the-trial" class="slide level2 scrollable">
 <h2>A decision rule, written before the trial</h2>
 <ol type="1">
@@ -843,111 +655,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </tbody>
 </table>
 </section>
-<section id="classify-the-lines-rice-two-regimes" class="slide level2">
-<h2>Classify the lines (rice, two regimes)</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-label="1"></a>classify <span class="ot">&lt;-</span> <span class="cf">function</span>(d, env_name) {</span>
-<span id="cb47-2"><a href="" aria-label="2"></a>  fit  <span class="ot">&lt;-</span> <span class="fu">lm</span>(REND <span class="sc">~</span> Bloq <span class="sc">+</span> GEN, <span class="at">data =</span> d)</span>
-<span id="cb47-3"><a href="" aria-label="3"></a>  em   <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(fit, <span class="sc">~</span> GEN)</span>
-<span id="cb47-4"><a href="" aria-label="4"></a>  ctrl <span class="ot">&lt;-</span> <span class="fu">summary</span>(em)<span class="sc">$</span>emmean[<span class="dv">1</span>]</span>
-<span id="cb47-5"><a href="" aria-label="5"></a>  <span class="fu">summary</span>(<span class="fu">contrast</span>(em, <span class="st">"trt.vs.ctrl"</span>, <span class="at">ref =</span> <span class="dv">1</span>), <span class="at">infer =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb47-6"><a href="" aria-label="6"></a>    <span class="fu">mutate</span>(<span class="at">env =</span> env_name, <span class="at">line =</span> <span class="fu">sub</span>(<span class="st">" - centinela"</span>, <span class="st">""</span>, contrast),</span>
-<span id="cb47-7"><a href="" aria-label="7"></a>           <span class="at">pct =</span> <span class="dv">100</span> <span class="sc">*</span> estimate <span class="sc">/</span> ctrl,</span>
-<span id="cb47-8"><a href="" aria-label="8"></a>           <span class="at">pct_lower =</span> <span class="dv">100</span> <span class="sc">*</span> lower.CL <span class="sc">/</span> ctrl, <span class="at">pct_upper =</span> <span class="dv">100</span> <span class="sc">*</span> upper.CL <span class="sc">/</span> ctrl,</span>
-<span id="cb47-9"><a href="" aria-label="9"></a>           <span class="at">class =</span> <span class="fu">case_when</span>(lower.CL <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"confirmed superior"</span>,</span>
-<span id="cb47-10"><a href="" aria-label="10"></a>                             upper.CL <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"confirmed inferior"</span>,</span>
-<span id="cb47-11"><a href="" aria-label="11"></a>                             pct <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">"promising"</span>, <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"not different"</span>))</span>
-<span id="cb47-12"><a href="" aria-label="12"></a>}</span>
-<span id="cb47-13"><a href="" aria-label="13"></a>sel <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">classify</span>(<span class="fu">filter</span>(rice, env <span class="sc">==</span> <span class="st">"Irrigated"</span>), <span class="st">"Irrigated"</span>),</span>
-<span id="cb47-14"><a href="" aria-label="14"></a>                 <span class="fu">classify</span>(<span class="fu">filter</span>(rice, env <span class="sc">==</span> <span class="st">"Drought"</span>), <span class="st">"Drought"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="gain-over-the-parent-with-the-class" class="slide level2">
-<h2>Gain over the parent, with the class</h2>
 
-<img data-src="06-anova_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section>
-<section id="what-the-figure-says" class="slide level2">
-<h2>What the figure says</h2>
-<ul>
-<li><strong>G9 and G4:</strong> promising under irrigation (+19%, +22%), <strong>confirmed superior under drought</strong> (+34%, +32%). Same direction in two environments: first candidates to advance</li>
-<li><strong>G8:</strong> confirmed superior under drought (+43%), equal to the parent under irrigation. A candidate for drought-prone sites</li>
-<li><strong>G6:</strong> promising in both, not confirmed in either: retest</li>
-<li><strong>Check:</strong> confirmed inferior under irrigation</li>
-</ul>
-<div class="keybox">
-<p>The same direction in <strong>more than one environment</strong> is stronger evidence than a p-value in one.</p>
-</div>
-</section>
-<section id="superior-everywhere-durum-22-environments" class="slide level2">
-<h2>Superior everywhere? Durum, 22 environments</h2>
-<p>Dunnett against <code>WAHA</code> <strong>in each environment</strong>, then count.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="" aria-label="1"></a>durum_w <span class="ot">&lt;-</span> durum <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Genotype =</span> <span class="fu">relevel</span>(Genotype, <span class="at">ref =</span> <span class="st">"WAHA"</span>))</span>
-<span id="cb48-2"><a href="" aria-label="2"></a>vs_waha <span class="ot">&lt;-</span> durum_w <span class="sc">|&gt;</span> <span class="fu">group_split</span>(Environment) <span class="sc">|&gt;</span></span>
-<span id="cb48-3"><a href="" aria-label="3"></a>  <span class="fu">lapply</span>(<span class="cf">function</span>(e) {</span>
-<span id="cb48-4"><a href="" aria-label="4"></a>    f <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> Block <span class="sc">+</span> Genotype, <span class="at">data =</span> e); em <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(f, <span class="sc">~</span> Genotype)</span>
-<span id="cb48-5"><a href="" aria-label="5"></a>    s <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">summary</span>(<span class="fu">contrast</span>(em, <span class="st">"trt.vs.ctrl"</span>, <span class="at">ref =</span> <span class="dv">1</span>)))</span>
-<span id="cb48-6"><a href="" aria-label="6"></a>    s<span class="sc">$</span>Environment <span class="ot">&lt;-</span> e<span class="sc">$</span>Environment[<span class="dv">1</span>]; s<span class="sc">$</span>waha <span class="ot">&lt;-</span> <span class="fu">summary</span>(em)<span class="sc">$</span>emmean[<span class="dv">1</span>]; s }) <span class="sc">|&gt;</span></span>
-<span id="cb48-7"><a href="" aria-label="7"></a>  <span class="fu">bind_rows</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">line =</span> <span class="fu">gsub</span>(<span class="st">"[()]"</span>, <span class="st">""</span>, <span class="fu">sub</span>(<span class="st">" - WAHA$"</span>, <span class="st">""</span>, contrast)))</span>
-<span id="cb48-8"><a href="" aria-label="8"></a>consistency <span class="ot">&lt;-</span> vs_waha <span class="sc">|&gt;</span> <span class="fu">group_by</span>(line) <span class="sc">|&gt;</span></span>
-<span id="cb48-9"><a href="" aria-label="9"></a>  <span class="fu">summarise</span>(<span class="at">better_in =</span> <span class="fu">sum</span>(estimate <span class="sc">&gt;</span> <span class="dv">0</span>),</span>
-<span id="cb48-10"><a href="" aria-label="10"></a>            <span class="at">sig_higher =</span> <span class="fu">sum</span>(p.value <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> estimate <span class="sc">&gt;</span> <span class="dv">0</span>),</span>
-<span id="cb48-11"><a href="" aria-label="11"></a>            <span class="at">sig_lower =</span> <span class="fu">sum</span>(p.value <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> estimate <span class="sc">&lt;</span> <span class="dv">0</span>),</span>
-<span id="cb48-12"><a href="" aria-label="12"></a>            <span class="at">mean_gain_pct =</span> <span class="fu">round</span>(<span class="fu">mean</span>(<span class="dv">100</span> <span class="sc">*</span> estimate <span class="sc">/</span> waha), <span class="dv">1</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb48-13"><a href="" aria-label="13"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(better_in), <span class="fu">desc</span>(sig_higher))</span>
-<span id="cb48-14"><a href="" aria-label="14"></a><span class="fu">head</span>(consistency, <span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 5
-  line     better_in sig_higher sig_lower mean_gain_pct
-  &lt;chr&gt;        &lt;int&gt;      &lt;int&gt;     &lt;int&gt;         &lt;dbl&gt;
-1 GTADUR          16          2         2           9.2
-2 CHENS           15          2         1           6.8
-3 SIMETO          13          2         3           3.2
-4 SAHEL77         12          5         2           5.9
-5 B.DUR194        12          2         3           4  
-6 OFANTO          12          2         2           3.2</code></pre>
-</div>
-</div>
-</section>
-<section id="no-line-beats-waha-everywhere" class="slide level2">
-<h2>No line beats WAHA everywhere</h2>
-<ul>
-<li>Best line, <code>GTADUR</code>: above <code>WAHA</code> in <strong>16 of 22</strong> environments, average gain <strong>+9%</strong>, significantly higher in 2 and <strong>significantly lower in 2</strong></li>
-<li><code>OFANTO</code>: <strong>+45%</strong> in <code>loc07_year1</code> (the exercise), but only <strong>+3%</strong> on average over 22 environments</li>
-</ul>
-<div class="keybox">
-<p>One environment can show a spectacular difference that the rest do not confirm.</p>
-</div>
-</section>
-<section id="selection-bias-winners-curse" class="slide level2">
-<h2>Selection bias (winner’s curse)</h2>
-<p>The best lines <strong>because</strong> they were the best include a part of luck. Select the 3 best in each environment; compare with their performance in the other 21.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="" aria-label="1"></a>env_means <span class="ot">&lt;-</span> durum <span class="sc">|&gt;</span> <span class="fu">group_by</span>(Environment, Genotype) <span class="sc">|&gt;</span></span>
-<span id="cb50-2"><a href="" aria-label="2"></a>  <span class="fu">summarise</span>(<span class="at">y =</span> <span class="fu">mean</span>(yield), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb50-3"><a href="" aria-label="3"></a>  <span class="fu">group_by</span>(Environment) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">dev =</span> y <span class="sc">-</span> <span class="fu">mean</span>(y)) <span class="sc">|&gt;</span> <span class="fu">ungroup</span>()</span>
-<span id="cb50-4"><a href="" aria-label="4"></a>bias <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">lapply</span>(<span class="fu">unique</span>(env_means<span class="sc">$</span>Environment), <span class="cf">function</span>(en) {</span>
-<span id="cb50-5"><a href="" aria-label="5"></a>  top <span class="ot">&lt;-</span> env_means <span class="sc">|&gt;</span> <span class="fu">filter</span>(Environment <span class="sc">==</span> en) <span class="sc">|&gt;</span> <span class="fu">slice_max</span>(y, <span class="at">n =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(Genotype)</span>
-<span id="cb50-6"><a href="" aria-label="6"></a>  <span class="fu">data.frame</span>(<span class="at">where_selected =</span> <span class="fu">mean</span>(env_means<span class="sc">$</span>dev[env_means<span class="sc">$</span>Environment <span class="sc">==</span> en <span class="sc">&amp;</span> env_means<span class="sc">$</span>Genotype <span class="sc">%in%</span> top]),</span>
-<span id="cb50-7"><a href="" aria-label="7"></a>             <span class="at">other_envs =</span> <span class="fu">mean</span>(env_means<span class="sc">$</span>dev[env_means<span class="sc">$</span>Environment <span class="sc">!=</span> en <span class="sc">&amp;</span> env_means<span class="sc">$</span>Genotype <span class="sc">%in%</span> top]))</span>
-<span id="cb50-8"><a href="" aria-label="8"></a>}))</span>
-<span id="cb50-9"><a href="" aria-label="9"></a><span class="fu">colMeans</span>(bias)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>where_selected     other_envs 
-     0.4800213      0.1483397 </code></pre>
-</div>
-</div>
-</section>
-<section id="about-two-thirds-of-the-advantage-disappears" class="slide level2">
-<h2>About two thirds of the advantage disappears</h2>
-<p>Advantage over the environment mean: <strong>+0.48 t/ha</strong> where selected, <strong>+0.15 t/ha</strong> in the other environments.</p>
-<p>Still above average elsewhere in 91% of the cases: the selection is useful, but the gain you see at selection is <strong>not</strong> the gain you will get.</p>
-<ul>
-<li>Select <strong>more lines than you need</strong> at the first stage</li>
-<li>Use adjusted means and intervals, not the raw ranking</li>
-<li>Confirm in other environments or seasons before releasing a line</li>
-</ul>
-</section>
+
+
+
+
+
+
 <section id="from-the-trial-to-the-decision" class="slide level2 scrollable">
 <h2>From the trial to the decision</h2>
 <ol type="1">
@@ -1001,62 +715,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </tbody>
 </table>
 </section>
-<section id="common-interpretation-pitfalls-2" class="slide level2">
-<h2>Common interpretation pitfalls (2)</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 39%">
-<col style="width: 60%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Pitfall</th>
-<th>What to do</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Skipping the residual diagnostics</td>
-<td>Check funnel and outliers first</td>
-</tr>
-<tr class="even">
-<td>Transforming and not going back</td>
-<td>Back-transform means, or model counts directly</td>
-</tr>
-<tr class="odd">
-<td>Subsamples treated as replicates (pseudoreplication)</td>
-<td>One value per plot</td>
-</tr>
-<tr class="even">
-<td>Missing plots ignored</td>
-<td>Use adjusted means (<code>emmeans</code>)</td>
-</tr>
-<tr class="odd">
-<td>One p-value as the decision</td>
-<td>Size + interval + smallest gain that matters</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="block-7" class="slide level2 divider">
-<h2>Block 7</h2>
-<p>Exercise</p>
-</section>
-<section id="exercise-durum-wheat-loc07_year1" class="slide level2 scrollable">
-<h2>Exercise: durum wheat, <code>loc07_year1</code></h2>
-<ol type="1">
-<li>Fit the RCBD and write the ANOVA table. CV and residual df?</li>
-<li>Check the assumptions (residual plot, QQ plot, Levene)</li>
-<li>LSD at 5% and Tukey groups</li>
-<li>Dunnett against <code>WAHA</code> (widely grown variety). Which genotypes are higher? How many would unadjusted tests declare?</li>
-<li>Express the best genotype as % of <code>WAHA</code>, with its interval. Is it above 10%?</li>
-</ol>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="" aria-label="1"></a>e7 <span class="ot">&lt;-</span> durum <span class="sc">|&gt;</span> <span class="fu">filter</span>(Environment <span class="sc">==</span> <span class="st">"loc07_year1"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb52-2"><a href="" aria-label="2"></a>  <span class="fu">mutate</span>(<span class="at">Genotype =</span> <span class="fu">relevel</span>(Genotype, <span class="at">ref =</span> <span class="st">"WAHA"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>This is the practice of Exercise 5 and Exercise 6 in the ZIP, which guide you step by step. The solution is in the course manual, chapter 6.</p>
-</section>
+
+
+
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways</h2>
 <ul>
@@ -1070,16 +731,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>The advantage of selected lines <strong>shrinks</strong> in the next stage: select more than you need</li>
 </ul>
 </section>
-<section id="questions-for-discussion" class="slide level2 scrollable">
-<h2>Questions for discussion</h2>
-<ol type="1">
-<li>What is the <strong>reference</strong> a new line must beat in your program: the parent, a check, or both?</li>
-<li>What is the <strong>smallest gain</strong> that makes you advance a line? Is it the same for yield and for disease resistance?</li>
-<li>How many replicates and environments do you have in the first trials of a mutant population? What difference could you detect?</li>
-<li>How many lines do you advance between stages, knowing the selection bias?</li>
-<li>Which of the pitfalls have you met in your own data?</li>
-</ol>
-</section>
+
 <section id="resources" class="slide level2">
 <h2>Resources</h2>
 <ul>
