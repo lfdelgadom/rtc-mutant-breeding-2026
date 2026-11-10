@@ -361,6 +361,8 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#classical-designs" id="toc-classical-designs" class="nav-link" data-scroll-target="#classical-designs"><span class="header-section-number">5.3.1</span> Classical designs</a></li>
   <li><a href="#designs-with-incomplete-blocks" id="toc-designs-with-incomplete-blocks" class="nav-link" data-scroll-target="#designs-with-incomplete-blocks"><span class="header-section-number">5.3.2</span> Designs with incomplete blocks</a></li>
+  <li><a href="#alpha-lattice-in-plain-words" id="toc-alpha-lattice-in-plain-words" class="nav-link" data-scroll-target="#alpha-lattice-in-plain-words"><span class="header-section-number">5.3.3</span> Alpha-lattice in plain words</a></li>
+  <li><a href="#variance-residual-variance-and-sed" id="toc-variance-residual-variance-and-sed" class="nav-link" data-scroll-target="#variance-residual-variance-and-sed"><span class="header-section-number">5.3.4</span> Variance, residual variance and SED</a></li>
   </ul></li>
   <li><a href="#comparing-designs-on-a-real-field" id="toc-comparing-designs-on-a-real-field" class="nav-link" data-scroll-target="#comparing-designs-on-a-real-field"><span class="header-section-number">5.4</span> Comparing designs on a real field</a>
   <ul class="collapse">
@@ -421,7 +423,8 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><a href="../slides/05-experimental-designs.html" target="_blank">Open the slides of Day 2, Experimental designs</a></p>
+<p><a href="../slides/05-experimental-designs.html" target="_blank">Morning: experimental designs</a><br>
+<a href="../slides/05b-analysing-designs.html" target="_blank">Afternoon: analysing designs</a></p>
 </div>
 </div>
 <section id="learning-objectives" class="level2" data-number="5.1">
@@ -440,8 +443,10 @@ window.Quarto = {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agridat)    <span class="co"># install.packages("agridat") if needed</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FielDHub)   <span class="co"># install.packages("FielDHub") if needed</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/design_schematics.R"</span>)   <span class="co"># schematic layouts of each design</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agridat)    <span class="co"># install.packages("agridat") if needed</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FielDHub)   <span class="co"># install.packages("FielDHub") if needed</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="why-design-matters" class="level2" data-number="5.2">
@@ -597,6 +602,20 @@ Figure&nbsp;5.2: Mean yield of each column of the uniformity trial, coloured by 
 </tr>
 </tbody>
 </table>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-classical" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-classical-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-experimental-designs_files/figure-html/fig-classical-1.png" class="img-fluid figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-classical-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.3: Schematic layouts of the classical designs. Each box is a plot and the letters are genotypes. CRD: genotypes anywhere. RCBD: each block (here a row, outlined) has every genotype once. Augmented: checks A and B in every block, each new line (n) in one plot only.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <p>The RCBD was used in <a href="04-qc-eda.html" class="quarto-xref"><span>Chapter 4</span></a> for the Nebraska wheat trial (<code>stroup.nin</code>): 56 genotypes in blocks of 56 plots. Its low-yield corner was smaller than a block, so the blocks could not remove it. The augmented design was introduced in <a href="03-field-data.html" class="quarto-xref"><span>Chapter 3</span></a> with <code>kling.augmented</code>.</p>
 </section>
 <section id="designs-with-incomplete-blocks" class="level3" data-number="5.3.2">
@@ -637,9 +656,61 @@ Figure&nbsp;5.2: Mean yield of each column of the uniformity trial, coloured by 
 </tr>
 </tbody>
 </table>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-incomplete" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-incomplete-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-experimental-designs_files/figure-html/fig-incomplete-1.png" class="img-fluid figure-img" width="1056">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-incomplete-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.4: Schematic layouts of the designs with incomplete blocks. Numbers are entries. Thick black line: replicate. Thin blue line: incomplete block. Orange: one row and one column of the row-column designs. p-rep: dark plots are lines in two plots, light plots are lines in one plot.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <p><strong>Alpha-lattice</strong> (Patterson and Williams, 1976). Each replicate is divided into <span class="math inline">\(s\)</span> incomplete blocks of <span class="math inline">\(k\)</span> plots, so the number of genotypes is <span class="math inline">\(t = s \times k\)</span>. Each replicate contains all the genotypes. Pairs of genotypes occur together in a block once or never (an <span class="math inline">\(\alpha(0,1)\)</span> design), and the allocation is chosen to give the lowest average variance of the differences between genotypes. The bean trial of this course is an alpha-lattice: 380 lines in 2 replicates of 396 plots (16 checks appear twice in each replicate), each replicate with 18 blocks of 22 plots (11 rows by 2 columns).</p>
 <p><strong>Row-column designs</strong> block in two directions at the same time: every row and every column is an incomplete block. In the <strong>resolvable</strong> version, the field is first divided into complete replicates, and rows and columns are blocks <strong>within</strong> each replicate. Randomization is not simple, because the design must be balanced in both directions; software such as FielDHub searches for a good allocation.</p>
 <p><strong>Partially replicated (p-rep) designs</strong> (Cullis et al., 2006) replicate only a fraction of the test lines (for example 20%) and sow the rest in one plot. The replicated lines provide the estimate of error, instead of repeating the same check many times.</p>
+</section>
+<section id="alpha-lattice-in-plain-words" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="alpha-lattice-in-plain-words"><span class="header-section-number">5.3.3</span> Alpha-lattice in plain words</h3>
+<ul>
+<li><strong>t</strong>: number of entries (genotypes).</li>
+<li><strong>k</strong>: number of plots in one incomplete block.</li>
+<li><strong>s = t / k</strong>: number of incomplete blocks in one replicate.</li>
+<li><strong>r</strong>: number of replicates.</li>
+<li><strong>Total plots = t × r.</strong></li>
+<li><strong>Incomplete block</strong>: a block that holds only some of the genotypes, not all of them.</li>
+<li><strong>Resolvable</strong>: the blocks are grouped in replicates, and every replicate contains all the genotypes.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-john-alpha" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-john-alpha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-experimental-designs_files/figure-html/fig-john-alpha-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-john-alpha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.5: A real alpha-lattice: the oat trial john.alpha, with t = 24 entries, r = 3 replicates and 72 plots in total. Each replicate has s = 6 incomplete blocks of k = 4 plots.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Reading the model.</strong> In <code>yield ~ rep + (1 | rep:block) + gen</code>, <code>gen</code> holds the genotypes we want to compare, <code>rep</code> the differences between replicates, and <code>(1 | rep:block)</code> removes the variation between incomplete blocks. We write <code>rep:block</code> and not <code>block</code> because block 1 of replicate 1 is not block 1 of replicate 2: they are different pieces of land.</p>
+<p><strong>In FielDHub:</strong> <code>alpha_lattice(t = 24, k = 4, r = 3)</code>. The number of entries <code>t</code> must be divisible by the block size <code>k</code>; with 24 entries, <code>k = 5</code> is not possible.</p>
+</section>
+<section id="variance-residual-variance-and-sed" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="variance-residual-variance-and-sed"><span class="header-section-number">5.3.4</span> Variance, residual variance and SED</h3>
+<p>Three words are used from now on.</p>
+<ul>
+<li><strong>Variance</strong> measures how much a set of values is spread around its mean: the average of the squared differences from the mean. The <strong>standard deviation</strong> is its square root, in the units of the measurement (t/ha).</li>
+<li><strong>Residual variance</strong> is the variance that the model cannot explain with its terms (genotypes, replicates, blocks, rows, columns). Every term that captures real field variation takes variance out of the residual. A smaller residual variance means a more precise comparison.</li>
+<li><strong>SED</strong> is the standard error of the difference between two genotype means. For equal replication, SED ≈ <span class="math inline">\(\sqrt{2 \times \text{residual variance} / r}\)</span>. The <strong>LSD</strong> is approximately 2 × SED: two genotypes must differ by more than this value before we call them different.</li>
+</ul>
+<p>For example, with a residual variance of 0.16 and 4 replicates, SED = <span class="math inline">\(\sqrt{2 \times 0.16 / 4}\)</span> = 0.28 t/ha and LSD ≈ 0.57 t/ha. If a better design brings the residual variance to 0.08, the SED falls to 0.20 and the LSD to 0.40 t/ha: smaller differences become detectable with the same land and seed.</p>
 </section>
 </section>
 <section id="comparing-designs-on-a-real-field" class="level2" data-number="5.4">
@@ -710,7 +781,7 @@ Figure&nbsp;5.2: Mean yield of each column of the uniformity trial, coloured by 
 <img src="05-experimental-designs_files/figure-html/fig-alpha-layout-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-alpha-layout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.3: The alpha-lattice laid over the uniformity trial: 2 replicates, each with 24 incomplete blocks of 15 plots (one block per column). Block colours alternate to show the boundaries.
+Figure&nbsp;5.6: The alpha-lattice laid over the uniformity trial: 2 replicates, each with 24 incomplete blocks of 15 plots (one block per column). Block colours alternate to show the boundaries.
 </figcaption>
 </figure>
 </div>
@@ -719,7 +790,7 @@ Figure&nbsp;5.3: The alpha-lattice laid over the uniformity trial: 2 replicates,
 </section>
 <section id="fitting-the-model-of-each-design" class="level3" data-number="5.4.2">
 <h3 data-number="5.4.2" class="anchored" data-anchor-id="fitting-the-model-of-each-design"><span class="header-section-number">5.4.2</span> Fitting the model of each design</h3>
-<p>Each design implies its own model. Genotypes are fixed here, because we want to compare their means; incomplete blocks, rows and columns are random (see <a href="#sec-model-from-layout" class="quarto-xref"><span>Section 5.9</span></a>).</p>
+<p>Each design implies its own model. The genotypes (<code>TREATMENT</code>) and the replicates are ordinary terms of the model. Blocks, rows and columns are written inside brackets, <code>(1 | ...)</code>: they only remove field variation and we never compare them. Models with a term like this are called mixed models (see <a href="#sec-model-from-layout" class="quarto-xref"><span>Section 5.9</span></a> and <a href="07-mixed-models.html" class="quarto-xref"><span>Chapter 7</span></a>).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fit_crd    <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> TREATMENT, <span class="at">data =</span> d_crd)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fit_rcbd   <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> REP <span class="sc">+</span> TREATMENT, <span class="at">data =</span> d_rcbd)</span>
@@ -788,7 +859,7 @@ Figure&nbsp;5.3: The alpha-lattice laid over the uniformity trial: 2 replicates,
 <img src="05-experimental-designs_files/figure-html/fig-beans-blocks-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-beans-blocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.4: Incomplete blocks of the bean trial Dar16C_hiP: each block is 11 rows by 2 columns (22 plots). Colours alternate between neighbouring blocks.
+Figure&nbsp;5.7: Incomplete blocks of the bean trial Dar16C_hiP: each block is 11 rows by 2 columns (22 plots). Colours alternate between neighbouring blocks.
 </figcaption>
 </figure>
 </div>
@@ -844,7 +915,7 @@ y_{ijk} = \mu + R_j + b_{k(j)} + G_i + \varepsilon_{ijk},
 <img src="05-experimental-designs_files/figure-html/fig-wh09-map-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wh09-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.5: Yield of the wheat trial WH09 (Wongan Hills, 2009). Replicate 1 occupies columns 1 to 6 and replicate 2 columns 7 to 12.
+Figure&nbsp;5.8: Yield of the wheat trial WH09 (Wongan Hills, 2009). Replicate 1 occupies columns 1 to 6 and replicate 2 columns 7 to 12.
 </figcaption>
 </figure>
 </div>
@@ -854,28 +925,25 @@ Figure&nbsp;5.5: Yield of the wheat trial WH09 (Wongan Hills, 2009). Replicate 1
 <p><span class="math display">\[
 y_{ijkm} = \mu + Rep_m + r_{j(m)} + c_{k(m)} + G_i + \varepsilon_{ijkm}
 \]</span></p>
-<p>Rows and columns are incomplete blocks, so they are random. If we ignore them and analyse the trial as an RCBD (replicates only), the field variation stays in the error:</p>
+<p>Rows and columns are incomplete blocks: they only remove field variation, so they go in brackets in the model. If we ignore them and analyse the trial as an RCBD (replicates only), the field variation stays in the error:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>m_rcbd   <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> geno), <span class="at">data =</span> wh09)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>m_rowcol <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rep<span class="sc">:</span>row) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rep<span class="sc">:</span>col) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> geno),</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> wh09)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">VarCorr</span>(m_rcbd), <span class="at">comp =</span> <span class="st">"Variance"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>m_rcbd   <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> rep <span class="sc">+</span> geno, <span class="at">data =</span> wh09)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>m_rowcol <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> rep <span class="sc">+</span> geno <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rep<span class="sc">:</span>row) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rep<span class="sc">:</span>col), <span class="at">data =</span> wh09)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">RCBD =</span> <span class="fu">sigma</span>(m_rcbd)<span class="sc">^</span><span class="dv">2</span>, <span class="at">row_column =</span> <span class="fu">sigma</span>(m_rowcol)<span class="sc">^</span><span class="dv">2</span>)   <span class="co"># residual variance</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> Groups   Name        Variance
- geno     (Intercept) 0.058336
- Residual             0.300582</code></pre>
+<pre><code>      RCBD row_column 
+ 0.3130188  0.1632631 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">VarCorr</span>(m_rowcol), <span class="at">comp =</span> <span class="st">"Variance"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Groups   Name        Variance
- geno     (Intercept) 0.087010
- rep:row  (Intercept) 0.011957
- rep:col  (Intercept) 0.107317
- Residual             0.174646</code></pre>
+ rep:row  (Intercept) 0.034546
+ rep:col  (Intercept) 0.110355
+ Residual             0.163263</code></pre>
 </div>
 </div>
-<p>With the row-column model the residual variance falls from about 0.30 to 0.17, and most of the field variation is between <strong>columns</strong> (0.107), much less between rows (0.012). The genotype variance becomes larger, because part of what looked like error was field. How this translates into heritability is the topic of <a href="07-mixed-models.html#sec-heritability" class="quarto-xref"><span>Section 7.7</span></a>.</p>
+<p>With the row-column model the residual variance falls from about 0.31 to 0.16, and most of the field variation is between <strong>columns</strong> (0.110), less between rows (0.035). Part of what the RCBD called error was field variation, so the genotype comparisons are more precise. How this translates into heritability is the topic of <a href="07-mixed-models.html#sec-heritability" class="quarto-xref"><span>Section 7.7</span></a>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -954,13 +1022,13 @@ y_{ijkm} = \mu + Rep_m + r_{j(m)} + c_{k(m)} + G_i + \varepsilon_{ijkm}
 <img src="05-experimental-designs_files/figure-html/fig-prep-aug-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prep-aug-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.6: The p-rep and augmented layouts on the Mercer and Hall field (20 rows by 25 columns). Dark plots are replicated test lines (p-rep) or checks (augmented).
+Figure&nbsp;5.9: The p-rep and augmented layouts on the Mercer and Hall field (20 rows by 25 columns). Dark plots are replicated test lines (p-rep) or checks (augmented).
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Both trials are analysed with the same model: entries fixed, rows and columns random. Because the field is blank, we can measure two things for the unreplicated lines:</p>
+<p>Both trials are analysed with the same model: the entries are compared, and rows and columns only remove field variation. Because the field is blank, we can measure two things for the unreplicated lines:</p>
 <ul>
 <li>the <strong>SED reported by the model</strong>, which is what the breeder would see;</li>
 <li>the <strong>true SED</strong>: the true differences between entries are zero, so the observed spread of the estimated means of the unreplicated lines is pure error (<span class="math inline">\(\sqrt{2 \times \text{variance of the means}}\)</span>).</li>
@@ -1149,9 +1217,58 @@ Figure&nbsp;5.6: The p-rep and augmented layouts on the Mercer and Hall field (2
 </section>
 <section id="sec-model-from-layout" class="level2" data-number="5.9">
 <h2 data-number="5.9" class="anchored" data-anchor-id="sec-model-from-layout"><span class="header-section-number">5.9</span> From layout to statistical model</h2>
-<p>The design determines the model. Every restriction of the randomization (replicate, block, row, column) becomes a term:</p>
+<p>The design determines the model. Every restriction of the randomization (replicate, block, row, column) becomes a term. We write the models with this notation:</p>
+<ul>
+<li><span class="math inline">\(Y\)</span>: observed response of a plot, for example yield (t/ha);</li>
+<li><span class="math inline">\(\mu\)</span>: overall mean of the trial;</li>
+<li><span class="math inline">\(G_k\)</span>: effect of genotype <span class="math inline">\(k\)</span>. This is what we compare;</li>
+<li><span class="math inline">\(R_i\)</span>: effect of replicate <span class="math inline">\(i\)</span> (a complete block);</li>
+<li><span class="math inline">\(B_{j(i)}\)</span>: effect of incomplete block <span class="math inline">\(j\)</span> within replicate <span class="math inline">\(i\)</span> (“<span class="math inline">\(j(i)\)</span>” reads “<span class="math inline">\(j\)</span> within <span class="math inline">\(i\)</span>”). In the augmented design, <span class="math inline">\(B_j\)</span> is a block of the field;</li>
+<li><span class="math inline">\(Row_{j(i)}\)</span> and <span class="math inline">\(Col_{l(i)}\)</span>: effect of row <span class="math inline">\(j\)</span> and column <span class="math inline">\(l\)</span> within replicate <span class="math inline">\(i\)</span>. In the p-rep design they are the rows and columns of the whole field, <span class="math inline">\(Row_j\)</span> and <span class="math inline">\(Col_l\)</span>;</li>
+<li><span class="math inline">\(\varepsilon\)</span>: experimental error, what the model cannot explain.</li>
+</ul>
+<p><span class="math inline">\(G\)</span> is what we compare. <span class="math inline">\(R\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(Row\)</span> and <span class="math inline">\(Col\)</span> only remove field variation, so the comparison between genotypes is fairer.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 72%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Design</th>
+<th>Model</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CRD</td>
+<td><span class="math inline">\(Y_{ik} = \mu + G_k + \varepsilon_{ik}\)</span></td>
+</tr>
+<tr class="even">
+<td>RCBD</td>
+<td><span class="math inline">\(Y_{ik} = \mu + R_i + G_k + \varepsilon_{ik}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Augmented</td>
+<td><span class="math inline">\(Y_{jk} = \mu + B_j + G_k + \varepsilon_{jk}\)</span></td>
+</tr>
+<tr class="even">
+<td>Alpha-lattice</td>
+<td><span class="math inline">\(Y_{ijk} = \mu + R_i + B_{j(i)} + G_k + \varepsilon_{ijk}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Resolvable row-column</td>
+<td><span class="math inline">\(Y_{ijlk} = \mu + R_i + Row_{j(i)} + Col_{l(i)} + G_k + \varepsilon_{ijlk}\)</span></td>
+</tr>
+<tr class="even">
+<td>p-rep</td>
+<td><span class="math inline">\(Y_{jlk} = \mu + Row_j + Col_l + G_k + \varepsilon_{jlk}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>In R each term of the equation is a term of the formula (<code>rep</code> is <span class="math inline">\(R\)</span>, <code>rep:block</code> is <span class="math inline">\(B_{j(i)}\)</span>, <code>geno</code> is <span class="math inline">\(G\)</span>):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># genotypes fixed; incomplete blocks, rows and columns random</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a term in brackets only removes field variation (see @sec-mixed-models)</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> geno)                                                  <span class="co"># CRD</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> rep <span class="sc">+</span> geno)                                            <span class="co"># RCBD</span></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> block <span class="sc">+</span> geno)                                          <span class="co"># Augmented (or rows and columns random)</span></span>
@@ -1162,9 +1279,9 @@ Figure&nbsp;5.6: The p-rep and augmented layouts on the Mercer and Hall field (2
 </div>
 <p>Three rules:</p>
 <ul>
-<li><strong>Complete blocks (replicates) can be fixed or random</strong>: every genotype is in every block, so blocks and genotypes are independent.</li>
-<li><strong>Incomplete blocks, rows and columns should be random.</strong> A genotype is not in every block, so part of the information about genotypes is between blocks; random blocks recover it.</li>
-<li><strong>Genotypes are fixed</strong> to compare and select them (BLUEs), and <strong>random</strong> to estimate the genetic variance and heritability (BLUPs). Both models are fitted, as shown in <a href="07-mixed-models.html" class="quarto-xref"><span>Chapter 7</span></a>.</li>
+<li><strong>Replicates (complete blocks)</strong> enter the model as ordinary terms: every genotype is in every replicate.</li>
+<li><strong>Incomplete blocks, rows and columns</strong> go in brackets, <code>(1 | block)</code>. A genotype is not in every block, so part of the information about genotypes is also between blocks, and writing them in brackets lets the model use it.</li>
+<li><strong>Genotypes</strong> are kept as ordinary terms to compare and select them. The alternative, and what it is good for (BLUEs, BLUPs and heritability), is the topic of <a href="07-mixed-models.html" class="quarto-xref"><span>Chapter 7</span></a>.</li>
 </ul>
 </section>
 <section id="exercise" class="level2" data-number="5.10">
@@ -1172,7 +1289,7 @@ Figure&nbsp;5.6: The p-rep and augmented layouts on the Mercer and Hall field (2
 <p>The dataset <code>john.alpha</code> in <code>agridat</code> is a real spring oats trial from Craibstone, near Aberdeen (John and Williams, 1995): 24 varieties in an alpha-lattice with 3 replicates, each with 6 incomplete blocks of 4 plots.</p>
 <ol type="1">
 <li>Check the design: how many plots per replicate, how many blocks per replicate, how many plots per block?</li>
-<li>Fit the model of an RCBD (replicates only) and the model of the alpha-lattice (blocks within replicates, random). Compare the residual variance and the average SED of the two models.</li>
+<li>Fit the model of an RCBD (replicates only) and the model of the alpha-lattice (blocks within replicates, in brackets). Compare the residual variance and the average SED of the two models.</li>
 <li>Generate a new alpha-lattice for the same trial (24 entries, blocks of 4, 3 replicates) with FielDHub, and look at its field book.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -1252,7 +1369,7 @@ Figure&nbsp;5.6: The p-rep and augmented layouts on the Mercer and Hall field (2
 <li>Fields vary at short distances and in more than one direction. Breeding trials, with many entries, need <strong>incomplete blocks</strong>: alpha-lattice or row-column designs.</li>
 <li>On a real uniformity field, the resolvable row-column design was about twice as efficient as the RCBD, with the same plots and seed.</li>
 <li>For early generations with limited seed, augmented and p-rep designs have the same true precision, but the augmented design overstates it; analyse both with spatial models.</li>
-<li>The design determines the model: replicates, blocks within replicates, rows and columns within replicates. Incomplete blocks are random.</li>
+<li>The design determines the model: replicates, blocks within replicates, rows and columns within replicates. Incomplete blocks, rows and columns go in brackets, <code>(1 | ...)</code>.</li>
 <li>Generate layouts with FielDHub, set the seed, and keep the row and column of every plot.</li>
 </ul>
 </section>
