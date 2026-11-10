@@ -58,15 +58,11 @@ em <- emmeans(fit_irr, ~ GEN)
 
 ## Plan for the afternoon
 
-| Block | Topic |
-|-----------------|-------------------------------------------------------|
-| 1 | The ANOVA of an RCBD: partition of the variation, by hand |
-| 2 | Assumptions: residual diagnostics and transformations |
-| 3 | Comparing means: LSD, Tukey and **Dunnett against a control** |
-| 4 | **Statistical vs practical significance** |
-| 5 | Augmented designs and several environments |
-| 6 | **Identifying superior genotypes**: from significance to selection, pitfalls |
-| 7 | Exercise on durum wheat, discussion and Q&A |
+| Time | Topic | Practice |
+|-----------------|---------------------------------------------|-------------------|
+| 13:30 | ANOVA of an RCBD and its assumptions | **Exercise 5** |
+| 15:00 | Comparing means: LSD, Tukey, Duncan, **Dunnett** | **Exercise 6** |
+| 16:15 | **Statistical vs practical significance** and the decision | discussion |
 
 ::: keybox
 **Goal:** leave able to fit the ANOVA of your trial, check it, and answer the breeder's question: **which lines are better than the parent or the check, by how much, and which ones do we advance?**
@@ -89,8 +85,7 @@ Homework: Exercise 3 (john.alpha) and Exercise 4 (wheat row-column).
 
 ------------------------------------------------------------------------
 
-## Block 1 {.divider}
-
+## Block 1 {.divider visibility="hidden"}
 The ANOVA of an RCBD
 
 ------------------------------------------------------------------------
@@ -130,8 +125,7 @@ F genotype = ratio of the variance among genotype means to the error variance. I
 
 ------------------------------------------------------------------------
 
-## The same table, by hand
-
+## The same table, by hand {visibility="hidden"}
 ```{r}
 y <- e10$yield; mu <- mean(y)
 b <- nlevels(e10$Block); g <- nlevels(e10$Genotype)
@@ -162,8 +156,7 @@ For that we need the comparisons of means (Block 3).
 
 ------------------------------------------------------------------------
 
-## Block 2 {.divider}
-
+## Block 2 {.divider visibility="hidden"}
 Assumptions
 
 ------------------------------------------------------------------------
@@ -214,8 +207,7 @@ The treatment with the highest mean has also the highest variance.
 
 ------------------------------------------------------------------------
 
-## The square root stabilizes the variance
-
+## The square root stabilizes the variance {visibility="hidden"}
 ```{r}
 #| fig-height: 3.4
 #| fig-width: 9
@@ -241,8 +233,22 @@ bind_rows(
 
 ------------------------------------------------------------------------
 
-## Block 3 {.divider}
+## Your turn: Exercise 5
 
+Open `Exercise5_anova_and_assumptions.Rmd` from the ZIP.
+
+1.  ANOVA of the RCBD (durum wheat, `loc07_year1`): MSE, CV and residual df
+2.  Residual plots, Shapiro and Levene
+3.  Larvae counts: fail, transform with the square root, **check again**
+4.  Extra: the same ANOVA for other designs
+
+::: keybox
+Run each box, replace the `___`, write your findings. About 50 minutes.
+:::
+
+------------------------------------------------------------------------
+
+## Block 3 {.divider visibility="hidden"}
 Comparing means
 
 ------------------------------------------------------------------------
@@ -274,8 +280,7 @@ c(CV = 100 * sigma(fit_irr) / mean(irr$REND), df = df.residual(fit_irr))
 
 ------------------------------------------------------------------------
 
-## LSD groups
-
+## LSD groups {visibility="hidden"}
 ```{r}
 LSD.test(fit_irr, "GEN", console = FALSE)$groups
 ```
@@ -284,8 +289,7 @@ Same letter = not significantly different. `G4` is separated from **six** genoty
 
 ------------------------------------------------------------------------
 
-## Tukey groups
-
+## Tukey groups {visibility="hidden"}
 ```{r}
 HSD.test(fit_irr, "GEN", console = FALSE)$groups
 ```
@@ -331,8 +335,7 @@ Without protection, **4 of 10** lines look different from the control. Dunnett c
 
 ------------------------------------------------------------------------
 
-## Differences to the control
-
+## Differences to the control {visibility="hidden"}
 ```{r}
 #| echo: false
 #| fig-height: 5
@@ -345,8 +348,22 @@ dun_tab |> mutate(contrast = reorder(contrast, estimate)) |>
 
 ------------------------------------------------------------------------
 
-## Block 4 {.divider}
+## Your turn: Exercise 6
 
+Open `Exercise6_mean_comparison.Rmd` from the ZIP.
+
+1.  **LSD** by hand and with `agricolae`; **Tukey**; **Duncan**
+2.  Compare the number of groups and of significant pairs
+3.  **Dunnett** against `WAHA`: which genotypes are higher?
+4.  The best genotype as % of `WAHA`, with its interval
+
+::: keybox
+Same file structure as Exercise 5. About 55 minutes.
+:::
+
+------------------------------------------------------------------------
+
+## Block 4 {.divider visibility="hidden"}
 Statistical vs practical significance
 
 ------------------------------------------------------------------------
@@ -387,14 +404,12 @@ With 3 replicates and CV 11%, differences below about **1.5 t/ha (19%)** cannot 
 
 ------------------------------------------------------------------------
 
-## Block 5 {.divider}
-
+## Block 5 {.divider visibility="hidden"}
 Augmented designs and several environments
 
 ------------------------------------------------------------------------
 
-## Augmented design: the error comes from the checks
-
+## Augmented design: the error comes from the checks {visibility="hidden"}
 Real meadowfoam trial: 50 new lines (1 plot) + 3 checks in every one of 6 blocks (`kling.augmented`).
 
 ```{r}
@@ -409,8 +424,7 @@ anova(fit_aug)
 
 ------------------------------------------------------------------------
 
-## Precision depends on the comparison
-
+## Precision depends on the comparison {visibility="hidden"}
 ```{r}
 em_aug <- emmeans(fit_aug, ~ gen)
 chk <- c("G89", "G90", "G91")
@@ -426,8 +440,7 @@ For selection, compare new lines with the **checks** and remember the large SED 
 
 ------------------------------------------------------------------------
 
-## Two water regimes (rice)
-
+## Two water regimes (rice) {visibility="hidden"}
 ```{r}
 anova(lm(REND ~ env / Bloq + GEN * env, data = rice))
 ```
@@ -436,8 +449,7 @@ Environment dominates. Genotypes differ. **G x E not significant** (p = 0.24): s
 
 ------------------------------------------------------------------------
 
-## 22 environments (durum wheat)
-
+## 22 environments (durum wheat) {visibility="hidden"}
 ```{r}
 fit_met <- lm(yield ~ Environment / Block + Genotype * Environment, data = durum)
 a <- anova(fit_met); a
@@ -447,8 +459,7 @@ Genotypes are tested against **G x E**, not the residual: environments are a sam
 
 ------------------------------------------------------------------------
 
-## Variance components from the mean squares
-
+## Variance components from the mean squares {visibility="hidden"}
 ```{r}
 ms <- setNames(a$`Mean Sq`, rownames(a)); r <- 4; e <- 22
 round(c(genotype = unname((ms["Genotype"] - ms["Environment:Genotype"]) / (r * e)),
@@ -462,8 +473,7 @@ round(c(genotype = unname((ms["Genotype"] - ms["Environment:Genotype"]) / (r * e
 
 ------------------------------------------------------------------------
 
-## Block 6 {.divider}
-
+## Block 6 {.divider visibility="hidden"}
 Identifying superior genotypes
 
 ------------------------------------------------------------------------
@@ -483,8 +493,7 @@ Identifying superior genotypes
 
 ------------------------------------------------------------------------
 
-## Classify the lines (rice, two regimes)
-
+## Classify the lines (rice, two regimes) {visibility="hidden"}
 ```{r}
 classify <- function(d, env_name) {
   fit  <- lm(REND ~ Bloq + GEN, data = d)
@@ -504,8 +513,7 @@ sel <- bind_rows(classify(filter(rice, env == "Irrigated"), "Irrigated"),
 
 ------------------------------------------------------------------------
 
-## Gain over the parent, with the class
-
+## Gain over the parent, with the class {visibility="hidden"}
 ```{r}
 #| echo: false
 #| fig-height: 5
@@ -524,8 +532,7 @@ sel |>
 
 ------------------------------------------------------------------------
 
-## What the figure says
-
+## What the figure says {visibility="hidden"}
 - **G9 and G4:** promising under irrigation (+19%, +22%), **confirmed superior under drought** (+34%, +32%). Same direction in two environments: first candidates to advance
 - **G8:** confirmed superior under drought (+43%), equal to the parent under irrigation. A candidate for drought-prone sites
 - **G6:** promising in both, not confirmed in either: retest
@@ -537,8 +544,7 @@ The same direction in **more than one environment** is stronger evidence than a 
 
 ------------------------------------------------------------------------
 
-## Superior everywhere? Durum, 22 environments
-
+## Superior everywhere? Durum, 22 environments {visibility="hidden"}
 Dunnett against `WAHA` **in each environment**, then count.
 
 ```{r}
@@ -560,8 +566,7 @@ head(consistency, 6)
 
 ------------------------------------------------------------------------
 
-## No line beats WAHA everywhere
-
+## No line beats WAHA everywhere {visibility="hidden"}
 - Best line, `GTADUR`: above `WAHA` in **16 of 22** environments, average gain **+9%**, significantly higher in 2 and **significantly lower in 2**
 - `OFANTO`: **+45%** in `loc07_year1` (the exercise), but only **+3%** on average over 22 environments
 
@@ -571,8 +576,7 @@ One environment can show a spectacular difference that the rest do not confirm.
 
 ------------------------------------------------------------------------
 
-## Selection bias (winner's curse)
-
+## Selection bias (winner's curse) {visibility="hidden"}
 The best lines **because** they were the best include a part of luck. Select the 3 best in each environment; compare with their performance in the other 21.
 
 ```{r}
@@ -589,8 +593,7 @@ colMeans(bias)
 
 ------------------------------------------------------------------------
 
-## About two thirds of the advantage disappears
-
+## About two thirds of the advantage disappears {visibility="hidden"}
 Advantage over the environment mean: **+0.48 t/ha** where selected, **+0.15 t/ha** in the other environments.
 
 Still above average elsewhere in 91% of the cases: the selection is useful, but the gain you see at selection is **not** the gain you will get.
@@ -626,8 +629,7 @@ Still above average elsewhere in 91% of the cases: the selection is useful, but 
 
 ------------------------------------------------------------------------
 
-## Common interpretation pitfalls (2)
-
+## Common interpretation pitfalls (2) {visibility="hidden"}
 | Pitfall | What to do |
 |----------------------------|-------------------------------------------|
 | Skipping the residual diagnostics | Check funnel and outliers first |
@@ -638,14 +640,12 @@ Still above average elsewhere in 91% of the cases: the selection is useful, but 
 
 ------------------------------------------------------------------------
 
-## Block 7 {.divider}
-
+## Block 7 {.divider visibility="hidden"}
 Exercise
 
 ------------------------------------------------------------------------
 
-## Exercise: durum wheat, `loc07_year1`
-
+## Exercise: durum wheat, `loc07_year1` {visibility="hidden"}
 1. Fit the RCBD and write the ANOVA table. CV and residual df?
 2. Check the assumptions (residual plot, QQ plot, Levene)
 3. LSD at 5% and Tukey groups
@@ -675,8 +675,7 @@ This is the practice of Exercise 5 and Exercise 6 in the ZIP, which guide you st
 
 ------------------------------------------------------------------------
 
-## Questions for discussion
-
+## Questions for discussion {visibility="hidden"}
 1. What is the **reference** a new line must beat in your program: the parent, a check, or both?
 2. What is the **smallest gain** that makes you advance a line? Is it the same for yield and for disease resistance?
 3. How many replicates and environments do you have in the first trials of a mutant population? What difference could you detect?
