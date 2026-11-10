@@ -265,6 +265,21 @@ Luis Fernando Delgado Muñoz
 <p><strong>Goal:</strong> leave able to fit the ANOVA of your trial, check it, and answer the breeder’s question: <strong>which lines are better than the parent or the check, by how much, and which ones do we advance?</strong></p>
 </div>
 </section>
+<section id="before-we-start" class="slide level2 scrollable">
+<h2>Before we start</h2>
+<ol type="1">
+<li>Download: <a href="../downloads/Day2_afternoon_analysing_designs.zip"><strong>Day 2 afternoon exercises (ZIP)</strong></a></li>
+<li>Unzip it (do not work inside the ZIP) and open <code>Day2_afternoon.Rproj</code></li>
+<li>Run <code>00_install_packages.R</code> <strong>once</strong>, even if you did it this morning: it adds <code>agricolae</code>, <code>car</code> and <code>lmerTest</code></li>
+</ol>
+<ul>
+<li><strong>13:30</strong> <code>Exercise5_anova_and_assumptions.Rmd</code>: ANOVA, assumptions, transformation</li>
+<li><strong>15:00</strong> <code>Exercise6_mean_comparison.Rmd</code>: LSD, Tukey, Duncan, Dunnett</li>
+</ul>
+<div class="small-note">
+<p>Homework: Exercise 3 (john.alpha) and Exercise 4 (wheat row-column).</p>
+</div>
+</section>
 <section id="block-1" class="slide level2 divider">
 <h2>Block 1</h2>
 <p>The ANOVA of an RCBD</p>
@@ -1040,7 +1055,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="" aria-label="1"></a>e7 <span class="ot">&lt;-</span> durum <span class="sc">|&gt;</span> <span class="fu">filter</span>(Environment <span class="sc">==</span> <span class="st">"loc07_year1"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb52-2"><a href="" aria-label="2"></a>  <span class="fu">mutate</span>(<span class="at">Genotype =</span> <span class="fu">relevel</span>(Genotype, <span class="at">ref =</span> <span class="st">"WAHA"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The solution is in the course manual, chapter 6.</p>
+<p>This is the practice of Exercise 5 and Exercise 6 in the ZIP, which guide you step by step. The solution is in the course manual, chapter 6.</p>
 </section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways</h2>
