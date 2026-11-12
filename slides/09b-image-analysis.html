@@ -221,39 +221,27 @@ Luis Fernando Delgado Muñoz
 <h2>Plan for the afternoon</h2>
 <table class="caption-top">
 <colgroup>
-<col style="width: 23%">
-<col style="width: 76%">
+<col style="width: 18%">
+<col style="width: 81%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Block</th>
-<th>Topic</th>
+<th style="text-align: left;">Time</th>
+<th style="text-align: left;">Activity</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td>From a photograph to a number</td>
+<td style="text-align: left;">13:30</td>
+<td style="text-align: left;"><strong>Lecture.</strong> From a photograph to a number; taking images that can be analysed; counting, measuring and scale; colour and disease severity</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td>Taking images that can be analysed</td>
+<td style="text-align: left;">15:00</td>
+<td style="text-align: left;"><strong>Practical.</strong> Image analysis in R with <code>pliman</code>, in pairs</td>
 </tr>
 <tr class="odd">
-<td>3</td>
-<td>Counting, measuring and scale with <code>pliman</code></td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Colour, leaves and disease severity</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Many images at once, and is the trait good enough?</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>Near infrared and drones (briefly), exercise and discussion</td>
+<td style="text-align: left;">16:30</td>
+<td style="text-align: left;"><strong>Q&amp;A</strong> on imaging set-ups</td>
 </tr>
 </tbody>
 </table>
@@ -261,9 +249,21 @@ Luis Fernando Delgado Muñoz
 <p><strong>Goal:</strong> leave able to turn a photograph taken with a phone into trait values for a trial, and to check that those values can be trusted.</p>
 </div>
 </section>
-<section id="block-1" class="slide level2 divider">
-<h2>Block 1</h2>
-<p>From a photograph to a number</p>
+
+<section id="before-we-start" class="slide level2 scrollable">
+<h2>Before we start</h2>
+<ol type="1">
+<li>Download: <a href="../downloads/Day4_afternoon_image_analysis.zip"><strong>Day 4 afternoon practical (ZIP)</strong></a></li>
+<li>Unzip it (do not work inside the ZIP) and open <code>Day4_afternoon.Rproj</code></li>
+<li>Run <code>00_install_packages.R</code> <strong>once</strong>: it installs <code>pliman</code> and <code>EBImage</code> (a few minutes)</li>
+</ol>
+<ul>
+<li>All images are the sample images of <code>pliman</code>: nothing else to download</li>
+<li>Work <strong>in pairs</strong>: one types, the other checks the labelled image; swap every part</li>
+</ul>
+<div class="small-note">
+<p>No Git needed: the ZIP is your own copy.</p>
+</div>
 </section>
 <section id="an-image-is-a-table-of-numbers" class="slide level2 scrollable">
 <h2>An image is a table of numbers</h2>
@@ -316,10 +316,20 @@ Luis Fernando Delgado Muñoz
 </table>
 <p><span class="small-note">From the cheapest to the most expensive. Drones: only briefly, at the end.</span></p>
 </section>
-<section id="block-2" class="slide level2 divider">
-<h2>Block 2</h2>
-<p>Taking images that can be analysed</p>
+<section id="real-field-photographs-artemis-and-image-safari" class="slide level2">
+<h2>Real field photographs: Artemis and Image Safari</h2>
+<ul>
+<li>Open collections of the <strong>Alliance of Bioversity International and CIAT</strong> on AWS: no account, CC BY-SA 4.0</li>
+<li><strong>Artemis:</strong> 1.39 million photographs of bean, cowpea, soybean and sorghum (4 countries), with agronomic and genotypic data</li>
+<li><strong>Image Safari:</strong> 6.08 million photographs, 18 crops, 9 countries of sub-Saharan Africa</li>
+<li><strong>40,558 annotated by organ.</strong> Not a disease dataset</li>
+</ul>
+<div class="keybox">
+<p><strong>Practical:</strong> <a href="tutorial-artemis-photos.html"><strong>Tutorial: download real field photos</strong></a> and open them in R.</p>
+</div>
+<p><span class="small-note">Mutuvi, S. et al.&nbsp;(2026), DOI 10.31220/agriRxiv.2026.00491</span></p>
 </section>
+
 <section id="most-of-the-work-is-before-the-photograph" class="slide level2">
 <h2>Most of the work is before the photograph</h2>
 <table class="caption-top">
@@ -370,10 +380,7 @@ Luis Fernando Delgado Muñoz
 <li>No setting repairs this reliably: <strong>fix it at capture</strong></li>
 </ul>
 </section>
-<section id="block-3" class="slide level2 divider">
-<h2>Block 3</h2>
-<p>Counting, measuring and scale with <code>pliman</code></p>
-</section>
+
 <section id="setting-up" class="slide level2">
 <h2>Setting up</h2>
 <div class="cell">
@@ -484,21 +491,8 @@ Luis Fernando Delgado Muñoz
 <li>A square of 2 x 2 cm (4 cm²) travels with the sample: areas in cm² at any distance or camera</li>
 </ul>
 </section>
-<section id="many-small-seeds" class="slide level2">
-<h2>Many small seeds</h2>
 
-<img data-src="09b-image-analysis_files/figure-revealjs/unnamed-chunk-12-1.png" width="576" class="r-stretch"><div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-label="1"></a><span class="fu">analyze_objects</span>(flax, <span class="at">index =</span> <span class="st">"GRAY"</span>, <span class="at">reference =</span> <span class="cn">TRUE</span>, <span class="at">reference_area =</span> <span class="dv">6</span>,</span>
-<span id="cb15-2"><a href="" aria-label="2"></a>                <span class="at">reference_larger =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="keybox">
-<p>268 seeds. With <code>lower_noise = 0.3</code> the same image gives 211: <strong>a parameter can change the count.</strong> Look at the labelled image of a few samples before running a batch.</p>
-</div>
-</section>
-<section id="block-4" class="slide level2 divider">
-<h2>Block 4</h2>
-<p>Colour, leaves and disease severity</p>
-</section>
+
 <section id="colour-as-a-trait" class="slide level2">
 <h2>Colour as a trait</h2>
 <div class="cell">
@@ -591,10 +585,7 @@ Luis Fernando Delgado Muñoz
 <li>Useful to screen large M2 populations without rating each leaf by eye</li>
 </ul>
 </section>
-<section id="block-5" class="slide level2 divider">
-<h2>Block 5</h2>
-<p>Many images at once, and is the trait good enough?</p>
-</section>
+
 <section id="a-folder-of-images" class="slide level2">
 <h2>A folder of images</h2>
 <div class="cell">
@@ -646,14 +637,7 @@ Luis Fernando Delgado Muñoz
 <p>Distance from the line <code>abline(0, 1)</code> that is the same for all samples is a <strong>bias</strong> that can be corrected. Scatter around it is <strong>error</strong> that cannot.</p>
 </div>
 </section>
-<section id="near-infrared-and-drones-briefly" class="slide level2">
-<h2>Near infrared and drones, briefly</h2>
-<p><strong>Near infrared.</strong> Healthy leaves reflect much more NIR than visible red. A camera with the infrared filter removed, or a multispectral camera, records it. NDVI measures vigour and stress better than RGB indices.</p>
-<p><strong>Drones.</strong> Images are joined in an orthomosaic, the field is divided in plots with a shapefile, and indices are extracted per plot: again one row per plot. <code>pliman</code> has <code>mosaic_*</code> functions for this.</p>
-<div class="keybox">
-<p>For a programme that is starting: learn the steps of this session with photographs on a tray first. Segmentation, scale, validation and the join with the trial are the same.</p>
-</div>
-</section>
+
 <section id="pitfalls" class="slide level2">
 <h2>Pitfalls</h2>
 <table class="caption-top">
@@ -699,27 +683,20 @@ Luis Fernando Delgado Muñoz
 </tbody>
 </table>
 </section>
-<section id="exercise" class="slide level2 scrollable">
-<h2>Exercise</h2>
-<p>With the image <code>flax_leaves.jpg</code>:</p>
+
+
+<section id="your-turn-the-practical-1500" class="slide level2 scrollable">
+<h2>Your turn: the practical (15:00)</h2>
+<p>Open the files of the ZIP in this order:</p>
 <ol type="1">
-<li>Count the leaves with the default settings and with <code>watershed = FALSE</code>. Which one is correct?</li>
-<li>Get the length and the width of each leaf, in pixels</li>
-<li>Which leaves have the lowest NGRDI? How many, and in which row of the picture?</li>
-<li>With <code>flax_grains.jpg</code>: total seed area in cm². Why does it change with <code>lower_noise = 0.3</code>?</li>
+<li><code>Image1_count_and_measure.Rmd</code>: count seeds, size, scale by dpi and by reference object (30 min)</li>
+<li><code>Image2_colour_leaves_severity.Rmd</code>: colour, flax leaves, <strong>your own visual score</strong>, disease severity (30 min)</li>
+<li><code>Image3_folder_to_field_book.Rmd</code>: a folder of images, the field book, validation, the model (30 min)</li>
+<li>Optional: <code>Image4_download_Artemis_photos_optional.Rmd</code> or the <a href="tutorial-artemis-photos.html"><strong>Artemis tutorial</strong></a>: real field photographs</li>
 </ol>
 <div class="keybox">
-<p>Hint: <code>whole$results</code>, <code>whole$object_index</code> and <code>fx$results</code> have what you need.</p>
+<p>Optional: bring 3 to 5 photos from your phone and analyse them in <code>my_images/</code>.</p>
 </div>
-</section>
-<section id="questions-for-discussion" class="slide level2">
-<h2>Questions for discussion</h2>
-<ul>
-<li>Which trait of your programme is measured by eye today and could be measured from a photograph?</li>
-<li>What would you put in the photograph as reference object, and on which background?</li>
-<li>How would you validate the image trait before using it for selection?</li>
-<li>Where would an image trait help in the M2 and M3 generations, when populations are large?</li>
-</ul>
 </section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways</h2>

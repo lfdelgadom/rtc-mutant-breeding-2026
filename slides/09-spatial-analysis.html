@@ -217,83 +217,75 @@ Luis Fernando Delgado Muñoz
 
   <p class="date">12 November 2026</p>
 </section>
-<section id="plan-for-the-day" class="slide level2">
-<h2>Plan for the day</h2>
+<section id="content" class="slide level2">
+<h2>Content</h2>
 <table class="caption-top">
 <colgroup>
-<col style="width: 23%">
-<col style="width: 76%">
+<col style="width: 26%">
+<col style="width: 73%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Block</th>
-<th>Topic</th>
+<th style="text-align: left;">Time</th>
+<th style="text-align: left;">Activity</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td>Why the position of a plot matters</td>
+<td style="text-align: left;">08:30</td>
+<td style="text-align: left;"><strong>Lecture and demo.</strong> Fields are not uniform; residual maps and the semivariogram; spatial models with SpATS; Mr.Bean; does it pay?</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td>Looking for spatial patterns: residual maps and variograms</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td><strong>Spatial models with SpATS</strong> (2D P-splines)</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Mr.Bean: the same analysis without code</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Spatial against non-spatial: does it pay?</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>Design or analysis?</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td>A complete single-trial workflow, exercise and discussion</td>
+<td style="text-align: left;">10:30</td>
+<td style="text-align: left;"><strong>Practical.</strong></td>
 </tr>
 </tbody>
 </table>
 <div class="keybox">
-<p><strong>Goal:</strong> leave able to look at a trial as a <strong>map</strong>, decide if a spatial model is needed, fit it, and report how much precision it adds.</p>
+<p><strong>Goal:</strong> Learn to view a trial as a <strong>map</strong>, decide whether a spatial model is needed, apply it, and explain how much it improves precision.</p>
 </div>
 </section>
-<section id="block-1" class="slide level2 divider">
-<h2>Block 1</h2>
-<p>Why the position of a plot matters</p>
+
+<section id="before-we-start" class="slide level2 scrollable">
+<h2>Before we start</h2>
+<ol type="1">
+<li>Download: <a href="../downloads/Day4_morning_spatial_analysis.zip"><strong>Day 4 morning practical (ZIP)</strong></a></li>
+<li>Unzip it (do not work inside the ZIP) and open <code>Day4_morning.Rproj</code></li>
+<li>Run <code>00_install_packages.R</code> <strong>once</strong>: it installs <code>SpATS</code> and the other packages</li>
+</ol>
+<ul>
+<li>Follow the lecture: we write the code together</li>
+</ul>
 </section>
 <section id="fields-are-not-uniform" class="slide level2">
 <h2>Fields are not uniform</h2>
 <ul>
-<li>A line of trees or a road along one side of the trial</li>
-<li>A trial split by a road or a canal</li>
-<li>A river or a drainage line crossing the field</li>
-<li>A slope: the top is drier than the bottom</li>
+<li>A slope can create a moisture gradient</li>
+<li>A line of trees can produce an edge effect</li>
+<li>A road or canal can divide the trial</li>
+<li>A river or drainage line can create a diagonal band</li>
 </ul>
 
 <img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"><p><span class="small-note">Schematic surfaces, not data. Darker is lower yield.</span></p>
 </section>
-<section id="what-it-does-to-selection" class="slide level2">
-<h2>What it does to selection</h2>
+<section id="why-spatial-variation-matters-for-selection" class="slide level2">
+<h2>Why spatial variation matters for selection</h2>
 <ul>
-<li>The environmental effect is <strong>added</strong> to the genetic effect</li>
-<li>A line in a good patch looks better than it is; a line in a poor patch looks worse</li>
-<li>Blocks remove the <strong>average</strong> difference among pieces of the field</li>
-<li>The variation <strong>inside</strong> a block stays in the residual</li>
+<li>We want to select lines with <strong>better genetics</strong></li>
+<li>However, field conditions also affect plant performance</li>
+<li>Good areas can favor some lines</li>
+<li>Poor areas can penalize others</li>
 </ul>
 <div class="keybox">
-<p>If the ranking mixes genes and soil, the selection gain is lower than expected, and the best lines are not always the ones we advance.</p>
+<p>Spatial analysis helps us separate genetic differences from field variation.</p>
 </div>
 </section>
-<section id="our-data-the-bean-trial-of-day-3" class="slide level2">
-<h2>Our data: the bean trial of Day 3</h2>
+<section class="slide level2">
+
+
+<img data-src="images/spatial_analysis_plot.png" class="r-stretch"></section>
+<section id="the-bean-trial" class="slide level2">
+<h2>The bean trial 🫘</h2>
 <ul>
 <li>380 lines, 2 replicates, <strong>792 plots</strong> in a field of <strong>66 rows x 12 columns</strong></li>
 <li>Columns 1 to 6 are replicate 1, columns 7 to 12 are replicate 2</li>
@@ -306,38 +298,120 @@ Luis Fernando Delgado Muñoz
 <h2>First diagnostic: mean yield by column</h2>
 
 <img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><div class="keybox">
-<p>Lines are randomized, so this is <strong>environment</strong>: from 1,082 kg/ha in column 1 to 1,545 in column 6. An edge-to-centre gradient of 463 kg/ha.</p>
+<p>Within replicate 1, mean yield increases by 463 kg/ha from column 1 to column 6. The repeated checks show a similar positional pattern, providing evidence of environmental variation across columns.</p>
 </div>
 </section>
-<section id="block-2" class="slide level2 divider">
-<h2>Block 2</h2>
-<p>Looking for spatial patterns</p>
+<section id="models-so-far-from-the-design-to-the-field" class="slide level2 compact">
+<h2>Models so far: from the design to the field</h2>
+<style>
+.fx { color:#2a5db0; font-weight:600; }
+.rd { color:#c0392b; font-weight:600; }
+.reveal section.compact h2 { font-size: 1.15em !important; margin-bottom: 0.1em; }
+.reveal section.compact table { font-size: 0.92em; }
+.reveal section.compact table th, .reveal section.compact table td { padding: 3px 10px; }
+.reveal section.compact > p, .reveal section.compact li { font-size: 0.9em; }
+.reveal section.compact ul { margin: 0.2em 0; }
+.reveal section.compact .keybox { font-size: 0.88em; padding: 0.3em 0.8em; margin-top: 0.2em; }
+.reveal section.compact .keybox p { margin: 0.15em 0; }
+</style>
+<table class="caption-top">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Design</th>
+<th style="text-align: left;">Model for the yield of one plot</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Complete blocks</td>
+<td style="text-align: left;">y<sub>ik</sub> = <span class="fx">μ</span> + <span class="rd">b<sub>k</sub></span> + <span class="rd">G<sub>i</sub></span> + <span class="rd">ε<sub>ik</sub></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Replicates and incomplete blocks (<strong>our Day 3 model</strong>)</td>
+<td style="text-align: left;">y<sub>ijk</sub> = <span class="fx">μ</span> + <span class="fx">Rep<sub>j</sub></span> + <span class="rd">b<sub>k(j)</sub></span> + <span class="rd">G<sub>i</sub></span> + <span class="rd">ε<sub>ijk</sub></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rows and columns</td>
+<td style="text-align: left;">y<sub>ijk</sub> = <span class="fx">μ</span> + <span class="rd">Row<sub>j</sub></span> + <span class="rd">Col<sub>k</sub></span> + <span class="rd">G<sub>i</sub></span> + <span class="rd">ε<sub>ijk</sub></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Replicates, rows and columns</td>
+<td style="text-align: left;">y<sub>ijkm</sub> = <span class="fx">μ</span> + <span class="fx">Rep<sub>m</sub></span> + <span class="rd">Row<sub>j(m)</sub></span> + <span class="rd">Col<sub>k(m)</sub></span> + <span class="rd">G<sub>i</sub></span> + <span class="rd">ε<sub>ijkm</sub></span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><span class="fx">Blue</span>: fixed (overall mean μ, replicate). <span class="rd">Red</span>: random (block b, row, column, line G, residual ε). y: yield of the plot</li>
+</ul>
+<div class="keybox">
+<p>All these models assume that the random terms are <strong>independent</strong>. But plots that are close in the field are often alike.</p>
+</div>
+<p><span class="small-note">Adapted from Wageningen University &amp; Research, course material (2021).</span></p>
 </section>
-<section id="start-from-the-day-3-model" class="slide level2">
-<h2>Start from the Day 3 model</h2>
+<section id="sources-of-spatial-variation" class="slide level2 compact">
+<h2>Sources of spatial variation</h2>
+
+<img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-5-1.png" width="1056" class="r-stretch"><ul>
+<li><strong>Design:</strong> the layout itself: replicates, blocks, rows and columns. We put these in the model</li>
+<li><strong>Global trend:</strong> a slope or gradient over the whole field (water, fertility, light)</li>
+<li><strong>Local trend:</strong> patches where neighbouring plots are alike (a wet corner, a compacted strip)</li>
+</ul>
+<div class="keybox">
+<p>Blocks, rows and columns handle the first. For the other two we need a <strong>smooth surface of the field</strong>.</p>
+</div>
+</section>
+
+<section id="did-the-block-model-remove-the-spatial-pattern" class="slide level2">
+<h2>Did the block model remove the spatial pattern?</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-label="1"></a>m_block <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> line) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rb), <span class="at">data =</span> beans)</span>
-<span id="cb1-2"><a href="" aria-label="2"></a>resid_df <span class="ot">&lt;-</span> beans <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(yield)) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">res =</span> <span class="fu">resid</span>(m_block))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-label="1"></a>m_block <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb1-2"><a href="" aria-label="2"></a>  yield <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> line) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rb),</span>
+<span id="cb1-3"><a href="" aria-label="3"></a>  <span class="at">data =</span> beans</span>
+<span id="cb1-4"><a href="" aria-label="4"></a>)</span>
+<span id="cb1-5"><a href="" aria-label="5"></a></span>
+<span id="cb1-6"><a href="" aria-label="6"></a>resid_df <span class="ot">&lt;-</span> beans <span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="" aria-label="7"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(yield)) <span class="sc">|&gt;</span></span>
+<span id="cb1-8"><a href="" aria-label="8"></a>  <span class="fu">mutate</span>(<span class="at">residual =</span> <span class="fu">resid</span>(m_block))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
-<li>Replicate fixed; lines and incomplete blocks random</li>
-<li>Question: <strong>did the blocks capture the whole field?</strong></li>
-<li>If yes, the residuals look like noise on the map. If not, we see patches or bands</li>
+<li>Replicate accounts for the average difference between replicates</li>
+<li>Line represents genetic differences among bean lines</li>
+<li>Replicate–block accounts for differences among incomplete block sections</li>
+<li>Residuals represent the variation that the model did not explain</li>
 </ul>
+<div class="keybox">
+<p>If the block model is sufficient, residuals should look randomly scattered across the field.</p>
+<p>If residuals form patches, bands, or gradients, some spatial variation remains.</p>
+</div>
 </section>
 <section id="residual-map" class="slide level2">
 <h2>Residual map</h2>
 
-<img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-6-1.png" width="1056" class="r-stretch"><ul>
-<li>More red plots near columns 6 and 7, more blue plots in columns 1 and 3</li>
-<li>Not pure noise: the blocks took most of the gradient, <strong>not all of it</strong></li>
+<img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-7-1.png" width="1056" class="r-stretch"><ul>
+<li>Blue: yield was lower than predicted</li>
+<li>White: yield was close to the predicted value</li>
+<li>Red: yield was higher than predicted</li>
+<li>Similar colors appear together in some areas of the field</li>
 </ul>
+<div class="keybox">
+<p>The block model removed part of the field variation, but some spatial pattern remains in the residuals.</p>
+</div>
 </section>
-<section id="what-is-left-inside-the-blocks" class="slide level2">
-<h2>What is left inside the blocks</h2>
 
-<img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"><div class="keybox">
-<p>Blocks of two columns (1-2, 3-4, 5-6): the residual still rises from -60 to 35, from -74 to 76 and from -29 to 52 kg/ha. A block cannot remove a gradient that runs inside it.</p>
+<section id="are-neighbouring-plots-independent" class="slide level2 compact">
+<h2>Are neighbouring plots independent?</h2>
+
+<img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-9-1.png" width="1056" class="r-stretch"><ul>
+<li>Each panel is one column of the field: the yield of the 66 plots, from row 1 to row 66. The red line is a smooth curve through them</li>
+<li>The lines are <strong>not flat</strong>: yield rises and falls along the field. Plots that are next to each other are alike</li>
+<li>Correlation between neighbouring plots: yield 0.34 (along rows) and 0.33 (along columns). Residuals of the Day 3 model: 0.12 and 0.12</li>
+</ul>
+<div class="keybox">
+<p>The traditional fix is to let the residual of a plot be correlated with its neighbour (an autoregressive model, AR1 × AR1), usually fitted in ASReml (licence needed) and hard to tune. We use <strong>SpATS</strong>.</p>
 </div>
 </section>
 <section id="the-semivariogram" class="slide level2">
@@ -348,7 +422,96 @@ Luis Fernando Delgado Muñoz
 <li>Independent residuals: a flat line (the dashed line is the residual variance)</li>
 </ul>
 
-<img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"><p><span class="small-note">Weak local correlation along the rows: the main structure is the gradient across the columns.</span></p>
+<img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"><p><span class="small-note">Weak local correlation along the rows: the main structure is the gradient across the columns.</span></p>
+</section>
+<section id="what-does-each-semivariogram-point-represent" class="slide level2">
+<h2>What does each semivariogram point represent?</h2>
+<p><span class="math display">\[
+\text{Semivariance for one pair}
+=
+\frac{1}{2}(e_i-e_j)^2
+\]</span></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Point</th>
+<th style="text-align: right;">Distance</th>
+<th style="text-align: left;">Plot pairs within each column</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">rows 1–2, 2–3, 3–4, …</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">rows 1–3, 2–4, 3–5, …</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">rows 1–4, 2–5, 3–6, …</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">(h)</td>
+<td style="text-align: right;">(h)</td>
+<td style="text-align: left;">rows 1–(1+h), 2–(2+h), …</td>
+</tr>
+</tbody>
+</table>
+<div class="keybox">
+<p>Each point is the average dissimilarity between the residuals of all plot pairs separated by the same distance.</p>
+</div>
+</section>
+<section id="do-rows-and-columns-explain-variance" class="slide level2 compact">
+<h2>Do rows and columns explain variance?</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-label="1"></a>m_rc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rep<span class="sc">:</span>rowf) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rep<span class="sc">:</span>colf) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> line), <span class="at">data =</span> beans)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Term</th>
+<th style="text-align: right;">Variance</th>
+<th style="text-align: right;">Share of the total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Lines (genetics)</td>
+<td style="text-align: right;">51,371</td>
+<td style="text-align: right;">29 %</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Rows within replicate</td>
+<td style="text-align: right;">50,468</td>
+<td style="text-align: right;">29 %</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Columns within replicate</td>
+<td style="text-align: right;">16,391</td>
+<td style="text-align: right;">9 %</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residual</td>
+<td style="text-align: right;">58,279</td>
+<td style="text-align: right;">33 %</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="keybox">
+<p>Rows explain 29 % of the variance and columns 9 %: <strong>as much as the lines</strong> (29 %). The field is a large part of what we measure, so it must be in the model.</p>
+</div>
+<ul>
+<li>Variance = how much the term moves the yield: the bigger, the more the field matters</li>
+</ul>
 </section>
 <section id="when-is-a-spatial-correction-justified" class="slide level2 scrollable">
 <h2>When is a spatial correction justified?</h2>
@@ -363,34 +526,31 @@ Luis Fernando Delgado Muñoz
 <p>If the residuals look random, the extra model buys nothing and costs complexity.</p>
 </div>
 </section>
-<section id="block-3" class="slide level2 divider">
-<h2>Block 3</h2>
-<p>Spatial models with SpATS</p>
-</section>
-<section id="the-idea-a-smooth-surface-of-the-field" class="slide level2">
+
+<section id="the-idea-a-smooth-surface-of-the-field" class="slide level2 compact">
 <h2>The idea: a smooth surface of the field</h2>
-<ul>
-<li>A spline is a flexible curve made of small pieces joined smoothly. In 2D it is a flexible <strong>surface</strong></li>
-<li>The <strong>penalty</strong> keeps the surface smooth: it follows a gradient or a patch, not the noise of one plot</li>
-<li>The data decide how smooth the surface is: no correlation structure to choose by hand</li>
-<li>Added to the mixed model, with random row, column and block effects</li>
+
+<img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-13-1.png" width="1152" class="r-stretch"><ul>
+<li>A <strong>spline</strong> is a flexible curve made of small pieces joined smoothly. In 2D it is a flexible <strong>surface</strong>. A <strong>penalty</strong> keeps it smooth, so it follows a gradient or a patch, not the noise of one plot</li>
+<li>SpATS splits the surface into parts, like an ANOVA: change across <strong>columns</strong>, change along <strong>rows</strong>, two <strong>tilts</strong> (the trend in one direction changes along the other), and <strong>local patches</strong></li>
+<li>The data decide how smooth the surface is. Random rows, columns and blocks are added as before</li>
 </ul>
 <p><span class="small-note">Rodriguez-Alvarez, Boer, van Eeuwijk &amp; Eilers (2018). <em>Spatial Statistics</em> 23: 52-71.</span></p>
 </section>
 <section id="the-model-in-r" class="slide level2">
 <h2>The model in R</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-label="1"></a><span class="fu">SpATS</span>(<span class="at">response =</span> <span class="st">"yield"</span>,</span>
-<span id="cb2-2"><a href="" aria-label="2"></a>      <span class="at">genotype =</span> <span class="st">"line"</span>, <span class="at">genotype.as.random =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-3"><a href="" aria-label="3"></a>      <span class="at">spatial  =</span> <span class="sc">~</span> <span class="fu">PSANOVA</span>(col, row, <span class="at">nseg =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">32</span>), <span class="at">nest.div =</span> <span class="dv">2</span>),</span>
-<span id="cb2-4"><a href="" aria-label="4"></a>      <span class="at">fixed    =</span> <span class="sc">~</span> rep,</span>
-<span id="cb2-5"><a href="" aria-label="5"></a>      <span class="at">random   =</span> <span class="sc">~</span> rowf <span class="sc">+</span> colf <span class="sc">+</span> rb,</span>
-<span id="cb2-6"><a href="" aria-label="6"></a>      <span class="at">data     =</span> beans)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-label="1"></a><span class="fu">SpATS</span>(<span class="at">response =</span> <span class="st">"yield"</span>,</span>
+<span id="cb3-2"><a href="" aria-label="2"></a>      <span class="at">genotype =</span> <span class="st">"line"</span>, <span class="at">genotype.as.random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-3"><a href="" aria-label="3"></a>      <span class="at">spatial  =</span> <span class="sc">~</span> <span class="fu">PSANOVA</span>(col, row, <span class="at">nseg =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">32</span>), <span class="at">nest.div =</span> <span class="dv">2</span>),</span>
+<span id="cb3-4"><a href="" aria-label="4"></a>      <span class="at">fixed    =</span> <span class="sc">~</span> rep,</span>
+<span id="cb3-5"><a href="" aria-label="5"></a>      <span class="at">random   =</span> <span class="sc">~</span> rowf <span class="sc">+</span> colf <span class="sc">+</span> rb,</span>
+<span id="cb3-6"><a href="" aria-label="6"></a>      <span class="at">data     =</span> beans)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <table class="caption-top">
 <colgroup>
-<col style="width: 6%">
-<col style="width: 94%">
+<col style="width: 25%">
+<col style="width: 75%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -421,67 +581,116 @@ Luis Fernando Delgado Muñoz
 <p><code>col</code> and <code>row</code> as numbers go in <code>PSANOVA()</code> (distance). <code>rowf</code> and <code>colf</code> as factors go in <code>random</code>.</p>
 </div>
 </section>
-<section id="reading-the-output-effective-dimensions" class="slide level2">
-<h2>Reading the output: effective dimensions</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 3
-  Term              `Effective dimension` `Number of levels`
-  &lt;chr&gt;                             &lt;dbl&gt;              &lt;dbl&gt;
-1 Lines                             244.                 380
-2 Smooth surface                     25.9                 NA
-3 Rows                               24.5                 66
-4 Columns                             2.1                 12
-5 Incomplete blocks                   1.4                 36</code></pre>
-</div>
-</div>
-<ul>
-<li>The effective dimension is how many parameters a term <strong>effectively</strong> uses</li>
-<li>Once the surface is in the model, the blocks have little left to explain</li>
-</ul>
-</section>
-<section id="what-was-removed-from-the-plots" class="slide level2">
-<h2>What was removed from the plots</h2>
-
-<img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-11-1.png" width="1056" class="r-stretch"><ul>
-<li><strong>Left:</strong> the estimated surface: high yield in the middle, low yield in the outer columns</li>
-<li><strong>Right:</strong> row effects, small by comparison (mostly under 100 kg/ha)</li>
-</ul>
-</section>
-<section id="the-standard-spats-plot" class="slide level2">
+<section id="the-standard-spats-plot" class="slide level2 compact">
 <h2>The standard SpATS plot</h2>
 
-<img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-12-1.png" width="1056" class="r-stretch"></section>
-<section id="blues-and-blups" class="slide level2">
-<h2>BLUEs and BLUPs</h2>
+<img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-15-1.png" width="1056" class="r-stretch"><p>Top: <strong>raw data</strong>, <strong>fitted data</strong>, <strong>residuals</strong> (what the model cannot explain). Bottom: <strong>spatial trend</strong> (the field effect), <strong>line predictions</strong> (what we select on) and their <strong>histogram</strong>.</p>
+</section>
+<section id="reading-the-output-effective-dimensions" class="slide level2 compact">
+<h2>Reading the output: effective dimensions</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-label="1"></a>blup_sp <span class="ot">&lt;-</span> <span class="fu">predict</span>(m_sp, <span class="at">which =</span> <span class="st">"line"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="" aria-label="2"></a>  <span class="fu">select</span>(line, <span class="at">BLUP =</span> predicted.values, <span class="at">SE =</span> standard.errors) <span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a href="" aria-label="3"></a>  <span class="fu">mutate</span>(<span class="at">BLUP =</span> BLUP <span class="sc">+</span> m_sp<span class="sc">$</span>coeff[[<span class="st">"repR2"</span>]] <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb4-4"><a href="" aria-label="4"></a></span>
-<span id="cb4-5"><a href="" aria-label="5"></a>m_sp_fix <span class="ot">&lt;-</span> <span class="fu">fit_spats</span>(beans, <span class="at">genotype_random =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb4-6"><a href="" aria-label="6"></a>blue_sp <span class="ot">&lt;-</span> <span class="fu">predict</span>(m_sp_fix, <span class="at">which =</span> <span class="st">"line"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-7"><a href="" aria-label="7"></a>  <span class="fu">select</span>(line, <span class="at">BLUE =</span> predicted.values, <span class="at">SE_BLUE =</span> standard.errors) <span class="sc">|&gt;</span></span>
-<span id="cb4-8"><a href="" aria-label="8"></a>  <span class="fu">mutate</span>(<span class="at">BLUE =</span> BLUE <span class="sc">+</span> m_sp_fix<span class="sc">$</span>coeff[[<span class="st">"repR2"</span>]] <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb4-9"><a href="" aria-label="9"></a></span>
-<span id="cb4-10"><a href="" aria-label="10"></a><span class="fu">left_join</span>(blue_sp, blup_sp, <span class="at">by =</span> <span class="st">"line"</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BLUP)) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>           line     BLUE  SE_BLUE     BLUP       SE
-1       SEF_060 2242.021 180.1600 1871.757 143.9013
-2       DOR_364 2114.316 181.6090 1809.103 144.3952
-3       DAB_366 2036.997 178.3529 1770.903 142.6014
-4 TIO_CANELA_75 1898.100 133.8103 1744.753 116.0499
-5       SEN_056 1954.716 180.5070 1714.841 143.2401</code></pre>
+<div class="cell-output-display">
+<table class="caption-top">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 14%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Term</th>
+<th style="text-align: right;">Effective</th>
+<th style="text-align: right;">Model</th>
+<th style="text-align: right;">Nominal</th>
+<th style="text-align: right;">Ratio</th>
+<th style="text-align: left;">In words</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Lines</td>
+<td style="text-align: right;">244.3</td>
+<td style="text-align: right;">380</td>
+<td style="text-align: right;">379</td>
+<td style="text-align: right;">0.64</td>
+<td style="text-align: left;">ratio = heritability</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Rows</td>
+<td style="text-align: right;">24.5</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">0.38</td>
+<td style="text-align: left;">differ a lot</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Columns</td>
+<td style="text-align: right;">2.1</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: left;">matter little now</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Incomplete blocks</td>
+<td style="text-align: right;">1.4</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: left;">almost nothing left</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Smooth surface</td>
+<td style="text-align: right;">25.9</td>
+<td style="text-align: right;">148</td>
+<td style="text-align: right;">148</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: left;">the field effect</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <ul>
-<li>BLUEs for a next stage (multi-environment analysis); BLUPs to rank within this trial</li>
+<li><strong>Model</strong>: how many separate values the term has (380 lines, 66 rows, 12 columns, 36 blocks)</li>
+<li><strong>Nominal</strong>: the most it could use (a little less: the mean and replicate take some)</li>
+<li><strong>Effective</strong>: how many the data really use. A simple, smooth pattern uses few</li>
+<li><strong>Ratio</strong> = Effective / Nominal. Lines use 244 of 379: <strong>0.64 is the heritability</strong></li>
 </ul>
 </section>
-<section id="block-4" class="slide level2 divider">
-<h2>Block 4</h2>
-<p>Mr.Bean: SpATS without code</p>
+<section id="where-is-the-complexity-of-the-surface" class="slide level2 compact">
+<h2>Where is the complexity of the surface?</h2>
+
+<img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"><ul>
+<li>The <strong>effective dimension</strong> of each part tells how much that part adds to the field effect</li>
+<li>Most of the surface is <strong>local patches</strong> (66 %). Change along rows and across columns is small</li>
+<li>A part with an effective dimension near 0 is not needed in this field</li>
+</ul>
 </section>
+<section id="what-was-removed-from-the-plots" class="slide level2 compact">
+<h2>What was removed from the plots</h2>
+
+<img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-18-1.png" width="768" class="r-stretch"><ul>
+<li>Each cell is the estimated effect of the <strong>field</strong> on yield, in kg/ha, whatever line is there</li>
+<li><strong>Red</strong>: the field adds yield here (more than the average of the trial). <strong>Blue</strong>: the field takes yield away</li>
+<li>SpATS subtracts this from every plot before it compares the lines</li>
+<li>Here: high in the middle of the field (columns 5 to 8), low in the outer columns (1 and 12)</li>
+</ul>
+</section>
+<section id="what-was-removed-the-row-effects" class="slide level2 compact">
+<h2>What was removed: the row effects</h2>
+
+<img data-src="09-spatial-analysis_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"><ul>
+<li>Each bar is one <strong>row</strong>. Its height is how many kg/ha the plots of that row yield <strong>above</strong> (bar up) or <strong>below</strong> (bar down) the average, only because of the row</li>
+<li>Positive: more than expected. Negative: less than expected</li>
+<li>They are small here (the largest is 122 kg/ha): the surface already took most of the field effect</li>
+</ul>
+</section>
+
+
 <section id="mr.bean" class="slide level2 scrollable">
 <h2>Mr.Bean</h2>
 <ul>
@@ -501,16 +710,14 @@ Luis Fernando Delgado Muñoz
 <section id="running-mr.bean" class="slide level2">
 <h2>Running Mr.Bean</h2>
 <ul>
-<li>Web version on shinyapps.io (needs internet; may be slow with many users)</li>
-<li>Or in R: <code>remotes::install_github("AparicioJohan/MrBeanApp")</code>, then <code>library(MrBean)</code> and <code>run_app()</code></li>
-<li>Project page: <code>apariciojohan.github.io/MrBeanApp</code></li>
+<li><p>Web version on shinyapps.io (<a href="https://beanteam.shinyapps.io/MrBean_BETA/" class="uri">https://beanteam.shinyapps.io/MrBean_BETA/</a>)</p></li>
+<li><p>Or in R: <code>remotes::install_github("AparicioJohan/MrBeanApp")</code>, then <code>library(MrBean)</code> and <code>run_app()</code></p></li>
+<li><p>Project page: <code>apariciojohan.github.io/MrBeanApp</code></p></li>
+<li><p>Step-by-step guide with screenshots: <a href="tutorial-mrbean-spatial.html">Mr.Bean tutorial</a> (about 35 min)</p></li>
 </ul>
-<p><strong>Practical:</strong> run the beans file in the app and in R, and compare the heritability and the top 5 lines.</p>
+<p><strong>Practical:</strong> run the beans file in the app and in R, and compare the heritability and the top lines.</p>
 </section>
-<section id="block-5" class="slide level2 divider">
-<h2>Block 5</h2>
-<p>Spatial against non-spatial: does it pay?</p>
-</section>
+
 <section id="four-ways-to-analyse-the-same-trial" class="slide level2">
 <h2>Four ways to analyse the same trial</h2>
 <div class="cell">
@@ -533,171 +740,26 @@ Luis Fernando Delgado Muñoz
 <p>Residual SD from 282 to 231 kg/ha; heritability of yield from 0.54 to 0.64.</p>
 </div>
 </section>
-<section id="does-the-ranking-change" class="slide level2">
-<h2>Does the ranking change?</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>correlation    selected     in_both 
-       0.94       38.00       30.00 </code></pre>
-</div>
-</div>
-<ul>
-<li>The rankings are similar, but <strong>8 of the 38 selected lines change</strong></li>
-<li>Which list is better? We cannot know the true values, but we can test the predictions</li>
-</ul>
-</section>
-<section id="a-check-with-the-other-replicate" class="slide level2">
-<h2>A check with the other replicate</h2>
-<ul>
-<li>Fit each model with <strong>replicate 1 only</strong>, predict the line means of <strong>replicate 2</strong>, and the other way round</li>
-<li>The replicates are in different columns: two independent samples of the field</li>
-</ul>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
-  Model                   `Correlation with the other replicate`
-  &lt;chr&gt;                                                    &lt;dbl&gt;
-1 SpATS                                                    0.367
-2 Blocks + rows + columns                                  0.36 
-3 Incomplete blocks                                        0.337
-4 Raw means                                                0.288</code></pre>
-</div>
-</div>
-<div class="keybox">
-<p>Adjusting for the field beats raw means, and the spatial model is slightly better than the blocks alone. With two replicates, do not over-read small differences.</p>
-</div>
-</section>
-<section id="when-does-it-pay-five-traits" class="slide level2">
-<h2>When does it pay? Five traits</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 4
-  Trait             `Incomplete blocks` SpATS  Gain
-  &lt;chr&gt;                           &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 Yield                           0.542 0.644 0.102
-2 Days to flowering               0.646 0.646 0    
-3 Days to maturity                0.644 0.653 0.01 
-4 Plant height                    0.123 0.157 0.034
-5 100-seed weight                 0.86  0.868 0.008</code></pre>
-</div>
-</div>
-<div class="keybox">
-<p>Large gain for <strong>yield</strong>, the trait most affected by soil and water. Almost nothing for flowering, maturity and seed weight. The spatial model is a tool for the traits that need it, not a default.</p>
-</div>
-</section>
-<section id="block-6" class="slide level2 divider">
-<h2>Block 6</h2>
-<p>Design or analysis?</p>
-</section>
-<section id="fix-it-in-the-field-or-in-the-model" class="slide level2">
-<h2>Fix it in the field or in the model?</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 21%">
-<col style="width: 39%">
-<col style="width: 39%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Problem</th>
-<th style="text-align: left;">Design</th>
-<th style="text-align: left;">Analysis</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Known gradient</td>
-<td style="text-align: left;">Blocks across the gradient</td>
-<td style="text-align: left;">Row/column effects, SpATS surface</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Unknown patches</td>
-<td style="text-align: left;">Small incomplete blocks, row-column</td>
-<td style="text-align: left;">Spatial model, residual map</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Border competition</td>
-<td style="text-align: left;">Border plots, plot size</td>
-<td style="text-align: left;">Do not analyse borders as data</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Unreplicated or p-rep</td>
-<td style="text-align: left;">Checks spread over the field</td>
-<td style="text-align: left;">Checks as reference, surface</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Large plot noise</td>
-<td style="text-align: left;">Larger plots, more replicates</td>
-<td style="text-align: left;">Not recoverable</td>
-</tr>
-</tbody>
-</table>
-<div class="keybox">
-<p><strong>Design for the precision you need; analyse for the heterogeneity that remains.</strong></p>
-</div>
-</section>
-<section id="in-the-bean-trial" class="slide level2">
-<h2>In the bean trial</h2>
-<ul>
-<li>The gradient runs <strong>across the width</strong> of the field</li>
-<li>Blocks of 2 columns cut it in 3 strips per replicate: the block variance is as large as the genetic variance</li>
-<li>But each block still holds two columns at different yield levels</li>
-<li><strong>Design fixes that cost less than the analysis:</strong>
-<ul>
-<li>blocks 1 column wide and 22 rows long, following the contours of the gradient</li>
-<li>border plots in the outer columns (the lowest yield: columns 1 and 12)</li>
-</ul></li>
-</ul>
-</section>
-<section id="block-7" class="slide level2 divider">
-<h2>Block 7</h2>
-<p>Single-trial workflow, exercise and discussion</p>
-</section>
-<section id="a-single-trial-workflow" class="slide level2 scrollable">
-<h2>A single-trial workflow</h2>
+
+
+
+
+
+
+
+
+
+
+<section id="your-turn-the-practical-1030" class="slide level2 scrollable">
+<h2>Your turn: the practical (10:30)</h2>
+<p>The <strong>same bean trial, yield only</strong>, analysed twice. Download the folder: <a href="../downloads/Day4_morning_spatial_analysis.zip">Day4_morning_spatial_analysis.zip</a></p>
 <ol type="1">
-<li><strong>Raw data and QC</strong> (Day 1) → 2. <strong>Design and model</strong> (Days 2 and 4) → 3. <strong>BLUPs and heritability</strong> (Day 3) → 4. <strong>Selection-ready table</strong> → 5. <strong>Decision</strong></li>
-</ol>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-label="1"></a>res <span class="ot">&lt;-</span> <span class="fu">single_trial</span>(beans, <span class="st">"yield"</span>)</span>
-<span id="cb10-2"><a href="" aria-label="2"></a><span class="fu">round</span>(res<span class="sc">$</span>h2, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.644</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-label="1"></a><span class="fu">head</span>(res<span class="sc">$</span>table, <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 6
-  line           BLUP    SE reliability  rank check
-  &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;int&gt; &lt;lgl&gt;
-1 SEF_060       1872.  144.       0.610     1 FALSE
-2 DOR_364       1809.  144.       0.607     2 FALSE
-3 DAB_366       1771.  143.       0.617     3 FALSE
-4 TIO_CANELA_75 1745.  116.       0.746     4 TRUE 
-5 SEN_056       1715.  143.       0.613     5 FALSE</code></pre>
-</div>
-</div>
-<p><span class="small-note">A high BLUP with low reliability is a candidate to retest; with high reliability, a solid advance.</span></p>
-</section>
-<section id="exercise" class="slide level2 scrollable">
-<h2>Exercise</h2>
-<p>With the same trial:</p>
-<ol type="1">
-<li>Draw the residual map of <strong>days to maturity (DPM)</strong> from the incomplete-block model. Bands or patches?</li>
-<li>Run <code>single_trial()</code> for DPM with and without space. Is the correction justified?</li>
-<li>How many of the 38 best lines for yield (10%) by the spatial model are among the 38 best by the Day 3 model? Which is the first line that enters only with the spatial model?</li>
+<li><strong>In R</strong> (about 80 min): open <code>Spatial_models_comparison.Rmd</code>. ANOVA with rows and columns, a ladder of mixed models (<code>lme4</code>), then SpATS; heritability, BLUEs and BLUPs, and the choice of model. Work <strong>with your neighbour</strong></li>
+<li><strong>In Mr.Bean</strong> (about 35 min): follow the <a href="tutorial-mrbean-spatial.html">step-by-step tutorial</a> and compare the numbers with R</li>
 </ol>
 <div class="keybox">
-<p>Hint: compare the heritability gain with the rule of this morning.</p>
+<p>Run each box, replace the <code>___</code>, write your findings. The answers you should get are in the comments. At the end: when is it worth adding rows and columns, and when do we need SpATS?</p>
 </div>
-</section>
-<section id="questions-for-discussion" class="slide level2">
-<h2>Questions for discussion</h2>
-<ul>
-<li>Look at the map of <strong>your own trial</strong>. Do you see a gradient, patches or an edge effect?</li>
-<li>Your trial has no coordinates. What would you record next season, and how?</li>
-<li>A spatial model changes 8 of 38 selected lines. How do you decide which list to trust?</li>
-<li>Where would you place border plots and checks in your next trial?</li>
-</ul>
 </section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways</h2>
@@ -705,7 +767,7 @@ Luis Fernando Delgado Muñoz
 <li>Plots that are close are more alike than plots that are far; blocks capture part of it, the rest stays in the residual</li>
 <li><strong>Look before you model:</strong> map of the raw data, map of the residuals, semivariogram</li>
 <li><code>SpATS</code> fits a smooth surface with random row, column and block effects, and returns BLUEs, BLUPs and heritability; Mr.Bean does it without code</li>
-<li>The gain depends on the trait: large for yield here, almost nothing for DF, DPM and SW100</li>
+<li>Most of the gain comes from adding rows and columns to the model; SpATS adds a little more precision (heritability 0.43, 0.54, 0.60, 0.64 along the ladder)</li>
 <li>Check against an independent replicate; report the heritability of the model you use</li>
 <li><strong>Design first, analysis second</strong></li>
 </ul>
