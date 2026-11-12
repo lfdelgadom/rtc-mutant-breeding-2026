@@ -1263,7 +1263,7 @@
     "href": "part1-week1/09-spatial-analysis.html",
     "title": "9  Spatial Analysis and Trial Precision",
     "section": "",
-    "text": "9.1 Learning objectives\nChapter 7 removed the variation among incomplete blocks from the comparison of lines. But a block is only a rough way of saying “these plots are close to each other”. The soil, the water and the light change gradually across a field, and a block of 22 plots can hide a lot of that change. This chapter models the position of the plots directly.\nWe continue with the bean trial of Chapter 7 and Chapter 8, so every result can be compared with what we already know.\nlibrary(dplyr)\nlibrary(tidyr)\nlibrary(readr)\nlibrary(ggplot2)\nlibrary(lme4)\nlibrary(SpATS)",
+    "text": "9.1 Learning objectives\nMaterials of this session\nOpen the slides\nPractical folder in R (ZIP)\nTutorial: spatial analysis with Mr.Bean\nChapter 7 removed the variation among incomplete blocks from the comparison of lines. But a block is only a rough way of saying “these plots are close to each other”. The soil, the water and the light change gradually across a field, and a block of 22 plots can hide a lot of that change. This chapter models the position of the plots directly.\nWe continue with the bean trial of Chapter 7 and Chapter 8, so every result can be compared with what we already know.\nlibrary(dplyr)\nlibrary(tidyr)\nlibrary(readr)\nlibrary(ggplot2)\nlibrary(lme4)\nlibrary(SpATS)",
     "crumbs": [
       "Week 1: Concepts and methods",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Analysis and Trial Precision</span>"
@@ -1406,7 +1406,7 @@
     "href": "part1-week1/09b-image-analysis.html",
     "title": "10  Low-Cost High-Throughput Phenotyping: Image Analysis in R",
     "section": "",
-    "text": "10.1 Learning objectives\nIn the morning (Chapter 9) we saw that the quality of a trial depends on the precision of every plot value. This afternoon we look at the other end of the problem: how the plot value is measured. Counting seeds, scoring colour, measuring leaves or rating disease by eye is slow, tiring and different from person to person. A photograph and a few lines of R can do the same work for hundreds of samples, in the same way every time.\nlibrary(pliman)\nlibrary(dplyr)\nAll images in this chapter are the sample images installed with pliman (Olivoto 2022), so every example runs on any computer. image_pliman() reads them by name.",
+    "text": "10.1 Learning objectives\nMaterials of this session\nOpen the slides\nPractical folder in R (ZIP)\nTutorial: download photos from Artemis\nIn the morning (Chapter 9) we saw that the quality of a trial depends on the precision of every plot value. This afternoon we look at the other end of the problem: how the plot value is measured. Counting seeds, scoring colour, measuring leaves or rating disease by eye is slow, tiring and different from person to person. A photograph and a few lines of R can do the same work for hundreds of samples, in the same way every time.\nlibrary(pliman)\nlibrary(dplyr)\nAll images in this chapter are the sample images installed with pliman (Olivoto 2022), so every example runs on any computer. image_pliman() reads them by name.",
     "crumbs": [
       "Week 1: Concepts and methods",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Low-Cost High-Throughput Phenotyping: Image Analysis in R</span>"
