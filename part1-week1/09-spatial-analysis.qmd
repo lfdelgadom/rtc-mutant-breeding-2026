@@ -5,6 +5,11 @@
 **Session:** Day 4, Thursday 12 November (morning)
 :::
 
+**Materials of this session**\
+[Open the slides](../slides/09-spatial-analysis.html){target="_blank"}\
+[Practical folder in R (ZIP)](../downloads/Day4_morning_spatial_analysis.zip)\
+[Tutorial: spatial analysis with Mr.Bean](../slides/tutorial-mrbean-spatial.html){target="_blank"}
+
 ## Learning objectives
 
 - Recognize field heterogeneity and explain how it distorts the ranking of lines

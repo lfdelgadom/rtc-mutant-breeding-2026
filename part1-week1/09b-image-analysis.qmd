@@ -5,6 +5,11 @@
 **Session:** Day 4, Thursday 12 November (afternoon)
 :::
 
+**Materials of this session**\
+[Open the slides](../slides/09b-image-analysis.html){target="_blank"}\
+[Practical folder in R (ZIP)](../downloads/Day4_afternoon_image_analysis.zip)\
+[Tutorial: download photos from Artemis](../slides/tutorial-artemis-photos.html){target="_blank"}
+
 ## Learning objectives
 
 - Explain how a photograph becomes a trait value, and where this fits in the analysis of a breeding trial
