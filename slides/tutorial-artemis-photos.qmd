@@ -1,0 +1,175 @@
+---
+title: "Tutorial: download real field photos from Artemis and Image Safari"
+subtitle: "RTC RER5030, Day 4 (image analysis). Luis Fernando Delgado Muñoz"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 2
+    code-copy: true
+    embed-resources: true
+execute:
+  eval: false
+  echo: true
+---
+
+## What you will do
+
+In about 30 minutes you will **look inside** a public collection of 7.5 million crop photographs, **download 10 of them**, and **open them in R** with the same tools we used in the practical. You do not need an account, a password or any special software: R is enough.
+
+::: {.callout-note}
+**Work in pairs and download only a few photos.** The collection is huge and we share the wifi of the room. Ten photos per pair are enough. Never try to download a whole folder.
+:::
+
+## 1. What is this collection?
+
+**Artemis and Image Safari** are crop image datasets of the Alliance of Bioversity International and CIAT, stored on Amazon Web Services as open data.
+
+| | Artemis | Image Safari |
+|:--|:--|:--|
+| Photographs | 1,387,663 | 6,081,555 |
+| Crops | common bean, cowpea, soybean, sorghum | 18 crops |
+| Countries | 4 | 9 (sub-Saharan Africa) |
+| Extra information | agronomic, genotypic and environmental metadata linked to the photos | one JSON metadata file per image |
+
+- 40,558 photographs have **annotations** of plant organs (segmentation, detection, points, scribbles): 10,887 in Artemis and 29,671 in Image Safari.
+- It is **not** a plant disease dataset: the annotations describe crops and plant organs. Disease detection is only a possible use.
+- Photographs are JPEG files at the original size of the camera. New images are added about once a year.
+- **Licence:** CC BY-SA 4.0. You may use and share them if you give credit and keep the same licence.
+- Two storage "buckets" in the region `us-west-2`; the name used here is `alliance-artemis-imagesafari`, with two main folders, `Artemis/` and `ImageSafari/`.
+
+Source: [registry.opendata.aws/artemis-image-safari](https://registry.opendata.aws/artemis-image-safari/).
+
+## 2. Set up (2 minutes)
+
+```{r}
+# xml2 reads the list of files; pliman we already have from the practical
+if (!requireNamespace("xml2", quietly = TRUE)) install.packages("xml2")
+library(xml2)
+library(pliman)
+```
+
+Now copy these two small functions. The first **lists** one folder of the collection, the second **downloads** one file.
+
+```{r}
+base <- "https://alliance-artemis-imagesafari.s3.us-west-2.amazonaws.com"
+
+# List one "folder": returns the sub-folders and the files (key and size in MB)
+list_bucket <- function(prefix = "", max_keys = 200) {
+  url <- paste0(base, "/?list-type=2&delimiter=%2F&max-keys=", max_keys,
+                "&prefix=", utils::URLencode(prefix, reserved = TRUE))
+  x <- xml2::read_xml(url)
+  xml2::xml_ns_strip(x)
+  list(
+    folders = xml2::xml_text(xml2::xml_find_all(x, "//CommonPrefixes/Prefix")),
+    files   = data.frame(
+      key     = xml2::xml_text(xml2::xml_find_all(x, "//Contents/Key")),
+      size_mb = round(as.numeric(xml2::xml_text(xml2::xml_find_all(x, "//Contents/Size"))) / 1e6, 2)
+    )
+  )
+}
+
+# Download one file by its key into a local folder
+get_photo <- function(key, dest = "artemis_photos") {
+  dir.create(dest, showWarnings = FALSE)
+  out <- file.path(dest, basename(key))
+  utils::download.file(paste0(base, "/", utils::URLencode(key)), out, mode = "wb", quiet = TRUE)
+  out
+}
+```
+
+## 3. Look inside before you download
+
+A *key* is the full name of a file, such as `Artemis/folder/photo.jpg`. A *prefix* is the beginning of a key, like a folder.
+
+```{r}
+list_bucket("")$folders         # the top level: you should see Artemis/ and ImageSafari/
+```
+
+```{r}
+top <- list_bucket("Artemis/")
+top$folders                      # the sub-folders of Artemis
+head(top$files)                  # files at this level, if any
+```
+
+**Go down one folder at a time.** Choose a folder from the list, put it in `prefix`, and list it again:
+
+```{r}
+prefix <- "Artemis/"             # change it: paste one of the folders you saw, for example the first
+cur <- list_bucket(prefix)
+cur$folders
+head(cur$files, 10)
+```
+
+Repeat until you reach a folder that has files ending in `.jpg` or `.jpeg`. Look also for folders or files with the words *annotations*, *metadata* or *json*: they tell you what each photo contains.
+
+::: {.callout-tip}
+You can also read the same list in your **browser**: paste this address and add the folder after `prefix=`:
+
+`https://alliance-artemis-imagesafari.s3.us-west-2.amazonaws.com/?list-type=2&delimiter=/&prefix=Artemis/`
+
+You will see an XML page. The names between `<Prefix>` are folders and the names between `<Key>` are files.
+:::
+
+**Write down** what you found: the path of the folder with photographs, the crop, and what metadata exists.
+
+## 4. Download 10 photographs
+
+```{r}
+# 'cur' is the folder with photographs that you found in step 3
+photos <- subset(cur$files, grepl("\\.jpe?g$", key, ignore.case = TRUE) & size_mb < 6)
+nrow(photos)                      # how many photographs are in this folder?
+sel <- head(photos$key, 10)       # the first 10 (you can choose others)
+paths <- vapply(sel, get_photo, character(1))
+paths
+```
+
+If a download fails with an error, try the next photograph: some keys may have special characters or the connection may be slow. Check the folder `artemis_photos/` in your project.
+
+## 5. Look at the photographs in R
+
+```{r}
+img <- image_import(paths[1])      # pliman reads the file
+dim(img)                           # height, width, colour channels
+plot(img)
+```
+
+Now use the colour indices of the practical on a real field photograph:
+
+```{r}
+image_index(img, index = c("R", "GLI", "NGRDI"), ncol = 3, nrow = 1)
+```
+
+**Questions to discuss with your neighbour:**
+
+1. Is the background uniform? Is the light even? Compare with the sample images of `pliman`.
+2. Could you separate the plant from the soil with these indices? Which index works best?
+3. What would you need to change in the way the photograph is taken to measure a trait reliably (see the pitfalls slide)?
+
+## 6. Optional: the AWS command line
+
+If you prefer a terminal, install the *AWS CLI* and use `--no-sign-request` (no account is needed):
+
+```bash
+aws s3 ls --no-sign-request s3://alliance-artemis-imagesafari/Artemis/
+aws s3 cp --no-sign-request s3://alliance-artemis-imagesafari/Artemis/<folder>/<photo>.jpg .
+```
+
+## 7. If something fails
+
+| Problem | What to do |
+|:--|:--|
+| `cannot open URL` or `403` | The network of the room may block Amazon. Try the browser address of step 3; if it also fails, use your phone as a hotspot, or ask the instructor for the sample folder |
+| `could not find function "read_xml"` | Run `library(xml2)` |
+| The list is empty | Check the `prefix`: it must end with `/` and match upper and lower case |
+| Very slow | Download fewer photographs, or wait for your neighbour to finish |
+
+## 8. Credit and good practice
+
+- Cite the dataset with the **access date** and the address, and also the data descriptor: Mutuvi, S. et al. (2026), DOI [10.31220/agriRxiv.2026.00491](https://doi.org/10.31220/agriRxiv.2026.00491).
+- Keep the licence (CC BY-SA 4.0) if you share the photographs or derived data.
+- Keep the file names as they are: it is the safest way to link a photograph to its metadata and annotations later.
+
+## About the project
+
+Artemis was an initiative of the Alliance of Bioversity International and CIAT with Mineral, supported by the Bill & Melinda Gates Foundation (2022 to 2026). It piloted smartphone photography with artificial intelligence for breeding trials in Tanzania and Uganda; the project reports about 50% less phenotyping time and more than 1,000 plots per day, with an accuracy within 10% (r² above 0.8). This is the same idea of the practical: **a phone, a protocol and R**, scaled to a breeding programme.

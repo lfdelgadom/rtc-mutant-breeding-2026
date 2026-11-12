@@ -10,6 +10,7 @@ project:
     - "slides/*_files/**"
     - "slides/images/**"
     - "downloads/*.zip"
+    - "data/Example_Beans.csv"
 
 book:
   title: "Experimental Design and Data Analysis for the Advancement of Mutant Populations"

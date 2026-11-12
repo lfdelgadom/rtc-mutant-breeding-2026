@@ -1,0 +1,109 @@
+---
+title: "Image 3: a folder of images, the field book and the model"
+author: "[Your name]"
+date: "12 November 2026"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = TRUE,
+                      fig.width = 8, fig.height = 4.5)
+```
+
+> **How to use this file.** Run each grey box with the green triangle, from top to bottom. Replace the `___` in the lines marked `# TODO`; the `# HINT` line above tells you where to look. Every part says what result you should get, so you can check yourself. Write what you see in the **Your findings** boxes. Knit only at the end, if time allows.
+
+# Context
+
+A trial has hundreds of photographs. The steps are always the same: analyse **a folder**, build **one row per plot**, join it to the **field book**, validate against a manual measurement, and analyse the trait like any other.
+
+```{r packages}
+library(pliman)
+library(dplyr)
+library(lme4)
+```
+
+# A folder of images
+
+The three images only show the structure: they are **not** three plots of a trial. We copy them to a folder and give them plot numbers as file names.
+
+```{r folder}
+dir <- file.path(tempdir(), "plots")
+dir.create(dir, showWarnings = FALSE)
+src <- system.file("tmp_images", package = "pliman")
+invisible(file.copy(file.path(src, c("soybean_touch.jpg", "soy_green.jpg", "flax_grains.jpg")),
+                    file.path(dir, c("plot_101.jpg", "plot_102.jpg", "plot_103.jpg"))))
+list.files(dir)
+```
+
+```{r batch}
+# HINT: pattern is the text that all the file names have in common
+batch <- analyze_objects(pattern = "___", dir_original = dir, plot = FALSE, verbose = FALSE)    # TODO
+batch$statistics
+# One row per image: n is the number of objects, area_mean the mean area (in pixels)
+```
+
+# Join with the field book
+
+```{r field-book}
+field_book <- read.csv("data/field_book_demo.csv")
+field_book
+```
+
+```{r join}
+image_traits <- batch$statistics |>
+  mutate(plot = as.integer(sub("plot_", "", img))) |>
+  select(plot, seed_number = n, seed_area = area_mean)
+
+trial <- field_book |> left_join(image_traits, by = "plot")
+trial
+```
+
+**Your findings:** what would go wrong if the file names were `IMG_0457.jpg` instead of the plot number? _...write here..._
+
+# Is the image trait good enough?
+
+An image trait must be **valid** (it agrees with a manual measurement), **precise** (its heritability is high enough to select on) and **reproducible** (two photographs of the same sample give the same value).
+
+**Validation by hand.** Count the seeds in `soy_green.jpg` and in `soybean_touch.jpg` yourself, then compare:
+
+```{r validate}
+manual <- c(plot_102 = ___, plot_101 = ___)      # TODO: your manual counts (soy_green is plot_102, soybean_touch is plot_101)
+automatic <- c(plot_102 = trial$seed_number[trial$plot == 102],
+               plot_101 = trial$seed_number[trial$plot == 101])
+rbind(manual, automatic)
+# You should get 9 and 30 in both rows. In a real trial, use 20 to 50 plots and plot them
+# with plot(manual, automatic); abline(0, 1). A distance from the line that is the same for all
+# samples is a BIAS (can be corrected); scatter around it is ERROR (cannot).
+```
+
+# The image trait enters the mixed model
+
+From here an image trait is **a trait like any other**. We do not have a trial with photographs, so we **pretend** that the 100-seed weight `SW100` of the bean trial of Day 3 came from images. The code is the same for a real image trait: only the column changes.
+
+```{r pretend}
+beans <- read.csv("data/Example_Beans.csv") |>
+  mutate(rep = factor(rep), line = factor(line), rb = factor(paste(rep, block, sep = ":")))
+beans$image_trait <- beans$SW100       # TODO later: replace with your image trait, joined by plot
+
+m <- lmer(image_trait ~ rep + (1 | line) + (1 | rb), data = beans)
+vc <- as.data.frame(VarCorr(m))
+sg <- vc$vcov[vc$grp == "line"]; se <- sigma(m)^2
+# Heritability on a line-mean basis for 2 replicates (approximate)
+round(sg / (sg + se / 2), 2)           # about 0.87
+```
+
+**Your findings:** with a heritability this high, would you use the image trait for selection? What would you need to check first? _...write here..._
+
+# Optional: your own photographs
+
+Copy 3 to 5 phone photos to the folder `my_images/` (plain background, even light, a reference object, file names `plot_201.jpg` and so on). Run `analyze_objects(pattern = "plot_", dir_original = "my_images", plot = TRUE, marker = "id", reference = TRUE, reference_area = ...)` and **look at every labelled image** before you trust the numbers.
+
+# Discussion with your neighbour
+
+- Which trait of your programme is measured by eye today and could be measured from a photograph?
+- What would you put in the photograph as reference object, and on which background?
+- Where would an image trait help in the M2 and M3 generations, when populations are large?

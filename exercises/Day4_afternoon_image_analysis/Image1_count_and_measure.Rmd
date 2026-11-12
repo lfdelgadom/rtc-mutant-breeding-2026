@@ -1,0 +1,116 @@
+---
+title: "Image 1: count, measure and scale"
+author: "[Your name]"
+date: "12 November 2026"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = TRUE,
+                      fig.width = 8, fig.height = 4.5)
+```
+
+> **How to use this file.** Run each grey box with the green triangle, from top to bottom. Replace the `___` in the lines marked `# TODO`; the `# HINT` line above tells you where to look. Every part says what result you should get, so you can check yourself. Write what you see in the **Your findings** boxes. Knit only at the end, if time allows.
+
+# Context
+
+An image is a table of numbers. With `pliman` we separate the objects from the background (*segmentation*), count them and measure them. All measurements start in **pixels**; to compare images we need a **scale**.
+
+**Questions:** (1) Is the automatic count correct? (2) How do we turn pixels into centimetres? (3) Does a setting change the answer?
+
+```{r packages}
+library(pliman)
+library(dplyr)
+```
+
+# Count seeds that touch
+
+```{r read-touch}
+touch <- image_pliman("soybean_touch.jpg", plot = FALSE)
+dim(touch)        # height, width and three colour channels
+plot(touch)       # look at the image first: some seeds touch each other
+```
+
+```{r count, fig.width = 6, fig.height = 4.6}
+seeds <- analyze_objects(touch, marker = "id", verbose = FALSE)
+nrow(seeds$results)       # you should get 30
+```
+
+**Check the count yourself.** Count the labels one by one in the picture above. Does it agree with the number?
+
+```{r no-watershed, fig.width = 6, fig.height = 4.6}
+# HINT: watershed is the step that separates touching objects. Switch it off with watershed = FALSE
+seeds_nw <- analyze_objects(touch, marker = "id", watershed = ___, verbose = FALSE)   # TODO
+nrow(seeds_nw$results)    # you should get 20: touching seeds are counted as one object
+```
+
+**Your findings:** which count is correct, and how do you know? What would happen to a seed count in a trial if you did not look at the labelled image? _...write here..._
+
+# What is measured
+
+```{r measures}
+seeds$results |>
+  select(id, area, perimeter, length, width, circularity) |>
+  head(5)
+# More than thirty measurements per object, all in PIXELS
+```
+
+```{r mean-size}
+# HINT: the column with the area of each seed in pixels is called area
+mean(seeds$results$___)       # TODO; you should get about 2 052 pixels
+```
+
+# Scale 1: a known resolution (dpi)
+
+If the scanner or the camera has a known resolution (300 dpi = 300 pixels per inch), `get_measures()` converts pixels to centimetres. The image `objects_300dpi.jpg` has a **square of 10 x 10 cm** and other objects.
+
+```{r dpi}
+objects <- image_pliman("objects_300dpi.jpg", plot = FALSE)
+obj <- analyze_objects(objects, verbose = FALSE)
+# HINT: the resolution of this image is 300 dpi
+cm <- as.data.frame(unclass(get_measures(obj, dpi = ___)))      # TODO
+cm |> select(id, area, width, length)
+# You should get 10.0 x 10.0 cm, 99.7 cm2 for the big square (object 1)
+```
+
+**Your findings:** the software measured the square at 10.0 x 10.0 cm. Why is it important to **validate** with an object of known size before measuring your samples? _...write here..._
+
+# Scale 2: a reference object
+
+When the distance of the camera changes, dpi is not known. Put a **reference object of known size** in every picture. In `la_leaves.jpg` there is a square of 2 x 2 cm (4 cm2) and four leaves.
+
+```{r reference, fig.width = 5, fig.height = 5}
+leaves <- image_pliman("la_leaves.jpg", plot = FALSE)
+la <- analyze_objects(leaves, marker = "id", reference = TRUE,
+                      reference_area = ___,            # TODO: the area of the reference square, in cm2
+                      reference_smaller = TRUE, verbose = FALSE)
+la$results |> select(id, area, length, width)
+# You should get a leaf area of about 43.6 cm2 for the largest leaf, in cm2 and not in pixels
+```
+
+**Your findings:** which leaf is the smallest and what is its area? Why is the reference object *smaller* than the leaves here (`reference_smaller = TRUE`)? _...write here..._
+
+# Many small seeds: a parameter can change the count
+
+```{r flax, fig.width = 6, fig.height = 4.8}
+flax <- image_pliman("flax_grains.jpg", plot = FALSE)
+fx <- analyze_objects(flax, index = "GRAY", reference = TRUE, reference_area = 6,
+                      reference_larger = TRUE, show_contour = FALSE, marker = "point",
+                      verbose = FALSE)
+# HINT: lower_noise removes small objects. Try 0.3
+fx_noise <- analyze_objects(flax, index = "GRAY", reference = TRUE, reference_area = 6,
+                            reference_larger = TRUE, lower_noise = ___, plot = FALSE,   # TODO
+                            verbose = FALSE)
+c(default = nrow(fx$results), lower_noise = nrow(fx_noise$results))     # you should get 268 and 200
+c(default = sum(fx$results$area), lower_noise = sum(fx_noise$results$area))   # total area in cm2: 16.8 and 13.1
+```
+
+**Your findings:** the same image gives 268 or 200 seeds. Which one do you trust? How would you decide, and what would you do before measuring 500 trial plots with the same setting? _...write here..._
+
+# Extra (if you finish early)
+
+Take the `soy_green.jpg` image (`image_pliman("soy_green.jpg")`), count the seeds, and measure their length and width in cm with the dpi you assume. What do you need to know to do it correctly?

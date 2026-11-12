@@ -51,7 +51,7 @@ beans <- read_csv("data/Example_Beans.csv", show_col_types = FALSE) |>
          yield = YdHa_clean)
 
 m_block  <- lmer(yield ~ rep + (1 | line) + (1 | rb), data = beans)
-resid_df <- beans |> filter(!is.na(yield)) |> mutate(res = resid(m_block))
+resid_df <- beans |> filter(!is.na(yield)) |> mutate(residual = resid(m_block))
 
 fit_spats <- function(data, trait = "yield", genotype_random = TRUE,
                       nseg = c(6, 32), random = ~ rowf + colf + rb) {
@@ -108,50 +108,59 @@ single_trial <- function(data, trait, spatial = TRUE) {
 }
 ```
 
-## Plan for the day
+## Content
 
-| Block | Topic |
-|-----------------|-------------------------------------------------------|
-| 1 | Why the position of a plot matters |
-| 2 | Looking for spatial patterns: residual maps and variograms |
-| 3 | **Spatial models with SpATS** (2D P-splines) |
-| 4 | Mr.Bean: the same analysis without code |
-| 5 | Spatial against non-spatial: does it pay? |
-| 6 | Design or analysis? |
-| 7 | A complete single-trial workflow, exercise and discussion |
+| Time | Activity |
+|:------------------|:----------------------------------------------------|
+| 08:30 | **Lecture and demo.** Fields are not uniform; residual maps and the semivariogram; spatial models with SpATS; Mr.Bean; does it pay? |
+| 10:30 | **Practical.** |
 
 ::: keybox
-**Goal:** leave able to look at a trial as a **map**, decide if a spatial model is needed, fit it, and report how much precision it adds.
+**Goal:** Learn to view a trial as a **map**, decide whether a spatial model is needed, apply it, and explain how much it improves precision.
 :::
 
 ------------------------------------------------------------------------
 
-## Block 1 {.divider}
+## Block 1 {.divider visibility="hidden"}
 
 Why the position of a plot matters
 
 ------------------------------------------------------------------------
 
+## Before we start
+
+1.  Download: [**Day 4 morning practical (ZIP)**](../downloads/Day4_morning_spatial_analysis.zip)
+2.  Unzip it (do not work inside the ZIP) and open `Day4_morning.Rproj`
+3.  Run `00_install_packages.R` **once**: it installs `SpATS` and the other packages
+
+- Follow the lecture: we write the code together
+
+------------------------------------------------------------------------
+
 ## Fields are not uniform
 
-- A line of trees or a road along one side of the trial
-- A trial split by a road or a canal
-- A river or a drainage line crossing the field
-- A slope: the top is drier than the bottom
+- A slope can create a moisture gradient
+- A line of trees can produce an edge effect
+- A road or canal can divide the trial
+- A river or drainage line can create a diagonal band
 
 ```{r}
 #| echo: false
 #| fig-width: 10
 #| fig-height: 4
+
 g <- expand.grid(row = 1:60, col = 1:12)
+
 g$`Moisture gradient`      <- -0.8 * g$row / 60 * 10
 g$`Tree line (edge)`       <- -8 * exp(-(g$col - 1) / 2)
-g$`Road through the trial` <- ifelse(g$row > 30, -5, 0)
-g$`River (diagonal band)`  <- -7 * exp(-((g$row - 5 * g$col - 5) / 6)^2)
+g$`Road or canal`          <- ifelse(g$row > 30, -5, 0)
+g$`River or drainage line` <- -7 * exp(-((g$row - 5 * g$col - 5) / 6)^2)
+
 pivot_longer(g, 3:6, names_to = "source", values_to = "effect") |>
   mutate(source = factor(source, levels = names(g)[3:6])) |>
   ggplot(aes(row, col, fill = effect)) +
-  geom_tile() + facet_wrap(~ source, nrow = 1) +
+  geom_tile() +
+  facet_wrap(~ source, nrow = 1) +
   scale_fill_viridis_c(guide = "none") +
   labs(x = "Row", y = "Column")
 ```
@@ -160,20 +169,24 @@ pivot_longer(g, 3:6, names_to = "source", values_to = "effect") |>
 
 ------------------------------------------------------------------------
 
-## What it does to selection
+## Why spatial variation matters for selection
 
-- The environmental effect is **added** to the genetic effect
-- A line in a good patch looks better than it is; a line in a poor patch looks worse
-- Blocks remove the **average** difference among pieces of the field
-- The variation **inside** a block stays in the residual
+- We want to select lines with **better genetics**
+- However, field conditions also affect plant performance
+- Good areas can favor some lines
+- Poor areas can penalize others
 
 ::: keybox
-If the ranking mixes genes and soil, the selection gain is lower than expected, and the best lines are not always the ones we advance.
+Spatial analysis helps us separate genetic differences from field variation.
 :::
 
 ------------------------------------------------------------------------
 
-## Our data: the bean trial of Day 3
+![](images/spatial_analysis_plot.png)
+
+------------------------------------------------------------------------
+
+## The bean trial 🫘
 
 - 380 lines, 2 replicates, **792 plots** in a field of **66 rows x 12 columns**
 - Columns 1 to 6 are replicate 1, columns 7 to 12 are replicate 2
@@ -209,7 +222,7 @@ profile <- bind_rows(
     summarise(yield = mean(yield), .groups = "drop") |> mutate(set = "Checks only (same lines everywhere)")
 )
 ggplot(profile, aes(col, yield)) +
-  geom_col(width = 0.8) + geom_vline(xintercept = 6.5, linewidth = 0.8) +
+  geom_col(width = 0.8, col = "black") + geom_vline(xintercept = 6.5, linewidth = 0.8) +
   scale_x_continuous(breaks = 1:12) + facet_wrap(~ set) +
   labs(x = "Column", y = "Mean yield (kg/ha)")
 ```
@@ -220,27 +233,103 @@ cm <- filter(profile, grepl("^All", set))
 ```
 
 ::: keybox
-Lines are randomized, so this is **environment**: from `r fmt(cm$yield[1])` kg/ha in column 1 to `r fmt(cm$yield[6])` in column 6. An edge-to-centre gradient of `r fmt(cm$yield[6] - cm$yield[1])` kg/ha.
+Within replicate 1, mean yield increases by 463 kg/ha from column 1 to column 6. The repeated checks show a similar positional pattern, providing evidence of environmental variation across columns.
 :::
 
 ------------------------------------------------------------------------
 
-## Block 2 {.divider}
+## Models so far: from the design to the field {.compact}
+
+```{=html}
+<style>
+.fx { color:#2a5db0; font-weight:600; }
+.rd { color:#c0392b; font-weight:600; }
+.reveal section.compact h2 { font-size: 1.15em !important; margin-bottom: 0.1em; }
+.reveal section.compact table { font-size: 0.92em; }
+.reveal section.compact table th, .reveal section.compact table td { padding: 3px 10px; }
+.reveal section.compact > p, .reveal section.compact li { font-size: 0.9em; }
+.reveal section.compact ul { margin: 0.2em 0; }
+.reveal section.compact .keybox { font-size: 0.88em; padding: 0.3em 0.8em; margin-top: 0.2em; }
+.reveal section.compact .keybox p { margin: 0.15em 0; }
+</style>
+```
+
+| Design | Model for the yield of one plot |
+|:--------------------------|:--------------------------------------------|
+| Complete blocks | y~ik~ = [μ]{.fx} + [b~k~]{.rd} + [G~i~]{.rd} + [ε~ik~]{.rd} |
+| Replicates and incomplete blocks (**our Day 3 model**) | y~ijk~ = [μ]{.fx} + [Rep~j~]{.fx} + [b~k(j)~]{.rd} + [G~i~]{.rd} + [ε~ijk~]{.rd} |
+| Rows and columns | y~ijk~ = [μ]{.fx} + [Row~j~]{.rd} + [Col~k~]{.rd} + [G~i~]{.rd} + [ε~ijk~]{.rd} |
+| Replicates, rows and columns | y~ijkm~ = [μ]{.fx} + [Rep~m~]{.fx} + [Row~j(m)~]{.rd} + [Col~k(m)~]{.rd} + [G~i~]{.rd} + [ε~ijkm~]{.rd} |
+
+- [Blue]{.fx}: fixed (overall mean μ, replicate). [Red]{.rd}: random (block b, row, column, line G, residual ε). y: yield of the plot
+
+::: keybox
+All these models assume that the random terms are **independent**. But plots that are close in the field are often alike.
+:::
+
+[Adapted from Wageningen University & Research, course material (2021).]{.small-note}
+
+------------------------------------------------------------------------
+
+## Sources of spatial variation {.compact}
+
+```{r}
+#| echo: false
+#| fig-width: 11
+#| fig-height: 2.9
+g <- expand.grid(col = 1:24, row = 1:24)
+g$`1. Design` <- ifelse(g$col > 12, 4, 0) + ifelse((g$row - 1) %/% 6 %% 2 == 0, 3, 0) +
+  c(2, -2, 0, 3, -3, 1, -1, 2, -2, 0, 1, -1)[(g$col - 1) %% 12 + 1]
+g$`2. Global trend` <- 0.5 * g$col + 0.35 * g$row
+g$`3. Local trend` <- 9 * exp(-((g$col - 6)^2 + (g$row - 7)^2) / 14) +
+  8 * exp(-((g$col - 17)^2 + (g$row - 17)^2) / 18) - 6 * exp(-((g$col - 18)^2 + (g$row - 6)^2) / 10)
+pivot_longer(g, 3:5, names_to = "source", values_to = "effect") |>
+  ggplot(aes(col, row, fill = effect)) +
+  geom_raster() + facet_wrap(~ source, nrow = 1) + coord_equal() +
+  scale_fill_gradient2(low = "#2166ac", mid = "white", high = "#b2182b", midpoint = 0, guide = "none") +
+  labs(x = "Column", y = "Row", caption = "Schematic: red adds yield, blue takes yield away")
+```
+
+- **Design:** the layout itself: replicates, blocks, rows and columns. We put these in the model
+- **Global trend:** a slope or gradient over the whole field (water, fertility, light)
+- **Local trend:** patches where neighbouring plots are alike (a wet corner, a compacted strip)
+
+::: keybox
+Blocks, rows and columns handle the first. For the other two we need a **smooth surface of the field**.
+:::
+
+------------------------------------------------------------------------
+
+## Block 2 {.divider visibility="hidden"}
 
 Looking for spatial patterns
 
 ------------------------------------------------------------------------
 
-## Start from the Day 3 model
+## Did the block model remove the spatial pattern?
 
 ```{r}
-m_block <- lmer(yield ~ rep + (1 | line) + (1 | rb), data = beans)
-resid_df <- beans |> filter(!is.na(yield)) |> mutate(res = resid(m_block))
+#| echo: true
+m_block <- lmer(
+  yield ~ rep + (1 | line) + (1 | rb),
+  data = beans
+)
+
+resid_df <- beans |>
+  filter(!is.na(yield)) |>
+  mutate(residual = resid(m_block))
 ```
 
-- Replicate fixed; lines and incomplete blocks random
-- Question: **did the blocks capture the whole field?**
-- If yes, the residuals look like noise on the map. If not, we see patches or bands
+- Replicate accounts for the average difference between replicates
+- Line represents genetic differences among bean lines
+- Replicate–block accounts for differences among incomplete block sections
+- Residuals represent the variation that the model did not explain
+
+::: keybox
+If the block model is sufficient, residuals should look randomly scattered across the field.
+
+If residuals form patches, bands, or gradients, some spatial variation remains.
+:::
 
 ------------------------------------------------------------------------
 
@@ -250,7 +339,7 @@ resid_df <- beans |> filter(!is.na(yield)) |> mutate(res = resid(m_block))
 #| echo: false
 #| fig-width: 11
 #| fig-height: 3.3
-ggplot(resid_df, aes(row, col, fill = res)) +
+ggplot(resid_df, aes(row, col, fill = residual)) +
   geom_tile(colour = "white", linewidth = 0.2) +
   geom_hline(yintercept = 6.5, linewidth = 0.8) +
   scale_fill_gradient2(low = "#2166ac", mid = "white", high = "#b2182b", midpoint = 0) +
@@ -259,18 +348,24 @@ ggplot(resid_df, aes(row, col, fill = res)) +
   labs(x = "Row", y = "Column", fill = "Residual\n(kg/ha)")
 ```
 
-- More red plots near columns 6 and 7, more blue plots in columns 1 and 3
-- Not pure noise: the blocks took most of the gradient, **not all of it**
+- Blue: yield was lower than predicted
+- White: yield was close to the predicted value
+- Red: yield was higher than predicted
+- Similar colors appear together in some areas of the field
+
+::: keybox
+The block model removed part of the field variation, but some spatial pattern remains in the residuals.
+:::
 
 ------------------------------------------------------------------------
 
-## What is left inside the blocks
+## What is left inside the blocks {visibility="hidden"}
 
 ```{r}
 #| echo: false
 #| fig-width: 10
 #| fig-height: 3.4
-col_res <- resid_df |> group_by(col) |> summarise(res = mean(res), .groups = "drop")
+col_res <- resid_df |> group_by(col) |> summarise(res = mean(residual), .groups = "drop")
 ggplot(col_res, aes(col, res)) +
   geom_col(width = 0.8) + geom_vline(xintercept = 6.5, linewidth = 0.8) +
   scale_x_continuous(breaks = 1:12) +
@@ -279,6 +374,37 @@ ggplot(col_res, aes(col, res)) +
 
 ::: keybox
 Blocks of two columns (1-2, 3-4, 5-6): the residual still rises from `r fmt(col_res$res[1])` to `r fmt(col_res$res[2])`, from `r fmt(col_res$res[3])` to `r fmt(col_res$res[4])` and from `r fmt(col_res$res[5])` to `r fmt(col_res$res[6])` kg/ha. A block cannot remove a gradient that runs inside it.
+:::
+
+------------------------------------------------------------------------
+
+## Are neighbouring plots independent? {.compact}
+
+```{r}
+#| echo: false
+#| fig-width: 11
+#| fig-height: 3.9
+ggplot(filter(beans, !is.na(yield)), aes(row, yield)) +
+  geom_point(size = 0.7, colour = "grey35") +
+  geom_smooth(method = "loess", span = 0.4, se = FALSE, colour = "#b2182b", linewidth = 0.8) +
+  facet_wrap(~ col, nrow = 2, labeller = label_both) +
+  labs(x = "Row (position along the column)", y = "Yield (kg/ha)")
+nb <- function(d, v, by = "row") {
+  a <- d |> select(row, col, x = all_of(v))
+  b <- a |> mutate(!!by := .data[[by]] - 1)
+  j <- inner_join(a, b, by = c("row", "col"), suffix = c("", "_n"))
+  if (by == "col") j <- filter(j, col != 6)
+  cor(j$x, j$x_n, use = "complete.obs")
+}
+yd <- beans |> filter(!is.na(yield))
+```
+
+- Each panel is one column of the field: the yield of the 66 plots, from row 1 to row 66. The red line is a smooth curve through them
+- The lines are **not flat**: yield rises and falls along the field. Plots that are next to each other are alike
+- Correlation between neighbouring plots: yield `r fmt(nb(yd, "yield"), 2)` (along rows) and `r fmt(nb(yd, "yield", "col"), 2)` (along columns). Residuals of the Day 3 model: `r fmt(nb(resid_df, "residual"), 2)` and `r fmt(nb(resid_df, "residual", "col"), 2)`
+
+::: keybox
+The traditional fix is to let the residual of a plot be correlated with its neighbour (an autoregressive model, AR1 × AR1), usually fitted in ASReml (licence needed) and hard to tune. We use **SpATS**.
 :::
 
 ------------------------------------------------------------------------
@@ -296,14 +422,14 @@ Blocks of two columns (1-2, 3-4, 5-6): the residual still rises from `r fmt(col_
 semivariogram <- function(d, max_lag = 25) {
   same <- outer(d$col, d$col, "==")
   lag  <- abs(outer(d$row, d$row, "-"))
-  half <- 0.5 * outer(d$res, d$res, "-")^2
+  half <- 0.5 * outer(d$residual, d$residual, "-")^2
   keep <- same & lag > 0 & lag <= max_lag & upper.tri(same)
   tibble(lag = lag[keep], gamma = half[keep]) |>
     group_by(lag) |> summarise(gamma = mean(gamma), .groups = "drop")
 }
 vg <- semivariogram(resid_df)
 ggplot(vg, aes(lag, gamma)) +
-  geom_hline(yintercept = var(resid_df$res), linetype = 2) +
+  geom_hline(yintercept = var(resid_df$residual), linetype = 2) +
   geom_point() + geom_line() +
   labs(x = "Distance between plots along the rows", y = "Semivariance")
 ```
@@ -312,14 +438,61 @@ ggplot(vg, aes(lag, gamma)) +
 
 ------------------------------------------------------------------------
 
+## What does each semivariogram point represent?
+
+$$
+\text{Semivariance for one pair}
+=
+\frac{1}{2}(e_i-e_j)^2
+$$
+
+| Point | Distance | Plot pairs within each column |
+|------:|---------:|:------------------------------|
+|     1 |        1 | rows 1–2, 2–3, 3–4, …         |
+|     2 |        2 | rows 1–3, 2–4, 3–5, …         |
+|     3 |        3 | rows 1–4, 2–5, 3–6, …         |
+| \(h\) |    \(h\) | rows 1–(1+h), 2–(2+h), …      |
+
+::: keybox
+Each point is the average dissimilarity between the residuals of all plot pairs separated by the same distance.
+:::
+
+------------------------------------------------------------------------
+
+## Do rows and columns explain variance? {.compact}
+
+```{r}
+#| echo: true
+m_rc <- lmer(yield ~ rep + (1 | rep:rowf) + (1 | rep:colf) + (1 | line), data = beans)
+```
+
+```{r}
+#| echo: false
+vc <- as.data.frame(VarCorr(m_rc))
+vc_tab <- tibble(Term = c("Lines (genetics)", "Rows within replicate", "Columns within replicate", "Residual"),
+                 Variance = vc$vcov[match(c("line", "rep:rowf", "rep:colf", "Residual"), vc$grp)]) |>
+  mutate(`Share of the total` = paste0(round(100 * Variance / sum(Variance)), " %"),
+         Variance = fmt(Variance))
+knitr::kable(vc_tab, align = "lrr")
+pct <- function(g) round(100 * vc$vcov[vc$grp == g] / sum(vc$vcov))
+```
+
+::: keybox
+Rows explain `r pct("rep:rowf")` % of the variance and columns `r pct("rep:colf")` %: **as much as the lines** (`r pct("line")` %). The field is a large part of what we measure, so it must be in the model.
+:::
+
+- Variance = how much the term moves the yield: the bigger, the more the field matters
+
+------------------------------------------------------------------------
+
 ## When is a spatial correction justified?
 
 Use it when **at least two** of these are true:
 
-1. The residual map shows patches or bands
-2. The semivariogram increases with distance
-3. Row or column effects are a sizeable part of the genetic variance
-4. The spatial model improves the fit (AIC) or the heritability by a useful amount
+1.  The residual map shows patches or bands
+2.  The semivariogram increases with distance
+3.  Row or column effects are a sizeable part of the genetic variance
+4.  The spatial model improves the fit (AIC) or the heritability by a useful amount
 
 ::: keybox
 If the residuals look random, the extra model buys nothing and costs complexity.
@@ -327,18 +500,37 @@ If the residuals look random, the extra model buys nothing and costs complexity.
 
 ------------------------------------------------------------------------
 
-## Block 3 {.divider}
+## Block 3 {.divider visibility="hidden"}
 
 Spatial models with SpATS
 
 ------------------------------------------------------------------------
 
-## The idea: a smooth surface of the field
+## The idea: a smooth surface of the field {.compact}
 
-- A spline is a flexible curve made of small pieces joined smoothly. In 2D it is a flexible **surface**
-- The **penalty** keeps the surface smooth: it follows a gradient or a patch, not the noise of one plot
-- The data decide how smooth the surface is: no correlation structure to choose by hand
-- Added to the mixed model, with random row, column and block effects
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 2.5
+g <- expand.grid(col = 1:20, row = 1:20)
+cc <- (g$col - 10) / 10; rr <- (g$row - 10) / 10
+g$`f(col)`        <- 2 * sin(2.5 * cc)
+g$`f(row)`        <- 2 * cos(2 * rr + 0.5)
+g$`f(col) x row`  <- 2 * sin(2.5 * cc) * rr
+g$`col x f(row)`  <- 2 * cc * cos(3 * rr)
+g$`f(col) x f(row)` <- 3 * sin(4 * cc) * sin(4 * rr)
+pivot_longer(g, 3:7, names_to = "part", values_to = "effect") |>
+  mutate(part = factor(part, unique(part))) |>
+  ggplot(aes(col, row, fill = effect)) +
+  geom_raster() + facet_wrap(~ part, nrow = 1) + coord_equal() +
+  scale_fill_gradient2(low = "#2166ac", mid = "white", high = "#b2182b", midpoint = 0, guide = "none") +
+  theme(axis.text = element_blank(), axis.title = element_blank()) +
+  labs(caption = "Schematic of the five parts of the surface")
+```
+
+- A **spline** is a flexible curve made of small pieces joined smoothly. In 2D it is a flexible **surface**. A **penalty** keeps it smooth, so it follows a gradient or a patch, not the noise of one plot
+- SpATS splits the surface into parts, like an ANOVA: change across **columns**, change along **rows**, two **tilts** (the trend in one direction changes along the other), and **local patches**
+- The data decide how smooth the surface is. Random rows, columns and blocks are added as before
 
 [Rodriguez-Alvarez, Boer, van Eeuwijk & Eilers (2018). *Spatial Statistics* 23: 52-71.]{.small-note}
 
@@ -357,7 +549,7 @@ SpATS(response = "yield",
 ```
 
 | Argument | Meaning |
-|:--|:----------------------------------------------|
+|:-----------------|:-----------------------------------------------------|
 | `genotype.as.random` | `TRUE` gives BLUPs, `FALSE` gives BLUEs |
 | `PSANOVA(col, row, nseg)` | the surface; `nseg` about half the number of columns and rows |
 | `fixed` | the replicate |
@@ -369,58 +561,111 @@ SpATS(response = "yield",
 
 ------------------------------------------------------------------------
 
-## Reading the output: effective dimensions
-
-```{r}
-#| echo: false
-ed <- m_sp$eff.dim
-ed_smooth <- sum(ed[grepl("^f\\(|^col:f", names(ed))])
-tibble(Term = c("Lines", "Smooth surface", "Rows", "Columns", "Incomplete blocks"),
-       `Effective dimension` = round(c(ed[["line"]], ed_smooth, ed[["rowf"]], ed[["colf"]], ed[["rb"]]), 1),
-       `Number of levels` = c(380, NA, 66, 12, 36))
-```
-
-- The effective dimension is how many parameters a term **effectively** uses
-- Once the surface is in the model, the blocks have little left to explain
-
-------------------------------------------------------------------------
-
-## What was removed from the plots
+## The standard SpATS plot {.compact}
 
 ```{r}
 #| echo: false
 #| fig-width: 11
-#| fig-height: 3.6
-tr <- obtain.spatialtrend(m_sp)
-trend <- expand.grid(col = tr$col.p, row = tr$row.p) |> mutate(trend = as.vector(tr$fit))
-p1 <- ggplot(trend, aes(row, col, fill = trend)) +
-  geom_raster() +
-  scale_fill_gradient2(low = "#2166ac", mid = "white", high = "#b2182b", midpoint = 0) +
-  scale_y_continuous(breaks = c(1, 6, 7, 12)) + coord_equal() +
-  labs(x = "Row", y = "Column", fill = "Trend")
-row_eff <- tibble(row = 1:66, effect = m_sp$coeff[paste0("rowf", 1:66)])
-p2 <- ggplot(row_eff, aes(row, effect)) + geom_col(width = 0.8) +
-  labs(x = "Row", y = "Row effect (kg/ha)")
-cowplot::plot_grid(p1, p2, nrow = 1, rel_widths = c(1.2, 1))
-```
-
-- **Left:** the estimated surface: high yield in the middle, low yield in the outer columns
-- **Right:** row effects, small by comparison (mostly under 100 kg/ha)
-
-------------------------------------------------------------------------
-
-## The standard SpATS plot
-
-```{r}
-#| echo: false
-#| fig-width: 11
-#| fig-height: 6.2
+#| fig-height: 5.4
 plot(m_sp, all.in.one = TRUE)
 ```
 
+Top: **raw data**, **fitted data**, **residuals** (what the model cannot explain). Bottom: **spatial trend** (the field effect), **line predictions** (what we select on) and their **histogram**.
+
 ------------------------------------------------------------------------
 
-## BLUEs and BLUPs
+## Reading the output: effective dimensions {.compact}
+
+```{r}
+#| echo: false
+sm <- grepl("^f\\(|^col:f", names(m_sp$eff.dim))
+get_d <- function(v, nm) if (nm == "surface") sum(v[sm]) else v[[nm]]
+tab_ed <- tibble(
+  Term = c("Lines", "Rows", "Columns", "Incomplete blocks", "Smooth surface"),
+  key  = c("line", "rowf", "colf", "rb", "surface")) |>
+  rowwise() |>
+  mutate(Effective = round(get_d(m_sp$eff.dim, key), 1),
+         Model     = get_d(m_sp$dim, key),
+         Nominal   = get_d(m_sp$dim.nom, key)) |>
+  ungroup() |>
+  mutate(Ratio = round(Effective / Nominal, 2),
+         `In words` = c("ratio = heritability", "differ a lot",
+                        "matter little now", "almost nothing left",
+                        "the field effect")) |>
+  select(-key)
+knitr::kable(tab_ed)
+```
+
+- **Model**: how many separate values the term has (380 lines, 66 rows, 12 columns, 36 blocks)
+- **Nominal**: the most it could use (a little less: the mean and replicate take some)
+- **Effective**: how many the data really use. A simple, smooth pattern uses few
+- **Ratio** = Effective / Nominal. Lines use 244 of 379: **0.64 is the heritability**
+
+------------------------------------------------------------------------
+
+## Where is the complexity of the surface? {.compact}
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 3.3
+parts <- tibble(part = c("f(col)", "f(row)", "f(col) x row", "col x f(row)", "f(col) x f(row)"),
+                nm = c("f(col)", "f(row)", "f(col):row", "col:f(row)", "f(col):f(row)")) |>
+  mutate(ed = unname(m_sp$eff.dim[nm]), share = ed / sum(ed))
+ggplot(parts, aes(ed, factor(part, rev(part)))) +
+  geom_col(width = 0.7, fill = "#3E6FA8") +
+  geom_text(aes(label = paste0(round(ed, 1), "  (", round(100 * share), " %)")), hjust = -0.1, size = 4.2) +
+  scale_x_continuous(expand = expansion(mult = c(0, 0.3))) +
+  labs(x = "Effective dimension", y = NULL)
+```
+
+- The **effective dimension** of each part tells how much that part adds to the field effect
+- Most of the surface is **local patches** (`r round(100 * parts$share[5])` %). Change along rows and across columns is small
+- A part with an effective dimension near 0 is not needed in this field
+
+------------------------------------------------------------------------
+
+## What was removed from the plots {.compact}
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 3.5
+tr <- obtain.spatialtrend(m_sp)
+trend <- expand.grid(col = tr$col.p, row = tr$row.p) |> mutate(trend = as.vector(tr$fit))
+ggplot(trend, aes(row, col, fill = trend)) +
+  geom_raster() +
+  scale_fill_gradient2(low = "#2166ac", mid = "white", high = "#b2182b", midpoint = 0) +
+  scale_y_continuous(breaks = c(1, 6, 7, 12)) + coord_equal() +
+  labs(x = "Row", y = "Column", fill = "Field effect\n(kg/ha)")
+```
+
+- Each cell is the estimated effect of the **field** on yield, in kg/ha, whatever line is there
+- **Red**: the field adds yield here (more than the average of the trial). **Blue**: the field takes yield away
+- SpATS subtracts this from every plot before it compares the lines
+- Here: high in the middle of the field (columns 5 to 8), low in the outer columns (1 and 12)
+
+------------------------------------------------------------------------
+
+## What was removed: the row effects {.compact}
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 3.3
+row_eff <- tibble(row = 1:66, effect = m_sp$coeff[paste0("rowf", 1:66)])
+ggplot(row_eff, aes(row, effect)) + geom_col(width = 0.8, fill = "#3E6FA8") +
+  geom_hline(yintercept = 0) +
+  labs(x = "Row", y = "Row effect (kg/ha)")
+```
+
+- Each bar is one **row**. Its height is how many kg/ha the plots of that row yield **above** (bar up) or **below** (bar down) the average, only because of the row
+- Positive: more than expected. Negative: less than expected
+- They are small here (the largest is `r fmt(max(abs(row_eff$effect)))` kg/ha): the surface already took most of the field effect
+
+------------------------------------------------------------------------
+
+## BLUEs and BLUPs {visibility="hidden"}
 
 ```{r}
 blup_sp <- predict(m_sp, which = "line") |>
@@ -439,7 +684,7 @@ left_join(blue_sp, blup_sp, by = "line") |> arrange(desc(BLUP)) |> head(5)
 
 ------------------------------------------------------------------------
 
-## Block 4 {.divider}
+## Block 4 {.divider visibility="hidden"}
 
 Mr.Bean: SpATS without code
 
@@ -450,10 +695,10 @@ Mr.Bean: SpATS without code
 - Free Shiny application from the Alliance of Bioversity International and CIAT (Aparicio et al. 2024)
 - Has a module that fits **the same SpATS model**: BLUEs, BLUPs and heritability without writing R
 
-1. **Import** the trial file (`Example_Beans.csv` is ready: one row per plot)
-2. **Tell the app** which column is the genotype, row, column, replicate, block and trait
-3. **Choose the model**: spatial (SpATS) or without space; genotype fixed or random
-4. **Run, inspect, download**: heritability, variance components, spatial trend, residuals, BLUEs or BLUPs
+1.  **Import** the trial file (`Example_Beans.csv` is ready: one row per plot)
+2.  **Tell the app** which column is the genotype, row, column, replicate, block and trait
+3.  **Choose the model**: spatial (SpATS) or without space; genotype fixed or random
+4.  **Run, inspect, download**: heritability, variance components, spatial trend, residuals, BLUEs or BLUPs
 
 ::: keybox
 Good to share an analysis with colleagues who do not use R, and to check your own code. Limit: the analysis is not saved as a script.
@@ -463,15 +708,17 @@ Good to share an analysis with colleagues who do not use R, and to check your ow
 
 ## Running Mr.Bean
 
-- Web version on shinyapps.io (needs internet; may be slow with many users)
+- Web version on shinyapps.io (<https://beanteam.shinyapps.io/MrBean_BETA/>)
 - Or in R: `remotes::install_github("AparicioJohan/MrBeanApp")`, then `library(MrBean)` and `run_app()`
 - Project page: `apariciojohan.github.io/MrBeanApp`
 
-**Practical:** run the beans file in the app and in R, and compare the heritability and the top 5 lines.
+- Step-by-step guide with screenshots: [Mr.Bean tutorial](tutorial-mrbean-spatial.html) (about 35 min)
+
+**Practical:** run the beans file in the app and in R, and compare the heritability and the top lines.
 
 ------------------------------------------------------------------------
 
-## Block 5 {.divider}
+## Block 5 {.divider visibility="hidden"}
 
 Spatial against non-spatial: does it pay?
 
@@ -504,7 +751,7 @@ Residual SD from `r fmt(comp[[2]][1])` to `r fmt(comp[[2]][4])` kg/ha; heritabil
 
 ------------------------------------------------------------------------
 
-## Does the ranking change?
+## Does the ranking change? {visibility="hidden"}
 
 ```{r}
 #| echo: false
@@ -523,7 +770,7 @@ round(c(correlation = cor(rank_cmp$BLUP_block, rank_cmp$BLUP_spats),
 
 ------------------------------------------------------------------------
 
-## A check with the other replicate
+## A check with the other replicate {visibility="hidden"}
 
 - Fit each model with **replicate 1 only**, predict the line means of **replicate 2**, and the other way round
 - The replicates are in different columns: two independent samples of the field
@@ -564,12 +811,12 @@ Adjusting for the field beats raw means, and the spatial model is slightly bette
 
 ------------------------------------------------------------------------
 
-## When does it pay? Five traits
+## When does it pay? Five traits {visibility="hidden"}
 
 ```{r}
 #| echo: false
 traits <- c(Yield = "yield", `Days to flowering` = "DF", `Days to maturity` = "DPM",
-            `Plant height` = "PLHA", `100-seed weight` = "SW100")
+            `Plants per plot` = "PLHA", `100-seed weight` = "SW100")
 gain <- bind_rows(lapply(names(traits), function(nm) {
   a <- single_trial(beans, traits[[nm]], spatial = FALSE)$h2
   b <- single_trial(beans, traits[[nm]], spatial = TRUE)$h2
@@ -584,16 +831,16 @@ Large gain for **yield**, the trait most affected by soil and water. Almost noth
 
 ------------------------------------------------------------------------
 
-## Block 6 {.divider}
+## Block 6 {.divider visibility="hidden"}
 
 Design or analysis?
 
 ------------------------------------------------------------------------
 
-## Fix it in the field or in the model?
+## Fix it in the field or in the model? {visibility="hidden"}
 
 | Problem | Design | Analysis |
-|:------------|:-----------------------|:-----------------------|
+|:------------------|:--------------------------|:--------------------------|
 | Known gradient | Blocks across the gradient | Row/column effects, SpATS surface |
 | Unknown patches | Small incomplete blocks, row-column | Spatial model, residual map |
 | Border competition | Border plots, plot size | Do not analyse borders as data |
@@ -606,7 +853,7 @@ Design or analysis?
 
 ------------------------------------------------------------------------
 
-## In the bean trial
+## In the bean trial {visibility="hidden"}
 
 - The gradient runs **across the width** of the field
 - Blocks of 2 columns cut it in 3 strips per replicate: the block variance is as large as the genetic variance
@@ -617,15 +864,15 @@ Design or analysis?
 
 ------------------------------------------------------------------------
 
-## Block 7 {.divider}
+## Block 7 {.divider visibility="hidden"}
 
 Single-trial workflow, exercise and discussion
 
 ------------------------------------------------------------------------
 
-## A single-trial workflow
+## A single-trial workflow {visibility="hidden"}
 
-1. **Raw data and QC** (Day 1) → 2. **Design and model** (Days 2 and 4) → 3. **BLUPs and heritability** (Day 3) → 4. **Selection-ready table** → 5. **Decision**
+1.  **Raw data and QC** (Day 1) → 2. **Design and model** (Days 2 and 4) → 3. **BLUPs and heritability** (Day 3) → 4. **Selection-ready table** → 5. **Decision**
 
 ```{r}
 res <- single_trial(beans, "yield")
@@ -637,13 +884,13 @@ head(res$table, 5)
 
 ------------------------------------------------------------------------
 
-## Exercise
+## Exercise {visibility="hidden"}
 
 With the same trial:
 
-1. Draw the residual map of **days to maturity (DPM)** from the incomplete-block model. Bands or patches?
-2. Run `single_trial()` for DPM with and without space. Is the correction justified?
-3. How many of the 38 best lines for yield (10%) by the spatial model are among the 38 best by the Day 3 model? Which is the first line that enters only with the spatial model?
+1.  Draw the residual map of **days to maturity (DPM)** from the incomplete-block model. Bands or patches?
+2.  Run `single_trial()` for DPM with and without space. Is the correction justified?
+3.  How many of the 38 best lines for yield (10%) by the spatial model are among the 38 best by the Day 3 model? Which is the first line that enters only with the spatial model?
 
 ::: keybox
 Hint: compare the heritability gain with the rule of this morning.
@@ -651,12 +898,25 @@ Hint: compare the heritability gain with the rule of this morning.
 
 ------------------------------------------------------------------------
 
-## Questions for discussion
+## Questions for discussion {visibility="hidden"}
 
 - Look at the map of **your own trial**. Do you see a gradient, patches or an edge effect?
 - Your trial has no coordinates. What would you record next season, and how?
-- A spatial model changes 8 of 38 selected lines. How do you decide which list to trust?
+- A spatial model changes several of the 38 selected lines. How do you decide which list to trust?
 - Where would you place border plots and checks in your next trial?
+
+------------------------------------------------------------------------
+
+## Your turn: the practical (10:30)
+
+The **same bean trial, yield only**, analysed twice. Download the folder: [Day4_morning_spatial_analysis.zip](../downloads/Day4_morning_spatial_analysis.zip)
+
+1.  **In R** (about 80 min): open `Spatial_models_comparison.Rmd`. ANOVA with rows and columns, a ladder of mixed models (`lme4`), then SpATS; heritability, BLUEs and BLUPs, and the choice of model. Work **with your neighbour**
+2.  **In Mr.Bean** (about 35 min): follow the [step-by-step tutorial](tutorial-mrbean-spatial.html) and compare the numbers with R
+
+::: keybox
+Run each box, replace the `___`, write your findings. The answers you should get are in the comments. At the end: when is it worth adding rows and columns, and when do we need SpATS?
+:::
 
 ------------------------------------------------------------------------
 
@@ -665,7 +925,7 @@ Hint: compare the heritability gain with the rule of this morning.
 - Plots that are close are more alike than plots that are far; blocks capture part of it, the rest stays in the residual
 - **Look before you model:** map of the raw data, map of the residuals, semivariogram
 - `SpATS` fits a smooth surface with random row, column and block effects, and returns BLUEs, BLUPs and heritability; Mr.Bean does it without code
-- The gain depends on the trait: large for yield here, almost nothing for DF, DPM and SW100
+- Most of the gain comes from adding rows and columns to the model; SpATS adds a little more precision (heritability 0.43, 0.54, 0.60, 0.64 along the ladder)
 - Check against an independent replicate; report the heritability of the model you use
 - **Design first, analysis second**
 
@@ -684,6 +944,6 @@ Hint: compare the heritability gain with the rule of this morning.
 
 **Luis Fernando Delgado Muñoz**
 
-[📧 [lfdelgadom@unal.edu.co](mailto:lfdelgadom@unal.edu.co)]{.small-note}
+[📧 [lfdelgadom\@unal.edu.co](mailto:lfdelgadom@unal.edu.co)]{.small-note}
 
 [💼 [linkedin.com/in/lfdelgadom](https://www.linkedin.com/in/lfdelgadom)]{.small-note}

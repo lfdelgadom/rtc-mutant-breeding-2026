@@ -1,0 +1,110 @@
+---
+title: "Image 2: colour, leaves and disease severity"
+author: "[Your name]"
+date: "12 November 2026"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = TRUE,
+                      fig.width = 8, fig.height = 4.5)
+```
+
+> **How to use this file.** Run each grey box with the green triangle, from top to bottom. Replace the `___` in the lines marked `# TODO`; the `# HINT` line above tells you where to look. Every part says what result you should get, so you can check yourself. Write what you see in the **Your findings** boxes. Knit only at the end, if time allows.
+
+# Context
+
+Colour is a trait: stay-green, senescence, seed colour, disease. A **vegetation index** combines the colour channels in one number that highlights what we want. We also measure the **percentage of diseased leaf area** without rating each leaf by eye.
+
+```{r packages}
+library(pliman)
+library(dplyr)
+```
+
+# Colour of seeds
+
+```{r soy}
+soy <- image_pliman("soy_green.jpg", plot = FALSE)
+plot(soy)
+```
+
+```{r indices, fig.height = 3}
+image_index(soy, index = c("R", "GLI", "NGRDI"), ncol = 3, nrow = 1)
+# GLI is high for green tissue; NGRDI separates green from yellow and red
+```
+
+```{r seed-colour, fig.width = 6.5, fig.height = 3.2}
+colour <- analyze_objects(soy, marker = "id", object_index = c("NGRDI", "GLI"), verbose = FALSE)
+colour$object_index |> mutate(across(-id, \(x) round(x, 3)))
+# Seeds 5 and 9 are greener: higher GLI, NGRDI close to zero (-0.03 against about -0.08)
+```
+
+```{r threshold}
+# HINT: seeds with NGRDI above -0.05 are green. Which threshold gives two groups?
+colour$object_index |>
+  mutate(class = if_else(NGRDI > ___, "green", "yellow")) |>      # TODO
+  count(class)
+# You should get 2 green and 7 yellow seeds
+```
+
+**Your findings:** a threshold found on 9 seeds: is it enough to classify a whole trial? How would you set it so that it can be trusted? _...write here..._
+
+# Flax leaves: elongated objects
+
+```{r flax-leaves}
+fleaves <- image_pliman("flax_leaves.jpg", plot = FALSE)
+plot(fleaves)
+```
+
+```{r watershed, fig.width = 10, fig.height = 5}
+par(mfrow = c(1, 2), mar = c(0, 0, 0, 0))
+split_default <- analyze_objects(fleaves, marker = "id", verbose = FALSE)
+# HINT: long leaves are cut in pieces by the watershed. Switch it off
+whole <- analyze_objects(fleaves, marker = "id", watershed = ___,        # TODO
+                         object_index = c("NGRDI", "GLI"), verbose = FALSE)
+c(default = nrow(split_default$results), whole = nrow(whole$results))     # you should get 28 and 15
+```
+
+**Your findings:** the default gives 28 objects and there are 15 leaves. Why? _...write here..._
+
+# A senescence score, and your own eye
+
+```{r senescence}
+leaf_traits <- whole$results |>
+  select(id, area, length, width) |>
+  left_join(whole$object_index, by = "id")
+# HINT: yellow leaves have a negative NGRDI
+leaf_traits |> filter(NGRDI < ___) |> select(id, NGRDI)      # TODO; you should get leaves 13 and 15
+```
+
+**Now your own eye.** Look at the labelled picture (`plot(fleaves)` above, or the right panel). Give each of the 15 leaves a **visual score of senescence**, 1 (green) to 5 (fully yellow), **without looking at the NGRDI**. Then compare with your neighbour.
+
+```{r visual}
+# TODO: type your 15 scores, in the order of the leaf ids 1 to 15
+visual <- c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)
+leaf_traits$visual <- visual
+cor(leaf_traits$visual, -leaf_traits$NGRDI, method = "spearman", use = "complete.obs")
+plot(leaf_traits$visual, leaf_traits$NGRDI, xlab = "Visual score", ylab = "NGRDI")
+```
+
+**Your findings:** does the image index agree with your eye? Where do you and your neighbour disagree with each other (the same leaf, a different score)? What does this say about the visual scores in your own trials? _...write here..._
+
+# Disease severity
+
+`measure_disease()` needs three small palettes: **healthy** tissue, **symptoms** and the **background**; the same palettes must be used for the whole study.
+
+```{r severity, fig.width = 5.5, fig.height = 3.6}
+set.seed(10)
+leaf    <- image_pliman("sev_leaf_nb.jpg", plot = FALSE)
+healthy <- image_pliman("sev_healthy.jpg", plot = FALSE)
+lesions <- image_pliman("sev_sympt.jpg", plot = FALSE)
+sev <- measure_disease(img = leaf, img_healthy = healthy, img_symptoms = lesions,
+                       lesion_size = "large", plot = TRUE)
+sev$severity     # about 10.7 % of the leaf area has symptoms
+```
+
+**Your findings:** would you trust this number for selection among M2 plants? What would you check first (palettes, lighting, a subset scored by an expert)? _...write here..._

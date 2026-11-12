@@ -1,0 +1,105 @@
+---
+title: "Image 4 (optional): download real field photos from Artemis"
+author: "[Your name]"
+date: "12 November 2026"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = TRUE,
+                      fig.width = 8, fig.height = 4.5)
+```
+
+> **How to use this file.** Run each grey box with the green triangle, from top to bottom. Replace the `___` in the lines marked `# TODO`; the `# HINT` line above tells you where to look. Every part says what result you should get, so you can check yourself. Write what you see in the **Your findings** boxes. Knit only at the end, if time allows.
+
+# Context
+
+**Artemis and Image Safari** (Alliance of Bioversity International and CIAT) are open collections of millions of crop photographs on Amazon Web Services (licence CC BY-SA 4.0, no account needed). Here we **look inside**, **download 10 photographs** and **open them** with `pliman`. The full explanation is in the tutorial linked from the slides (`tutorial-artemis-photos.html`).
+
+> **Work in pairs and download only 10 photographs per pair.** We share the wifi of the room.
+
+```{r packages}
+if (!requireNamespace("xml2", quietly = TRUE)) install.packages("xml2")
+library(xml2)
+library(pliman)
+```
+
+# Two helper functions
+
+```{r functions}
+base <- "https://alliance-artemis-imagesafari.s3.us-west-2.amazonaws.com"
+
+# List one "folder" of the bucket: returns the sub-folders and the files (key, size in MB)
+list_bucket <- function(prefix = "", max_keys = 200) {
+  url <- paste0(base, "/?list-type=2&delimiter=%2F&max-keys=", max_keys,
+                "&prefix=", utils::URLencode(prefix, reserved = TRUE))
+  x <- xml2::read_xml(url)
+  xml2::xml_ns_strip(x)
+  list(
+    folders = xml2::xml_text(xml2::xml_find_all(x, "//CommonPrefixes/Prefix")),
+    files   = data.frame(
+      key     = xml2::xml_text(xml2::xml_find_all(x, "//Contents/Key")),
+      size_mb = round(as.numeric(xml2::xml_text(xml2::xml_find_all(x, "//Contents/Size"))) / 1e6, 2)
+    )
+  )
+}
+
+# Download one file by its key into a local folder
+get_photo <- function(key, dest = "artemis_photos") {
+  dir.create(dest, showWarnings = FALSE)
+  out <- file.path(dest, basename(key))
+  utils::download.file(paste0(base, "/", utils::URLencode(key)), out, mode = "wb", quiet = TRUE)
+  out
+}
+```
+
+# Look inside the collection
+
+```{r top}
+# You should see two folders: Artemis/ and ImageSafari/
+list_bucket("")$folders
+```
+
+```{r down}
+# HINT: write one of the folders that you saw above, ending with /
+prefix <- "___"                          # TODO: start with "Artemis/", then go down one folder at a time
+cur <- list_bucket(prefix)
+cur$folders
+head(cur$files, 10)
+```
+
+Repeat the box above with a deeper folder until you find files that end in `.jpg` or `.jpeg`.
+
+**Your findings:** the path of the folder with photographs, the crop, and any folder or file that looks like metadata or annotations. _...write here..._
+
+# Download 10 photographs
+
+```{r download}
+photos <- subset(cur$files, grepl("\\.jpe?g$", key, ignore.case = TRUE) & size_mb < 6)
+nrow(photos)
+sel <- head(photos$key, ___)             # TODO: how many photographs? 10 is enough
+paths <- vapply(sel, get_photo, character(1))
+paths
+```
+
+# Look at them in R
+
+```{r look}
+img <- image_import(paths[1])
+dim(img)
+plot(img)
+```
+
+```{r indices, fig.height = 3}
+image_index(img, index = c("R", "GLI", "NGRDI"), ncol = 3, nrow = 1)
+```
+
+**Your findings:** is the background uniform? Is the light even? Which index separates the plant from the soil best? What would you change in the way the photograph is taken? _...write here..._
+
+# Credit
+
+Cite the collection with the access date and the address, and the data descriptor: Mutuvi, S. et al. (2026), DOI 10.31220/agriRxiv.2026.00491. Keep the licence (CC BY-SA 4.0) if you share the photographs.

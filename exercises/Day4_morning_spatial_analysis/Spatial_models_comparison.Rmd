@@ -1,0 +1,177 @@
+---
+title: "Spatial practical: do rows and columns matter, and which model should we use?"
+author: "[Your name]"
+date: "12 November 2026"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = TRUE,
+                      fig.width = 9, fig.height = 4.2)
+```
+
+> **How to use this file.** Run each grey box with the green triangle, from top to bottom. Replace the `___` in the lines marked `# TODO`; the `# HINT` line above tells you where to look. Every part says what result you should get, so you can check yourself. Write what you see in the **Your findings** boxes. Knit only at the end, if time allows.
+
+# Context
+
+The same bean trial as in the lecture and in Mr.Bean: **380 lines, 2 replicates, 792 plots**, in a field of 66 rows x 12 columns. The trait is the clean yield (`YdHa_clean`, kg/ha), here called `yield`.
+
+**Questions for this practical**
+
+1. Do rows and columns change the yield in a statistically significant way?
+2. As we add terms to the mixed model (blocks, rows, columns, a spatial surface), how do the **residual error** and the **heritability** change?
+3. Is the extra work worth it? When should we include rows and columns, and when do we need SpATS?
+
+At the end you repeat the SpATS analysis in the **Mr.Bean** app (see the tutorial linked in the slides) and compare the numbers.
+
+```{r packages}
+source("helpers.R")
+beans <- load_beans()
+dim(beans)       # 792 plots
+```
+
+# Do rows and columns matter? An ANOVA
+
+First the simplest test. We treat replicate, line, row and column as factors and ask if row and column explain a significant part of the yield **after** the replicate and the lines.
+
+```{r anova}
+# HINT: the factors for row and column are called rowf and colf
+fit_aov <- lm(yield ~ rep + line + ___ + ___, data = beans)       # TODO
+anova(fit_aov)
+# You should get: rowf F = 5.8 and colf F = 10.7, both with p < 2e-16
+```
+
+**Your findings:** which of the two has the larger F value? Does the field change the yield even after we take out the genetics? _...write here..._
+
+> This is a quick screening test. It tells us that rows and columns **belong in the model**. The next part shows how much each way of including them helps.
+
+# A ladder of mixed models
+
+Each model adds one thing to the previous one. Lines are always random, so we can compute the heritability (`h2_cullis()` is in `helpers.R`).
+
+```{r ladder}
+m0 <- lmer(yield ~ rep + (1 | line), data = beans)                          # no field terms
+m1 <- lmer(yield ~ rep + (1 | line) + (1 | rb), data = beans)               # incomplete blocks (Day 3)
+# HINT: row inside replicate and column inside replicate are written rep:rowf and rep:colf
+m2 <- lmer(yield ~ rep + (1 | line) + (1 | ___) + (1 | ___), data = beans)  # TODO
+m3 <- lmer(yield ~ rep + (1 | line) + (1 | rb) + (1 | rowf) + (1 | colf), data = beans)   # blocks + rows + columns
+```
+
+```{r variances}
+print(VarCorr(m2), comp = "Variance")
+# Rows and columns have variances of their own: they explain part of the variation
+```
+
+```{r ladder-table}
+ladder <- tibble(
+  Model = c("M0: replicate + line", "M1: + incomplete blocks (Day 3)",
+            "M2: + rows and columns in replicate (no blocks)", "M3: + blocks + rows + columns"),
+  `Residual SD` = sapply(list(m0, m1, m2, m3), sigma),
+  Heritability  = sapply(list(m0, m1, m2, m3), h2_cullis),
+  AIC           = sapply(list(m0, m1, m2, m3), AIC)
+)
+ladder |> mutate(across(where(is.numeric), \(x) round(x, 2)))
+# You should get: residual SD 353, 282, 241, 241; heritability 0.43, 0.54, 0.59, 0.60; AIC 11690, 11510, 11493, 11438
+```
+
+**Your findings:** what happens to the residual SD and the heritability at each step? Which single step helps most? Lower AIC means a better balance between fit and complexity: which model has the lowest AIC? _...write here..._
+
+# The spatial model: SpATS
+
+SpATS adds a **smooth surface** over the field. We use exactly the settings of the Mr.Bean app (`spats_app()` in `helpers.R`): rows and columns inside each replicate as random terms, and one spline segment per column and per row. Open `helpers.R` to see the call.
+
+```{r spats}
+sp <- spats_app(beans)
+summary(sp)
+```
+
+```{r spats-h2}
+# Heritability of the lines: effective dimension of the lines over the number of lines minus one
+# HINT: sp$eff.dim["line"] is the effective dimension of the lines; there are 380 lines
+sp$eff.dim[["line"]] / (___ - 1)                                       # TODO
+# You should get 0.641 (effective dimension 243.1; Mr.Bean gives the same)
+round(sqrt(sp$psi[1]), 2)         # residual SD: 232.05
+```
+
+```{r spats-plot, fig.height = 6.5}
+plot(sp, all.in.one = TRUE)       # raw data, fitted, residuals, spatial trend, line predictions, histogram
+```
+
+**Your findings:** read the **Dimensions** table in `summary(sp)`: how much of the effective dimension is used by the lines? By rows and columns? In the *Fitted Spatial Trend*, where is the yield high and where low? _...write here..._
+
+# Compare all the models
+
+```{r compare}
+all_models <- bind_rows(
+  ladder |> select(Model, `Residual SD`, Heritability),
+  tibble(Model = "SpATS (as in Mr.Bean)", `Residual SD` = sqrt(sp$psi[1]), Heritability = h2_spats(sp))
+)
+all_models |> mutate(across(where(is.numeric), \(x) round(x, 2)))
+# SpATS: residual SD 232 and heritability 0.64
+```
+
+```{r bar-plot, fig.height = 3.2}
+ggplot(all_models, aes(Heritability, factor(Model, rev(Model)))) +
+  geom_col(fill = "#3E6FA8", width = 0.7) +
+  geom_text(aes(label = round(Heritability, 2)), hjust = -0.15) +
+  xlim(0, 0.8) + labs(x = "Heritability (line)", y = NULL)
+```
+
+## Does the ranking change?
+
+We take the BLUPs of the lines from each model and ask how many of the **38 best lines** (10 %) of SpATS are also among the 38 best of the other model.
+
+```{r ranking}
+p_sp <- predict(sp, which = "line")
+b_sp <- setNames(p_sp$predicted.values, as.character(p_sp$line))
+# HINT: blup_lmer(model) gives the BLUPs of a model; top_overlap(a, b) counts the common lines
+rank_tab <- tibble(
+  Model = c("M0", "M1 (Day 3)", "M2", "M3"),
+  `Common lines (of 38)` = sapply(list(m0, m1, m2, m3), \(m) top_overlap(blup_lmer(m), b_sp)[["in_both"]]),
+  `Correlation of BLUPs` = sapply(list(m0, m1, m2, m3), \(m) { b <- blup_lmer(m); cor(b[names(b_sp)], b_sp) })
+)
+rank_tab |> mutate(`Correlation of BLUPs` = round(`Correlation of BLUPs`, 3))
+# You should get 24, 31, 34 and 32 common lines
+```
+
+**Your findings:** the correlation of BLUPs is high for every model. Why does it still matter that 7 of the 38 selected lines change between the Day 3 model (M1) and SpATS? _...write here..._
+
+## BLUEs and BLUPs
+
+```{r blues}
+# HINT: for BLUEs the lines are NOT random
+sp_fix <- spats_app(beans, genotype_random = ___)                       # TODO
+p_fix  <- predict(sp_fix, which = "line")
+bb <- tibble(line = as.character(p_fix$line), BLUE = p_fix$predicted.values) |>
+  left_join(tibble(line = names(b_sp), BLUP = b_sp), by = "line")
+range(bb$BLUE); range(bb$BLUP)       # the BLUEs are more spread out: about 486 to 2344 against 811 to 1973
+ggplot(bb, aes(BLUE, BLUP)) + geom_point(alpha = 0.6) + geom_abline(slope = 1, intercept = 0, colour = "red") +
+  labs(x = "BLUE", y = "BLUP")
+```
+
+**Your findings:** why are the BLUPs less spread out than the BLUEs (they are "shrunk" towards the mean)? Which would you use to rank lines in this trial, and which to send to a multi-environment analysis? _...write here..._
+
+# The same analysis in Mr.Bean
+
+Follow the Mr.Bean tutorial linked in the slides (about 35 minutes) and fill in the numbers that the app gives you:
+
+| | Mr.Bean | R (this file) |
+|:--|:--|:--|
+| Heritability | ___ | 0.64 |
+| Residual SD | ___ | 232.05 |
+| Effective dimension of the lines | ___ | 243.1 |
+| Best line | ___ | SEF_060 |
+
+**Your findings:** do the app and R agree? Why can the two give the same numbers? _...write here..._
+
+# Decision
+
+Fill in your conclusions with a neighbour:
+
+1. When is it worth including **rows and columns**? _...write here..._
+2. When do we need a **spatial surface (SpATS)** on top of that? _...write here..._
+3. In your next trial, what would you record so that you can do this analysis? _...write here..._

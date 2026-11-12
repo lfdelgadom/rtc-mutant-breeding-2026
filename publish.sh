@@ -22,6 +22,8 @@ SLIDES=(
   "06-anova"
   "09-spatial-analysis"
   "09b-image-analysis"
+  "tutorial-artemis-photos"
+  "tutorial-mrbean-spatial"
   "11-ai-plant-breeding"
 )
 

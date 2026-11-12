@@ -1,0 +1,4 @@
+Optional (Image3, last part): copy 3 to 5 photos taken with your phone here.
+Rules for a good photograph: plain background of one colour that the objects do not have,
+even light without shadows, a reference object of known size in the picture, objects separated.
+Name each file with a plot number, for example plot_201.jpg.

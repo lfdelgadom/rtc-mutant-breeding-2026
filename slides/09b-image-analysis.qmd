@@ -47,14 +47,11 @@ shadow  <- image_pliman("shadow.jpg", plot = FALSE)
 
 ## Plan for the afternoon
 
-| Block | Topic |
-|-----------------|-------------------------------------------------------|
-| 1 | From a photograph to a number |
-| 2 | Taking images that can be analysed |
-| 3 | Counting, measuring and scale with `pliman` |
-| 4 | Colour, leaves and disease severity |
-| 5 | Many images at once, and is the trait good enough? |
-| 6 | Near infrared and drones (briefly), exercise and discussion |
+| Time | Activity |
+|:------------|:-------------------------------------------------------|
+| 13:30 | **Lecture.** From a photograph to a number; taking images that can be analysed; counting, measuring and scale; colour and disease severity |
+| 15:00 | **Practical.** Image analysis in R with `pliman`, in pairs |
+| 16:30 | **Q&A** on imaging set-ups |
 
 ::: keybox
 **Goal:** leave able to turn a photograph taken with a phone into trait values for a trial, and to check that those values can be trusted.
@@ -62,9 +59,24 @@ shadow  <- image_pliman("shadow.jpg", plot = FALSE)
 
 ------------------------------------------------------------------------
 
-## Block 1 {.divider}
+## Block 1 {.divider visibility="hidden"}
 
 From a photograph to a number
+
+------------------------------------------------------------------------
+
+## Before we start
+
+1.  Download: [**Day 4 afternoon practical (ZIP)**](../downloads/Day4_afternoon_image_analysis.zip)
+2.  Unzip it (do not work inside the ZIP) and open `Day4_afternoon.Rproj`
+3.  Run `00_install_packages.R` **once**: it installs `pliman` and `EBImage` (a few minutes)
+
+-   All images are the sample images of `pliman`: nothing else to download
+-   Work **in pairs**: one types, the other checks the labelled image; swap every part
+
+::: small-note
+No Git needed: the ZIP is your own copy.
+:::
 
 ------------------------------------------------------------------------
 
@@ -96,7 +108,22 @@ High-throughput phenotyping does not need expensive equipment: a phone, a tray a
 
 ------------------------------------------------------------------------
 
-## Block 2 {.divider}
+## Real field photographs: Artemis and Image Safari
+
+-   Open collections of the **Alliance of Bioversity International and CIAT** on AWS: no account, CC BY-SA 4.0
+-   **Artemis:** 1.39 million photographs of bean, cowpea, soybean and sorghum (4 countries), with agronomic and genotypic data
+-   **Image Safari:** 6.08 million photographs, 18 crops, 9 countries of sub-Saharan Africa
+-   **40,558 annotated by organ.** Not a disease dataset
+
+::: keybox
+**Practical:** [**Tutorial: download real field photos**](tutorial-artemis-photos.html) and open them in R.
+:::
+
+[Mutuvi, S. et al. (2026), DOI 10.31220/agriRxiv.2026.00491]{.small-note}
+
+------------------------------------------------------------------------
+
+## Block 2 {.divider visibility="hidden"}
 
 Taking images that can be analysed
 
@@ -132,7 +159,7 @@ invisible(analyze_objects(shadow, plot = TRUE, show_original = FALSE, verbose = 
 
 ------------------------------------------------------------------------
 
-## Block 3 {.divider}
+## Block 3 {.divider visibility="hidden"}
 
 Counting, measuring and scale with `pliman`
 
@@ -242,7 +269,7 @@ la$results |> select(id, area, length, width)
 
 ------------------------------------------------------------------------
 
-## Many small seeds
+## Many small seeds {visibility="hidden"}
 
 ```{r}
 #| echo: false
@@ -268,7 +295,7 @@ analyze_objects(flax, index = "GRAY", reference = TRUE, reference_area = 6,
 
 ------------------------------------------------------------------------
 
-## Block 4 {.divider}
+## Block 4 {.divider visibility="hidden"}
 
 Colour, leaves and disease severity
 
@@ -361,7 +388,7 @@ sev$severity
 
 ------------------------------------------------------------------------
 
-## Block 5 {.divider}
+## Block 5 {.divider visibility="hidden"}
 
 Many images at once, and is the trait good enough?
 
@@ -420,7 +447,7 @@ Distance from the line `abline(0, 1)` that is the same for all samples is a **bi
 
 ------------------------------------------------------------------------
 
-## Near infrared and drones, briefly
+## Near infrared and drones, briefly {visibility="hidden"}
 
 **Near infrared.** Healthy leaves reflect much more NIR than visible red. A camera with the infrared filter removed, or a multispectral camera, records it. NDVI measures vigour and stress better than RGB indices.
 
@@ -446,7 +473,7 @@ For a programme that is starting: learn the steps of this session with photograp
 
 ------------------------------------------------------------------------
 
-## Exercise
+## Exercise {visibility="hidden"}
 
 With the image `flax_leaves.jpg`:
 
@@ -461,12 +488,27 @@ Hint: `whole$results`, `whole$object_index` and `fx$results` have what you need.
 
 ------------------------------------------------------------------------
 
-## Questions for discussion
+## Questions for discussion {visibility="hidden"}
 
 - Which trait of your programme is measured by eye today and could be measured from a photograph?
 - What would you put in the photograph as reference object, and on which background?
 - How would you validate the image trait before using it for selection?
 - Where would an image trait help in the M2 and M3 generations, when populations are large?
+
+------------------------------------------------------------------------
+
+## Your turn: the practical (15:00)
+
+Open the files of the ZIP in this order:
+
+1.  `Image1_count_and_measure.Rmd`: count seeds, size, scale by dpi and by reference object (30 min)
+2.  `Image2_colour_leaves_severity.Rmd`: colour, flax leaves, **your own visual score**, disease severity (30 min)
+3.  `Image3_folder_to_field_book.Rmd`: a folder of images, the field book, validation, the model (30 min)
+4.  Optional: `Image4_download_Artemis_photos_optional.Rmd` or the [**Artemis tutorial**](tutorial-artemis-photos.html): real field photographs
+
+::: keybox
+Optional: bring 3 to 5 photos from your phone and analyse them in `my_images/`.
+:::
 
 ------------------------------------------------------------------------
 
