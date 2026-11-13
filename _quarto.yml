@@ -10,6 +10,7 @@ project:
     - "slides/*_files/**"
     - "slides/images/**"
     - "downloads/*.zip"
+    - "data/bean_nirs.csv"
     - "data/Example_Beans.csv"
 
 book:

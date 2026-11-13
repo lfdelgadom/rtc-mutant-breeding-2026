@@ -103,6 +103,23 @@ head(cur$files, 10)
 
 Repeat until you reach a folder that has files ending in `.jpg` or `.jpeg`. Look also for folders or files with the words *annotations*, *metadata* or *json*: they tell you what each photo contains.
 
+::: {.callout-note}
+**The tree is deep.** The photographs are usually 4 to 6 folders down (crop, images, site, project, date, and so on). Do not go down by hand: this loop enters the first folder at each level until it finds files.
+
+```{r}
+prefix <- "Artemis/common-bean/images/ciat-arusha/disease-scouting/"   # any folder you chose
+repeat {
+  cur <- list_bucket(prefix)
+  if (nrow(cur$files) > 0 || length(cur$folders) == 0) break
+  prefix <- cur$folders[1]
+}
+prefix                            # the folder where the photographs are
+head(cur$files, 10)
+```
+
+A real example that worked on the course: starting from the disease scouting folder of CIAT Arusha (Tanzania), the loop ends in `.../disease-scouting/2024--tza--feb/2024-02-02/unplotted/`, with photographs of about 4 MB each. Other sites in the common bean images are `ciat-kawanda`, `ciat-palmira`, `csu-fort-collins`, `naro-namulonge` and `tari-maruku`.
+:::
+
 ::: {.callout-tip}
 You can also read the same list in your **browser**: paste this address and add the folder after `prefix=`:
 

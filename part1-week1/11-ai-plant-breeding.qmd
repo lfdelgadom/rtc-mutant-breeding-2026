@@ -5,28 +5,29 @@
 **Session:** Day 5, Friday 13 November, 15:00 to 16:15
 :::
 
+::: {.callout-tip}
+## Materials for this session
+
+- [Lecture slides](../slides/11-ai-plant-breeding.html){target="_blank"}
+- [Practical: NIR spectra of beans and PCR (ZIP)](../downloads/ML_NIRS_beans_practical.zip). Unzip it, open the `.Rproj`, and start with `NIRS_beans_PCR_practical.Rmd`.
+- [Data: bean NIR spectra and laboratory values (CSV)](../data/bean_nirs.csv)
+:::
+
 ## Learning objectives
 
-- Decide when machine learning (ML) improves a prediction and when a classical model is enough
-- Describe the main ML models used in breeding: penalized regression, PLS, random forest, gradient boosting and support vector machines
-- Build a prediction model from near-infrared (NIR) spectra and compare it with a baseline
-- Validate a model honestly: training, validation and test sets, cross-validation by groups and data leakage
-- Recognize why a model that works in one population or season can fail in the next
-- Explain the limits of ML and the role of breeder knowledge
+- Explain the difference between explaining a trial and predicting a new sample
+- Describe what near-infrared (NIR) light is and what a NIR spectrum measures
+- Say which kinds of traits NIR predicts well (chemical) and which not (minerals, cooking and physical traits)
+- Build a simple prediction model, principal component regression (PCR), and describe other common models in one sentence each
+- Measure prediction quality with RMSE, bias, R² and RPD, and compare with a baseline
+- Validate honestly and avoid **data leakage**, for example by keeping all samples of a bean line in the same fold
 
-Most of this course uses models to **explain** a trial: is there a difference between lines, how large is it, how sure are we? ML is used for another goal: to **predict** a value for a new sample, such as a plant that was only photographed or scanned. We do not need to understand every step of the model if it predicts well; but we do need to know **how well it predicts in the situation where we will use it**. This chapter is about that question.
+Most of this course uses models to **explain** a trial: is there a difference between lines, how large is it, how sure are we? Machine learning (ML) is used for another goal: to **predict** a value for a new sample. We may not need to understand every step of the model if it predicts well. But we do need to know **how well it predicts in the situation where we will use it**. This chapter is about that question, with NIR spectra of common beans.
 
 ```{r}
 #| message: false
-library(dplyr)
-library(tidyr)
-library(readr)
-library(ggplot2)
-library(glmnet)    # ridge, lasso, elastic net
-library(pls)       # partial least squares
-library(ranger)    # random forest
-library(gbm)       # gradient boosting
-library(e1071)     # support vector machines
+source("exercises/ML_NIRS_beans_practical/helpers.R")   # the functions used in the practical
+source("slides/ml_deck_functions.R")                     # extra models for the comparison
 ```
 
 ```{r}
@@ -36,457 +37,345 @@ theme_set(theme_minimal(base_size = 11))
 ```
 
 ::: callout-note
-## Packages
-
-This chapter needs `glmnet`, `pls`, `gbm` and `e1071` in addition to `ranger`, which is in the course installation. If any is missing, run `install.packages(c("glmnet", "pls", "gbm", "e1071"))` once. The Day 6 practical uses the same packages.
+## Functions in a separate file
+To keep the code short, the work is done by functions in `helpers.R`: `load_bean_nir()`, `prepare_spectra()`, `fit_pcr()`, `predict_pcr()`, `quality()`, `make_folds()`, `cv_predict()` and `cv_curve()`. You can open the file to see how each one works. The practical uses the same file.
 :::
 
 ## Prediction against explanation
 
-A mixed model or an ANOVA answers questions about **parameters**: which genotype effect, which variance component. ML models answer questions about **new observations**: given the spectrum, the image or the weather of a plot, what will its value be? The practical differences are:
-
-| | Classical statistics (ANOVA, mixed models) | Machine learning |
+| | Explain (inference) | Predict |
 |---|---|---|
-| Main goal | Explain, estimate effects, test hypotheses | Predict new observations |
-| Data | Designed experiments, few explanatory variables | Many variables, often more variables than samples |
-| Model | Specified by the analyst from the design | Learned from the data, often nonlinear |
-| Output | Effects with their uncertainty | A prediction and an error estimate |
-| Main risk | Wrong model structure | Overfitting and a model that does not transfer |
+| Question | Why? Is there an effect? | What will the value be for a new sample? |
+| Typical tools | ANOVA, mixed models | PCR, PLS, random forest, boosting |
+| Result | An effect size and a p-value | A number for each new sample, and its error |
+| A model is good when | The assumptions hold and the design is sound | It predicts samples it has never seen |
 
-They are not rivals. The design and the mixed model give clean phenotypes, and ML turns **cheap measurements** (images, spectra, sensors, markers) into predictions of **expensive ones** (laboratory analysis, yield, disease scores).
+A model can explain well and predict badly, and the other way around.
 
-## Where ML pays in a breeding programme
+## Where prediction pays in a breeding programme
 
-ML is useful when there are many predictors, when the relation with the trait is not a simple straight line, or when we need to measure thousands of samples quickly.
+Some measurements are slow or costly: laboratory analysis of phytate, sugars or protein, scoring disease in the field, phenotyping every line in every trial. A prediction model learns the link between a **cheap measurement** (a NIR spectrum, an image, a marker) and the **expensive one**. We measure the expensive trait on a few samples, build the model, and then use the cheap measurement on all samples.
 
-| Application | Predictors | Target |
-|---|---|---|
-| Chemical composition | NIR spectra | Protein, oil, starch, carotenoids |
-| Disease and vigour | Image features (@sec-images) | Severity score, biomass |
-| Yield and traits | Drone and sensor indices | Yield, plant height |
-| Genomic prediction | Thousands of markers | Breeding value |
-| G×E prediction | Environmental covariates (@sec-met-gxe) | Performance in a new environment |
+In a mutation breeding programme there can be thousands of M2 or M3 plants and lines. NIR on the seed allows a fast **screening** for composition. The interesting lines are then confirmed in the laboratory. Prediction does not replace the laboratory: it tells you where to look.
 
-In a **mutation breeding** programme, the large M2 and M3 populations have thousands of plants that cannot be measured one by one in the laboratory. A prediction from an image or a spectrum can rank every plant, so that the laboratory measures only the promising ones. The prediction does not replace the measurement: it decides where to spend it.
+## Light we can see and light we cannot see
 
-## The data: NIR spectra of cassava breeding samples
+Light is a wave, and its **wavelength** (in nanometres, nm) tells us what kind of light it is. Our eyes see only 400 to 700 nm. The NIR region starts just after the red edge, at about 750 nm, and goes to about 2,500 nm. Before the visible there are ultraviolet light and X-rays; after the NIR there are the mid and thermal infrared, microwaves and radio waves.
 
-We use a real data set from the CIAT cassava breeding programme (Davrieux et al. 2016), published with the `rchemo` package. It is a small part of a large calibration database built to predict carotenoids in fresh cassava roots, a trait of the biofortification programme, because the laboratory method (HPLC) can analyse only a few samples per day. Near-infrared spectra were measured between 400 and 2498 nm every 2 nm (1050 variables). For each sample, the concentration of a pigment was measured with the reference laboratory method (the data documentation names the target "pigment concentration"), and the aim is to predict it from the spectrum, which is much cheaper and faster.
+![The light spectrum and where our bean spectra sit. The instrument (FOSS DS2500) measures the visible, the red edge and the NIR, from 400 to 2,500 nm.](../slides/images/light_spectrum.png){#fig-light width="95%"}
+
+A NIR instrument sends light onto the sample (for example whole seed or flour). The sample **absorbs** some wavelengths and the instrument records the light that comes back. The result at each wavelength is the **spectrum**. It is fast, it needs no chemicals, and the sample is not destroyed. But the spectrum is **indirect**: we need a model to turn it into a number.
+
+## What NIR can "see"
+
+Molecules absorb NIR light when their bonds vibrate. In the NIR region the strongest bands come from bonds with hydrogen: **O-H** (water, sugars, starch), **N-H** (protein) and **C-H** (oil, sugars, starch). @fig-groups shows where many chemical groups absorb. It is drawn from the data of Goddu and Delker (1960), compiled by S. D. J. Brown.
+
+![Positions of absorption bands of chemical groups in the near-infrared region (data: Goddu and Delker 1960). Darker bars mean stronger absorption.](../slides/images/nir_structure_chart.png){#fig-groups width="85%"}
+
+@fig-bands is a simple summary for food and grain. The bands are broad and overlap, so we cannot read a compound from one wavelength. That is why we need a calibration model.
+
+![A simple map of the main absorption bands of water, protein, oil and starch or sugars. Positions are approximate.](../slides/images/nir_bands_simple.png){#fig-bands width="85%"}
+
+::: callout-important
+## NIR sees bonds, not elements
+NIR works well for **chemical** traits made of organic molecules: water, protein, oil, starch, sugars, fibre and phenolics. It works poorly for traits that are not built from organic bonds or that have many physical causes:
+
+- **Minerals** such as iron and zinc: a metal has no NIR band. A model can only use the link between the mineral and the organic matrix, so it is indirect and weaker.
+- **Physical and cooking traits** such as cooking time, water absorption, hardness or texture. They depend on the seed coat, structure and storage, not on one chemical group.
+
+So NIR is very good for chemical variables and less good for physico-chemical ones. Always test each new trait before you trust a model.
+:::
+
+## The NIR spectra of beans
+
+The data come from common bean seed samples of CIAT: **117 samples of 44 lines** (most lines have 3 repeats), with NIR spectra from 400 to 2,500 nm (here every 2 nm, 1,050 variables) and 13 laboratory traits.
 
 ```{r}
-nir <- read_csv("data/cassava_nir.csv", show_col_types = FALSE)
-wl_cols <- grep("^w", names(nir))
-wl <- as.numeric(sub("w", "", names(nir)[wl_cols]))
-X  <- as.matrix(nir[, wl_cols])
-y  <- nir$pigment
-is_cal <- nir$set == "calibration"
-
-nir |>
-  group_by(set, year) |>
-  summarise(samples = n(), mean_pigment = mean(pigment), sd = sd(pigment), .groups = "drop")
+bean <- load_bean_nir("data/bean_nirs.csv")   # lab, X (spectra), wl, line
+lab  <- bean$lab
+X    <- bean$X
+line <- bean$line
+dim(X)
+table(table(line))        # lines with 1, 2 or 3 samples
 ```
 
-There are `{r} sum(is_cal)` samples from 2009 to 2012 (the **calibration** set, which we use to build models) and `{r} sum(!is_cal)` samples from 2013 (the **test** set, which we keep untouched until the end and which plays the role of the next season). The table has `{r} length(wl)` predictors and `{r} sum(is_cal)` samples, so there are **many more variables than samples**; a standard multiple regression cannot be fitted.
+```{r}
+traits <- c("water_absorption", "cooking_time", "iron", "zinc", "phytate", "phenolics",
+            "verbascose", "stachyose", "raffinose", "sucrose", "fructose",
+            "total_sugars", "total_oligosaccharides")
+tab <- data.frame(trait = traits,
+                  mean = sapply(traits, function(t) mean(lab[[t]])),
+                  sd   = sapply(traits, function(t) sd(lab[[t]])),
+                  min  = sapply(traits, function(t) min(lab[[t]])),
+                  max  = sapply(traits, function(t) max(lab[[t]])))
+knitr::kable(tab, digits = 2, row.names = FALSE)
+```
+
+Units: iron and zinc in mg/kg; phytate and sugars in mg/g; water absorption in %; cooking time in minutes.
 
 ```{r}
 #| label: fig-spectra
-#| fig-cap: "NIR spectra of 60 samples from the calibration set, coloured by pigment concentration (low, medium and high thirds). The spectra look alike and the differences are small."
+#| fig-cap: "Raw NIR spectra of 60 samples, coloured by phytate. The spectra look alike and the differences are small."
 #| fig-width: 8
 #| fig-height: 3.8
-set.seed(1)
-show <- sample(which(is_cal), 60)
-grp <- cut(y, quantile(y[is_cal], c(0, 1/3, 2/3, 1)), labels = c("low", "medium", "high"), include.lowest = TRUE)
-long <- data.frame(sample = rep(show, each = length(wl)), wavelength = rep(wl, times = length(show)),
-                   absorbance = as.vector(t(X[show, ])), pigment = rep(grp[show], each = length(wl)))
-ggplot(long, aes(wavelength, absorbance, group = sample, colour = pigment)) +
-  geom_line(alpha = 0.6) +
-  scale_colour_manual(values = c(low = "#1b9e77", medium = "#e6ab02", high = "#d95f02")) +
-  labs(x = "Wavelength (nm)", y = "Absorbance", colour = "Pigment")
+plot_spectra(X, colour_by = lab$phytate, n = 60, legend_title = "Phytate")
 ```
-
-```{r}
-#| label: fig-year
-#| fig-cap: "Pigment concentration by year. The test year (2013) has a higher mean than the calibration years: the breeding population is evolving."
-#| fig-width: 6.5
-#| fig-height: 3.4
-ggplot(nir, aes(factor(year), pigment, fill = set)) +
-  geom_boxplot(outlier.shape = NA, alpha = 0.7) +
-  geom_jitter(width = 0.15, size = 0.8, alpha = 0.5) +
-  scale_fill_manual(values = c(calibration = "#9ecae1", test = "#fdae6b")) +
-  labs(x = "Year", y = "Pigment concentration", fill = NULL)
-```
-
-```{r}
-#| include: false
-m_cal <- mean(y[is_cal]); m_test <- mean(y[!is_cal]); max_cal <- max(y[is_cal]); max_test <- max(y[!is_cal])
-```
-
-This figure is the most important one of the chapter. The mean of the test year is `{r} fmt(m_test, 1)`, while the calibration years have a mean of `{r} fmt(m_cal, 1)`, and the test year has samples above the maximum of the calibration set (`{r} fmt(max_test, 1)` against `{r} fmt(max_cal, 1)`). The breeding programme has improved the trait, so **the next season is not like the previous ones**. In the full CIAT database the mean carotenoid content rose by more than 80% between 2009 and 2014 (Davrieux et al. 2016), and the authors link the limits of PLS to this change. We will see what it does to the predictions.
 
 ## Preparing the spectra
 
-Raw spectra differ mainly in the baseline (how much light the sample scatters) and not in chemistry. Two standard treatments are applied to **each spectrum separately**:
+Two light steps make the differences easier to see:
 
-1. **Standard normal variate (SNV)**: subtract the mean of the spectrum and divide by its standard deviation. It removes differences in overall level and scale.
-2. **First derivative** (after a light smoothing): it removes the slope of the baseline and sharpens the absorption peaks.
+1. **SNV** (standard normal variate): each spectrum is centred and scaled by itself. It removes differences in level caused by grain size and light scatter.
+2. **First derivative**: removes a sloping baseline and sharpens the peaks.
 
 ```{r}
-snv <- function(X) t(apply(X, 1, function(s) (s - mean(s)) / sd(s)))
-
-first_derivative <- function(X, k = 5) {
-  Xs <- t(apply(X, 1, function(s) stats::filter(s, rep(1 / k, k), sides = 2)))   # moving average
-  Xs <- Xs[, !apply(Xs, 2, anyNA), drop = FALSE]
-  t(apply(Xs, 1, diff))
-}
-
-prep <- function(X) {
-  Z <- first_derivative(snv(X))
-  colnames(Z) <- paste0("v", seq_len(ncol(Z)))
-  Z
-}
-Z <- prep(X)
-wl_d <- (wl[3:(length(wl) - 3)] + wl[4:(length(wl) - 2)]) / 2    # wavelength of each derivative variable
-c(variables = ncol(Z), wavelengths = length(wl_d))
+Z <- prepare_spectra(X)
+dim(Z)
 ```
 
 ```{r}
 #| label: fig-prep
-#| fig-cap: "The same 15 calibration spectra, raw (top), after SNV (middle) and after SNV and first derivative (bottom)."
+#| fig-cap: "The same spectra after SNV and first derivative."
 #| fig-width: 8
-#| fig-height: 5.5
-i15 <- show[1:15]
-mk <- function(M, w, lab) data.frame(sample = rep(i15, each = length(w)), wavelength = rep(w, times = 15),
-                                     value = as.vector(t(M[i15, ])), step = lab)
-bind_rows(mk(X, wl, "1. Raw"), mk(snv(X), wl, "2. SNV"), mk(Z, wl_d, "3. SNV + first derivative")) |>
-  ggplot(aes(wavelength, value, group = sample)) +
-  geom_line(alpha = 0.6, colour = "#2c7fb8") +
-  facet_wrap(~ step, ncol = 1, scales = "free_y") +
-  labs(x = "Wavelength (nm)", y = NULL)
+#| fig-height: 3.6
+plot_spectra(Z, colour_by = lab$phytate, n = 60, ylab = "SNV + first derivative", legend_title = "Phytate")
 ```
 
-The treatment is a choice that can change the result, and it must be **decided with the calibration set only**. SNV and the derivative work on one spectrum at a time, so they do not use information from other samples. Treatments that compute a mean or a variance across samples (scaling variables, for example) must be learned in the training samples and then applied to new samples with the same numbers.
+Each spectrum is treated on its own, so this step cannot leak information between samples.
+
+**Principal components.** PCA summarises the 1,045 variables in a few new variables, the principal components. Here the first four hold `{r} fmt(sum(100 * prcomp(Z)$sdev[1:4]^2 / sum(prcomp(Z)$sdev^2)), 0)` % of the variation.
+
+```{r}
+#| label: fig-pca
+#| fig-cap: "The first two principal components of the prepared spectra, coloured by grain colour."
+#| fig-width: 7
+#| fig-height: 4
+pca <- prcomp(Z)
+ve  <- 100 * pca$sdev^2 / sum(pca$sdev^2)
+ggplot(data.frame(PC1 = pca$x[, 1], PC2 = pca$x[, 2], colour = lab$colour), aes(PC1, PC2, colour = colour)) +
+  geom_point(size = 2.2) + labs(x = paste0("PC1 (", round(ve[1]), "%)"), y = paste0("PC2 (", round(ve[2]), "%)"), colour = "Grain colour")
+```
 
 ## Measuring prediction quality
 
-The quality of a prediction is measured on samples that the model has **not seen**.
+Let $y_i$ be the observed value and $\hat y_i$ the predicted value of sample $i$, for $n$ samples that **were not used to build the model**.
 
-- **RMSE** (root mean squared error): the typical size of the error, in the units of the trait. Lower is better.
-- **R²** of the prediction: the share of the variation of the new samples that the prediction explains.
-- **Bias**: the mean of (prediction minus observed). It should be near zero; a bias shows that the model is systematically high or low.
-- **RPD** (ratio of performance to deviation): the standard deviation of the observed values divided by the RMSE. It is common in NIR work; values above 2 are usually taken as a useful model for screening.
+| Measure | Formula | Meaning |
+|---|---|---|
+| RMSE | $\sqrt{\frac{1}{n}\sum (y_i-\hat y_i)^2}$ | Typical size of the error, in the unit of the trait. Small is good |
+| Bias | $\frac{1}{n}\sum (\hat y_i-y_i)$ | Is the model on average too high or too low? Close to 0 is good |
+| R² | squared correlation of $y$ and $\hat y$ | Share of variation explained. Close to 1 is good |
+| RPD | $\mathrm{sd}(y)/\mathrm{RMSE}$ | How much better than predicting the mean for everyone |
 
-Every model must be compared with a **baseline**. The simplest baseline predicts the mean of the calibration set for every new sample.
-
-```{r}
-rmse <- function(o, p) sqrt(mean((o - p)^2))
-r2   <- function(o, p) 1 - sum((o - p)^2) / sum((o - mean(o))^2)
-metrics <- function(o, p) c(RMSE = rmse(o, p), R2 = r2(o, p), bias = mean(p - o), RPD = sd(o) / rmse(o, p))
-
-A <- Z[is_cal, ];  yA <- y[is_cal]       # calibration
-B <- Z[!is_cal, ]; yB <- y[!is_cal]      # test (the next season)
-baseline <- metrics(yB, rep(mean(yA), length(yB)))
-round(baseline, 2)
-```
-
-Predicting the calibration mean gives an RMSE of `{r} fmt(baseline["RMSE"], 2)` on the test year: this is the number to beat.
+A common guide for RPD (Williams): below 1.5 the model is not useful; 1.5 to 2 rough screening; 2 to 2.5 approximate quantitative prediction; above 2.5 good. The **baseline** "always predict the mean" has RMSE equal to the standard deviation, so RPD = 1. A model must beat the baseline. Wadoux et al. (2021, chapter 9) describe these measures and others, such as the RPIQ (using the interquartile range) and Lin's concordance correlation coefficient (CCC), which are better for skewed data.
 
 ## The models
 
-We fit the main families of models to the same data. Each model has a **tuning parameter** that controls how flexible it is. A model that is too flexible learns the noise of the calibration samples (overfitting); one that is too rigid misses the signal. Tuning parameters are chosen by **cross-validation inside the calibration set**, never with the test set.
+### Principal component regression (PCR)
 
-| Model | Idea | Tuning parameter | Main strength | Main weakness |
-|---|---|---|---|---|
-| **Ridge** | Linear model that shrinks all coefficients | Amount of shrinkage | Stable with correlated variables | Keeps all variables |
-| **Lasso** | Shrinks and sets many coefficients to zero | Amount of shrinkage | Selects a few variables | Unstable with correlated variables |
-| **Elastic net** | Mix of ridge and lasso | Shrinkage and the mix | Selects groups of related variables | Two parameters |
-| **PLS** | Builds a few components that covary with the trait | Number of components | Standard for spectra | Linear |
-| **Random forest** | Average of many decision trees | Variables per split | Nonlinear, few assumptions | Cannot predict outside the range of the data |
-| **Gradient boosting** | Trees built one after the other, each correcting the errors of the last | Number of trees, learning rate, depth | Often very accurate | Many parameters, can overfit |
-| **Support vector machine** | Flexible curve fitted with a margin of tolerance | Cost and kernel width | Good with small samples | Hard to interpret |
+PCR is the simplest model that works well for spectra. It has three steps:
 
-We write one function that fits any of these models to a training set and predicts a new set, with the tuning included.
+1. **PCA** of the spectra of the training samples (1,045 variables to a few components).
+2. A normal **linear regression** of the trait on the first *k* components.
+3. To **predict** a new sample, project its spectrum on the same components and use the regression.
+
+You choose one number: *k*. In the code, the three steps are two functions: `fit_pcr()` and `predict_pcr()`.
 
 ```{r}
-fit_predict <- function(model, A, y, B) {
-  switch(model,
-    PLS = {
-      d <- data.frame(y = y); d$X <- I(A)
-      set.seed(1)
-      m <- plsr(y ~ X, ncomp = 15, data = d, validation = "CV", segments = 10)
-      nc <- which.min(RMSEP(m)$val[1, 1, -1])                 # components chosen by cross-validation
-      as.numeric(predict(m, ncomp = nc, newdata = data.frame(X = I(B))))
-    },
-    Ridge = { set.seed(1); cv <- cv.glmnet(A, y, alpha = 0);   as.numeric(predict(cv, B, s = "lambda.min")) },
-    Lasso = { set.seed(1); cv <- cv.glmnet(A, y, alpha = 1);   as.numeric(predict(cv, B, s = "lambda.min")) },
-    ENet  = { set.seed(1); cv <- cv.glmnet(A, y, alpha = 0.5); as.numeric(predict(cv, B, s = "lambda.min")) },
-    RF = {
-      set.seed(1)
-      predict(ranger(x = A, y = y, num.trees = 500), B)$predictions
-    },
-    GBM = {
-      set.seed(1)
-      d <- as.data.frame(A); d$y <- y
-      g <- gbm(y ~ ., data = d, distribution = "gaussian", n.trees = 1500, shrinkage = 0.02,
-               interaction.depth = 3, cv.folds = 5, verbose = FALSE)
-      nt <- gbm.perf(g, method = "cv", plot.it = FALSE)       # number of trees chosen by cross-validation
-      predict(g, as.data.frame(B), n.trees = nt)
-    },
-    SVM = {
-      tu <- tune.svm(A, y, gamma = 10^(-4:-2), cost = c(1, 10, 100), tunecontrol = tune.control(cross = 5))
-      predict(tu$best.model, B)
-    })
-}
+y <- lab$phytate
+f_random  <- make_folds(line, by_line = FALSE)
+f_by_line <- make_folds(line, by_line = TRUE)
+
+model <- fit_pcr(Z, y, ncomp = 12)       # fit on all samples
+round(quality(y, predict_pcr(model, Z)), 2)   # same samples: too good, not a real test
 ```
+
+The last line predicts the samples that built the model. It looks good, but this is not a test.
+
+### Other model families
+
+| Model | In one sentence |
+|---|---|
+| **PCR** | PCA first, then a linear regression on the components |
+| **PLS** (partial least squares) | Like PCR, but the components are built to be related to the trait. The classic NIR method |
+| **Ridge** | A linear model that shrinks all coefficients, so no wavelength dominates |
+| **Lasso** | Shrinks and sets many coefficients exactly to zero: it selects wavelengths |
+| **Elastic net** | A mix of ridge and lasso |
+| **Random forest** | Many decision trees, each on a random part of the data; the average is the prediction. It needs tuning and can overfit |
+| **Support vector machine (SVM)** | Finds a smooth curve that stays close to the data; a kernel lets it follow curved relations |
+| **Boosting (GBM)** | Many small trees built one after the other, each one fixing the errors of the previous ones |
+
+Ridge, lasso and elastic net start from a linear model with one coefficient for each wavelength and add a **penalty** for large coefficients. Ridge makes all coefficients smaller. The lasso pushes many of them to exactly zero, so only some wavelengths stay in the model. Elastic net mixes the two. The strength of the penalty is chosen by cross-validation.
+
+PCR and PLS are the traditional tools of NIR. Trees and boosting come from machine learning. The soil spectroscopy book of Wadoux et al. (2021) also describes Cubist and memory-based learning.
+
+### Comparison on one trait
+
+We predict phytate with every model, with validation by line (@sec-leakage explains why). Inside each training set, the number of components or the penalty is chosen by an inner cross-validation.
 
 ```{r}
-models <- c("PLS", "Ridge", "Lasso", "ENet", "RF", "GBM", "SVM")
-pred_test <- sapply(models, function(m) fit_predict(m, A, yA, B))
-perf <- t(apply(pred_test, 2, function(p) metrics(yB, p))) |> as.data.frame()
-perf$model <- rownames(perf)
-perf |> arrange(RMSE) |> select(model, RMSE, R2, bias, RPD) |> mutate(across(where(is.numeric), \(x) round(x, 2)))
+#| cache: true
+Z5 <- thin(Z, 5)                       # average 5 neighbouring variables, for speed
+models <- c("PCR", "PLS", "Ridge", "Lasso", "ENet", "RF", "GBM", "SVM")
+P <- sapply(models, function(m) cv_model(m, Z5, y, f_by_line, line))
+perf <- t(apply(P, 2, function(p) quality(y, p)))
+perf <- rbind(perf, "Always the mean" = c(RMSE = sd(y) * sqrt(116 / 117), R2 = 0, bias = 0, RPD = 1))
+knitr::kable(perf, digits = 2)
 ```
 
-```{r}
-#| include: false
-best <- perf$model[which.min(perf$RMSE)]
-worst <- perf$model[which.max(perf$RMSE)]
-```
-
-All models beat the baseline (`{r} fmt(baseline["RMSE"], 2)`), and the best are the lasso, the elastic net and the support vector machine, with an RMSE near `{r} fmt(min(perf$RMSE), 1)`. The table has two lessons.
-
-1. **There is no model that is best for every problem.** The linear models with a good penalty and the SVM are at the top here; the ridge, which keeps every variable, and the random forest are at the bottom. The order would be different in another data set, so the comparison must always be done with your data.
-2. **Every model has a negative bias.** All of them predict values that are, on average, `{r} fmt(abs(mean(perf$bias)), 1)` units too low in the test year. We look at why below.
+All models beat the baseline, but none is excellent: phytate is a difficult trait. PCR is the weakest here. Lasso, elastic net, boosting and SVM do better (RPD about 1.7), but none reaches 2, so they are useful for rough screening only.
 
 ```{r}
 #| label: fig-pred-obs
-#| fig-cap: "Predicted against observed pigment in the test year (2013). The dashed line is the 1:1 line; the shaded band is the range of the calibration set."
-#| fig-width: 8
-#| fig-height: 5
-po <- as.data.frame(pred_test) |> mutate(observed = yB) |>
-  pivot_longer(-observed, names_to = "model", values_to = "predicted") |>
-  mutate(model = factor(model, levels = models))
-ggplot(po, aes(observed, predicted)) +
-  annotate("rect", xmin = -Inf, xmax = Inf, ymin = min(yA), ymax = max(yA), fill = "grey85", alpha = 0.6) +
-  geom_abline(linetype = 2) +
-  geom_point(colour = "#2c7fb8", alpha = 0.7, size = 1.4) +
-  facet_wrap(~ model, nrow = 2) +
-  coord_equal() +
-  labs(x = "Observed pigment", y = "Predicted pigment")
-```
-
-The points lie **below** the 1:1 line for the high values. The highest observed values of the test year are above anything in the calibration set, and the models do not follow them. The random forest shows it clearly: a tree predicts an average of the training values, so it can **never predict above the maximum it has seen**. A linear model can extrapolate, but only if the relation stays the same outside the range. This is the practical meaning of "transfer": a model is reliable inside the range and the conditions where it was built.
-
-### What the lasso selected
-
-Penalized regression has a bonus: the lasso gives a short list of spectral variables that matter.
-
-```{r}
-#| label: fig-lasso
-#| fig-cap: "Coefficients of the lasso (non-zero only). Each bar is a spectral variable (first derivative of the SNV spectrum) at its wavelength."
-#| fig-width: 8
+#| fig-cap: "Predicted against observed phytate for four models (validation by line). The dashed line is the 1:1 line."
+#| fig-width: 9
 #| fig-height: 3.4
-set.seed(1)
-cv_l <- cv.glmnet(A, yA, alpha = 1)
-b <- as.matrix(coef(cv_l, s = "lambda.min"))[-1, 1]
-sel <- data.frame(wavelength = wl_d[b != 0], coefficient = b[b != 0])
-ggplot(sel, aes(wavelength, coefficient)) +
-  geom_col(width = 6, fill = "#2c7fb8") +
-  labs(x = "Wavelength (nm)", y = "Lasso coefficient")
+pl <- do.call(rbind, lapply(c("PCR", "PLS", "Lasso", "RF"), function(m) data.frame(model = m, obs = y, pred = P[, m])))
+ggplot(pl, aes(obs, pred)) + geom_abline(linetype = 2) + geom_point(colour = "#2c7fb8", alpha = 0.7) +
+  facet_wrap(~model, nrow = 1) + labs(x = "Observed phytate (mg/g)", y = "Predicted phytate (mg/g)")
 ```
 
-The lasso keeps `{r} nrow(sel)` of the `{r} ncol(A)` variables. A short list helps interpretation and a cheaper instrument (a few filters instead of the full spectrum) is possible if the important regions are known. But with correlated variables the selection is not unique: neighbouring wavelengths can replace each other, so do not read the list as "the only wavelengths that matter".
+### How many components?
 
-## Validation: how to know if the number is honest
-
-The estimate of the error is only valid if the samples used to **evaluate** the model were not used in any way to **build** it. There are three levels.
-
-| Set | Used for | Rule |
-|---|---|---|
-| Training | Fit the model | Many samples |
-| Validation (or cross-validation folds) | Choose the tuning parameters and the model | Taken from the training data |
-| Test | Report the final error | Used **once**, at the end |
-
-### Cross-validation
-
-In **k-fold cross-validation** the calibration set is divided in k parts; the model is fitted k times, each time leaving one part out and predicting it. The prediction errors of the left-out parts estimate the error for new samples.
-
-How the parts are made is the most important decision. If the samples are not independent (the same genotype in several plots, the same plant measured several times, the same field and year), a **random** split puts very similar samples in the training and in the validation part, and the error looks smaller than it will be. The honest split follows the **question you want to answer**: a new year needs a split by year, a new genotype needs a split by genotype, a new location needs a split by location.
-
-We compare both ways with three models.
+With few components the model is too simple; with many it learns the noise (**overfitting**). We try 1 to 25 components and look at the validation error.
 
 ```{r}
-set.seed(2)
-fold_random <- sample(rep(1:10, length.out = nrow(A)))
-yr_cal <- nir$year[is_cal]
-
-cv_error <- function(model, groups) {
-  p <- numeric(nrow(A))
-  for (g in unique(groups)) {
-    i <- groups == g
-    p[i] <- fit_predict(model, A[!i, , drop = FALSE], yA[!i], A[i, , drop = FALSE])
-  }
-  rmse(yA, p)
-}
-
-cv_tab <- data.frame(model = c("PLS", "ENet", "SVM"))
-cv_tab$random_10_fold <- sapply(cv_tab$model, cv_error, groups = fold_random)
-cv_tab$leave_one_year_out <- sapply(cv_tab$model, cv_error, groups = yr_cal)
-cv_tab$test_2013 <- perf$RMSE[match(cv_tab$model, perf$model)]
-cv_tab |> mutate(across(where(is.numeric), \(x) round(x, 2)))
-```
-
-```{r}
-#| label: fig-cv
-#| fig-cap: "Error of three models estimated by random 10-fold cross-validation, by leaving one year out, and on the real test year. Random cross-validation is too optimistic."
-#| fig-width: 6.5
+#| label: fig-curve
+#| fig-cap: "Validation error of PCR for phytate against the number of components, with random folds and with folds by line."
+#| fig-width: 7
 #| fig-height: 3.6
-cv_tab |>
-  pivot_longer(-model, names_to = "validation", values_to = "RMSE") |>
-  mutate(validation = factor(validation, levels = c("random_10_fold", "leave_one_year_out", "test_2013"),
-                             labels = c("Random 10-fold", "Leave one year out", "Test year 2013"))) |>
-  ggplot(aes(model, RMSE, fill = validation)) +
-  geom_col(position = "dodge") +
-  scale_fill_manual(values = c("#9ecae1", "#4292c6", "#08519c")) +
-  labs(x = NULL, y = "RMSE", fill = NULL)
+#| cache: true
+cv_a <- cv_curve(Z, y, f_random, 25)
+cv_b <- cv_curve(Z, y, f_by_line, 25)
+curve <- rbind(transform(cv_a, folds = "random folds"), transform(cv_b, folds = "by-line folds"))
+ggplot(curve, aes(components, RMSE, colour = folds)) + geom_line(linewidth = 1) + geom_point() +
+  labs(x = "Number of components", y = "RMSE of cross-validation (mg/g)", colour = NULL)
 ```
 
-```{r}
-#| include: false
-opt <- mean(cv_tab$leave_one_year_out / cv_tab$random_10_fold)
-```
+## Knowing if the number is honest {#sec-leakage}
 
-Random cross-validation reports an error of about `{r} fmt(mean(cv_tab$random_10_fold), 1)`, while leaving a year out gives `{r} fmt(mean(cv_tab$leave_one_year_out), 1)` and the real test year `{r} fmt(mean(cv_tab$test_2013), 1)`. The error for a new year is `{r} fmt(100 * (opt - 1), 0)` % larger than the random split reports, because samples of the same year share conditions (the growing season, the batch, the laboratory run) that the model learns. The leave-one-year-out error is a good forecast of the real error in the next season, and this is the number to report.
+The rule is simple: **judge a model on samples it has not seen**. In cross-validation we cut the data in *k* folds; each part is called a **fold**. Each time one fold is the test and the other folds build the model. With k = 5 there are 5 rounds and every sample is tested once.
 
 ### Data leakage
 
-**Leakage** is any way in which information from the validation or test samples reaches the model before the evaluation. It always makes the error look smaller, and it is common in practice:
+Many bean lines have up to **three samples** that are almost the same bean. If the folds are random, one sample of a line can be in the training set and another sample of the same line in the test set. The model has already "seen" that line, so the test is too easy and the error looks too good. This is **data leakage**.
 
-- The same genotype, plant or sample (or its replicates) in training and test sets.
-- Choosing the variables (the best wavelengths, the best markers) with **all** the data and then cross-validating only the model. The selection must be repeated **inside each fold**.
-- Scaling or transforming variables with means computed on all the samples.
-- Tuning the model on the test set and reporting the same test set.
-- A variable in the predictors that is a consequence of the target (for example, a score that is derived from the trait).
+```{r}
+d9 <- data.frame(sample = lab$sample, line = line, fold_random = f_random, fold_by_line = f_by_line)
+knitr::kable(d9[order(d9$line), ][1:9, ], row.names = FALSE)
+```
+
+With random folds the three samples of line L03 go to different folds (1, 10, 9). With folds by line they all go to fold 1. In breeding the question is: *will the model work on a **new line**?* So the validation must hold out **whole lines**.
+
+```{r}
+trait_pick <- c("phytate", "iron", "cooking_time")
+leak <- do.call(rbind, lapply(trait_pick, function(t) {
+  yy <- lab[[t]]
+  c1 <- quality(yy, cv_predict(Z, yy, f_random,  12))
+  c2 <- quality(yy, cv_predict(Z, yy, f_by_line, 12))
+  data.frame(trait = t, validation = c("random", "by line"), rbind(c1, c2)[, c("RMSE", "R2", "RPD")])
+}))
+knitr::kable(leak, digits = 2, row.names = FALSE)
+```
+
+Random folds look better, but that is the leak, not a better model. Report the by-line numbers.
+
+**What about averaging the replicates?** Using the mean spectrum and the mean value of each line is a valid choice for line-level decisions. It reduces noise and removes leakage, because each line is one point. The cost is that only 44 points remain and the error is on a different scale. Our advice is to keep all samples and validate by line, and to use line means as a second check.
+
+```{r}
+Zm <- rowsum(Z, line) / as.vector(table(line)[rownames(rowsum(Z, line))])
+Lm <- rownames(Zm); fm <- make_folds(Lm, k = 10)
+avg <- do.call(rbind, lapply(c("phytate", "iron", "cooking_time"), function(t) {
+  yy <- lab[[t]]; ym <- tapply(yy, line, mean)[Lm]
+  a <- quality(yy, cv_predict(Z, yy, f_by_line, 12))
+  b <- quality(ym, cv_predict(Zm, ym, fm, 12))
+  data.frame(trait = t, data = c("all samples, by line", "line means"), rbind(a, b)[, c("RMSE", "R2", "RPD")])
+}))
+knitr::kable(avg, digits = 2, row.names = FALSE)
+```
+ The same idea holds for years, sites, plots or families: any group that is "the same thing" measured more than once must stay together in one fold.
 
 ```{r}
 #| eval: false
-# WRONG: variables are chosen with all the samples, the folds only see a "clean" problem
-top <- order(-abs(cor(A, yA)))[1:30]
-cv_error_wrong <- cross_validate(model, A[, top], yA)
-
-# RIGHT: inside each fold, choose the variables with the training part only
-for (k in 1:10) {
-  train <- fold != k
-  top <- order(-abs(cor(A[train, ], yA[train])))[1:30]
-  fit <- fit_model(A[train, top], yA[train])
-  pred[!train] <- predict(fit, A[!train, top])
-}
+# WRONG: samples of the same line can be in training and in test
+folds <- make_folds(line, by_line = FALSE)
+# RIGHT: all samples of a line stay together
+folds <- make_folds(line, by_line = TRUE)
+quality(y, cv_predict(Z, y, folds, ncomp = 12))
 ```
 
-A rule that avoids most leakage: **every step that learns something from the data belongs inside the cross-validation loop**.
+## What NIR predicts well, and what not
 
-## When the next season is different
-
-The model has an error of about `{r} fmt(min(perf$RMSE), 1)` units in the test year, mostly because of the bias: the population moved. The practical solution is not a more complex model but a **model that is updated**: add to the calibration a few samples of the new population (with their laboratory value) and refit.
+We use the same recipe (PCR, validation by line, number of components chosen between 1 and 25) for all 13 traits.
 
 ```{r}
-#| label: fig-update
-#| fig-cap: "Error in the test year when 0, 10, 20 or 40 samples of 2013 are added to the calibration (elastic net). Each point is the mean of 12 random choices of the added samples; the error is computed on the 2013 samples that were not added."
-#| fig-width: 6
-#| fig-height: 3.4
-i_test <- which(!is_cal); i_cal <- which(is_cal)
-upd <- do.call(rbind, lapply(c(0, 10, 20, 40), function(n) {
-  r <- sapply(1:12, function(s) {
-    set.seed(s)
-    add <- if (n > 0) sample(i_test, n) else integer(0)
-    trn <- c(i_cal, add); tst <- setdiff(i_test, add)
-    p <- fit_predict("ENet", Z[trn, ], y[trn], Z[tst, ])
-    c(rmse(y[tst], p), mean(p - y[tst]))
-  })
-  data.frame(added = n, RMSE = mean(r[1, ]), bias = mean(r[2, ]))
+#| label: fig-traits
+#| fig-cap: "R² of PCR with validation by line for 13 bean traits, coloured by type of trait."
+#| fig-width: 8
+#| fig-height: 4.2
+#| cache: true
+type <- c(water_absorption = "Cooking / physical", cooking_time = "Cooking / physical",
+          iron = "Minerals", zinc = "Minerals", phytate = "Organic compounds", phenolics = "Organic compounds",
+          verbascose = "Organic compounds", stachyose = "Organic compounds", raffinose = "Organic compounds",
+          sucrose = "Organic compounds", fructose = "Organic compounds", total_sugars = "Organic compounds",
+          total_oligosaccharides = "Organic compounds")
+res <- do.call(rbind, lapply(traits, function(t) {
+  yy  <- lab[[t]]
+  k   <- which.min(cv_curve(Z, yy, f_by_line, 25)$RMSE)
+  data.frame(trait = t, type = type[[t]], R2 = r2(yy, cv_predict(Z, yy, f_by_line, k)))
 }))
-ggplot(upd, aes(added, RMSE)) +
-  geom_line(colour = "#2c7fb8") + geom_point(size = 2.5, colour = "#2c7fb8") +
-  scale_x_continuous(breaks = c(0, 10, 20, 40)) +
-  labs(x = "Samples of 2013 added to the calibration", y = "RMSE on the rest of 2013")
+res$trait <- factor(res$trait, levels = res$trait[order(res$R2)])
+ggplot(res, aes(R2, trait, fill = type)) + geom_col() + labs(x = "R² (PCR, validation by line)", y = NULL, fill = NULL)
 ```
 
-With no new sample the error is `{r} fmt(upd$RMSE[1], 2)`; adding only 20 laboratory measurements of the new year lowers it to `{r} fmt(upd$RMSE[3], 2)`, and the bias goes from `{r} fmt(upd$bias[1], 2)` to `{r} fmt(upd$bias[3], 2)`. In a breeding programme this is routine work: **a calibration is a living tool, checked each season with a few reference samples and updated when it drifts**.
+The picture agrees with the chemistry:
 
-## Other uses in a breeding programme
+- **Sugars and phenolics** (organic molecules with many C-H and O-H bonds): good.
+- **Phytate and the other oligosaccharides**: medium. Useful for screening, not for exact values.
+- **Iron and zinc**: weak to moderate. NIR cannot see a metal; it sees what goes with it.
+- **Cooking time and water absorption**: weak. They depend on the seed coat, storage and structure.
 
-The same workflow (predictors, calibration set, models tuned by cross-validation, an honest test) applies to the other cases of the agenda.
+The number of components was chosen on the same validation folds, so these R² values are slightly optimistic. The model comparison above used a stricter, nested validation.
 
-- **Image features** (@sec-images): the area, colour indices and shape of the objects in a photograph are the predictors, and a laboratory or visual score is the target. The question to ask is the same one: how well does the model predict a **new** plant, in a **new** season?
-- **Markers** (genomic prediction): thousands of markers against a few hundred lines. Ridge regression is the model behind GBLUP, and the elastic net and random forest are alternatives. The validation by genotype and by environment decides if the prediction will help.
-- **G×E prediction** (@sec-met-gxe): to predict a line in a **new** environment, the model needs a description of the environment (soil, weather, management). Without covariates, the best prediction for a new environment is the mean of the line, as in @sec-met-gxe.
-- **Early generations of mutant populations**: predictions from images or spectra of thousands of M2 plants, followed by a laboratory or field check of the best ones. The prediction model is built on a **subset that is measured by both ways**, and checked by generation.
+Published work gives the same message. In a CIAT study of common bean (Garcia et al. 2025), NIR predicted nitrogen well (CCC 0.84) and iron and zinc only moderately (about 0.4). A study of Croatian landraces (Vranić et al. 2019) found good prediction of nitrogen (R² 0.89), usable models for phytic acid and phosphorus, and poor models for iron and zinc. A 2026 review of legume breeding (Ghaitaranpour et al. 2026) also reports that visible and NIR models work best for composition and less well for appearance and texture, and that the human sensory panel remains the reference.
 
-## Limitations
+## Other uses and other validation units
 
-- **Small data sets.** With a few hundred samples, the error estimate itself is uncertain, and a complex model can look good by luck. Report the validation error with how many samples it comes from, and prefer simple models when the sample is small.
-- **Overfitting.** The more flexible the model, the more the calibration error understates the real error. This is why the test set is used once.
-- **Interpretability.** A random forest or boosting model does not give effects that can be explained to a farmer or a regulator. Ask if the decision needs an explanation.
-- **Transfer.** A model works inside the range and conditions where it was built: other crop, other season, other instrument, other laboratory. Verify before use and monitor after.
-- **Label quality.** The model learns from the reference measurements. If the laboratory values are noisy or biased, the best possible prediction is limited by them.
-- **Garbage in, garbage out.** Spectra from different instruments, images with different light, or sensors without calibration produce models that do not transfer.
+The same workflow is used with image features (disease severity, plant traits), multi-environment trials (yield and G×E in new environments, using weather and soil covariates) and markers (genomic selection). Flexible models can beat simple ones when the data are large; with small data, simple models are often as good. In genomic prediction, machine learning has not consistently beaten classical models such as GBLUP (Yoosefzadeh-Najafabadi et al. 2025), and reviews list large data needs, hard interpretation and biased data as limits (Yoosefzadeh Najafabadi et al. 2023).
 
-::: callout-important
-## Breeder knowledge remains essential
-ML does not know the biology. The breeder knows if a prediction makes sense for the crop, which samples are unusual, when a population has changed and which errors matter. The best systems use ML for the volume (thousands of samples) and the breeder for the **decision**: a plant predicted as promising still has to be confirmed before it is advanced.
-:::
+Data leakage by line is one case of a general rule: **leave out the whole unit you want to predict**. For a new line, keep all samples of the line together. For a new environment, keep all plots of that environment together. For a new season, keep a whole year together. The function `make_folds()` takes any grouping variable.
 
-## Exercise
+## Limits of prediction models
 
-Use the cassava NIR data of this chapter.
+- **Interpretability**: trees, boosting and SVM are harder to explain than PCR or the lasso. Check that a model uses sensible wavelengths.
+- **Transfer across crops**: a bean model does not work for chickpea or wheat. Build and test a new one for each crop.
 
-1. Use only the samples of 2009, 2010 and 2011 as calibration, and the samples of 2012 as validation (a "next season" that is different from the one used above).
-2. Fit PLS and the elastic net, and compute RMSE and bias on the 2012 samples.
-3. Compare the RMSE with the one from random 10-fold cross-validation inside 2009 to 2011. Which one would you report as the expected error for next season?
+- **Small data**: 117 samples from 44 lines give noisy estimates of R².
+- **Another instrument, season or sample form** (whole seed against flour): the model may not transfer. Check it and re-calibrate.
+- A model is valid only inside the **range** of the data used to build it.
+- The laboratory value is the reference: a noisy laboratory method limits the model.
+- A calibration is **living**: add new samples each season and check the error again.
 
-::: {.callout-tip collapse="true"}
-## Solution
+## Practical
 
-```{r}
-#| label: exercise-solution
-i_a <- is_cal & nir$year <= 2011
-i_b <- is_cal & nir$year == 2012
-set.seed(5)
-folds <- sample(rep(1:10, length.out = sum(i_a)))
-
-one_model <- function(m) {
-  p_next <- fit_predict(m, Z[i_a, ], y[i_a], Z[i_b, ])
-  p_cv <- numeric(sum(i_a))
-  for (k in 1:10) {
-    j <- folds == k
-    p_cv[j] <- fit_predict(m, Z[i_a, ][!j, ], y[i_a][!j], Z[i_a, ][j, , drop = FALSE])
-  }
-  c(RMSE_random_cv = rmse(y[i_a], p_cv), RMSE_2012 = rmse(y[i_b], p_next), bias_2012 = mean(p_next - y[i_b]))
-}
-sol <- t(sapply(c("PLS", "ENet"), one_model))
-round(sol, 2)
-```
-
-The error in 2012 (`{r} fmt(sol["PLS", "RMSE_2012"], 2)` for PLS and `{r} fmt(sol["ENet", "RMSE_2012"], 2)` for the elastic net) is larger than the random cross-validation error (`{r} fmt(sol["PLS", "RMSE_random_cv"], 2)` and `{r} fmt(sol["ENet", "RMSE_random_cv"], 2)`). The number to report is the 2012 error, because the question is "how well will this model predict next year?", and only a split by year imitates that question.
-:::
+Use the ZIP file at the top of this chapter. You will follow the same workflow with short code and functions: look at the spectra, prepare them, fit PCR, validate with random folds and with folds by line, choose the number of components, compare a chemical trait (total sugars, phytate) with a physical one (cooking time, iron), and write a conclusion for a breeder.
 
 ## Key takeaways
 
-- ML is for **prediction**: it turns cheap measurements (spectra, images, sensors, markers) into estimates of expensive ones. It does not replace the experimental design or the mixed model.
-- Compare every model with a **baseline** and with a classical model. There is no best model in general: here penalized regression and the SVM were at the top, and the random forest could not follow values beyond its training range.
-- The honest error comes from data that the model never saw, split the way the model will be used: by year, by genotype or by location. The error for a new year was about `{r} fmt(100 * (opt - 1), 0)` % larger than random cross-validation reported.
-- Avoid **leakage**: every step that learns from the data (variable selection, scaling, tuning) belongs inside the validation loop.
-- A calibration **drifts** when the population evolves. Check it each season with a few reference samples and update it: 20 new samples reduced the error from `{r} fmt(upd$RMSE[1], 2)` to `{r} fmt(upd$RMSE[3], 2)`.
-- The breeder decides. A prediction ranks and prioritizes, and the promising lines are confirmed before they are advanced.
+- ML is for **prediction**: it turns a cheap measurement into an estimate of an expensive one. It does not replace the experimental design or the mixed model.
+- NIR measures **bonds** (O-H, N-H, C-H). It is very good for **chemical** traits and weak for minerals and physical or cooking traits.
+- Prepare the spectra (SNV, first derivative) and start with a **simple model**: PCR or PLS.
+- Report **RMSE, R², bias and RPD**, and always compare with "always the mean".
+- Avoid **leakage**: keep all samples of one line in the same fold. Random folds look too good.
+- Use prediction to **screen**, and confirm the promising lines in the laboratory.
 
 ## References {#sec-ai-breeding-refs}
 
-- Barnes, R. J., Dhanoa, M. S. and Lister, S. J. (1989). Standard normal variate transformation and de-trending of near-infrared diffuse reflectance spectra. *Applied Spectroscopy* 43: 772-777.
-- Breiman, L. (2001). Random forests. *Machine Learning* 45: 5-32.
-- Cortes, C. and Vapnik, V. (1995). Support-vector networks. *Machine Learning* 20: 273-297.
-- Davrieux, F., Dufour, D., Dardenne, P., Belalcazar, J., Pizarro, M., Luna, J., Londono, L., Jaramillo, A., Sanchez, T., Morante, N., Calle, F., Becerra Lopez-Lavalle, L., Ceballos, H. (2016). LOCAL regression algorithm improves near infrared spectroscopy predictions when the target constituent evolves in breeding populations. *Journal of Near Infrared Spectroscopy* 24: 109. The data are distributed with the `rchemo` package (GPL-3), from the CIAT cassava programme.
-- Friedman, J. H. (2001). Greedy function approximation: a gradient boosting machine. *The Annals of Statistics* 29: 1189-1232.
-- Hastie, T., Tibshirani, R. and Friedman, J. (2009). *The Elements of Statistical Learning*, 2nd edition. Springer.
-- Montesinos López, O. A., Montesinos López, A. and Crossa, J. (2022). *Multivariate Statistical Machine Learning Methods for Genomic Prediction*. Springer.
-- Tibshirani, R. (1996). Regression shrinkage and selection via the lasso. *Journal of the Royal Statistical Society B* 58: 267-288.
-- Wold, S., Sjöström, M. and Eriksson, L. (2001). PLS-regression: a basic tool of chemometrics. *Chemometrics and Intelligent Laboratory Systems* 58: 109-130.
-- Zou, H. and Hastie, T. (2005). Regularization and variable selection via the elastic net. *Journal of the Royal Statistical Society B* 67: 301-320.
+- Garcia, T., Carvajal-Yepes, M., Drewry, D. T., Santos, L. G., Duitama, J., Wenzl, P. and Chacón-Sánchez, M. I. (2025). Non-destructive prediction of nitrogen, iron and zinc content in diverse common bean seeds from a genebank using near-infrared spectroscopy. *Food Chemistry: Molecular Sciences* 11: 100316. DOI: 10.1016/j.fochms.2025.100316.
+- Ghaitaranpour, A., Kebede, B., Duizer, L. M. and Yoosefzadeh-Najafabadi, M. (2026). AI-assisted nondestructive phenotyping of sensory-related traits in modern legume breeding. *Smart Agricultural Technology* 15: 102668. DOI: 10.1016/j.atech.2026.102668.
+- Goddu, R. F. and Delker, D. A. (1960). Spectra-structure correlations for the near-infrared. *Analytical Chemistry* 32: 140-141. Data compiled by S. D. J. Brown, GitHub `sdjbrown/NIR-spectra-structure`.
+- Vranić, M., Petek, M., Bošnjak, K., Lazarević, B. and Carović-Stanko, K. (2019). Prediction of macro and microelements content in Croatian common bean landraces (*Phaseolus vulgaris* L.) by NIR spectroscopy. *Poljoprivreda* 25(1): 48-55. DOI: 10.18047/poljo.25.1.7.
+- Yoosefzadeh Najafabadi, M., Hesami, M. and Eskandari, M. (2023). Machine learning-assisted approaches in modernized plant breeding programs. *Genes* 14(4): 777. DOI: 10.3390/genes14040777.
+- Yoosefzadeh-Najafabadi, M., Xavier, A., Eskandari, M. and Hesami, M. (2025). Machine learning after a decade: is it still a missing keystone in genomic-based plant breeding? *Artificial Intelligence Review* 58: 260. DOI: 10.1007/s10462-025-11274-y.
+- Wadoux, A. M. J.-C., Minasny, B. and McBratney, A. B. (2021). *Soil Spectral Inference with R*. Springer. Chapter 9.
+- Bean NIR data: CIAT (PhD work of L. F. Londoño), shared for training.

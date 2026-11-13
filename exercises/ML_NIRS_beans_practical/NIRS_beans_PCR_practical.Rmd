@@ -1,0 +1,208 @@
+---
+title: "Predicting bean composition with NIR spectra and PCR"
+subtitle: "RTC RER5030, Machine learning for prediction"
+author: "Your name"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: false
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = TRUE)
+```
+
+# What you will do
+
+You have NIR spectra and laboratory values of **117 samples of common bean** from CIAT (44 lines, up to 3 samples per line).
+You will build a simple model, **principal component regression (PCR)**, and test it **honestly**.
+
+Fill the blanks `___` (three underscores). Lines that start with `# HINT` help you.
+Expected results are written in comments like `# Expected: ...`. Small differences are normal.
+
+All the work is done by functions in `helpers.R`. Open that file if you are curious, but you do not need to change it.
+
+```{r load}
+source("helpers.R")
+bean <- load_bean_nir("data/bean_nirs.csv")   # a list with four parts
+lab  <- bean$lab      # laboratory values (one row per sample)
+X    <- bean$X        # spectra (one row per sample, one column per wavelength)
+line <- bean$line     # the bean line of each sample
+```
+
+# Step 1. Look at the data
+
+**Question 1.** How many samples and how many wavelengths are there?
+
+```{r step1}
+dim(X)                 # Expected: 117 1050
+head(lab[, 1:8])
+table(table(line))     # how many lines have 1, 2, 3 samples
+```
+
+**Question 2.** Plot 40 spectra, coloured by the phytate value.
+
+```{r step1-plot}
+# HINT: plot_spectra(X, colour_by = ___ )   use the phytate column of lab
+plot_spectra(X, colour_by = ___, legend_title = "Phytate")
+```
+
+*Write what you see: do the spectra look different from each other?*
+
+> Your answer:
+
+# Step 2. Prepare the spectra
+
+Two small steps: **SNV** (each spectrum on its own scale) and **first derivative** (removes the baseline).
+
+```{r step2}
+Z <- prepare_spectra(___)        # HINT: use the raw spectra, X
+dim(Z)                            # Expected: 117 1045
+plot_spectra(Z, colour_by = lab$phytate, ylab = "SNV + derivative", legend_title = "Phytate")
+```
+
+# Step 3. Principal components
+
+PCA turns 1,045 wavelengths into a few new variables (components) that keep most of the information.
+
+```{r step3}
+pca <- prcomp(Z)
+var_explained <- 100 * pca$sdev^2 / sum(pca$sdev^2)
+round(var_explained[1:5], 1)      # share of variation of PC1 to PC5 (%)
+
+scores <- data.frame(PC1 = pca$x[, 1], PC2 = pca$x[, 2], colour = lab$colour)
+ggplot(scores, aes(PC1, PC2, colour = colour)) + geom_point(size = 2.5)
+```
+
+**Question 3.** How much of the variation do the first 4 components hold together?
+
+```{r step3-q}
+sum(var_explained[1:___])         # Expected: about 89
+```
+
+# Step 4. A first PCR model (and why it is too good)
+
+We predict **phytate** (mg/g). First, fit the model with 12 components on **all** samples, then predict the same samples.
+
+```{r step4}
+y <- lab$phytate
+model <- fit_pcr(Z, y, ncomp = ___)       # HINT: 12
+pred  <- predict_pcr(model, ___)          # HINT: predict the same spectra, Z
+round(quality(y, pred), 2)               # Expected: R2 about 0.7 (it looks good, but it is not honest)
+plot_pred(y, pred, "Same samples used to build and to test")
+```
+
+**Warning.** The model has already seen these samples. This is **not** a test. We need new samples.
+
+# Step 5. Honest validation
+
+We cut the data in 10 groups (folds). Each time, 9 groups build the model and 1 group is the test.
+
+**5a. Random folds**: any sample can go to any fold.
+
+```{r step5a}
+folds_random <- make_folds(line, by_line = ___)       # HINT: FALSE
+pred_random  <- cv_predict(Z, y, folds_random, ncomp = 12)
+round(quality(y, pred_random), 2)                    # Expected: R2 about 0.55
+```
+
+**5b. Folds by line**: all samples of one line go to the same fold. The test lines are truly new.
+
+```{r step5b}
+folds_line <- make_folds(line, by_line = ___)         # HINT: TRUE
+pred_line  <- cv_predict(Z, y, folds_line, ncomp = 12)
+round(quality(y, pred_line), 2)                      # Expected: R2 about 0.47, lower than 5a
+```
+
+**Question 4.** Which result is lower, random or by line? Why? (*Hint: data leakage. The same line is in training and in test.*)
+
+> Your answer:
+
+Look at the first samples of a few lines and see where they go:
+
+```{r step5-table}
+check <- data.frame(sample = lab$sample, line = line, fold_random = folds_random, fold_by_line = folds_line)
+head(check[order(check$line), ], 9)
+```
+
+# Step 6. How many components?
+
+Few components: too simple. Many components: the model learns the noise (overfitting). We test 1 to 25.
+
+```{r step6}
+curve <- cv_curve(Z, y, folds_line, max_comp = 25)
+plot(curve$components, curve$RMSE, type = "b", xlab = "Number of components", ylab = "RMSE (by-line validation)")
+best_k <- curve$components[which.min(curve$RMSE)]
+best_k                                                # Expected: a number between 15 and 25
+```
+
+```{r step6-final}
+pred_best <- cv_predict(Z, y, folds_line, ncomp = best_k)
+round(quality(y, pred_best), 2)
+plot_pred(y, pred_best, paste("Phytate, PCR with", best_k, "components, validation by line"))
+```
+
+**Question 5.** The baseline model "always say the mean" has RMSE = sd(y). Is PCR better? What is the RPD?
+
+```{r step6-q}
+round(sd(y), 2)                                      # RMSE of "always the mean"
+round(rpd(y, pred_best), 2)                          # Expected: about 1.5 to 1.7
+```
+
+> Your answer (use the RPD guide: below 1.5 not useful, 1.5 to 2 rough screening, 2 to 2.5 approximate, above 2.5 good):
+
+# Step 7. Chemical traits against physical traits
+
+NIR sees chemical bonds (O-H, N-H, C-H). So it should work better for **chemical** traits (sugars) than for **minerals** or **cooking** traits.
+
+We test four traits with the same recipe.
+
+```{r step7}
+traits <- c("total_sugars", "phytate", "iron", "cooking_time")
+results <- sapply(traits, function(trait) {
+  yy  <- lab[[trait]]
+  cur <- cv_curve(Z, yy, folds_line, max_comp = 25)
+  k   <- which.min(cur$RMSE)
+  c(k = k, round(quality(yy, cv_predict(Z, yy, folds_line, k)), 2))
+})
+t(results)
+```
+
+```{r step7-plot}
+r2_table <- data.frame(trait = traits, R2 = results["R2", ])
+ggplot(r2_table, aes(reorder(trait, R2), R2)) + geom_col(fill = "#2c7fb8") + coord_flip() +
+  labs(x = NULL, y = "R2 (validation by line)")
+# Expected: total_sugars highest (about 0.8), then phytate (about 0.6), iron and cooking_time low (0.3 to 0.4).
+```
+
+**Question 6.** Which traits could you screen with NIR? Which ones not? Why?
+
+> Your answer:
+
+# Step 8. Try PLS (optional)
+
+PLS is the standard method in NIR. It is like PCR, but the components are built to be related to the trait.
+
+```{r step8}
+curve_pls <- cv_curve(Z, y, folds_line, max_comp = 25, method = "pls")
+k_pls <- curve_pls$components[which.min(curve_pls$RMSE)]
+pred_pls <- cv_predict(Z, y, folds_line, ncomp = k_pls, method = "pls")
+rbind(PCR = quality(y, pred_best), PLS = quality(y, pred_pls)) |> round(2)
+# PLS usually reaches a similar result with fewer components.
+```
+
+# Step 9. Your conclusion
+
+Write 3 to 5 lines for a breeder who asks: *"Can I use NIR to screen my bean lines for phytate?"*
+
+Use these points: the RMSE and RPD by line, the baseline, and the data leakage.
+
+> Your conclusion:
+
+# Take-home messages
+
+1. Never test a model on the samples that built it.
+2. Keep all samples of one line (or one family, site, year) in the same fold.
+3. NIR works best for chemical traits and weakly for minerals and cooking traits.
+4. Compare with "always the mean" and report RMSE, R2, bias and RPD.
