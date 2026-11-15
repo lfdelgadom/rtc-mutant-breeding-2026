@@ -2365,6 +2365,30 @@ Note
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cur<span class="sc">$</span>files, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Repeat until you reach a folder that has files ending in <code>.jpg</code> or <code>.jpeg</code>. Look also for folders or files with the words <em>annotations</em>, <em>metadata</em> or <em>json</em>: they tell you what each photo contains.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>The tree is deep.</strong> The photographs are usually 4 to 6 folders down (crop, images, site, project, date, and so on). Do not go down by hand: this loop enters the first folder at each level until it finds files.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>prefix <span class="ot">&lt;-</span> <span class="st">&quot;Artemis/common-bean/images/ciat-arusha/disease-scouting/&quot;</span>   <span class="co"># any folder you chose</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span> {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  cur <span class="ot">&lt;-</span> <span class="fu">list_bucket</span>(prefix)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(cur<span class="sc">$</span>files) <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">||</span> <span class="fu">length</span>(cur<span class="sc">$</span>folders) <span class="sc">==</span> <span class="dv">0</span>) <span class="cf">break</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  prefix <span class="ot">&lt;-</span> cur<span class="sc">$</span>folders[<span class="dv">1</span>]</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>prefix                            <span class="co"># the folder where the photographs are</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cur<span class="sc">$</span>files, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A real example that worked on the course: starting from the disease scouting folder of CIAT Arusha (Tanzania), the loop ends in <code>.../disease-scouting/2024--tza--feb/2024-02-02/unplotted/</code>, with photographs of about 4 MB each. Other sites in the common bean images are <code>ciat-kawanda</code>, <code>ciat-palmira</code>, <code>csu-fort-collins</code>, <code>naro-namulonge</code> and <code>tari-maruku</code>.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2385,25 +2409,25 @@ Tip
 <section id="download-10-photographs" class="level2">
 <h2 class="anchored" data-anchor-id="download-10-photographs">4. Download 10 photographs</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># &#39;cur&#39; is the folder with photographs that you found in step 3</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>photos <span class="ot">&lt;-</span> <span class="fu">subset</span>(cur<span class="sc">$</span>files, <span class="fu">grepl</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">.jpe?g$&quot;</span>, key, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>) <span class="sc">&amp;</span> size_mb <span class="sc">&lt;</span> <span class="dv">6</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(photos)                      <span class="co"># how many photographs are in this folder?</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>sel <span class="ot">&lt;-</span> <span class="fu">head</span>(photos<span class="sc">$</span>key, <span class="dv">10</span>)       <span class="co"># the first 10 (you can choose others)</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>paths <span class="ot">&lt;-</span> <span class="fu">vapply</span>(sel, get_photo, <span class="fu">character</span>(<span class="dv">1</span>))</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>paths</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># &#39;cur&#39; is the folder with photographs that you found in step 3</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>photos <span class="ot">&lt;-</span> <span class="fu">subset</span>(cur<span class="sc">$</span>files, <span class="fu">grepl</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">.jpe?g$&quot;</span>, key, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>) <span class="sc">&amp;</span> size_mb <span class="sc">&lt;</span> <span class="dv">6</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(photos)                      <span class="co"># how many photographs are in this folder?</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>sel <span class="ot">&lt;-</span> <span class="fu">head</span>(photos<span class="sc">$</span>key, <span class="dv">10</span>)       <span class="co"># the first 10 (you can choose others)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>paths <span class="ot">&lt;-</span> <span class="fu">vapply</span>(sel, get_photo, <span class="fu">character</span>(<span class="dv">1</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>paths</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If a download fails with an error, try the next photograph: some keys may have special characters or the connection may be slow. Check the folder <code>artemis_photos/</code> in your project.</p>
 </section>
 <section id="look-at-the-photographs-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="look-at-the-photographs-in-r">5. Look at the photographs in R</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>img <span class="ot">&lt;-</span> <span class="fu">image_import</span>(paths[<span class="dv">1</span>])      <span class="co"># pliman reads the file</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(img)                           <span class="co"># height, width, colour channels</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(img)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>img <span class="ot">&lt;-</span> <span class="fu">image_import</span>(paths[<span class="dv">1</span>])      <span class="co"># pliman reads the file</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(img)                           <span class="co"># height, width, colour channels</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(img)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now use the colour indices of the practical on a real field photograph:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image_index</span>(img, <span class="at">index =</span> <span class="fu">c</span>(<span class="st">&quot;R&quot;</span>, <span class="st">&quot;GLI&quot;</span>, <span class="st">&quot;NGRDI&quot;</span>), <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image_index</span>(img, <span class="at">index =</span> <span class="fu">c</span>(<span class="st">&quot;R&quot;</span>, <span class="st">&quot;GLI&quot;</span>, <span class="st">&quot;NGRDI&quot;</span>), <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>Questions to discuss with your neighbour:</strong></p>
 <ol type="1">
@@ -2415,8 +2439,8 @@ Tip
 <section id="optional-the-aws-command-line" class="level2">
 <h2 class="anchored" data-anchor-id="optional-the-aws-command-line">6. Optional: the AWS command line</h2>
 <p>If you prefer a terminal, install the <em>AWS CLI</em> and use <code>--no-sign-request</code> (no account is needed):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> s3 ls <span class="at">--no-sign-request</span> s3://alliance-artemis-imagesafari/Artemis/</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> s3 cp <span class="at">--no-sign-request</span> s3://alliance-artemis-imagesafari/Artemis/<span class="op">&lt;</span>folder<span class="op">&gt;</span>/<span class="op">&lt;</span>photo<span class="op">&gt;</span>.jpg .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> s3 ls <span class="at">--no-sign-request</span> s3://alliance-artemis-imagesafari/Artemis/</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> s3 cp <span class="at">--no-sign-request</span> s3://alliance-artemis-imagesafari/Artemis/<span class="op">&lt;</span>folder<span class="op">&gt;</span>/<span class="op">&lt;</span>photo<span class="op">&gt;</span>.jpg .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="if-something-fails" class="level2">
 <h2 class="anchored" data-anchor-id="if-something-fails">7. If something fails</h2>

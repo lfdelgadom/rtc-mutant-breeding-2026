@@ -6,12 +6,15 @@
 <script src="11-ai-plant-breeding_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="11-ai-plant-breeding_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="11-ai-plant-breeding_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="11-ai-plant-breeding_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="11-ai-plant-breeding_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="11-ai-plant-breeding_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="11-ai-plant-breeding_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="11-ai-plant-breeding_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Luis Fernando Delgado Muñoz">
-  <meta name="dcterms.date" content="2026-11-13">
-  <title>Day 5: Machine Learning for Prediction in Plant Breeding</title>
+  <meta name="dcterms.date" content="2026-11-16">
+  <title>Machine Learning for Prediction in Plant Breeding</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -204,8 +207,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Day 5: Machine Learning for Prediction in Plant Breeding</h1>
-  <p class="subtitle">Regional Training Course on Experimental Design and Data Analysis for the Advancement of Mutant Populations (RER5030)</p>
+  <h1 class="title">Machine Learning for Prediction in Plant Breeding</h1>
+  <p class="subtitle">Day 6. Learning to predict with NIR spectra of common beans. Regional Training Course on Experimental Design and Data Analysis for the Advancement of Mutant Populations (RER5030)</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -215,461 +218,1200 @@ Luis Fernando Delgado Muñoz
 </div>
 </div>
 
-  <p class="date">13 November 2026</p>
+  <p class="date">16 November 2026</p>
 </section>
-<section id="plan-for-the-session" class="slide level2">
-<h2>Plan for the session</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 23%">
-<col style="width: 76%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Block</th>
-<th>Topic</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>Prediction, not explanation</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>The data: NIR spectra of cassava</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>The models and how they perform</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Honest validation and data leakage</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>When the next season is different</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>Limits, the breeder, exercise</td>
-</tr>
-</tbody>
-</table>
-<div class="keybox">
-<p><strong>Goal:</strong> leave able to build a prediction model from many cheap measurements, compare it with a baseline, and report an <strong>honest</strong> error.</p>
-</div>
-</section>
-<section id="block-1" class="slide level2 divider">
-<h2>Block 1</h2>
-<p>Prediction, not explanation</p>
+<section id="plan-for-this-session" class="slide level2 smaller scrollable">
+<h2>Plan for this session</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Part 1. The idea</strong></p>
+<ol type="1">
+<li>Two different questions</li>
+<li>Where prediction pays in breeding</li>
+<li>Machine learning in general</li>
+<li><strong>Practical 1</strong>: explain and predict wheat yield (mixed model and random forest)</li>
+<li>Light we see and light we do not see</li>
+<li>What NIR can “see” (and what it cannot)</li>
+</ol>
+<p><strong>Part 2. The data</strong></p>
+<ol start="7" type="1">
+<li>Beans from CIAT, 117 samples, 13 lab traits, 1,050 wavelengths</li>
+<li>Preparing the spectra</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>Part 3. The models</strong></p>
+<ol start="9" type="1">
+<li>How good is a prediction? (RMSE, R², bias, RPD)</li>
+<li>First model, principal component regression (PCR)</li>
+<li>More models (PLS, ridge, lasso, random forest, SVM, boosting)</li>
+<li>Data leakage, the most common mistake</li>
+</ol>
+<p><strong>Part 4. Take-home</strong></p>
+<ol start="13" type="1">
+<li>NIR works well for some traits, not for others</li>
+<li><strong>Practical 2</strong>: beans and PCR</li>
+</ol>
+</div></div>
 </section>
 <section id="two-different-questions" class="slide level2">
 <h2>Two different questions</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 39%">
-<col style="width: 35%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Classical statistics</th>
-<th>Machine learning</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Goal</td>
-<td>Explain, estimate effects, test</td>
-<td><strong>Predict</strong> new observations</td>
-</tr>
-<tr class="even">
-<td>Data</td>
-<td>Designed trials, few variables</td>
-<td>More variables than samples</td>
-</tr>
-<tr class="odd">
-<td>Model</td>
-<td>Specified from the design</td>
-<td>Learned from the data</td>
-</tr>
-<tr class="even">
-<td>Output</td>
-<td>Effects with uncertainty</td>
-<td>A prediction and its error</td>
-</tr>
-<tr class="odd">
-<td>Main risk</td>
-<td>Wrong model structure</td>
-<td>Overfitting, no transfer</td>
-</tr>
-</tbody>
-</table>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Inference: “Why?”</strong></p>
+<ul>
+<li>Does the mutation change the trait?</li>
+<li>Which factors have an effect?</li>
+<li>Tools: linear models, ANOVA, mixed models</li>
+<li>Result: an effect and a p-value <strong>and variance components</strong></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Prediction: “What will it be?”</strong></p>
+<ul>
+<li>What is the phytate or yield of this new mutant bean line?</li>
+<li>Which lines should I keep for the next cycle?</li>
+<li>Principal Component Regression (PCR), PLS, Random Forest, Boosting, SVM.</li>
+<li>Result: A predicted value for a new blind sample, an honest error (RMSE), a ranking for screening, and Feature Importance.</li>
+</ul>
+</div></div>
 <div class="keybox">
-<p>They are not rivals: the design and the mixed model give <strong>clean phenotypes</strong>; ML turns <strong>cheap</strong> measurements into predictions of <strong>expensive</strong> ones.</p>
+<p>A model that explains well can still predict badly, and the other way around. Today we only judge a model by <strong>how well it predicts samples it has never seen</strong>.</p>
 </div>
 </section>
-<section id="where-it-pays-in-a-breeding-programme" class="slide level2">
-<h2>Where it pays in a breeding programme</h2>
+<section id="where-prediction-pays" class="slide level2 smaller">
+<h2>Where prediction pays</h2>
 <table class="caption-top">
 <colgroup>
-<col style="width: 30%">
-<col style="width: 36%">
-<col style="width: 33%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Application</th>
-<th>Predictors</th>
-<th>Target</th>
+<th>Slow or costly measurement</th>
+<th>Cheap measurement that predicts it</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Chemical composition</td>
-<td>NIR spectra</td>
-<td>Protein, oil, starch, carotenoids</td>
+<td>Laboratory analysis (phytate, sugars, protein, dry content)</td>
+<td>NIR spectrum (a few seconds, no chemicals)</td>
 </tr>
 <tr class="even">
-<td>Disease and vigour</td>
-<td>Image features (Day 4)</td>
-<td>Severity, biomass</td>
+<td>Scoring disease in the field</td>
+<td>Drone or phone images</td>
 </tr>
 <tr class="odd">
-<td>Yield and traits</td>
-<td>Drone and sensor indices</td>
-<td>Yield, height</td>
+<td>Phenotyping every line in every trial</td>
+<td>Genomic markers (genomic selection), not common in mutation breeding</td>
 </tr>
 <tr class="even">
-<td>Genomic prediction</td>
-<td>Thousands of markers</td>
-<td>Breeding value</td>
-</tr>
-<tr class="odd">
-<td>G×E prediction</td>
-<td>Environmental covariates</td>
-<td>Performance in a new environment</td>
+<td>Counting grains, measuring leaf area</td>
+<td>Image analysis</td>
 </tr>
 </tbody>
 </table>
+<ul>
+<li>One expensive measurement is made on <strong>a few samples</strong>. A model learns the link to a cheap measurement.</li>
+<li>Then the cheap measurement is made on <strong>all samples</strong>.</li>
+</ul>
 </section>
 <section id="in-a-mutation-breeding-programme" class="slide level2">
 <h2>In a mutation breeding programme</h2>
 <ul>
-<li>M2 and M3 populations have <strong>thousands of plants</strong>: the laboratory cannot measure them one by one</li>
-<li>A prediction from an image or a spectrum <strong>ranks every plant</strong></li>
-<li>The laboratory measures only the promising ones</li>
+<li>Thousands of M2, M3 plants or lines. Laboratory analysis is possible only for a few.</li>
+<li>A fast NIR scan of the seed lets you <strong>screen</strong> many lines for composition (protein, sugars, anti-nutrients).</li>
+<li>You keep the interesting ones and confirm them in the laboratory.</li>
 </ul>
 <div class="keybox">
-<p>The prediction does not replace the measurement. It decides <strong>where to spend it</strong>.</p>
+<p>Prediction is a <strong>screening tool</strong>. It does not replace the laboratory. It tells you where to look.</p>
 </div>
 </section>
-<section id="block-2" class="slide level2 divider">
-<h2>Block 2</h2>
-<p>The data: NIR spectra of cassava</p>
+<section id="screening-and-validation" class="slide level2">
+<h2>Screening and Validation</h2>
+<p><a href="images/nir_mutation_breeding.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="images/nir_mutation_breeding.jpeg"></a></p>
 </section>
-<section id="a-real-data-set-from-the-ciat-cassava-programme" class="slide level2">
-<h2>A real data set from the CIAT cassava programme</h2>
+<section id="screening-vs-certification-in-mutation-plant-breeding" class="slide level2">
+<h2>Screening vs certification in Mutation Plant Breeding</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="images/mutant_screening_prediction.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="images/mutant_screening_prediction.jpeg" class="quarto-figure quarto-figure-center" style="width:8.04in"></a></p>
+</figure>
+</div>
+</section>
+<section>
+<section id="machine-learning-in-general" class="title-slide slide level1 divider center">
+<h1>Machine learning in general</h1>
+
+</section>
+<section id="what-is-machine-learning" class="slide level2">
+<h2>What is machine learning?</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="images/ml_ai_circles.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="images/ml_ai_circles.png" class="quarto-figure quarto-figure-center" height="410"></a></p>
+</figure>
+</div>
+<p>Machine learning: the machine <strong>learns patterns from data</strong>. Nobody writes the rules.</p>
+</section>
+<section id="three-ways-a-machine-learns" class="slide level2">
+<h2>Three ways a machine learns</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="images/ml_three_ways.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="images/ml_three_ways.png" class="quarto-figure quarto-figure-center" height="400"></a></p>
+</figure>
+</div>
+<div class="keybox">
+<p>Almost everything in this lecture is <strong>supervised</strong>: we know the laboratory value, and we teach the model to predict it.</p>
+</div>
+</section>
+
+
+<section id="underfitting-and-overfitting" class="slide level2 smaller">
+<h2>Underfitting and overfitting</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="images/ml_fit_levels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="images/ml_fit_levels.png" class="quarto-figure quarto-figure-center" height="390"></a></p>
+</figure>
+</div>
+<p>A too flexible model follows the noise: perfect on seen data, bad on new data. Always test on <strong>unseen</strong> samples.</p>
+<div class="small-note">
+<p>Interactive version: <a href="https://mlu-explain.github.io/bias-variance/">The Bias-Variance Tradeoff</a>, MLU-Explain.</p>
+</div>
+</section>
+<section id="the-life-of-a-model" class="slide level2">
+<h2>The life of a model</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="images/ml_workflow.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="images/ml_workflow.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
+</figure>
+</div>
+<p>A model is never “finished”. With a new season, instrument or variety, check the error and retrain.</p>
+</section>
+<section id="benefits-and-challenges" class="slide level2">
+<h2>Benefits and challenges</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Benefits</strong></p>
 <ul>
-<li>Part of a large calibration database to predict <strong>carotenoids in fresh cassava roots</strong> (Davrieux et al.&nbsp;2016)</li>
-<li>The laboratory method (HPLC) analyses only a few samples per day; NIR is cheap and fast</li>
-<li>Spectra from 400 to 2498 nm every 2 nm: <strong>1050 variables</strong></li>
-<li><strong>200 calibration samples</strong> (2009 to 2012) and <strong>80 test samples</strong> (2013)</li>
+<li>Faster and more consistent decisions</li>
+<li>Earlier warning of pests, diseases and stress</li>
+<li>Better use of water, fertiliser and lab time</li>
+<li>More lines screened with the same budget</li>
 </ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Challenges</strong></p>
+<ul>
+<li>Cost of sensors, drones and instruments</li>
+<li>Training and digital skills; slow adoption</li>
+<li>Data privacy and security</li>
+<li>Models that are hard to explain</li>
+<li>Poor internet and technology in rural areas</li>
+</ul>
+</div></div>
+<div class="small-note">
+<p>Summarised from DeHaat and GeoPard (see “Read more”).</p>
+</div>
+</section>
+<section id="train-validation-and-test" class="slide level2">
+<h2>Train, validation and test</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="images/data_split.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="images/data_split.png" class="quarto-figure quarto-figure-center" style="width:92.0%"></a></p>
+</figure>
+</div>
+<div class="small-note">
+<p><strong>Training</strong> fits the model. <strong>Validation</strong> (or cross-validation) is used to choose settings and compare models. <strong>Test</strong> gives the final grade and is used once. In Practical 1 we split the wheat data in two ways, random folds and folds by environment.</p>
+</div>
+</section></section>
+<section>
+<section id="practical-1" class="title-slide slide level1 divider center">
+<h1>Practical 1</h1>
+
+</section>
+<section id="explain-and-predict-wheat-yield" class="slide level2 smaller scrollable">
+<h2>Explain and predict wheat yield</h2>
+<p>Yield data of <strong>24 durum wheat genotypes</strong> in <strong>22 environments</strong>. The same data answers two different questions.</p>
+<ol type="1">
+<li><strong>Explain</strong>: a <strong>mixed model</strong> shows where the variation comes from (genotype, environment, block).</li>
+<li><strong>Predict</strong>: a <strong>random forest</strong> (many decision trees, each on a random part of the data, and the answers are averaged) predicts the yield of a plot.</li>
+<li><strong>Test honestly</strong>: random folds against a <strong>new environment</strong>. Why do the results differ?</li>
+</ol>
 <div class="keybox">
-<p>More variables than samples: a standard multiple regression cannot be fitted.</p>
+<p><strong>Download</strong>: <a href="../downloads/ML_wheat_GxE_practical.zip">ML_wheat_GxE_practical.zip</a>. Unzip it, open the <code>.Rproj</code>, run <code>00_install_packages.R</code> once (every line must print TRUE), and start with the <code>.Rmd</code> file. About 20 minutes.</p>
+</div>
+</section></section>
+<section>
+<section id="light-and-nir" class="title-slide slide level1 divider center">
+<h1>Light and NIR</h1>
+
+</section>
+<section id="light-we-can-and-cannot-see" class="slide level2 smaller">
+<h2>Light we can and cannot see</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="images/light_spectrum.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="images/light_spectrum.png" class="quarto-figure quarto-figure-center" style="width:95.0%"></a></p>
+</figure>
+</div>
+<ul>
+<li>Light is a wave. The <strong>wavelength</strong> (in nanometres, nm) tells us what kind of light it is.</li>
+<li>Our eyes see only 400 to 700 nm. A NIR instrument also uses light <strong>we cannot see</strong>.</li>
+</ul>
+</section>
+<section id="what-a-nir-instrument-does" class="slide level2">
+<h2>What a NIR instrument does</h2>
+<p><a href="images/nir_how_works.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="images/nir_how_works.jpeg"></a></p>
+</section>
+<section id="which-groups-absorb-and-where" class="slide level2 smaller">
+<h2>Which groups absorb, and where</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="images/nir_structure_chart.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Each bar shows where a chemical group (C-H, O-H, N-H…) absorbs. Click the image to enlarge. Data: Goddu and Delker (1960), compiled by S. D. J. Brown."><img data-src="images/nir_structure_chart.png" class="quarto-figure quarto-figure-center" height="440" alt="Each bar shows where a chemical group (C-H, O-H, N-H…) absorbs. Click the image to enlarge. Data: Goddu and Delker (1960), compiled by S. D. J. Brown."></a></p>
+</figure>
+</div>
+<figcaption>Each bar shows where a chemical group (C-H, O-H, N-H…) absorbs. Click the image to enlarge. Data: Goddu and Delker (1960), compiled by S. D. J. Brown.</figcaption>
+</figure>
 </div>
 </section>
-<section id="the-spectra" class="slide level2">
-<h2>The spectra</h2>
 
-<img data-src="11-ai-plant-breeding_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"><p>The spectra look alike: the information is in <strong>small differences</strong>.</p>
+<section id="nir-sees-bonds-not-elements" class="slide level2">
+<h2>NIR sees bonds, not elements</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Works well (organic chemistry)</strong></p>
+<ul>
+<li>Water, protein, oil</li>
+<li>Starch, sugars</li>
+<li>Fibre, phenolics</li>
+<li>Phytate (partly, through its C-H and O-H bonds)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Works poorly (not organic bonds)</strong></p>
+<ul>
+<li>Minerals: iron, zinc (no bond to see; the model uses links with organic matter)</li>
+<li>Physical and cooking behaviour: cooking time, water absorption, hardness, texture (many causes, not one chemical)</li>
+</ul>
+</div></div>
+<div class="keybox">
+<p>NIR is very good for <strong>chemical</strong> traits and weaker for <strong>physico-chemical</strong> traits. Always check before you trust a model for a new trait.</p>
+</div>
+</section></section>
+<section>
+<section id="the-data" class="title-slide slide level1 divider center">
+<h1>The data</h1>
+
 </section>
-<section id="the-population-is-evolving" class="slide level2">
-<h2>The population is evolving</h2>
-
-<img data-src="11-ai-plant-breeding_files/figure-revealjs/unnamed-chunk-2-1.png" width="864" class="r-stretch"><div class="keybox">
-<p>The test year has a mean of <strong>8.5</strong>; the calibration years have <strong>5.6</strong>. The next season is <strong>not like the previous ones</strong>.</p>
+<section id="a-data-set-of-ciat-beans" class="slide level2 smaller">
+<h2>A data set of CIAT beans</h2>
+<ul>
+<li>117 samples of dry bean seed, <strong>44 lines</strong>, up to 3 repeats per line.</li>
+<li>NIR spectra from 400 to 2,500 nm (FOSS DS2500), every 2 nm = 1,050 variables.</li>
+<li>13 laboratory traits: minerals, anti-nutrients, sugars, cooking.</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-label="1"></a><span class="fu">dim</span>(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  117 1050</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-label="1"></a><span class="fu">table</span>(<span class="fu">table</span>(line))     <span class="co"># how many samples per line: number of repeats</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 1  2  3 
+ 6  3 35 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-label="1"></a><span class="fu">names</span>(lab)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "sample"                 "line"                   "plot"                  
+ [4] "colour"                 "water_absorption"       "cooking_time"          
+ [7] "iron"                   "zinc"                   "phytate"               
+[10] "phenolics"              "verbascose"             "stachyose"             
+[13] "raffinose"              "sucrose"                "fructose"              
+[16] "total_sugars"           "total_oligosaccharides"</code></pre>
+</div>
 </div>
 </section>
-<section id="preparing-the-spectra" class="slide level2">
+<section id="the-laboratory-values" class="slide level2 smaller">
+<h2>The laboratory values</h2>
+<div style="font-size: 0.62em; line-height: 1.1">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">trait</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">water_absorption</td>
+<td style="text-align: right;">98.08</td>
+<td style="text-align: right;">5.49</td>
+<td style="text-align: right;">81.49</td>
+<td style="text-align: right;">116.51</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cooking_time</td>
+<td style="text-align: right;">32.60</td>
+<td style="text-align: right;">5.19</td>
+<td style="text-align: right;">23.97</td>
+<td style="text-align: right;">67.35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">iron</td>
+<td style="text-align: right;">60.79</td>
+<td style="text-align: right;">7.26</td>
+<td style="text-align: right;">42.25</td>
+<td style="text-align: right;">78.60</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">zinc</td>
+<td style="text-align: right;">27.79</td>
+<td style="text-align: right;">2.76</td>
+<td style="text-align: right;">21.15</td>
+<td style="text-align: right;">36.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">phytate</td>
+<td style="text-align: right;">13.03</td>
+<td style="text-align: right;">3.24</td>
+<td style="text-align: right;">1.16</td>
+<td style="text-align: right;">18.10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">phenolics</td>
+<td style="text-align: right;">5.10</td>
+<td style="text-align: right;">1.86</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">9.13</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">verbascose</td>
+<td style="text-align: right;">1.10</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">1.66</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stachyose</td>
+<td style="text-align: right;">25.42</td>
+<td style="text-align: right;">2.13</td>
+<td style="text-align: right;">20.71</td>
+<td style="text-align: right;">32.32</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raffinose</td>
+<td style="text-align: right;">1.92</td>
+<td style="text-align: right;">0.51</td>
+<td style="text-align: right;">1.29</td>
+<td style="text-align: right;">4.13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sucrose</td>
+<td style="text-align: right;">34.98</td>
+<td style="text-align: right;">5.74</td>
+<td style="text-align: right;">18.81</td>
+<td style="text-align: right;">47.82</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fructose</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.48</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">total_sugars</td>
+<td style="text-align: right;">60.42</td>
+<td style="text-align: right;">5.37</td>
+<td style="text-align: right;">49.98</td>
+<td style="text-align: right;">72.77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">total_oligosaccharides</td>
+<td style="text-align: right;">28.44</td>
+<td style="text-align: right;">2.29</td>
+<td style="text-align: right;">23.12</td>
+<td style="text-align: right;">35.57</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="small-note">
+<p>Units: iron and zinc in mg/kg; phytate and sugars in mg/g; water absorption in %; cooking time in minutes.</p>
+</div>
+</section>
+<section id="the-raw-spectra-coloured-by-phytate" class="slide level2">
+<h2>The raw spectra, coloured by phytate</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-label="1"></a><span class="fu">plot_spectra</span>(X, <span class="at">colour_by =</span> lab<span class="sc">$</span>phytate, <span class="at">n =</span> <span class="dv">60</span>, <span class="at">legend_title =</span> <span class="st">"Phytate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="11-ai-plant-breeding_files/figure-revealjs/raw-spectra-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="11-ai-plant-breeding_files/figure-revealjs/raw-spectra-1.png" width="864"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The spectra look <strong>almost the same</strong>. The differences we need are small and hidden.</li>
+</ul>
+</section>
+<section id="preparing-the-spectra" class="slide level2 smaller">
 <h2>Preparing the spectra</h2>
-<ul>
-<li><strong>SNV</strong>: subtract the mean of each spectrum and divide by its standard deviation (removes level and scale)</li>
-<li><strong>First derivative</strong> after light smoothing (removes the baseline slope, sharpens peaks)</li>
-<li>Applied to <strong>each spectrum separately</strong>: no information from other samples</li>
-</ul>
-
-<img data-src="11-ai-plant-breeding_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="block-3" class="slide level2 divider">
-<h2>Block 3</h2>
-<p>The models and how they perform</p>
-</section>
-<section id="measuring-prediction-quality" class="slide level2">
-<h2>Measuring prediction quality</h2>
-<p>On samples the model has <strong>not seen</strong>:</p>
-<ul>
-<li><strong>RMSE</strong>: typical error, in the units of the trait</li>
-<li><strong>R²</strong> of the prediction</li>
-<li><strong>Bias</strong>: mean of (prediction minus observed), should be near 0</li>
-<li><strong>RPD</strong>: standard deviation of observed values divided by RMSE (above 2: useful for screening)</li>
-</ul>
-<div class="keybox">
-<p>Always compare with a <strong>baseline</strong>: predict the calibration mean for every new sample. Here the RMSE of the baseline is <strong>4.76</strong>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Step 1. SNV</strong>: each spectrum is centred and scaled by itself. This removes differences in level (grain size, light scatter).</p>
+<p><strong>Step 2. First derivative</strong>: removes a sloping baseline and sharpens the peaks.</p>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-label="1"></a>Z <span class="ot">&lt;-</span> <span class="fu">prepare_spectra</span>(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="11-ai-plant-breeding_files/figure-revealjs/prepared-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="11-ai-plant-breeding_files/figure-revealjs/prepared-plot-1.png" width="864"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="small-note">
+<p>Each spectrum is treated on its own, so this step cannot leak information between samples.</p>
 </div>
 </section>
-<section id="the-model-families" class="slide level2">
-<h2>The model families</h2>
+<section id="a-first-look-with-pca" class="slide level2">
+<h2>A first look with PCA</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="11-ai-plant-breeding_files/figure-revealjs/pca-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="11-ai-plant-breeding_files/figure-revealjs/pca-1.png" width="864"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>1,045 variables are summarised by a few <strong>principal components</strong>. The first four hold 89% of the variation.</li>
+<li>Grain colour separates the samples: the spectrum “knows” about the seed.</li>
+</ul>
+</section></section>
+<section>
+<section id="prediction-quality" class="title-slide slide level1 divider center">
+<h1>Prediction quality</h1>
+
+</section>
+<section id="measuring-prediction-quality" class="slide level2 smaller">
+<h2>Measuring prediction quality</h2>
 <table class="caption-top">
 <colgroup>
-<col style="width: 23%">
-<col style="width: 49%">
-<col style="width: 27%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Measure</th>
+<th>Meaning</th>
+<th>Good when</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>RMSE</strong></td>
+<td>Typical size of the error (same unit as the trait)</td>
+<td>small</td>
+</tr>
+<tr class="even">
+<td><strong>Bias</strong></td>
+<td>Mean of (predicted − observed): too high or too low?</td>
+<td>near 0</td>
+</tr>
+<tr class="odd">
+<td><strong>R²</strong></td>
+<td>Share of the variation that the prediction explains</td>
+<td>near 1</td>
+</tr>
+<tr class="even">
+<td><strong>RPD</strong></td>
+<td>sd of observed / RMSE: how much better than “always the mean”</td>
+<td>large</td>
+</tr>
+</tbody>
+</table>
+<p>RPD guide (Williams): <strong>&lt; 1.5</strong> not useful; <strong>1.5 to 2</strong> rough screening; <strong>2 to 2.5</strong> approximate; <strong>&gt; 2.5</strong> good.</p>
+<div class="keybox">
+<p>These numbers are only honest when they are computed on samples <strong>the model did not see</strong> (next slides).</p>
+</div>
+</section>
+<section id="principal-component-regression-pcr-as-a-first-model" class="slide level2 smaller scrollable">
+<h2>Principal component regression (PCR) as a first model</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><strong>Three simple steps</strong></p>
+<ol type="1">
+<li><strong>PCA</strong> of the spectra: 1,045 variables become a few components</li>
+<li><strong>Regression</strong>: a normal linear model of the trait on the first <em>k</em> components</li>
+<li><strong>Predict</strong>: project a new spectrum on the same components, then use the regression</li>
+</ol>
+<p>You choose only one number: <em>k</em>, the number of components.</p>
+</div><div class="column" style="width:45%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-label="1"></a>model <span class="ot">&lt;-</span> <span class="fu">fit_pcr</span>(Z_train, y_train, <span class="at">ncomp =</span> <span class="dv">12</span>)</span>
+<span id="cb9-2"><a href="" aria-label="2"></a>pred  <span class="ot">&lt;-</span> <span class="fu">predict_pcr</span>(model, Z_new)</span>
+<span id="cb9-3"><a href="" aria-label="3"></a><span class="fu">quality</span>(y_new, pred)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div></div>
+</section>
+<section id="what-is-a-fold" class="slide level2 smaller">
+<h2>What is a fold?</h2>
+<p>In <strong>k-fold cross-validation</strong> we cut the data into <em>k</em> parts. Each part is called a <strong>fold</strong>. Each fold is the <strong>test</strong> once, and the other folds build the model.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="11-ai-plant-breeding_files/figure-revealjs/fold-fig-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="11-ai-plant-breeding_files/figure-revealjs/fold-fig-1.png" width="768"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>With k = 5 there are 5 rounds. Every sample is tested exactly once.</li>
+<li>The test fold is never used to build the model in that round.</li>
+<li>The <strong>fold</strong> is the unit of the split. Next: what goes into each fold.</li>
+</ul>
+<div class="small-note">
+<p>Interactive version: <a href="https://mlu-explain.github.io/cross-validation/">Cross-Validation</a>, MLU-Explain.</p>
+</div>
+</section>
+<section id="how-many-components" class="slide level2 smaller">
+<h2>How many components?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="11-ai-plant-breeding_files/figure-revealjs/curve-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="11-ai-plant-breeding_files/figure-revealjs/curve-1.png" width="864"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Too few components: the model is too simple. Too many: it learns the noise (<strong>overfitting</strong>). Spectra often need 15 to 25 components.</li>
+<li>The honest curve (by line) is <strong>higher</strong>. We come back to this in the leakage slides.</li>
+</ul>
+</section>
+<section id="more-model-families" class="slide level2 smaller">
+<h2>More model families</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Model</th>
-<th>Idea</th>
-<th>Tuning</th>
+<th>In one sentence</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Ridge</strong></td>
-<td>Linear, shrinks all coefficients</td>
-<td>Amount of shrinkage</td>
-</tr>
-<tr class="even">
-<td><strong>Lasso</strong></td>
-<td>Shrinks, sets many coefficients to 0</td>
-<td>Amount of shrinkage</td>
-</tr>
-<tr class="odd">
-<td><strong>Elastic net</strong></td>
-<td>Mix of ridge and lasso</td>
-<td>Shrinkage and mix</td>
+<td><strong>PCR</strong></td>
+<td>PCA first, then a linear regression on the components</td>
 </tr>
 <tr class="even">
 <td><strong>PLS</strong></td>
-<td>Few components that covary with the trait</td>
-<td>Components</td>
+<td>Like PCR, but the components are built to relate to the trait. The NIR standard</td>
 </tr>
 <tr class="odd">
-<td><strong>Random forest</strong></td>
-<td>Average of many trees</td>
-<td>Variables per split</td>
+<td><strong>Ridge</strong></td>
+<td>Linear model that shrinks all coefficients</td>
 </tr>
 <tr class="even">
-<td><strong>Boosting</strong></td>
-<td>Trees built one after another</td>
-<td>Trees, rate, depth</td>
+<td><strong>Lasso</strong></td>
+<td>Shrinks and sets many coefficients to exactly 0: it selects wavelengths</td>
 </tr>
 <tr class="odd">
-<td><strong>SVM</strong></td>
-<td>Flexible curve, margin of tolerance</td>
-<td>Cost, kernel width</td>
+<td><strong>Elastic net</strong></td>
+<td>A mix of ridge and lasso</td>
+</tr>
+<tr class="even">
+<td><strong>Random forest</strong></td>
+<td>Many trees, each on a random part of the data; the average is the prediction</td>
+</tr>
+<tr class="odd">
+<td><strong>Support vector machine (SVM)</strong></td>
+<td>Finds a smooth curve that stays close to the data. A kernel lets it follow curved relations</td>
+</tr>
+<tr class="even">
+<td><strong>Boosting (GBM)</strong></td>
+<td>Small trees built one after the other, each fixing the errors of the last</td>
 </tr>
 </tbody>
 </table>
-<div class="keybox">
-<p>Tune by <strong>cross-validation inside the calibration set</strong>, never with the test set.</p>
+<div class="small-note">
+<p>Definitions follow Wadoux et al.&nbsp;(2021), chapter 9, and standard texts. PCR and PLS are the classic NIR tools. Trees and boosting come from machine learning. Interactive explanations of decision trees and random forests: <a href="https://mlu-explain.github.io/random-forest/">mlu-explain.github.io/random-forest</a></p>
 </div>
 </section>
-<section id="one-function-to-fit-them-all" class="slide level2">
-<h2>One function to fit them all</h2>
+
+<section id="performance-of-all-models" class="slide level2 smaller">
+<h2>Performance of all models</h2>
+<p>Phytate, 10-fold validation with all samples of a line kept together.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-label="1"></a>fit_predict <span class="ot">&lt;-</span> <span class="cf">function</span>(model, A, y, B) {</span>
-<span id="cb1-2"><a href="" aria-label="2"></a>  <span class="cf">switch</span>(model,</span>
-<span id="cb1-3"><a href="" aria-label="3"></a>    <span class="at">PLS   =</span> { ... <span class="fu">plsr</span>(y <span class="sc">~</span> X, <span class="at">ncomp =</span> <span class="dv">15</span>, <span class="at">validation =</span> <span class="st">"CV"</span>) ... },</span>
-<span id="cb1-4"><a href="" aria-label="4"></a>    <span class="at">Lasso =</span> { cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(A, y, <span class="at">alpha =</span> <span class="dv">1</span>);   <span class="fu">predict</span>(cv, B, <span class="at">s =</span> <span class="st">"lambda.min"</span>) },</span>
-<span id="cb1-5"><a href="" aria-label="5"></a>    <span class="at">ENet  =</span> { cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(A, y, <span class="at">alpha =</span> <span class="fl">0.5</span>); <span class="fu">predict</span>(cv, B, <span class="at">s =</span> <span class="st">"lambda.min"</span>) },</span>
-<span id="cb1-6"><a href="" aria-label="6"></a>    <span class="at">RF    =</span> { <span class="fu">predict</span>(<span class="fu">ranger</span>(<span class="at">x =</span> A, <span class="at">y =</span> y, <span class="at">num.trees =</span> <span class="dv">500</span>), B)<span class="sc">$</span>predictions },</span>
-<span id="cb1-7"><a href="" aria-label="7"></a>    <span class="at">GBM   =</span> { ... <span class="fu">gbm</span>(..., <span class="at">cv.folds =</span> <span class="dv">5</span>) ... },</span>
-<span id="cb1-8"><a href="" aria-label="8"></a>    <span class="at">SVM   =</span> { tu <span class="ot">&lt;-</span> <span class="fu">tune.svm</span>(A, y, <span class="at">gamma =</span> <span class="dv">10</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">4</span><span class="sc">:-</span><span class="dv">2</span>), <span class="at">cost =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>)); <span class="fu">predict</span>(tu<span class="sc">$</span>best.model, B) })</span>
-<span id="cb1-9"><a href="" aria-label="9"></a>}</span>
-<span id="cb1-10"><a href="" aria-label="10"></a>pred_test <span class="ot">&lt;-</span> <span class="fu">sapply</span>(models, <span class="cf">function</span>(m) <span class="fu">fit_predict</span>(m, A, yA, B))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Full function in the course manual.</p>
-</section>
-<section id="performance-in-the-test-year" class="slide level2">
-<h2>Performance in the test year</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>      model RMSE   R2  bias  RPD
-Lasso Lasso 1.51 0.84 -1.10 2.52
-ENet   ENet 1.52 0.84 -1.09 2.51
-SVM     SVM 1.56 0.83 -1.11 2.45
-PLS     PLS 1.61 0.82 -1.05 2.37
-GBM     GBM 1.83 0.77 -1.28 2.09
-RF       RF 2.22 0.66 -1.40 1.72
-Ridge Ridge 2.27 0.64 -1.48 1.68</code></pre>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">RMSE</th>
+<th style="text-align: right;">R2</th>
+<th style="text-align: right;">bias</th>
+<th style="text-align: right;">RPD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PCR</td>
+<td style="text-align: right;">2.48</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">-0.04</td>
+<td style="text-align: right;">1.30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PLS</td>
+<td style="text-align: right;">2.16</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">1.50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ridge</td>
+<td style="text-align: right;">2.40</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">-0.01</td>
+<td style="text-align: right;">1.35</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lasso</td>
+<td style="text-align: right;">1.87</td>
+<td style="text-align: right;">0.67</td>
+<td style="text-align: right;">-0.02</td>
+<td style="text-align: right;">1.73</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ENet</td>
+<td style="text-align: right;">1.83</td>
+<td style="text-align: right;">0.68</td>
+<td style="text-align: right;">-0.02</td>
+<td style="text-align: right;">1.77</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RF</td>
+<td style="text-align: right;">2.09</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GBM</td>
+<td style="text-align: right;">1.82</td>
+<td style="text-align: right;">0.68</td>
+<td style="text-align: right;">-0.06</td>
+<td style="text-align: right;">1.78</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SVM</td>
+<td style="text-align: right;">1.88</td>
+<td style="text-align: right;">0.66</td>
+<td style="text-align: right;">-0.14</td>
+<td style="text-align: right;">1.72</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Always the mean</td>
+<td style="text-align: right;">3.23</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <ul>
-<li>All models beat the baseline (<strong>4.76</strong>)</li>
-<li><strong>No model is best for every problem</strong>: compare with your own data</li>
-<li><strong>All biases are negative</strong>: the models predict too low in the new year</li>
+<li>All beat “always the mean”. PCR is the weakest here. Lasso, elastic net, boosting and SVM do better (RPD about 1.7), but none reaches 2.</li>
+</ul>
+</section>
+<section id="which-model-should-i-use" class="slide level2 smaller">
+<h2>Which model should I use?</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 52%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>A good first choice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Many correlated variables, few samples (spectra)</td>
+<td>PLS, ridge, lasso</td>
+</tr>
+<tr class="even">
+<td>You want to know <strong>which variables</strong> matter</td>
+<td>Lasso or elastic net</td>
+</tr>
+<tr class="odd">
+<td>Tables with interactions (genotype, environment, covariates)</td>
+<td>Random forest or boosting</td>
+</tr>
+<tr class="even">
+<td>Very large data, images</td>
+<td>Deep learning</td>
+</tr>
+<tr class="odd">
+<td>You must explain the result to others</td>
+<td>Linear or mixed models</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>If two models are close, take the <strong>simpler</strong> one. With small data, small differences are noise.</li>
 </ul>
 </section>
 <section id="predicted-against-observed" class="slide level2">
 <h2>Predicted against observed</h2>
-
-<img data-src="11-ai-plant-breeding_files/figure-revealjs/unnamed-chunk-6-1.png" width="1152" class="r-stretch"><p><span class="small-note">Shaded band: range of the calibration set. A tree never predicts above the maximum it has seen.</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="11-ai-plant-breeding_files/figure-revealjs/pred-obs-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="11-ai-plant-breeding_files/figure-revealjs/pred-obs-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="what-the-lasso-selected" class="slide level2">
-<h2>What the lasso selected</h2>
-
-<img data-src="11-ai-plant-breeding_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"><p><strong>30</strong> of <strong>1045</strong> variables kept. Neighbouring wavelengths can replace each other: not “the only wavelengths that matter”.</p>
-</section>
-<section id="block-4" class="slide level2 divider">
-<h2>Block 4</h2>
-<p>Honest validation and data leakage</p>
-</section>
-<section id="three-sets-three-roles" class="slide level2">
-<h2>Three sets, three roles</h2>
+<section id="ways-to-split-the-data" class="slide level2">
+<h2>Ways to split the data</h2>
 <table class="caption-top">
 <colgroup>
-<col style="width: 17%">
-<col style="width: 52%">
-<col style="width: 30%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Set</th>
-<th>Used for</th>
-<th>Rule</th>
+<th>Method</th>
+<th>How it works</th>
+<th>Good for</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Training</td>
-<td>Fit the model</td>
-<td>Many samples</td>
+<td><strong>Train and test split</strong></td>
+<td>One part builds the model, one part tests it</td>
+<td>Large data sets</td>
 </tr>
 <tr class="even">
-<td>Validation / CV folds</td>
-<td>Choose tuning and the model</td>
-<td>Taken from the training data</td>
+<td><strong>k-fold cross-validation</strong></td>
+<td>k parts; each part is the test once</td>
+<td>Medium and small data sets (our case)</td>
 </tr>
 <tr class="odd">
-<td>Test</td>
-<td>Report the final error</td>
-<td>Used <strong>once</strong>, at the end</td>
+<td><strong>Leave-one-out</strong></td>
+<td>Every sample is the test once</td>
+<td>Very small data sets, slow for large ones</td>
+</tr>
+<tr class="even">
+<td><strong>Bootstrap</strong></td>
+<td>Random samples with replacement</td>
+<td>Checking how stable the estimate is</td>
 </tr>
 </tbody>
 </table>
 <div class="keybox">
-<p>The way you split must follow the <strong>question</strong>: new year, split by year. New genotype, split by genotype. New location, split by location.</p>
+<p>Whatever the method, the <strong>unit left out</strong> must be the unit you want to predict (a line, an environment, a year). That is the next topic.</p>
 </div>
-</section>
-<section id="random-against-by-year-validation" class="slide level2">
-<h2>Random against by-year validation</h2>
+<div class="small-note" style="font-size:0.6em; line-height:1.2">
+<p>Yoosefzadeh Najafabadi et al.&nbsp;(2023). Machine learning-assisted approaches in modernized plant breeding programs. <em>Genes</em> 14(4): 777. DOI 10.3390/genes14040777</p>
+</div>
+</section></section>
+<section>
+<section id="data-leakage" class="title-slide slide level1 divider center">
+<h1>Data leakage</h1>
 
-<img data-src="11-ai-plant-breeding_files/figure-revealjs/unnamed-chunk-8-1.png" width="864" class="r-stretch"><div class="keybox">
-<p>The error for a new year is <strong>75 %</strong> larger than random cross-validation reports: samples of the same year share conditions that the model learns.</p>
-</div>
 </section>
-<section id="data-leakage" class="slide level2">
-<h2>Data leakage</h2>
-<p>Information from validation or test samples reaches the model <strong>before</strong> the evaluation. The error looks smaller than it is.</p>
-<ul>
-<li>The same genotype, plant or sample (or replicates) in training and test</li>
-<li>Choosing variables (wavelengths, markers) with <strong>all</strong> the data, then cross-validating only the model</li>
-<li>Scaling or transforming with means computed on all samples</li>
-<li>Tuning on the test set and reporting the same test set</li>
-<li>A predictor that is a consequence of the target</li>
-</ul>
-<div class="keybox">
-<p>Every step that learns something from the data belongs <strong>inside</strong> the validation loop.</p>
-</div>
-</section>
-<section id="wrong-and-right" class="slide level2">
-<h2>Wrong and right</h2>
+<section id="the-idea-of-data-leakage" class="slide level2 smaller">
+<h2>The idea of data leakage</h2>
+<p>A line has up to <strong>3 samples</strong> that are almost the same bean. What if a random split puts one in training and one in test?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-label="1"></a><span class="co"># WRONG: variables chosen with all the samples</span></span>
-<span id="cb3-2"><a href="" aria-label="2"></a>top <span class="ot">&lt;-</span> <span class="fu">order</span>(<span class="sc">-</span><span class="fu">abs</span>(<span class="fu">cor</span>(A, yA)))[<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>]</span>
-<span id="cb3-3"><a href="" aria-label="3"></a>cv_error_wrong <span class="ot">&lt;-</span> <span class="fu">cross_validate</span>(model, A[, top], yA)</span>
-<span id="cb3-4"><a href="" aria-label="4"></a></span>
-<span id="cb3-5"><a href="" aria-label="5"></a><span class="co"># RIGHT: inside each fold, choose with the training part only</span></span>
-<span id="cb3-6"><a href="" aria-label="6"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb3-7"><a href="" aria-label="7"></a>  train <span class="ot">&lt;-</span> fold <span class="sc">!=</span> k</span>
-<span id="cb3-8"><a href="" aria-label="8"></a>  top <span class="ot">&lt;-</span> <span class="fu">order</span>(<span class="sc">-</span><span class="fu">abs</span>(<span class="fu">cor</span>(A[train, ], yA[train])))[<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>]</span>
-<span id="cb3-9"><a href="" aria-label="9"></a>  fit <span class="ot">&lt;-</span> <span class="fu">fit_model</span>(A[train, top], yA[train])</span>
-<span id="cb3-10"><a href="" aria-label="10"></a>  pred[<span class="sc">!</span>train] <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, A[<span class="sc">!</span>train, top])</span>
-<span id="cb3-11"><a href="" aria-label="11"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">sample</th>
+<th style="text-align: left;">line</th>
+<th style="text-align: right;">fold_random</th>
+<th style="text-align: right;">fold_by_line</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">M03819_024</td>
+<td style="text-align: left;">ACC31</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">M03819_060</td>
+<td style="text-align: left;">ACC31</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">M03819_097</td>
+<td style="text-align: left;">ACC31</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">M03819_023</td>
+<td style="text-align: left;">ACC8</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">M03819_059</td>
+<td style="text-align: left;">ACC8</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">M03819_096</td>
+<td style="text-align: left;">ACC8</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">M03819_074</td>
+<td style="text-align: left;">AFR298</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">M03819_111</td>
+<td style="text-align: left;">AFR298</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">M03819_015</td>
+<td style="text-align: left;">AFR619</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5</td>
+</tr>
+</tbody>
+</table>
 </div>
-</section>
-<section id="block-5" class="slide level2 divider">
-<h2>Block 5</h2>
-<p>When the next season is different</p>
-</section>
-<section id="a-calibration-is-a-living-tool" class="slide level2">
-<h2>A calibration is a living tool</h2>
-
-<img data-src="11-ai-plant-breeding_files/figure-revealjs/unnamed-chunk-10-1.png" width="768" class="r-stretch"><div class="keybox">
-<p>With no new sample the error is <strong>1.52</strong>. Adding <strong>20</strong> laboratory measurements of the new year: <strong>1.14</strong>. Check each season with a few reference samples and update.</p>
 </div>
-</section>
-<section id="the-same-workflow-for-other-data" class="slide level2">
-<h2>The same workflow for other data</h2>
 <ul>
-<li><strong>Image features</strong> (Day 4): area, colour indices, shape as predictors; a visual or laboratory score as the target</li>
-<li><strong>Markers</strong>: ridge is the model behind GBLUP; validate by genotype and by environment</li>
-<li><strong>G×E</strong>: predicting a <strong>new</strong> environment needs a description of it (soil, weather); without covariates, use the mean of the line</li>
-<li><strong>Early generations</strong>: predictions on thousands of M2 plants, then a check of the best ones</li>
-</ul>
-</section>
-<section id="block-6" class="slide level2 divider">
-<h2>Block 6</h2>
-<p>Limits, the breeder, exercise</p>
-</section>
-<section id="limitations" class="slide level2">
-<h2>Limitations</h2>
-<ul>
-<li><strong>Small data sets</strong>: the error estimate is itself uncertain; prefer simple models</li>
-<li><strong>Overfitting</strong>: more flexible models understate the real error</li>
-<li><strong>Interpretability</strong>: forests and boosting do not give effects to explain</li>
-<li><strong>Transfer</strong>: other crop, season, instrument or laboratory needs a new check</li>
-<li><strong>Label quality</strong>: noisy laboratory values limit the best possible prediction</li>
+<li><strong>Random folds</strong>: samples of the same line can sit in different folds. The model has already “seen” that line, so the test is too easy.</li>
+<li><strong>By-line folds</strong>: all samples of a line sit in the same fold. The test line is truly new.</li>
 </ul>
 <div class="keybox">
-<p>ML does not know the biology. The breeder knows if a prediction makes sense, which samples are unusual and which errors matter.</p>
+<p>The question in breeding is: <em>will the model work on a <strong>new line</strong>?</em> So the validation must hold out <strong>whole lines</strong>.</p>
 </div>
 </section>
-<section id="exercise" class="slide level2 scrollable">
-<h2>Exercise</h2>
-<p>Use the cassava data.</p>
-<ol type="1">
-<li>Calibration: samples of <strong>2009 to 2011</strong>. Validation: samples of <strong>2012</strong></li>
-<li>Fit <strong>PLS</strong> and the <strong>elastic net</strong>; compute RMSE and bias on 2012</li>
-<li>Compare with random 10-fold cross-validation inside 2009 to 2011</li>
-</ol>
-<p>Which error would you report as the expected error for next season?</p>
-</section>
-<section id="key-takeaways" class="slide level2">
-<h2>Key takeaways</h2>
+<section id="random-against-by-line-results" class="slide level2 smaller">
+<h2>Random against by-line results</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">trait</th>
+<th style="text-align: left;">validation</th>
+<th style="text-align: right;">RMSE</th>
+<th style="text-align: right;">R2</th>
+<th style="text-align: right;">RPD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">phytate</td>
+<td style="text-align: left;">random</td>
+<td style="text-align: right;">2.14</td>
+<td style="text-align: right;">0.56</td>
+<td style="text-align: right;">1.51</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">phytate</td>
+<td style="text-align: left;">by line</td>
+<td style="text-align: right;">2.41</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">1.35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">iron</td>
+<td style="text-align: left;">random</td>
+<td style="text-align: right;">5.69</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">1.28</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">iron</td>
+<td style="text-align: left;">by line</td>
+<td style="text-align: right;">6.47</td>
+<td style="text-align: right;">0.26</td>
+<td style="text-align: right;">1.12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">cooking_time</td>
+<td style="text-align: left;">random</td>
+<td style="text-align: right;">4.74</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">1.09</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cooking_time</td>
+<td style="text-align: left;">by line</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">1.10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <ul>
-<li>ML is for <strong>prediction</strong>: cheap measurements into estimates of expensive ones</li>
-<li>Always compare with a <strong>baseline</strong>; there is <strong>no best model</strong> in general</li>
-<li>The honest error comes from data the model never saw, split the way the model will be used</li>
-<li>Avoid <strong>leakage</strong>: every learning step belongs inside the validation loop</li>
-<li>A calibration <strong>drifts</strong>: update it every season with a few reference samples</li>
-<li>The breeder <strong>decides</strong>; the prediction ranks and prioritizes</li>
+<li>Random folds always look <strong>better</strong>. That is the leak, not a better model.</li>
+<li>Report the by-line numbers. They answer the breeder’s real question.</li>
 </ul>
 </section>
-<section id="read-more" class="slide level2">
-<h2>Read more</h2>
-<p>Full notes: course manual, chapter “Machine Learning for Prediction in Plant Breeding”</p>
-<p>Data: Davrieux et al.&nbsp;(2016), <em>J. Near Infrared Spectroscopy</em> 24: 109, distributed with the <code>rchemo</code> package (CIAT cassava programme)</p>
+<section id="what-about-averaging-replicates" class="slide level2 smaller">
+<h2>What about averaging replicates?</h2>
+<p>One option is to use the <strong>mean spectrum and the mean value of each line</strong>. Then each line is one point, and leakage cannot happen.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">trait</th>
+<th style="text-align: left;">data</th>
+<th style="text-align: right;">RMSE</th>
+<th style="text-align: right;">R2</th>
+<th style="text-align: right;">RPD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">phytate</td>
+<td style="text-align: left;">all samples, by line</td>
+<td style="text-align: right;">2.41</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">1.35</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">phytate</td>
+<td style="text-align: left;">line means</td>
+<td style="text-align: right;">2.01</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">2.25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">iron</td>
+<td style="text-align: left;">all samples, by line</td>
+<td style="text-align: right;">6.47</td>
+<td style="text-align: right;">0.26</td>
+<td style="text-align: right;">1.12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">iron</td>
+<td style="text-align: left;">line means</td>
+<td style="text-align: right;">6.05</td>
+<td style="text-align: right;">0.26</td>
+<td style="text-align: right;">1.11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">cooking_time</td>
+<td style="text-align: left;">all samples, by line</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">1.10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cooking_time</td>
+<td style="text-align: left;">line means</td>
+<td style="text-align: right;">6.69</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">1.01</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>Averaging <strong>reduces noise</strong> and is fine for line-level decisions.</li>
+</ul>
+</section>
+<section id="the-wrong-way-and-the-right-way" class="slide level2 smaller">
+<h2>The wrong way and the right way</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Wrong</strong>: random split</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-label="1"></a>folds <span class="ot">&lt;-</span> <span class="fu">make_folds</span>(line, <span class="at">by_line =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-2"><a href="" aria-label="2"></a>p <span class="ot">&lt;-</span> <span class="fu">cv_predict</span>(Z, y, folds, <span class="at">ncomp =</span> <span class="dv">12</span>)</span>
+<span id="cb10-3"><a href="" aria-label="3"></a><span class="fu">quality</span>(y, p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Right</strong>: split by line</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-label="1"></a>folds <span class="ot">&lt;-</span> <span class="fu">make_folds</span>(line, <span class="at">by_line =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-2"><a href="" aria-label="2"></a>p <span class="ot">&lt;-</span> <span class="fu">cv_predict</span>(Z, y, folds, <span class="at">ncomp =</span> <span class="dv">12</span>)</span>
+<span id="cb11-3"><a href="" aria-label="3"></a><span class="fu">quality</span>(y, p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div></div>
+<ul>
+<li>Same data, same model, one argument changes: <code>by_line = TRUE</code>.</li>
+<li>The same idea holds for years, sites, plots, families or any group that is “the same thing” measured more than once.</li>
+</ul>
+</section></section>
+<section>
+<section id="what-nir-predicts-well" class="title-slide slide level1 divider center">
+<h1>What NIR predicts well</h1>
 
 </section>
+<section id="where-nir-works-and-where-not" class="slide level2 smaller">
+<h2>Where NIR works, and where not</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="11-ai-plant-breeding_files/figure-revealjs/traits-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="11-ai-plant-breeding_files/figure-revealjs/traits-1.png" width="864"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+<section id="compare-with-published-work" class="slide level2 smaller">
+<h2>Compare with published work</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Study</th>
+<th>What they found</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Garcia et al.&nbsp;(2025), CIAT, common bean</td>
+<td><strong>Nitrogen</strong> predicted well (CCC 0.84); <strong>iron and zinc</strong> only about 0.4</td>
+</tr>
+<tr class="even">
+<td>Vranić et al.&nbsp;(2019), Croatia, common bean</td>
+<td><strong>Nitrogen</strong> good (R² 0.89); phytic acid and phosphorus <strong>usable</strong>; iron and zinc <strong>poor</strong></td>
+</tr>
+<tr class="odd">
+<td>Our data (CIAT beans)</td>
+<td>Sugars and phenolics <strong>good</strong>; phytate <strong>medium</strong>; minerals and cooking <strong>weak</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="small-note" style="font-size:0.6em; line-height:1.2">
+<p>Garcia et al.&nbsp;(2025). Non-destructive prediction of nitrogen, iron and zinc content in diverse common bean seeds from a genebank using near-infrared spectroscopy. <em>Food Chemistry: Molecular Sciences</em> 11: 100316. DOI 10.1016/j.fochms.2025.100316</p>
+<p>Vranić et al.&nbsp;(2019). Prediction of macro and microelements content in Croatian common bean landraces (<em>Phaseolus vulgaris</em> L.) by NIR spectroscopy. <em>Poljoprivreda</em> 25(1): 48-55. DOI 10.18047/poljo.25.1.7</p>
+</div>
+<ul>
+<li>Different studies, same message: <strong>NIR is a chemistry tool</strong>.</li>
+</ul>
+</section>
+
+
+
+
+
+
+<section id="limitations-to-keep-in-mind" class="slide level2 smaller">
+<h2>Limitations to keep in mind</h2>
+<ul>
+<li><strong>Small data and overfitting</strong>: 117 samples, 44 lines. Estimates of R² are noisy, and flexible models can learn the noise.</li>
+<li><strong>Interpretability</strong>: trees, boosting and SVM are harder to explain than PCR or the lasso.</li>
+<li><strong>Transfer across crops</strong>: a bean model does not work for chickpea or wheat. Build and test a new one for each crop.</li>
+<li><strong>Different instrument, season or sample form</strong> (whole seed against flour): the model may not transfer. Re-calibrate.</li>
+<li><strong>Outliers and new genotypes</strong>: a model is only valid inside the range of the data it was built on.</li>
+<li><strong>The laboratory value is the truth</strong>: if the laboratory method is noisy, the model cannot be better than the method.</li>
+<li><strong>Calibration is living</strong>: add new samples every season and check the error again.</li>
+</ul>
+</section></section>
+<section>
+<section id="your-turn" class="title-slide slide level1 divider center">
+<h1>Your turn</h1>
+
+</section>
+<section id="the-practical-with-beans-and-pcr" class="slide level2 smaller scrollable">
+<h2>The practical with beans and PCR</h2>
+<p>You will do the whole workflow in R, with <strong>short code</strong> and functions from a helpers file.</p>
+<ol type="1">
+<li>Look at the data and the spectra</li>
+<li>Prepare the spectra (SNV + derivative)</li>
+<li>Look at the principal components</li>
+<li>Fit a PCR model and see why testing on the same samples is misleading</li>
+<li>Validate honestly: random folds against <strong>by-line</strong> folds</li>
+<li>Try a chemical trait (total sugars, phytate) and a physical one (cooking time, iron)</li>
+<li>Write your own conclusion: <em>would you use NIR for this trait?</em></li>
+</ol>
+<div class="keybox">
+<p><strong>Download</strong>: <a href="../downloads/ML_NIRS_beans_practical.zip">ML_NIRS_beans_practical.zip</a>. Unzip it, open the <code>.Rproj</code>, run <code>00_install_packages.R</code> once, and start with the <code>.Rmd</code> file.</p>
+</div>
+</section>
+<section id="key-takeaways" class="slide level2 smaller scrollable">
+<h2>Key takeaways</h2>
+<ol type="1">
+<li>Prediction asks “what will it be?”. We judge a model only on samples it <strong>has not seen</strong>.</li>
+<li>NIR measures <strong>bonds</strong> (O-H, N-H, C-H). It is excellent for <strong>chemical</strong> traits and weak for minerals and physical traits.</li>
+<li>Prepare spectra (SNV, derivative), then start with a <strong>simple model</strong>: PCR or PLS.</li>
+<li>Report <strong>RMSE, R², bias and RPD</strong>, and compare with “always the mean”.</li>
+<li><strong>Data leakage</strong>: keep all samples of one line in the same fold. Random folds look too good.</li>
+<li>Use prediction to <strong>screen</strong>, then confirm in the laboratory.</li>
+</ol>
+</section>
+<section id="read-more" class="slide level2 smaller">
+<h2>Read more</h2>
+<ul>
+<li>Wadoux, A. M. J.-C., Minasny, B. and McBratney, A. B. (2021). <em>Soil Spectral Inference with R</em>. Springer. Chapter 9: models, goodness of fit.</li>
+<li>Goddu, R. F. and Delker, D. A. (1960). Spectra-structure correlations for the near-infrared. <em>Analytical Chemistry</em> 32: 140-141. Chart data compiled by S. D. J. Brown (GitHub: sdjbrown/NIR-spectra-structure).</li>
+<li>Garcia, Carvajal-Yepes, Drewry, Santos, Duitama, Wenzl and Chacón-Sánchez (2025). Non-destructive prediction of nitrogen, iron and zinc content in diverse common bean seeds from a genebank using near-infrared spectroscopy. <em>Food Chemistry: Molecular Sciences</em> 11: 100316. DOI 10.1016/j.fochms.2025.100316</li>
+<li>Vranić, Petek, Bošnjak, Lazarević and Carović-Stanko (2019). Prediction of macro and microelements content in Croatian common bean landraces (<em>Phaseolus vulgaris</em> L.) by NIR spectroscopy. <em>Poljoprivreda</em> 25(1): 48-55. DOI 10.18047/poljo.25.1.7</li>
+</ul>
+</section>
+<section id="read-more-machine-learning-in-breeding" class="slide level2 smaller">
+<h2>Read more, machine learning in breeding</h2>
+<ul>
+<li>Yoosefzadeh Najafabadi, Hesami and Eskandari (2023). Machine learning-assisted approaches in modernized plant breeding programs. <em>Genes</em> 14(4): 777. DOI 10.3390/genes14040777</li>
+<li>Yoosefzadeh-Najafabadi, Xavier, Eskandari and Hesami (2025). Machine learning after a decade: is it still a missing keystone in genomic-based plant breeding? <em>Artificial Intelligence Review</em> 58: 260. DOI 10.1007/s10462-025-11274-y</li>
+<li>Ghaitaranpour, Kebede, Duizer and Yoosefzadeh-Najafabadi (2026). AI-assisted nondestructive phenotyping of sensory-related traits in modern legume breeding. <em>Smart Agricultural Technology</em> 15: 102668. DOI 10.1016/j.atech.2026.102668</li>
+<li>MLU-Explain (Machine Learning University). Interactive articles on cross-validation, bias and variance, decision trees and random forests: <a href="https://mlu-explain.github.io/">mlu-explain.github.io</a></li>
+<li>DeHaat. AI and ML in agriculture (blog). dehaat.in/en/blog/ai-and-ml-in-agriculture</li>
+<li>GeoPard. Applications of machine learning for precision agriculture (blog). geopard.tech/blog/applications-of-machine-learning-for-precision-agriculture/</li>
+</ul>
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>Luis Fernando Delgado Muñoz | RTC RER5030 | Day 5: Machine learning</p>
+<p>Luis Fernando Delgado Muñoz | RTC RER5030 | Day 6 | Machine learning</p>
 </div>
 </div></div>
 
@@ -1089,6 +1831,38 @@ Ridge Ridge 2.27 0.64 -1.48 1.68</code></pre>
         }
       });
       </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>13&nbsp; An End-to-End Analysis Pipeline – Experimental Design and Data Analysis for the Advancement of Mutant Populations</title>
+<title>13&nbsp; Data Analysis Pipeline in Plant Breeding – Experimental Design and Data Analysis for the Advancement of Mutant Populations</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part2-week2/12-analysis-pipeline.html">Week 2: Mutation breeding applications</a></li><li class="breadcrumb-item"><a href="../part2-week2/12-analysis-pipeline.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part2-week2/12-analysis-pipeline.html">Week 2: Mutation breeding applications</a></li><li class="breadcrumb-item"><a href="../part2-week2/12-analysis-pipeline.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Analysis Pipeline in Plant Breeding</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -277,7 +277,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/12-analysis-pipeline.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Analysis Pipeline in Plant Breeding</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -324,24 +324,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">13.1</span> Learning objectives</a></li>
   <li><a href="#pipeline-overview" id="toc-pipeline-overview" class="nav-link" data-scroll-target="#pipeline-overview"><span class="header-section-number">13.2</span> Pipeline overview</a></li>
-  <li><a href="#case-1-cassava-breeding-data" id="toc-case-1-cassava-breeding-data" class="nav-link" data-scroll-target="#case-1-cassava-breeding-data"><span class="header-section-number">13.3</span> Case 1: cassava breeding data</a></li>
-  <li><a href="#case-2-bean-breeding-data" id="toc-case-2-bean-breeding-data" class="nav-link" data-scroll-target="#case-2-bean-breeding-data"><span class="header-section-number">13.4</span> Case 2: bean breeding data</a></li>
-  <li><a href="#case-3-a-mutant-population-dataset" id="toc-case-3-a-mutant-population-dataset" class="nav-link" data-scroll-target="#case-3-a-mutant-population-dataset"><span class="header-section-number">13.5</span> Case 3: a mutant population dataset</a></li>
-  <li><a href="#qualitative-traits" id="toc-qualitative-traits" class="nav-link" data-scroll-target="#qualitative-traits"><span class="header-section-number">13.6</span> Qualitative traits</a></li>
-  <li><a href="#how-the-pipeline-changes" id="toc-how-the-pipeline-changes" class="nav-link" data-scroll-target="#how-the-pipeline-changes"><span class="header-section-number">13.7</span> How the pipeline changes</a></li>
-  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">13.8</span> Reproducibility</a></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">13.9</span> Exercise</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">13.10</span> Key takeaways</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">13.11</span> References</a></li>
+  <li><a href="#the-cassava-example" id="toc-the-cassava-example" class="nav-link" data-scroll-target="#the-cassava-example"><span class="header-section-number">13.3</span> The cassava example</a></li>
+  <li><a href="#quality-control" id="toc-quality-control" class="nav-link" data-scroll-target="#quality-control"><span class="header-section-number">13.4</span> Quality control</a></li>
+  <li><a href="#single-trial-analysis" id="toc-single-trial-analysis" class="nav-link" data-scroll-target="#single-trial-analysis"><span class="header-section-number">13.5</span> Single trial analysis</a></li>
+  <li><a href="#multi-environment-analysis" id="toc-multi-environment-analysis" class="nav-link" data-scroll-target="#multi-environment-analysis"><span class="header-section-number">13.6</span> Multi-environment analysis</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">13.7</span> Results</a>
+  <ul class="collapse">
+  <li><a href="#selection-index" id="toc-selection-index" class="nav-link" data-scroll-target="#selection-index"><span class="header-section-number">13.7.1</span> Selection index</a></li>
+  </ul></li>
+  <li><a href="#what-a-breeder-decides-from-this" id="toc-what-a-breeder-decides-from-this" class="nav-link" data-scroll-target="#what-a-breeder-decides-from-this"><span class="header-section-number">13.8</span> What a breeder decides from this</a></li>
+  <li><a href="#qualitative-traits" id="toc-qualitative-traits" class="nav-link" data-scroll-target="#qualitative-traits"><span class="header-section-number">13.9</span> Qualitative traits</a></li>
+  <li><a href="#how-the-pipeline-changes-for-mutant-populations" id="toc-how-the-pipeline-changes-for-mutant-populations" class="nav-link" data-scroll-target="#how-the-pipeline-changes-for-mutant-populations"><span class="header-section-number">13.10</span> How the pipeline changes for mutant populations</a></li>
+  <li><a href="#open-pipelines-and-reproducibility" id="toc-open-pipelines-and-reproducibility" class="nav-link" data-scroll-target="#open-pipelines-and-reproducibility"><span class="header-section-number">13.11</span> Open pipelines and reproducibility</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">13.12</span> Exercise</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">13.13</span> Key takeaways</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">13.14</span> References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lfdelgadom/rtc-mutant-breeding-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part2-week2/12-analysis-pipeline.html">Week 2: Mutation breeding applications</a></li><li class="breadcrumb-item"><a href="../part2-week2/12-analysis-pipeline.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part2-week2/12-analysis-pipeline.html">Week 2: Mutation breeding applications</a></li><li class="breadcrumb-item"><a href="../part2-week2/12-analysis-pipeline.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Analysis Pipeline in Plant Breeding</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-pipeline" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span></h1>
+<h1 class="title"><span id="sec-pipeline" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Analysis Pipeline in Plant Breeding</span></span></h1>
 </div>
 
 
@@ -360,53 +366,434 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="chapter-info">
 <p><strong>Author:</strong> Luis Fernando Delgado Muñoz<br>
-<strong>Session:</strong> Day 6 – Monday 16 November, 08:30–12:30</p>
+<strong>Session:</strong> Day 6, Monday 16 November (after the machine learning session)</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Materials for this session
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><a href="../slides/12-analysis-pipeline.html" target="_blank">Lecture slides</a></li>
+<li><a href="../downloads/Pipeline_cassava_support.zip">Support folder (ZIP)</a>. It has the full R Markdown of this chapter, the cassava data, the original code of the nine trials, and the code and demo data of Hussain et al.&nbsp;(2022). Unzip it, open the <code>.Rproj</code>, and run <code>00_install_packages.R</code> first.</li>
+<li><a href="../data/cassava_DVGXE_tidy.csv">Data: nine cassava trials (CSV)</a></li>
+</ul>
+</div>
 </div>
 <section id="learning-objectives" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">13.1</span> Learning objectives</h2>
 <ul>
-<li>Run a complete, reproducible analysis from raw data to a selection report</li>
-<li>Adapt the pipeline to crop, trial structure, traits and environments</li>
-<li>Analyse quantitative and qualitative traits</li>
+<li>Describe the steps of a data analysis pipeline, from raw data to a selection decision</li>
+<li>Check the quality of trial data: design, missing values and shared clones</li>
+<li>Fit a spatial model in each trial and estimate heritability</li>
+<li>Fit a multi-environment model and read clone by trial interaction (G×E)</li>
+<li>Combine traits in a selection index and make an advancement table</li>
+<li>Know where to find an open pipeline (Hussain et al.&nbsp;2022) and its code</li>
 </ul>
+<p>The course focus is mutation breeding. In this chapter we show the regular pipeline of a breeding programme, with real cassava data. The same steps apply to a mutant population. Every figure is made with free R packages, so you can repeat it.</p>
 </section>
 <section id="pipeline-overview" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="pipeline-overview"><span class="header-section-number">13.2</span> Pipeline overview</h2>
-<!-- TODO: Raw data → QC → design-based model → spatial correction → BLUPs/BLUEs → heritability → selection index → report. -->
+<p>A breeding programme runs many trials, in many places, with many traits. At the end the breeder must decide which clones go to the next stage. A pipeline is a fixed sequence of steps, written as code, that gives the same answer every time.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/images/hussain_pipeline.jpg" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>The pipeline of Hussain et al.&nbsp;(2022): data, pre-processing, data modelling and results. Figure from Hussain et al.&nbsp;(2022), Plant Methods 18, 1, doi: 10.1186/s13007-022-00845-7, open access, CC BY 4.0.</figcaption>
+</figure>
+</div>
+<p>Our steps in this chapter are:</p>
+<ol type="1">
+<li>Import the data</li>
+<li>Quality control (design, missing data, shared clones, variation)</li>
+<li>Single trial analysis with a spatial model, and heritability</li>
+<li>Multi-environment analysis, G×E and genotypic correlation</li>
+<li>Results: correlation between traits, selection index and advancement table</li>
+</ol>
 </section>
-<section id="case-1-cassava-breeding-data" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="case-1-cassava-breeding-data"><span class="header-section-number">13.3</span> Case 1: cassava breeding data</h2>
-</section>
-<section id="case-2-bean-breeding-data" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="case-2-bean-breeding-data"><span class="header-section-number">13.4</span> Case 2: bean breeding data</h2>
-</section>
-<section id="case-3-a-mutant-population-dataset" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="case-3-a-mutant-population-dataset"><span class="header-section-number">13.5</span> Case 3: a mutant population dataset</h2>
-<!-- TODO: Quantitative and qualitative traits. -->
-</section>
-<section id="qualitative-traits" class="level2" data-number="13.6">
-<h2 data-number="13.6" class="anchored" data-anchor-id="qualitative-traits"><span class="header-section-number">13.6</span> Qualitative traits</h2>
-<!-- TODO: Binary and ordinal scores with GLMMs. -->
+<section id="the-cassava-example" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="the-cassava-example"><span class="header-section-number">13.3</span> The cassava example</h2>
+<p>The data come from nine cassava trials in the Caribbean coast of Colombia, in 2021 and 2022, with 51 clones. Each trial is a row-column design with checks (released varieties) spread at random. The traits are yield (t/ha), dry matter, plant type (score 1 to 5), germination, height of the first branch and branch number. The data are public in Cassava Base, and the original code is in the repository <code>Cassava2050/2022DVGXE9env</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmmTMB)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># glmmTMB(disease ~ rep + (1 | geno), family = binomial, data = trial)</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ordinal)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># clmm(score ~ rep + (1 | geno), data = trial)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"exercises/Pipeline_cassava_support/helpers.R"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">load_cassava</span>(<span class="st">"data/cassava_DVGXE_tidy.csv"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 762  65</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(d<span class="sc">$</span>trial, d<span class="sc">$</span>check_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+         check test
+  ciat21    18   66
+  momi21    18   66
+  polo21    18   66
+  repe21    18   66
+  arem22    14   64
+  cere22    12   68
+  ciat22    12   88
+  saha22    14   70
+  stom22    12   72</code></pre>
+</div>
 </div>
 </section>
-<section id="how-the-pipeline-changes" class="level2" data-number="13.7">
-<h2 data-number="13.7" class="anchored" data-anchor-id="how-the-pipeline-changes"><span class="header-section-number">13.7</span> How the pipeline changes</h2>
-<!-- TODO: Crop, trial structure, traits, environments, breeding objectives. -->
+<section id="quality-control" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="quality-control"><span class="header-section-number">13.4</span> Quality control</h2>
+<p>First look at the field design. Orange tiles are checks, blue tiles are test clones.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">plot_trial_layout</span>(d, <span class="st">"ciat21"</span>) <span class="sc">|</span> <span class="fu">plot_trial_layout</span>(d, <span class="st">"ciat22"</span>)) <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-analysis-pipeline_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="1056"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Then missing data. A common rule is to drop a trait or trial with more than 20% missing values. Here almost everything is complete.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-analysis-pipeline_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Trials can only be compared if they share clones (or checks).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_connect</span>(d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-analysis-pipeline_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Last, look at the variation between trials. The trials differ a lot in the mean. This is the environment effect. We want the clone effect, not the place effect.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_trait_trial</span>(d, <span class="st">"yield_ha"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-analysis-pipeline_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="reproducibility" class="level2" data-number="13.8">
-<h2 data-number="13.8" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">13.8</span> Reproducibility</h2>
-<!-- TODO: RStudio projects, renv, Git/GitHub, Quarto reports. Reference: doi 10.1186/s13007-022-00845-7. -->
+<section id="single-trial-analysis" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="single-trial-analysis"><span class="header-section-number">13.5</span> Single trial analysis</h2>
+<p>Neighbour plots are often more alike than distant plots (soil, water, light). If we ignore this, the trend goes into the error and the clone ranking gets noisy. The package <strong>SpATS</strong> fits clone as random plus a smooth two-dimensional surface over rows and columns. It gives a BLUP per clone and a heritability per trial.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">fit_spats</span>(d, <span class="st">"ciat22"</span>, <span class="st">"yield_ha"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m1, <span class="at">cex =</span> <span class="fl">0.7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-analysis-pipeline_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getHeritability</span>(m1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  g 
+0.7 </code></pre>
+</div>
+</div>
+<p>We repeat this for every trial and every trait in a loop.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>H2 <span class="ot">&lt;-</span> <span class="fu">single_h2</span>(d)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>H2<span class="sc">$</span>trial <span class="ot">&lt;-</span> <span class="fu">factor</span>(H2<span class="sc">$</span>trial, <span class="at">levels =</span> <span class="fu">levels</span>(d<span class="sc">$</span>trial))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>H2<span class="sc">$</span>trait <span class="ot">&lt;-</span> <span class="fu">factor</span>(H2<span class="sc">$</span>trait, <span class="at">levels =</span> TRAITS)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(H2, <span class="fu">aes</span>(trait, trial, <span class="at">fill =</span> h2)) <span class="sc">+</span> <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, h2)), <span class="at">size =</span> <span class="fl">3.2</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"#F3E5D8"</span>, <span class="at">high =</span> <span class="st">"#0072B2"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">name =</span> <span class="st">"H2"</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-analysis-pipeline_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Most values are moderate to high. A trait with a very low value in a trial (germination in stom22) is not reliable there, and it should not go to the multi-environment analysis.</p>
 </section>
-<section id="exercise" class="level2" data-number="13.9">
-<h2 data-number="13.9" class="anchored" data-anchor-id="exercise"><span class="header-section-number">13.9</span> Exercise</h2>
-<!-- TODO: one exercise on the shared data -->
-<div class="callout callout-style-default callout-tip callout-empty-content callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<section id="multi-environment-analysis" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="multi-environment-analysis"><span class="header-section-number">13.6</span> Multi-environment analysis</h2>
+<p>The model is: yield of a plot = trial mean + clone effect + clone by trial effect + error. In lme4 we write <code>yield ~ trial + (1 | clone) + (1 | clone:trial)</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>met <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">c</span>(<span class="st">"yield_ha"</span>, <span class="st">"DM_gravity"</span>, <span class="st">"plant_type"</span>), <span class="cf">function</span>(tr) {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">met_model</span>(d, tr); v <span class="ot">&lt;-</span> <span class="fu">met_h2</span>(m, d, tr)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">trait =</span> TRAIT_LABELS[[tr]], <span class="at">clone =</span> v[[<span class="st">"Vg"</span>]], <span class="at">clone_x_trial =</span> v[[<span class="st">"VgxE"</span>]],</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">residual =</span> v[[<span class="st">"Ve"</span>]], <span class="at">H2 =</span> v[[<span class="st">"h2"</span>]])</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">do.call</span>(rbind, met), <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Trait"</span>, <span class="st">"Clone variance"</span>, <span class="st">"Clone by trial variance"</span>, <span class="st">"Residual variance"</span>, <span class="st">"Heritability, all trials"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 14%">
+<col style="width: 23%">
+<col style="width: 17%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Trait</th>
+<th style="text-align: right;">Clone variance</th>
+<th style="text-align: right;">Clone by trial variance</th>
+<th style="text-align: right;">Residual variance</th>
+<th style="text-align: right;">Heritability, all trials</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Yield (t/ha)</td>
+<td style="text-align: right;">17.53</td>
+<td style="text-align: right;">27.39</td>
+<td style="text-align: right;">66.12</td>
+<td style="text-align: right;">0.70</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dry matter (%)</td>
+<td style="text-align: right;">9.09</td>
+<td style="text-align: right;">1.72</td>
+<td style="text-align: right;">3.06</td>
+<td style="text-align: right;">0.96</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Plant type (1 to 5)</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">0.82</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>When the clone by trial variance is large, the best clone changes from place to place. The genotypic correlation between trials shows where this happens. Values near 1 mean the ranking is similar.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mY <span class="ot">&lt;-</span> <span class="fu">met_model</span>(d, <span class="st">"yield_ha"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_corr</span>(<span class="fu">trial_gcor</span>(mY))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-analysis-pipeline_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="816"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="results" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="results"><span class="header-section-number">13.7</span> Results</h2>
+<p>The correlation between traits (clone BLUPs across all trials) shows which traits move together.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">all_blups</span>(d)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>Rt <span class="ot">&lt;-</span> <span class="fu">cor</span>(B[, TRAITS])</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Rt) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(Rt) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"yield"</span>, <span class="st">"dry matter"</span>, <span class="st">"plant type"</span>, <span class="st">"germination"</span>, <span class="st">"height 1st br."</span>, <span class="st">"branch no."</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_corr</span>(Rt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-analysis-pipeline_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="720"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="selection-index" class="level3" data-number="13.7.1">
+<h3 data-number="13.7.1" class="anchored" data-anchor-id="selection-index"><span class="header-section-number">13.7.1</span> Selection index</h3>
+<p>We use yield, dry matter and plant type. Each BLUP is standardised and multiplied by a score chosen by the breeder: yield +10, dry matter +10, plant type -5 (a low plant type score is better). We keep the top 20%.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">selection_table</span>(B)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>top <span class="ot">&lt;-</span> <span class="fu">head</span>(S, <span class="dv">11</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">data.frame</span>(<span class="at">Rank =</span> top<span class="sc">$</span>rank, <span class="at">Clone =</span> top<span class="sc">$</span>g, <span class="at">Yield =</span> <span class="fu">round</span>(top<span class="sc">$</span>yield_ha, <span class="dv">1</span>),</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                        <span class="st">`</span><span class="at">Dry matter</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(top<span class="sc">$</span>DM_gravity, <span class="dv">1</span>), <span class="st">`</span><span class="at">Plant type</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(top<span class="sc">$</span>plant_type, <span class="dv">2</span>),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Index =</span> <span class="fu">round</span>(top<span class="sc">$</span>index, <span class="dv">1</span>), <span class="at">Advance =</span> <span class="fu">ifelse</span>(top<span class="sc">$</span>selected, <span class="st">"yes"</span>, <span class="st">"no"</span>),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">check.names =</span> <span class="cn">FALSE</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 30%">
+<col style="width: 8%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 8%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Rank</th>
+<th style="text-align: left;">Clone</th>
+<th style="text-align: right;">Yield</th>
+<th style="text-align: right;">Dry matter</th>
+<th style="text-align: right;">Plant type</th>
+<th style="text-align: right;">Index</th>
+<th style="text-align: left;">Advance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">SM3464-29</td>
+<td style="text-align: right;">8.4</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">-0.13</td>
+<td style="text-align: right;">29.7</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">SM3640-20</td>
+<td style="text-align: right;">6.1</td>
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">26.0</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">SM2775-4_is_Bellotti</td>
+<td style="text-align: right;">1.8</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">-0.39</td>
+<td style="text-align: right;">22.8</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">SM3559-11</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">4.3</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">22.7</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">SMB2446-2_is_Caiseli</td>
+<td style="text-align: right;">0.7</td>
+<td style="text-align: right;">2.6</td>
+<td style="text-align: right;">-0.66</td>
+<td style="text-align: right;">20.3</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">SM1759-29</td>
+<td style="text-align: right;">1.3</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">-0.42</td>
+<td style="text-align: right;">20.3</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">CM9456-12</td>
+<td style="text-align: right;">4.4</td>
+<td style="text-align: right;">1.4</td>
+<td style="text-align: right;">-0.16</td>
+<td style="text-align: right;">20.3</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">SGB765-4_is_Rojita</td>
+<td style="text-align: right;">2.4</td>
+<td style="text-align: right;">1.8</td>
+<td style="text-align: right;">-0.31</td>
+<td style="text-align: right;">17.9</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">SM3106-14</td>
+<td style="text-align: right;">2.9</td>
+<td style="text-align: right;">1.7</td>
+<td style="text-align: right;">-0.05</td>
+<td style="text-align: right;">15.8</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">CM4919-1_is_Veronica</td>
+<td style="text-align: right;">2.3</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">-0.53</td>
+<td style="text-align: right;">15.1</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">SM3641-2</td>
+<td style="text-align: right;">-0.7</td>
+<td style="text-align: right;">4.5</td>
+<td style="text-align: right;">-0.09</td>
+<td style="text-align: right;">14.6</td>
+<td style="text-align: left;">yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The scores are a decision of the breeder, not a statistical result. The statistics gives fair numbers to combine. Clones with “is” in the name are released varieties used as checks.</p>
+</section>
+</section>
+<section id="what-a-breeder-decides-from-this" class="level2" data-number="13.8">
+<h2 data-number="13.8" class="anchored" data-anchor-id="what-a-breeder-decides-from-this"><span class="header-section-number">13.8</span> What a breeder decides from this</h2>
+<ul>
+<li>Keep the clones with a high index and a stable ranking across trials.</li>
+<li>Look again at clones that are good in one place only (G×E).</li>
+<li>Check the traits that were not in the index (disease, root quality) before the final list.</li>
+<li>Do not trust a trait with low heritability.</li>
+<li>Write down the weights and the cut-off, so the next cycle can repeat them.</li>
+</ul>
+</section>
+<section id="qualitative-traits" class="level2" data-number="13.9">
+<h2 data-number="13.9" class="anchored" data-anchor-id="qualitative-traits"><span class="header-section-number">13.9</span> Qualitative traits</h2>
+<p>Disease scores and similar traits are binary or ordinal. A model for categories can be better than a normal model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmmTMB)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># glmmTMB(disease ~ rep + (1 | geno), family = binomial, data = trial)</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ordinal)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># clmm(score ~ rep + (1 | geno), data = trial)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="how-the-pipeline-changes-for-mutant-populations" class="level2" data-number="13.10">
+<h2 data-number="13.10" class="anchored" data-anchor-id="how-the-pipeline-changes-for-mutant-populations"><span class="header-section-number">13.10</span> How the pipeline changes for mutant populations</h2>
+<ul>
+<li>The checks are the parent, and the plots are M2 or M3 plants or families. The same steps apply.</li>
+<li>Check the design, fix the soil trend, and estimate the effect of each line against the parent.</li>
+<li>Few replicates and many lines mean low heritability. Do not skip the quality control step.</li>
+</ul>
+</section>
+<section id="open-pipelines-and-reproducibility" class="level2" data-number="13.11">
+<h2 data-number="13.11" class="anchored" data-anchor-id="open-pipelines-and-reproducibility"><span class="header-section-number">13.11</span> Open pipelines and reproducibility</h2>
+<p>Hussain et al.&nbsp;(2022) published an open pipeline with R Markdown files (quality check and lme4) and demo data. Their repository is <a href="https://github.com/whussain2/Analysis-pipeline">github.com/whussain2/Analysis-pipeline</a>. A copy is in the support folder, in <code>reference/Hussain_Analysis-pipeline/</code>. Use it to compare with the code of this chapter.</p>
+<p>To make your own analysis repeatable, use an RStudio project, write the steps in a Quarto or R Markdown file, keep the data and the code together, and use Git and GitHub for versions.</p>
+</section>
+<section id="exercise" class="level2" data-number="13.12">
+<h2 data-number="13.12" class="anchored" data-anchor-id="exercise"><span class="header-section-number">13.12</span> Exercise</h2>
+<p>Open <code>Pipeline_cassava_support.Rmd</code> from the support folder.</p>
+<ol type="1">
+<li>Repeat the box plot for dry matter. Which trial has the lowest mean?</li>
+<li>Fit the spatial model for <code>DM_gravity</code> in trial <code>momi21</code>. What is its heritability?</li>
+<li>Change the selection weights, for example dry matter +20. How many of the top 11 clones change?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -415,23 +802,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_trait_trial</span>(d, <span class="st">"DM_gravity"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">fit_spats</span>(d, <span class="st">"momi21"</span>, <span class="st">"DM_gravity"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">getHeritability</span>(m2)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>S2 <span class="ot">&lt;-</span> <span class="fu">selection_table</span>(B, <span class="at">weights =</span> <span class="fu">c</span>(<span class="at">yield_ha =</span> <span class="dv">10</span>, <span class="at">DM_gravity =</span> <span class="dv">20</span>, <span class="at">plant_type =</span> <span class="sc">-</span><span class="dv">5</span>))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">head</span>(S2<span class="sc">$</span>g, <span class="dv">11</span>) <span class="sc">%in%</span> <span class="fu">head</span>(S<span class="sc">$</span>g, <span class="dv">11</span>))   <span class="co"># clones in both lists</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </div>
 </div>
 </section>
-<section id="key-takeaways" class="level2" data-number="13.10">
-<h2 data-number="13.10" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">13.10</span> Key takeaways</h2>
+<section id="key-takeaways" class="level2" data-number="13.13">
+<h2 data-number="13.13" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">13.13</span> Key takeaways</h2>
 <ul>
-<li></li>
-<li></li>
-<li></li>
+<li>A pipeline turns many trials into one repeatable decision.</li>
+<li>Always look at the data first: design, missing values, shared clones.</li>
+<li>Fix the field trend in each trial before comparing clones.</li>
+<li>Use a multi-environment model to separate clone, place and interaction.</li>
+<li>The selection index uses the breeder’s weights, and the code makes them visible.</li>
 </ul>
 </section>
-<section id="references" class="level2" data-number="13.11">
-<h2 data-number="13.11" class="anchored" data-anchor-id="references"><span class="header-section-number">13.11</span> References</h2>
+<section id="references" class="level2" data-number="13.14">
+<h2 data-number="13.14" class="anchored" data-anchor-id="references"><span class="header-section-number">13.14</span> References</h2>
+<ul>
+<li>Hussain, W., Anumalla, M., Catolos, M., Khanna, A., Sta. Cruz, M. T., Ramos, J., and Bhosale, S. (2022). Open-source analytical pipeline for robust data analysis, visualizations and sharing in crop breeding. <em>Plant Methods</em> 18, 1. doi: 10.1186/s13007-022-00845-7</li>
+<li>Rodríguez-Álvarez, M. X., Boer, M. P., van Eeuwijk, F. A., and Eilers, P. H. C. (2018). Correcting for spatial heterogeneity in plant breeding experiments with P-splines. <em>Spatial Statistics</em> 23, 52 to 71.</li>
+</ul>
 
 
 </section>

@@ -111,6 +111,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -277,7 +306,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part2-week2/12-analysis-pipeline.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Analysis Pipeline in Plant Breeding</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -324,25 +353,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">12.1</span> Learning objectives</a></li>
   <li><a href="#prediction-against-explanation" id="toc-prediction-against-explanation" class="nav-link" data-scroll-target="#prediction-against-explanation"><span class="header-section-number">12.2</span> Prediction against explanation</a></li>
-  <li><a href="#where-ml-pays-in-a-breeding-programme" id="toc-where-ml-pays-in-a-breeding-programme" class="nav-link" data-scroll-target="#where-ml-pays-in-a-breeding-programme"><span class="header-section-number">12.3</span> Where ML pays in a breeding programme</a></li>
-  <li><a href="#the-data-nir-spectra-of-cassava-breeding-samples" id="toc-the-data-nir-spectra-of-cassava-breeding-samples" class="nav-link" data-scroll-target="#the-data-nir-spectra-of-cassava-breeding-samples"><span class="header-section-number">12.4</span> The data: NIR spectra of cassava breeding samples</a></li>
-  <li><a href="#preparing-the-spectra" id="toc-preparing-the-spectra" class="nav-link" data-scroll-target="#preparing-the-spectra"><span class="header-section-number">12.5</span> Preparing the spectra</a></li>
-  <li><a href="#measuring-prediction-quality" id="toc-measuring-prediction-quality" class="nav-link" data-scroll-target="#measuring-prediction-quality"><span class="header-section-number">12.6</span> Measuring prediction quality</a></li>
-  <li><a href="#the-models" id="toc-the-models" class="nav-link" data-scroll-target="#the-models"><span class="header-section-number">12.7</span> The models</a>
+  <li><a href="#where-prediction-pays-in-a-breeding-programme" id="toc-where-prediction-pays-in-a-breeding-programme" class="nav-link" data-scroll-target="#where-prediction-pays-in-a-breeding-programme"><span class="header-section-number">12.3</span> Where prediction pays in a breeding programme</a></li>
+  <li><a href="#machine-learning-in-general" id="toc-machine-learning-in-general" class="nav-link" data-scroll-target="#machine-learning-in-general"><span class="header-section-number">12.4</span> Machine learning in general</a></li>
+  <li><a href="#train-validation-and-test" id="toc-train-validation-and-test" class="nav-link" data-scroll-target="#train-validation-and-test"><span class="header-section-number">12.5</span> Train, validation and test</a></li>
+  <li><a href="#practical-1-explain-and-predict-wheat-yield" id="toc-practical-1-explain-and-predict-wheat-yield" class="nav-link" data-scroll-target="#practical-1-explain-and-predict-wheat-yield"><span class="header-section-number">12.6</span> Practical 1, explain and predict wheat yield</a></li>
+  <li><a href="#light-we-can-see-and-light-we-cannot-see" id="toc-light-we-can-see-and-light-we-cannot-see" class="nav-link" data-scroll-target="#light-we-can-see-and-light-we-cannot-see"><span class="header-section-number">12.7</span> Light we can see and light we cannot see</a></li>
+  <li><a href="#what-nir-can-see" id="toc-what-nir-can-see" class="nav-link" data-scroll-target="#what-nir-can-see"><span class="header-section-number">12.8</span> What NIR can “see”</a></li>
+  <li><a href="#the-nir-spectra-of-beans" id="toc-the-nir-spectra-of-beans" class="nav-link" data-scroll-target="#the-nir-spectra-of-beans"><span class="header-section-number">12.9</span> The NIR spectra of beans</a></li>
+  <li><a href="#preparing-the-spectra" id="toc-preparing-the-spectra" class="nav-link" data-scroll-target="#preparing-the-spectra"><span class="header-section-number">12.10</span> Preparing the spectra</a></li>
+  <li><a href="#measuring-prediction-quality" id="toc-measuring-prediction-quality" class="nav-link" data-scroll-target="#measuring-prediction-quality"><span class="header-section-number">12.11</span> Measuring prediction quality</a></li>
+  <li><a href="#the-models" id="toc-the-models" class="nav-link" data-scroll-target="#the-models"><span class="header-section-number">12.12</span> The models</a>
   <ul class="collapse">
-  <li><a href="#what-the-lasso-selected" id="toc-what-the-lasso-selected" class="nav-link" data-scroll-target="#what-the-lasso-selected"><span class="header-section-number">12.7.1</span> What the lasso selected</a></li>
+  <li><a href="#principal-component-regression-pcr" id="toc-principal-component-regression-pcr" class="nav-link" data-scroll-target="#principal-component-regression-pcr"><span class="header-section-number">12.12.1</span> Principal component regression (PCR)</a></li>
+  <li><a href="#other-model-families" id="toc-other-model-families" class="nav-link" data-scroll-target="#other-model-families"><span class="header-section-number">12.12.2</span> Other model families</a></li>
+  <li><a href="#comparison-on-one-trait" id="toc-comparison-on-one-trait" class="nav-link" data-scroll-target="#comparison-on-one-trait"><span class="header-section-number">12.12.3</span> Comparison on one trait</a></li>
+  <li><a href="#what-the-model-uses" id="toc-what-the-model-uses" class="nav-link" data-scroll-target="#what-the-model-uses"><span class="header-section-number">12.12.4</span> What the model uses</a></li>
+  <li><a href="#which-model-should-i-use" id="toc-which-model-should-i-use" class="nav-link" data-scroll-target="#which-model-should-i-use"><span class="header-section-number">12.12.5</span> Which model should I use?</a></li>
+  <li><a href="#how-many-components" id="toc-how-many-components" class="nav-link" data-scroll-target="#how-many-components"><span class="header-section-number">12.12.6</span> How many components?</a></li>
   </ul></li>
-  <li><a href="#validation-how-to-know-if-the-number-is-honest" id="toc-validation-how-to-know-if-the-number-is-honest" class="nav-link" data-scroll-target="#validation-how-to-know-if-the-number-is-honest"><span class="header-section-number">12.8</span> Validation: how to know if the number is honest</a>
+  <li><a href="#sec-leakage" id="toc-sec-leakage" class="nav-link" data-scroll-target="#sec-leakage"><span class="header-section-number">12.13</span> Knowing if the number is honest</a>
   <ul class="collapse">
-  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">12.8.1</span> Cross-validation</a></li>
-  <li><a href="#data-leakage" id="toc-data-leakage" class="nav-link" data-scroll-target="#data-leakage"><span class="header-section-number">12.8.2</span> Data leakage</a></li>
+  <li><a href="#data-leakage" id="toc-data-leakage" class="nav-link" data-scroll-target="#data-leakage"><span class="header-section-number">12.13.1</span> Data leakage</a></li>
   </ul></li>
-  <li><a href="#when-the-next-season-is-different" id="toc-when-the-next-season-is-different" class="nav-link" data-scroll-target="#when-the-next-season-is-different"><span class="header-section-number">12.9</span> When the next season is different</a></li>
-  <li><a href="#other-uses-in-a-breeding-programme" id="toc-other-uses-in-a-breeding-programme" class="nav-link" data-scroll-target="#other-uses-in-a-breeding-programme"><span class="header-section-number">12.10</span> Other uses in a breeding programme</a></li>
-  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">12.11</span> Limitations</a></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">12.12</span> Exercise</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">12.13</span> Key takeaways</a></li>
-  <li><a href="#sec-ai-breeding-refs" id="toc-sec-ai-breeding-refs" class="nav-link" data-scroll-target="#sec-ai-breeding-refs"><span class="header-section-number">12.14</span> References</a></li>
+  <li><a href="#what-nir-predicts-well-and-what-not" id="toc-what-nir-predicts-well-and-what-not" class="nav-link" data-scroll-target="#what-nir-predicts-well-and-what-not"><span class="header-section-number">12.14</span> What NIR predicts well, and what not</a></li>
+  <li><a href="#other-uses-and-other-validation-units" id="toc-other-uses-and-other-validation-units" class="nav-link" data-scroll-target="#other-uses-and-other-validation-units"><span class="header-section-number">12.15</span> Other uses and other validation units</a></li>
+  <li><a href="#limits-of-prediction-models" id="toc-limits-of-prediction-models" class="nav-link" data-scroll-target="#limits-of-prediction-models"><span class="header-section-number">12.16</span> Limits of prediction models</a></li>
+  <li><a href="#practical-2-beans-and-pcr" id="toc-practical-2-beans-and-pcr" class="nav-link" data-scroll-target="#practical-2-beans-and-pcr"><span class="header-section-number">12.17</span> Practical 2, beans and PCR</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">12.18</span> Key takeaways</a></li>
+  <li><a href="#sec-ai-breeding-refs" id="toc-sec-ai-breeding-refs" class="nav-link" data-scroll-target="#sec-ai-breeding-refs"><span class="header-section-number">12.19</span> References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lfdelgadom/rtc-mutant-breeding-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -370,29 +408,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="chapter-info">
 <p><strong>Author:</strong> Luis Fernando Delgado Muñoz<br>
-<strong>Session:</strong> Day 5, Friday 13 November, 15:00 to 16:15</p>
+<strong>Session:</strong> Day 6, Monday 16 November</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Materials for this session
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><a href="../slides/11-ai-plant-breeding.html" target="_blank">Lecture slides</a></li>
+<li><a href="../downloads/ML_wheat_GxE_practical.zip">Practical 1: explain and predict wheat yield, mixed model and random forest (ZIP)</a>. Unzip it, open the <code>.Rproj</code>, and start with <code>ML_wheat_GxE_practical.Rmd</code>.</li>
+<li><a href="../downloads/ML_NIRS_beans_practical.zip">Practical 2: NIR spectra of beans and PCR (ZIP)</a>. Unzip it, open the <code>.Rproj</code>, and start with <code>NIRS_beans_PCR_practical.Rmd</code>.</li>
+<li><a href="../data/bean_nirs.csv">Data: bean NIR spectra and laboratory values (CSV)</a></li>
+</ul>
+</div>
 </div>
 <section id="learning-objectives" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">12.1</span> Learning objectives</h2>
 <ul>
-<li>Decide when machine learning (ML) improves a prediction and when a classical model is enough</li>
-<li>Describe the main ML models used in breeding: penalized regression, PLS, random forest, gradient boosting and support vector machines</li>
-<li>Build a prediction model from near-infrared (NIR) spectra and compare it with a baseline</li>
-<li>Validate a model honestly: training, validation and test sets, cross-validation by groups and data leakage</li>
-<li>Recognize why a model that works in one population or season can fail in the next</li>
-<li>Explain the limits of ML and the role of breeder knowledge</li>
+<li>Explain the difference between explaining a trial and predicting a new sample</li>
+<li>Describe what near-infrared (NIR) light is and what a NIR spectrum measures</li>
+<li>Say which kinds of traits NIR predicts well (chemical) and which not (minerals, cooking and physical traits)</li>
+<li>Build a simple prediction model, principal component regression (PCR), and describe other common models in one sentence each</li>
+<li>Explain training, validation and test sets, and k-fold cross-validation</li>
+<li>Measure prediction quality with RMSE, bias, R² and RPD, and compare with a baseline</li>
+<li>Choose a model family for a given situation, and say when a simple model is enough</li>
+<li>Validate honestly and avoid <strong>data leakage</strong>, for example by keeping all samples of a bean line in the same fold</li>
 </ul>
-<p>Most of this course uses models to <strong>explain</strong> a trial: is there a difference between lines, how large is it, how sure are we? ML is used for another goal: to <strong>predict</strong> a value for a new sample, such as a plant that was only photographed or scanned. We do not need to understand every step of the model if it predicts well; but we do need to know <strong>how well it predicts in the situation where we will use it</strong>. This chapter is about that question.</p>
+<p>Most of this course uses models to <strong>explain</strong> a trial: is there a difference between lines, how large is it, how sure are we? Machine learning (ML) is used for another goal: to <strong>predict</strong> a value for a new sample. We may not need to understand every step of the model if it predicts well. But we do need to know <strong>how well it predicts in the situation where we will use it</strong>. This chapter is about that question, with NIR spectra of common beans.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)    <span class="co"># ridge, lasso, elastic net</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pls)       <span class="co"># partial least squares</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ranger)    <span class="co"># random forest</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gbm)       <span class="co"># gradient boosting</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071)     <span class="co"># support vector machines</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"exercises/ML_NIRS_beans_practical/helpers.R"</span>)   <span class="co"># the functions used in the practical</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"slides/ml_deck_functions.R"</span>)                     <span class="co"># extra models for the comparison</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -400,17 +451,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Packages
+<span class="screen-reader-only">Note</span>Functions in a separate file
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This chapter needs <code>glmnet</code>, <code>pls</code>, <code>gbm</code> and <code>e1071</code> in addition to <code>ranger</code>, which is in the course installation. If any is missing, run <code>install.packages(c("glmnet", "pls", "gbm", "e1071"))</code> once. The Day 6 practical uses the same packages.</p>
+<p>To keep the code short, the work is done by functions in <code>helpers.R</code>: <code>load_bean_nir()</code>, <code>prepare_spectra()</code>, <code>fit_pcr()</code>, <code>predict_pcr()</code>, <code>quality()</code>, <code>make_folds()</code>, <code>cv_predict()</code> and <code>cv_curve()</code>. You can open the file to see how each one works. The practical uses the same file.</p>
 </div>
 </div>
 </section>
 <section id="prediction-against-explanation" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="prediction-against-explanation"><span class="header-section-number">12.2</span> Prediction against explanation</h2>
-<p>A mixed model or an ANOVA answers questions about <strong>parameters</strong>: which genotype effect, which variance component. ML models answer questions about <strong>new observations</strong>: given the spectrum, the image or the weather of a plot, what will its value be? The practical differences are:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -420,122 +470,315 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th></th>
-<th>Classical statistics (ANOVA, mixed models)</th>
-<th>Machine learning</th>
+<th>Explain (inference)</th>
+<th>Predict</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Main goal</td>
-<td>Explain, estimate effects, test hypotheses</td>
-<td>Predict new observations</td>
+<td>Question</td>
+<td>Why? Is there an effect?</td>
+<td>What will the value be for a new sample?</td>
 </tr>
 <tr class="even">
-<td>Data</td>
-<td>Designed experiments, few explanatory variables</td>
-<td>Many variables, often more variables than samples</td>
+<td>Typical tools</td>
+<td>ANOVA, mixed models</td>
+<td>PCR, PLS, random forest, boosting</td>
 </tr>
 <tr class="odd">
-<td>Model</td>
-<td>Specified by the analyst from the design</td>
-<td>Learned from the data, often nonlinear</td>
+<td>Result</td>
+<td>An effect size and a p-value</td>
+<td>A number for each new sample, and its error</td>
 </tr>
 <tr class="even">
-<td>Output</td>
-<td>Effects with their uncertainty</td>
-<td>A prediction and an error estimate</td>
-</tr>
-<tr class="odd">
-<td>Main risk</td>
-<td>Wrong model structure</td>
-<td>Overfitting and a model that does not transfer</td>
+<td>A model is good when</td>
+<td>The assumptions hold and the design is sound</td>
+<td>It predicts samples it has never seen</td>
 </tr>
 </tbody>
 </table>
-<p>They are not rivals. The design and the mixed model give clean phenotypes, and ML turns <strong>cheap measurements</strong> (images, spectra, sensors, markers) into predictions of <strong>expensive ones</strong> (laboratory analysis, yield, disease scores).</p>
+<p>A model can explain well and predict badly, and the other way around.</p>
 </section>
-<section id="where-ml-pays-in-a-breeding-programme" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="where-ml-pays-in-a-breeding-programme"><span class="header-section-number">12.3</span> Where ML pays in a breeding programme</h2>
-<p>ML is useful when there are many predictors, when the relation with the trait is not a simple straight line, or when we need to measure thousands of samples quickly.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
+<section id="where-prediction-pays-in-a-breeding-programme" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="where-prediction-pays-in-a-breeding-programme"><span class="header-section-number">12.3</span> Where prediction pays in a breeding programme</h2>
+<p>Some measurements are slow or costly: laboratory analysis of phytate, sugars or protein, scoring disease in the field, phenotyping every line in every trial. A prediction model learns the link between a <strong>cheap measurement</strong> (a NIR spectrum, an image, a marker) and the <strong>expensive one</strong>. We measure the expensive trait on a few samples, build the model, and then use the cheap measurement on all samples.</p>
+<p>In a mutation breeding programme there can be thousands of M2 or M3 plants and lines. NIR on the seed allows a fast <strong>screening</strong> for composition. The interesting lines are then confirmed in the laboratory. Prediction does not replace the laboratory: it tells you where to look.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/images/nir_mutation_breeding.jpeg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Screening with NIR and validation in the laboratory in a mutation breeding programme.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/images/mutant_screening_prediction.jpeg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Screening against certification. A prediction model is good enough to choose which lines to keep. A value that must be certified needs the laboratory method.</figcaption>
+</figure>
+</div>
+</section>
+<section id="machine-learning-in-general" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="machine-learning-in-general"><span class="header-section-number">12.4</span> Machine learning in general</h2>
+<p><strong>Machine learning</strong> is a part of artificial intelligence. The machine <strong>learns patterns from data</strong>, and nobody writes the rules.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/images/ml_ai_circles.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Artificial intelligence, machine learning and deep learning, as nested circles.</figcaption>
+</figure>
+</div>
+<p>A machine can learn in three ways: <strong>supervised</strong> learning (we know the answer for the training samples, for example the laboratory value), <strong>unsupervised</strong> learning (we look for groups or structure with no answer, for example PCA or clustering) and <strong>reinforcement</strong> learning (the machine learns by trial and reward). Almost everything in this chapter is supervised.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/images/ml_three_ways.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Three ways a machine learns.</figcaption>
+</figure>
+</div>
+<p>Machine learning is used in agriculture for many tasks, such as crop and yield prediction, disease and pest detection, soil and water management, and phenotyping with images (examples as described by DeHaat and GeoPard, see the references).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/images/ml_applications.png" class="img-fluid figure-img" style="width:75.0%"></p>
+<figcaption>Examples of machine learning in agriculture.</figcaption>
+</figure>
+</div>
+<p>A supervised model can answer two kinds of question. <strong>Regression</strong> gives a number (for example phytate in mg/g). <strong>Classification</strong> gives a class (for example grain colour). In this chapter we do regression.</p>
+<p><strong>Underfitting and overfitting.</strong> A model that is too simple misses the pattern (underfitting). A model that is too flexible follows the noise: it is perfect on the samples it has seen and bad on new ones (overfitting). That is why we always test on samples the model has not seen. For an interactive explanation, see <a href="https://mlu-explain.github.io/bias-variance/">The Bias-Variance Tradeoff</a> of MLU-Explain.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/images/ml_fit_levels.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Underfitting, a good fit and overfitting.</figcaption>
+</figure>
+</div>
+<p><strong>The life of a model.</strong> A model is never finished. We collect data, prepare it, train, validate and use the model. With a new season, instrument or variety we check the error again and retrain.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/images/ml_workflow.png" class="img-fluid figure-img" style="width:95.0%"></p>
+<figcaption>The life of a model.</figcaption>
+</figure>
+</div>
+<p><strong>Benefits.</strong> Faster and more consistent decisions, earlier warning of pests, diseases and stress, better use of water, fertiliser and laboratory time, and more lines screened with the same budget. <strong>Challenges.</strong> Cost of sensors, drones and instruments, training and digital skills, data privacy and security, models that are hard to explain, and poor internet and technology in rural areas.</p>
+</section>
+<section id="train-validation-and-test" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="train-validation-and-test"><span class="header-section-number">12.5</span> Train, validation and test</h2>
+<p>When we build a prediction model we cut the data into parts, and each part has one job.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/images/data_split.png" class="img-fluid figure-img" style="width:95.0%"></p>
+<figcaption>Training, validation and test sets. With plenty of data we use three separate parts. With small data, cross-validation plays the role of validation.</figcaption>
+</figure>
+</div>
+<ul>
+<li><strong>Training</strong> is used to fit the model.</li>
+<li><strong>Validation</strong> is used to choose settings (for example the number of components) and to compare models.</li>
+<li><strong>Test</strong> gives the final grade. It is used <strong>once</strong>.</li>
+</ul>
+<p>If the test set helps to choose the model, the final number is too good. The rule is: whoever gives the final grade must not help to choose the model. With small data (117 samples, or 2,112 plots) three separate parts leave too little in each one. Then we use <strong>k-fold cross-validation</strong> inside the training data in place of a validation set, and we keep a test set apart, or we use a nested validation, as in the model comparison below. In Practical 1 we split the wheat data in two ways, random folds and folds by environment.</p>
+</section>
+<section id="practical-1-explain-and-predict-wheat-yield" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="practical-1-explain-and-predict-wheat-yield"><span class="header-section-number">12.6</span> Practical 1, explain and predict wheat yield</h2>
+<p>The data are the yield of <strong>24 durum wheat genotypes</strong> in <strong>22 environments</strong>. The same data answer two different questions:</p>
+<ol type="1">
+<li><strong>Explain.</strong> A mixed model shows where the variation comes from. Environment explains about 65% of the variance, residual 20%, the block within the environment 10% and the genotype only 5.5%.</li>
+<li><strong>Predict.</strong> A random forest (many decision trees, each on a random part of the data, with the answers averaged) predicts the yield of a plot.</li>
+<li><strong>Test honestly.</strong> With random folds the forest looks very good (RMSE 0.54 against 0.82 for “always the mean”), because plots of the same environment are in training and in test. When a whole environment is left out, the forest is no better than the mean (RMSE 0.90 against 0.87). The model learned the environments, not the genotypes.</li>
+</ol>
+<p>Use the wheat ZIP file at the top of this chapter. The practical takes about 20 minutes and has the same structure as the bean practical.</p>
+</section>
+<section id="light-we-can-see-and-light-we-cannot-see" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="light-we-can-see-and-light-we-cannot-see"><span class="header-section-number">12.7</span> Light we can see and light we cannot see</h2>
+<p>Light is a wave, and its <strong>wavelength</strong> (in nanometres, nm) tells us what kind of light it is. Our eyes see only 400 to 700 nm. The NIR region starts just after the red edge, at about 750 nm, and goes to about 2,500 nm. Before the visible there are ultraviolet light and X-rays; after the NIR there are the mid and thermal infrared, microwaves and radio waves.</p>
+<div id="fig-light" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-light-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../slides/images/light_spectrum.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-light-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.1: The light spectrum and where our bean spectra sit. The instrument (FOSS DS2500) measures the visible, the red edge and the NIR, from 400 to 2,500 nm.
+</figcaption>
+</figure>
+</div>
+<p>A NIR instrument sends light onto the sample (for example whole seed or flour). The sample <strong>absorbs</strong> some wavelengths and the instrument records the light that comes back. The result at each wavelength is the <strong>spectrum</strong>. It is fast, it needs no chemicals, and the sample is not destroyed. But the spectrum is <strong>indirect</strong>: we need a model to turn it into a number.</p>
+</section>
+<section id="what-nir-can-see" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="what-nir-can-see"><span class="header-section-number">12.8</span> What NIR can “see”</h2>
+<p>Molecules absorb NIR light when their bonds vibrate. In the NIR region the strongest bands come from bonds with hydrogen: <strong>O-H</strong> (water, sugars, starch), <strong>N-H</strong> (protein) and <strong>C-H</strong> (oil, sugars, starch). <a href="#fig-groups" class="quarto-xref">Figure&nbsp;<span>12.2</span></a> shows where many chemical groups absorb. It is drawn from the data of Goddu and Delker (1960), compiled by S. D. J. Brown.</p>
+<div id="fig-groups" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-groups-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../slides/images/nir_structure_chart.png" class="img-fluid figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-groups-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.2: Positions of absorption bands of chemical groups in the near-infrared region (data: Goddu and Delker 1960). Darker bars mean stronger absorption.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-bands" class="quarto-xref">Figure&nbsp;<span>12.3</span></a> is a simple summary for food and grain. The bands are broad and overlap, so we cannot read a compound from one wavelength. That is why we need a calibration model.</p>
+<div id="fig-bands" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bands-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../slides/images/nir_bands_simple.png" class="img-fluid figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bands-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.3: A simple map of the main absorption bands of water, protein, oil and starch or sugars. Positions are approximate.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>NIR sees bonds, not elements
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>NIR works well for <strong>chemical</strong> traits made of organic molecules: water, protein, oil, starch, sugars, fibre and phenolics. It works poorly for traits that are not built from organic bonds or that have many physical causes:</p>
+<ul>
+<li><strong>Minerals</strong> such as iron and zinc: a metal has no NIR band. A model can only use the link between the mineral and the organic matrix, so it is indirect and weaker.</li>
+<li><strong>Physical and cooking traits</strong> such as cooking time, water absorption, hardness or texture. They depend on the seed coat, structure and storage, not on one chemical group.</li>
+</ul>
+<p>So NIR is very good for chemical variables and less good for physico-chemical ones. Always test each new trait before you trust a model.</p>
+</div>
+</div>
+</section>
+<section id="the-nir-spectra-of-beans" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="the-nir-spectra-of-beans"><span class="header-section-number">12.9</span> The NIR spectra of beans</h2>
+<p>The data come from common bean seed samples of CIAT: <strong>117 samples of 44 lines</strong> (most lines have 3 repeats), with NIR spectra from 400 to 2,500 nm (here every 2 nm, 1,050 variables) and 13 laboratory traits.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>bean <span class="ot">&lt;-</span> <span class="fu">load_bean_nir</span>(<span class="st">"data/bean_nirs.csv"</span>)   <span class="co"># lab, X (spectra), wl, line</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lab  <span class="ot">&lt;-</span> bean<span class="sc">$</span>lab</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>X    <span class="ot">&lt;-</span> bean<span class="sc">$</span>X</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>line <span class="ot">&lt;-</span> bean<span class="sc">$</span>line</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  117 1050</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">table</span>(line))        <span class="co"># lines with 1, 2 or 3 samples</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 1  2  3 
+ 6  3 35 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>traits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"water_absorption"</span>, <span class="st">"cooking_time"</span>, <span class="st">"iron"</span>, <span class="st">"zinc"</span>, <span class="st">"phytate"</span>, <span class="st">"phenolics"</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>            <span class="st">"verbascose"</span>, <span class="st">"stachyose"</span>, <span class="st">"raffinose"</span>, <span class="st">"sucrose"</span>, <span class="st">"fructose"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">"total_sugars"</span>, <span class="st">"total_oligosaccharides"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">trait =</span> traits,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">mean =</span> <span class="fu">sapply</span>(traits, <span class="cf">function</span>(t) <span class="fu">mean</span>(lab[[t]])),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sd   =</span> <span class="fu">sapply</span>(traits, <span class="cf">function</span>(t) <span class="fu">sd</span>(lab[[t]])),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">min  =</span> <span class="fu">sapply</span>(traits, <span class="cf">function</span>(t) <span class="fu">min</span>(lab[[t]])),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max  =</span> <span class="fu">sapply</span>(traits, <span class="cf">function</span>(t) <span class="fu">max</span>(lab[[t]])))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tab, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th>Application</th>
-<th>Predictors</th>
-<th>Target</th>
+<th style="text-align: left;">trait</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Chemical composition</td>
-<td>NIR spectra</td>
-<td>Protein, oil, starch, carotenoids</td>
+<td style="text-align: left;">water_absorption</td>
+<td style="text-align: right;">98.08</td>
+<td style="text-align: right;">5.49</td>
+<td style="text-align: right;">81.49</td>
+<td style="text-align: right;">116.51</td>
 </tr>
 <tr class="even">
-<td>Disease and vigour</td>
-<td>Image features (<a href="09b-image-analysis.html" class="quarto-xref"><span>Chapter 10</span></a>)</td>
-<td>Severity score, biomass</td>
+<td style="text-align: left;">cooking_time</td>
+<td style="text-align: right;">32.60</td>
+<td style="text-align: right;">5.19</td>
+<td style="text-align: right;">23.97</td>
+<td style="text-align: right;">67.35</td>
 </tr>
 <tr class="odd">
-<td>Yield and traits</td>
-<td>Drone and sensor indices</td>
-<td>Yield, plant height</td>
+<td style="text-align: left;">iron</td>
+<td style="text-align: right;">60.79</td>
+<td style="text-align: right;">7.26</td>
+<td style="text-align: right;">42.25</td>
+<td style="text-align: right;">78.60</td>
 </tr>
 <tr class="even">
-<td>Genomic prediction</td>
-<td>Thousands of markers</td>
-<td>Breeding value</td>
+<td style="text-align: left;">zinc</td>
+<td style="text-align: right;">27.79</td>
+<td style="text-align: right;">2.76</td>
+<td style="text-align: right;">21.15</td>
+<td style="text-align: right;">36.00</td>
 </tr>
 <tr class="odd">
-<td>G×E prediction</td>
-<td>Environmental covariates (<a href="10-met-gxe.html" class="quarto-xref"><span>Chapter 11</span></a>)</td>
-<td>Performance in a new environment</td>
+<td style="text-align: left;">phytate</td>
+<td style="text-align: right;">13.03</td>
+<td style="text-align: right;">3.24</td>
+<td style="text-align: right;">1.16</td>
+<td style="text-align: right;">18.10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">phenolics</td>
+<td style="text-align: right;">5.10</td>
+<td style="text-align: right;">1.86</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">9.13</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">verbascose</td>
+<td style="text-align: right;">1.10</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">1.66</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stachyose</td>
+<td style="text-align: right;">25.42</td>
+<td style="text-align: right;">2.13</td>
+<td style="text-align: right;">20.71</td>
+<td style="text-align: right;">32.32</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raffinose</td>
+<td style="text-align: right;">1.92</td>
+<td style="text-align: right;">0.51</td>
+<td style="text-align: right;">1.29</td>
+<td style="text-align: right;">4.13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sucrose</td>
+<td style="text-align: right;">34.98</td>
+<td style="text-align: right;">5.74</td>
+<td style="text-align: right;">18.81</td>
+<td style="text-align: right;">47.82</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fructose</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.48</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">total_sugars</td>
+<td style="text-align: right;">60.42</td>
+<td style="text-align: right;">5.37</td>
+<td style="text-align: right;">49.98</td>
+<td style="text-align: right;">72.77</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">total_oligosaccharides</td>
+<td style="text-align: right;">28.44</td>
+<td style="text-align: right;">2.29</td>
+<td style="text-align: right;">23.12</td>
+<td style="text-align: right;">35.57</td>
 </tr>
 </tbody>
 </table>
-<p>In a <strong>mutation breeding</strong> programme, the large M2 and M3 populations have thousands of plants that cannot be measured one by one in the laboratory. A prediction from an image or a spectrum can rank every plant, so that the laboratory measures only the promising ones. The prediction does not replace the measurement: it decides where to spend it.</p>
-</section>
-<section id="the-data-nir-spectra-of-cassava-breeding-samples" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="the-data-nir-spectra-of-cassava-breeding-samples"><span class="header-section-number">12.4</span> The data: NIR spectra of cassava breeding samples</h2>
-<p>We use a real data set from the CIAT cassava breeding programme (Davrieux et al.&nbsp;2016), published with the <code>rchemo</code> package. It is a small part of a large calibration database built to predict carotenoids in fresh cassava roots, a trait of the biofortification programme, because the laboratory method (HPLC) can analyse only a few samples per day. Near-infrared spectra were measured between 400 and 2498 nm every 2 nm (1050 variables). For each sample, the concentration of a pigment was measured with the reference laboratory method (the data documentation names the target “pigment concentration”), and the aim is to predict it from the spectrum, which is much cheaper and faster.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nir <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cassava_nir.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>wl_cols <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"^w"</span>, <span class="fu">names</span>(nir))</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>wl <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">sub</span>(<span class="st">"w"</span>, <span class="st">""</span>, <span class="fu">names</span>(nir)[wl_cols]))</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>X  <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(nir[, wl_cols])</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>y  <span class="ot">&lt;-</span> nir<span class="sc">$</span>pigment</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>is_cal <span class="ot">&lt;-</span> nir<span class="sc">$</span>set <span class="sc">==</span> <span class="st">"calibration"</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>nir <span class="sc">|&gt;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(set, year) <span class="sc">|&gt;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">samples =</span> <span class="fu">n</span>(), <span class="at">mean_pigment =</span> <span class="fu">mean</span>(pigment), <span class="at">sd =</span> <span class="fu">sd</span>(pigment), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 5
-  set          year samples mean_pigment    sd
-  &lt;chr&gt;       &lt;dbl&gt;   &lt;int&gt;        &lt;dbl&gt; &lt;dbl&gt;
-1 calibration  2009      42         4.62  2.21
-2 calibration  2010      47         6.19  2.90
-3 calibration  2011      40         4.70  3.65
-4 calibration  2012      71         6.33  2.84
-5 test         2013      80         8.50  3.82</code></pre>
 </div>
 </div>
-<p>There are 200 samples from 2009 to 2012 (the <strong>calibration</strong> set, which we use to build models) and 80 samples from 2013 (the <strong>test</strong> set, which we keep untouched until the end and which plays the role of the next season). The table has 1050 predictors and 200 samples, so there are <strong>many more variables than samples</strong>; a standard multiple regression cannot be fitted.</p>
+<p>Units: iron and zinc in mg/kg; phytate and sugars in mg/g; water absorption in %; cooking time in minutes.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>show <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">which</span>(is_cal), <span class="dv">60</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>grp <span class="ot">&lt;-</span> <span class="fu">cut</span>(y, <span class="fu">quantile</span>(y[is_cal], <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>, <span class="dv">1</span>)), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"low"</span>, <span class="st">"medium"</span>, <span class="st">"high"</span>), <span class="at">include.lowest =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>long <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sample =</span> <span class="fu">rep</span>(show, <span class="at">each =</span> <span class="fu">length</span>(wl)), <span class="at">wavelength =</span> <span class="fu">rep</span>(wl, <span class="at">times =</span> <span class="fu">length</span>(show)),</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">absorbance =</span> <span class="fu">as.vector</span>(<span class="fu">t</span>(X[show, ])), <span class="at">pigment =</span> <span class="fu">rep</span>(grp[show], <span class="at">each =</span> <span class="fu">length</span>(wl)))</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(long, <span class="fu">aes</span>(wavelength, absorbance, <span class="at">group =</span> sample, <span class="at">colour =</span> pigment)) <span class="sc">+</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">low =</span> <span class="st">"#1b9e77"</span>, <span class="at">medium =</span> <span class="st">"#e6ab02"</span>, <span class="at">high =</span> <span class="st">"#d95f02"</span>)) <span class="sc">+</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Wavelength (nm)"</span>, <span class="at">y =</span> <span class="st">"Absorbance"</span>, <span class="at">colour =</span> <span class="st">"Pigment"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_spectra</span>(X, <span class="at">colour_by =</span> lab<span class="sc">$</span>phytate, <span class="at">n =</span> <span class="dv">60</span>, <span class="at">legend_title =</span> <span class="st">"Phytate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-spectra" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -543,71 +786,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <img src="11-ai-plant-breeding_files/figure-html/fig-spectra-1.png" class="img-fluid figure-img" width="768">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spectra-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.1: NIR spectra of 60 samples from the calibration set, coloured by pigment concentration (low, medium and high thirds). The spectra look alike and the differences are small.
+Figure&nbsp;12.4: Raw NIR spectra of 60 samples, coloured by phytate. The spectra look alike and the differences are small.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nir, <span class="fu">aes</span>(<span class="fu">factor</span>(year), pigment, <span class="at">fill =</span> set)) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.15</span>, <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">calibration =</span> <span class="st">"#9ecae1"</span>, <span class="at">test =</span> <span class="st">"#fdae6b"</span>)) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Pigment concentration"</span>, <span class="at">fill =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-year" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="11-ai-plant-breeding_files/figure-html/fig-year-1.png" class="img-fluid figure-img" width="624">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.2: Pigment concentration by year. The test year (2013) has a higher mean than the calibration years: the breeding population is evolving.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>This figure is the most important one of the chapter. The mean of the test year is 8.5, while the calibration years have a mean of 5.6, and the test year has samples above the maximum of the calibration set (15.4 against 12.3). The breeding programme has improved the trait, so <strong>the next season is not like the previous ones</strong>. In the full CIAT database the mean carotenoid content rose by more than 80% between 2009 and 2014 (Davrieux et al.&nbsp;2016), and the authors link the limits of PLS to this change. We will see what it does to the predictions.</p>
 </section>
-<section id="preparing-the-spectra" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="preparing-the-spectra"><span class="header-section-number">12.5</span> Preparing the spectra</h2>
-<p>Raw spectra differ mainly in the baseline (how much light the sample scatters) and not in chemistry. Two standard treatments are applied to <strong>each spectrum separately</strong>:</p>
+<section id="preparing-the-spectra" class="level2" data-number="12.10">
+<h2 data-number="12.10" class="anchored" data-anchor-id="preparing-the-spectra"><span class="header-section-number">12.10</span> Preparing the spectra</h2>
+<p>Two light steps make the differences easier to see:</p>
 <ol type="1">
-<li><strong>Standard normal variate (SNV)</strong>: subtract the mean of the spectrum and divide by its standard deviation. It removes differences in overall level and scale.</li>
-<li><strong>First derivative</strong> (after a light smoothing): it removes the slope of the baseline and sharpens the absorption peaks.</li>
+<li><strong>SNV</strong> (standard normal variate): each spectrum is centred and scaled by itself. It removes differences in level caused by grain size and light scatter.</li>
+<li><strong>First derivative</strong>: removes a sloping baseline and sharpens the peaks.</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>snv <span class="ot">&lt;-</span> <span class="cf">function</span>(X) <span class="fu">t</span>(<span class="fu">apply</span>(X, <span class="dv">1</span>, <span class="cf">function</span>(s) (s <span class="sc">-</span> <span class="fu">mean</span>(s)) <span class="sc">/</span> <span class="fu">sd</span>(s)))</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>first_derivative <span class="ot">&lt;-</span> <span class="cf">function</span>(X, <span class="at">k =</span> <span class="dv">5</span>) {</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  Xs <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(X, <span class="dv">1</span>, <span class="cf">function</span>(s) stats<span class="sc">::</span><span class="fu">filter</span>(s, <span class="fu">rep</span>(<span class="dv">1</span> <span class="sc">/</span> k, k), <span class="at">sides =</span> <span class="dv">2</span>)))   <span class="co"># moving average</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  Xs <span class="ot">&lt;-</span> Xs[, <span class="sc">!</span><span class="fu">apply</span>(Xs, <span class="dv">2</span>, anyNA), drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>(<span class="fu">apply</span>(Xs, <span class="dv">1</span>, diff))</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>prep <span class="ot">&lt;-</span> <span class="cf">function</span>(X) {</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  Z <span class="ot">&lt;-</span> <span class="fu">first_derivative</span>(<span class="fu">snv</span>(X))</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(Z) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"v"</span>, <span class="fu">seq_len</span>(<span class="fu">ncol</span>(Z)))</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  Z</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">prep</span>(X)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>wl_d <span class="ot">&lt;-</span> (wl[<span class="dv">3</span><span class="sc">:</span>(<span class="fu">length</span>(wl) <span class="sc">-</span> <span class="dv">3</span>)] <span class="sc">+</span> wl[<span class="dv">4</span><span class="sc">:</span>(<span class="fu">length</span>(wl) <span class="sc">-</span> <span class="dv">2</span>)]) <span class="sc">/</span> <span class="dv">2</span>    <span class="co"># wavelength of each derivative variable</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">variables =</span> <span class="fu">ncol</span>(Z), <span class="at">wavelengths =</span> <span class="fu">length</span>(wl_d))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">prepare_spectra</span>(X)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  variables wavelengths 
-       1045        1045 </code></pre>
+<pre><code>[1]  117 1045</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>i15 <span class="ot">&lt;-</span> show[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>]</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mk <span class="ot">&lt;-</span> <span class="cf">function</span>(M, w, lab) <span class="fu">data.frame</span>(<span class="at">sample =</span> <span class="fu">rep</span>(i15, <span class="at">each =</span> <span class="fu">length</span>(w)), <span class="at">wavelength =</span> <span class="fu">rep</span>(w, <span class="at">times =</span> <span class="dv">15</span>),</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">value =</span> <span class="fu">as.vector</span>(<span class="fu">t</span>(M[i15, ])), <span class="at">step =</span> lab)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(<span class="fu">mk</span>(X, wl, <span class="st">"1. Raw"</span>), <span class="fu">mk</span>(<span class="fu">snv</span>(X), wl, <span class="st">"2. SNV"</span>), <span class="fu">mk</span>(Z, wl_d, <span class="st">"3. SNV + first derivative"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(wavelength, value, <span class="at">group =</span> sample)) <span class="sc">+</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">colour =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> step, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Wavelength (nm)"</span>, <span class="at">y =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_spectra</span>(Z, <span class="at">colour_by =</span> lab<span class="sc">$</span>phytate, <span class="at">n =</span> <span class="dv">60</span>, <span class="at">ylab =</span> <span class="st">"SNV + first derivative"</span>, <span class="at">legend_title =</span> <span class="st">"Phytate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-prep" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -615,221 +816,351 @@ Figure&nbsp;12.2: Pigment concentration by year. The test year (2013) has a high
 <img src="11-ai-plant-breeding_files/figure-html/fig-prep-1.png" class="img-fluid figure-img" width="768">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.3: The same 15 calibration spectra, raw (top), after SNV (middle) and after SNV and first derivative (bottom).
+Figure&nbsp;12.5: The same spectra after SNV and first derivative.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The treatment is a choice that can change the result, and it must be <strong>decided with the calibration set only</strong>. SNV and the derivative work on one spectrum at a time, so they do not use information from other samples. Treatments that compute a mean or a variance across samples (scaling variables, for example) must be learned in the training samples and then applied to new samples with the same numbers.</p>
-</section>
-<section id="measuring-prediction-quality" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="measuring-prediction-quality"><span class="header-section-number">12.6</span> Measuring prediction quality</h2>
-<p>The quality of a prediction is measured on samples that the model has <strong>not seen</strong>.</p>
-<ul>
-<li><strong>RMSE</strong> (root mean squared error): the typical size of the error, in the units of the trait. Lower is better.</li>
-<li><strong>R²</strong> of the prediction: the share of the variation of the new samples that the prediction explains.</li>
-<li><strong>Bias</strong>: the mean of (prediction minus observed). It should be near zero; a bias shows that the model is systematically high or low.</li>
-<li><strong>RPD</strong> (ratio of performance to deviation): the standard deviation of the observed values divided by the RMSE. It is common in NIR work; values above 2 are usually taken as a useful model for screening.</li>
-</ul>
-<p>Every model must be compared with a <strong>baseline</strong>. The simplest baseline predicts the mean of the calibration set for every new sample.</p>
+<p>Each spectrum is treated on its own, so this step cannot leak information between samples.</p>
+<p><strong>Principal components.</strong> PCA summarises the 1,045 variables in a few new variables, the principal components. Here the first four hold 89 % of the variation.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rmse <span class="ot">&lt;-</span> <span class="cf">function</span>(o, p) <span class="fu">sqrt</span>(<span class="fu">mean</span>((o <span class="sc">-</span> p)<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>r2   <span class="ot">&lt;-</span> <span class="cf">function</span>(o, p) <span class="dv">1</span> <span class="sc">-</span> <span class="fu">sum</span>((o <span class="sc">-</span> p)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>((o <span class="sc">-</span> <span class="fu">mean</span>(o))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>metrics <span class="ot">&lt;-</span> <span class="cf">function</span>(o, p) <span class="fu">c</span>(<span class="at">RMSE =</span> <span class="fu">rmse</span>(o, p), <span class="at">R2 =</span> <span class="fu">r2</span>(o, p), <span class="at">bias =</span> <span class="fu">mean</span>(p <span class="sc">-</span> o), <span class="at">RPD =</span> <span class="fu">sd</span>(o) <span class="sc">/</span> <span class="fu">rmse</span>(o, p))</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> Z[is_cal, ];  yA <span class="ot">&lt;-</span> y[is_cal]       <span class="co"># calibration</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> Z[<span class="sc">!</span>is_cal, ]; yB <span class="ot">&lt;-</span> y[<span class="sc">!</span>is_cal]      <span class="co"># test (the next season)</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="fu">metrics</span>(yB, <span class="fu">rep</span>(<span class="fu">mean</span>(yA), <span class="fu">length</span>(yB)))</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(baseline, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> RMSE    R2  bias   RPD 
- 4.76 -0.58 -2.88  0.80 </code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(Z)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ve  <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> pca<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>(pca<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">PC1 =</span> pca<span class="sc">$</span>x[, <span class="dv">1</span>], <span class="at">PC2 =</span> pca<span class="sc">$</span>x[, <span class="dv">2</span>], <span class="at">colour =</span> lab<span class="sc">$</span>colour), <span class="fu">aes</span>(PC1, PC2, <span class="at">colour =</span> colour)) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.2</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">paste0</span>(<span class="st">"PC1 ("</span>, <span class="fu">round</span>(ve[<span class="dv">1</span>]), <span class="st">"%)"</span>), <span class="at">y =</span> <span class="fu">paste0</span>(<span class="st">"PC2 ("</span>, <span class="fu">round</span>(ve[<span class="dv">2</span>]), <span class="st">"%)"</span>), <span class="at">colour =</span> <span class="st">"Grain colour"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-pca" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-ai-plant-breeding_files/figure-html/fig-pca-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.6: The first two principal components of the prepared spectra, coloured by grain colour.
+</figcaption>
+</figure>
 </div>
 </div>
-<p>Predicting the calibration mean gives an RMSE of 4.76 on the test year: this is the number to beat.</p>
+</div>
 </section>
-<section id="the-models" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="the-models"><span class="header-section-number">12.7</span> The models</h2>
-<p>We fit the main families of models to the same data. Each model has a <strong>tuning parameter</strong> that controls how flexible it is. A model that is too flexible learns the noise of the calibration samples (overfitting); one that is too rigid misses the signal. Tuning parameters are chosen by <strong>cross-validation inside the calibration set</strong>, never with the test set.</p>
+<section id="measuring-prediction-quality" class="level2" data-number="12.11">
+<h2 data-number="12.11" class="anchored" data-anchor-id="measuring-prediction-quality"><span class="header-section-number">12.11</span> Measuring prediction quality</h2>
+<p>Let <span class="math inline">\(y_i\)</span> be the observed value and <span class="math inline">\(\hat y_i\)</span> the predicted value of sample <span class="math inline">\(i\)</span>, for <span class="math inline">\(n\)</span> samples that <strong>were not used to build the model</strong>.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Measure</th>
+<th>Formula</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RMSE</td>
+<td><span class="math inline">\(\sqrt{\frac{1}{n}\sum (y_i-\hat y_i)^2}\)</span></td>
+<td>Typical size of the error, in the unit of the trait. Small is good</td>
+</tr>
+<tr class="even">
+<td>Bias</td>
+<td><span class="math inline">\(\frac{1}{n}\sum (\hat y_i-y_i)\)</span></td>
+<td>Is the model on average too high or too low? Close to 0 is good</td>
+</tr>
+<tr class="odd">
+<td>R²</td>
+<td>squared correlation of <span class="math inline">\(y\)</span> and <span class="math inline">\(\hat y\)</span></td>
+<td>Share of variation explained. Close to 1 is good</td>
+</tr>
+<tr class="even">
+<td>RPD</td>
+<td><span class="math inline">\(\mathrm{sd}(y)/\mathrm{RMSE}\)</span></td>
+<td>How much better than predicting the mean for everyone</td>
+</tr>
+</tbody>
+</table>
+<p>A common guide for RPD (Williams): below 1.5 the model is not useful; 1.5 to 2 rough screening; 2 to 2.5 approximate quantitative prediction; above 2.5 good. The <strong>baseline</strong> “always predict the mean” has RMSE equal to the standard deviation, so RPD = 1. A model must beat the baseline. Wadoux et al.&nbsp;(2021, chapter 9) describe these measures and others, such as the RPIQ (using the interquartile range) and Lin’s concordance correlation coefficient (CCC), which are better for skewed data.</p>
+</section>
+<section id="the-models" class="level2" data-number="12.12">
+<h2 data-number="12.12" class="anchored" data-anchor-id="the-models"><span class="header-section-number">12.12</span> The models</h2>
+<section id="principal-component-regression-pcr" class="level3" data-number="12.12.1">
+<h3 data-number="12.12.1" class="anchored" data-anchor-id="principal-component-regression-pcr"><span class="header-section-number">12.12.1</span> Principal component regression (PCR)</h3>
+<p>PCR is the simplest model that works well for spectra. It has three steps:</p>
+<ol type="1">
+<li><strong>PCA</strong> of the spectra of the training samples (1,045 variables to a few components).</li>
+<li>A normal <strong>linear regression</strong> of the trait on the first <em>k</em> components.</li>
+<li>To <strong>predict</strong> a new sample, project its spectrum on the same components and use the regression.</li>
+</ol>
+<p>You choose one number: <em>k</em>. In the code, the three steps are two functions: <code>fit_pcr()</code> and <code>predict_pcr()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> lab<span class="sc">$</span>phytate</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>f_random  <span class="ot">&lt;-</span> <span class="fu">make_folds</span>(line, <span class="at">by_line =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>f_by_line <span class="ot">&lt;-</span> <span class="fu">make_folds</span>(line, <span class="at">by_line =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">fit_pcr</span>(Z, y, <span class="at">ncomp =</span> <span class="dv">12</span>)       <span class="co"># fit on all samples</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">quality</span>(y, <span class="fu">predict_pcr</span>(model, Z)), <span class="dv">2</span>)   <span class="co"># same samples: too good, not a real test</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>RMSE   R2 bias  RPD 
+1.82 0.68 0.00 1.78 </code></pre>
+</div>
+</div>
+<p>The last line predicts the samples that built the model. It looks good, but this is not a test.</p>
+</section>
+<section id="other-model-families" class="level3" data-number="12.12.2">
+<h3 data-number="12.12.2" class="anchored" data-anchor-id="other-model-families"><span class="header-section-number">12.12.2</span> Other model families</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Model</th>
-<th>Idea</th>
-<th>Tuning parameter</th>
-<th>Main strength</th>
-<th>Main weakness</th>
+<th>In one sentence</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td><strong>PCR</strong></td>
+<td>PCA first, then a linear regression on the components</td>
+</tr>
+<tr class="even">
+<td><strong>PLS</strong> (partial least squares)</td>
+<td>Like PCR, but the components are built to be related to the trait. The classic NIR method</td>
+</tr>
+<tr class="odd">
 <td><strong>Ridge</strong></td>
-<td>Linear model that shrinks all coefficients</td>
-<td>Amount of shrinkage</td>
-<td>Stable with correlated variables</td>
-<td>Keeps all variables</td>
+<td>A linear model that shrinks all coefficients, so no wavelength dominates</td>
 </tr>
 <tr class="even">
 <td><strong>Lasso</strong></td>
-<td>Shrinks and sets many coefficients to zero</td>
-<td>Amount of shrinkage</td>
-<td>Selects a few variables</td>
-<td>Unstable with correlated variables</td>
+<td>Shrinks and sets many coefficients exactly to zero: it selects wavelengths</td>
 </tr>
 <tr class="odd">
 <td><strong>Elastic net</strong></td>
-<td>Mix of ridge and lasso</td>
-<td>Shrinkage and the mix</td>
-<td>Selects groups of related variables</td>
-<td>Two parameters</td>
+<td>A mix of ridge and lasso</td>
 </tr>
 <tr class="even">
-<td><strong>PLS</strong></td>
-<td>Builds a few components that covary with the trait</td>
-<td>Number of components</td>
-<td>Standard for spectra</td>
-<td>Linear</td>
-</tr>
-<tr class="odd">
 <td><strong>Random forest</strong></td>
-<td>Average of many decision trees</td>
-<td>Variables per split</td>
-<td>Nonlinear, few assumptions</td>
-<td>Cannot predict outside the range of the data</td>
-</tr>
-<tr class="even">
-<td><strong>Gradient boosting</strong></td>
-<td>Trees built one after the other, each correcting the errors of the last</td>
-<td>Number of trees, learning rate, depth</td>
-<td>Often very accurate</td>
-<td>Many parameters, can overfit</td>
+<td>Many decision trees, each on a random part of the data; the average is the prediction. It needs tuning and can overfit</td>
 </tr>
 <tr class="odd">
-<td><strong>Support vector machine</strong></td>
-<td>Flexible curve fitted with a margin of tolerance</td>
-<td>Cost and kernel width</td>
-<td>Good with small samples</td>
-<td>Hard to interpret</td>
+<td><strong>Support vector machine (SVM)</strong></td>
+<td>Finds a smooth curve that stays close to the data; a kernel lets it follow curved relations</td>
+</tr>
+<tr class="even">
+<td><strong>Boosting (GBM)</strong></td>
+<td>Many small trees built one after the other, each one fixing the errors of the previous ones</td>
 </tr>
 </tbody>
 </table>
-<p>We write one function that fits any of these models to a training set and predicts a new set, with the tuning included.</p>
+<p>Ridge, lasso and elastic net start from a linear model with one coefficient for each wavelength and add a <strong>penalty</strong> for large coefficients. Ridge makes all coefficients smaller. The lasso pushes many of them to exactly zero, so only some wavelengths stay in the model. Elastic net mixes the two. The strength of the penalty is chosen by cross-validation.</p>
+<p>PCR and PLS are the traditional tools of NIR. Trees and boosting come from machine learning. The soil spectroscopy book of Wadoux et al.&nbsp;(2021) also describes Cubist and memory-based learning.</p>
+</section>
+<section id="comparison-on-one-trait" class="level3" data-number="12.12.3">
+<h3 data-number="12.12.3" class="anchored" data-anchor-id="comparison-on-one-trait"><span class="header-section-number">12.12.3</span> Comparison on one trait</h3>
+<p>We predict phytate with every model, with validation by line (<a href="#sec-leakage" class="quarto-xref"><span>Section 12.13</span></a> explains why). Inside each training set, the number of components or the penalty is chosen by an inner cross-validation.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit_predict <span class="ot">&lt;-</span> <span class="cf">function</span>(model, A, y, B) {</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">switch</span>(model,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">PLS =</span> {</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y =</span> y); d<span class="sc">$</span>X <span class="ot">&lt;-</span> <span class="fu">I</span>(A)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>      m <span class="ot">&lt;-</span> <span class="fu">plsr</span>(y <span class="sc">~</span> X, <span class="at">ncomp =</span> <span class="dv">15</span>, <span class="at">data =</span> d, <span class="at">validation =</span> <span class="st">"CV"</span>, <span class="at">segments =</span> <span class="dv">10</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      nc <span class="ot">&lt;-</span> <span class="fu">which.min</span>(<span class="fu">RMSEP</span>(m)<span class="sc">$</span>val[<span class="dv">1</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>])                 <span class="co"># components chosen by cross-validation</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.numeric</span>(<span class="fu">predict</span>(m, <span class="at">ncomp =</span> nc, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">X =</span> <span class="fu">I</span>(B))))</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Ridge =</span> { <span class="fu">set.seed</span>(<span class="dv">1</span>); cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(A, y, <span class="at">alpha =</span> <span class="dv">0</span>);   <span class="fu">as.numeric</span>(<span class="fu">predict</span>(cv, B, <span class="at">s =</span> <span class="st">"lambda.min"</span>)) },</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Lasso =</span> { <span class="fu">set.seed</span>(<span class="dv">1</span>); cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(A, y, <span class="at">alpha =</span> <span class="dv">1</span>);   <span class="fu">as.numeric</span>(<span class="fu">predict</span>(cv, B, <span class="at">s =</span> <span class="st">"lambda.min"</span>)) },</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">ENet  =</span> { <span class="fu">set.seed</span>(<span class="dv">1</span>); cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(A, y, <span class="at">alpha =</span> <span class="fl">0.5</span>); <span class="fu">as.numeric</span>(<span class="fu">predict</span>(cv, B, <span class="at">s =</span> <span class="st">"lambda.min"</span>)) },</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">RF =</span> {</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">predict</span>(<span class="fu">ranger</span>(<span class="at">x =</span> A, <span class="at">y =</span> y, <span class="at">num.trees =</span> <span class="dv">500</span>), B)<span class="sc">$</span>predictions</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">GBM =</span> {</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>      d <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(A); d<span class="sc">$</span>y <span class="ot">&lt;-</span> y</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>      g <span class="ot">&lt;-</span> <span class="fu">gbm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> d, <span class="at">distribution =</span> <span class="st">"gaussian"</span>, <span class="at">n.trees =</span> <span class="dv">1500</span>, <span class="at">shrinkage =</span> <span class="fl">0.02</span>,</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">interaction.depth =</span> <span class="dv">3</span>, <span class="at">cv.folds =</span> <span class="dv">5</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>      nt <span class="ot">&lt;-</span> <span class="fu">gbm.perf</span>(g, <span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">plot.it =</span> <span class="cn">FALSE</span>)       <span class="co"># number of trees chosen by cross-validation</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">predict</span>(g, <span class="fu">as.data.frame</span>(B), <span class="at">n.trees =</span> nt)</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">SVM =</span> {</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>      tu <span class="ot">&lt;-</span> <span class="fu">tune.svm</span>(A, y, <span class="at">gamma =</span> <span class="dv">10</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">4</span><span class="sc">:-</span><span class="dv">2</span>), <span class="at">cost =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>), <span class="at">tunecontrol =</span> <span class="fu">tune.control</span>(<span class="at">cross =</span> <span class="dv">5</span>))</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">predict</span>(tu<span class="sc">$</span>best.model, B)</span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Z5 <span class="ot">&lt;-</span> <span class="fu">thin</span>(Z, <span class="dv">5</span>)                       <span class="co"># average 5 neighbouring variables, for speed</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PCR"</span>, <span class="st">"PLS"</span>, <span class="st">"Ridge"</span>, <span class="st">"Lasso"</span>, <span class="st">"ENet"</span>, <span class="st">"RF"</span>, <span class="st">"GBM"</span>, <span class="st">"SVM"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">sapply</span>(models, <span class="cf">function</span>(m) <span class="fu">cv_model</span>(m, Z5, y, f_by_line, line))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>perf <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(P, <span class="dv">2</span>, <span class="cf">function</span>(p) <span class="fu">quality</span>(y, p)))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>perf <span class="ot">&lt;-</span> <span class="fu">rbind</span>(perf, <span class="st">"Always the mean"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="at">RMSE =</span> <span class="fu">sd</span>(y) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">116</span> <span class="sc">/</span> <span class="dv">117</span>), <span class="at">R2 =</span> <span class="dv">0</span>, <span class="at">bias =</span> <span class="dv">0</span>, <span class="at">RPD =</span> <span class="dv">1</span>))</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(perf, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">RMSE</th>
+<th style="text-align: right;">R2</th>
+<th style="text-align: right;">bias</th>
+<th style="text-align: right;">RPD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PCR</td>
+<td style="text-align: right;">2.48</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">-0.04</td>
+<td style="text-align: right;">1.30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PLS</td>
+<td style="text-align: right;">2.16</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">1.50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ridge</td>
+<td style="text-align: right;">2.40</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">-0.01</td>
+<td style="text-align: right;">1.35</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lasso</td>
+<td style="text-align: right;">1.87</td>
+<td style="text-align: right;">0.67</td>
+<td style="text-align: right;">-0.02</td>
+<td style="text-align: right;">1.73</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ENet</td>
+<td style="text-align: right;">1.83</td>
+<td style="text-align: right;">0.68</td>
+<td style="text-align: right;">-0.02</td>
+<td style="text-align: right;">1.77</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RF</td>
+<td style="text-align: right;">2.09</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GBM</td>
+<td style="text-align: right;">1.82</td>
+<td style="text-align: right;">0.68</td>
+<td style="text-align: right;">-0.06</td>
+<td style="text-align: right;">1.78</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SVM</td>
+<td style="text-align: right;">1.88</td>
+<td style="text-align: right;">0.66</td>
+<td style="text-align: right;">-0.14</td>
+<td style="text-align: right;">1.72</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Always the mean</td>
+<td style="text-align: right;">3.23</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+</tbody>
+</table>
 </div>
+</div>
+<p>All models beat the baseline, but none is excellent: phytate is a difficult trait. PCR is the weakest here. Lasso, elastic net, boosting and SVM do better (RPD about 1.7), but none reaches 2, so they are useful for rough screening only.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PLS"</span>, <span class="st">"Ridge"</span>, <span class="st">"Lasso"</span>, <span class="st">"ENet"</span>, <span class="st">"RF"</span>, <span class="st">"GBM"</span>, <span class="st">"SVM"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>pred_test <span class="ot">&lt;-</span> <span class="fu">sapply</span>(models, <span class="cf">function</span>(m) <span class="fu">fit_predict</span>(m, A, yA, B))</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>perf <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(pred_test, <span class="dv">2</span>, <span class="cf">function</span>(p) <span class="fu">metrics</span>(yB, p))) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>perf<span class="sc">$</span>model <span class="ot">&lt;-</span> <span class="fu">rownames</span>(perf)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>perf <span class="sc">|&gt;</span> <span class="fu">arrange</span>(RMSE) <span class="sc">|&gt;</span> <span class="fu">select</span>(model, RMSE, R2, bias, RPD) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), \(x) <span class="fu">round</span>(x, <span class="dv">2</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      model RMSE   R2  bias  RPD
-Lasso Lasso 1.51 0.84 -1.10 2.52
-ENet   ENet 1.52 0.84 -1.09 2.51
-SVM     SVM 1.56 0.83 -1.11 2.45
-PLS     PLS 1.61 0.82 -1.05 2.37
-GBM     GBM 1.83 0.77 -1.28 2.09
-RF       RF 2.22 0.66 -1.40 1.72
-Ridge Ridge 2.27 0.64 -1.48 1.68</code></pre>
-</div>
-</div>
-<p>All models beat the baseline (4.76), and the best are the lasso, the elastic net and the support vector machine, with an RMSE near 1.5. The table has two lessons.</p>
-<ol type="1">
-<li><strong>There is no model that is best for every problem.</strong> The linear models with a good penalty and the SVM are at the top here; the ridge, which keeps every variable, and the random forest are at the bottom. The order would be different in another data set, so the comparison must always be done with your data.</li>
-<li><strong>Every model has a negative bias.</strong> All of them predict values that are, on average, 1.2 units too low in the test year. We look at why below.</li>
-</ol>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>po <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pred_test) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">observed =</span> yB) <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>observed, <span class="at">names_to =</span> <span class="st">"model"</span>, <span class="at">values_to =</span> <span class="st">"predicted"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="fu">factor</span>(model, <span class="at">levels =</span> models))</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(po, <span class="fu">aes</span>(observed, predicted)) <span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"rect"</span>, <span class="at">xmin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">xmax =</span> <span class="cn">Inf</span>, <span class="at">ymin =</span> <span class="fu">min</span>(yA), <span class="at">ymax =</span> <span class="fu">max</span>(yA), <span class="at">fill =</span> <span class="st">"grey85"</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#2c7fb8"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="fl">1.4</span>) <span class="sc">+</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> model, <span class="at">nrow =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Observed pigment"</span>, <span class="at">y =</span> <span class="st">"Predicted pigment"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">c</span>(<span class="st">"PCR"</span>, <span class="st">"PLS"</span>, <span class="st">"Lasso"</span>, <span class="st">"RF"</span>), <span class="cf">function</span>(m) <span class="fu">data.frame</span>(<span class="at">model =</span> m, <span class="at">obs =</span> y, <span class="at">pred =</span> P[, m])))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pl, <span class="fu">aes</span>(obs, pred)) <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#2c7fb8"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>model, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Observed phytate (mg/g)"</span>, <span class="at">y =</span> <span class="st">"Predicted phytate (mg/g)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-pred-obs" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pred-obs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="11-ai-plant-breeding_files/figure-html/fig-pred-obs-1.png" class="img-fluid figure-img" width="768">
+<img src="11-ai-plant-breeding_files/figure-html/fig-pred-obs-1.png" class="img-fluid figure-img" width="864">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pred-obs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.4: Predicted against observed pigment in the test year (2013). The dashed line is the 1:1 line; the shaded band is the range of the calibration set.
+Figure&nbsp;12.7: Predicted against observed phytate for four models (validation by line). The dashed line is the 1:1 line.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The points lie <strong>below</strong> the 1:1 line for the high values. The highest observed values of the test year are above anything in the calibration set, and the models do not follow them. The random forest shows it clearly: a tree predicts an average of the training values, so it can <strong>never predict above the maximum it has seen</strong>. A linear model can extrapolate, but only if the relation stays the same outside the range. This is the practical meaning of “transfer”: a model is reliable inside the range and the conditions where it was built.</p>
-<section id="what-the-lasso-selected" class="level3" data-number="12.7.1">
-<h3 data-number="12.7.1" class="anchored" data-anchor-id="what-the-lasso-selected"><span class="header-section-number">12.7.1</span> What the lasso selected</h3>
-<p>Penalized regression has a bonus: the lasso gives a short list of spectral variables that matter.</p>
+</section>
+<section id="what-the-model-uses" class="level3" data-number="12.12.4">
+<h3 data-number="12.12.4" class="anchored" data-anchor-id="what-the-model-uses"><span class="header-section-number">12.12.4</span> What the model uses</h3>
+<p>A lasso model keeps only some wavelengths. Where are they?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>cv_l <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(A, yA, <span class="at">alpha =</span> <span class="dv">1</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">coef</span>(cv_l, <span class="at">s =</span> <span class="st">"lambda.min"</span>))[<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>]</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>sel <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">wavelength =</span> wl_d[b <span class="sc">!=</span> <span class="dv">0</span>], <span class="at">coefficient =</span> b[b <span class="sc">!=</span> <span class="dv">0</span>])</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sel, <span class="fu">aes</span>(wavelength, coefficient)) <span class="sc">+</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="dv">6</span>, <span class="at">fill =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Wavelength (nm)"</span>, <span class="at">y =</span> <span class="st">"Lasso coefficient"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>inner <span class="ot">&lt;-</span> <span class="fu">make_folds</span>(line, <span class="at">k =</span> <span class="dv">5</span>, <span class="at">by_line =</span> <span class="cn">TRUE</span>, <span class="at">seed =</span> <span class="dv">7</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>las   <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(Z5, y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">foldid =</span> inner)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>beta  <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">coef</span>(las, <span class="at">s =</span> <span class="st">"lambda.min"</span>))[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>grp   <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fu">seq_len</span>(<span class="fu">ncol</span>(Z)) <span class="sc">/</span> <span class="dv">5</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>wl5   <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">tapply</span>(<span class="fu">as.numeric</span>(<span class="fu">colnames</span>(Z)), grp, mean))</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>keep  <span class="ot">&lt;-</span> beta <span class="sc">!=</span> <span class="dv">0</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">wavelength =</span> wl5[keep], <span class="at">coefficient =</span> beta[keep]), <span class="fu">aes</span>(wavelength, coefficient)) <span class="sc">+</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="dv">8</span>, <span class="at">fill =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Wavelength (nm)"</span>, <span class="at">y =</span> <span class="st">"Lasso coefficient"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-lasso" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-lasso-coef" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-lasso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="11-ai-plant-breeding_files/figure-html/fig-lasso-1.png" class="img-fluid figure-img" width="768">
+<div aria-describedby="fig-lasso-coef-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-ai-plant-breeding_files/figure-html/fig-lasso-coef-1.png" class="img-fluid figure-img" width="768">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lasso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.5: Coefficients of the lasso (non-zero only). Each bar is a spectral variable (first derivative of the SNV spectrum) at its wavelength.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lasso-coef-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.8: Wavelengths kept by the lasso for phytate and their coefficients.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The lasso keeps 30 of the 1045 variables. A short list helps interpretation and a cheaper instrument (a few filters instead of the full spectrum) is possible if the important regions are known. But with correlated variables the selection is not unique: neighbouring wavelengths can replace each other, so do not read the list as “the only wavelengths that matter”.</p>
+<p>The lasso kept 30 of 209 variables. Compare their positions with the band map: do they sit near O-H, N-H or C-H bands? A model can predict well and still be hard to explain, so check that it uses sensible wavelengths.</p>
+</section>
+<section id="which-model-should-i-use" class="level3" data-number="12.12.5">
+<h3 data-number="12.12.5" class="anchored" data-anchor-id="which-model-should-i-use"><span class="header-section-number">12.12.5</span> Which model should I use?</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>A good first choice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Many correlated variables, few samples (spectra)</td>
+<td>PLS, ridge, lasso</td>
+</tr>
+<tr class="even">
+<td>You want to know <strong>which variables</strong> matter</td>
+<td>Lasso or elastic net</td>
+</tr>
+<tr class="odd">
+<td>Tables with interactions (genotype, environment, covariates)</td>
+<td>Random forest or boosting</td>
+</tr>
+<tr class="even">
+<td>Very large data, images</td>
+<td>Deep learning</td>
+</tr>
+<tr class="odd">
+<td>You must explain the result to others</td>
+<td>Linear or mixed models</td>
+</tr>
+</tbody>
+</table>
+<p>If two models are close, take the <strong>simpler</strong> one. With small data, small differences are noise. For interactive explanations of decision trees and random forests, see <a href="https://mlu-explain.github.io/random-forest/">MLU-Explain, random forest</a>.</p>
+</section>
+<section id="how-many-components" class="level3" data-number="12.12.6">
+<h3 data-number="12.12.6" class="anchored" data-anchor-id="how-many-components"><span class="header-section-number">12.12.6</span> How many components?</h3>
+<p>With few components the model is too simple; with many it learns the noise (<strong>overfitting</strong>). We try 1 to 25 components and look at the validation error.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cv_a <span class="ot">&lt;-</span> <span class="fu">cv_curve</span>(Z, y, f_random, <span class="dv">25</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>cv_b <span class="ot">&lt;-</span> <span class="fu">cv_curve</span>(Z, y, f_by_line, <span class="dv">25</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>curve <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">transform</span>(cv_a, <span class="at">folds =</span> <span class="st">"random folds"</span>), <span class="fu">transform</span>(cv_b, <span class="at">folds =</span> <span class="st">"by-line folds"</span>))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(curve, <span class="fu">aes</span>(components, RMSE, <span class="at">colour =</span> folds)) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of components"</span>, <span class="at">y =</span> <span class="st">"RMSE of cross-validation (mg/g)"</span>, <span class="at">colour =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-curve" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-curve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-ai-plant-breeding_files/figure-html/fig-curve-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-curve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.9: Validation error of PCR for phytate against the number of components, with random folds and with folds by line.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
-<section id="validation-how-to-know-if-the-number-is-honest" class="level2" data-number="12.8">
-<h2 data-number="12.8" class="anchored" data-anchor-id="validation-how-to-know-if-the-number-is-honest"><span class="header-section-number">12.8</span> Validation: how to know if the number is honest</h2>
-<p>The estimate of the error is only valid if the samples used to <strong>evaluate</strong> the model were not used in any way to <strong>build</strong> it. There are three levels.</p>
+<section id="sec-leakage" class="level2" data-number="12.13">
+<h2 data-number="12.13" class="anchored" data-anchor-id="sec-leakage"><span class="header-section-number">12.13</span> Knowing if the number is honest</h2>
+<p>The rule is simple: <strong>judge a model on samples it has not seen</strong>. In cross-validation we cut the data in <em>k</em> folds; each part is called a <strong>fold</strong>. Each time one fold is the test and the other folds build the model. With k = 5 there are 5 rounds and every sample is tested once. For an interactive version, see <a href="https://mlu-explain.github.io/cross-validation/">Cross-Validation</a> of MLU-Explain.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -838,250 +1169,514 @@ Figure&nbsp;12.5: Coefficients of the lasso (non-zero only). Each bar is a spect
 </colgroup>
 <thead>
 <tr class="header">
-<th>Set</th>
-<th>Used for</th>
-<th>Rule</th>
+<th>Method</th>
+<th>How it works</th>
+<th>Good for</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Training</td>
-<td>Fit the model</td>
-<td>Many samples</td>
+<td><strong>Train and test split</strong></td>
+<td>One part builds the model, one part tests it</td>
+<td>Large data sets</td>
 </tr>
 <tr class="even">
-<td>Validation (or cross-validation folds)</td>
-<td>Choose the tuning parameters and the model</td>
-<td>Taken from the training data</td>
+<td><strong>k-fold cross-validation</strong></td>
+<td>k parts; each part is the test once</td>
+<td>Medium and small data sets (our case)</td>
 </tr>
 <tr class="odd">
-<td>Test</td>
-<td>Report the final error</td>
-<td>Used <strong>once</strong>, at the end</td>
+<td><strong>Leave-one-out</strong></td>
+<td>Every sample is the test once</td>
+<td>Very small data sets, slow for large ones</td>
+</tr>
+<tr class="even">
+<td><strong>Bootstrap</strong></td>
+<td>Random samples with replacement</td>
+<td>Checking how stable the estimate is</td>
 </tr>
 </tbody>
 </table>
-<section id="cross-validation" class="level3" data-number="12.8.1">
-<h3 data-number="12.8.1" class="anchored" data-anchor-id="cross-validation"><span class="header-section-number">12.8.1</span> Cross-validation</h3>
-<p>In <strong>k-fold cross-validation</strong> the calibration set is divided in k parts; the model is fitted k times, each time leaving one part out and predicting it. The prediction errors of the left-out parts estimate the error for new samples.</p>
-<p>How the parts are made is the most important decision. If the samples are not independent (the same genotype in several plots, the same plant measured several times, the same field and year), a <strong>random</strong> split puts very similar samples in the training and in the validation part, and the error looks smaller than it will be. The honest split follows the <strong>question you want to answer</strong>: a new year needs a split by year, a new genotype needs a split by genotype, a new location needs a split by location.</p>
-<p>We compare both ways with three models.</p>
+<p>Whatever the method, the <strong>unit left out</strong> must be the unit you want to predict (a line, an environment, a year). That is the next topic.</p>
+<section id="data-leakage" class="level3" data-number="12.13.1">
+<h3 data-number="12.13.1" class="anchored" data-anchor-id="data-leakage"><span class="header-section-number">12.13.1</span> Data leakage</h3>
+<p>Many bean lines have up to <strong>three samples</strong> that are almost the same bean. If the folds are random, one sample of a line can be in the training set and another sample of the same line in the test set. The model has already “seen” that line, so the test is too easy and the error looks too good. This is <strong>data leakage</strong>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>fold_random <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">length.out =</span> <span class="fu">nrow</span>(A)))</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>yr_cal <span class="ot">&lt;-</span> nir<span class="sc">$</span>year[is_cal]</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>cv_error <span class="ot">&lt;-</span> <span class="cf">function</span>(model, groups) {</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">nrow</span>(A))</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (g <span class="cf">in</span> <span class="fu">unique</span>(groups)) {</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    i <span class="ot">&lt;-</span> groups <span class="sc">==</span> g</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    p[i] <span class="ot">&lt;-</span> <span class="fu">fit_predict</span>(model, A[<span class="sc">!</span>i, , <span class="at">drop =</span> <span class="cn">FALSE</span>], yA[<span class="sc">!</span>i], A[i, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rmse</span>(yA, p)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>cv_tab <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">model =</span> <span class="fu">c</span>(<span class="st">"PLS"</span>, <span class="st">"ENet"</span>, <span class="st">"SVM"</span>))</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>cv_tab<span class="sc">$</span>random_10_fold <span class="ot">&lt;-</span> <span class="fu">sapply</span>(cv_tab<span class="sc">$</span>model, cv_error, <span class="at">groups =</span> fold_random)</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>cv_tab<span class="sc">$</span>leave_one_year_out <span class="ot">&lt;-</span> <span class="fu">sapply</span>(cv_tab<span class="sc">$</span>model, cv_error, <span class="at">groups =</span> yr_cal)</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>cv_tab<span class="sc">$</span>test_2013 <span class="ot">&lt;-</span> perf<span class="sc">$</span>RMSE[<span class="fu">match</span>(cv_tab<span class="sc">$</span>model, perf<span class="sc">$</span>model)]</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>cv_tab <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), \(x) <span class="fu">round</span>(x, <span class="dv">2</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  model random_10_fold leave_one_year_out test_2013
-1   PLS           0.98               1.71      1.61
-2  ENet           0.88               1.62      1.52
-3   SVM           0.89               1.47      1.56</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>cv_tab <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>model, <span class="at">names_to =</span> <span class="st">"validation"</span>, <span class="at">values_to =</span> <span class="st">"RMSE"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">validation =</span> <span class="fu">factor</span>(validation, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"random_10_fold"</span>, <span class="st">"leave_one_year_out"</span>, <span class="st">"test_2013"</span>),</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Random 10-fold"</span>, <span class="st">"Leave one year out"</span>, <span class="st">"Test year 2013"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(model, RMSE, <span class="at">fill =</span> validation)) <span class="sc">+</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#9ecae1"</span>, <span class="st">"#4292c6"</span>, <span class="st">"#08519c"</span>)) <span class="sc">+</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"RMSE"</span>, <span class="at">fill =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>d9 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sample =</span> lab<span class="sc">$</span>sample, <span class="at">line =</span> line, <span class="at">fold_random =</span> f_random, <span class="at">fold_by_line =</span> f_by_line)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d9[<span class="fu">order</span>(d9<span class="sc">$</span>line), ][<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, ], <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-cv" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-cv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="11-ai-plant-breeding_files/figure-html/fig-cv-1.png" class="img-fluid figure-img" width="624">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">sample</th>
+<th style="text-align: left;">line</th>
+<th style="text-align: right;">fold_random</th>
+<th style="text-align: right;">fold_by_line</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">S001</td>
+<td style="text-align: left;">L01</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S037</td>
+<td style="text-align: left;">L01</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S075</td>
+<td style="text-align: left;">L01</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S002</td>
+<td style="text-align: left;">L02</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S038</td>
+<td style="text-align: left;">L02</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S076</td>
+<td style="text-align: left;">L02</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S003</td>
+<td style="text-align: left;">L03</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S039</td>
+<td style="text-align: left;">L03</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S077</td>
+<td style="text-align: left;">L03</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.6: Error of three models estimated by random 10-fold cross-validation, by leaving one year out, and on the real test year. Random cross-validation is too optimistic.
+</div>
+<p>With random folds the three samples of line L03 go to different folds (1, 10, 9). With folds by line they all go to fold 1. In breeding the question is: <em>will the model work on a <strong>new line</strong>?</em> So the validation must hold out <strong>whole lines</strong>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>trait_pick <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"phytate"</span>, <span class="st">"iron"</span>, <span class="st">"cooking_time"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>leak <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(trait_pick, <span class="cf">function</span>(t) {</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  yy <span class="ot">&lt;-</span> lab[[t]]</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  c1 <span class="ot">&lt;-</span> <span class="fu">quality</span>(yy, <span class="fu">cv_predict</span>(Z, yy, f_random,  <span class="dv">12</span>))</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  c2 <span class="ot">&lt;-</span> <span class="fu">quality</span>(yy, <span class="fu">cv_predict</span>(Z, yy, f_by_line, <span class="dv">12</span>))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">trait =</span> t, <span class="at">validation =</span> <span class="fu">c</span>(<span class="st">"random"</span>, <span class="st">"by line"</span>), <span class="fu">rbind</span>(c1, c2)[, <span class="fu">c</span>(<span class="st">"RMSE"</span>, <span class="st">"R2"</span>, <span class="st">"RPD"</span>)])</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(leak, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">trait</th>
+<th style="text-align: left;">validation</th>
+<th style="text-align: right;">RMSE</th>
+<th style="text-align: right;">R2</th>
+<th style="text-align: right;">RPD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">phytate</td>
+<td style="text-align: left;">random</td>
+<td style="text-align: right;">2.14</td>
+<td style="text-align: right;">0.56</td>
+<td style="text-align: right;">1.51</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">phytate</td>
+<td style="text-align: left;">by line</td>
+<td style="text-align: right;">2.41</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">1.35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">iron</td>
+<td style="text-align: left;">random</td>
+<td style="text-align: right;">5.69</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">1.28</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">iron</td>
+<td style="text-align: left;">by line</td>
+<td style="text-align: right;">6.47</td>
+<td style="text-align: right;">0.26</td>
+<td style="text-align: right;">1.12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">cooking_time</td>
+<td style="text-align: left;">random</td>
+<td style="text-align: right;">4.74</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">1.09</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cooking_time</td>
+<td style="text-align: left;">by line</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">1.10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Random folds look better, but that is the leak, not a better model. Report the by-line numbers.</p>
+<p><strong>What about averaging the replicates?</strong> Using the mean spectrum and the mean value of each line is a valid choice for line-level decisions. It reduces noise and removes leakage, because each line is one point. The cost is that only 44 points remain and the error is on a different scale. Our advice is to keep all samples and validate by line, and to use line means as a second check.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Zm <span class="ot">&lt;-</span> <span class="fu">rowsum</span>(Z, line) <span class="sc">/</span> <span class="fu">as.vector</span>(<span class="fu">table</span>(line)[<span class="fu">rownames</span>(<span class="fu">rowsum</span>(Z, line))])</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>Lm <span class="ot">&lt;-</span> <span class="fu">rownames</span>(Zm); fm <span class="ot">&lt;-</span> <span class="fu">make_folds</span>(Lm, <span class="at">k =</span> <span class="dv">10</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>avg <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">c</span>(<span class="st">"phytate"</span>, <span class="st">"iron"</span>, <span class="st">"cooking_time"</span>), <span class="cf">function</span>(t) {</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  yy <span class="ot">&lt;-</span> lab[[t]]; ym <span class="ot">&lt;-</span> <span class="fu">tapply</span>(yy, line, mean)[Lm]</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  a <span class="ot">&lt;-</span> <span class="fu">quality</span>(yy, <span class="fu">cv_predict</span>(Z, yy, f_by_line, <span class="dv">12</span>))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  b <span class="ot">&lt;-</span> <span class="fu">quality</span>(ym, <span class="fu">cv_predict</span>(Zm, ym, fm, <span class="dv">12</span>))</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">trait =</span> t, <span class="at">data =</span> <span class="fu">c</span>(<span class="st">"all samples, by line"</span>, <span class="st">"line means"</span>), <span class="fu">rbind</span>(a, b)[, <span class="fu">c</span>(<span class="st">"RMSE"</span>, <span class="st">"R2"</span>, <span class="st">"RPD"</span>)])</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(avg, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">trait</th>
+<th style="text-align: left;">data</th>
+<th style="text-align: right;">RMSE</th>
+<th style="text-align: right;">R2</th>
+<th style="text-align: right;">RPD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">phytate</td>
+<td style="text-align: left;">all samples, by line</td>
+<td style="text-align: right;">2.41</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">1.35</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">phytate</td>
+<td style="text-align: left;">line means</td>
+<td style="text-align: right;">2.23</td>
+<td style="text-align: right;">0.76</td>
+<td style="text-align: right;">2.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">iron</td>
+<td style="text-align: left;">all samples, by line</td>
+<td style="text-align: right;">6.47</td>
+<td style="text-align: right;">0.26</td>
+<td style="text-align: right;">1.12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">iron</td>
+<td style="text-align: left;">line means</td>
+<td style="text-align: right;">5.69</td>
+<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">1.18</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">cooking_time</td>
+<td style="text-align: left;">all samples, by line</td>
+<td style="text-align: right;">4.72</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">1.10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cooking_time</td>
+<td style="text-align: left;">line means</td>
+<td style="text-align: right;">6.60</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">1.03</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The same idea holds for years, sites, plots or families: any group that is “the same thing” measured more than once must stay together in one fold.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRONG: samples of the same line can be in training and in test</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>folds <span class="ot">&lt;-</span> <span class="fu">make_folds</span>(line, <span class="at">by_line =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># RIGHT: all samples of a line stay together</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>folds <span class="ot">&lt;-</span> <span class="fu">make_folds</span>(line, <span class="at">by_line =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">quality</span>(y, <span class="fu">cv_predict</span>(Z, y, folds, <span class="at">ncomp =</span> <span class="dv">12</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="what-nir-predicts-well-and-what-not" class="level2" data-number="12.14">
+<h2 data-number="12.14" class="anchored" data-anchor-id="what-nir-predicts-well-and-what-not"><span class="header-section-number">12.14</span> What NIR predicts well, and what not</h2>
+<p>We use the same recipe (PCR, validation by line, number of components chosen between 1 and 25) for all 13 traits.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>type <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">water_absorption =</span> <span class="st">"Cooking / physical"</span>, <span class="at">cooking_time =</span> <span class="st">"Cooking / physical"</span>,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">iron =</span> <span class="st">"Minerals"</span>, <span class="at">zinc =</span> <span class="st">"Minerals"</span>, <span class="at">phytate =</span> <span class="st">"Organic compounds"</span>, <span class="at">phenolics =</span> <span class="st">"Organic compounds"</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">verbascose =</span> <span class="st">"Organic compounds"</span>, <span class="at">stachyose =</span> <span class="st">"Organic compounds"</span>, <span class="at">raffinose =</span> <span class="st">"Organic compounds"</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">sucrose =</span> <span class="st">"Organic compounds"</span>, <span class="at">fructose =</span> <span class="st">"Organic compounds"</span>, <span class="at">total_sugars =</span> <span class="st">"Organic compounds"</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">total_oligosaccharides =</span> <span class="st">"Organic compounds"</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(traits, <span class="cf">function</span>(t) {</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  yy  <span class="ot">&lt;-</span> lab[[t]]</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  k   <span class="ot">&lt;-</span> <span class="fu">which.min</span>(<span class="fu">cv_curve</span>(Z, yy, f_by_line, <span class="dv">25</span>)<span class="sc">$</span>RMSE)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">trait =</span> t, <span class="at">type =</span> type[[t]], <span class="at">R2 =</span> <span class="fu">r2</span>(yy, <span class="fu">cv_predict</span>(Z, yy, f_by_line, k)))</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>trait <span class="ot">&lt;-</span> <span class="fu">factor</span>(res<span class="sc">$</span>trait, <span class="at">levels =</span> res<span class="sc">$</span>trait[<span class="fu">order</span>(res<span class="sc">$</span>R2)])</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(res, <span class="fu">aes</span>(R2, trait, <span class="at">fill =</span> type)) <span class="sc">+</span> <span class="fu">geom_col</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"R² (PCR, validation by line)"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-traits" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-traits-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-ai-plant-breeding_files/figure-html/fig-traits-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-traits-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.10: R² of PCR with validation by line for 13 bean traits, coloured by type of trait.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Random cross-validation reports an error of about 0.9, while leaving a year out gives 1.6 and the real test year 1.6. The error for a new year is 75 % larger than the random split reports, because samples of the same year share conditions (the growing season, the batch, the laboratory run) that the model learns. The leave-one-year-out error is a good forecast of the real error in the next season, and this is the number to report.</p>
-</section>
-<section id="data-leakage" class="level3" data-number="12.8.2">
-<h3 data-number="12.8.2" class="anchored" data-anchor-id="data-leakage"><span class="header-section-number">12.8.2</span> Data leakage</h3>
-<p><strong>Leakage</strong> is any way in which information from the validation or test samples reaches the model before the evaluation. It always makes the error look smaller, and it is common in practice:</p>
+<p>The picture agrees with the chemistry:</p>
 <ul>
-<li>The same genotype, plant or sample (or its replicates) in training and test sets.</li>
-<li>Choosing the variables (the best wavelengths, the best markers) with <strong>all</strong> the data and then cross-validating only the model. The selection must be repeated <strong>inside each fold</strong>.</li>
-<li>Scaling or transforming variables with means computed on all the samples.</li>
-<li>Tuning the model on the test set and reporting the same test set.</li>
-<li>A variable in the predictors that is a consequence of the target (for example, a score that is derived from the trait).</li>
+<li><strong>Sucrose, total sugars and phenolics</strong> (organic molecules with many C-H and O-H bonds): the best, with R² about 0.8.</li>
+<li><strong>Phytate and the other oligosaccharides</strong>: medium. Useful for screening, not for exact values.</li>
+<li><strong>Iron and zinc</strong>: weak to moderate. NIR cannot see a metal; it sees what goes with it.</li>
+<li><strong>Cooking time and water absorption</strong>: weak. They depend on the seed coat, storage and structure.</li>
+<li><strong>Exceptions</strong>: fructose and verbascose are organic but weak. Not every organic compound works.</li>
 </ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRONG: variables are chosen with all the samples, the folds only see a "clean" problem</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>top <span class="ot">&lt;-</span> <span class="fu">order</span>(<span class="sc">-</span><span class="fu">abs</span>(<span class="fu">cor</span>(A, yA)))[<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>]</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>cv_error_wrong <span class="ot">&lt;-</span> <span class="fu">cross_validate</span>(model, A[, top], yA)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># RIGHT: inside each fold, choose the variables with the training part only</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  train <span class="ot">&lt;-</span> fold <span class="sc">!=</span> k</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  top <span class="ot">&lt;-</span> <span class="fu">order</span>(<span class="sc">-</span><span class="fu">abs</span>(<span class="fu">cor</span>(A[train, ], yA[train])))[<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>]</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">fit_model</span>(A[train, top], yA[train])</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  pred[<span class="sc">!</span>train] <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, A[<span class="sc">!</span>train, top])</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>A rule that avoids most leakage: <strong>every step that learns something from the data belongs inside the cross-validation loop</strong>.</p>
+<p>The number of components was chosen on the same validation folds, so these R² values are slightly optimistic. The model comparison above used a stricter, nested validation.</p>
+<p>Published work gives the same message. In a CIAT study of common bean (Garcia et al.&nbsp;2025), NIR predicted nitrogen well (CCC 0.84) and iron and zinc only moderately (about 0.4). A study of Croatian landraces (Vranić et al.&nbsp;2019) found good prediction of nitrogen (R² 0.89), usable models for phytic acid and phosphorus, and poor models for iron and zinc. A 2026 review of legume breeding (Ghaitaranpour et al.&nbsp;2026) also reports that visible and NIR models work best for composition and less well for appearance and texture, and that the human sensory panel remains the reference.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Study</th>
+<th>What they found</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Garcia et al.&nbsp;(2025), CIAT, common bean</td>
+<td>Nitrogen predicted well (CCC 0.84); iron and zinc only about 0.4</td>
+</tr>
+<tr class="even">
+<td>Vranić et al.&nbsp;(2019), Croatia, common bean</td>
+<td>Nitrogen good (R² 0.89); phytic acid and phosphorus usable; iron and zinc poor</td>
+</tr>
+<tr class="odd">
+<td>Our data (CIAT beans)</td>
+<td>Sugars and phenolics good; phytate medium; minerals and cooking weak</td>
+</tr>
+</tbody>
+</table>
+<p>Sensors other than NIR are used for sensory traits in legumes (taste, texture and appearance are slow to score with human panels):</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Sensor</th>
+<th>Used for</th>
+<th>Message from the review</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>NIR and Vis-NIR (with PLS)</td>
+<td>Composition, some sensory scores</td>
+<td>Works best for composition; weaker for appearance and texture</td>
+</tr>
+<tr class="even">
+<td>Colour images (RGB)</td>
+<td>Seed colour, canning colour</td>
+<td>Good for external traits only</td>
+</tr>
+<tr class="odd">
+<td>Hyperspectral imaging</td>
+<td>Flour quality, seed quality</td>
+<td>Costly, needs large data</td>
+</tr>
+<tr class="even">
+<td>Electronic nose and tongue</td>
+<td>Aroma, off-flavour</td>
+<td>Still limited for large breeding populations</td>
+</tr>
+</tbody>
+</table>
 </section>
+<section id="other-uses-and-other-validation-units" class="level2" data-number="12.15">
+<h2 data-number="12.15" class="anchored" data-anchor-id="other-uses-and-other-validation-units"><span class="header-section-number">12.15</span> Other uses and other validation units</h2>
+<p>The same workflow (cheap data, a model, honest validation) is used in many places in breeding.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data</th>
+<th>Prediction</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spectra (NIR)</td>
+<td>Composition of seed or flour</td>
+<td>What we did in this chapter</td>
+</tr>
+<tr class="even">
+<td>Image features</td>
+<td>Plant traits, disease severity</td>
+<td>Features first, then a model</td>
+</tr>
+<tr class="odd">
+<td>Multi-environment trials</td>
+<td>Yield and G×E in new environments</td>
+<td>Use environment covariates (weather, soil)</td>
+</tr>
+<tr class="even">
+<td>Markers</td>
+<td>Breeding values (genomic selection)</td>
+<td>Very many variables, few lines: penalised models are common</td>
+</tr>
+</tbody>
+</table>
+<p>Some examples reported by Yoosefzadeh Najafabadi et al.&nbsp;(2023) and Yoosefzadeh-Najafabadi et al.&nbsp;(2025), as reported for the original studies:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Crop and data</th>
+<th>What was predicted</th>
+<th>Result reported</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Soybean, hyperspectral reflectance</td>
+<td>Seed yield</td>
+<td>Random forest best, 84%</td>
+</tr>
+<tr class="even">
+<td>Potato, light at chosen wavelengths</td>
+<td>Virus infection</td>
+<td>SVM, 89.8% accuracy</td>
+</tr>
+<tr class="odd">
+<td>Wheat, drone sensors (multi-sensor)</td>
+<td>Grain yield, early stage</td>
+<td>Ensemble, R² up to 0.69</td>
+</tr>
+<tr class="even">
+<td>Soybean, drone image time series</td>
+<td>Relative maturity</td>
+<td>CNN-LSTM beat local regression</td>
+</tr>
+<tr class="odd">
+<td>Wheat, markers (multi-trait models)</td>
+<td>End-use quality traits</td>
+<td>+5.5% to +7.9%; flour protein up to +35%</td>
+</tr>
+</tbody>
+</table>
+<p>Flexible models can beat simple ones when the data are large; with small data, simple models are often as good. No best algorithm exists for every case. Start simple, and use a complex model only if it clearly predicts better on new data. Machine learning helps with non-linear links, many variables, several traits at once and environmental data for G×E. It does not win by default in genomic prediction, with small data sets, or when the data are biased. In genomic prediction, machine learning has not consistently beaten classical models such as GBLUP (Yoosefzadeh-Najafabadi et al.&nbsp;2025), and reviews list large data needs, hard interpretation and biased data as limits (Yoosefzadeh Najafabadi et al.&nbsp;2023).</p>
+<p>Data leakage by line is one case of a general rule: <strong>leave out the whole unit you want to predict</strong>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>You want to predict</th>
+<th>Leave out together</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A new line</td>
+<td>All samples of that line</td>
+</tr>
+<tr class="even">
+<td>A new environment</td>
+<td>All plots of that environment</td>
+</tr>
+<tr class="odd">
+<td>A new season</td>
+<td>All data of that year</td>
+</tr>
+<tr class="even">
+<td>A new line in a new environment</td>
+<td>Both (hardest case)</td>
+</tr>
+</tbody>
+</table>
+<p>The function <code>make_folds()</code> takes any grouping variable, for example <code>make_folds(environment, by_line = TRUE)</code>. The more different the new situation is from the training data, the larger the error. Test in the situation where you will use the model.</p>
 </section>
-<section id="when-the-next-season-is-different" class="level2" data-number="12.9">
-<h2 data-number="12.9" class="anchored" data-anchor-id="when-the-next-season-is-different"><span class="header-section-number">12.9</span> When the next season is different</h2>
-<p>The model has an error of about 1.5 units in the test year, mostly because of the bias: the population moved. The practical solution is not a more complex model but a <strong>model that is updated</strong>: add to the calibration a few samples of the new population (with their laboratory value) and refit.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>i_test <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="sc">!</span>is_cal); i_cal <span class="ot">&lt;-</span> <span class="fu">which</span>(is_cal)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>upd <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">40</span>), <span class="cf">function</span>(n) {</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  r <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="cf">function</span>(s) {</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(s)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    add <span class="ot">&lt;-</span> <span class="cf">if</span> (n <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">sample</span>(i_test, n) <span class="cf">else</span> <span class="fu">integer</span>(<span class="dv">0</span>)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    trn <span class="ot">&lt;-</span> <span class="fu">c</span>(i_cal, add); tst <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(i_test, add)</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">fit_predict</span>(<span class="st">"ENet"</span>, Z[trn, ], y[trn], Z[tst, ])</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="fu">rmse</span>(y[tst], p), <span class="fu">mean</span>(p <span class="sc">-</span> y[tst]))</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">added =</span> n, <span class="at">RMSE =</span> <span class="fu">mean</span>(r[<span class="dv">1</span>, ]), <span class="at">bias =</span> <span class="fu">mean</span>(r[<span class="dv">2</span>, ]))</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>}))</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(upd, <span class="fu">aes</span>(added, RMSE)) <span class="sc">+</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">colour =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">40</span>)) <span class="sc">+</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Samples of 2013 added to the calibration"</span>, <span class="at">y =</span> <span class="st">"RMSE on the rest of 2013"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-update" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-update-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="11-ai-plant-breeding_files/figure-html/fig-update-1.png" class="img-fluid figure-img" width="576">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-update-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.7: Error in the test year when 0, 10, 20 or 40 samples of 2013 are added to the calibration (elastic net). Each point is the mean of 12 random choices of the added samples; the error is computed on the 2013 samples that were not added.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>With no new sample the error is 1.52; adding only 20 laboratory measurements of the new year lowers it to 1.14, and the bias goes from -1.09 to -0.62. In a breeding programme this is routine work: <strong>a calibration is a living tool, checked each season with a few reference samples and updated when it drifts</strong>.</p>
-</section>
-<section id="other-uses-in-a-breeding-programme" class="level2" data-number="12.10">
-<h2 data-number="12.10" class="anchored" data-anchor-id="other-uses-in-a-breeding-programme"><span class="header-section-number">12.10</span> Other uses in a breeding programme</h2>
-<p>The same workflow (predictors, calibration set, models tuned by cross-validation, an honest test) applies to the other cases of the agenda.</p>
+<section id="limits-of-prediction-models" class="level2" data-number="12.16">
+<h2 data-number="12.16" class="anchored" data-anchor-id="limits-of-prediction-models"><span class="header-section-number">12.16</span> Limits of prediction models</h2>
 <ul>
-<li><strong>Image features</strong> (<a href="09b-image-analysis.html" class="quarto-xref"><span>Chapter 10</span></a>): the area, colour indices and shape of the objects in a photograph are the predictors, and a laboratory or visual score is the target. The question to ask is the same one: how well does the model predict a <strong>new</strong> plant, in a <strong>new</strong> season?</li>
-<li><strong>Markers</strong> (genomic prediction): thousands of markers against a few hundred lines. Ridge regression is the model behind GBLUP, and the elastic net and random forest are alternatives. The validation by genotype and by environment decides if the prediction will help.</li>
-<li><strong>G×E prediction</strong> (<a href="10-met-gxe.html" class="quarto-xref"><span>Chapter 11</span></a>): to predict a line in a <strong>new</strong> environment, the model needs a description of the environment (soil, weather, management). Without covariates, the best prediction for a new environment is the mean of the line, as in <a href="10-met-gxe.html" class="quarto-xref"><span>Chapter 11</span></a>.</li>
-<li><strong>Early generations of mutant populations</strong>: predictions from images or spectra of thousands of M2 plants, followed by a laboratory or field check of the best ones. The prediction model is built on a <strong>subset that is measured by both ways</strong>, and checked by generation.</li>
+<li><p><strong>Interpretability</strong>: trees, boosting and SVM are harder to explain than PCR or the lasso. Check that a model uses sensible wavelengths.</p></li>
+<li><p><strong>Transfer across crops</strong>: a bean model does not work for chickpea or wheat. Build and test a new one for each crop.</p></li>
+<li><p><strong>Small data</strong>: 117 samples from 44 lines give noisy estimates of R².</p></li>
+<li><p><strong>Another instrument, season or sample form</strong> (whole seed against flour): the model may not transfer. Check it and re-calibrate.</p></li>
+<li><p>A model is valid only inside the <strong>range</strong> of the data used to build it.</p></li>
+<li><p>The laboratory value is the reference: a noisy laboratory method limits the model.</p></li>
+<li><p>A calibration is <strong>living</strong>: add new samples each season and check the error again.</p></li>
 </ul>
 </section>
-<section id="limitations" class="level2" data-number="12.11">
-<h2 data-number="12.11" class="anchored" data-anchor-id="limitations"><span class="header-section-number">12.11</span> Limitations</h2>
-<ul>
-<li><strong>Small data sets.</strong> With a few hundred samples, the error estimate itself is uncertain, and a complex model can look good by luck. Report the validation error with how many samples it comes from, and prefer simple models when the sample is small.</li>
-<li><strong>Overfitting.</strong> The more flexible the model, the more the calibration error understates the real error. This is why the test set is used once.</li>
-<li><strong>Interpretability.</strong> A random forest or boosting model does not give effects that can be explained to a farmer or a regulator. Ask if the decision needs an explanation.</li>
-<li><strong>Transfer.</strong> A model works inside the range and conditions where it was built: other crop, other season, other instrument, other laboratory. Verify before use and monitor after.</li>
-<li><strong>Label quality.</strong> The model learns from the reference measurements. If the laboratory values are noisy or biased, the best possible prediction is limited by them.</li>
-<li><strong>Garbage in, garbage out.</strong> Spectra from different instruments, images with different light, or sensors without calibration produce models that do not transfer.</li>
-</ul>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Breeder knowledge remains essential
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>ML does not know the biology. The breeder knows if a prediction makes sense for the crop, which samples are unusual, when a population has changed and which errors matter. The best systems use ML for the volume (thousands of samples) and the breeder for the <strong>decision</strong>: a plant predicted as promising still has to be confirmed before it is advanced.</p>
-</div>
-</div>
+<section id="practical-2-beans-and-pcr" class="level2" data-number="12.17">
+<h2 data-number="12.17" class="anchored" data-anchor-id="practical-2-beans-and-pcr"><span class="header-section-number">12.17</span> Practical 2, beans and PCR</h2>
+<p>Use the bean ZIP file at the top of this chapter. You will follow the same workflow with short code and functions: look at the spectra, prepare them, fit PCR, validate with random folds and with folds by line, choose the number of components, compare a chemical trait (total sugars, phytate) with a physical one (cooking time, iron), and write a conclusion for a breeder.</p>
 </section>
-<section id="exercise" class="level2" data-number="12.12">
-<h2 data-number="12.12" class="anchored" data-anchor-id="exercise"><span class="header-section-number">12.12</span> Exercise</h2>
-<p>Use the cassava NIR data of this chapter.</p>
-<ol type="1">
-<li>Use only the samples of 2009, 2010 and 2011 as calibration, and the samples of 2012 as validation (a “next season” that is different from the one used above).</li>
-<li>Fit PLS and the elastic net, and compute RMSE and bias on the 2012 samples.</li>
-<li>Compare the RMSE with the one from random 10-fold cross-validation inside 2009 to 2011. Which one would you report as the expected error for next season?</li>
-</ol>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>i_a <span class="ot">&lt;-</span> is_cal <span class="sc">&amp;</span> nir<span class="sc">$</span>year <span class="sc">&lt;=</span> <span class="dv">2011</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>i_b <span class="ot">&lt;-</span> is_cal <span class="sc">&amp;</span> nir<span class="sc">$</span>year <span class="sc">==</span> <span class="dv">2012</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">5</span>)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>folds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">length.out =</span> <span class="fu">sum</span>(i_a)))</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>one_model <span class="ot">&lt;-</span> <span class="cf">function</span>(m) {</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  p_next <span class="ot">&lt;-</span> <span class="fu">fit_predict</span>(m, Z[i_a, ], y[i_a], Z[i_b, ])</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  p_cv <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">sum</span>(i_a))</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    j <span class="ot">&lt;-</span> folds <span class="sc">==</span> k</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    p_cv[j] <span class="ot">&lt;-</span> <span class="fu">fit_predict</span>(m, Z[i_a, ][<span class="sc">!</span>j, ], y[i_a][<span class="sc">!</span>j], Z[i_a, ][j, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">RMSE_random_cv =</span> <span class="fu">rmse</span>(y[i_a], p_cv), <span class="at">RMSE_2012 =</span> <span class="fu">rmse</span>(y[i_b], p_next), <span class="at">bias_2012 =</span> <span class="fu">mean</span>(p_next <span class="sc">-</span> y[i_b]))</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>sol <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">"PLS"</span>, <span class="st">"ENet"</span>), one_model))</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(sol, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     RMSE_random_cv RMSE_2012 bias_2012
-PLS            0.97      2.18     -1.89
-ENet           0.86      2.34     -2.03</code></pre>
-</div>
-</div>
-<p>The error in 2012 (2.18 for PLS and 2.34 for the elastic net) is larger than the random cross-validation error (0.97 and 0.86). The number to report is the 2012 error, because the question is “how well will this model predict next year?”, and only a split by year imitates that question.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="key-takeaways" class="level2" data-number="12.13">
-<h2 data-number="12.13" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">12.13</span> Key takeaways</h2>
+<section id="key-takeaways" class="level2" data-number="12.18">
+<h2 data-number="12.18" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">12.18</span> Key takeaways</h2>
 <ul>
-<li>ML is for <strong>prediction</strong>: it turns cheap measurements (spectra, images, sensors, markers) into estimates of expensive ones. It does not replace the experimental design or the mixed model.</li>
-<li>Compare every model with a <strong>baseline</strong> and with a classical model. There is no best model in general: here penalized regression and the SVM were at the top, and the random forest could not follow values beyond its training range.</li>
-<li>The honest error comes from data that the model never saw, split the way the model will be used: by year, by genotype or by location. The error for a new year was about 75 % larger than random cross-validation reported.</li>
-<li>Avoid <strong>leakage</strong>: every step that learns from the data (variable selection, scaling, tuning) belongs inside the validation loop.</li>
-<li>A calibration <strong>drifts</strong> when the population evolves. Check it each season with a few reference samples and update it: 20 new samples reduced the error from 1.52 to 1.14.</li>
-<li>The breeder decides. A prediction ranks and prioritizes, and the promising lines are confirmed before they are advanced.</li>
+<li><strong>Train, validation and test</strong> have different jobs. The test set gives the final grade and is used once. With small data, cross-validation replaces the validation set.</li>
+<li>ML is for <strong>prediction</strong>: it turns a cheap measurement into an estimate of an expensive one. It does not replace the experimental design or the mixed model.</li>
+<li>NIR measures <strong>bonds</strong> (O-H, N-H, C-H). It is very good for <strong>chemical</strong> traits and weak for minerals and physical or cooking traits.</li>
+<li>Prepare the spectra (SNV, first derivative) and start with a <strong>simple model</strong>: PCR or PLS.</li>
+<li>Report <strong>RMSE, R², bias and RPD</strong>, and always compare with “always the mean”.</li>
+<li>Avoid <strong>leakage</strong>: keep all samples of one line in the same fold. Random folds look too good.</li>
+<li>Use prediction to <strong>screen</strong>, and confirm the promising lines in the laboratory.</li>
 </ul>
 </section>
-<section id="sec-ai-breeding-refs" class="level2" data-number="12.14">
-<h2 data-number="12.14" class="anchored" data-anchor-id="sec-ai-breeding-refs"><span class="header-section-number">12.14</span> References</h2>
+<section id="sec-ai-breeding-refs" class="level2" data-number="12.19">
+<h2 data-number="12.19" class="anchored" data-anchor-id="sec-ai-breeding-refs"><span class="header-section-number">12.19</span> References</h2>
 <ul>
-<li>Barnes, R. J., Dhanoa, M. S. and Lister, S. J. (1989). Standard normal variate transformation and de-trending of near-infrared diffuse reflectance spectra. <em>Applied Spectroscopy</em> 43: 772-777.</li>
-<li>Breiman, L. (2001). Random forests. <em>Machine Learning</em> 45: 5-32.</li>
-<li>Cortes, C. and Vapnik, V. (1995). Support-vector networks. <em>Machine Learning</em> 20: 273-297.</li>
-<li>Davrieux, F., Dufour, D., Dardenne, P., Belalcazar, J., Pizarro, M., Luna, J., Londono, L., Jaramillo, A., Sanchez, T., Morante, N., Calle, F., Becerra Lopez-Lavalle, L., Ceballos, H. (2016). LOCAL regression algorithm improves near infrared spectroscopy predictions when the target constituent evolves in breeding populations. <em>Journal of Near Infrared Spectroscopy</em> 24: 109. The data are distributed with the <code>rchemo</code> package (GPL-3), from the CIAT cassava programme.</li>
-<li>Friedman, J. H. (2001). Greedy function approximation: a gradient boosting machine. <em>The Annals of Statistics</em> 29: 1189-1232.</li>
-<li>Hastie, T., Tibshirani, R. and Friedman, J. (2009). <em>The Elements of Statistical Learning</em>, 2nd edition. Springer.</li>
-<li>Montesinos López, O. A., Montesinos López, A. and Crossa, J. (2022). <em>Multivariate Statistical Machine Learning Methods for Genomic Prediction</em>. Springer.</li>
-<li>Tibshirani, R. (1996). Regression shrinkage and selection via the lasso. <em>Journal of the Royal Statistical Society B</em> 58: 267-288.</li>
-<li>Wold, S., Sjöström, M. and Eriksson, L. (2001). PLS-regression: a basic tool of chemometrics. <em>Chemometrics and Intelligent Laboratory Systems</em> 58: 109-130.</li>
-<li>Zou, H. and Hastie, T. (2005). Regularization and variable selection via the elastic net. <em>Journal of the Royal Statistical Society B</em> 67: 301-320.</li>
+<li>Garcia, T., Carvajal-Yepes, M., Drewry, D. T., Santos, L. G., Duitama, J., Wenzl, P. and Chacón-Sánchez, M. I. (2025). Non-destructive prediction of nitrogen, iron and zinc content in diverse common bean seeds from a genebank using near-infrared spectroscopy. <em>Food Chemistry: Molecular Sciences</em> 11: 100316. DOI: 10.1016/j.fochms.2025.100316.</li>
+<li>Ghaitaranpour, A., Kebede, B., Duizer, L. M. and Yoosefzadeh-Najafabadi, M. (2026). AI-assisted nondestructive phenotyping of sensory-related traits in modern legume breeding. <em>Smart Agricultural Technology</em> 15: 102668. DOI: 10.1016/j.atech.2026.102668.</li>
+<li>Goddu, R. F. and Delker, D. A. (1960). Spectra-structure correlations for the near-infrared. <em>Analytical Chemistry</em> 32: 140-141. Data compiled by S. D. J. Brown, GitHub <code>sdjbrown/NIR-spectra-structure</code>.</li>
+<li>Vranić, M., Petek, M., Bošnjak, K., Lazarević, B. and Carović-Stanko, K. (2019). Prediction of macro and microelements content in Croatian common bean landraces (<em>Phaseolus vulgaris</em> L.) by NIR spectroscopy. <em>Poljoprivreda</em> 25(1): 48-55. DOI: 10.18047/poljo.25.1.7.</li>
+<li>Yoosefzadeh Najafabadi, M., Hesami, M. and Eskandari, M. (2023). Machine learning-assisted approaches in modernized plant breeding programs. <em>Genes</em> 14(4): 777. DOI: 10.3390/genes14040777.</li>
+<li>Yoosefzadeh-Najafabadi, M., Xavier, A., Eskandari, M. and Hesami, M. (2025). Machine learning after a decade: is it still a missing keystone in genomic-based plant breeding? <em>Artificial Intelligence Review</em> 58: 260. DOI: 10.1007/s10462-025-11274-y.</li>
+<li>Wadoux, A. M. J.-C., Minasny, B. and McBratney, A. B. (2021). <em>Soil Spectral Inference with R</em>. Springer. Chapter 9.</li>
+<li>MLU-Explain (Machine Learning University). Interactive articles on cross-validation, bias and variance, decision trees and random forests. <a href="https://mlu-explain.github.io/">mlu-explain.github.io</a></li>
+<li>DeHaat. AI and ML in agriculture (blog). dehaat.in/en/blog/ai-and-ml-in-agriculture</li>
+<li>GeoPard. Applications of machine learning for precision agriculture (blog). geopard.tech/blog/applications-of-machine-learning-for-precision-agriculture/</li>
+<li>Bean NIR data: CIAT (PhD work of L. F. Londoño), shared for training.</li>
 </ul>
 
 
@@ -1495,8 +2090,8 @@ ENet           0.86      2.34     -2.03</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part2-week2/12-analysis-pipeline.html" class="pagination-link" aria-label="An End-to-End Analysis Pipeline">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">An End-to-End Analysis Pipeline</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part2-week2/12-analysis-pipeline.html" class="pagination-link" aria-label="Data Analysis Pipeline in Plant Breeding">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Analysis Pipeline in Plant Breeding</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
