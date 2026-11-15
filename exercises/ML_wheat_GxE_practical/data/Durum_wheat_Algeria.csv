@@ -1,0 +1,2113 @@
+Year,Location,Environment,region,Block,Genotype,GenoGroup,yield
+year1,loc01,loc01_year1,B,Bl1,ARDENTE,A ,3.502000093
+year1,loc01,loc01_year1,B,Bl1,BIDI17,B,2.490999937
+year1,loc01,loc01_year1,B,Bl1,MBBACHIR,B,2.519000053
+year1,loc01,loc01_year1,B,Bl1,HEBD/GDO,A ,3.65199995
+year1,loc01,loc01_year1,B,Bl1,HEBDA03,B,2.470000029
+year1,loc01,loc01_year1,B,Bl1,BID/WAHA,A ,3.210000038
+year1,loc01,loc01_year1,B,Bl1,SIMETO,A ,2.480999947
+year1,loc01,loc01_year1,B,Bl1,GTADUR,A ,3.680000067
+year1,loc01,loc01_year1,B,Bl1,POLONICU,B,2.585999966
+year1,loc01,loc01_year1,B,Bl1,B.DUR194,B,3.664000034
+year1,loc01,loc01_year1,B,Bl1,DUILIO,A ,3.532999992
+year1,loc01,loc01_year1,B,Bl1,EIDER,A ,4.710000038
+year1,loc01,loc01_year1,B,Bl1,POLON/ZB,B,3.51699996
+year1,loc01,loc01_year1,B,Bl1,VITRON,A ,3.96600008
+year1,loc01,loc01_year1,B,Bl1,SAHEL77,A ,4.222000122
+year1,loc01,loc01_year1,B,Bl1,OUMRABI9,A ,3.525000095
+year1,loc01,loc01_year1,B,Bl1,KEBIR,A ,3.071000099
+year1,loc01,loc01_year1,B,Bl1,OFANTO,A ,3.50999999
+year1,loc01,loc01_year1,B,Bl1,INRAT69,A ,3.355999947
+year1,loc01,loc01_year1,B,Bl1,WAHA,A ,3.51699996
+year1,loc01,loc01_year1,B,Bl1,O.ZENADI,B,2.480999947
+year1,loc01,loc01_year1,B,Bl1,MEXICALI,A ,3.648000002
+year1,loc01,loc01_year1,B,Bl1,BELIKH02,A ,3.957000017
+year1,loc01,loc01_year1,B,Bl1,CHENS,A ,3.819000006
+year1,loc01,loc01_year1,B,Bl2,SAHEL77,A ,3.640000105
+year1,loc01,loc01_year1,B,Bl2,OFANTO,A ,2.631999969
+year1,loc01,loc01_year1,B,Bl2,ARDENTE,A ,3.79399991
+year1,loc01,loc01_year1,B,Bl2,HEBDA03,B,1.889000058
+year1,loc01,loc01_year1,B,Bl2,KEBIR,A ,2.339999914
+year1,loc01,loc01_year1,B,Bl2,WAHA,A ,4.103000164
+year1,loc01,loc01_year1,B,Bl2,POLON/ZB,B,2.345000029
+year1,loc01,loc01_year1,B,Bl2,BIDI17,B,2.490999937
+year1,loc01,loc01_year1,B,Bl2,DUILIO,A ,3.532999992
+year1,loc01,loc01_year1,B,Bl2,MEXICALI,A ,2.480999947
+year1,loc01,loc01_year1,B,Bl2,OUMRABI9,A ,4.699999809
+year1,loc01,loc01_year1,B,Bl2,B.DUR194,B,4.396999836
+year1,loc01,loc01_year1,B,Bl2,GTADUR,A ,4.269000053
+year1,loc01,loc01_year1,B,Bl2,BID/WAHA,A ,3.648000002
+year1,loc01,loc01_year1,B,Bl2,MBBACHIR,B,2.667000055
+year1,loc01,loc01_year1,B,Bl2,INRAT69,A ,3.502000093
+year1,loc01,loc01_year1,B,Bl2,SIMETO,A ,3.063999891
+year1,loc01,loc01_year1,B,Bl2,EIDER,A ,3.38499999
+year1,loc01,loc01_year1,B,Bl2,HEBD/GDO,A ,3.068000078
+year1,loc01,loc01_year1,B,Bl2,VITRON,A ,3.084000111
+year1,loc01,loc01_year1,B,Bl2,CHENS,A ,3.525000095
+year1,loc01,loc01_year1,B,Bl2,BELIKH02,A ,2.930999994
+year1,loc01,loc01_year1,B,Bl2,O.ZENADI,B,1.896999955
+year1,loc01,loc01_year1,B,Bl2,POLONICU,B,1.723999977
+year1,loc01,loc01_year1,B,Bl3,INRAT69,A ,2.772000074
+year1,loc01,loc01_year1,B,Bl3,O.ZENADI,B,2.625999928
+year1,loc01,loc01_year1,B,Bl3,WAHA,A ,3.223999977
+year1,loc01,loc01_year1,B,Bl3,MBBACHIR,B,2.963000059
+year1,loc01,loc01_year1,B,Bl3,HEBD/GDO,A ,3.359999895
+year1,loc01,loc01_year1,B,Bl3,CHENS,A ,4.111999989
+year1,loc01,loc01_year1,B,Bl3,DUILIO,A ,2.944000006
+year1,loc01,loc01_year1,B,Bl3,HEBDA03,B,1.889000058
+year1,loc01,loc01_year1,B,Bl3,BID/WAHA,A ,3.79399991
+year1,loc01,loc01_year1,B,Bl3,MEXICALI,A ,3.210000038
+year1,loc01,loc01_year1,B,Bl3,ARDENTE,A ,4.815000057
+year1,loc01,loc01_year1,B,Bl3,EIDER,A ,3.09100008
+year1,loc01,loc01_year1,B,Bl3,POLONICU,B,3.01699996
+year1,loc01,loc01_year1,B,Bl3,KEBIR,A ,3.362999916
+year1,loc01,loc01_year1,B,Bl3,VITRON,A ,3.230999947
+year1,loc01,loc01_year1,B,Bl3,OFANTO,A ,3.655999899
+year1,loc01,loc01_year1,B,Bl3,OUMRABI9,A ,3.671999931
+year1,loc01,loc01_year1,B,Bl3,POLON/ZB,B,2.345000029
+year1,loc01,loc01_year1,B,Bl3,GTADUR,A ,3.826999903
+year1,loc01,loc01_year1,B,Bl3,BIDI17,B,2.930999994
+year1,loc01,loc01_year1,B,Bl3,BELIKH02,A ,3.223999977
+year1,loc01,loc01_year1,B,Bl3,SIMETO,A ,3.210000038
+year1,loc01,loc01_year1,B,Bl3,B.DUR194,B,3.809999943
+year1,loc01,loc01_year1,B,Bl3,SAHEL77,A ,3.348999977
+year1,loc01,loc01_year1,B,Bl4,POLON/ZB,B,2.638000011
+year1,loc01,loc01_year1,B,Bl4,BELIKH02,A ,4.690000057
+year1,loc01,loc01_year1,B,Bl4,SAHEL77,A ,3.493999958
+year1,loc01,loc01_year1,B,Bl4,CHENS,A ,3.525000095
+year1,loc01,loc01_year1,B,Bl4,OFANTO,A ,3.802000046
+year1,loc01,loc01_year1,B,Bl4,OUMRABI9,A ,2.937000036
+year1,loc01,loc01_year1,B,Bl4,BIDI17,B,2.197999954
+year1,loc01,loc01_year1,B,Bl4,HEBD/GDO,A ,3.068000078
+year1,loc01,loc01_year1,B,Bl4,MBBACHIR,B,2.519000053
+year1,loc01,loc01_year1,B,Bl4,WAHA,A ,3.371000051
+year1,loc01,loc01_year1,B,Bl4,DUILIO,A ,3.38499999
+year1,loc01,loc01_year1,B,Bl4,HEBDA03,B,2.75999999
+year1,loc01,loc01_year1,B,Bl4,EIDER,A ,3.237999916
+year1,loc01,loc01_year1,B,Bl4,MEXICALI,A ,2.917999983
+year1,loc01,loc01_year1,B,Bl4,O.ZENADI,B,2.772000074
+year1,loc01,loc01_year1,B,Bl4,INRAT69,A ,2.625999928
+year1,loc01,loc01_year1,B,Bl4,ARDENTE,A ,2.917999983
+year1,loc01,loc01_year1,B,Bl4,POLONICU,B,2.299000025
+year1,loc01,loc01_year1,B,Bl4,BID/WAHA,A ,3.210000038
+year1,loc01,loc01_year1,B,Bl4,B.DUR194,B,3.078000069
+year1,loc01,loc01_year1,B,Bl4,SIMETO,A ,3.355999947
+year1,loc01,loc01_year1,B,Bl4,KEBIR,A ,3.217000008
+year1,loc01,loc01_year1,B,Bl4,VITRON,A ,3.525000095
+year1,loc01,loc01_year1,B,Bl4,GTADUR,A ,4.710000038
+year1,loc02,loc02_year1,A,Bl1,KEBIR,A ,1.348999977
+year1,loc02,loc02_year1,A,Bl1,CHENS,A ,1.411999941
+year1,loc02,loc02_year1,A,Bl1,HEBD/GDO,A ,0.89200002
+year1,loc02,loc02_year1,A,Bl1,INRAT69,A ,0.666000009
+year1,loc02,loc02_year1,A,Bl1,MEXICALI,A ,0.741999984
+year1,loc02,loc02_year1,A,Bl1,POLON/ZB,B,0.967999995
+year1,loc02,loc02_year1,A,Bl1,BID/WAHA,A ,0.819000006
+year1,loc02,loc02_year1,A,Bl1,VITRON,A ,0.741999984
+year1,loc02,loc02_year1,A,Bl1,WAHA,A ,1.56400001
+year1,loc02,loc02_year1,A,Bl1,GTADUR,A ,1.197999954
+year1,loc02,loc02_year1,A,Bl1,OUMRABI9,A ,0.893999994
+year1,loc02,loc02_year1,A,Bl1,SAHEL77,A ,1.485999942
+year1,loc02,loc02_year1,A,Bl1,EIDER,A ,1.350999951
+year1,loc02,loc02_year1,A,Bl1,POLONICU,B,0.893999994
+year1,loc02,loc02_year1,A,Bl1,ARDENTE,A ,1.195000052
+year1,loc02,loc02_year1,A,Bl1,B.DUR194,B,1.345999956
+year1,loc02,loc02_year1,A,Bl1,BIDI17,B,1.488999963
+year1,loc02,loc02_year1,A,Bl1,SIMETO,A ,1.56400001
+year1,loc02,loc02_year1,A,Bl1,OFANTO,A ,2.392999887
+year1,loc02,loc02_year1,A,Bl1,HEBDA03,B,0.745000005
+year1,loc02,loc02_year1,A,Bl1,O.ZENADI,B,1.192000031
+year1,loc02,loc02_year1,A,Bl1,DUILIO,A ,1.042999983
+year1,loc02,loc02_year1,A,Bl1,BELIKH02,A ,1.118999958
+year1,loc02,loc02_year1,A,Bl1,MBBACHIR,B,1.493999958
+year1,loc02,loc02_year1,A,Bl2,MBBACHIR,B,1.868000031
+year1,loc02,loc02_year1,A,Bl2,POLONICU,B,1.192000031
+year1,loc02,loc02_year1,A,Bl2,O.ZENADI,B,1.414999962
+year1,loc02,loc02_year1,A,Bl2,VITRON,A ,1.633000016
+year1,loc02,loc02_year1,A,Bl2,SIMETO,A ,2.010999918
+year1,loc02,loc02_year1,A,Bl2,EIDER,A ,1.876000047
+year1,loc02,loc02_year1,A,Bl2,HEBD/GDO,A ,1.411999941
+year1,loc02,loc02_year1,A,Bl2,CHENS,A ,1.485999942
+year1,loc02,loc02_year1,A,Bl2,ARDENTE,A ,1.269999981
+year1,loc02,loc02_year1,A,Bl2,INRAT69,A ,1.258000016
+year1,loc02,loc02_year1,A,Bl2,GTADUR,A ,1.047999978
+year1,loc02,loc02_year1,A,Bl2,OUMRABI9,A ,0.819000006
+year1,loc02,loc02_year1,A,Bl2,MEXICALI,A ,0.666999996
+year1,loc02,loc02_year1,A,Bl2,DUILIO,A ,1.116999984
+year1,loc02,loc02_year1,A,Bl2,KEBIR,A ,1.498999953
+year1,loc02,loc02_year1,A,Bl2,BIDI17,B,1.861999989
+year1,loc02,loc02_year1,A,Bl2,POLON/ZB,B,2.233999968
+year1,loc02,loc02_year1,A,Bl2,BELIKH02,A ,2.911000013
+year1,loc02,loc02_year1,A,Bl2,OFANTO,A ,2.693000078
+year1,loc02,loc02_year1,A,Bl2,SAHEL77,A ,2.08100009
+year1,loc02,loc02_year1,A,Bl2,B.DUR194,B,1.644999981
+year1,loc02,loc02_year1,A,Bl2,HEBDA03,B,1.786999941
+year1,loc02,loc02_year1,A,Bl2,BID/WAHA,A ,1.713000059
+year1,loc02,loc02_year1,A,Bl2,WAHA,A ,2.085000038
+year1,loc02,loc02_year1,A,Bl3,DUILIO,A ,2.979000092
+year1,loc02,loc02_year1,A,Bl3,OFANTO,A ,3.74000001
+year1,loc02,loc02_year1,A,Bl3,SIMETO,A ,3.27699995
+year1,loc02,loc02_year1,A,Bl3,KEBIR,A ,3.447999954
+year1,loc02,loc02_year1,A,Bl3,VITRON,A ,3.266000032
+year1,loc02,loc02_year1,A,Bl3,WAHA,A ,3.27699995
+year1,loc02,loc02_year1,A,Bl3,BID/WAHA,A ,3.872999907
+year1,loc02,loc02_year1,A,Bl3,INRAT69,A ,2.812000036
+year1,loc02,loc02_year1,A,Bl3,OUMRABI9,A ,3.723999977
+year1,loc02,loc02_year1,A,Bl3,B.DUR194,B,3.290999889
+year1,loc02,loc02_year1,A,Bl3,CHENS,A ,4.162000179
+year1,loc02,loc02_year1,A,Bl3,BIDI17,B,2.979000092
+year1,loc02,loc02_year1,A,Bl3,EIDER,A ,3.151000023
+year1,loc02,loc02_year1,A,Bl3,POLON/ZB,B,2.382999897
+year1,loc02,loc02_year1,A,Bl3,HEBDA03,B,1.93599999
+year1,loc02,loc02_year1,A,Bl3,O.ZENADI,B,2.680999994
+year1,loc02,loc02_year1,A,Bl3,MBBACHIR,B,2.989000082
+year1,loc02,loc02_year1,A,Bl3,POLONICU,B,3.128000021
+year1,loc02,loc02_year1,A,Bl3,BELIKH02,A ,3.28399992
+year1,loc02,loc02_year1,A,Bl3,ARDENTE,A ,4.931000233
+year1,loc02,loc02_year1,A,Bl3,HEBD/GDO,A ,3.417999983
+year1,loc02,loc02_year1,A,Bl3,GTADUR,A ,3.892999887
+year1,loc02,loc02_year1,A,Bl3,MEXICALI,A ,3.263000011
+year1,loc02,loc02_year1,A,Bl3,SAHEL77,A ,3.417999983
+year1,loc02,loc02_year1,A,Bl4,INRAT69,A ,2.664000034
+year1,loc02,loc02_year1,A,Bl4,POLON/ZB,B,2.680999994
+year1,loc02,loc02_year1,A,Bl4,O.ZENADI,B,2.829999924
+year1,loc02,loc02_year1,A,Bl4,EIDER,A ,3.301000118
+year1,loc02,loc02_year1,A,Bl4,CHENS,A ,3.566999912
+year1,loc02,loc02_year1,A,Bl4,ARDENTE,A ,2.989000082
+year1,loc02,loc02_year1,A,Bl4,B.DUR194,B,3.141000032
+year1,loc02,loc02_year1,A,Bl4,OFANTO,A ,3.888999939
+year1,loc02,loc02_year1,A,Bl4,DUILIO,A ,3.426000118
+year1,loc02,loc02_year1,A,Bl4,OUMRABI9,A ,2.979000092
+year1,loc02,loc02_year1,A,Bl4,HEBDA03,B,2.829999924
+year1,loc02,loc02_year1,A,Bl4,POLONICU,B,2.382999897
+year1,loc02,loc02_year1,A,Bl4,MEXICALI,A ,2.96600008
+year1,loc02,loc02_year1,A,Bl4,BID/WAHA,A ,3.27699995
+year1,loc02,loc02_year1,A,Bl4,VITRON,A ,3.562999964
+year1,loc02,loc02_year1,A,Bl4,BIDI17,B,2.233999968
+year1,loc02,loc02_year1,A,Bl4,KEBIR,A ,3.447999954
+year1,loc02,loc02_year1,A,Bl4,SAHEL77,A ,3.566999912
+year1,loc02,loc02_year1,A,Bl4,WAHA,A ,3.426000118
+year1,loc02,loc02_year1,A,Bl4,SIMETO,A ,3.426000118
+year1,loc02,loc02_year1,A,Bl4,GTADUR,A ,4.791999817
+year1,loc02,loc02_year1,A,Bl4,HEBD/GDO,A ,3.121000051
+year1,loc02,loc02_year1,A,Bl4,MBBACHIR,B,2.539999962
+year1,loc02,loc02_year1,A,Bl4,BELIKH02,A ,4.77699995
+year1,loc04,loc04_year1,A,Bl1,O.ZENADI,B,1.161000013
+year1,loc04,loc04_year1,A,Bl1,EIDER,A ,1.452000022
+year1,loc04,loc04_year1,A,Bl1,VITRON,A ,1.445000052
+year1,loc04,loc04_year1,A,Bl1,MEXICALI,A ,1.889999986
+year1,loc04,loc04_year1,A,Bl1,POLONICU,B,1.702000022
+year1,loc04,loc04_year1,A,Bl1,OUMRABI9,A ,1.684999943
+year1,loc04,loc04_year1,A,Bl1,POLON/ZB,B,1.217000008
+year1,loc04,loc04_year1,A,Bl1,OFANTO,A ,1.699000001
+year1,loc04,loc04_year1,A,Bl1,SAHEL77,A ,1.472000003
+year1,loc04,loc04_year1,A,Bl1,BID/WAHA,A ,1.452999949
+year1,loc04,loc04_year1,A,Bl1,INRAT69,A ,1.777999997
+year1,loc04,loc04_year1,A,Bl1,MBBACHIR,B,2.003000021
+year1,loc04,loc04_year1,A,Bl1,B.DUR194,B,1.952000022
+year1,loc04,loc04_year1,A,Bl1,KEBIR,A ,2.072999954
+year1,loc04,loc04_year1,A,Bl1,BIDI17,B,1.648000002
+year1,loc04,loc04_year1,A,Bl1,HEBD/GDO,A ,1.743999958
+year1,loc04,loc04_year1,A,Bl1,BELIKH02,A ,1.519999981
+year1,loc04,loc04_year1,A,Bl1,SIMETO,A ,2.019999981
+year1,loc04,loc04_year1,A,Bl1,CHENS,A ,1.985000014
+year1,loc04,loc04_year1,A,Bl1,WAHA,A ,1.79400003
+year1,loc04,loc04_year1,A,Bl1,HEBDA03,B,1.625
+year1,loc04,loc04_year1,A,Bl1,GTADUR,A ,2.354000092
+year1,loc04,loc04_year1,A,Bl1,DUILIO,A ,2.325000048
+year1,loc04,loc04_year1,A,Bl1,ARDENTE,A ,1.873999953
+year1,loc04,loc04_year1,A,Bl2,VITRON,A ,1.993999958
+year1,loc04,loc04_year1,A,Bl2,SIMETO,A ,3.404000044
+year1,loc04,loc04_year1,A,Bl2,EIDER,A ,2.234999895
+year1,loc04,loc04_year1,A,Bl2,CHENS,A ,2.549999952
+year1,loc04,loc04_year1,A,Bl2,SAHEL77,A ,2.207000017
+year1,loc04,loc04_year1,A,Bl2,O.ZENADI,B,1.960000038
+year1,loc04,loc04_year1,A,Bl2,MBBACHIR,B,1.654999971
+year1,loc04,loc04_year1,A,Bl2,HEBDA03,B,1.625
+year1,loc04,loc04_year1,A,Bl2,MEXICALI,A ,2.177999973
+year1,loc04,loc04_year1,A,Bl2,BIDI17,B,1.980999947
+year1,loc04,loc04_year1,A,Bl2,GTADUR,A ,2.470000029
+year1,loc04,loc04_year1,A,Bl2,WAHA,A ,2.256999969
+year1,loc04,loc04_year1,A,Bl2,KEBIR,A ,2.04399991
+year1,loc04,loc04_year1,A,Bl2,BID/WAHA,A ,2.368000031
+year1,loc04,loc04_year1,A,Bl2,ARDENTE,A ,1.902999997
+year1,loc04,loc04_year1,A,Bl2,B.DUR194,B,2.154000044
+year1,loc04,loc04_year1,A,Bl2,BELIKH02,A ,1.779999971
+year1,loc04,loc04_year1,A,Bl2,OUMRABI9,A ,2.513999939
+year1,loc04,loc04_year1,A,Bl2,POLONICU,B,2.163000107
+year1,loc04,loc04_year1,A,Bl2,DUILIO,A ,1.876999974
+year1,loc04,loc04_year1,A,Bl2,POLON/ZB,B,2.029000044
+year1,loc04,loc04_year1,A,Bl2,INRAT69,A ,2.111000061
+year1,loc04,loc04_year1,A,Bl2,OFANTO,A ,3.252000093
+year1,loc04,loc04_year1,A,Bl2,HEBD/GDO,A ,2.282000065
+year1,loc04,loc04_year1,A,Bl3,OFANTO,A ,2.075999975
+year1,loc04,loc04_year1,A,Bl3,KEBIR,A ,1.970999956
+year1,loc04,loc04_year1,A,Bl3,BIDI17,B,1.590999961
+year1,loc04,loc04_year1,A,Bl3,BELIKH02,A ,1.866999984
+year1,loc04,loc04_year1,A,Bl3,MEXICALI,A ,1.860999942
+year1,loc04,loc04_year1,A,Bl3,CHENS,A ,2.072000027
+year1,loc04,loc04_year1,A,Bl3,MBBACHIR,B,1.799999952
+year1,loc04,loc04_year1,A,Bl3,POLON/ZB,B,1.449000001
+year1,loc04,loc04_year1,A,Bl3,SAHEL77,A ,1.991000056
+year1,loc04,loc04_year1,A,Bl3,HEBDA03,B,1.567000031
+year1,loc04,loc04_year1,A,Bl3,B.DUR194,B,1.850999951
+year1,loc04,loc04_year1,A,Bl3,ARDENTE,A ,1.802000046
+year1,loc04,loc04_year1,A,Bl3,HEBD/GDO,A ,1.802000046
+year1,loc04,loc04_year1,A,Bl3,OUMRABI9,A ,2.45600009
+year1,loc04,loc04_year1,A,Bl3,GTADUR,A ,2.323999882
+year1,loc04,loc04_year1,A,Bl3,EIDER,A ,2.046999931
+year1,loc04,loc04_year1,A,Bl3,O.ZENADI,B,1.815000057
+year1,loc04,loc04_year1,A,Bl3,VITRON,A ,2.138999939
+year1,loc04,loc04_year1,A,Bl3,POLONICU,B,2.163000107
+year1,loc04,loc04_year1,A,Bl3,DUILIO,A ,2.094000101
+year1,loc04,loc04_year1,A,Bl3,SIMETO,A ,2.711999893
+year1,loc04,loc04_year1,A,Bl3,WAHA,A ,2.459000111
+year1,loc04,loc04_year1,A,Bl3,BID/WAHA,A ,2.789999962
+year1,loc04,loc04_year1,A,Bl3,INRAT69,A ,2.082000017
+year1,loc04,loc04_year1,A,Bl4,MBBACHIR,B,1.843000054
+year1,loc04,loc04_year1,A,Bl4,POLON/ZB,B,2.230999947
+year1,loc04,loc04_year1,A,Bl4,INRAT69,A ,1.518000007
+year1,loc04,loc04_year1,A,Bl4,EIDER,A ,1.81400001
+year1,loc04,loc04_year1,A,Bl4,O.ZENADI,B,1.930999994
+year1,loc04,loc04_year1,A,Bl4,KEBIR,A ,1.722000003
+year1,loc04,loc04_year1,A,Bl4,BIDI17,B,1.850999951
+year1,loc04,loc04_year1,A,Bl4,WAHA,A ,2.315000057
+year1,loc04,loc04_year1,A,Bl4,BID/WAHA,A ,2.325000048
+year1,loc04,loc04_year1,A,Bl4,CHENS,A ,2.085999966
+year1,loc04,loc04_year1,A,Bl4,MEXICALI,A ,2.480999947
+year1,loc04,loc04_year1,A,Bl4,OFANTO,A ,2.671000004
+year1,loc04,loc04_year1,A,Bl4,GTADUR,A ,2.846999884
+year1,loc04,loc04_year1,A,Bl4,SIMETO,A ,2.523999929
+year1,loc04,loc04_year1,A,Bl4,BELIKH02,A ,2.040999889
+year1,loc04,loc04_year1,A,Bl4,OUMRABI9,A ,2.397000074
+year1,loc04,loc04_year1,A,Bl4,VITRON,A ,1.907999992
+year1,loc04,loc04_year1,A,Bl4,DUILIO,A ,1.919999957
+year1,loc04,loc04_year1,A,Bl4,ARDENTE,A ,1.758999944
+year1,loc04,loc04_year1,A,Bl4,HEBD/GDO,A ,2.165999889
+year1,loc04,loc04_year1,A,Bl4,POLONICU,B,2.220999956
+year1,loc04,loc04_year1,A,Bl4,SAHEL77,A ,2.482000113
+year1,loc04,loc04_year1,A,Bl4,B.DUR194,B,2.660000086
+year1,loc04,loc04_year1,A,Bl4,HEBDA03,B,1.929999948
+year1,loc05,loc05_year1,A,Bl1,B.DUR194,B,1.113000035
+year1,loc05,loc05_year1,A,Bl1,VITRON,A ,1.113000035
+year1,loc05,loc05_year1,A,Bl1,OUMRABI9,A ,1.046000004
+year1,loc05,loc05_year1,A,Bl1,CHENS,A ,1.419999957
+year1,loc05,loc05_year1,A,Bl1,WAHA,A ,1.172000051
+year1,loc05,loc05_year1,A,Bl1,MBBACHIR,B,1.001999974
+year1,loc05,loc05_year1,A,Bl1,HEBD/GDO,A ,0.887000024
+year1,loc05,loc05_year1,A,Bl1,KEBIR,A ,0.949000001
+year1,loc05,loc05_year1,A,Bl1,BELIKH02,A ,1.200999975
+year1,loc05,loc05_year1,A,Bl1,OFANTO,A ,1.350000024
+year1,loc05,loc05_year1,A,Bl1,DUILIO,A ,0.894999981
+year1,loc05,loc05_year1,A,Bl1,INRAT69,A ,0.592999995
+year1,loc05,loc05_year1,A,Bl1,MEXICALI,A ,1.254999995
+year1,loc05,loc05_year1,A,Bl1,BID/WAHA,A ,1.148000002
+year1,loc05,loc05_year1,A,Bl1,GTADUR,A ,1.235000014
+year1,loc05,loc05_year1,A,Bl1,EIDER,A ,0.88499999
+year1,loc05,loc05_year1,A,Bl1,POLON/ZB,B,1
+year1,loc05,loc05_year1,A,Bl1,O.ZENADI,B,1.088999987
+year1,loc05,loc05_year1,A,Bl1,HEBDA03,B,0.972000003
+year1,loc05,loc05_year1,A,Bl1,SIMETO,A ,0.792999983
+year1,loc05,loc05_year1,A,Bl1,BIDI17,B,1.098999977
+year1,loc05,loc05_year1,A,Bl1,ARDENTE,A ,0.995000005
+year1,loc05,loc05_year1,A,Bl1,SAHEL77,A ,1.225999951
+year1,loc05,loc05_year1,A,Bl1,POLONICU,B,0.936999977
+year1,loc05,loc05_year1,A,Bl2,INRAT69,A ,0.519999981
+year1,loc05,loc05_year1,A,Bl2,POLON/ZB,B,1.057999969
+year1,loc05,loc05_year1,A,Bl2,EIDER,A ,1.363999963
+year1,loc05,loc05_year1,A,Bl2,HEBD/GDO,A ,1.090000033
+year1,loc05,loc05_year1,A,Bl2,BELIKH02,A ,1.345999956
+year1,loc05,loc05_year1,A,Bl2,CHENS,A ,1.708999991
+year1,loc05,loc05_year1,A,Bl2,WAHA,A ,1.402999997
+year1,loc05,loc05_year1,A,Bl2,MEXICALI,A ,1.182999969
+year1,loc05,loc05_year1,A,Bl2,OFANTO,A ,1.307000041
+year1,loc05,loc05_year1,A,Bl2,OUMRABI9,A ,1.177000046
+year1,loc05,loc05_year1,A,Bl2,GTADUR,A ,1.248999953
+year1,loc05,loc05_year1,A,Bl2,B.DUR194,B,1.373000026
+year1,loc05,loc05_year1,A,Bl2,KEBIR,A ,0.963
+year1,loc05,loc05_year1,A,Bl2,BIDI17,B,0.968999982
+year1,loc05,loc05_year1,A,Bl2,BID/WAHA,A ,1.25
+year1,loc05,loc05_year1,A,Bl2,POLONICU,B,1.082000017
+year1,loc05,loc05_year1,A,Bl2,DUILIO,A ,1.126000047
+year1,loc05,loc05_year1,A,Bl2,MBBACHIR,B,0.958000004
+year1,loc05,loc05_year1,A,Bl2,SIMETO,A ,0.837000012
+year1,loc05,loc05_year1,A,Bl2,ARDENTE,A ,1.037999988
+year1,loc05,loc05_year1,A,Bl2,SAHEL77,A ,1.355999947
+year1,loc05,loc05_year1,A,Bl2,O.ZENADI,B,1.161000013
+year1,loc05,loc05_year1,A,Bl2,HEBDA03,B,0.797999978
+year1,loc05,loc05_year1,A,Bl2,VITRON,A ,1.011999965
+year1,loc05,loc05_year1,A,Bl3,POLONICU,B,0.691999972
+year1,loc05,loc05_year1,A,Bl3,B.DUR194,B,1.200000048
+year1,loc05,loc05_year1,A,Bl3,WAHA,A ,1.258999944
+year1,loc05,loc05_year1,A,Bl3,BIDI17,B,1.070000052
+year1,loc05,loc05_year1,A,Bl3,HEBD/GDO,A ,0.799000025
+year1,loc05,loc05_year1,A,Bl3,SAHEL77,A ,1.557999969
+year1,loc05,loc05_year1,A,Bl3,HEBDA03,B,0.92900002
+year1,loc05,loc05_year1,A,Bl3,OFANTO,A ,1.335999966
+year1,loc05,loc05_year1,A,Bl3,SIMETO,A ,0.778999984
+year1,loc05,loc05_year1,A,Bl3,CHENS,A ,1.506999969
+year1,loc05,loc05_year1,A,Bl3,KEBIR,A ,1.108999968
+year1,loc05,loc05_year1,A,Bl3,OUMRABI9,A ,1.220999956
+year1,loc05,loc05_year1,A,Bl3,VITRON,A ,1.256999969
+year1,loc05,loc05_year1,A,Bl3,BID/WAHA,A ,1.161999941
+year1,loc05,loc05_year1,A,Bl3,MEXICALI,A ,1.182999969
+year1,loc05,loc05_year1,A,Bl3,ARDENTE,A ,1.08099997
+year1,loc05,loc05_year1,A,Bl3,EIDER,A ,1.335000038
+year1,loc05,loc05_year1,A,Bl3,DUILIO,A ,1.067999959
+year1,loc05,loc05_year1,A,Bl3,BELIKH02,A ,1.287999988
+year1,loc05,loc05_year1,A,Bl3,POLON/ZB,B,1.144999981
+year1,loc05,loc05_year1,A,Bl3,INRAT69,A ,0.680000007
+year1,loc05,loc05_year1,A,Bl3,O.ZENADI,B,1.103000045
+year1,loc05,loc05_year1,A,Bl3,MBBACHIR,B,0.813000023
+year1,loc05,loc05_year1,A,Bl3,GTADUR,A ,1.292999983
+year1,loc05,loc05_year1,A,Bl4,HEBD/GDO,A ,1.01699996
+year1,loc05,loc05_year1,A,Bl4,ARDENTE,A ,1.210999966
+year1,loc05,loc05_year1,A,Bl4,WAHA,A ,1.447000027
+year1,loc05,loc05_year1,A,Bl4,DUILIO,A ,1.444000006
+year1,loc05,loc05_year1,A,Bl4,VITRON,A ,1.343999982
+year1,loc05,loc05_year1,A,Bl4,OUMRABI9,A ,1.511000037
+year1,loc05,loc05_year1,A,Bl4,CHENS,A ,1.376000047
+year1,loc05,loc05_year1,A,Bl4,EIDER,A ,1.524000049
+year1,loc05,loc05_year1,A,Bl4,GTADUR,A ,1.394999981
+year1,loc05,loc05_year1,A,Bl4,SIMETO,A ,0.822000027
+year1,loc05,loc05_year1,A,Bl4,BID/WAHA,A ,1.279000044
+year1,loc05,loc05_year1,A,Bl4,POLON/ZB,B,1.174000025
+year1,loc05,loc05_year1,A,Bl4,BIDI17,B,1.200000048
+year1,loc05,loc05_year1,A,Bl4,BELIKH02,A ,1.404000044
+year1,loc05,loc05_year1,A,Bl4,MEXICALI,A ,1.5
+year1,loc05,loc05_year1,A,Bl4,INRAT69,A ,0.708000004
+year1,loc05,loc05_year1,A,Bl4,B.DUR194,B,1.460000038
+year1,loc05,loc05_year1,A,Bl4,SAHEL77,A ,1.616000056
+year1,loc05,loc05_year1,A,Bl4,POLONICU,B,1.225999951
+year1,loc05,loc05_year1,A,Bl4,MBBACHIR,B,1.103000045
+year1,loc05,loc05_year1,A,Bl4,KEBIR,A ,0.27700001
+year1,loc05,loc05_year1,A,Bl4,HEBDA03,B,0.958000004
+year1,loc05,loc05_year1,A,Bl4,O.ZENADI,B,0.986999989
+year1,loc05,loc05_year1,A,Bl4,OFANTO,A ,1.335999966
+year1,loc07,loc07_year1,B,Bl1,GTADUR,A ,1.292999983
+year1,loc07,loc07_year1,B,Bl1,INRAT69,A ,0.925000012
+year1,loc07,loc07_year1,B,Bl1,DUILIO,A ,1.121000051
+year1,loc07,loc07_year1,B,Bl1,HEBD/GDO,A ,1.233999968
+year1,loc07,loc07_year1,B,Bl1,SAHEL77,A ,1.062999964
+year1,loc07,loc07_year1,B,Bl1,POLONICU,B,1.422000051
+year1,loc07,loc07_year1,B,Bl1,BIDI17,B,1.049000025
+year1,loc07,loc07_year1,B,Bl1,BID/WAHA,A ,1.264000058
+year1,loc07,loc07_year1,B,Bl1,MEXICALI,A ,0.968999982
+year1,loc07,loc07_year1,B,Bl1,BELIKH02,A ,1.366000056
+year1,loc07,loc07_year1,B,Bl1,KEBIR,A ,0.792999983
+year1,loc07,loc07_year1,B,Bl1,EIDER,A ,1.366000056
+year1,loc07,loc07_year1,B,Bl1,O.ZENADI,B,1.027999997
+year1,loc07,loc07_year1,B,Bl1,VITRON,A ,1.235999942
+year1,loc07,loc07_year1,B,Bl1,OFANTO,A ,1.350999951
+year1,loc07,loc07_year1,B,Bl1,OUMRABI9,A ,1.394999981
+year1,loc07,loc07_year1,B,Bl1,HEBDA03,B,1.077999949
+year1,loc07,loc07_year1,B,Bl1,CHENS,A ,1.350999951
+year1,loc07,loc07_year1,B,Bl1,B.DUR194,B,1.222000003
+year1,loc07,loc07_year1,B,Bl1,POLON/ZB,B,1.220999956
+year1,loc07,loc07_year1,B,Bl1,WAHA,A ,0.861999989
+year1,loc07,loc07_year1,B,Bl1,MBBACHIR,B,1.072000027
+year1,loc07,loc07_year1,B,Bl1,ARDENTE,A ,0.88499999
+year1,loc07,loc07_year1,B,Bl1,SIMETO,A ,1.322000027
+year1,loc07,loc07_year1,B,Bl2,MEXICALI,A ,1.207999945
+year1,loc07,loc07_year1,B,Bl2,BELIKH02,A ,0.954999983
+year1,loc07,loc07_year1,B,Bl2,KEBIR,A ,0.896000028
+year1,loc07,loc07_year1,B,Bl2,POLONICU,B,1.121000051
+year1,loc07,loc07_year1,B,Bl2,BIDI17,B,0.976999998
+year1,loc07,loc07_year1,B,Bl2,OUMRABI9,A ,1.116000056
+year1,loc07,loc07_year1,B,Bl2,HEBD/GDO,A ,0.968999982
+year1,loc07,loc07_year1,B,Bl2,BID/WAHA,A ,0.948000014
+year1,loc07,loc07_year1,B,Bl2,HEBDA03,B,0.675000012
+year1,loc07,loc07_year1,B,Bl2,EIDER,A ,1.277999997
+year1,loc07,loc07_year1,B,Bl2,OFANTO,A ,1.235999942
+year1,loc07,loc07_year1,B,Bl2,ARDENTE,A ,0.814999998
+year1,loc07,loc07_year1,B,Bl2,GTADUR,A ,0.904999971
+year1,loc07,loc07_year1,B,Bl2,MBBACHIR,B,0.734000027
+year1,loc07,loc07_year1,B,Bl2,POLON/ZB,B,0.819000006
+year1,loc07,loc07_year1,B,Bl2,INRAT69,A ,0.880999982
+year1,loc07,loc07_year1,B,Bl2,VITRON,A ,1.092000008
+year1,loc07,loc07_year1,B,Bl2,DUILIO,A ,0.948000014
+year1,loc07,loc07_year1,B,Bl2,O.ZENADI,B,0.968999982
+year1,loc07,loc07_year1,B,Bl2,SIMETO,A ,1.019999981
+year1,loc07,loc07_year1,B,Bl2,SAHEL77,A ,0.717999995
+year1,loc07,loc07_year1,B,Bl2,CHENS,A ,1.322000027
+year1,loc07,loc07_year1,B,Bl2,B.DUR194,B,0.968999982
+year1,loc07,loc07_year1,B,Bl2,WAHA,A ,0.963
+year1,loc07,loc07_year1,B,Bl3,SIMETO,A ,1.394000053
+year1,loc07,loc07_year1,B,Bl3,GTADUR,A ,0.934000015
+year1,loc07,loc07_year1,B,Bl3,WAHA,A ,0.976999998
+year1,loc07,loc07_year1,B,Bl3,POLONICU,B,0.963
+year1,loc07,loc07_year1,B,Bl3,KEBIR,A ,1.159999967
+year1,loc07,loc07_year1,B,Bl3,O.ZENADI,B,0.777999997
+year1,loc07,loc07_year1,B,Bl3,BID/WAHA,A ,0.990999997
+year1,loc07,loc07_year1,B,Bl3,SAHEL77,A ,0.934000015
+year1,loc07,loc07_year1,B,Bl3,MEXICALI,A ,1.348999977
+year1,loc07,loc07_year1,B,Bl3,MBBACHIR,B,1.350999951
+year1,loc07,loc07_year1,B,Bl3,CHENS,A ,1.366000056
+year1,loc07,loc07_year1,B,Bl3,HEBD/GDO,A ,1.057000041
+year1,loc07,loc07_year1,B,Bl3,DUILIO,A ,1.322000027
+year1,loc07,loc07_year1,B,Bl3,OUMRABI9,A ,1.381000042
+year1,loc07,loc07_year1,B,Bl3,BIDI17,B,0.776000023
+year1,loc07,loc07_year1,B,Bl3,EIDER,A ,1.263000011
+year1,loc07,loc07_year1,B,Bl3,VITRON,A ,1.264000058
+year1,loc07,loc07_year1,B,Bl3,ARDENTE,A ,1.123999953
+year1,loc07,loc07_year1,B,Bl3,OFANTO,A ,1.422000051
+year1,loc07,loc07_year1,B,Bl3,INRAT69,A ,1.248000026
+year1,loc07,loc07_year1,B,Bl3,POLON/ZB,B,0.976999998
+year1,loc07,loc07_year1,B,Bl3,BELIKH02,A ,0.984000027
+year1,loc07,loc07_year1,B,Bl3,HEBDA03,B,0.819000006
+year1,loc07,loc07_year1,B,Bl3,B.DUR194,B,1.222000003
+year1,loc07,loc07_year1,B,Bl4,KEBIR,A ,1.027999997
+year1,loc07,loc07_year1,B,Bl4,OUMRABI9,A ,1.101999998
+year1,loc07,loc07_year1,B,Bl4,DUILIO,A ,1.121000051
+year1,loc07,loc07_year1,B,Bl4,BID/WAHA,A ,0.920000017
+year1,loc07,loc07_year1,B,Bl4,SAHEL77,A ,0.976999998
+year1,loc07,loc07_year1,B,Bl4,O.ZENADI,B,1.027999997
+year1,loc07,loc07_year1,B,Bl4,MBBACHIR,B,1.190000057
+year1,loc07,loc07_year1,B,Bl4,VITRON,A ,1.394000053
+year1,loc07,loc07_year1,B,Bl4,INRAT69,A ,1.218999982
+year1,loc07,loc07_year1,B,Bl4,HEBD/GDO,A ,0.984000027
+year1,loc07,loc07_year1,B,Bl4,CHENS,A ,1.394999981
+year1,loc07,loc07_year1,B,Bl4,WAHA,A ,0.963
+year1,loc07,loc07_year1,B,Bl4,POLONICU,B,1.335999966
+year1,loc07,loc07_year1,B,Bl4,OFANTO,A ,1.437000036
+year1,loc07,loc07_year1,B,Bl4,EIDER,A ,1.042999983
+year1,loc07,loc07_year1,B,Bl4,POLON/ZB,B,0.890999973
+year1,loc07,loc07_year1,B,Bl4,ARDENTE,A ,0.842999995
+year1,loc07,loc07_year1,B,Bl4,BIDI17,B,0.948000014
+year1,loc07,loc07_year1,B,Bl4,B.DUR194,B,0.954999983
+year1,loc07,loc07_year1,B,Bl4,SIMETO,A ,1.407999992
+year1,loc07,loc07_year1,B,Bl4,BELIKH02,A ,0.984000027
+year1,loc07,loc07_year1,B,Bl4,MEXICALI,A ,1.082000017
+year1,loc07,loc07_year1,B,Bl4,HEBDA03,B,1.13499999
+year1,loc07,loc07_year1,B,Bl4,GTADUR,A ,1.13499999
+year1,loc10,loc10_year1,B,Bl1,INRAT69,A ,1.452999949
+year1,loc10,loc10_year1,B,Bl1,ARDENTE,A ,1.56400001
+year1,loc10,loc10_year1,B,Bl1,POLON/ZB,B,1.784000039
+year1,loc10,loc10_year1,B,Bl1,SAHEL77,A ,1.830000043
+year1,loc10,loc10_year1,B,Bl1,OFANTO,A ,1.450999975
+year1,loc10,loc10_year1,B,Bl1,HEBDA03,B,2.25999999
+year1,loc10,loc10_year1,B,Bl1,EIDER,A ,2.237999916
+year1,loc10,loc10_year1,B,Bl1,MEXICALI,A ,2.60800004
+year1,loc10,loc10_year1,B,Bl1,SIMETO,A ,2.22300005
+year1,loc10,loc10_year1,B,Bl1,POLONICU,B,2.09100008
+year1,loc10,loc10_year1,B,Bl1,HEBD/GDO,A ,1.713999987
+year1,loc10,loc10_year1,B,Bl1,GTADUR,A ,2.121000051
+year1,loc10,loc10_year1,B,Bl1,VITRON,A ,1.960999966
+year1,loc10,loc10_year1,B,Bl1,BID/WAHA,A ,1.922000051
+year1,loc10,loc10_year1,B,Bl1,WAHA,A ,1.684999943
+year1,loc10,loc10_year1,B,Bl1,DUILIO,A ,1.911999941
+year1,loc10,loc10_year1,B,Bl1,CHENS,A ,2.382999897
+year1,loc10,loc10_year1,B,Bl1,BIDI17,B,1.597000003
+year1,loc10,loc10_year1,B,Bl1,B.DUR194,B,2.252000093
+year1,loc10,loc10_year1,B,Bl1,MBBACHIR,B,1.763000011
+year1,loc10,loc10_year1,B,Bl1,KEBIR,A ,1.889000058
+year1,loc10,loc10_year1,B,Bl1,OUMRABI9,A ,1.858999968
+year1,loc10,loc10_year1,B,Bl1,BELIKH02,A ,2.201999903
+year1,loc10,loc10_year1,B,Bl1,O.ZENADI,B,1.830000043
+year1,loc10,loc10_year1,B,Bl2,BIDI17,B,0.870999992
+year1,loc10,loc10_year1,B,Bl2,ARDENTE,A ,1.447999954
+year1,loc10,loc10_year1,B,Bl2,O.ZENADI,B,1.350999951
+year1,loc10,loc10_year1,B,Bl2,OUMRABI9,A ,1.161999941
+year1,loc10,loc10_year1,B,Bl2,VITRON,A ,1.800999999
+year1,loc10,loc10_year1,B,Bl2,DUILIO,A ,1.463000059
+year1,loc10,loc10_year1,B,Bl2,EIDER,A ,1.815999985
+year1,loc10,loc10_year1,B,Bl2,WAHA,A ,1.481999993
+year1,loc10,loc10_year1,B,Bl2,SAHEL77,A ,1.409000039
+year1,loc10,loc10_year1,B,Bl2,GTADUR,A ,1.889000058
+year1,loc10,loc10_year1,B,Bl2,HEBD/GDO,A ,1.55400002
+year1,loc10,loc10_year1,B,Bl2,SIMETO,A ,1.947000027
+year1,loc10,loc10_year1,B,Bl2,POLONICU,B,1.161999941
+year1,loc10,loc10_year1,B,Bl2,OFANTO,A ,1.523000002
+year1,loc10,loc10_year1,B,Bl2,KEBIR,A ,1.452999949
+year1,loc10,loc10_year1,B,Bl2,POLON/ZB,B,1.131999969
+year1,loc10,loc10_year1,B,Bl2,CHENS,A ,1.337000012
+year1,loc10,loc10_year1,B,Bl2,B.DUR194,B,1.307000041
+year1,loc10,loc10_year1,B,Bl2,BID/WAHA,A ,1.460000038
+year1,loc10,loc10_year1,B,Bl2,INRAT69,A ,1.01699996
+year1,loc10,loc10_year1,B,Bl2,BELIKH02,A ,1.679999948
+year1,loc10,loc10_year1,B,Bl2,MEXICALI,A ,1.521000028
+year1,loc10,loc10_year1,B,Bl2,HEBDA03,B,0.753000021
+year1,loc10,loc10_year1,B,Bl2,MBBACHIR,B,1.026000023
+year1,loc10,loc10_year1,B,Bl3,MEXICALI,A ,1.940999985
+year1,loc10,loc10_year1,B,Bl3,CHENS,A ,1.960999966
+year1,loc10,loc10_year1,B,Bl3,POLON/ZB,B,1.422000051
+year1,loc10,loc10_year1,B,Bl3,GTADUR,A ,1.613000035
+year1,loc10,loc10_year1,B,Bl3,POLONICU,B,1.016000032
+year1,loc10,loc10_year1,B,Bl3,INRAT69,A ,1.25
+year1,loc10,loc10_year1,B,Bl3,EIDER,A ,1.526000023
+year1,loc10,loc10_year1,B,Bl3,KEBIR,A ,1.496000051
+year1,loc10,loc10_year1,B,Bl3,OFANTO,A ,1.27699995
+year1,loc10,loc10_year1,B,Bl3,WAHA,A ,1.845000029
+year1,loc10,loc10_year1,B,Bl3,O.ZENADI,B,1.292999983
+year1,loc10,loc10_year1,B,Bl3,DUILIO,A ,1.434000015
+year1,loc10,loc10_year1,B,Bl3,ARDENTE,A ,1.56400001
+year1,loc10,loc10_year1,B,Bl3,HEBD/GDO,A ,1.409000039
+year1,loc10,loc10_year1,B,Bl3,HEBDA03,B,0.926999986
+year1,loc10,loc10_year1,B,Bl3,OUMRABI9,A ,1.277999997
+year1,loc10,loc10_year1,B,Bl3,B.DUR194,B,1.190999985
+year1,loc10,loc10_year1,B,Bl3,MBBACHIR,B,1.09800005
+year1,loc10,loc10_year1,B,Bl3,BID/WAHA,A ,2.226000071
+year1,loc10,loc10_year1,B,Bl3,BELIKH02,A ,1.883000016
+year1,loc10,loc10_year1,B,Bl3,SIMETO,A ,1.873999953
+year1,loc10,loc10_year1,B,Bl3,SAHEL77,A ,1.860000014
+year1,loc10,loc10_year1,B,Bl3,VITRON,A ,1.845000029
+year1,loc10,loc10_year1,B,Bl3,BIDI17,B,1.075000048
+year1,loc10,loc10_year1,B,Bl4,MBBACHIR,B,1.458999991
+year1,loc10,loc10_year1,B,Bl4,BID/WAHA,A ,1.937000036
+year1,loc10,loc10_year1,B,Bl4,GTADUR,A ,2.076999903
+year1,loc10,loc10_year1,B,Bl4,BELIKH02,A ,1.838999987
+year1,loc10,loc10_year1,B,Bl4,HEBD/GDO,A ,1.889000058
+year1,loc10,loc10_year1,B,Bl4,MEXICALI,A ,1.998999953
+year1,loc10,loc10_year1,B,Bl4,VITRON,A ,1.889000058
+year1,loc10,loc10_year1,B,Bl4,EIDER,A ,2.22300005
+year1,loc10,loc10_year1,B,Bl4,B.DUR194,B,1.684999943
+year1,loc10,loc10_year1,B,Bl4,ARDENTE,A ,0.839999974
+year1,loc10,loc10_year1,B,Bl4,OUMRABI9,A ,1.496000051
+year1,loc10,loc10_year1,B,Bl4,O.ZENADI,B,1.467000008
+year1,loc10,loc10_year1,B,Bl4,CHENS,A ,1.20599997
+year1,loc10,loc10_year1,B,Bl4,POLON/ZB,B,1.348999977
+year1,loc10,loc10_year1,B,Bl4,SAHEL77,A ,1.99000001
+year1,loc10,loc10_year1,B,Bl4,POLONICU,B,1.292000055
+year1,loc10,loc10_year1,B,Bl4,SIMETO,A ,1.64199996
+year1,loc10,loc10_year1,B,Bl4,WAHA,A ,1.626999974
+year1,loc10,loc10_year1,B,Bl4,BIDI17,B,1.307000041
+year1,loc10,loc10_year1,B,Bl4,DUILIO,A ,1.014000058
+year1,loc10,loc10_year1,B,Bl4,HEBDA03,B,1.404999971
+year1,loc10,loc10_year1,B,Bl4,KEBIR,A ,1.437999964
+year1,loc10,loc10_year1,B,Bl4,OFANTO,A ,1.741000056
+year1,loc10,loc10_year1,B,Bl4,INRAT69,A ,1.628000021
+year1,loc11,loc11_year1,B,Bl1,SAHEL77,A ,1.360999942
+year1,loc11,loc11_year1,B,Bl1,ARDENTE,A ,1.027999997
+year1,loc11,loc11_year1,B,Bl1,POLONICU,B,0.878000021
+year1,loc11,loc11_year1,B,Bl1,VITRON,A ,1.710000038
+year1,loc11,loc11_year1,B,Bl1,HEBDA03,B,0.819000006
+year1,loc11,loc11_year1,B,Bl1,O.ZENADI,B,1.347000003
+year1,loc11,loc11_year1,B,Bl1,POLON/ZB,B,0.961000025
+year1,loc11,loc11_year1,B,Bl1,SIMETO,A ,2
+year1,loc11,loc11_year1,B,Bl1,WAHA,A ,1.917999983
+year1,loc11,loc11_year1,B,Bl1,MEXICALI,A ,2.078999996
+year1,loc11,loc11_year1,B,Bl1,DUILIO,A ,1.962000012
+year1,loc11,loc11_year1,B,Bl1,OFANTO,A ,1.45599997
+year1,loc11,loc11_year1,B,Bl1,BELIKH02,A ,1.894999981
+year1,loc11,loc11_year1,B,Bl1,EIDER,A ,1.55400002
+year1,loc11,loc11_year1,B,Bl1,BID/WAHA,A ,1.792000055
+year1,loc11,loc11_year1,B,Bl1,GTADUR,A ,1.519000053
+year1,loc11,loc11_year1,B,Bl1,B.DUR194,B,1.361999989
+year1,loc11,loc11_year1,B,Bl1,HEBD/GDO,A ,1.069000006
+year1,loc11,loc11_year1,B,Bl1,INRAT69,A ,1.855000019
+year1,loc11,loc11_year1,B,Bl1,MBBACHIR,B,0.981000006
+year1,loc11,loc11_year1,B,Bl1,CHENS,A ,1.773000002
+year1,loc11,loc11_year1,B,Bl1,BIDI17,B,1.654999971
+year1,loc11,loc11_year1,B,Bl1,OUMRABI9,A ,1.488999963
+year1,loc11,loc11_year1,B,Bl1,KEBIR,A ,1.427000046
+year1,loc11,loc11_year1,B,Bl2,HEBDA03,B,0.83099997
+year1,loc11,loc11_year1,B,Bl2,POLONICU,B,0.976999998
+year1,loc11,loc11_year1,B,Bl2,HEBD/GDO,A ,1.269000053
+year1,loc11,loc11_year1,B,Bl2,ARDENTE,A ,1.128000021
+year1,loc11,loc11_year1,B,Bl2,GTADUR,A ,1.475000024
+year1,loc11,loc11_year1,B,Bl2,POLON/ZB,B,1.133000016
+year1,loc11,loc11_year1,B,Bl2,WAHA,A ,2.076999903
+year1,loc11,loc11_year1,B,Bl2,MEXICALI,A ,1.832999945
+year1,loc11,loc11_year1,B,Bl2,KEBIR,A ,1.398000002
+year1,loc11,loc11_year1,B,Bl2,DUILIO,A ,1.789000034
+year1,loc11,loc11_year1,B,Bl2,OFANTO,A ,1.440999985
+year1,loc11,loc11_year1,B,Bl2,BIDI17,B,1.481999993
+year1,loc11,loc11_year1,B,Bl2,BID/WAHA,A ,2.196000099
+year1,loc11,loc11_year1,B,Bl2,BELIKH02,A ,1.590999961
+year1,loc11,loc11_year1,B,Bl2,SAHEL77,A ,1.73300004
+year1,loc11,loc11_year1,B,Bl2,SIMETO,A ,1.95599997
+year1,loc11,loc11_year1,B,Bl2,OUMRABI9,A ,2.003999949
+year1,loc11,loc11_year1,B,Bl2,INRAT69,A ,1.521999955
+year1,loc11,loc11_year1,B,Bl2,MBBACHIR,B,0.995999992
+year1,loc11,loc11_year1,B,Bl2,O.ZENADI,B,1.06099999
+year1,loc11,loc11_year1,B,Bl2,VITRON,A ,1.332999945
+year1,loc11,loc11_year1,B,Bl2,B.DUR194,B,1.319000006
+year1,loc11,loc11_year1,B,Bl2,CHENS,A ,1.957999945
+year1,loc11,loc11_year1,B,Bl2,EIDER,A ,1.569000006
+year1,loc11,loc11_year1,B,Bl3,MBBACHIR,B,1.327999949
+year1,loc11,loc11_year1,B,Bl3,O.ZENADI,B,1.261000037
+year1,loc11,loc11_year1,B,Bl3,SIMETO,A ,2.028000116
+year1,loc11,loc11_year1,B,Bl3,EIDER,A ,1.827999949
+year1,loc11,loc11_year1,B,Bl3,VITRON,A ,1.901000023
+year1,loc11,loc11_year1,B,Bl3,HEBD/GDO,A ,1.212000012
+year1,loc11,loc11_year1,B,Bl3,MEXICALI,A ,2.453999996
+year1,loc11,loc11_year1,B,Bl3,INRAT69,A ,1.580000043
+year1,loc11,loc11_year1,B,Bl3,GTADUR,A ,1.621000051
+year1,loc11,loc11_year1,B,Bl3,CHENS,A ,1.786999941
+year1,loc11,loc11_year1,B,Bl3,DUILIO,A ,1.616000056
+year1,loc11,loc11_year1,B,Bl3,SAHEL77,A ,1.475000024
+year1,loc11,loc11_year1,B,Bl3,ARDENTE,A ,0.985000014
+year1,loc11,loc11_year1,B,Bl3,BELIKH02,A ,1.633999944
+year1,loc11,loc11_year1,B,Bl3,POLONICU,B,0.89200002
+year1,loc11,loc11_year1,B,Bl3,B.DUR194,B,1.116000056
+year1,loc11,loc11_year1,B,Bl3,BIDI17,B,1.611999989
+year1,loc11,loc11_year1,B,Bl3,OUMRABI9,A ,1.703999996
+year1,loc11,loc11_year1,B,Bl3,KEBIR,A ,1.629999995
+year1,loc11,loc11_year1,B,Bl3,HEBDA03,B,0.833000004
+year1,loc11,loc11_year1,B,Bl3,OFANTO,A ,1.440999985
+year1,loc11,loc11_year1,B,Bl3,WAHA,A ,1.702000022
+year1,loc11,loc11_year1,B,Bl3,POLON/ZB,B,1.003999949
+year1,loc11,loc11_year1,B,Bl3,BID/WAHA,A ,1.922000051
+year1,loc11,loc11_year1,B,Bl4,VITRON,A ,1.60800004
+year1,loc11,loc11_year1,B,Bl4,CHENS,A ,1.957999945
+year1,loc11,loc11_year1,B,Bl4,BIDI17,B,1.468000054
+year1,loc11,loc11_year1,B,Bl4,ARDENTE,A ,1.042999983
+year1,loc11,loc11_year1,B,Bl4,B.DUR194,B,1.246000051
+year1,loc11,loc11_year1,B,Bl4,BID/WAHA,A ,2.24000001
+year1,loc11,loc11_year1,B,Bl4,O.ZENADI,B,1.06099999
+year1,loc11,loc11_year1,B,Bl4,OUMRABI9,A ,1.646000028
+year1,loc11,loc11_year1,B,Bl4,MBBACHIR,B,0.865999997
+year1,loc11,loc11_year1,B,Bl4,SAHEL77,A ,1.518000007
+year1,loc11,loc11_year1,B,Bl4,EIDER,A ,1.55400002
+year1,loc11,loc11_year1,B,Bl4,KEBIR,A ,1.557999969
+year1,loc11,loc11_year1,B,Bl4,OFANTO,A ,1.45599997
+year1,loc11,loc11_year1,B,Bl4,WAHA,A ,1.932999969
+year1,loc11,loc11_year1,B,Bl4,HEBD/GDO,A ,1.24000001
+year1,loc11,loc11_year1,B,Bl4,SIMETO,A ,1.942000031
+year1,loc11,loc11_year1,B,Bl4,MEXICALI,A ,1.991999984
+year1,loc11,loc11_year1,B,Bl4,DUILIO,A ,1.702999949
+year1,loc11,loc11_year1,B,Bl4,INRAT69,A ,1.738999963
+year1,loc11,loc11_year1,B,Bl4,POLON/ZB,B,1.133000016
+year1,loc11,loc11_year1,B,Bl4,POLONICU,B,0.906000018
+year1,loc11,loc11_year1,B,Bl4,BELIKH02,A ,1.315999985
+year1,loc11,loc11_year1,B,Bl4,GTADUR,A ,1.417000055
+year1,loc11,loc11_year1,B,Bl4,HEBDA03,B,0.862999976
+year1,loc12,loc12_year1,B,Bl1,BIDI17,B,1.725999951
+year1,loc12,loc12_year1,B,Bl1,OUMRABI9,A ,2.290999889
+year1,loc12,loc12_year1,B,Bl1,INRAT69,A ,2.444999933
+year1,loc12,loc12_year1,B,Bl1,HEBD/GDO,A ,2.602999926
+year1,loc12,loc12_year1,B,Bl1,WAHA,A ,2.29399991
+year1,loc12,loc12_year1,B,Bl1,SIMETO,A ,3.315999985
+year1,loc12,loc12_year1,B,Bl1,GTADUR,A ,2.592000008
+year1,loc12,loc12_year1,B,Bl1,DUILIO,A ,2.447999954
+year1,loc12,loc12_year1,B,Bl1,HEBDA03,B,2.016000032
+year1,loc12,loc12_year1,B,Bl1,ARDENTE,A ,2.161999941
+year1,loc12,loc12_year1,B,Bl1,VITRON,A ,2.444999933
+year1,loc12,loc12_year1,B,Bl1,BID/WAHA,A ,2.453000069
+year1,loc12,loc12_year1,B,Bl1,CHENS,A ,2.709000111
+year1,loc12,loc12_year1,B,Bl1,MEXICALI,A ,2.299000025
+year1,loc12,loc12_year1,B,Bl1,B.DUR194,B,1.733999968
+year1,loc12,loc12_year1,B,Bl1,SAHEL77,A ,2.601000071
+year1,loc12,loc12_year1,B,Bl1,OFANTO,A ,2.019999981
+year1,loc12,loc12_year1,B,Bl1,KEBIR,A ,2.306999922
+year1,loc12,loc12_year1,B,Bl1,MBBACHIR,B,2.019999981
+year1,loc12,loc12_year1,B,Bl1,POLONICU,B,1.588999987
+year1,loc12,loc12_year1,B,Bl1,POLON/ZB,B,1.868000031
+year1,loc12,loc12_year1,B,Bl1,EIDER,A ,2.164999962
+year1,loc12,loc12_year1,B,Bl1,O.ZENADI,B,1.583999991
+year1,loc12,loc12_year1,B,Bl1,BELIKH02,A ,2.299000025
+year1,loc12,loc12_year1,B,Bl2,O.ZENADI,B,1.728000045
+year1,loc12,loc12_year1,B,Bl2,HEBDA03,B,2.016000032
+year1,loc12,loc12_year1,B,Bl2,B.DUR194,B,2.023000002
+year1,loc12,loc12_year1,B,Bl2,POLON/ZB,B,1.868000031
+year1,loc12,loc12_year1,B,Bl2,CHENS,A ,2.424000025
+year1,loc12,loc12_year1,B,Bl2,MEXICALI,A ,2.874000072
+year1,loc12,loc12_year1,B,Bl2,HEBD/GDO,A ,2.459000111
+year1,loc12,loc12_year1,B,Bl2,VITRON,A ,2.157999992
+year1,loc12,loc12_year1,B,Bl2,OUMRABI9,A ,2.578000069
+year1,loc12,loc12_year1,B,Bl2,OFANTO,A ,2.019999981
+year1,loc12,loc12_year1,B,Bl2,ARDENTE,A ,2.450999975
+year1,loc12,loc12_year1,B,Bl2,BID/WAHA,A ,2.59800005
+year1,loc12,loc12_year1,B,Bl2,INRAT69,A ,2.013999939
+year1,loc12,loc12_year1,B,Bl2,GTADUR,A ,2.447999954
+year1,loc12,loc12_year1,B,Bl2,POLONICU,B,1.878000021
+year1,loc12,loc12_year1,B,Bl2,WAHA,A ,2.006999969
+year1,loc12,loc12_year1,B,Bl2,DUILIO,A ,2.592000008
+year1,loc12,loc12_year1,B,Bl2,SIMETO,A ,3.02699995
+year1,loc12,loc12_year1,B,Bl2,KEBIR,A ,2.450999975
+year1,loc12,loc12_year1,B,Bl2,BELIKH02,A ,2.585999966
+year1,loc12,loc12_year1,B,Bl2,SAHEL77,A ,2.601000071
+year1,loc12,loc12_year1,B,Bl2,MBBACHIR,B,1.731999993
+year1,loc12,loc12_year1,B,Bl2,EIDER,A ,2.164999962
+year1,loc12,loc12_year1,B,Bl2,BIDI17,B,2.157999992
+year1,loc12,loc12_year1,B,Bl3,SIMETO,A ,2.595000029
+year1,loc12,loc12_year1,B,Bl3,BELIKH02,A ,2.730000019
+year1,loc12,loc12_year1,B,Bl3,O.ZENADI,B,2.447999954
+year1,loc12,loc12_year1,B,Bl3,GTADUR,A ,3.45600009
+year1,loc12,loc12_year1,B,Bl3,DUILIO,A ,3.167999983
+year1,loc12,loc12_year1,B,Bl3,SAHEL77,A ,3.467000008
+year1,loc12,loc12_year1,B,Bl3,HEBDA03,B,2.016000032
+year1,loc12,loc12_year1,B,Bl3,POLONICU,B,1.733999968
+year1,loc12,loc12_year1,B,Bl3,KEBIR,A ,2.450999975
+year1,loc12,loc12_year1,B,Bl3,BID/WAHA,A ,3.030999899
+year1,loc12,loc12_year1,B,Bl3,VITRON,A ,3.164000034
+year1,loc12,loc12_year1,B,Bl3,ARDENTE,A ,2.450999975
+year1,loc12,loc12_year1,B,Bl3,CHENS,A ,2.993999958
+year1,loc12,loc12_year1,B,Bl3,WAHA,A ,2.579999924
+year1,loc12,loc12_year1,B,Bl3,BIDI17,B,2.301000118
+year1,loc12,loc12_year1,B,Bl3,POLON/ZB,B,2.299000025
+year1,loc12,loc12_year1,B,Bl3,OFANTO,A ,2.742000103
+year1,loc12,loc12_year1,B,Bl3,MBBACHIR,B,2.164999962
+year1,loc12,loc12_year1,B,Bl3,OUMRABI9,A ,2.864000082
+year1,loc12,loc12_year1,B,Bl3,B.DUR194,B,2.45600009
+year1,loc12,loc12_year1,B,Bl3,INRAT69,A ,2.73300004
+year1,loc12,loc12_year1,B,Bl3,HEBD/GDO,A ,2.602999926
+year1,loc12,loc12_year1,B,Bl3,MEXICALI,A ,2.154999971
+year1,loc12,loc12_year1,B,Bl3,EIDER,A ,2.453000069
+year1,loc12,loc12_year1,B,Bl4,OFANTO,A ,2.885999918
+year1,loc12,loc12_year1,B,Bl4,BID/WAHA,A ,2.742000103
+year1,loc12,loc12_year1,B,Bl4,POLON/ZB,B,2.443000078
+year1,loc12,loc12_year1,B,Bl4,MBBACHIR,B,2.453000069
+year1,loc12,loc12_year1,B,Bl4,O.ZENADI,B,2.447999954
+year1,loc12,loc12_year1,B,Bl4,BIDI17,B,2.157999992
+year1,loc12,loc12_year1,B,Bl4,GTADUR,A ,3.45600009
+year1,loc12,loc12_year1,B,Bl4,BELIKH02,A ,2.154999971
+year1,loc12,loc12_year1,B,Bl4,POLONICU,B,1.878000021
+year1,loc12,loc12_year1,B,Bl4,CHENS,A ,2.424000025
+year1,loc12,loc12_year1,B,Bl4,DUILIO,A ,2.880000114
+year1,loc12,loc12_year1,B,Bl4,WAHA,A ,2.723999977
+year1,loc12,loc12_year1,B,Bl4,B.DUR194,B,2.312000036
+year1,loc12,loc12_year1,B,Bl4,MEXICALI,A ,2.874000072
+year1,loc12,loc12_year1,B,Bl4,VITRON,A ,2.877000093
+year1,loc12,loc12_year1,B,Bl4,INRAT69,A ,2.157999992
+year1,loc12,loc12_year1,B,Bl4,SIMETO,A ,2.739000082
+year1,loc12,loc12_year1,B,Bl4,KEBIR,A ,2.882999897
+year1,loc12,loc12_year1,B,Bl4,EIDER,A ,2.309000015
+year1,loc12,loc12_year1,B,Bl4,HEBD/GDO,A ,2.892999887
+year1,loc12,loc12_year1,B,Bl4,SAHEL77,A ,3.467000008
+year1,loc12,loc12_year1,B,Bl4,HEBDA03,B,2.016000032
+year1,loc12,loc12_year1,B,Bl4,ARDENTE,A ,1.873999953
+year1,loc12,loc12_year1,B,Bl4,OUMRABI9,A ,2.290999889
+year1,loc14,loc14_year1,A,Bl1,KEBIR,A ,1.973999977
+year1,loc14,loc14_year1,A,Bl1,BELIKH02,A ,2.599999905
+year1,loc14,loc14_year1,A,Bl1,SIMETO,A ,2.605000019
+year1,loc14,loc14_year1,A,Bl1,SAHEL77,A ,2.125999928
+year1,loc14,loc14_year1,A,Bl1,O.ZENADI,B,2.414999962
+year1,loc14,loc14_year1,A,Bl1,B.DUR194,B,2.937000036
+year1,loc14,loc14_year1,A,Bl1,MBBACHIR,B,3.558000088
+year1,loc14,loc14_year1,A,Bl1,OUMRABI9,A ,3.29399991
+year1,loc14,loc14_year1,A,Bl1,VITRON,A ,1.83099997
+year1,loc14,loc14_year1,A,Bl1,DUILIO,A ,2.032000065
+year1,loc14,loc14_year1,A,Bl1,BIDI17,B,1.904000044
+year1,loc14,loc14_year1,A,Bl1,ARDENTE,A ,2.765000105
+year1,loc14,loc14_year1,A,Bl1,HEBD/GDO,A ,2.180999994
+year1,loc14,loc14_year1,A,Bl1,CHENS,A ,2.052999973
+year1,loc14,loc14_year1,A,Bl1,HEBDA03,B,2.121999979
+year1,loc14,loc14_year1,A,Bl1,POLONICU,B,1.460999966
+year1,loc14,loc14_year1,A,Bl1,INRAT69,A ,1.745000005
+year1,loc14,loc14_year1,A,Bl1,OFANTO,A ,1.90199995
+year1,loc14,loc14_year1,A,Bl1,MEXICALI,A ,2.34100008
+year1,loc14,loc14_year1,A,Bl1,POLON/ZB,B,2.138000011
+year1,loc14,loc14_year1,A,Bl1,EIDER,A ,2.121999979
+year1,loc14,loc14_year1,A,Bl1,GTADUR,A ,2.601000071
+year1,loc14,loc14_year1,A,Bl1,BID/WAHA,A ,2.782000065
+year1,loc14,loc14_year1,A,Bl1,WAHA,A ,1.907999992
+year1,loc14,loc14_year1,A,Bl2,OFANTO,A ,2.04399991
+year1,loc14,loc14_year1,A,Bl2,WAHA,A ,2.494999886
+year1,loc14,loc14_year1,A,Bl2,VITRON,A ,1.751000047
+year1,loc14,loc14_year1,A,Bl2,BID/WAHA,A ,2.141000032
+year1,loc14,loc14_year1,A,Bl2,EIDER,A ,2.003000021
+year1,loc14,loc14_year1,A,Bl2,HEBD/GDO,A ,1.92900002
+year1,loc14,loc14_year1,A,Bl2,INRAT69,A ,2.41899991
+year1,loc14,loc14_year1,A,Bl2,KEBIR,A ,2.599999905
+year1,loc14,loc14_year1,A,Bl2,CHENS,A ,1.911999941
+year1,loc14,loc14_year1,A,Bl2,MEXICALI,A ,2.517999887
+year1,loc14,loc14_year1,A,Bl2,GTADUR,A ,2.272000074
+year1,loc14,loc14_year1,A,Bl2,MBBACHIR,B,3.005000114
+year1,loc14,loc14_year1,A,Bl2,ARDENTE,A ,1.958999991
+year1,loc14,loc14_year1,A,Bl2,BIDI17,B,1.340000033
+year1,loc14,loc14_year1,A,Bl2,SIMETO,A ,2.138999939
+year1,loc14,loc14_year1,A,Bl2,POLON/ZB,B,1.697999954
+year1,loc14,loc14_year1,A,Bl2,O.ZENADI,B,2.023999929
+year1,loc14,loc14_year1,A,Bl2,B.DUR194,B,1.470000029
+year1,loc14,loc14_year1,A,Bl2,SAHEL77,A ,1.616000056
+year1,loc14,loc14_year1,A,Bl2,DUILIO,A ,1.590000033
+year1,loc14,loc14_year1,A,Bl2,POLONICU,B,1.83099997
+year1,loc14,loc14_year1,A,Bl2,BELIKH02,A ,2.398000002
+year1,loc14,loc14_year1,A,Bl2,OUMRABI9,A ,1.506999969
+year1,loc14,loc14_year1,A,Bl2,HEBDA03,B,1.350000024
+year1,loc14,loc14_year1,A,Bl3,BIDI17,B,1.771999955
+year1,loc14,loc14_year1,A,Bl3,SAHEL77,A ,2.630000114
+year1,loc14,loc14_year1,A,Bl3,O.ZENADI,B,2.509000063
+year1,loc14,loc14_year1,A,Bl3,CHENS,A ,2.641000032
+year1,loc14,loc14_year1,A,Bl3,OFANTO,A ,2.782000065
+year1,loc14,loc14_year1,A,Bl3,GTADUR,A ,2.503999949
+year1,loc14,loc14_year1,A,Bl3,POLONICU,B,2.198999882
+year1,loc14,loc14_year1,A,Bl3,ARDENTE,A ,2.779999971
+year1,loc14,loc14_year1,A,Bl3,SIMETO,A ,2.676000118
+year1,loc14,loc14_year1,A,Bl3,HEBD/GDO,A ,2.519999981
+year1,loc14,loc14_year1,A,Bl3,VITRON,A ,2.036000013
+year1,loc14,loc14_year1,A,Bl3,MEXICALI,A ,2.634000063
+year1,loc14,loc14_year1,A,Bl3,OUMRABI9,A ,2.855999947
+year1,loc14,loc14_year1,A,Bl3,DUILIO,A ,1.715999961
+year1,loc14,loc14_year1,A,Bl3,BELIKH02,A ,2.545000076
+year1,loc14,loc14_year1,A,Bl3,INRAT69,A ,2.144000053
+year1,loc14,loc14_year1,A,Bl3,EIDER,A ,2.244999886
+year1,loc14,loc14_year1,A,Bl3,HEBDA03,B,2.246000051
+year1,loc14,loc14_year1,A,Bl3,POLON/ZB,B,3.006000042
+year1,loc14,loc14_year1,A,Bl3,KEBIR,A ,2.095000029
+year1,loc14,loc14_year1,A,Bl3,B.DUR194,B,2.782000065
+year1,loc14,loc14_year1,A,Bl3,MBBACHIR,B,2.26699996
+year1,loc14,loc14_year1,A,Bl3,WAHA,A ,2.421000004
+year1,loc14,loc14_year1,A,Bl3,BID/WAHA,A ,2.151000023
+year1,loc14,loc14_year1,A,Bl4,WAHA,A ,2.410000086
+year1,loc14,loc14_year1,A,Bl4,ARDENTE,A ,2.832999945
+year1,loc14,loc14_year1,A,Bl4,MEXICALI,A ,2.296999931
+year1,loc14,loc14_year1,A,Bl4,POLONICU,B,2.546999931
+year1,loc14,loc14_year1,A,Bl4,BELIKH02,A ,2.13499999
+year1,loc14,loc14_year1,A,Bl4,POLON/ZB,B,2.361999989
+year1,loc14,loc14_year1,A,Bl4,SAHEL77,A ,2.417999983
+year1,loc14,loc14_year1,A,Bl4,BID/WAHA,A ,2.457000017
+year1,loc14,loc14_year1,A,Bl4,VITRON,A ,1.697999954
+year1,loc14,loc14_year1,A,Bl4,EIDER,A ,2.023999929
+year1,loc14,loc14_year1,A,Bl4,GTADUR,A ,2.292999983
+year1,loc14,loc14_year1,A,Bl4,BIDI17,B,2.119999886
+year1,loc14,loc14_year1,A,Bl4,CHENS,A ,2.851999998
+year1,loc14,loc14_year1,A,Bl4,O.ZENADI,B,1.802999973
+year1,loc14,loc14_year1,A,Bl4,OUMRABI9,A ,2.730000019
+year1,loc14,loc14_year1,A,Bl4,B.DUR194,B,2.496000051
+year1,loc14,loc14_year1,A,Bl4,DUILIO,A ,2.200999975
+year1,loc14,loc14_year1,A,Bl4,HEBD/GDO,A ,2.562000036
+year1,loc14,loc14_year1,A,Bl4,SIMETO,A ,1.949000001
+year1,loc14,loc14_year1,A,Bl4,OFANTO,A ,2.529000044
+year1,loc14,loc14_year1,A,Bl4,INRAT69,A ,2.187000036
+year1,loc14,loc14_year1,A,Bl4,KEBIR,A ,2.178999901
+year1,loc14,loc14_year1,A,Bl4,MBBACHIR,B,1.675999999
+year1,loc14,loc14_year1,A,Bl4,HEBDA03,B,2.26699996
+year1,loc16,loc16_year1,B,Bl1,INRAT69,A ,1.322000027
+year1,loc16,loc16_year1,B,Bl1,HEBD/GDO,A ,1.05400002
+year1,loc16,loc16_year1,B,Bl1,WAHA,A ,1.753000021
+year1,loc16,loc16_year1,B,Bl1,CHENS,A ,1.722000003
+year1,loc16,loc16_year1,B,Bl1,BELIKH02,A ,1.583999991
+year1,loc16,loc16_year1,B,Bl1,ARDENTE,A ,0.84799999
+year1,loc16,loc16_year1,B,Bl1,GTADUR,A ,1.17900002
+year1,loc16,loc16_year1,B,Bl1,MBBACHIR,B,1.014999986
+year1,loc16,loc16_year1,B,Bl1,POLONICU,B,0.474000007
+year1,loc16,loc16_year1,B,Bl1,HEBDA03,B,1.40199995
+year1,loc16,loc16_year1,B,Bl1,B.DUR194,B,1.605999947
+year1,loc16,loc16_year1,B,Bl1,POLON/ZB,B,0.906000018
+year1,loc16,loc16_year1,B,Bl1,KEBIR,A ,1.927000046
+year1,loc16,loc16_year1,B,Bl1,OFANTO,A ,2.359999895
+year1,loc16,loc16_year1,B,Bl1,DUILIO,A ,1.623999953
+year1,loc16,loc16_year1,B,Bl1,O.ZENADI,B,0.832000017
+year1,loc16,loc16_year1,B,Bl1,BID/WAHA,A ,1.452000022
+year1,loc16,loc16_year1,B,Bl1,EIDER,A ,1.307000041
+year1,loc16,loc16_year1,B,Bl1,BIDI17,B,0.861000001
+year1,loc16,loc16_year1,B,Bl1,OUMRABI9,A ,1.467000008
+year1,loc16,loc16_year1,B,Bl1,VITRON,A ,1.644999981
+year1,loc16,loc16_year1,B,Bl1,SIMETO,A ,1.264999986
+year1,loc16,loc16_year1,B,Bl1,MEXICALI,A ,2.210000038
+year1,loc16,loc16_year1,B,Bl1,SAHEL77,A ,2.517999887
+year1,loc16,loc16_year1,B,Bl2,HEBDA03,B,1.40199995
+year1,loc16,loc16_year1,B,Bl2,KEBIR,A ,1.725000024
+year1,loc16,loc16_year1,B,Bl2,SAHEL77,A ,2.503000021
+year1,loc16,loc16_year1,B,Bl2,OUMRABI9,A ,1.351999998
+year1,loc16,loc16_year1,B,Bl2,POLONICU,B,1.207999945
+year1,loc16,loc16_year1,B,Bl2,ARDENTE,A ,0.920000017
+year1,loc16,loc16_year1,B,Bl2,POLON/ZB,B,0.748000026
+year1,loc16,loc16_year1,B,Bl2,O.ZENADI,B,0.788999975
+year1,loc16,loc16_year1,B,Bl2,INRAT69,A ,2.069000006
+year1,loc16,loc16_year1,B,Bl2,HEBD/GDO,A ,0.894999981
+year1,loc16,loc16_year1,B,Bl2,CHENS,A ,2.108999968
+year1,loc16,loc16_year1,B,Bl2,BIDI17,B,1.034000039
+year1,loc16,loc16_year1,B,Bl2,EIDER,A ,1.868000031
+year1,loc16,loc16_year1,B,Bl2,DUILIO,A ,2.154999971
+year1,loc16,loc16_year1,B,Bl2,BELIKH02,A ,2.303999901
+year1,loc16,loc16_year1,B,Bl2,BID/WAHA,A ,1.753999949
+year1,loc16,loc16_year1,B,Bl2,VITRON,A ,2.13499999
+year1,loc16,loc16_year1,B,Bl2,B.DUR194,B,1.577000022
+year1,loc16,loc16_year1,B,Bl2,MBBACHIR,B,1.187000036
+year1,loc16,loc16_year1,B,Bl2,SIMETO,A ,1.911999941
+year1,loc16,loc16_year1,B,Bl2,MEXICALI,A ,2.237999916
+year1,loc16,loc16_year1,B,Bl2,OFANTO,A ,2.029000044
+year1,loc16,loc16_year1,B,Bl2,GTADUR,A ,1.753999949
+year1,loc16,loc16_year1,B,Bl2,WAHA,A ,2.240999937
+year1,loc16,loc16_year1,B,Bl3,INRAT69,A ,1.580000043
+year1,loc16,loc16_year1,B,Bl3,BID/WAHA,A ,1.710999966
+year1,loc16,loc16_year1,B,Bl3,VITRON,A ,2.092000008
+year1,loc16,loc16_year1,B,Bl3,OFANTO,A ,1.610999942
+year1,loc16,loc16_year1,B,Bl3,MEXICALI,A ,1.922999978
+year1,loc16,loc16_year1,B,Bl3,ARDENTE,A ,0.791000009
+year1,loc16,loc16_year1,B,Bl3,O.ZENADI,B,0.717000008
+year1,loc16,loc16_year1,B,Bl3,POLON/ZB,B,0.862999976
+year1,loc16,loc16_year1,B,Bl3,SIMETO,A ,1.855000019
+year1,loc16,loc16_year1,B,Bl3,CHENS,A ,2.009000063
+year1,loc16,loc16_year1,B,Bl3,WAHA,A ,2.082999945
+year1,loc16,loc16_year1,B,Bl3,OUMRABI9,A ,1.868999958
+year1,loc16,loc16_year1,B,Bl3,POLONICU,B,0.906000018
+year1,loc16,loc16_year1,B,Bl3,DUILIO,A ,2.055000067
+year1,loc16,loc16_year1,B,Bl3,HEBDA03,B,0.930000007
+year1,loc16,loc16_year1,B,Bl3,BELIKH02,A ,1.511999965
+year1,loc16,loc16_year1,B,Bl3,HEBD/GDO,A ,0.894999981
+year1,loc16,loc16_year1,B,Bl3,EIDER,A ,1.36500001
+year1,loc16,loc16_year1,B,Bl3,GTADUR,A ,1.480999947
+year1,loc16,loc16_year1,B,Bl3,B.DUR194,B,1.06099999
+year1,loc16,loc16_year1,B,Bl3,SAHEL77,A ,2.575000048
+year1,loc16,loc16_year1,B,Bl3,MBBACHIR,B,1.35800004
+year1,loc16,loc16_year1,B,Bl3,BIDI17,B,0.560000002
+year1,loc16,loc16_year1,B,Bl3,KEBIR,A ,1.652999997
+year1,loc16,loc16_year1,B,Bl4,MEXICALI,A ,2.510999918
+year1,loc16,loc16_year1,B,Bl4,EIDER,A ,1.753000021
+year1,loc16,loc16_year1,B,Bl4,BID/WAHA,A ,1.911999941
+year1,loc16,loc16_year1,B,Bl4,BIDI17,B,1.004999995
+year1,loc16,loc16_year1,B,Bl4,HEBDA03,B,1.802999973
+year1,loc16,loc16_year1,B,Bl4,O.ZENADI,B,0.889999986
+year1,loc16,loc16_year1,B,Bl4,B.DUR194,B,0.773999989
+year1,loc16,loc16_year1,B,Bl4,SAHEL77,A ,2.374000072
+year1,loc16,loc16_year1,B,Bl4,MBBACHIR,B,1.373000026
+year1,loc16,loc16_year1,B,Bl4,BELIKH02,A ,2.289000034
+year1,loc16,loc16_year1,B,Bl4,OFANTO,A ,1.741000056
+year1,loc16,loc16_year1,B,Bl4,KEBIR,A ,1.337000012
+year1,loc16,loc16_year1,B,Bl4,POLONICU,B,0.84799999
+year1,loc16,loc16_year1,B,Bl4,ARDENTE,A ,0.876999974
+year1,loc16,loc16_year1,B,Bl4,GTADUR,A ,1.710999966
+year1,loc16,loc16_year1,B,Bl4,HEBD/GDO,A ,0.995999992
+year1,loc16,loc16_year1,B,Bl4,WAHA,A ,1.667000055
+year1,loc16,loc16_year1,B,Bl4,DUILIO,A ,1.36500001
+year1,loc16,loc16_year1,B,Bl4,INRAT69,A ,1.580000043
+year1,loc16,loc16_year1,B,Bl4,CHENS,A ,1.692999959
+year1,loc16,loc16_year1,B,Bl4,SIMETO,A ,1.307999969
+year1,loc16,loc16_year1,B,Bl4,OUMRABI9,A ,1.222000003
+year1,loc16,loc16_year1,B,Bl4,POLON/ZB,B,0.84799999
+year1,loc16,loc16_year1,B,Bl4,VITRON,A ,1.817999959
+year1,loc18,loc18_year1,B,Bl1,BID/WAHA,A ,1.758000016
+year1,loc18,loc18_year1,B,Bl1,EIDER,A ,1.886999965
+year1,loc18,loc18_year1,B,Bl1,WAHA,A ,2.270999908
+year1,loc18,loc18_year1,B,Bl1,DUILIO,A ,1.746999979
+year1,loc18,loc18_year1,B,Bl1,HEBDA03,B,1.23300004
+year1,loc18,loc18_year1,B,Bl1,BIDI17,B,0.882000029
+year1,loc18,loc18_year1,B,Bl1,GTADUR,A ,1.860000014
+year1,loc18,loc18_year1,B,Bl1,B.DUR194,B,1.677000046
+year1,loc18,loc18_year1,B,Bl1,INRAT69,A ,1.807000041
+year1,loc18,loc18_year1,B,Bl1,SAHEL77,A ,2.453000069
+year1,loc18,loc18_year1,B,Bl1,BELIKH02,A ,1.187000036
+year1,loc18,loc18_year1,B,Bl1,KEBIR,A ,1.284999967
+year1,loc18,loc18_year1,B,Bl1,CHENS,A ,1.593999982
+year1,loc18,loc18_year1,B,Bl1,VITRON,A ,1.792000055
+year1,loc18,loc18_year1,B,Bl1,OFANTO,A ,2.09100008
+year1,loc18,loc18_year1,B,Bl1,MBBACHIR,B,1.363999963
+year1,loc18,loc18_year1,B,Bl1,HEBD/GDO,A ,0.973999977
+year1,loc18,loc18_year1,B,Bl1,MEXICALI,A ,1.167999983
+year1,loc18,loc18_year1,B,Bl1,POLON/ZB,B,0.971000016
+year1,loc18,loc18_year1,B,Bl1,SIMETO,A ,1.962000012
+year1,loc18,loc18_year1,B,Bl1,ARDENTE,A ,1.325999975
+year1,loc18,loc18_year1,B,Bl1,OUMRABI9,A ,1.786999941
+year1,loc18,loc18_year1,B,Bl1,POLONICU,B,1.758999944
+year1,loc18,loc18_year1,B,Bl1,O.ZENADI,B,0.915000021
+year1,loc18,loc18_year1,B,Bl2,INRAT69,A ,2.095999956
+year1,loc18,loc18_year1,B,Bl2,SAHEL77,A ,2.842000008
+year1,loc18,loc18_year1,B,Bl2,MEXICALI,A ,1.470999956
+year1,loc18,loc18_year1,B,Bl2,BELIKH02,A ,1.200999975
+year1,loc18,loc18_year1,B,Bl2,HEBD/GDO,A ,0.973999977
+year1,loc18,loc18_year1,B,Bl2,GTADUR,A ,1.83099997
+year1,loc18,loc18_year1,B,Bl2,CHENS,A ,1.666000009
+year1,loc18,loc18_year1,B,Bl2,VITRON,A ,2.066999912
+year1,loc18,loc18_year1,B,Bl2,BIDI17,B,0.781000018
+year1,loc18,loc18_year1,B,Bl2,MBBACHIR,B,1.335000038
+year1,loc18,loc18_year1,B,Bl2,ARDENTE,A ,1.45599997
+year1,loc18,loc18_year1,B,Bl2,BID/WAHA,A ,1.656000018
+year1,loc18,loc18_year1,B,Bl2,KEBIR,A ,1.212000012
+year1,loc18,loc18_year1,B,Bl2,DUILIO,A ,1.631999969
+year1,loc18,loc18_year1,B,Bl2,O.ZENADI,B,1.001999974
+year1,loc18,loc18_year1,B,Bl2,SIMETO,A ,1.817999959
+year1,loc18,loc18_year1,B,Bl2,EIDER,A ,1.960000038
+year1,loc18,loc18_year1,B,Bl2,POLON/ZB,B,1.014000058
+year1,loc18,loc18_year1,B,Bl2,POLONICU,B,1.889000058
+year1,loc18,loc18_year1,B,Bl2,B.DUR194,B,1.807000041
+year1,loc18,loc18_year1,B,Bl2,OUMRABI9,A ,1.962000012
+year1,loc18,loc18_year1,B,Bl2,OFANTO,A ,1.973999977
+year1,loc18,loc18_year1,B,Bl2,WAHA,A ,2.286000013
+year1,loc18,loc18_year1,B,Bl2,HEBDA03,B,1.422000051
+year1,loc18,loc18_year1,B,Bl3,MBBACHIR,B,1.480999947
+year1,loc18,loc18_year1,B,Bl3,EIDER,A ,2.046999931
+year1,loc18,loc18_year1,B,Bl3,INRAT69,A ,1.850999951
+year1,loc18,loc18_year1,B,Bl3,OUMRABI9,A ,2.078000069
+year1,loc18,loc18_year1,B,Bl3,SIMETO,A ,1.470999956
+year1,loc18,loc18_year1,B,Bl3,KEBIR,A ,1.401000023
+year1,loc18,loc18_year1,B,Bl3,SAHEL77,A ,2.857000113
+year1,loc18,loc18_year1,B,Bl3,DUILIO,A ,1.356999993
+year1,loc18,loc18_year1,B,Bl3,CHENS,A ,1.883000016
+year1,loc18,loc18_year1,B,Bl3,POLONICU,B,1.629999995
+year1,loc18,loc18_year1,B,Bl3,WAHA,A ,2.155999899
+year1,loc18,loc18_year1,B,Bl3,MEXICALI,A ,1.529000044
+year1,loc18,loc18_year1,B,Bl3,BELIKH02,A ,1.274000049
+year1,loc18,loc18_year1,B,Bl3,O.ZENADI,B,1.001999974
+year1,loc18,loc18_year1,B,Bl3,B.DUR194,B,1.417000055
+year1,loc18,loc18_year1,B,Bl3,GTADUR,A ,1.932000041
+year1,loc18,loc18_year1,B,Bl3,HEBD/GDO,A ,1.01699996
+year1,loc18,loc18_year1,B,Bl3,OFANTO,A ,1.843999982
+year1,loc18,loc18_year1,B,Bl3,BID/WAHA,A ,1.860000014
+year1,loc18,loc18_year1,B,Bl3,BIDI17,B,0.911000013
+year1,loc18,loc18_year1,B,Bl3,HEBDA03,B,1.320000052
+year1,loc18,loc18_year1,B,Bl3,VITRON,A ,2.023000002
+year1,loc18,loc18_year1,B,Bl3,POLON/ZB,B,1.116000056
+year1,loc18,loc18_year1,B,Bl3,ARDENTE,A ,1.644000053
+year1,loc18,loc18_year1,B,Bl4,GTADUR,A ,1.800999999
+year1,loc18,loc18_year1,B,Bl4,SIMETO,A ,1.54400003
+year1,loc18,loc18_year1,B,Bl4,DUILIO,A ,1.327999949
+year1,loc18,loc18_year1,B,Bl4,HEBD/GDO,A ,1.090000033
+year1,loc18,loc18_year1,B,Bl4,WAHA,A ,2.198999882
+year1,loc18,loc18_year1,B,Bl4,B.DUR194,B,1.40199995
+year1,loc18,loc18_year1,B,Bl4,EIDER,A ,2.234999895
+year1,loc18,loc18_year1,B,Bl4,SAHEL77,A ,2.943000078
+year1,loc18,loc18_year1,B,Bl4,O.ZENADI,B,1.074000001
+year1,loc18,loc18_year1,B,Bl4,ARDENTE,A ,1.600000024
+year1,loc18,loc18_year1,B,Bl4,BELIKH02,A ,1.345999956
+year1,loc18,loc18_year1,B,Bl4,MBBACHIR,B,1.305999994
+year1,loc18,loc18_year1,B,Bl4,INRAT69,A ,2.052999973
+year1,loc18,loc18_year1,B,Bl4,HEBDA03,B,1.261999965
+year1,loc18,loc18_year1,B,Bl4,BID/WAHA,A ,1.904000044
+year1,loc18,loc18_year1,B,Bl4,CHENS,A ,1.853999972
+year1,loc18,loc18_year1,B,Bl4,MEXICALI,A ,1.370000005
+year1,loc18,loc18_year1,B,Bl4,POLONICU,B,1.817000031
+year1,loc18,loc18_year1,B,Bl4,BIDI17,B,0.897000015
+year1,loc18,loc18_year1,B,Bl4,OUMRABI9,A ,1.873999953
+year1,loc18,loc18_year1,B,Bl4,KEBIR,A ,1.182000041
+year1,loc18,loc18_year1,B,Bl4,OFANTO,A ,1.756999969
+year1,loc18,loc18_year1,B,Bl4,VITRON,A ,1.950999975
+year1,loc18,loc18_year1,B,Bl4,POLON/ZB,B,1.014000058
+year2,loc01,loc01_year2,B,Bl1,DUILIO,A ,3.700000048
+year2,loc01,loc01_year2,B,Bl1,MBBACHIR,B,1.149999976
+year2,loc01,loc01_year2,B,Bl1,GTADUR,A ,2.917000055
+year2,loc01,loc01_year2,B,Bl1,O.ZENADI,B,1.575999975
+year2,loc01,loc01_year2,B,Bl1,WAHA,A ,3.094000101
+year2,loc01,loc01_year2,B,Bl1,HEBD/GDO,A ,2.65199995
+year2,loc01,loc01_year2,B,Bl1,ARDENTE,A ,2.780999899
+year2,loc01,loc01_year2,B,Bl1,SAHEL77,A ,3.467999935
+year2,loc01,loc01_year2,B,Bl1,BIDI17,B,2.335000038
+year2,loc01,loc01_year2,B,Bl1,VITRON,A ,3.506999969
+year2,loc01,loc01_year2,B,Bl1,BID/WAHA,A ,3.134000063
+year2,loc01,loc01_year2,B,Bl1,SIMETO,A ,3.35800004
+year2,loc01,loc01_year2,B,Bl1,CHENS,A ,3.457000017
+year2,loc01,loc01_year2,B,Bl1,MEXICALI,A ,3.180000067
+year2,loc01,loc01_year2,B,Bl1,POLONICU,B,2.167000055
+year2,loc01,loc01_year2,B,Bl1,OUMRABI9,A ,2.296999931
+year2,loc01,loc01_year2,B,Bl1,HEBDA03,B,1.728999972
+year2,loc01,loc01_year2,B,Bl1,B.DUR194,B,2.755000114
+year2,loc01,loc01_year2,B,Bl1,OFANTO,A ,3.654000044
+year2,loc01,loc01_year2,B,Bl1,EIDER,A ,2.178999901
+year2,loc01,loc01_year2,B,Bl1,POLON/ZB,B,1.876999974
+year2,loc01,loc01_year2,B,Bl1,INRAT69,A ,2.921999931
+year2,loc01,loc01_year2,B,Bl1,KEBIR,A ,3.035000086
+year2,loc01,loc01_year2,B,Bl1,BELIKH02,A ,3.036000013
+year2,loc01,loc01_year2,B,Bl2,BELIKH02,A ,2.891000032
+year2,loc01,loc01_year2,B,Bl2,GTADUR,A ,2.625999928
+year2,loc01,loc01_year2,B,Bl2,MEXICALI,A ,3.180000067
+year2,loc01,loc01_year2,B,Bl2,HEBDA03,B,1.585000038
+year2,loc01,loc01_year2,B,Bl2,VITRON,A ,3.361000061
+year2,loc01,loc01_year2,B,Bl2,ARDENTE,A ,2.049000025
+year2,loc01,loc01_year2,B,Bl2,CHENS,A ,3.457000017
+year2,loc01,loc01_year2,B,Bl2,BID/WAHA,A ,2.835000038
+year2,loc01,loc01_year2,B,Bl2,SIMETO,A ,3.796000004
+year2,loc01,loc01_year2,B,Bl2,INRAT69,A ,2.483999968
+year2,loc01,loc01_year2,B,Bl2,O.ZENADI,B,1.432999969
+year2,loc01,loc01_year2,B,Bl2,POLON/ZB,B,1.73300004
+year2,loc01,loc01_year2,B,Bl2,B.DUR194,B,2.464999914
+year2,loc01,loc01_year2,B,Bl2,OFANTO,A ,3.214999914
+year2,loc01,loc01_year2,B,Bl2,BIDI17,B,2.042999983
+year2,loc01,loc01_year2,B,Bl2,DUILIO,A ,3.10800004
+year2,loc01,loc01_year2,B,Bl2,OUMRABI9,A ,3.157999992
+year2,loc01,loc01_year2,B,Bl2,KEBIR,A ,2.746000051
+year2,loc01,loc01_year2,B,Bl2,HEBD/GDO,A ,2.799999952
+year2,loc01,loc01_year2,B,Bl2,MBBACHIR,B,1.437999964
+year2,loc01,loc01_year2,B,Bl2,EIDER,A ,2.759000063
+year2,loc01,loc01_year2,B,Bl2,SAHEL77,A ,3.323999882
+year2,loc01,loc01_year2,B,Bl2,WAHA,A ,2.799000025
+year2,loc01,loc01_year2,B,Bl2,POLONICU,B,1.588999987
+year2,loc01,loc01_year2,B,Bl3,ARDENTE,A ,2.487999916
+year2,loc01,loc01_year2,B,Bl3,POLONICU,B,1.445000052
+year2,loc01,loc01_year2,B,Bl3,MEXICALI,A ,3.469000101
+year2,loc01,loc01_year2,B,Bl3,B.DUR194,B,2.319999933
+year2,loc01,loc01_year2,B,Bl3,BIDI17,B,2.042999983
+year2,loc01,loc01_year2,B,Bl3,KEBIR,A ,3.035000086
+year2,loc01,loc01_year2,B,Bl3,HEBD/GDO,A ,2.799999952
+year2,loc01,loc01_year2,B,Bl3,O.ZENADI,B,1.146000028
+year2,loc01,loc01_year2,B,Bl3,SIMETO,A ,2.773999929
+year2,loc01,loc01_year2,B,Bl3,INRAT69,A ,3.213999987
+year2,loc01,loc01_year2,B,Bl3,VITRON,A ,2.921999931
+year2,loc01,loc01_year2,B,Bl3,BELIKH02,A ,2.746999979
+year2,loc01,loc01_year2,B,Bl3,EIDER,A ,3.049999952
+year2,loc01,loc01_year2,B,Bl3,HEBDA03,B,1.440999985
+year2,loc01,loc01_year2,B,Bl3,GTADUR,A ,3.500999928
+year2,loc01,loc01_year2,B,Bl3,POLON/ZB,B,1.876999974
+year2,loc01,loc01_year2,B,Bl3,WAHA,A ,3.240999937
+year2,loc01,loc01_year2,B,Bl3,MBBACHIR,B,1.437999964
+year2,loc01,loc01_year2,B,Bl3,SAHEL77,A ,3.178999901
+year2,loc01,loc01_year2,B,Bl3,OUMRABI9,A ,2.727999926
+year2,loc01,loc01_year2,B,Bl3,BID/WAHA,A ,2.984999895
+year2,loc01,loc01_year2,B,Bl3,DUILIO,A ,2.812000036
+year2,loc01,loc01_year2,B,Bl3,CHENS,A ,2.736999989
+year2,loc01,loc01_year2,B,Bl3,OFANTO,A ,2.923000097
+year2,loc01,loc01_year2,B,Bl4,OFANTO,A ,2.77699995
+year2,loc01,loc01_year2,B,Bl4,POLONICU,B,1.299999952
+year2,loc01,loc01_year2,B,Bl4,VITRON,A ,3.506999969
+year2,loc01,loc01_year2,B,Bl4,ARDENTE,A ,2.487999916
+year2,loc01,loc01_year2,B,Bl4,O.ZENADI,B,1.432999969
+year2,loc01,loc01_year2,B,Bl4,SIMETO,A ,3.796000004
+year2,loc01,loc01_year2,B,Bl4,KEBIR,A ,2.312000036
+year2,loc01,loc01_year2,B,Bl4,MBBACHIR,B,1.437999964
+year2,loc01,loc01_year2,B,Bl4,BELIKH02,A ,2.601999998
+year2,loc01,loc01_year2,B,Bl4,WAHA,A ,3.388000011
+year2,loc01,loc01_year2,B,Bl4,GTADUR,A ,3.062999964
+year2,loc01,loc01_year2,B,Bl4,EIDER,A ,2.614000082
+year2,loc01,loc01_year2,B,Bl4,BIDI17,B,2.042999983
+year2,loc01,loc01_year2,B,Bl4,CHENS,A ,3.025000095
+year2,loc01,loc01_year2,B,Bl4,POLON/ZB,B,2.165999889
+year2,loc01,loc01_year2,B,Bl4,SAHEL77,A ,2.457000017
+year2,loc01,loc01_year2,B,Bl4,HEBD/GDO,A ,2.65199995
+year2,loc01,loc01_year2,B,Bl4,B.DUR194,B,2.609999895
+year2,loc01,loc01_year2,B,Bl4,DUILIO,A ,3.256000042
+year2,loc01,loc01_year2,B,Bl4,HEBDA03,B,1.728999972
+year2,loc01,loc01_year2,B,Bl4,BID/WAHA,A ,3.282999992
+year2,loc01,loc01_year2,B,Bl4,OUMRABI9,A ,3.015000105
+year2,loc01,loc01_year2,B,Bl4,MEXICALI,A ,3.614000082
+year2,loc01,loc01_year2,B,Bl4,INRAT69,A ,2.191999912
+year2,loc02,loc02_year2,A,Bl1,GTADUR,A ,1.19599998
+year2,loc02,loc02_year2,A,Bl1,MBBACHIR,B,1.273000002
+year2,loc02,loc02_year2,A,Bl1,HEBDA03,B,1.014999986
+year2,loc02,loc02_year2,A,Bl1,O.ZENADI,B,0.995000005
+year2,loc02,loc02_year2,A,Bl1,INRAT69,A ,1.22300005
+year2,loc02,loc02_year2,A,Bl1,HEBD/GDO,A ,0.991999984
+year2,loc02,loc02_year2,A,Bl1,WAHA,A ,1.090000033
+year2,loc02,loc02_year2,A,Bl1,VITRON,A ,0.788999975
+year2,loc02,loc02_year2,A,Bl1,BIDI17,B,0.973999977
+year2,loc02,loc02_year2,A,Bl1,OUMRABI9,A ,1.462000012
+year2,loc02,loc02_year2,A,Bl1,POLON/ZB,B,0.912
+year2,loc02,loc02_year2,A,Bl1,ARDENTE,A ,0.875
+year2,loc02,loc02_year2,A,Bl1,SIMETO,A ,1.287999988
+year2,loc02,loc02_year2,A,Bl1,BELIKH02,A ,1.139000058
+year2,loc02,loc02_year2,A,Bl1,SAHEL77,A ,1.315000057
+year2,loc02,loc02_year2,A,Bl1,CHENS,A ,1.090000033
+year2,loc02,loc02_year2,A,Bl1,OFANTO,A ,1.125
+year2,loc02,loc02_year2,A,Bl1,EIDER,A ,1.023000002
+year2,loc02,loc02_year2,A,Bl1,MEXICALI,A ,1.016000032
+year2,loc02,loc02_year2,A,Bl1,POLONICU,B,1.605000019
+year2,loc02,loc02_year2,A,Bl1,BID/WAHA,A ,1.453999996
+year2,loc02,loc02_year2,A,Bl1,DUILIO,A ,1.881000042
+year2,loc02,loc02_year2,A,Bl1,B.DUR194,B,1.996000051
+year2,loc02,loc02_year2,A,Bl1,KEBIR,A ,1.20599997
+year2,loc02,loc02_year2,A,Bl2,SIMETO,A ,1.317000031
+year2,loc02,loc02_year2,A,Bl2,MBBACHIR,B,1.389999986
+year2,loc02,loc02_year2,A,Bl2,DUILIO,A ,1.912999988
+year2,loc02,loc02_year2,A,Bl2,CHENS,A ,1.279000044
+year2,loc02,loc02_year2,A,Bl2,BIDI17,B,1.018000007
+year2,loc02,loc02_year2,A,Bl2,B.DUR194,B,1.805999994
+year2,loc02,loc02_year2,A,Bl2,INRAT69,A ,1.047999978
+year2,loc02,loc02_year2,A,Bl2,BELIKH02,A ,1.386999965
+year2,loc02,loc02_year2,A,Bl2,HEBDA03,B,1.246999979
+year2,loc02,loc02_year2,A,Bl2,KEBIR,A ,1.271999955
+year2,loc02,loc02_year2,A,Bl2,VITRON,A ,0.68599999
+year2,loc02,loc02_year2,A,Bl2,BID/WAHA,A ,1.148000002
+year2,loc02,loc02_year2,A,Bl2,HEBD/GDO,A ,0.730000019
+year2,loc02,loc02_year2,A,Bl2,POLONICU,B,1.605000019
+year2,loc02,loc02_year2,A,Bl2,EIDER,A ,1.095999956
+year2,loc02,loc02_year2,A,Bl2,WAHA,A ,0.698000014
+year2,loc02,loc02_year2,A,Bl2,GTADUR,A ,1.138000011
+year2,loc02,loc02_year2,A,Bl2,ARDENTE,A ,0.524999976
+year2,loc02,loc02_year2,A,Bl2,SAHEL77,A ,1.460999966
+year2,loc02,loc02_year2,A,Bl2,O.ZENADI,B,0.936999977
+year2,loc02,loc02_year2,A,Bl2,OFANTO,A ,1.139999986
+year2,loc02,loc02_year2,A,Bl2,OUMRABI9,A ,1.213999987
+year2,loc02,loc02_year2,A,Bl2,MEXICALI,A ,0.624000013
+year2,loc02,loc02_year2,A,Bl2,POLON/ZB,B,1.108999968
+year2,loc02,loc02_year2,A,Bl3,BELIKH02,A ,1.284999967
+year2,loc02,loc02_year2,A,Bl3,B.DUR194,B,1.383999944
+year2,loc02,loc02_year2,A,Bl3,BIDI17,B,1.062000036
+year2,loc02,loc02_year2,A,Bl3,KEBIR,A ,1.256999969
+year2,loc02,loc02_year2,A,Bl3,BID/WAHA,A ,1.264999986
+year2,loc02,loc02_year2,A,Bl3,ARDENTE,A ,0.699999988
+year2,loc02,loc02_year2,A,Bl3,POLONICU,B,1.458999991
+year2,loc02,loc02_year2,A,Bl3,INRAT69,A ,0.94599998
+year2,loc02,loc02_year2,A,Bl3,VITRON,A ,0.716000021
+year2,loc02,loc02_year2,A,Bl3,OFANTO,A ,0.994000018
+year2,loc02,loc02_year2,A,Bl3,SIMETO,A ,1.200000048
+year2,loc02,loc02_year2,A,Bl3,DUILIO,A ,1.838999987
+year2,loc02,loc02_year2,A,Bl3,SAHEL77,A ,1.447000027
+year2,loc02,loc02_year2,A,Bl3,WAHA,A ,0.66900003
+year2,loc02,loc02_year2,A,Bl3,EIDER,A ,1.241999984
+year2,loc02,loc02_year2,A,Bl3,POLON/ZB,B,1.254999995
+year2,loc02,loc02_year2,A,Bl3,MEXICALI,A ,0.754000008
+year2,loc02,loc02_year2,A,Bl3,CHENS,A ,0.915000021
+year2,loc02,loc02_year2,A,Bl3,HEBD/GDO,A ,0.963
+year2,loc02,loc02_year2,A,Bl3,HEBDA03,B,0.754000008
+year2,loc02,loc02_year2,A,Bl3,GTADUR,A ,1.401000023
+year2,loc02,loc02_year2,A,Bl3,MBBACHIR,B,1.111999989
+year2,loc02,loc02_year2,A,Bl3,OUMRABI9,A ,1.169999957
+year2,loc02,loc02_year2,A,Bl3,O.ZENADI,B,0.61500001
+year2,loc02,loc02_year2,A,Bl4,CHENS,A ,1.350999951
+year2,loc02,loc02_year2,A,Bl4,O.ZENADI,B,0.658999979
+year2,loc02,loc02_year2,A,Bl4,HEBD/GDO,A ,0.846000016
+year2,loc02,loc02_year2,A,Bl4,INRAT69,A ,0.874000013
+year2,loc02,loc02_year2,A,Bl4,SIMETO,A ,1.156000018
+year2,loc02,loc02_year2,A,Bl4,OFANTO,A ,0.994000018
+year2,loc02,loc02_year2,A,Bl4,POLONICU,B,1.386000037
+year2,loc02,loc02_year2,A,Bl4,POLON/ZB,B,0.904999971
+year2,loc02,loc02_year2,A,Bl4,OUMRABI9,A ,1.169999957
+year2,loc02,loc02_year2,A,Bl4,SAHEL77,A ,1.447000027
+year2,loc02,loc02_year2,A,Bl4,DUILIO,A ,1.692000031
+year2,loc02,loc02_year2,A,Bl4,KEBIR,A ,1.373999953
+year2,loc02,loc02_year2,A,Bl4,BID/WAHA,A ,0.842999995
+year2,loc02,loc02_year2,A,Bl4,EIDER,A ,0.847000003
+year2,loc02,loc02_year2,A,Bl4,VITRON,A ,0.583999991
+year2,loc02,loc02_year2,A,Bl4,BIDI17,B,0.959999979
+year2,loc02,loc02_year2,A,Bl4,MBBACHIR,B,0.964999974
+year2,loc02,loc02_year2,A,Bl4,HEBDA03,B,0.870000005
+year2,loc02,loc02_year2,A,Bl4,ARDENTE,A ,0.656000018
+year2,loc02,loc02_year2,A,Bl4,BELIKH02,A ,1.35800004
+year2,loc02,loc02_year2,A,Bl4,MEXICALI,A ,0.725000024
+year2,loc02,loc02_year2,A,Bl4,B.DUR194,B,1.442000031
+year2,loc02,loc02_year2,A,Bl4,WAHA,A ,0.771000028
+year2,loc02,loc02_year2,A,Bl4,GTADUR,A ,1.093999982
+year2,loc04,loc04_year2,A,Bl1,MBBACHIR,B,0.630999982
+year2,loc04,loc04_year2,A,Bl1,POLONICU,B,1.202000022
+year2,loc04,loc04_year2,A,Bl1,ARDENTE,A ,1.462000012
+year2,loc04,loc04_year2,A,Bl1,OUMRABI9,A ,1.333999991
+year2,loc04,loc04_year2,A,Bl1,VITRON,A ,1.055999994
+year2,loc04,loc04_year2,A,Bl1,O.ZENADI,B,1.213999987
+year2,loc04,loc04_year2,A,Bl1,HEBD/GDO,A ,1.019000053
+year2,loc04,loc04_year2,A,Bl1,WAHA,A ,1.478999972
+year2,loc04,loc04_year2,A,Bl1,INRAT69,A ,1.136000037
+year2,loc04,loc04_year2,A,Bl1,CHENS,A ,1.220999956
+year2,loc04,loc04_year2,A,Bl1,GTADUR,A ,2.186000109
+year2,loc04,loc04_year2,A,Bl1,SAHEL77,A ,1.335999966
+year2,loc04,loc04_year2,A,Bl1,OFANTO,A ,1.511999965
+year2,loc04,loc04_year2,A,Bl1,SIMETO,A ,0.425999999
+year2,loc04,loc04_year2,A,Bl1,BIDI17,B,1.016000032
+year2,loc04,loc04_year2,A,Bl1,EIDER,A ,0.931999981
+year2,loc04,loc04_year2,A,Bl1,DUILIO,A ,0.924000025
+year2,loc04,loc04_year2,A,Bl1,KEBIR,A ,1.001000047
+year2,loc04,loc04_year2,A,Bl1,MEXICALI,A ,0.908999979
+year2,loc04,loc04_year2,A,Bl1,HEBDA03,B,0.90200001
+year2,loc04,loc04_year2,A,Bl1,B.DUR194,B,1.129999995
+year2,loc04,loc04_year2,A,Bl1,BELIKH02,A ,1.460999966
+year2,loc04,loc04_year2,A,Bl1,BID/WAHA,A ,1.264000058
+year2,loc04,loc04_year2,A,Bl1,POLON/ZB,B,0.931999981
+year2,loc04,loc04_year2,A,Bl2,POLON/ZB,B,0.981999993
+year2,loc04,loc04_year2,A,Bl2,HEBDA03,B,0.859000027
+year2,loc04,loc04_year2,A,Bl2,MBBACHIR,B,0.927999973
+year2,loc04,loc04_year2,A,Bl2,SAHEL77,A ,1.427999973
+year2,loc04,loc04_year2,A,Bl2,B.DUR194,B,1.355999947
+year2,loc04,loc04_year2,A,Bl2,KEBIR,A ,1.172000051
+year2,loc04,loc04_year2,A,Bl2,CHENS,A ,1.20599997
+year2,loc04,loc04_year2,A,Bl2,OUMRABI9,A ,0.92900002
+year2,loc04,loc04_year2,A,Bl2,DUILIO,A ,0.709999979
+year2,loc04,loc04_year2,A,Bl2,WAHA,A ,0.785000026
+year2,loc04,loc04_year2,A,Bl2,O.ZENADI,B,1.065000057
+year2,loc04,loc04_year2,A,Bl2,OFANTO,A ,1.340000033
+year2,loc04,loc04_year2,A,Bl2,VITRON,A ,1.202999949
+year2,loc04,loc04_year2,A,Bl2,EIDER,A ,1.159000039
+year2,loc04,loc04_year2,A,Bl2,MEXICALI,A ,0.924000025
+year2,loc04,loc04_year2,A,Bl2,POLONICU,B,1.039999962
+year2,loc04,loc04_year2,A,Bl2,HEBD/GDO,A ,0.898999989
+year2,loc04,loc04_year2,A,Bl2,BELIKH02,A ,1.07099998
+year2,loc04,loc04_year2,A,Bl2,BIDI17,B,1.241999984
+year2,loc04,loc04_year2,A,Bl2,GTADUR,A ,1.399999976
+year2,loc04,loc04_year2,A,Bl2,INRAT69,A ,0.865999997
+year2,loc04,loc04_year2,A,Bl2,ARDENTE,A ,1.208999991
+year2,loc04,loc04_year2,A,Bl2,SIMETO,A ,1.20599997
+year2,loc04,loc04_year2,A,Bl2,BID/WAHA,A ,0.842999995
+year2,loc04,loc04_year2,A,Bl3,SIMETO,A ,0.992999971
+year2,loc04,loc04_year2,A,Bl3,KEBIR,A ,1.11500001
+year2,loc04,loc04_year2,A,Bl3,DUILIO,A ,1.207999945
+year2,loc04,loc04_year2,A,Bl3,HEBD/GDO,A ,1.026000023
+year2,loc04,loc04_year2,A,Bl3,HEBDA03,B,1.059999943
+year2,loc04,loc04_year2,A,Bl3,WAHA,A ,1.103999972
+year2,loc04,loc04_year2,A,Bl3,SAHEL77,A ,0.971000016
+year2,loc04,loc04_year2,A,Bl3,INRAT69,A ,0.859000027
+year2,loc04,loc04_year2,A,Bl3,BELIKH02,A ,1.284000039
+year2,loc04,loc04_year2,A,Bl3,GTADUR,A ,1.085999966
+year2,loc04,loc04_year2,A,Bl3,BID/WAHA,A ,1.194000006
+year2,loc04,loc04_year2,A,Bl3,BIDI17,B,1.171000004
+year2,loc04,loc04_year2,A,Bl3,B.DUR194,B,1.024000049
+year2,loc04,loc04_year2,A,Bl3,EIDER,A ,0.989000022
+year2,loc04,loc04_year2,A,Bl3,O.ZENADI,B,1.164999962
+year2,loc04,loc04_year2,A,Bl3,VITRON,A ,1.090999961
+year2,loc04,loc04_year2,A,Bl3,ARDENTE,A ,1.125
+year2,loc04,loc04_year2,A,Bl3,POLONICU,B,1.05400002
+year2,loc04,loc04_year2,A,Bl3,MBBACHIR,B,1.133999944
+year2,loc04,loc04_year2,A,Bl3,OFANTO,A ,1.282999992
+year2,loc04,loc04_year2,A,Bl3,OUMRABI9,A ,1.20599997
+year2,loc04,loc04_year2,A,Bl3,POLON/ZB,B,1.332999945
+year2,loc04,loc04_year2,A,Bl3,MEXICALI,A ,0.97299999
+year2,loc04,loc04_year2,A,Bl3,CHENS,A ,0.972000003
+year2,loc04,loc04_year2,A,Bl4,MBBACHIR,B,0.991999984
+year2,loc04,loc04_year2,A,Bl4,OFANTO,A ,1.225999951
+year2,loc04,loc04_year2,A,Bl4,BIDI17,B,1.241999984
+year2,loc04,loc04_year2,A,Bl4,KEBIR,A ,1.307000041
+year2,loc04,loc04_year2,A,Bl4,HEBD/GDO,A ,1.236999989
+year2,loc04,loc04_year2,A,Bl4,POLON/ZB,B,1.146999955
+year2,loc04,loc04_year2,A,Bl4,BID/WAHA,A ,1.179999948
+year2,loc04,loc04_year2,A,Bl4,SAHEL77,A ,1.100000024
+year2,loc04,loc04_year2,A,Bl4,O.ZENADI,B,1.235999942
+year2,loc04,loc04_year2,A,Bl4,VITRON,A ,0.978999972
+year2,loc04,loc04_year2,A,Bl4,POLONICU,B,1.236999989
+year2,loc04,loc04_year2,A,Bl4,GTADUR,A ,1.42900002
+year2,loc04,loc04_year2,A,Bl4,DUILIO,A ,1.279000044
+year2,loc04,loc04_year2,A,Bl4,ARDENTE,A ,1.406000018
+year2,loc04,loc04_year2,A,Bl4,SIMETO,A ,0.921999991
+year2,loc04,loc04_year2,A,Bl4,INRAT69,A ,1.192999959
+year2,loc04,loc04_year2,A,Bl4,B.DUR194,B,1.031000018
+year2,loc04,loc04_year2,A,Bl4,CHENS,A ,1.177999973
+year2,loc04,loc04_year2,A,Bl4,HEBDA03,B,1.18900001
+year2,loc04,loc04_year2,A,Bl4,OUMRABI9,A ,1.475999951
+year2,loc04,loc04_year2,A,Bl4,BELIKH02,A ,1.13499999
+year2,loc04,loc04_year2,A,Bl4,EIDER,A ,1.342000008
+year2,loc04,loc04_year2,A,Bl4,WAHA,A ,1.131999969
+year2,loc04,loc04_year2,A,Bl4,MEXICALI,A ,0.851999998
+year2,loc05,loc05_year2,A,Bl1,KEBIR,A ,1.218000054
+year2,loc05,loc05_year2,A,Bl1,VITRON,A ,1.748999953
+year2,loc05,loc05_year2,A,Bl1,HEBD/GDO,A ,1.708999991
+year2,loc05,loc05_year2,A,Bl1,O.ZENADI,B,1.629999995
+year2,loc05,loc05_year2,A,Bl1,BID/WAHA,A ,1.754999995
+year2,loc05,loc05_year2,A,Bl1,GTADUR,A ,2.003999949
+year2,loc05,loc05_year2,A,Bl1,BELIKH02,A ,1.978000045
+year2,loc05,loc05_year2,A,Bl1,OFANTO,A ,2.279999971
+year2,loc05,loc05_year2,A,Bl1,B.DUR194,B,2.01699996
+year2,loc05,loc05_year2,A,Bl1,OUMRABI9,A ,1.82099998
+year2,loc05,loc05_year2,A,Bl1,POLONICU,B,1.893000007
+year2,loc05,loc05_year2,A,Bl1,SAHEL77,A ,1.853000045
+year2,loc05,loc05_year2,A,Bl1,BIDI17,B,1.498000026
+year2,loc05,loc05_year2,A,Bl1,HEBDA03,B,1.675999999
+year2,loc05,loc05_year2,A,Bl1,CHENS,A ,1.88499999
+year2,loc05,loc05_year2,A,Bl1,SIMETO,A ,1.82099998
+year2,loc05,loc05_year2,A,Bl1,ARDENTE,A ,1.68599999
+year2,loc05,loc05_year2,A,Bl1,WAHA,A ,1.644999981
+year2,loc05,loc05_year2,A,Bl1,POLON/ZB,B,1.758999944
+year2,loc05,loc05_year2,A,Bl1,MBBACHIR,B,1.585999966
+year2,loc05,loc05_year2,A,Bl1,DUILIO,A ,1.764000058
+year2,loc05,loc05_year2,A,Bl1,EIDER,A ,1.733999968
+year2,loc05,loc05_year2,A,Bl1,INRAT69,A ,1.302000046
+year2,loc05,loc05_year2,A,Bl1,MEXICALI,A ,1.508999944
+year2,loc05,loc05_year2,A,Bl2,MEXICALI,A ,1.56099999
+year2,loc05,loc05_year2,A,Bl2,OFANTO,A ,1.789999962
+year2,loc05,loc05_year2,A,Bl2,HEBD/GDO,A ,1.544999957
+year2,loc05,loc05_year2,A,Bl2,BID/WAHA,A ,1.452999949
+year2,loc05,loc05_year2,A,Bl2,MBBACHIR,B,1.513000011
+year2,loc05,loc05_year2,A,Bl2,CHENS,A ,1.656000018
+year2,loc05,loc05_year2,A,Bl2,BELIKH02,A ,1.434999943
+year2,loc05,loc05_year2,A,Bl2,KEBIR,A ,1.322000027
+year2,loc05,loc05_year2,A,Bl2,O.ZENADI,B,1.457000017
+year2,loc05,loc05_year2,A,Bl2,BIDI17,B,1.409999967
+year2,loc05,loc05_year2,A,Bl2,B.DUR194,B,1.468000054
+year2,loc05,loc05_year2,A,Bl2,OUMRABI9,A ,1.463000059
+year2,loc05,loc05_year2,A,Bl2,ARDENTE,A ,1.430999994
+year2,loc05,loc05_year2,A,Bl2,WAHA,A ,1.580000043
+year2,loc05,loc05_year2,A,Bl2,INRAT69,A ,1.248000026
+year2,loc05,loc05_year2,A,Bl2,HEBDA03,B,1.468000054
+year2,loc05,loc05_year2,A,Bl2,SAHEL77,A ,1.648000002
+year2,loc05,loc05_year2,A,Bl2,EIDER,A ,1.754999995
+year2,loc05,loc05_year2,A,Bl2,POLON/ZB,B,1.613999963
+year2,loc05,loc05_year2,A,Bl2,SIMETO,A ,1.623999953
+year2,loc05,loc05_year2,A,Bl2,POLONICU,B,1.575999975
+year2,loc05,loc05_year2,A,Bl2,VITRON,A ,1.674000025
+year2,loc05,loc05_year2,A,Bl2,DUILIO,A ,1.725000024
+year2,loc05,loc05_year2,A,Bl2,GTADUR,A ,1.912999988
+year2,loc05,loc05_year2,A,Bl3,ARDENTE,A ,1.626000047
+year2,loc05,loc05_year2,A,Bl3,BIDI17,B,1.702999949
+year2,loc05,loc05_year2,A,Bl3,BELIKH02,A ,1.473999977
+year2,loc05,loc05_year2,A,Bl3,KEBIR,A ,1.371000051
+year2,loc05,loc05_year2,A,Bl3,HEBDA03,B,1.603000045
+year2,loc05,loc05_year2,A,Bl3,WAHA,A ,1.57099998
+year2,loc05,loc05_year2,A,Bl3,GTADUR,A ,1.838000059
+year2,loc05,loc05_year2,A,Bl3,SIMETO,A ,1.648000002
+year2,loc05,loc05_year2,A,Bl3,EIDER,A ,2
+year2,loc05,loc05_year2,A,Bl3,INRAT69,A ,1.325000048
+year2,loc05,loc05_year2,A,Bl3,OFANTO,A ,1.919999957
+year2,loc05,loc05_year2,A,Bl3,POLON/ZB,B,1.597000003
+year2,loc05,loc05_year2,A,Bl3,POLONICU,B,1.741999984
+year2,loc05,loc05_year2,A,Bl3,SAHEL77,A ,1.677000046
+year2,loc05,loc05_year2,A,Bl3,VITRON,A ,1.654000044
+year2,loc05,loc05_year2,A,Bl3,B.DUR194,B,1.80400002
+year2,loc05,loc05_year2,A,Bl3,MBBACHIR,B,1.63499999
+year2,loc05,loc05_year2,A,Bl3,OUMRABI9,A ,1.697999954
+year2,loc05,loc05_year2,A,Bl3,HEBD/GDO,A ,1.728000045
+year2,loc05,loc05_year2,A,Bl3,DUILIO,A ,1.769999981
+year2,loc05,loc05_year2,A,Bl3,BID/WAHA,A ,1.68900001
+year2,loc05,loc05_year2,A,Bl3,MEXICALI,A ,1.830000043
+year2,loc05,loc05_year2,A,Bl3,O.ZENADI,B,1.835000038
+year2,loc05,loc05_year2,A,Bl3,CHENS,A ,2.186000109
+year2,loc05,loc05_year2,A,Bl4,DUILIO,A ,1.960999966
+year2,loc05,loc05_year2,A,Bl4,BELIKH02,A ,1.832000017
+year2,loc05,loc05_year2,A,Bl4,MBBACHIR,B,1.751999974
+year2,loc05,loc05_year2,A,Bl4,OUMRABI9,A ,1.690999985
+year2,loc05,loc05_year2,A,Bl4,O.ZENADI,B,1.705000043
+year2,loc05,loc05_year2,A,Bl4,SAHEL77,A ,1.731999993
+year2,loc05,loc05_year2,A,Bl4,WAHA,A ,1.705000043
+year2,loc05,loc05_year2,A,Bl4,CHENS,A ,1.89199996
+year2,loc05,loc05_year2,A,Bl4,HEBDA03,B,1.731999993
+year2,loc05,loc05_year2,A,Bl4,INRAT69,A ,1.205000043
+year2,loc05,loc05_year2,A,Bl4,MEXICALI,A ,1.674999952
+year2,loc05,loc05_year2,A,Bl4,SIMETO,A ,1.600999951
+year2,loc05,loc05_year2,A,Bl4,HEBD/GDO,A ,1.697000027
+year2,loc05,loc05_year2,A,Bl4,POLON/ZB,B,1.603999972
+year2,loc05,loc05_year2,A,Bl4,POLONICU,B,1.870000005
+year2,loc05,loc05_year2,A,Bl4,KEBIR,A ,2.078999996
+year2,loc05,loc05_year2,A,Bl4,B.DUR194,B,2.131999969
+year2,loc05,loc05_year2,A,Bl4,OFANTO,A ,2.240999937
+year2,loc05,loc05_year2,A,Bl4,VITRON,A ,1.800999999
+year2,loc05,loc05_year2,A,Bl4,BIDI17,B,1.758999944
+year2,loc05,loc05_year2,A,Bl4,BID/WAHA,A ,1.870000005
+year2,loc05,loc05_year2,A,Bl4,ARDENTE,A ,1.868000031
+year2,loc05,loc05_year2,A,Bl4,GTADUR,A ,2.121999979
+year2,loc05,loc05_year2,A,Bl4,EIDER,A ,2.040999889
+year2,loc07,loc07_year2,B,Bl1,INRAT69,A ,0.786000013
+year2,loc07,loc07_year2,B,Bl1,B.DUR194,B,0.893999994
+year2,loc07,loc07_year2,B,Bl1,POLONICU,B,0.358999997
+year2,loc07,loc07_year2,B,Bl1,OFANTO,A ,0.845000029
+year2,loc07,loc07_year2,B,Bl1,MEXICALI,A ,0.551999986
+year2,loc07,loc07_year2,B,Bl1,HEBD/GDO,A ,0.275999993
+year2,loc07,loc07_year2,B,Bl1,WAHA,A ,0.63499999
+year2,loc07,loc07_year2,B,Bl1,HEBDA03,B,0.163000003
+year2,loc07,loc07_year2,B,Bl1,DUILIO,A ,0.505999982
+year2,loc07,loc07_year2,B,Bl1,GTADUR,A ,0.602999985
+year2,loc07,loc07_year2,B,Bl1,SAHEL77,A ,0.605000019
+year2,loc07,loc07_year2,B,Bl1,VITRON,A ,0.474000007
+year2,loc07,loc07_year2,B,Bl1,O.ZENADI,B,0.294
+year2,loc07,loc07_year2,B,Bl1,BID/WAHA,A ,0.605000019
+year2,loc07,loc07_year2,B,Bl1,SIMETO,A ,0.521000028
+year2,loc07,loc07_year2,B,Bl1,CHENS,A ,0.779999971
+year2,loc07,loc07_year2,B,Bl1,BIDI17,B,0.277999997
+year2,loc07,loc07_year2,B,Bl1,MBBACHIR,B,0.163000003
+year2,loc07,loc07_year2,B,Bl1,ARDENTE,A ,0.47299999
+year2,loc07,loc07_year2,B,Bl1,EIDER,A ,0.537999988
+year2,loc07,loc07_year2,B,Bl1,KEBIR,A ,0.552999973
+year2,loc07,loc07_year2,B,Bl1,BELIKH02,A ,0.488999993
+year2,loc07,loc07_year2,B,Bl1,OUMRABI9,A ,0.666999996
+year2,loc07,loc07_year2,B,Bl1,POLON/ZB,B,0.458000004
+year2,loc07,loc07_year2,B,Bl2,BELIKH02,A ,0.667999983
+year2,loc07,loc07_year2,B,Bl2,INRAT69,A ,0.753000021
+year2,loc07,loc07_year2,B,Bl2,VITRON,A ,0.850000024
+year2,loc07,loc07_year2,B,Bl2,GTADUR,A ,0.799000025
+year2,loc07,loc07_year2,B,Bl2,EIDER,A ,0.63499999
+year2,loc07,loc07_year2,B,Bl2,SAHEL77,A ,0.718999982
+year2,loc07,loc07_year2,B,Bl2,ARDENTE,A ,0.635999978
+year2,loc07,loc07_year2,B,Bl2,BID/WAHA,A ,0.637000024
+year2,loc07,loc07_year2,B,Bl2,SIMETO,A ,0.63499999
+year2,loc07,loc07_year2,B,Bl2,OFANTO,A ,0.779999971
+year2,loc07,loc07_year2,B,Bl2,WAHA,A ,0.617999971
+year2,loc07,loc07_year2,B,Bl2,O.ZENADI,B,0.31099999
+year2,loc07,loc07_year2,B,Bl2,MEXICALI,A ,0.745999992
+year2,loc07,loc07_year2,B,Bl2,CHENS,A ,0.930000007
+year2,loc07,loc07_year2,B,Bl2,B.DUR194,B,0.779999971
+year2,loc07,loc07_year2,B,Bl2,POLON/ZB,B,0.458000004
+year2,loc07,loc07_year2,B,Bl2,HEBDA03,B,0.294
+year2,loc07,loc07_year2,B,Bl2,BIDI17,B,0.638000011
+year2,loc07,loc07_year2,B,Bl2,DUILIO,A ,0.718999982
+year2,loc07,loc07_year2,B,Bl2,KEBIR,A ,0.731000006
+year2,loc07,loc07_year2,B,Bl2,MBBACHIR,B,0.277999997
+year2,loc07,loc07_year2,B,Bl2,OUMRABI9,A ,0.894999981
+year2,loc07,loc07_year2,B,Bl2,HEBD/GDO,A ,0.796999991
+year2,loc07,loc07_year2,B,Bl2,POLONICU,B,0.537999988
+year2,loc07,loc07_year2,B,Bl3,DUILIO,A ,0.882000029
+year2,loc07,loc07_year2,B,Bl3,BID/WAHA,A ,0.441000015
+year2,loc07,loc07_year2,B,Bl3,B.DUR194,B,0.714999974
+year2,loc07,loc07_year2,B,Bl3,POLON/ZB,B,0.474000007
+year2,loc07,loc07_year2,B,Bl3,BELIKH02,A ,0.602999985
+year2,loc07,loc07_year2,B,Bl3,MBBACHIR,B,0.261000007
+year2,loc07,loc07_year2,B,Bl3,ARDENTE,A ,0.734000027
+year2,loc07,loc07_year2,B,Bl3,BIDI17,B,0.621999979
+year2,loc07,loc07_year2,B,Bl3,SIMETO,A ,0.911000013
+year2,loc07,loc07_year2,B,Bl3,EIDER,A ,0.912
+year2,loc07,loc07_year2,B,Bl3,HEBD/GDO,A ,0.666999996
+year2,loc07,loc07_year2,B,Bl3,CHENS,A ,0.978999972
+year2,loc07,loc07_year2,B,Bl3,SAHEL77,A ,0.718999982
+year2,loc07,loc07_year2,B,Bl3,KEBIR,A ,0.634000003
+year2,loc07,loc07_year2,B,Bl3,POLONICU,B,0.57099998
+year2,loc07,loc07_year2,B,Bl3,MEXICALI,A ,0.680999994
+year2,loc07,loc07_year2,B,Bl3,O.ZENADI,B,0.540000021
+year2,loc07,loc07_year2,B,Bl3,WAHA,A ,0.911000013
+year2,loc07,loc07_year2,B,Bl3,VITRON,A ,0.653999984
+year2,loc07,loc07_year2,B,Bl3,OFANTO,A ,0.925999999
+year2,loc07,loc07_year2,B,Bl3,INRAT69,A ,0.720000029
+year2,loc07,loc07_year2,B,Bl3,HEBDA03,B,0.342999995
+year2,loc07,loc07_year2,B,Bl3,OUMRABI9,A ,0.862999976
+year2,loc07,loc07_year2,B,Bl3,GTADUR,A ,1.172999978
+year2,loc07,loc07_year2,B,Bl4,OUMRABI9,A ,1.024999976
+year2,loc07,loc07_year2,B,Bl4,B.DUR194,B,1.105000019
+year2,loc07,loc07_year2,B,Bl4,MEXICALI,A ,0.89200002
+year2,loc07,loc07_year2,B,Bl4,OFANTO,A ,0.990999997
+year2,loc07,loc07_year2,B,Bl4,EIDER,A ,0.797999978
+year2,loc07,loc07_year2,B,Bl4,SIMETO,A ,0.926999986
+year2,loc07,loc07_year2,B,Bl4,HEBD/GDO,A ,0.781000018
+year2,loc07,loc07_year2,B,Bl4,WAHA,A ,0.894999981
+year2,loc07,loc07_year2,B,Bl4,O.ZENADI,B,0.555999994
+year2,loc07,loc07_year2,B,Bl4,POLONICU,B,0.57099998
+year2,loc07,loc07_year2,B,Bl4,MBBACHIR,B,0.342999995
+year2,loc07,loc07_year2,B,Bl4,INRAT69,A ,0.671000004
+year2,loc07,loc07_year2,B,Bl4,KEBIR,A ,0.584999979
+year2,loc07,loc07_year2,B,Bl4,BELIKH02,A ,0.667999983
+year2,loc07,loc07_year2,B,Bl4,POLON/ZB,B,0.555999994
+year2,loc07,loc07_year2,B,Bl4,BID/WAHA,A ,0.948000014
+year2,loc07,loc07_year2,B,Bl4,ARDENTE,A ,0.734000027
+year2,loc07,loc07_year2,B,Bl4,CHENS,A ,0.930000007
+year2,loc07,loc07_year2,B,Bl4,GTADUR,A ,0.944999993
+year2,loc07,loc07_year2,B,Bl4,SAHEL77,A ,0.850000024
+year2,loc07,loc07_year2,B,Bl4,VITRON,A ,0.751999974
+year2,loc07,loc07_year2,B,Bl4,HEBDA03,B,0.358999997
+year2,loc07,loc07_year2,B,Bl4,BIDI17,B,0.523999989
+year2,loc07,loc07_year2,B,Bl4,DUILIO,A ,1.077999949
+year2,loc10,loc10_year2,B,Bl1,GTADUR,A ,2.582000017
+year2,loc10,loc10_year2,B,Bl1,POLON/ZB,B,1.671000004
+year2,loc10,loc10_year2,B,Bl1,OFANTO,A ,1.646000028
+year2,loc10,loc10_year2,B,Bl1,OUMRABI9,A ,1.86500001
+year2,loc10,loc10_year2,B,Bl1,SIMETO,A ,3.045000076
+year2,loc10,loc10_year2,B,Bl1,SAHEL77,A ,1.998000026
+year2,loc10,loc10_year2,B,Bl1,ARDENTE,A ,1.610999942
+year2,loc10,loc10_year2,B,Bl1,HEBDA03,B,1.120000005
+year2,loc10,loc10_year2,B,Bl1,B.DUR194,B,2.575000048
+year2,loc10,loc10_year2,B,Bl1,DUILIO,A ,1.89199996
+year2,loc10,loc10_year2,B,Bl1,O.ZENADI,B,0.879999995
+year2,loc10,loc10_year2,B,Bl1,HEBD/GDO,A ,1.636000037
+year2,loc10,loc10_year2,B,Bl1,BIDI17,B,1.559999943
+year2,loc10,loc10_year2,B,Bl1,EIDER,A ,2.092999935
+year2,loc10,loc10_year2,B,Bl1,CHENS,A ,2.200999975
+year2,loc10,loc10_year2,B,Bl1,INRAT69,A ,1.488000035
+year2,loc10,loc10_year2,B,Bl1,BELIKH02,A ,1.991999984
+year2,loc10,loc10_year2,B,Bl1,MBBACHIR,B,0.887000024
+year2,loc10,loc10_year2,B,Bl1,KEBIR,A ,2.062000036
+year2,loc10,loc10_year2,B,Bl1,POLONICU,B,1.416000009
+year2,loc10,loc10_year2,B,Bl1,VITRON,A ,1.916000009
+year2,loc10,loc10_year2,B,Bl1,MEXICALI,A ,1.31099999
+year2,loc10,loc10_year2,B,Bl1,BID/WAHA,A ,2.309999943
+year2,loc10,loc10_year2,B,Bl1,WAHA,A ,2.677000046
+year2,loc10,loc10_year2,B,Bl2,CHENS,A ,2.954999924
+year2,loc10,loc10_year2,B,Bl2,SAHEL77,A ,2.450000048
+year2,loc10,loc10_year2,B,Bl2,B.DUR194,B,2.296000004
+year2,loc10,loc10_year2,B,Bl2,HEBD/GDO,A ,1.100999951
+year2,loc10,loc10_year2,B,Bl2,POLON/ZB,B,1.187000036
+year2,loc10,loc10_year2,B,Bl2,MEXICALI,A ,1.444000006
+year2,loc10,loc10_year2,B,Bl2,EIDER,A ,2.282999992
+year2,loc10,loc10_year2,B,Bl2,POLONICU,B,1.277999997
+year2,loc10,loc10_year2,B,Bl2,SIMETO,A ,2.069000006
+year2,loc10,loc10_year2,B,Bl2,INRAT69,A ,1.722000003
+year2,loc10,loc10_year2,B,Bl2,OUMRABI9,A ,2.535000086
+year2,loc10,loc10_year2,B,Bl2,OFANTO,A ,2.025000095
+year2,loc10,loc10_year2,B,Bl2,BELIKH02,A ,2.403000116
+year2,loc10,loc10_year2,B,Bl2,HEBDA03,B,1.843999982
+year2,loc10,loc10_year2,B,Bl2,BIDI17,B,1.393000007
+year2,loc10,loc10_year2,B,Bl2,KEBIR,A ,2.220000029
+year2,loc10,loc10_year2,B,Bl2,VITRON,A ,2.234999895
+year2,loc10,loc10_year2,B,Bl2,O.ZENADI,B,1.100000024
+year2,loc10,loc10_year2,B,Bl2,ARDENTE,A ,1.537999988
+year2,loc10,loc10_year2,B,Bl2,MBBACHIR,B,1.524999976
+year2,loc10,loc10_year2,B,Bl2,GTADUR,A ,2.822000027
+year2,loc10,loc10_year2,B,Bl2,DUILIO,A ,2.875999928
+year2,loc10,loc10_year2,B,Bl2,BID/WAHA,A ,2.857000113
+year2,loc10,loc10_year2,B,Bl2,WAHA,A ,2.700000048
+year2,loc10,loc10_year2,B,Bl3,INRAT69,A ,2.476000071
+year2,loc10,loc10_year2,B,Bl3,SIMETO,A ,3.278000116
+year2,loc10,loc10_year2,B,Bl3,OUMRABI9,A ,2.948999882
+year2,loc10,loc10_year2,B,Bl3,POLONICU,B,2.015000105
+year2,loc10,loc10_year2,B,Bl3,MBBACHIR,B,1.700000048
+year2,loc10,loc10_year2,B,Bl3,ARDENTE,A ,1.707000017
+year2,loc10,loc10_year2,B,Bl3,HEBDA03,B,1.478000045
+year2,loc10,loc10_year2,B,Bl3,O.ZENADI,B,1.287999988
+year2,loc10,loc10_year2,B,Bl3,WAHA,A ,1.787999988
+year2,loc10,loc10_year2,B,Bl3,OFANTO,A ,1.447000027
+year2,loc10,loc10_year2,B,Bl3,EIDER,A ,2.390000105
+year2,loc10,loc10_year2,B,Bl3,BID/WAHA,A ,2.594000101
+year2,loc10,loc10_year2,B,Bl3,B.DUR194,B,2.711999893
+year2,loc10,loc10_year2,B,Bl3,SAHEL77,A ,2.371999979
+year2,loc10,loc10_year2,B,Bl3,KEBIR,A ,2.717000008
+year2,loc10,loc10_year2,B,Bl3,DUILIO,A ,2.944999933
+year2,loc10,loc10_year2,B,Bl3,GTADUR,A ,2.717999935
+year2,loc10,loc10_year2,B,Bl3,POLON/ZB,B,2.065999985
+year2,loc10,loc10_year2,B,Bl3,MEXICALI,A ,2.444999933
+year2,loc10,loc10_year2,B,Bl3,CHENS,A ,3.174999952
+year2,loc10,loc10_year2,B,Bl3,BELIKH02,A ,2.769000053
+year2,loc10,loc10_year2,B,Bl3,VITRON,A ,2.713999987
+year2,loc10,loc10_year2,B,Bl3,HEBD/GDO,A ,2.164000034
+year2,loc10,loc10_year2,B,Bl3,BIDI17,B,1.924999952
+year2,loc10,loc10_year2,B,Bl4,WAHA,A ,2.755000114
+year2,loc10,loc10_year2,B,Bl4,SAHEL77,A ,2.575999975
+year2,loc10,loc10_year2,B,Bl4,OFANTO,A ,2.506000042
+year2,loc10,loc10_year2,B,Bl4,SIMETO,A ,3.375
+year2,loc10,loc10_year2,B,Bl4,B.DUR194,B,2.894000053
+year2,loc10,loc10_year2,B,Bl4,HEBDA03,B,2.082999945
+year2,loc10,loc10_year2,B,Bl4,OUMRABI9,A ,2.891000032
+year2,loc10,loc10_year2,B,Bl4,BID/WAHA,A ,2.999000072
+year2,loc10,loc10_year2,B,Bl4,MBBACHIR,B,1.483999968
+year2,loc10,loc10_year2,B,Bl4,DUILIO,A ,2.806999922
+year2,loc10,loc10_year2,B,Bl4,GTADUR,A ,2.86500001
+year2,loc10,loc10_year2,B,Bl4,POLONICU,B,1.902999997
+year2,loc10,loc10_year2,B,Bl4,EIDER,A ,2.780999899
+year2,loc10,loc10_year2,B,Bl4,O.ZENADI,B,1.91900003
+year2,loc10,loc10_year2,B,Bl4,INRAT69,A ,2.460000038
+year2,loc10,loc10_year2,B,Bl4,HEBD/GDO,A ,2.214999914
+year2,loc10,loc10_year2,B,Bl4,POLON/ZB,B,1.886000037
+year2,loc10,loc10_year2,B,Bl4,VITRON,A ,2.676000118
+year2,loc10,loc10_year2,B,Bl4,ARDENTE,A ,2.252000093
+year2,loc10,loc10_year2,B,Bl4,CHENS,A ,2.84100008
+year2,loc10,loc10_year2,B,Bl4,BIDI17,B,1.949000001
+year2,loc10,loc10_year2,B,Bl4,KEBIR,A ,2.690000057
+year2,loc10,loc10_year2,B,Bl4,BELIKH02,A ,2.611000061
+year2,loc10,loc10_year2,B,Bl4,MEXICALI,A ,2.967999935
+year2,loc11,loc11_year2,B,Bl1,HEBD/GDO,A ,1.478999972
+year2,loc11,loc11_year2,B,Bl1,MBBACHIR,B,1.618000031
+year2,loc11,loc11_year2,B,Bl1,WAHA,A ,1.876999974
+year2,loc11,loc11_year2,B,Bl1,BID/WAHA,A ,2.089999914
+year2,loc11,loc11_year2,B,Bl1,BELIKH02,A ,2
+year2,loc11,loc11_year2,B,Bl1,O.ZENADI,B,1.56099999
+year2,loc11,loc11_year2,B,Bl1,OFANTO,A ,1.879999995
+year2,loc11,loc11_year2,B,Bl1,CHENS,A ,1.799000025
+year2,loc11,loc11_year2,B,Bl1,HEBDA03,B,2.226999998
+year2,loc11,loc11_year2,B,Bl1,B.DUR194,B,2.799000025
+year2,loc11,loc11_year2,B,Bl1,SIMETO,A ,2.148999929
+year2,loc11,loc11_year2,B,Bl1,OUMRABI9,A ,1.786999941
+year2,loc11,loc11_year2,B,Bl1,EIDER,A ,2.211999893
+year2,loc11,loc11_year2,B,Bl1,DUILIO,A ,1.819000006
+year2,loc11,loc11_year2,B,Bl1,BIDI17,B,2.012000084
+year2,loc11,loc11_year2,B,Bl1,GTADUR,A ,1.873999953
+year2,loc11,loc11_year2,B,Bl1,POLON/ZB,B,2.16899991
+year2,loc11,loc11_year2,B,Bl1,ARDENTE,A ,2.11500001
+year2,loc11,loc11_year2,B,Bl1,SAHEL77,A ,2.608999968
+year2,loc11,loc11_year2,B,Bl1,INRAT69,A ,2.35800004
+year2,loc11,loc11_year2,B,Bl1,KEBIR,A ,1.876999974
+year2,loc11,loc11_year2,B,Bl1,POLONICU,B,2.279000044
+year2,loc11,loc11_year2,B,Bl1,MEXICALI,A ,2.400000095
+year2,loc11,loc11_year2,B,Bl1,VITRON,A ,2.364000082
+year2,loc11,loc11_year2,B,Bl2,SIMETO,A ,2.555000067
+year2,loc11,loc11_year2,B,Bl2,BIDI17,B,2.174000025
+year2,loc11,loc11_year2,B,Bl2,EIDER,A ,2.555000067
+year2,loc11,loc11_year2,B,Bl2,INRAT69,A ,1.758999944
+year2,loc11,loc11_year2,B,Bl2,ARDENTE,A ,2.357000113
+year2,loc11,loc11_year2,B,Bl2,B.DUR194,B,2.644000053
+year2,loc11,loc11_year2,B,Bl2,HEBDA03,B,1.878000021
+year2,loc11,loc11_year2,B,Bl2,OFANTO,A ,1.65199995
+year2,loc11,loc11_year2,B,Bl2,MBBACHIR,B,1.473999977
+year2,loc11,loc11_year2,B,Bl2,WAHA,A ,2.135999918
+year2,loc11,loc11_year2,B,Bl2,POLON/ZB,B,1.985000014
+year2,loc11,loc11_year2,B,Bl2,VITRON,A ,2.509000063
+year2,loc11,loc11_year2,B,Bl2,GTADUR,A ,1.86500001
+year2,loc11,loc11_year2,B,Bl2,DUILIO,A ,1.89199996
+year2,loc11,loc11_year2,B,Bl2,CHENS,A ,1.942999959
+year2,loc11,loc11_year2,B,Bl2,HEBD/GDO,A ,1.766000032
+year2,loc11,loc11_year2,B,Bl2,POLONICU,B,1.975999951
+year2,loc11,loc11_year2,B,Bl2,OUMRABI9,A ,1.687999964
+year2,loc11,loc11_year2,B,Bl2,BELIKH02,A ,1.912999988
+year2,loc11,loc11_year2,B,Bl2,BID/WAHA,A ,2.269999981
+year2,loc11,loc11_year2,B,Bl2,SAHEL77,A ,2.392999887
+year2,loc11,loc11_year2,B,Bl2,MEXICALI,A ,2.061000109
+year2,loc11,loc11_year2,B,Bl2,KEBIR,A ,1.631999969
+year2,loc11,loc11_year2,B,Bl2,O.ZENADI,B,1.368999958
+year2,loc11,loc11_year2,B,Bl3,SIMETO,A ,2.183000088
+year2,loc11,loc11_year2,B,Bl3,HEBD/GDO,A ,1.539999962
+year2,loc11,loc11_year2,B,Bl3,BID/WAHA,A ,2.177999973
+year2,loc11,loc11_year2,B,Bl3,OUMRABI9,A ,1.952000022
+year2,loc11,loc11_year2,B,Bl3,GTADUR,A ,1.921000004
+year2,loc11,loc11_year2,B,Bl3,SAHEL77,A ,2.601999998
+year2,loc11,loc11_year2,B,Bl3,INRAT69,A ,1.779000044
+year2,loc11,loc11_year2,B,Bl3,BELIKH02,A ,1.868000031
+year2,loc11,loc11_year2,B,Bl3,CHENS,A ,2.141000032
+year2,loc11,loc11_year2,B,Bl3,OFANTO,A ,1.639000058
+year2,loc11,loc11_year2,B,Bl3,WAHA,A ,2.049999952
+year2,loc11,loc11_year2,B,Bl3,KEBIR,A ,1.799999952
+year2,loc11,loc11_year2,B,Bl3,POLONICU,B,2.378000021
+year2,loc11,loc11_year2,B,Bl3,BIDI17,B,2.414999962
+year2,loc11,loc11_year2,B,Bl3,MEXICALI,A ,2.15899992
+year2,loc11,loc11_year2,B,Bl3,ARDENTE,A ,2.076999903
+year2,loc11,loc11_year2,B,Bl3,MBBACHIR,B,1.595000029
+year2,loc11,loc11_year2,B,Bl3,EIDER,A ,2.099999905
+year2,loc11,loc11_year2,B,Bl3,VITRON,A ,2.96600008
+year2,loc11,loc11_year2,B,Bl3,B.DUR194,B,3.194999933
+year2,loc11,loc11_year2,B,Bl3,HEBDA03,B,2.35800004
+year2,loc11,loc11_year2,B,Bl3,DUILIO,A ,2.174999952
+year2,loc11,loc11_year2,B,Bl3,O.ZENADI,B,1.557999969
+year2,loc11,loc11_year2,B,Bl3,POLON/ZB,B,2.178999901
+year2,loc11,loc11_year2,B,Bl4,MEXICALI,A ,2.611000061
+year2,loc11,loc11_year2,B,Bl4,VITRON,A ,2.739000082
+year2,loc11,loc11_year2,B,Bl4,SAHEL77,A ,2.993999958
+year2,loc11,loc11_year2,B,Bl4,B.DUR194,B,2.710000038
+year2,loc11,loc11_year2,B,Bl4,SIMETO,A ,2.760999918
+year2,loc11,loc11_year2,B,Bl4,POLON/ZB,B,2.441999912
+year2,loc11,loc11_year2,B,Bl4,CHENS,A ,2.219000101
+year2,loc11,loc11_year2,B,Bl4,DUILIO,A ,2.059999943
+year2,loc11,loc11_year2,B,Bl4,POLONICU,B,2.16899991
+year2,loc11,loc11_year2,B,Bl4,EIDER,A ,1.896999955
+year2,loc11,loc11_year2,B,Bl4,HEBD/GDO,A ,1.643000007
+year2,loc11,loc11_year2,B,Bl4,O.ZENADI,B,1.381000042
+year2,loc11,loc11_year2,B,Bl4,BID/WAHA,A ,1.828999996
+year2,loc11,loc11_year2,B,Bl4,BELIKH02,A ,1.705000043
+year2,loc11,loc11_year2,B,Bl4,KEBIR,A ,1.756999969
+year2,loc11,loc11_year2,B,Bl4,OUMRABI9,A ,1.753999949
+year2,loc11,loc11_year2,B,Bl4,HEBDA03,B,2.207999945
+year2,loc11,loc11_year2,B,Bl4,OFANTO,A ,2.219000101
+year2,loc11,loc11_year2,B,Bl4,ARDENTE,A ,2.246000051
+year2,loc11,loc11_year2,B,Bl4,BIDI17,B,2.246999979
+year2,loc11,loc11_year2,B,Bl4,INRAT69,A ,1.988999963
+year2,loc11,loc11_year2,B,Bl4,WAHA,A ,2.390000105
+year2,loc11,loc11_year2,B,Bl4,GTADUR,A ,2.494999886
+year2,loc11,loc11_year2,B,Bl4,MBBACHIR,B,1.651000023
+year2,loc12,loc12_year2,B,Bl1,SAHEL77,A ,2.404000044
+year2,loc12,loc12_year2,B,Bl1,KEBIR,A ,3.111000061
+year2,loc12,loc12_year2,B,Bl1,OUMRABI9,A ,2.657000065
+year2,loc12,loc12_year2,B,Bl1,MEXICALI,A ,2.782000065
+year2,loc12,loc12_year2,B,Bl1,EIDER,A ,2.528000116
+year2,loc12,loc12_year2,B,Bl1,ARDENTE,A ,2.50999999
+year2,loc12,loc12_year2,B,Bl1,BIDI17,B,2.464999914
+year2,loc12,loc12_year2,B,Bl1,POLON/ZB,B,2.325999975
+year2,loc12,loc12_year2,B,Bl1,B.DUR194,B,3.131999969
+year2,loc12,loc12_year2,B,Bl1,INRAT69,A ,3.191999912
+year2,loc12,loc12_year2,B,Bl1,VITRON,A ,2.627000093
+year2,loc12,loc12_year2,B,Bl1,BELIKH02,A ,2.01699996
+year2,loc12,loc12_year2,B,Bl1,SIMETO,A ,1.845999956
+year2,loc12,loc12_year2,B,Bl1,CHENS,A ,2.884000063
+year2,loc12,loc12_year2,B,Bl1,O.ZENADI,B,1.924999952
+year2,loc12,loc12_year2,B,Bl1,MBBACHIR,B,2.351000071
+year2,loc12,loc12_year2,B,Bl1,HEBDA03,B,2.631999969
+year2,loc12,loc12_year2,B,Bl1,BID/WAHA,A ,3.894000053
+year2,loc12,loc12_year2,B,Bl1,WAHA,A ,3.209000111
+year2,loc12,loc12_year2,B,Bl1,DUILIO,A ,2.53399992
+year2,loc12,loc12_year2,B,Bl1,GTADUR,A ,3.24000001
+year2,loc12,loc12_year2,B,Bl1,POLONICU,B,2.71600008
+year2,loc12,loc12_year2,B,Bl1,HEBD/GDO,A ,3.792999983
+year2,loc12,loc12_year2,B,Bl1,OFANTO,A ,2.977999926
+year2,loc12,loc12_year2,B,Bl2,BIDI17,B,2.746000051
+year2,loc12,loc12_year2,B,Bl2,MEXICALI,A ,2.986999989
+year2,loc12,loc12_year2,B,Bl2,BID/WAHA,A ,3.280999899
+year2,loc12,loc12_year2,B,Bl2,BELIKH02,A ,2.500999928
+year2,loc12,loc12_year2,B,Bl2,INRAT69,A ,3.191999912
+year2,loc12,loc12_year2,B,Bl2,POLONICU,B,2.788000107
+year2,loc12,loc12_year2,B,Bl2,HEBDA03,B,2.688999891
+year2,loc12,loc12_year2,B,Bl2,WAHA,A ,3.463000059
+year2,loc12,loc12_year2,B,Bl2,SAHEL77,A ,2.249000072
+year2,loc12,loc12_year2,B,Bl2,SIMETO,A ,2.148999929
+year2,loc12,loc12_year2,B,Bl2,EIDER,A ,1.981999993
+year2,loc12,loc12_year2,B,Bl2,MBBACHIR,B,2.055999994
+year2,loc12,loc12_year2,B,Bl2,OUMRABI9,A ,2.292000055
+year2,loc12,loc12_year2,B,Bl2,ARDENTE,A ,2.190999985
+year2,loc12,loc12_year2,B,Bl2,VITRON,A ,2.213000059
+year2,loc12,loc12_year2,B,Bl2,OFANTO,A ,2.582999945
+year2,loc12,loc12_year2,B,Bl2,HEBD/GDO,A ,1.906999946
+year2,loc12,loc12_year2,B,Bl2,POLON/ZB,B,2.142999887
+year2,loc12,loc12_year2,B,Bl2,KEBIR,A ,2.398000002
+year2,loc12,loc12_year2,B,Bl2,GTADUR,A ,2.816999912
+year2,loc12,loc12_year2,B,Bl2,O.ZENADI,B,2.243000031
+year2,loc12,loc12_year2,B,Bl2,CHENS,A ,3.063999891
+year2,loc12,loc12_year2,B,Bl2,B.DUR194,B,3.404999971
+year2,loc12,loc12_year2,B,Bl2,DUILIO,A ,3.082000017
+year2,loc12,loc12_year2,B,Bl3,BIDI17,B,2.309999943
+year2,loc12,loc12_year2,B,Bl3,DUILIO,A ,3.059999943
+year2,loc12,loc12_year2,B,Bl3,POLONICU,B,2.289999962
+year2,loc12,loc12_year2,B,Bl3,CHENS,A ,2.763999939
+year2,loc12,loc12_year2,B,Bl3,MBBACHIR,B,1.886000037
+year2,loc12,loc12_year2,B,Bl3,HEBDA03,B,2.201999903
+year2,loc12,loc12_year2,B,Bl3,BELIKH02,A ,2.105000019
+year2,loc12,loc12_year2,B,Bl3,B.DUR194,B,3.496000051
+year2,loc12,loc12_year2,B,Bl3,VITRON,A ,2.483999968
+year2,loc12,loc12_year2,B,Bl3,INRAT69,A ,2.517999887
+year2,loc12,loc12_year2,B,Bl3,SIMETO,A ,2.614000082
+year2,loc12,loc12_year2,B,Bl3,HEBD/GDO,A ,2.124000072
+year2,loc12,loc12_year2,B,Bl3,WAHA,A ,2.650000095
+year2,loc12,loc12_year2,B,Bl3,POLON/ZB,B,2.426000118
+year2,loc12,loc12_year2,B,Bl3,SAHEL77,A ,2.069999933
+year2,loc12,loc12_year2,B,Bl3,BID/WAHA,A ,2.130000114
+year2,loc12,loc12_year2,B,Bl3,OFANTO,A ,2.621999979
+year2,loc12,loc12_year2,B,Bl3,KEBIR,A ,2.569000006
+year2,loc12,loc12_year2,B,Bl3,ARDENTE,A ,2.003999949
+year2,loc12,loc12_year2,B,Bl3,EIDER,A ,2.295000076
+year2,loc12,loc12_year2,B,Bl3,OUMRABI9,A ,2.25999999
+year2,loc12,loc12_year2,B,Bl3,MEXICALI,A ,2.601999998
+year2,loc12,loc12_year2,B,Bl3,O.ZENADI,B,1.934000015
+year2,loc12,loc12_year2,B,Bl3,GTADUR,A ,3.052999973
+year2,loc12,loc12_year2,B,Bl4,BIDI17,B,2.194000006
+year2,loc12,loc12_year2,B,Bl4,POLONICU,B,2.201999903
+year2,loc12,loc12_year2,B,Bl4,HEBD/GDO,A ,1.902999997
+year2,loc12,loc12_year2,B,Bl4,HEBDA03,B,2.194999933
+year2,loc12,loc12_year2,B,Bl4,POLON/ZB,B,2.223999977
+year2,loc12,loc12_year2,B,Bl4,SAHEL77,A ,2.269999981
+year2,loc12,loc12_year2,B,Bl4,BELIKH02,A ,2.289999962
+year2,loc12,loc12_year2,B,Bl4,O.ZENADI,B,2.09100008
+year2,loc12,loc12_year2,B,Bl4,VITRON,A ,2.358999968
+year2,loc12,loc12_year2,B,Bl4,GTADUR,A ,2.838999987
+year2,loc12,loc12_year2,B,Bl4,B.DUR194,B,2.467000008
+year2,loc12,loc12_year2,B,Bl4,WAHA,A ,2.405999899
+year2,loc12,loc12_year2,B,Bl4,OFANTO,A ,2.655999899
+year2,loc12,loc12_year2,B,Bl4,MEXICALI,A ,2.542000055
+year2,loc12,loc12_year2,B,Bl4,OUMRABI9,A ,2.342000008
+year2,loc12,loc12_year2,B,Bl4,DUILIO,A ,2.713000059
+year2,loc12,loc12_year2,B,Bl4,EIDER,A ,2.210999966
+year2,loc12,loc12_year2,B,Bl4,INRAT69,A ,2.75999999
+year2,loc12,loc12_year2,B,Bl4,MBBACHIR,B,1.953999996
+year2,loc12,loc12_year2,B,Bl4,CHENS,A ,2.575999975
+year2,loc12,loc12_year2,B,Bl4,SIMETO,A ,1.876000047
+year2,loc12,loc12_year2,B,Bl4,BID/WAHA,A ,2.420000076
+year2,loc12,loc12_year2,B,Bl4,ARDENTE,A ,2.135999918
+year2,loc12,loc12_year2,B,Bl4,KEBIR,A ,2.296999931
+year2,loc14,loc14_year2,A,Bl1,ARDENTE,A ,2.34100008
+year2,loc14,loc14_year2,A,Bl1,HEBDA03,B,1.975000024
+year2,loc14,loc14_year2,A,Bl1,OFANTO,A ,2.887000084
+year2,loc14,loc14_year2,A,Bl1,BIDI17,B,2.614000082
+year2,loc14,loc14_year2,A,Bl1,INRAT69,A ,2.190000057
+year2,loc14,loc14_year2,A,Bl1,POLONICU,B,2.380000114
+year2,loc14,loc14_year2,A,Bl1,B.DUR194,B,3.84100008
+year2,loc14,loc14_year2,A,Bl1,GTADUR,A ,2.930999994
+year2,loc14,loc14_year2,A,Bl1,MBBACHIR,B,2.295000076
+year2,loc14,loc14_year2,A,Bl1,O.ZENADI,B,2.549999952
+year2,loc14,loc14_year2,A,Bl1,SAHEL77,A ,3.118000031
+year2,loc14,loc14_year2,A,Bl1,SIMETO,A ,4.031000137
+year2,loc14,loc14_year2,A,Bl1,MEXICALI,A ,3.930000067
+year2,loc14,loc14_year2,A,Bl1,BELIKH02,A ,3.552999973
+year2,loc14,loc14_year2,A,Bl1,EIDER,A ,3.549000025
+year2,loc14,loc14_year2,A,Bl1,HEBD/GDO,A ,3.131000042
+year2,loc14,loc14_year2,A,Bl1,DUILIO,A ,3.197999954
+year2,loc14,loc14_year2,A,Bl1,CHENS,A ,3.72300005
+year2,loc14,loc14_year2,A,Bl1,BID/WAHA,A ,3.362999916
+year2,loc14,loc14_year2,A,Bl1,POLON/ZB,B,2.707000017
+year2,loc14,loc14_year2,A,Bl1,KEBIR,A ,2.976999998
+year2,loc14,loc14_year2,A,Bl1,VITRON,A ,3.207999945
+year2,loc14,loc14_year2,A,Bl1,OUMRABI9,A ,3.354000092
+year2,loc14,loc14_year2,A,Bl1,WAHA,A ,2.704999924
+year2,loc14,loc14_year2,A,Bl2,MBBACHIR,B,2.559000015
+year2,loc14,loc14_year2,A,Bl2,O.ZENADI,B,2.828999996
+year2,loc14,loc14_year2,A,Bl2,MEXICALI,A ,3.470000029
+year2,loc14,loc14_year2,A,Bl2,HEBDA03,B,2.684999943
+year2,loc14,loc14_year2,A,Bl2,BIDI17,B,3.253000021
+year2,loc14,loc14_year2,A,Bl2,POLONICU,B,3.200999975
+year2,loc14,loc14_year2,A,Bl2,DUILIO,A ,3.822999954
+year2,loc14,loc14_year2,A,Bl2,SAHEL77,A ,3.592000008
+year2,loc14,loc14_year2,A,Bl2,POLON/ZB,B,3.053999901
+year2,loc14,loc14_year2,A,Bl2,INRAT69,A ,3.236000061
+year2,loc14,loc14_year2,A,Bl2,CHENS,A ,3.750999928
+year2,loc14,loc14_year2,A,Bl2,WAHA,A ,3.415999889
+year2,loc14,loc14_year2,A,Bl2,KEBIR,A ,3.713999987
+year2,loc14,loc14_year2,A,Bl2,SIMETO,A ,3.391000032
+year2,loc14,loc14_year2,A,Bl2,GTADUR,A ,4.59100008
+year2,loc14,loc14_year2,A,Bl2,OUMRABI9,A ,2.852999926
+year2,loc14,loc14_year2,A,Bl2,B.DUR194,B,3.59100008
+year2,loc14,loc14_year2,A,Bl2,BID/WAHA,A ,3.279999971
+year2,loc14,loc14_year2,A,Bl2,BELIKH02,A ,3.385999918
+year2,loc14,loc14_year2,A,Bl2,HEBD/GDO,A ,3.53399992
+year2,loc14,loc14_year2,A,Bl2,ARDENTE,A ,3.664000034
+year2,loc14,loc14_year2,A,Bl2,EIDER,A ,3.882999897
+year2,loc14,loc14_year2,A,Bl2,OFANTO,A ,2.371000051
+year2,loc14,loc14_year2,A,Bl2,VITRON,A ,3.263999939
+year2,loc14,loc14_year2,A,Bl3,KEBIR,A ,2.671000004
+year2,loc14,loc14_year2,A,Bl3,ARDENTE,A ,3.204999924
+year2,loc14,loc14_year2,A,Bl3,MBBACHIR,B,3.894999981
+year2,loc14,loc14_year2,A,Bl3,CHENS,A ,3.263000011
+year2,loc14,loc14_year2,A,Bl3,MEXICALI,A ,3.651000023
+year2,loc14,loc14_year2,A,Bl3,BELIKH02,A ,2.618999958
+year2,loc14,loc14_year2,A,Bl3,OFANTO,A ,2.440999985
+year2,loc14,loc14_year2,A,Bl3,SIMETO,A ,3.112999916
+year2,loc14,loc14_year2,A,Bl3,BIDI17,B,3.947999954
+year2,loc14,loc14_year2,A,Bl3,BID/WAHA,A ,3.266000032
+year2,loc14,loc14_year2,A,Bl3,WAHA,A ,2.789000034
+year2,loc14,loc14_year2,A,Bl3,EIDER,A ,2.923000097
+year2,loc14,loc14_year2,A,Bl3,VITRON,A ,3.069000006
+year2,loc14,loc14_year2,A,Bl3,POLON/ZB,B,3.775000095
+year2,loc14,loc14_year2,A,Bl3,DUILIO,A ,2.920000076
+year2,loc14,loc14_year2,A,Bl3,POLONICU,B,2.575000048
+year2,loc14,loc14_year2,A,Bl3,B.DUR194,B,3.71600008
+year2,loc14,loc14_year2,A,Bl3,O.ZENADI,B,3.819000006
+year2,loc14,loc14_year2,A,Bl3,HEBD/GDO,A ,2.559999943
+year2,loc14,loc14_year2,A,Bl3,HEBDA03,B,3.407999992
+year2,loc14,loc14_year2,A,Bl3,INRAT69,A ,3.34800005
+year2,loc14,loc14_year2,A,Bl3,SAHEL77,A ,3.967999935
+year2,loc14,loc14_year2,A,Bl3,OUMRABI9,A ,2.923000097
+year2,loc14,loc14_year2,A,Bl3,GTADUR,A ,3.726000071
+year2,loc14,loc14_year2,A,Bl4,HEBDA03,B,2.628999949
+year2,loc14,loc14_year2,A,Bl4,GTADUR,A ,2.790999889
+year2,loc14,loc14_year2,A,Bl4,DUILIO,A ,2.474999905
+year2,loc14,loc14_year2,A,Bl4,MEXICALI,A ,2.927000046
+year2,loc14,loc14_year2,A,Bl4,POLON/ZB,B,3.247999907
+year2,loc14,loc14_year2,A,Bl4,POLONICU,B,2.686000109
+year2,loc14,loc14_year2,A,Bl4,OUMRABI9,A ,2.490999937
+year2,loc14,loc14_year2,A,Bl4,BELIKH02,A ,3.400000095
+year2,loc14,loc14_year2,A,Bl4,BIDI17,B,3.39199996
+year2,loc14,loc14_year2,A,Bl4,WAHA,A ,3.319000006
+year2,loc14,loc14_year2,A,Bl4,HEBD/GDO,A ,2.684999943
+year2,loc14,loc14_year2,A,Bl4,CHENS,A ,3.792999983
+year2,loc14,loc14_year2,A,Bl4,SAHEL77,A ,2.910000086
+year2,loc14,loc14_year2,A,Bl4,INRAT69,A ,3.069000006
+year2,loc14,loc14_year2,A,Bl4,VITRON,A ,3.263999939
+year2,loc14,loc14_year2,A,Bl4,OFANTO,A ,3.375
+year2,loc14,loc14_year2,A,Bl4,EIDER,A ,2.602999926
+year2,loc14,loc14_year2,A,Bl4,SIMETO,A ,3.197000027
+year2,loc14,loc14_year2,A,Bl4,MBBACHIR,B,2.892999887
+year2,loc14,loc14_year2,A,Bl4,KEBIR,A ,2.921000004
+year2,loc14,loc14_year2,A,Bl4,O.ZENADI,B,3.441999912
+year2,loc14,loc14_year2,A,Bl4,ARDENTE,A ,3.065000057
+year2,loc14,loc14_year2,A,Bl4,BID/WAHA,A ,3.726000071
+year2,loc14,loc14_year2,A,Bl4,B.DUR194,B,3.395999908
+year2,loc16,loc16_year2,B,Bl1,KEBIR,A ,1.406000018
+year2,loc16,loc16_year2,B,Bl1,SIMETO,A ,1.521999955
+year2,loc16,loc16_year2,B,Bl1,O.ZENADI,B,1.707000017
+year2,loc16,loc16_year2,B,Bl1,BIDI17,B,1.338999987
+year2,loc16,loc16_year2,B,Bl1,HEBDA03,B,1.101999998
+year2,loc16,loc16_year2,B,Bl1,DUILIO,A ,0.51700002
+year2,loc16,loc16_year2,B,Bl1,EIDER,A ,1.638000011
+year2,loc16,loc16_year2,B,Bl1,OUMRABI9,A ,0.768999994
+year2,loc16,loc16_year2,B,Bl1,SAHEL77,A ,0.500999987
+year2,loc16,loc16_year2,B,Bl1,HEBD/GDO,A ,1.156000018
+year2,loc16,loc16_year2,B,Bl1,MEXICALI,A ,1.575000048
+year2,loc16,loc16_year2,B,Bl1,GTADUR,A ,1.725000024
+year2,loc16,loc16_year2,B,Bl1,CHENS,A ,1.154999971
+year2,loc16,loc16_year2,B,Bl1,ARDENTE,A ,1.873000026
+year2,loc16,loc16_year2,B,Bl1,WAHA,A ,1.49000001
+year2,loc16,loc16_year2,B,Bl1,BID/WAHA,A ,1.713000059
+year2,loc16,loc16_year2,B,Bl1,B.DUR194,B,1.386000037
+year2,loc16,loc16_year2,B,Bl1,OFANTO,A ,1.748000026
+year2,loc16,loc16_year2,B,Bl1,POLON/ZB,B,1.00999999
+year2,loc16,loc16_year2,B,Bl1,MBBACHIR,B,0.867999971
+year2,loc16,loc16_year2,B,Bl1,INRAT69,A ,1.282999992
+year2,loc16,loc16_year2,B,Bl1,BELIKH02,A ,1.748000026
+year2,loc16,loc16_year2,B,Bl1,VITRON,A ,1.378999949
+year2,loc16,loc16_year2,B,Bl1,POLONICU,B,0.890999973
+year2,loc16,loc16_year2,B,Bl2,OFANTO,A ,1.235000014
+year2,loc16,loc16_year2,B,Bl2,DUILIO,A ,0.89200002
+year2,loc16,loc16_year2,B,Bl2,KEBIR,A ,1.587000012
+year2,loc16,loc16_year2,B,Bl2,BIDI17,B,1.81099999
+year2,loc16,loc16_year2,B,Bl2,BID/WAHA,A ,2.428999901
+year2,loc16,loc16_year2,B,Bl2,WAHA,A ,1.751999974
+year2,loc16,loc16_year2,B,Bl2,HEBD/GDO,A ,1.23300004
+year2,loc16,loc16_year2,B,Bl2,B.DUR194,B,1.705000043
+year2,loc16,loc16_year2,B,Bl2,MBBACHIR,B,1.065999985
+year2,loc16,loc16_year2,B,Bl2,ARDENTE,A ,2.078000069
+year2,loc16,loc16_year2,B,Bl2,O.ZENADI,B,1.447000027
+year2,loc16,loc16_year2,B,Bl2,EIDER,A ,1.43900001
+year2,loc16,loc16_year2,B,Bl2,MEXICALI,A ,2.157000065
+year2,loc16,loc16_year2,B,Bl2,BELIKH02,A ,1.791000009
+year2,loc16,loc16_year2,B,Bl2,POLONICU,B,1.481999993
+year2,loc16,loc16_year2,B,Bl2,POLON/ZB,B,1.166000009
+year2,loc16,loc16_year2,B,Bl2,GTADUR,A ,1.756999969
+year2,loc16,loc16_year2,B,Bl2,INRAT69,A ,1.567999959
+year2,loc16,loc16_year2,B,Bl2,SAHEL77,A ,1.508000016
+year2,loc16,loc16_year2,B,Bl2,OUMRABI9,A ,1.529999971
+year2,loc16,loc16_year2,B,Bl2,HEBDA03,B,1.427999973
+year2,loc16,loc16_year2,B,Bl2,VITRON,A ,1.523000002
+year2,loc16,loc16_year2,B,Bl2,SIMETO,A ,1.348999977
+year2,loc16,loc16_year2,B,Bl2,CHENS,A ,1.475000024
+year2,loc16,loc16_year2,B,Bl3,MBBACHIR,B,0.884000003
+year2,loc16,loc16_year2,B,Bl3,SAHEL77,A ,1.491000056
+year2,loc16,loc16_year2,B,Bl3,INRAT69,A ,1.355000019
+year2,loc16,loc16_year2,B,Bl3,BID/WAHA,A ,1.825999975
+year2,loc16,loc16_year2,B,Bl3,OFANTO,A ,1.909000039
+year2,loc16,loc16_year2,B,Bl3,B.DUR194,B,1.738000035
+year2,loc16,loc16_year2,B,Bl3,HEBDA03,B,1.152999997
+year2,loc16,loc16_year2,B,Bl3,HEBD/GDO,A ,1.159000039
+year2,loc16,loc16_year2,B,Bl3,POLON/ZB,B,1.106999993
+year2,loc16,loc16_year2,B,Bl3,WAHA,A ,1.593000054
+year2,loc16,loc16_year2,B,Bl3,POLONICU,B,1.726999998
+year2,loc16,loc16_year2,B,Bl3,BIDI17,B,1.491999984
+year2,loc16,loc16_year2,B,Bl3,BELIKH02,A ,2.717000008
+year2,loc16,loc16_year2,B,Bl3,MEXICALI,A ,2.203999996
+year2,loc16,loc16_year2,B,Bl3,SIMETO,A ,0.870999992
+year2,loc16,loc16_year2,B,Bl3,OUMRABI9,A ,2.170000076
+year2,loc16,loc16_year2,B,Bl3,O.ZENADI,B,1.705000043
+year2,loc16,loc16_year2,B,Bl3,VITRON,A ,1.215999961
+year2,loc16,loc16_year2,B,Bl3,ARDENTE,A ,1.312999964
+year2,loc16,loc16_year2,B,Bl3,GTADUR,A ,1.838000059
+year2,loc16,loc16_year2,B,Bl3,CHENS,A ,1.342000008
+year2,loc16,loc16_year2,B,Bl3,DUILIO,A ,1.731999993
+year2,loc16,loc16_year2,B,Bl3,EIDER,A ,1.103999972
+year2,loc16,loc16_year2,B,Bl3,KEBIR,A ,1.277999997
+year2,loc16,loc16_year2,B,Bl4,MEXICALI,A ,1.786000013
+year2,loc16,loc16_year2,B,Bl4,ARDENTE,A ,1.646999955
+year2,loc16,loc16_year2,B,Bl4,O.ZENADI,B,1.590999961
+year2,loc16,loc16_year2,B,Bl4,KEBIR,A ,1.578999996
+year2,loc16,loc16_year2,B,Bl4,B.DUR194,B,2.572000027
+year2,loc16,loc16_year2,B,Bl4,POLONICU,B,1.498999953
+year2,loc16,loc16_year2,B,Bl4,DUILIO,A ,1.677999973
+year2,loc16,loc16_year2,B,Bl4,VITRON,A ,1.197000027
+year2,loc16,loc16_year2,B,Bl4,OFANTO,A ,3.167000055
+year2,loc16,loc16_year2,B,Bl4,BID/WAHA,A ,1.934999943
+year2,loc16,loc16_year2,B,Bl4,GTADUR,A ,1.988000035
+year2,loc16,loc16_year2,B,Bl4,SAHEL77,A ,1.411000013
+year2,loc16,loc16_year2,B,Bl4,POLON/ZB,B,1.128999949
+year2,loc16,loc16_year2,B,Bl4,INRAT69,A ,1.070000052
+year2,loc16,loc16_year2,B,Bl4,CHENS,A ,1.208999991
+year2,loc16,loc16_year2,B,Bl4,SIMETO,A ,1.633999944
+year2,loc16,loc16_year2,B,Bl4,EIDER,A ,1.421000004
+year2,loc16,loc16_year2,B,Bl4,BELIKH02,A ,1.059999943
+year2,loc16,loc16_year2,B,Bl4,WAHA,A ,1.598999977
+year2,loc16,loc16_year2,B,Bl4,MBBACHIR,B,0.856000006
+year2,loc16,loc16_year2,B,Bl4,HEBDA03,B,1.587000012
+year2,loc16,loc16_year2,B,Bl4,HEBD/GDO,A ,1.157999992
+year2,loc16,loc16_year2,B,Bl4,OUMRABI9,A ,1.582000017
+year2,loc16,loc16_year2,B,Bl4,BIDI17,B,1.61500001
+year2,loc18,loc18_year2,B,Bl1,INRAT69,A ,1.317999959
+year2,loc18,loc18_year2,B,Bl1,CHENS,A ,2.144000053
+year2,loc18,loc18_year2,B,Bl1,OUMRABI9,A ,1.537999988
+year2,loc18,loc18_year2,B,Bl1,MEXICALI,A ,1.307000041
+year2,loc18,loc18_year2,B,Bl1,GTADUR,A ,1.697000027
+year2,loc18,loc18_year2,B,Bl1,POLONICU,B,1.350000024
+year2,loc18,loc18_year2,B,Bl1,EIDER,A ,1.501000047
+year2,loc18,loc18_year2,B,Bl1,MBBACHIR,B,1.725000024
+year2,loc18,loc18_year2,B,Bl1,HEBDA03,B,1.478000045
+year2,loc18,loc18_year2,B,Bl1,DUILIO,A ,1.83099997
+year2,loc18,loc18_year2,B,Bl1,ARDENTE,A ,1.985000014
+year2,loc18,loc18_year2,B,Bl1,VITRON,A ,2.052000046
+year2,loc18,loc18_year2,B,Bl1,BIDI17,B,1.746999979
+year2,loc18,loc18_year2,B,Bl1,BELIKH02,A ,1.508000016
+year2,loc18,loc18_year2,B,Bl1,SAHEL77,A ,1.59800005
+year2,loc18,loc18_year2,B,Bl1,POLON/ZB,B,2.154000044
+year2,loc18,loc18_year2,B,Bl1,SIMETO,A ,2.280999899
+year2,loc18,loc18_year2,B,Bl1,WAHA,A ,1.804999948
+year2,loc18,loc18_year2,B,Bl1,BID/WAHA,A ,1.421000004
+year2,loc18,loc18_year2,B,Bl1,B.DUR194,B,1.963000059
+year2,loc18,loc18_year2,B,Bl1,KEBIR,A ,1.192999959
+year2,loc18,loc18_year2,B,Bl1,O.ZENADI,B,1.338999987
+year2,loc18,loc18_year2,B,Bl1,HEBD/GDO,A ,1.282999992
+year2,loc18,loc18_year2,B,Bl1,OFANTO,A ,1.263000011
+year2,loc18,loc18_year2,B,Bl2,GTADUR,A ,1.355999947
+year2,loc18,loc18_year2,B,Bl2,WAHA,A ,1.383000016
+year2,loc18,loc18_year2,B,Bl2,BELIKH02,A ,1.312999964
+year2,loc18,loc18_year2,B,Bl2,SIMETO,A ,2.092999935
+year2,loc18,loc18_year2,B,Bl2,B.DUR194,B,1.621000051
+year2,loc18,loc18_year2,B,Bl2,POLONICU,B,1.27699995
+year2,loc18,loc18_year2,B,Bl2,VITRON,A ,1.659000039
+year2,loc18,loc18_year2,B,Bl2,CHENS,A ,1.56400001
+year2,loc18,loc18_year2,B,Bl2,OFANTO,A ,1.146000028
+year2,loc18,loc18_year2,B,Bl2,MBBACHIR,B,1.289999962
+year2,loc18,loc18_year2,B,Bl2,KEBIR,A ,1.302000046
+year2,loc18,loc18_year2,B,Bl2,EIDER,A ,1.238999963
+year2,loc18,loc18_year2,B,Bl2,BIDI17,B,1.332000017
+year2,loc18,loc18_year2,B,Bl2,ARDENTE,A ,1.087000012
+year2,loc18,loc18_year2,B,Bl2,INRAT69,A ,1.355999947
+year2,loc18,loc18_year2,B,Bl2,HEBD/GDO,A ,1.42900002
+year2,loc18,loc18_year2,B,Bl2,MEXICALI,A ,1.345999956
+year2,loc18,loc18_year2,B,Bl2,POLON/ZB,B,1.330000043
+year2,loc18,loc18_year2,B,Bl2,HEBDA03,B,1.340000033
+year2,loc18,loc18_year2,B,Bl2,O.ZENADI,B,1.317000031
+year2,loc18,loc18_year2,B,Bl2,DUILIO,A ,1.496999979
+year2,loc18,loc18_year2,B,Bl2,BID/WAHA,A ,1.363000035
+year2,loc18,loc18_year2,B,Bl2,OUMRABI9,A ,1.248000026
+year2,loc18,loc18_year2,B,Bl2,SAHEL77,A ,1.192000031
+year2,loc18,loc18_year2,B,Bl3,BELIKH02,A ,1.18900001
+year2,loc18,loc18_year2,B,Bl3,KEBIR,A ,1.003999949
+year2,loc18,loc18_year2,B,Bl3,POLONICU,B,1.391000032
+year2,loc18,loc18_year2,B,Bl3,CHENS,A ,1.809999943
+year2,loc18,loc18_year2,B,Bl3,OFANTO,A ,1.351999998
+year2,loc18,loc18_year2,B,Bl3,VITRON,A ,1.718000054
+year2,loc18,loc18_year2,B,Bl3,BID/WAHA,A ,1.870000005
+year2,loc18,loc18_year2,B,Bl3,B.DUR194,B,1.366999984
+year2,loc18,loc18_year2,B,Bl3,POLON/ZB,B,1.995000005
+year2,loc18,loc18_year2,B,Bl3,SAHEL77,A ,1.840999961
+year2,loc18,loc18_year2,B,Bl3,INRAT69,A ,1.470000029
+year2,loc18,loc18_year2,B,Bl3,MBBACHIR,B,1.968000054
+year2,loc18,loc18_year2,B,Bl3,BIDI17,B,1.702999949
+year2,loc18,loc18_year2,B,Bl3,O.ZENADI,B,1.863000035
+year2,loc18,loc18_year2,B,Bl3,MEXICALI,A ,2.279999971
+year2,loc18,loc18_year2,B,Bl3,SIMETO,A ,2.237999916
+year2,loc18,loc18_year2,B,Bl3,GTADUR,A ,2.46600008
+year2,loc18,loc18_year2,B,Bl3,EIDER,A ,2.428999901
+year2,loc18,loc18_year2,B,Bl3,HEBDA03,B,2.109999895
+year2,loc18,loc18_year2,B,Bl3,HEBD/GDO,A ,2.782999992
+year2,loc18,loc18_year2,B,Bl3,WAHA,A ,1.93599999
+year2,loc18,loc18_year2,B,Bl3,DUILIO,A ,1.411999941
+year2,loc18,loc18_year2,B,Bl3,ARDENTE,A ,1.840000033
+year2,loc18,loc18_year2,B,Bl3,OUMRABI9,A ,1.050999999
+year2,loc18,loc18_year2,B,Bl4,SIMETO,A ,2.135999918
+year2,loc18,loc18_year2,B,Bl4,B.DUR194,B,1.598999977
+year2,loc18,loc18_year2,B,Bl4,WAHA,A ,1.995000005
+year2,loc18,loc18_year2,B,Bl4,HEBD/GDO,A ,1.753999949
+year2,loc18,loc18_year2,B,Bl4,BIDI17,B,2.40199995
+year2,loc18,loc18_year2,B,Bl4,POLON/ZB,B,1.570000052
+year2,loc18,loc18_year2,B,Bl4,CHENS,A ,2.316999912
+year2,loc18,loc18_year2,B,Bl4,DUILIO,A ,2.252000093
+year2,loc18,loc18_year2,B,Bl4,GTADUR,A ,2.552999973
+year2,loc18,loc18_year2,B,Bl4,VITRON,A ,1.562999964
+year2,loc18,loc18_year2,B,Bl4,BELIKH02,A ,1.616999984
+year2,loc18,loc18_year2,B,Bl4,OUMRABI9,A ,2.655999899
+year2,loc18,loc18_year2,B,Bl4,KEBIR,A ,1.643000007
+year2,loc18,loc18_year2,B,Bl4,O.ZENADI,B,2.052000046
+year2,loc18,loc18_year2,B,Bl4,OFANTO,A ,1.756000042
+year2,loc18,loc18_year2,B,Bl4,INRAT69,A ,1.360999942
+year2,loc18,loc18_year2,B,Bl4,MBBACHIR,B,2.000999928
+year2,loc18,loc18_year2,B,Bl4,ARDENTE,A ,1.449000001
+year2,loc18,loc18_year2,B,Bl4,BID/WAHA,A ,1.914000034
+year2,loc18,loc18_year2,B,Bl4,MEXICALI,A ,1.628000021
+year2,loc18,loc18_year2,B,Bl4,POLONICU,B,1.973999977
+year2,loc18,loc18_year2,B,Bl4,EIDER,A ,1.534000039
+year2,loc18,loc18_year2,B,Bl4,SAHEL77,A ,2.263999939
+year2,loc18,loc18_year2,B,Bl4,HEBDA03,B,2.101000071

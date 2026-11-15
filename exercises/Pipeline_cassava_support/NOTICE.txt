@@ -1,0 +1,4 @@
+The folder reference/Hussain_Analysis-pipeline is a copy of https://github.com/whussain2/Analysis-pipeline
+(Hussain et al. 2022, Plant Methods 18, 1, doi:10.1186/s13007-022-00845-7; article under CC BY 4.0).
+It is included only for teaching in this course. The repository does not state a licence for the code.
+Please cite the article and use the original repository for any other purpose.

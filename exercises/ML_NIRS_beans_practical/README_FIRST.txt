@@ -1,5 +1,5 @@
 PRACTICAL: NIR spectra of common beans and PCR
-RTC RER5030, Day 5 (machine learning)
+RTC RER5030, Day 6 (machine learning)
 
 1. Unzip this folder. Keep all files together.
 2. Double-click ML_NIRS_beans_practical.Rproj to open RStudio in this folder.

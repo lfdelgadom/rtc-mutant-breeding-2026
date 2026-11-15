@@ -2,14 +2,15 @@
 
 ::: chapter-info
 **Author:** Luis Fernando Delgado Muñoz\
-**Session:** Day 5, Friday 13 November, 15:00 to 16:15
+**Session:** Day 6, Monday 16 November
 :::
 
 ::: {.callout-tip}
 ## Materials for this session
 
 - [Lecture slides](../slides/11-ai-plant-breeding.html){target="_blank"}
-- [Practical: NIR spectra of beans and PCR (ZIP)](../downloads/ML_NIRS_beans_practical.zip). Unzip it, open the `.Rproj`, and start with `NIRS_beans_PCR_practical.Rmd`.
+- [Practical 1: explain and predict wheat yield, mixed model and random forest (ZIP)](../downloads/ML_wheat_GxE_practical.zip). Unzip it, open the `.Rproj`, and start with `ML_wheat_GxE_practical.Rmd`.
+- [Practical 2: NIR spectra of beans and PCR (ZIP)](../downloads/ML_NIRS_beans_practical.zip). Unzip it, open the `.Rproj`, and start with `NIRS_beans_PCR_practical.Rmd`.
 - [Data: bean NIR spectra and laboratory values (CSV)](../data/bean_nirs.csv)
 :::
 
@@ -19,7 +20,9 @@
 - Describe what near-infrared (NIR) light is and what a NIR spectrum measures
 - Say which kinds of traits NIR predicts well (chemical) and which not (minerals, cooking and physical traits)
 - Build a simple prediction model, principal component regression (PCR), and describe other common models in one sentence each
+- Explain training, validation and test sets, and k-fold cross-validation
 - Measure prediction quality with RMSE, bias, R² and RPD, and compare with a baseline
+- Choose a model family for a given situation, and say when a simple model is enough
 - Validate honestly and avoid **data leakage**, for example by keeping all samples of a bean line in the same fold
 
 Most of this course uses models to **explain** a trial: is there a difference between lines, how large is it, how sure are we? Machine learning (ML) is used for another goal: to **predict** a value for a new sample. We may not need to understand every step of the model if it predicts well. But we do need to know **how well it predicts in the situation where we will use it**. This chapter is about that question, with NIR spectra of common beans.
@@ -57,6 +60,58 @@ A model can explain well and predict badly, and the other way around.
 Some measurements are slow or costly: laboratory analysis of phytate, sugars or protein, scoring disease in the field, phenotyping every line in every trial. A prediction model learns the link between a **cheap measurement** (a NIR spectrum, an image, a marker) and the **expensive one**. We measure the expensive trait on a few samples, build the model, and then use the cheap measurement on all samples.
 
 In a mutation breeding programme there can be thousands of M2 or M3 plants and lines. NIR on the seed allows a fast **screening** for composition. The interesting lines are then confirmed in the laboratory. Prediction does not replace the laboratory: it tells you where to look.
+
+![Screening with NIR and validation in the laboratory in a mutation breeding programme.](../slides/images/nir_mutation_breeding.jpeg){width="80%" fig-align="center"}
+
+![Screening against certification. A prediction model is good enough to choose which lines to keep. A value that must be certified needs the laboratory method.](../slides/images/mutant_screening_prediction.jpeg){width="80%" fig-align="center"}
+
+## Machine learning in general
+
+**Machine learning** is a part of artificial intelligence. The machine **learns patterns from data**, and nobody writes the rules.
+
+![Artificial intelligence, machine learning and deep learning, as nested circles.](../slides/images/ml_ai_circles.png){width="60%" fig-align="center"}
+
+A machine can learn in three ways: **supervised** learning (we know the answer for the training samples, for example the laboratory value), **unsupervised** learning (we look for groups or structure with no answer, for example PCA or clustering) and **reinforcement** learning (the machine learns by trial and reward). Almost everything in this chapter is supervised.
+
+![Three ways a machine learns.](../slides/images/ml_three_ways.png){width="70%" fig-align="center"}
+
+Machine learning is used in agriculture for many tasks, such as crop and yield prediction, disease and pest detection, soil and water management, and phenotyping with images (examples as described by DeHaat and GeoPard, see the references).
+
+![Examples of machine learning in agriculture.](../slides/images/ml_applications.png){width="75%" fig-align="center"}
+
+A supervised model can answer two kinds of question. **Regression** gives a number (for example phytate in mg/g). **Classification** gives a class (for example grain colour). In this chapter we do regression.
+
+**Underfitting and overfitting.** A model that is too simple misses the pattern (underfitting). A model that is too flexible follows the noise: it is perfect on the samples it has seen and bad on new ones (overfitting). That is why we always test on samples the model has not seen. For an interactive explanation, see [The Bias-Variance Tradeoff](https://mlu-explain.github.io/bias-variance/) of MLU-Explain.
+
+![Underfitting, a good fit and overfitting.](../slides/images/ml_fit_levels.png){width="80%" fig-align="center"}
+
+**The life of a model.** A model is never finished. We collect data, prepare it, train, validate and use the model. With a new season, instrument or variety we check the error again and retrain.
+
+![The life of a model.](../slides/images/ml_workflow.png){width="95%" fig-align="center"}
+
+**Benefits.** Faster and more consistent decisions, earlier warning of pests, diseases and stress, better use of water, fertiliser and laboratory time, and more lines screened with the same budget. **Challenges.** Cost of sensors, drones and instruments, training and digital skills, data privacy and security, models that are hard to explain, and poor internet and technology in rural areas.
+
+## Train, validation and test
+
+When we build a prediction model we cut the data into parts, and each part has one job.
+
+![Training, validation and test sets. With plenty of data we use three separate parts. With small data, cross-validation plays the role of validation.](../slides/images/data_split.png){width="95%" fig-align="center"}
+
+- **Training** is used to fit the model.
+- **Validation** is used to choose settings (for example the number of components) and to compare models.
+- **Test** gives the final grade. It is used **once**.
+
+If the test set helps to choose the model, the final number is too good. The rule is: whoever gives the final grade must not help to choose the model. With small data (117 samples, or 2,112 plots) three separate parts leave too little in each one. Then we use **k-fold cross-validation** inside the training data in place of a validation set, and we keep a test set apart, or we use a nested validation, as in the model comparison below. In Practical 1 we split the wheat data in two ways, random folds and folds by environment.
+
+## Practical 1, explain and predict wheat yield
+
+The data are the yield of **24 durum wheat genotypes** in **22 environments**. The same data answer two different questions:
+
+1. **Explain.** A mixed model shows where the variation comes from. Environment explains about 65% of the variance, residual 20%, the block within the environment 10% and the genotype only 5.5%.
+2. **Predict.** A random forest (many decision trees, each on a random part of the data, with the answers averaged) predicts the yield of a plot.
+3. **Test honestly.** With random folds the forest looks very good (RMSE 0.54 against 0.82 for "always the mean"), because plots of the same environment are in training and in test. When a whole environment is left out, the forest is no better than the mean (RMSE 0.90 against 0.87). The model learned the environments, not the genotypes.
+
+Use the wheat ZIP file at the top of this chapter. The practical takes about 20 minutes and has the same structure as the bean practical.
 
 ## Light we can see and light we cannot see
 
@@ -235,6 +290,40 @@ ggplot(pl, aes(obs, pred)) + geom_abline(linetype = 2) + geom_point(colour = "#2
   facet_wrap(~model, nrow = 1) + labs(x = "Observed phytate (mg/g)", y = "Predicted phytate (mg/g)")
 ```
 
+### What the model uses
+
+A lasso model keeps only some wavelengths. Where are they?
+
+```{r}
+#| label: fig-lasso-coef
+#| fig-cap: "Wavelengths kept by the lasso for phytate and their coefficients."
+#| fig-width: 8
+#| fig-height: 3.4
+library(glmnet)
+inner <- make_folds(line, k = 5, by_line = TRUE, seed = 7)
+las   <- cv.glmnet(Z5, y, alpha = 1, foldid = inner)
+beta  <- as.numeric(coef(las, s = "lambda.min"))[-1]
+grp   <- ceiling(seq_len(ncol(Z)) / 5)
+wl5   <- as.numeric(tapply(as.numeric(colnames(Z)), grp, mean))
+keep  <- beta != 0
+ggplot(data.frame(wavelength = wl5[keep], coefficient = beta[keep]), aes(wavelength, coefficient)) +
+  geom_col(width = 8, fill = "#2c7fb8") + labs(x = "Wavelength (nm)", y = "Lasso coefficient")
+```
+
+The lasso kept `{r} sum(keep)` of `{r} length(beta)` variables. Compare their positions with the band map: do they sit near O-H, N-H or C-H bands? A model can predict well and still be hard to explain, so check that it uses sensible wavelengths.
+
+### Which model should I use?
+
+| Situation | A good first choice |
+|---|---|
+| Many correlated variables, few samples (spectra) | PLS, ridge, lasso |
+| You want to know **which variables** matter | Lasso or elastic net |
+| Tables with interactions (genotype, environment, covariates) | Random forest or boosting |
+| Very large data, images | Deep learning |
+| You must explain the result to others | Linear or mixed models |
+
+If two models are close, take the **simpler** one. With small data, small differences are noise. For interactive explanations of decision trees and random forests, see [MLU-Explain, random forest](https://mlu-explain.github.io/random-forest/).
+
 ### How many components?
 
 With few components the model is too simple; with many it learns the noise (**overfitting**). We try 1 to 25 components and look at the validation error.
@@ -254,7 +343,16 @@ ggplot(curve, aes(components, RMSE, colour = folds)) + geom_line(linewidth = 1) 
 
 ## Knowing if the number is honest {#sec-leakage}
 
-The rule is simple: **judge a model on samples it has not seen**. In cross-validation we cut the data in *k* folds; each part is called a **fold**. Each time one fold is the test and the other folds build the model. With k = 5 there are 5 rounds and every sample is tested once.
+The rule is simple: **judge a model on samples it has not seen**. In cross-validation we cut the data in *k* folds; each part is called a **fold**. Each time one fold is the test and the other folds build the model. With k = 5 there are 5 rounds and every sample is tested once. For an interactive version, see [Cross-Validation](https://mlu-explain.github.io/cross-validation/) of MLU-Explain.
+
+| Method | How it works | Good for |
+|---|---|---|
+| **Train and test split** | One part builds the model, one part tests it | Large data sets |
+| **k-fold cross-validation** | k parts; each part is the test once | Medium and small data sets (our case) |
+| **Leave-one-out** | Every sample is the test once | Very small data sets, slow for large ones |
+| **Bootstrap** | Random samples with replacement | Checking how stable the estimate is |
+
+Whatever the method, the **unit left out** must be the unit you want to predict (a line, an environment, a year). That is the next topic.
 
 ### Data leakage
 
@@ -330,20 +428,64 @@ ggplot(res, aes(R2, trait, fill = type)) + geom_col() + labs(x = "R² (PCR, vali
 
 The picture agrees with the chemistry:
 
-- **Sugars and phenolics** (organic molecules with many C-H and O-H bonds): good.
+- **Sucrose, total sugars and phenolics** (organic molecules with many C-H and O-H bonds): the best, with R² about 0.8.
 - **Phytate and the other oligosaccharides**: medium. Useful for screening, not for exact values.
 - **Iron and zinc**: weak to moderate. NIR cannot see a metal; it sees what goes with it.
 - **Cooking time and water absorption**: weak. They depend on the seed coat, storage and structure.
+- **Exceptions**: fructose and verbascose are organic but weak. Not every organic compound works.
 
 The number of components was chosen on the same validation folds, so these R² values are slightly optimistic. The model comparison above used a stricter, nested validation.
 
 Published work gives the same message. In a CIAT study of common bean (Garcia et al. 2025), NIR predicted nitrogen well (CCC 0.84) and iron and zinc only moderately (about 0.4). A study of Croatian landraces (Vranić et al. 2019) found good prediction of nitrogen (R² 0.89), usable models for phytic acid and phosphorus, and poor models for iron and zinc. A 2026 review of legume breeding (Ghaitaranpour et al. 2026) also reports that visible and NIR models work best for composition and less well for appearance and texture, and that the human sensory panel remains the reference.
 
+| Study | What they found |
+|---|---|
+| Garcia et al. (2025), CIAT, common bean | Nitrogen predicted well (CCC 0.84); iron and zinc only about 0.4 |
+| Vranić et al. (2019), Croatia, common bean | Nitrogen good (R² 0.89); phytic acid and phosphorus usable; iron and zinc poor |
+| Our data (CIAT beans) | Sugars and phenolics good; phytate medium; minerals and cooking weak |
+
+Sensors other than NIR are used for sensory traits in legumes (taste, texture and appearance are slow to score with human panels):
+
+| Sensor | Used for | Message from the review |
+|---|---|---|
+| NIR and Vis-NIR (with PLS) | Composition, some sensory scores | Works best for composition; weaker for appearance and texture |
+| Colour images (RGB) | Seed colour, canning colour | Good for external traits only |
+| Hyperspectral imaging | Flour quality, seed quality | Costly, needs large data |
+| Electronic nose and tongue | Aroma, off-flavour | Still limited for large breeding populations |
+
 ## Other uses and other validation units
 
-The same workflow is used with image features (disease severity, plant traits), multi-environment trials (yield and G×E in new environments, using weather and soil covariates) and markers (genomic selection). Flexible models can beat simple ones when the data are large; with small data, simple models are often as good. In genomic prediction, machine learning has not consistently beaten classical models such as GBLUP (Yoosefzadeh-Najafabadi et al. 2025), and reviews list large data needs, hard interpretation and biased data as limits (Yoosefzadeh Najafabadi et al. 2023).
+The same workflow (cheap data, a model, honest validation) is used in many places in breeding.
 
-Data leakage by line is one case of a general rule: **leave out the whole unit you want to predict**. For a new line, keep all samples of the line together. For a new environment, keep all plots of that environment together. For a new season, keep a whole year together. The function `make_folds()` takes any grouping variable.
+| Data | Prediction | Note |
+|---|---|---|
+| Spectra (NIR) | Composition of seed or flour | What we did in this chapter |
+| Image features | Plant traits, disease severity | Features first, then a model |
+| Multi-environment trials | Yield and G×E in new environments | Use environment covariates (weather, soil) |
+| Markers | Breeding values (genomic selection) | Very many variables, few lines: penalised models are common |
+
+Some examples reported by Yoosefzadeh Najafabadi et al. (2023) and Yoosefzadeh-Najafabadi et al. (2025), as reported for the original studies:
+
+| Crop and data | What was predicted | Result reported |
+|---|---|---|
+| Soybean, hyperspectral reflectance | Seed yield | Random forest best, 84% |
+| Potato, light at chosen wavelengths | Virus infection | SVM, 89.8% accuracy |
+| Wheat, drone sensors (multi-sensor) | Grain yield, early stage | Ensemble, R² up to 0.69 |
+| Soybean, drone image time series | Relative maturity | CNN-LSTM beat local regression |
+| Wheat, markers (multi-trait models) | End-use quality traits | +5.5% to +7.9%; flour protein up to +35% |
+
+Flexible models can beat simple ones when the data are large; with small data, simple models are often as good. No best algorithm exists for every case. Start simple, and use a complex model only if it clearly predicts better on new data. Machine learning helps with non-linear links, many variables, several traits at once and environmental data for G×E. It does not win by default in genomic prediction, with small data sets, or when the data are biased. In genomic prediction, machine learning has not consistently beaten classical models such as GBLUP (Yoosefzadeh-Najafabadi et al. 2025), and reviews list large data needs, hard interpretation and biased data as limits (Yoosefzadeh Najafabadi et al. 2023).
+
+Data leakage by line is one case of a general rule: **leave out the whole unit you want to predict**.
+
+| You want to predict | Leave out together |
+|---|---|
+| A new line | All samples of that line |
+| A new environment | All plots of that environment |
+| A new season | All data of that year |
+| A new line in a new environment | Both (hardest case) |
+
+The function `make_folds()` takes any grouping variable, for example `make_folds(environment, by_line = TRUE)`. The more different the new situation is from the training data, the larger the error. Test in the situation where you will use the model.
 
 ## Limits of prediction models
 
@@ -356,12 +498,13 @@ Data leakage by line is one case of a general rule: **leave out the whole unit y
 - The laboratory value is the reference: a noisy laboratory method limits the model.
 - A calibration is **living**: add new samples each season and check the error again.
 
-## Practical
+## Practical 2, beans and PCR
 
-Use the ZIP file at the top of this chapter. You will follow the same workflow with short code and functions: look at the spectra, prepare them, fit PCR, validate with random folds and with folds by line, choose the number of components, compare a chemical trait (total sugars, phytate) with a physical one (cooking time, iron), and write a conclusion for a breeder.
+Use the bean ZIP file at the top of this chapter. You will follow the same workflow with short code and functions: look at the spectra, prepare them, fit PCR, validate with random folds and with folds by line, choose the number of components, compare a chemical trait (total sugars, phytate) with a physical one (cooking time, iron), and write a conclusion for a breeder.
 
 ## Key takeaways
 
+- **Train, validation and test** have different jobs. The test set gives the final grade and is used once. With small data, cross-validation replaces the validation set.
 - ML is for **prediction**: it turns a cheap measurement into an estimate of an expensive one. It does not replace the experimental design or the mixed model.
 - NIR measures **bonds** (O-H, N-H, C-H). It is very good for **chemical** traits and weak for minerals and physical or cooking traits.
 - Prepare the spectra (SNV, first derivative) and start with a **simple model**: PCR or PLS.
@@ -378,4 +521,7 @@ Use the ZIP file at the top of this chapter. You will follow the same workflow w
 - Yoosefzadeh Najafabadi, M., Hesami, M. and Eskandari, M. (2023). Machine learning-assisted approaches in modernized plant breeding programs. *Genes* 14(4): 777. DOI: 10.3390/genes14040777.
 - Yoosefzadeh-Najafabadi, M., Xavier, A., Eskandari, M. and Hesami, M. (2025). Machine learning after a decade: is it still a missing keystone in genomic-based plant breeding? *Artificial Intelligence Review* 58: 260. DOI: 10.1007/s10462-025-11274-y.
 - Wadoux, A. M. J.-C., Minasny, B. and McBratney, A. B. (2021). *Soil Spectral Inference with R*. Springer. Chapter 9.
+- MLU-Explain (Machine Learning University). Interactive articles on cross-validation, bias and variance, decision trees and random forests. [mlu-explain.github.io](https://mlu-explain.github.io/)
+- DeHaat. AI and ML in agriculture (blog). dehaat.in/en/blog/ai-and-ml-in-agriculture
+- GeoPard. Applications of machine learning for precision agriculture (blog). geopard.tech/blog/applications-of-machine-learning-for-precision-agriculture/
 - Bean NIR data: CIAT (PhD work of L. F. Londoño), shared for training.

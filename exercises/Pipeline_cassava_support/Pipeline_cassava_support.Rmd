@@ -1,0 +1,124 @@
+---
+title: "Data analysis pipeline in plant breeding"
+subtitle: "Cassava, nine trials in Colombia (2021 and 2022). Free packages only"
+author: "Luis Fernando Delgado Muñoz. RTC RER5030, Day 6"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.align = "center")
+source("helpers.R")
+library(patchwork)
+```
+
+This file runs every step of the pipeline shown in class. It uses only free packages: **SpATS** for the spatial model of each trial and **lme4** for the multi-environment model.
+
+## 1. Import the data
+
+One row per plot. Key columns: `trial_name`, `accession_name` (clone), `rep_number`, `row_number`, `col_number`, `check_test`, and the traits.
+
+```{r import}
+d <- load_cassava("data/cassava_DVGXE_tidy.csv")
+dim(d)
+table(d$trial, d$check_test)
+```
+
+## 2. Pre-processing and quality control
+
+### Field design
+
+```{r design, fig.width=11, fig.height=4.2}
+(plot_trial_layout(d, "ciat21") | plot_trial_layout(d, "ciat22")) + plot_layout(guides = "collect")
+```
+
+### Missing data
+
+Rule of thumb: drop a trait or trial with more than 20% missing.
+
+```{r missing, fig.width=9, fig.height=4.4}
+plot_missing(d)
+```
+
+### Shared clones
+
+```{r shared, fig.width=8, fig.height=4.4}
+plot_connect(d)
+```
+
+### Variation between trials
+
+```{r boxplot, fig.width=9, fig.height=4.2}
+plot_trait_trial(d, "yield_ha")
+```
+
+Try another trait. Change `"yield_ha"` for `"DM_gravity"`.
+
+## 3. Single trial analysis (spatial model, SpATS)
+
+```{r spats, fig.width=10, fig.height=4.4}
+m1 <- fit_spats(d, "ciat22", "yield_ha")
+plot(m1, cex = 0.7)
+getHeritability(m1)
+```
+
+Heritability of every trait in every trial (a few seconds):
+
+```{r h2, fig.width=9, fig.height=4.2}
+H2 <- single_h2(d)
+H2$trial <- factor(H2$trial, levels = levels(d$trial))
+H2$trait <- factor(H2$trait, levels = TRAITS)
+ggplot(H2, aes(trait, trial, fill = h2)) + geom_tile(colour = "white") +
+  geom_text(aes(label = sprintf("%.2f", h2)), size = 3.2) +
+  scale_fill_gradient(low = "#F3E5D8", high = "#0072B2", limits = c(0, 1), name = "H2") +
+  labs(x = NULL, y = NULL) + theme_minimal(base_size = 13) +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+```
+
+A trait with heritability below about 0.1 in a trial should not go into the multi-environment analysis.
+
+## 4. Multi-environment analysis (lme4)
+
+Model: `trait ~ trial + (1 | clone) + (1 | clone:trial)`.
+
+```{r met}
+mY <- met_model(d, "yield_ha")
+summary(mY)
+met_h2(mY, d, "yield_ha")
+```
+
+### Genotypic correlation between trials
+
+```{r gcor, fig.width=8.5, fig.height=4.6}
+plot_corr(trial_gcor(mY))
+```
+
+## 5. Results
+
+### BLUPs of all traits and correlation between traits
+
+```{r blups, fig.width=7.5, fig.height=4.6}
+B <- all_blups(d)
+head(B)
+plot_corr(cor(B[, TRAITS]))
+```
+
+### Selection index
+
+Scores used in the original report: yield +10, dry matter +10, plant type -5. We keep the top 20%.
+
+```{r index}
+S <- selection_table(B, weights = c(yield_ha = 10, DM_gravity = 10, plant_type = -5), pct = 0.20)
+knitr::kable(head(S[, c("rank", "g", "yield_ha", "DM_gravity", "plant_type", "index", "selected")], 15), digits = 2)
+```
+
+Change the weights and see how the list changes. For example, give dry matter a score of 20.
+
+## 6. Reproducibility
+
+```{r session}
+sessionInfo()
+```

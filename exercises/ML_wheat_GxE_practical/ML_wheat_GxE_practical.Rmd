@@ -1,0 +1,136 @@
+---
+title: "Explaining and predicting yield in durum wheat"
+subtitle: "RTC RER5030, Machine learning for prediction, Practical 1"
+author: "Your name"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: false
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = TRUE)
+```
+
+# What you will do
+
+You have yield data of **24 durum wheat genotypes** in **22 environments** with **4 blocks** (the data set from the G×E session).
+You will ask the same data two different questions:
+
+1. **Explain**: how much of the yield variation comes from the genotype and how much from the environment? (a mixed model)
+2. **Predict**: can a machine learning model (random forest) predict the yield of plots it has not seen? And how honest is that test?
+
+Fill the blanks `___` (three underscores). Lines that start with `# HINT` help you.
+Expected results are written in comments like `# Expected: ...`. Small differences are normal.
+The work is done by short functions in `helpers.R`. You do not need to change that file.
+
+```{r load}
+source("helpers.R")
+wheat <- load_wheat("data/Durum_wheat_Algeria.csv")
+```
+
+# Step 1. Look at the data
+
+**Question 1.** How many plots, genotypes and environments are there?
+
+```{r step1}
+nrow(wheat)                              # Expected: 2112
+length(unique(wheat$___))                # HINT: genotypes. Expected: 24
+length(unique(wheat$Environment))        # Expected: 22
+table(wheat$Genotype, wheat$Environment)[1:3, 1:5]   # plots of each genotype in each environment
+```
+
+*How many plots does each genotype have in each environment? Remember this number for Step 5.*
+
+> Your answer:
+
+# Step 2. Explain: a mixed model
+
+We ask: *where does the yield variation come from?* Genotype, environment and block are random effects.
+
+```{r step2}
+m <- lmer(yield ~ (1 | Genotype) + (1 | ___) + (1 | Environment:Block), data = wheat)   # HINT: the environment
+variance_table(m)
+# Expected: Environment about 64%, Residual about 20%, Environment:Block about 10%, Genotype about 6%.
+```
+
+**Question 2.** Which source is the largest? What share belongs to the genotype?
+
+> Your answer:
+
+# Step 3. Predict: a random forest, with random folds
+
+Now a different question: *what yield will a plot have?*
+A **random forest** builds many decision trees and averages them. We split the plots in 5 folds **at random**.
+Each fold is the test once, and the other four folds build the model.
+
+```{r step3}
+folds_random <- make_folds(nrow(wheat))               # random folds
+res_random <- cv_rf(yield ~ Genotype + Environment + Block + region + Year,
+                    data = wheat, folds = ___)        # HINT: folds_random
+round(quality(wheat$yield, res_random$pred, res_random$baseline), 3)
+# Expected: RMSE about 0.54 and "always the mean" about 0.82 (t/ha). It looks like a good model.
+```
+
+```{r step3-plot}
+plot_pred(wheat$yield, res_random$pred, "Random folds")
+```
+
+**Question 3.** How much smaller is the error of the model than the error of "always the mean"?
+
+> Your answer:
+
+# Step 4. Does it rank genotypes inside an environment?
+
+A breeder compares genotypes **in the same environment**. Let us check the correlation inside each environment.
+
+```{r step4}
+within_r(wheat$Environment, wheat$yield, res_random$pred)
+# Expected: about 0.5, much lower than the overall picture suggests
+```
+
+**Question 4.** Why is it lower than the plot above suggests? (HINT: what does the model know about each environment?)
+
+> Your answer:
+
+# Step 5. An honest test: a new environment
+
+In Step 1 you saw that every genotype has **4 plots** in each environment. With random folds, the other 3 plots of the same genotype and environment are almost always in the training set. This is **data leakage**, the same problem as with the bean lines.
+
+What if the environment is **new**? Then **whole environments** must stay together in the same fold, and the model cannot use the variable Environment.
+
+```{r step5}
+folds_env <- make_folds(nrow(wheat), group = wheat$___)        # HINT: the environment
+res_env <- cv_rf(yield ~ Genotype + Block + region + Year, data = wheat, folds = folds_env)
+round(quality(wheat$yield, res_env$pred, res_env$baseline), 3)
+# Expected: RMSE about 0.9, about the same as "always the mean" (about 0.87)
+```
+
+**Question 5.** Is the model better than "always the mean" for a new environment? What would the model need to know about a new environment?
+
+> Your answer:
+
+# Step 6. Which variables does the model use?
+
+```{r step6}
+rf <- fit_rf(yield ~ Genotype + Environment + Block + region + Year, data = wheat)
+plot_importance(___)                  # HINT: the random forest, rf
+# Expected: Environment first, far above the others
+```
+
+**Question 6.** The mixed model and the random forest agree on one thing. Which one?
+
+> Your answer:
+
+# Step 7. Your conclusion
+
+Write 3 or 4 sentences for a breeder: *what does the mixed model tell you, what does the random forest tell you, and which question does each one answer?*
+Include the idea of an honest test: **leave out the unit you want to predict**.
+
+> Your conclusion:
+
+# Optional
+
+Change `ntree` to 500 in `cv_rf()`. Does the error change?
+Add `GenoGroup` to the formula. Does it help?
