@@ -2029,11 +2029,22 @@
     ]
   },
   {
+    "objectID": "part2-week2/12-analysis-pipeline.html#the-path-of-the-data",
+    "href": "part2-week2/12-analysis-pipeline.html#the-path-of-the-data",
+    "title": "13  Data Analysis Pipeline in Plant Breeding",
+    "section": "13.3 The path of the data",
+    "text": "13.3 The path of the data\nThe data are collected with a field book app, stored in a database in the cloud (Cassava Base in this example), and downloaded as one table. Then the analysis starts.\n\nsource(\"exercises/Pipeline_cassava_support/helpers.R\")\nplot_flow()",
+    "crumbs": [
+      "Week 2: Mutation breeding applications",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Data Analysis Pipeline in Plant Breeding</span>"
+    ]
+  },
+  {
     "objectID": "part2-week2/12-analysis-pipeline.html#the-cassava-example",
     "href": "part2-week2/12-analysis-pipeline.html#the-cassava-example",
     "title": "13  Data Analysis Pipeline in Plant Breeding",
-    "section": "13.3 The cassava example",
-    "text": "13.3 The cassava example\nThe data come from nine cassava trials in the Caribbean coast of Colombia, in 2021 and 2022, with 51 clones. Each trial is a row-column design with checks (released varieties) spread at random. The traits are yield (t/ha), dry matter, plant type (score 1 to 5), germination, height of the first branch and branch number. The data are public in Cassava Base, and the original code is in the repository Cassava2050/2022DVGXE9env.\n\nsource(\"exercises/Pipeline_cassava_support/helpers.R\")\nlibrary(patchwork)\nd &lt;- load_cassava(\"data/cassava_DVGXE_tidy.csv\")\ndim(d)\n\n[1] 762  65\n\ntable(d$trial, d$check_test)\n\n        \n         check test\n  ciat21    18   66\n  momi21    18   66\n  polo21    18   66\n  repe21    18   66\n  arem22    14   64\n  cere22    12   68\n  ciat22    12   88\n  saha22    14   70\n  stom22    12   72",
+    "section": "13.4 The cassava example",
+    "text": "13.4 The cassava example\nThe data come from nine cassava trials in the Caribbean coast of Colombia, in 2021 and 2022, with 51 clones. Each trial is a row-column design with checks (released varieties) spread at random. The traits are yield (t/ha), dry matter, plant type (score 1 to 5), germination, height of the first branch and branch number. The data are public in Cassava Base, and the original code is in the repository Cassava2050/2022DVGXE9env.\n\nsource(\"exercises/Pipeline_cassava_support/helpers.R\")\nlibrary(patchwork)\nd &lt;- load_cassava(\"data/cassava_DVGXE_tidy.csv\")\ndim(d)\n\n[1] 762  65\n\ntable(d$trial, d$check_test)\n\n        \n         check test\n  ciat21    18   66\n  momi21    18   66\n  polo21    18   66\n  repe21    18   66\n  arem22    14   64\n  cere22    12   68\n  ciat22    12   88\n  saha22    14   70\n  stom22    12   72",
     "crumbs": [
       "Week 2: Mutation breeding applications",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Data Analysis Pipeline in Plant Breeding</span>"
@@ -2043,8 +2054,8 @@
     "objectID": "part2-week2/12-analysis-pipeline.html#quality-control",
     "href": "part2-week2/12-analysis-pipeline.html#quality-control",
     "title": "13  Data Analysis Pipeline in Plant Breeding",
-    "section": "13.4 Quality control",
-    "text": "13.4 Quality control\nFirst look at the field design. Orange tiles are checks, blue tiles are test clones.\n\n(plot_trial_layout(d, \"ciat21\") | plot_trial_layout(d, \"ciat22\")) + plot_layout(guides = \"collect\")\n\n\n\n\n\n\n\n\nThen missing data. A common rule is to drop a trait or trial with more than 20% missing values. Here almost everything is complete.\n\nplot_missing(d)\n\n\n\n\n\n\n\n\nTrials can only be compared if they share clones (or checks).\n\nplot_connect(d)\n\n\n\n\n\n\n\n\nLast, look at the variation between trials. The trials differ a lot in the mean. This is the environment effect. We want the clone effect, not the place effect.\n\nplot_trait_trial(d, \"yield_ha\")",
+    "section": "13.5 Quality control",
+    "text": "13.5 Quality control\nFirst look at the field design. Orange tiles are checks, blue tiles are test clones.\n\nplot_layout_grid(d, c(\"ciat21\", \"momi21\", \"polo21\", \"repe21\", \"ciat22\", \"saha22\"))\n\n\n\n\n\n\n\n\nThen missing data. A common rule is to drop a trait or trial with more than 20% missing values. Here almost everything is complete.\n\nplot_missing(d)\n\n\n\n\n\n\n\n\nTrials can only be compared if they share clones (or checks).\n\nplot_connect(d)\n\n\n\n\n\n\n\n\nLast, look at the variation between trials. The trials differ a lot in the mean. This is the environment effect. We want the clone effect, not the place effect.\n\nplot_trait_trial(d, \"yield_ha\")",
     "crumbs": [
       "Week 2: Mutation breeding applications",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Data Analysis Pipeline in Plant Breeding</span>"
@@ -2054,8 +2065,8 @@
     "objectID": "part2-week2/12-analysis-pipeline.html#single-trial-analysis",
     "href": "part2-week2/12-analysis-pipeline.html#single-trial-analysis",
     "title": "13  Data Analysis Pipeline in Plant Breeding",
-    "section": "13.5 Single trial analysis",
-    "text": "13.5 Single trial analysis\nNeighbour plots are often more alike than distant plots (soil, water, light). If we ignore this, the trend goes into the error and the clone ranking gets noisy. The package SpATS fits clone as random plus a smooth two-dimensional surface over rows and columns. It gives a BLUP per clone and a heritability per trial.\n\nm1 &lt;- fit_spats(d, \"ciat22\", \"yield_ha\")\nplot(m1, cex = 0.7)\n\n\n\n\n\n\n\ngetHeritability(m1)\n\n  g \n0.7 \n\n\nWe repeat this for every trial and every trait in a loop.\n\nH2 &lt;- single_h2(d)\nH2$trial &lt;- factor(H2$trial, levels = levels(d$trial))\nH2$trait &lt;- factor(H2$trait, levels = TRAITS)\nggplot(H2, aes(trait, trial, fill = h2)) + geom_tile(colour = \"white\") +\n  geom_text(aes(label = sprintf(\"%.2f\", h2)), size = 3.2) +\n  scale_fill_gradient(low = \"#F3E5D8\", high = \"#0072B2\", limits = c(0, 1), name = \"H2\") +\n  labs(x = NULL, y = NULL) + theme_minimal(base_size = 13) +\n  theme(axis.text.x = element_text(angle = 30, hjust = 1))\n\n\n\n\n\n\n\n\nMost values are moderate to high. A trait with a very low value in a trial (germination in stom22) is not reliable there, and it should not go to the multi-environment analysis.",
+    "section": "13.6 Single trial analysis",
+    "text": "13.6 Single trial analysis\nNeighbour plots are often more alike than distant plots (soil, water, light). If we ignore this, the trend goes into the error and the clone ranking gets noisy. The package SpATS fits clone as random plus a smooth two-dimensional surface over rows and columns. It gives a BLUP per clone and a heritability per trial.\n\nm1 &lt;- fit_spats(d, \"ciat22\", \"yield_ha\")\nplot(m1, cex = 0.7)\n\n\n\n\n\n\n\ngetHeritability(m1)\n\n  g \n0.7 \n\n\nWe repeat this for every trial and every trait in a loop.\n\nH2 &lt;- single_h2(d)\nH2$trial &lt;- factor(H2$trial, levels = levels(d$trial))\nH2$trait &lt;- factor(H2$trait, levels = TRAITS)\nggplot(H2, aes(trait, trial, fill = h2)) + geom_tile(colour = \"white\") +\n  geom_text(aes(label = sprintf(\"%.2f\", h2)), size = 3.2) +\n  scale_fill_gradient(low = \"#F3E5D8\", high = \"#0072B2\", limits = c(0, 1), name = \"H2\") +\n  labs(x = NULL, y = NULL) + theme_minimal(base_size = 13) +\n  theme(axis.text.x = element_text(angle = 30, hjust = 1))\n\n\n\n\n\n\n\n\nMost values are moderate to high. A trait with a very low value in a trial (germination in stom22) is not reliable there, and it should not go to the multi-environment analysis.",
     "crumbs": [
       "Week 2: Mutation breeding applications",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Data Analysis Pipeline in Plant Breeding</span>"
@@ -2065,8 +2076,8 @@
     "objectID": "part2-week2/12-analysis-pipeline.html#multi-environment-analysis",
     "href": "part2-week2/12-analysis-pipeline.html#multi-environment-analysis",
     "title": "13  Data Analysis Pipeline in Plant Breeding",
-    "section": "13.6 Multi-environment analysis",
-    "text": "13.6 Multi-environment analysis\nThe model is: yield of a plot = trial mean + clone effect + clone by trial effect + error. In lme4 we write yield ~ trial + (1 | clone) + (1 | clone:trial).\n\nmet &lt;- lapply(c(\"yield_ha\", \"DM_gravity\", \"plant_type\"), function(tr) {\n  m &lt;- met_model(d, tr); v &lt;- met_h2(m, d, tr)\n  data.frame(trait = TRAIT_LABELS[[tr]], clone = v[[\"Vg\"]], clone_x_trial = v[[\"VgxE\"]],\n             residual = v[[\"Ve\"]], H2 = v[[\"h2\"]])\n})\nknitr::kable(do.call(rbind, met), digits = 2, row.names = FALSE,\n             col.names = c(\"Trait\", \"Clone variance\", \"Clone by trial variance\", \"Residual variance\", \"Heritability, all trials\"))\n\n\n\n\n\n\n\n\n\n\n\nTrait\nClone variance\nClone by trial variance\nResidual variance\nHeritability, all trials\n\n\n\n\nYield (t/ha)\n17.53\n27.39\n66.12\n0.70\n\n\nDry matter (%)\n9.09\n1.72\n3.06\n0.96\n\n\nPlant type (1 to 5)\n0.18\n0.16\n0.32\n0.82\n\n\n\n\n\nWhen the clone by trial variance is large, the best clone changes from place to place. The genotypic correlation between trials shows where this happens. Values near 1 mean the ranking is similar.\n\nmY &lt;- met_model(d, \"yield_ha\")\nplot_corr(trial_gcor(mY))",
+    "section": "13.7 Multi-environment analysis",
+    "text": "13.7 Multi-environment analysis\nThe model is: yield of a plot = trial mean + clone effect + clone by trial effect + error. In lme4 we write yield ~ trial + (1 | clone) + (1 | clone:trial).\n\nmet &lt;- lapply(c(\"yield_ha\", \"DM_gravity\", \"plant_type\"), function(tr) {\n  m &lt;- met_model(d, tr); v &lt;- met_h2(m, d, tr)\n  data.frame(trait = TRAIT_LABELS[[tr]], clone = v[[\"Vg\"]], clone_x_trial = v[[\"VgxE\"]],\n             residual = v[[\"Ve\"]], H2 = v[[\"h2\"]])\n})\nknitr::kable(do.call(rbind, met), digits = 2, row.names = FALSE,\n             col.names = c(\"Trait\", \"Clone variance\", \"Clone by trial variance\", \"Residual variance\", \"Heritability, all trials\"))\n\n\n\n\n\n\n\n\n\n\n\nTrait\nClone variance\nClone by trial variance\nResidual variance\nHeritability, all trials\n\n\n\n\nYield (t/ha)\n17.53\n27.39\n66.12\n0.70\n\n\nDry matter (%)\n9.09\n1.72\n3.06\n0.96\n\n\nPlant type (1 to 5)\n0.18\n0.16\n0.32\n0.82\n\n\n\n\n\nWhen the clone by trial variance is large, the best clone changes from place to place. The genotypic correlation between trials shows where this happens. Values near 1 mean the ranking is similar.\n\nmY &lt;- met_model(d, \"yield_ha\")\nplot_corr(trial_gcor(mY))",
     "crumbs": [
       "Week 2: Mutation breeding applications",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Data Analysis Pipeline in Plant Breeding</span>"
@@ -2076,8 +2087,8 @@
     "objectID": "part2-week2/12-analysis-pipeline.html#results",
     "href": "part2-week2/12-analysis-pipeline.html#results",
     "title": "13  Data Analysis Pipeline in Plant Breeding",
-    "section": "13.7 Results",
-    "text": "13.7 Results\nThe correlation between traits (clone BLUPs across all trials) shows which traits move together.\n\nB &lt;- all_blups(d)\nRt &lt;- cor(B[, TRAITS])\ncolnames(Rt) &lt;- rownames(Rt) &lt;- c(\"yield\", \"dry matter\", \"plant type\", \"germination\", \"height 1st br.\", \"branch no.\")\nplot_corr(Rt)\n\n\n\n\n\n\n\n\n\n13.7.1 Selection index\nWe use yield, dry matter and plant type. Each BLUP is standardised and multiplied by a score chosen by the breeder: yield +10, dry matter +10, plant type -5 (a low plant type score is better). We keep the top 20%.\n\nS &lt;- selection_table(B)\ntop &lt;- head(S, 11)\nknitr::kable(data.frame(Rank = top$rank, Clone = top$g, Yield = round(top$yield_ha, 1),\n                        `Dry matter` = round(top$DM_gravity, 1), `Plant type` = round(top$plant_type, 2),\n                        Index = round(top$index, 1), Advance = ifelse(top$selected, \"yes\", \"no\"),\n                        check.names = FALSE), row.names = FALSE)\n\n\n\n\n\n\n\n\n\n\n\n\n\nRank\nClone\nYield\nDry matter\nPlant type\nIndex\nAdvance\n\n\n\n\n1\nSM3464-29\n8.4\n0.6\n-0.13\n29.7\nyes\n\n\n2\nSM3640-20\n6.1\n2.5\n0.10\n26.0\nyes\n\n\n3\nSM2775-4_is_Bellotti\n1.8\n3.4\n-0.39\n22.8\nyes\n\n\n4\nSM3559-11\n3.4\n4.3\n0.20\n22.7\nyes\n\n\n5\nSMB2446-2_is_Caiseli\n0.7\n2.6\n-0.66\n20.3\nyes\n\n\n6\nSM1759-29\n1.3\n3.0\n-0.42\n20.3\nyes\n\n\n7\nCM9456-12\n4.4\n1.4\n-0.16\n20.3\nyes\n\n\n8\nSGB765-4_is_Rojita\n2.4\n1.8\n-0.31\n17.9\nyes\n\n\n9\nSM3106-14\n2.9\n1.7\n-0.05\n15.8\nyes\n\n\n10\nCM4919-1_is_Veronica\n2.3\n0.2\n-0.53\n15.1\nyes\n\n\n11\nSM3641-2\n-0.7\n4.5\n-0.09\n14.6\nyes\n\n\n\n\n\nThe scores are a decision of the breeder, not a statistical result. The statistics gives fair numbers to combine. Clones with “is” in the name are released varieties used as checks.",
+    "section": "13.8 Results",
+    "text": "13.8 Results\nThe correlation between traits (clone BLUPs across all trials) shows which traits move together.\n\nB &lt;- all_blups(d)\nRt &lt;- cor(B[, TRAITS])\ncolnames(Rt) &lt;- rownames(Rt) &lt;- c(\"yield\", \"dry matter\", \"plant type\", \"germination\", \"height 1st br.\", \"branch no.\")\nplot_corr(Rt)\n\n\n\n\n\n\n\n\n\n13.8.1 Selection index\nWe use yield, dry matter and plant type. Each BLUP is standardised and multiplied by a score chosen by the breeder: yield +10, dry matter +10, plant type -5 (a low plant type score is better). We keep the top 20%.\n\nS &lt;- selection_table(B)\ntop &lt;- head(S, 11)\nknitr::kable(data.frame(Rank = top$rank, Clone = top$g, Yield = round(top$yield_ha, 1),\n                        `Dry matter` = round(top$DM_gravity, 1), `Plant type` = round(top$plant_type, 2),\n                        Index = round(top$index, 1), Advance = ifelse(top$selected, \"yes\", \"no\"),\n                        check.names = FALSE), row.names = FALSE)\n\n\n\n\n\n\n\n\n\n\n\n\n\nRank\nClone\nYield\nDry matter\nPlant type\nIndex\nAdvance\n\n\n\n\n1\nSM3464-29\n8.4\n0.6\n-0.13\n29.7\nyes\n\n\n2\nSM3640-20\n6.1\n2.5\n0.10\n26.0\nyes\n\n\n3\nSM2775-4_is_Bellotti\n1.8\n3.4\n-0.39\n22.8\nyes\n\n\n4\nSM3559-11\n3.4\n4.3\n0.20\n22.7\nyes\n\n\n5\nSMB2446-2_is_Caiseli\n0.7\n2.6\n-0.66\n20.3\nyes\n\n\n6\nSM1759-29\n1.3\n3.0\n-0.42\n20.3\nyes\n\n\n7\nCM9456-12\n4.4\n1.4\n-0.16\n20.3\nyes\n\n\n8\nSGB765-4_is_Rojita\n2.4\n1.8\n-0.31\n17.9\nyes\n\n\n9\nSM3106-14\n2.9\n1.7\n-0.05\n15.8\nyes\n\n\n10\nCM4919-1_is_Veronica\n2.3\n0.2\n-0.53\n15.1\nyes\n\n\n11\nSM3641-2\n-0.7\n4.5\n-0.09\n14.6\nyes\n\n\n\n\n\nThe scores are a decision of the breeder, not a statistical result. The statistics gives fair numbers to combine. Clones with “is” in the name are released varieties used as checks.",
     "crumbs": [
       "Week 2: Mutation breeding applications",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Data Analysis Pipeline in Plant Breeding</span>"
@@ -2087,8 +2098,8 @@
     "objectID": "part2-week2/12-analysis-pipeline.html#what-a-breeder-decides-from-this",
     "href": "part2-week2/12-analysis-pipeline.html#what-a-breeder-decides-from-this",
     "title": "13  Data Analysis Pipeline in Plant Breeding",
-    "section": "13.8 What a breeder decides from this",
-    "text": "13.8 What a breeder decides from this\n\nKeep the clones with a high index and a stable ranking across trials.\nLook again at clones that are good in one place only (G×E).\nCheck the traits that were not in the index (disease, root quality) before the final list.\nDo not trust a trait with low heritability.\nWrite down the weights and the cut-off, so the next cycle can repeat them.",
+    "section": "13.9 What a breeder decides from this",
+    "text": "13.9 What a breeder decides from this\n\nKeep the clones with a high index and a stable ranking across trials.\nLook again at clones that are good in one place only (G×E).\nCheck the traits that were not in the index (disease, root quality) before the final list.\nDo not trust a trait with low heritability.\nWrite down the weights and the cut-off, so the next cycle can repeat them.",
     "crumbs": [
       "Week 2: Mutation breeding applications",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Data Analysis Pipeline in Plant Breeding</span>"
@@ -2098,8 +2109,8 @@
     "objectID": "part2-week2/12-analysis-pipeline.html#qualitative-traits",
     "href": "part2-week2/12-analysis-pipeline.html#qualitative-traits",
     "title": "13  Data Analysis Pipeline in Plant Breeding",
-    "section": "13.9 Qualitative traits",
-    "text": "13.9 Qualitative traits\nDisease scores and similar traits are binary or ordinal. A model for categories can be better than a normal model.\n\nlibrary(glmmTMB)\n# glmmTMB(disease ~ rep + (1 | geno), family = binomial, data = trial)\nlibrary(ordinal)\n# clmm(score ~ rep + (1 | geno), data = trial)",
+    "section": "13.10 Qualitative traits",
+    "text": "13.10 Qualitative traits\nDisease scores and similar traits are binary or ordinal. A model for categories can be better than a normal model.\n\nlibrary(glmmTMB)\n# glmmTMB(disease ~ rep + (1 | geno), family = binomial, data = trial)\nlibrary(ordinal)\n# clmm(score ~ rep + (1 | geno), data = trial)",
     "crumbs": [
       "Week 2: Mutation breeding applications",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Data Analysis Pipeline in Plant Breeding</span>"
@@ -2109,8 +2120,8 @@
     "objectID": "part2-week2/12-analysis-pipeline.html#how-the-pipeline-changes-for-mutant-populations",
     "href": "part2-week2/12-analysis-pipeline.html#how-the-pipeline-changes-for-mutant-populations",
     "title": "13  Data Analysis Pipeline in Plant Breeding",
-    "section": "13.10 How the pipeline changes for mutant populations",
-    "text": "13.10 How the pipeline changes for mutant populations\n\nThe checks are the parent, and the plots are M2 or M3 plants or families. The same steps apply.\nCheck the design, fix the soil trend, and estimate the effect of each line against the parent.\nFew replicates and many lines mean low heritability. Do not skip the quality control step.",
+    "section": "13.11 How the pipeline changes for mutant populations",
+    "text": "13.11 How the pipeline changes for mutant populations\n\nThe checks are the parent, and the plots are M2 or M3 plants or families. The same steps apply.\nCheck the design, fix the soil trend, and estimate the effect of each line against the parent.\nFew replicates and many lines mean low heritability. Do not skip the quality control step.",
     "crumbs": [
       "Week 2: Mutation breeding applications",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Data Analysis Pipeline in Plant Breeding</span>"
@@ -2120,8 +2131,8 @@
     "objectID": "part2-week2/12-analysis-pipeline.html#open-pipelines-and-reproducibility",
     "href": "part2-week2/12-analysis-pipeline.html#open-pipelines-and-reproducibility",
     "title": "13  Data Analysis Pipeline in Plant Breeding",
-    "section": "13.11 Open pipelines and reproducibility",
-    "text": "13.11 Open pipelines and reproducibility\nHussain et al. (2022) published an open pipeline with R Markdown files (quality check and lme4) and demo data. Their repository is github.com/whussain2/Analysis-pipeline. A copy is in the support folder, in reference/Hussain_Analysis-pipeline/. Use it to compare with the code of this chapter.\nTo make your own analysis repeatable, use an RStudio project, write the steps in a Quarto or R Markdown file, keep the data and the code together, and use Git and GitHub for versions.",
+    "section": "13.12 Open pipelines and reproducibility",
+    "text": "13.12 Open pipelines and reproducibility\nHussain et al. (2022) published an open pipeline with R Markdown files (quality check and lme4) and demo data. Their repository is github.com/whussain2/Analysis-pipeline. A copy is in the support folder, in reference/Hussain_Analysis-pipeline/. Use it to compare with the code of this chapter.\nTo make your own analysis repeatable, use an RStudio project, write the steps in a Quarto or R Markdown file, keep the data and the code together, and use Git and GitHub for versions.",
     "crumbs": [
       "Week 2: Mutation breeding applications",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Data Analysis Pipeline in Plant Breeding</span>"
@@ -2131,8 +2142,8 @@
     "objectID": "part2-week2/12-analysis-pipeline.html#exercise",
     "href": "part2-week2/12-analysis-pipeline.html#exercise",
     "title": "13  Data Analysis Pipeline in Plant Breeding",
-    "section": "13.12 Exercise",
-    "text": "13.12 Exercise\nOpen Pipeline_cassava_support.Rmd from the support folder.\n\nRepeat the box plot for dry matter. Which trial has the lowest mean?\nFit the spatial model for DM_gravity in trial momi21. What is its heritability?\nChange the selection weights, for example dry matter +20. How many of the top 11 clones change?\n\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\n\nplot_trait_trial(d, \"DM_gravity\")\nm2 &lt;- fit_spats(d, \"momi21\", \"DM_gravity\")\ngetHeritability(m2)\nS2 &lt;- selection_table(B, weights = c(yield_ha = 10, DM_gravity = 20, plant_type = -5))\nsum(head(S2$g, 11) %in% head(S$g, 11))   # clones in both lists",
+    "section": "13.13 Exercise",
+    "text": "13.13 Exercise\nOpen Pipeline_cassava_support.Rmd from the support folder.\n\nRepeat the box plot for dry matter. Which trial has the lowest mean?\nFit the spatial model for DM_gravity in trial momi21. What is its heritability?\nChange the selection weights, for example dry matter +20. How many of the top 11 clones change?\n\n\n\n\n\n\n\nTipSolution\n\n\n\n\n\n\nplot_trait_trial(d, \"DM_gravity\")\nm2 &lt;- fit_spats(d, \"momi21\", \"DM_gravity\")\ngetHeritability(m2)\nS2 &lt;- selection_table(B, weights = c(yield_ha = 10, DM_gravity = 20, plant_type = -5))\nsum(head(S2$g, 11) %in% head(S$g, 11))   # clones in both lists",
     "crumbs": [
       "Week 2: Mutation breeding applications",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Data Analysis Pipeline in Plant Breeding</span>"
@@ -2142,8 +2153,8 @@
     "objectID": "part2-week2/12-analysis-pipeline.html#key-takeaways",
     "href": "part2-week2/12-analysis-pipeline.html#key-takeaways",
     "title": "13  Data Analysis Pipeline in Plant Breeding",
-    "section": "13.13 Key takeaways",
-    "text": "13.13 Key takeaways\n\nA pipeline turns many trials into one repeatable decision.\nAlways look at the data first: design, missing values, shared clones.\nFix the field trend in each trial before comparing clones.\nUse a multi-environment model to separate clone, place and interaction.\nThe selection index uses the breeder’s weights, and the code makes them visible.",
+    "section": "13.14 Key takeaways",
+    "text": "13.14 Key takeaways\n\nA pipeline turns many trials into one repeatable decision.\nAlways look at the data first: design, missing values, shared clones.\nFix the field trend in each trial before comparing clones.\nUse a multi-environment model to separate clone, place and interaction.\nThe selection index uses the breeder’s weights, and the code makes them visible.",
     "crumbs": [
       "Week 2: Mutation breeding applications",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Data Analysis Pipeline in Plant Breeding</span>"
@@ -2153,8 +2164,8 @@
     "objectID": "part2-week2/12-analysis-pipeline.html#references",
     "href": "part2-week2/12-analysis-pipeline.html#references",
     "title": "13  Data Analysis Pipeline in Plant Breeding",
-    "section": "13.14 References",
-    "text": "13.14 References\n\nHussain, W., Anumalla, M., Catolos, M., Khanna, A., Sta. Cruz, M. T., Ramos, J., and Bhosale, S. (2022). Open-source analytical pipeline for robust data analysis, visualizations and sharing in crop breeding. Plant Methods 18, 1. doi: 10.1186/s13007-022-00845-7\nRodríguez-Álvarez, M. X., Boer, M. P., van Eeuwijk, F. A., and Eilers, P. H. C. (2018). Correcting for spatial heterogeneity in plant breeding experiments with P-splines. Spatial Statistics 23, 52 to 71.",
+    "section": "13.15 References",
+    "text": "13.15 References\n\nHussain, W., Anumalla, M., Catolos, M., Khanna, A., Sta. Cruz, M. T., Ramos, J., and Bhosale, S. (2022). Open-source analytical pipeline for robust data analysis, visualizations and sharing in crop breeding. Plant Methods 18, 1. doi: 10.1186/s13007-022-00845-7\nRodríguez-Álvarez, M. X., Boer, M. P., van Eeuwijk, F. A., and Eilers, P. H. C. (2018). Correcting for spatial heterogeneity in plant breeding experiments with P-splines. Spatial Statistics 23, 52 to 71.",
     "crumbs": [
       "Week 2: Mutation breeding applications",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Data Analysis Pipeline in Plant Breeding</span>"
