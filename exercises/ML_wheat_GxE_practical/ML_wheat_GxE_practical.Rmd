@@ -45,6 +45,19 @@ table(wheat$Genotype, wheat$Environment)[1:3, 1:5]   # plots of each genotype in
 
 > Your answer:
 
+Numbers are not enough. Look at the yield with **box plots**, one for each factor of the mixed model of Step 2. Each box shows the middle half of the plots, the line is the median. The boxes are ordered by median.
+
+```{r step1-plots}
+plot_box(wheat, "___")                # HINT: first the environment
+plot_box_block(wheat)                 # blocks inside each environment (one panel for each environment)
+plot_box(wheat, "___")                # HINT: now the genotype
+# Expected: environment medians go from about 0.7 to 3.2 t/ha, genotype medians only from about 1.4 to 2.0 t/ha
+```
+
+**Question 1b.** Which factor makes the yield change most: the environment, the block inside the environment, or the genotype? Are the blocks similar in every environment? Keep your answer. You will compare it with the variance table of Step 2.
+
+> Your answer:
+
 # Step 2. Explain: a mixed model
 
 We ask: *where does the yield variation come from?* Genotype, environment and block are random effects.
@@ -53,6 +66,7 @@ We ask: *where does the yield variation come from?* Genotype, environment and bl
 m <- lmer(yield ~ (1 | Genotype) + (1 | ___) + (1 | Environment:Block), data = wheat)   # HINT: the environment
 variance_table(m)
 # Expected: Environment about 64%, Residual about 20%, Environment:Block about 10%, Genotype about 6%.
+# Does it agree with the box plots of Step 1?
 ```
 
 **Question 2.** Which source is the largest? What share belongs to the genotype?

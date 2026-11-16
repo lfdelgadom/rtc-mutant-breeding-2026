@@ -95,6 +95,19 @@ Without a pipeline, every trial is analysed by hand in a different way. With a p
 Figure from Hussain et al. (2022), Plant Methods 18, 1. doi: 10.1186/s13007-022-00845-7. Open access, CC BY 4.0. The authors share the code with a demo data set (see the last slides).
 :::
 
+## The path of the data
+
+```{r}
+#| fig-width: 10
+#| fig-height: 3.6
+#| fig-align: center
+plot_flow()
+```
+
+::: small-note
+Cassava breeding flow. Data are collected with a field book app, stored in a database in the cloud (Cassava Base), and downloaded as one table. Then the analysis starts.
+:::
+
 ## Our example, nine cassava trials
 
 ::::: columns
@@ -115,6 +128,13 @@ Data are public in Cassava Base (anyone can register and download). The R code i
 :::::
 
 # Where the data comes from {.divider}
+
+```{r}
+#| fig-width: 10
+#| fig-height: 3
+#| fig-align: center
+plot_flow(1:3)
+```
 
 ## Data collection
 
@@ -164,18 +184,24 @@ knitr::kable(head(d[, c("trial", "accession_name", "rep_number", "row_number", "
 
 # Pre-processing {.divider}
 
+```{r}
+#| fig-width: 10
+#| fig-height: 3
+#| fig-align: center
+plot_flow(4)
+```
+
 ## Look at the field design first
 
 ```{r}
 #| fig-width: 11
-#| fig-height: 4.2
+#| fig-height: 4.6
 #| fig-align: center
-library(patchwork)
-(plot_trial_layout(d, "ciat21") | plot_trial_layout(d, "ciat22")) + plot_layout(guides = "collect")
+plot_layout_grid(d, c("ciat21", "momi21", "polo21", "repe21", "ciat22", "saha22"))
 ```
 
 ::: small-note
-Orange tiles are checks, blue tiles are test clones. The same check clones appear in many places, so we can measure soil variation.
+Six of the nine trials. Orange tiles are checks, blue tiles are test clones. The checks are spread at random, so we can measure soil variation.
 :::
 
 ## Missing data
@@ -218,6 +244,13 @@ Yield of all plots, by trial. Trials differ a lot in the mean. This is the **env
 :::
 
 # Modelling {.divider}
+
+```{r}
+#| fig-width: 10
+#| fig-height: 3
+#| fig-align: center
+plot_flow(5:6)
+```
 
 ## Single trial analysis with a spatial model
 
@@ -306,6 +339,13 @@ Correlation of clone BLUPs, yield, between pairs of trials. Values near 1 mean t
 :::
 
 # Results {.divider}
+
+```{r}
+#| fig-width: 10
+#| fig-height: 3
+#| fig-align: center
+plot_flow(7)
+```
 
 ## Correlation between traits
 

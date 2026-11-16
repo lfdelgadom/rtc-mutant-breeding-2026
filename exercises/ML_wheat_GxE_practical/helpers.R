@@ -79,3 +79,20 @@ plot_importance <- function(rf) {
   ggplot(imp, aes(IncMSE, reorder(variable, IncMSE))) + geom_col(fill = "#2c7fb8") +
     labs(x = "% increase of the error when the variable is shuffled", y = NULL)
 }
+
+# Box plots of yield for one factor, with the boxes ordered by their median
+plot_box <- function(data, factor_name, title = NULL) {
+  f <- reorder(data[[factor_name]], data$yield, median)
+  ggplot(data.frame(f, yield = data$yield), aes(f, yield)) +
+    geom_boxplot(fill = "#9ecae1", outlier.size = 0.8) +
+    labs(title = title, x = factor_name, y = "Yield (t/ha)") +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1))
+}
+
+# Box plots of yield by block, one panel per environment
+plot_box_block <- function(data) {
+  ggplot(data, aes(Block, yield)) +
+    geom_boxplot(fill = "#fdd49e", outlier.size = 0.6) +
+    facet_wrap(~ Environment, nrow = 4) +
+    labs(x = "Block", y = "Yield (t/ha)")
+}

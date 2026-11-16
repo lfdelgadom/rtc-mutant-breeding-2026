@@ -1,6 +1,7 @@
 # Helpers for the cassava data analysis pipeline (free packages only: lme4, SpATS, ggplot2)
 library(ggplot2)
 library(SpATS)
+suppressMessages(library(patchwork))
 
 TRAITS <- c("yield_ha", "DM_gravity", "plant_type",
             "germination_perc", "height_1st_branch", "branch_number")
@@ -36,7 +37,9 @@ plot_trial_layout <- function(d, trial) {
   ggplot(x, aes(col_number, row_number, fill = check_test)) +
     geom_tile(colour = "white") +
     scale_fill_manual(values = c(check = "#D55E00", test = "#56B4E9"), name = NULL) +
-    scale_y_reverse() + coord_equal() + labs(x = "Column", y = "Row", title = trial) +
+    scale_y_reverse(breaks = function(l) unique(round(pretty(l, 4)))) +
+    scale_x_continuous(breaks = function(l) unique(round(pretty(l, 4)))) +
+    coord_equal() + labs(x = "Column", y = "Row", title = trial) +
     theme_minimal(base_size = 12)
 }
 
@@ -144,4 +147,66 @@ selection_table <- function(B, weights = c(yield_ha = 10, DM_gravity = 10, plant
   B$rank <- seq_len(nrow(B))
   B$selected <- B$rank <= ceiling(pct * nrow(B))
   B
+}
+
+# Several field layouts in one figure (needs the patchwork package)
+plot_layout_grid <- function(d, trials, ncol = 3) {
+  patchwork::wrap_plots(lapply(trials, function(t) plot_trial_layout(d, t) + coord_cartesian() + theme(legend.position = "bottom")),
+                        ncol = ncol, guides = "collect") &
+    theme(legend.position = "bottom")
+}
+
+# The flow of the data, from the field to the selection. "active" highlights some steps.
+plot_flow <- function(active = NULL) {
+  steps <- data.frame(
+    n = 1:7,
+    title = c("Data collection", "Data storage", "Download", "Exploratory\nanalysis",
+              "Single trial\nanalysis", "Multi-environment\nanalysis", "Selection"),
+    detail = c("Field book app,\nsensors, robots", "Database in the cloud\n(Cassava Base, BMS)",
+               "One table,\none row per plot", "Design, missing data,\nshared clones",
+               "Spatial model,\nheritability", "G x E, BLUPs,\nheritability", "Index and\nadvancement table"),
+    block = c("Data", "Data", "Data", "Pre-processing", "Modelling", "Modelling", "Results"),
+    x = c(1, 2, 3, 4, 1, 2, 3), y = c(2, 2, 2, 2, 0.4, 0.4, 0.4), stringsAsFactors = FALSE)
+  steps$y[5:7] <- 0.4
+  steps$x[5:7] <- c(1.6, 2.6, 3.6)
+  cols <- c(Data = "#3E6FA8", `Pre-processing` = "#E0A030", Modelling = "#4F7A3A", Results = "#7A5C4F")
+  steps$fill <- cols[steps$block]
+  if (!is.null(active)) steps$fill[!(steps$n %in% active)] <- "#C9CDD2"
+  steps$txt <- ifelse(is.null(active) | steps$n %in% active, "white", "grey35")
+  w <- 0.42; h <- 0.5
+  arr <- data.frame(x = c(1, 2, 3, 1.6, 2.6) + w + 0.01, xend = c(2, 3, 4, 2.6, 3.6) - w - 0.01,
+                    y = c(2, 2, 2, 0.4, 0.4), yend = c(2, 2, 2, 0.4, 0.4))
+  ggplot() +
+    geom_segment(data = arr, aes(x = x, xend = xend, y = y, yend = yend),
+                 arrow = grid::arrow(length = grid::unit(0.18, "cm"), type = "closed"), colour = "grey30", linewidth = 0.7) +
+    geom_segment(aes(x = 4, xend = 4, y = 2 - h - 0.02, yend = 1.2), colour = "grey30", linewidth = 0.7) +
+    geom_segment(aes(x = 4, xend = 1.6, y = 1.2, yend = 1.2), colour = "grey30", linewidth = 0.7) +
+    geom_segment(aes(x = 1.6, xend = 1.6, y = 1.2, yend = 0.4 + h + 0.02), colour = "grey30", linewidth = 0.7,
+                 arrow = grid::arrow(length = grid::unit(0.18, "cm"), type = "closed")) +
+    geom_rect(data = steps, aes(xmin = x - w, xmax = x + w, ymin = y - h, ymax = y + h, fill = I(fill)), colour = "white") +
+    geom_text(data = steps, aes(x, y + 0.13, label = title, colour = I(txt)), size = 3.7, fontface = "bold", lineheight = 0.9) +
+    geom_text(data = steps, aes(x, y - 0.22, label = detail, colour = I(txt)), size = 3, lineheight = 0.9) +
+    geom_text(data = steps, aes(x - w + 0.04, y + h - 0.08, label = n, colour = I(txt)), size = 3.2, fontface = "bold") +
+    xlim(0.45, 4.55) + ylim(-0.25, 2.65) + theme_void()
+}
+
+# Stage 1 of a two-stage analysis: a spatial model in each trial gives one adjusted mean (BLUE) per clone
+# and its standard error. The weight of each mean is 1 / se^2.
+stage1_blues <- function(d, trait) {
+  out <- lapply(levels(d$trial), function(tr) {
+    x <- d[d$trial == tr & !is.na(d[[trait]]), ]; x$g <- droplevels(x$g)
+    m <- SpATS::SpATS(response = trait, genotype = "g", genotype.as.random = FALSE,
+                      spatial = ~ SpATS::PSANOVA(col_number, row_number, nseg = c(8, 8), degree = 3, nest.div = 2),
+                      data = x, control = list(tolerance = 1e-3, monitoring = 0))
+    p <- predict(m, which = "g")
+    data.frame(trial = tr, g = as.character(p$g), blue = p$predicted.values, se2 = p$standard.errors^2)
+  })
+  B <- do.call(rbind, out); B$trial <- factor(B$trial); B$g <- factor(B$g); B
+}
+
+# Stage 2: clone and clone by trial are random, and the known variance of each mean is used as weight.
+# nlme can fix the residual standard deviation to 1 (lme4 cannot), as ASReml does with its weights.
+stage2_met <- function(B) {
+  nlme::lme(blue ~ trial, random = ~ 1 | g/trial, weights = nlme::varFixed(~ se2), data = B,
+            control = nlme::lmeControl(sigma = 1))
 }

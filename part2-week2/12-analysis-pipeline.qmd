@@ -38,6 +38,19 @@ Our steps in this chapter are:
 4. Multi-environment analysis, G×E and genotypic correlation
 5. Results: correlation between traits, selection index and advancement table
 
+## The path of the data
+
+The data are collected with a field book app, stored in a database in the cloud (Cassava Base in this example), and downloaded as one table. Then the analysis starts.
+
+```{r}
+#| fig-width: 10
+#| fig-height: 3.6
+#| label: pipe-flow-pre
+#| cache: false
+source("exercises/Pipeline_cassava_support/helpers.R")
+plot_flow()
+```
+
 ## The cassava example
 
 The data come from nine cassava trials in the Caribbean coast of Colombia, in 2021 and 2022, with 51 clones. Each trial is a row-column design with checks (released varieties) spread at random. The traits are yield (t/ha), dry matter, plant type (score 1 to 5), germination, height of the first branch and branch number. The data are public in Cassava Base, and the original code is in the repository `Cassava2050/2022DVGXE9env`.
@@ -58,8 +71,8 @@ First look at the field design. Orange tiles are checks, blue tiles are test clo
 
 ```{r}
 #| fig-width: 11
-#| fig-height: 4.2
-(plot_trial_layout(d, "ciat21") | plot_trial_layout(d, "ciat22")) + plot_layout(guides = "collect")
+#| fig-height: 4.6
+plot_layout_grid(d, c("ciat21", "momi21", "polo21", "repe21", "ciat22", "saha22"))
 ```
 
 Then missing data. A common rule is to drop a trait or trial with more than 20% missing values. Here almost everything is complete.

@@ -17,6 +17,12 @@ library(patchwork)
 
 This file runs every step of the pipeline shown in class. It uses only free packages: **SpATS** for the spatial model of each trial and **lme4** for the multi-environment model.
 
+## The path of the data
+
+```{r flow, fig.width=10, fig.height=3.6}
+plot_flow()
+```
+
 ## 1. Import the data
 
 One row per plot. Key columns: `trial_name`, `accession_name` (clone), `rep_number`, `row_number`, `col_number`, `check_test`, and the traits.
@@ -31,9 +37,11 @@ table(d$trial, d$check_test)
 
 ### Field design
 
-```{r design, fig.width=11, fig.height=4.2}
-(plot_trial_layout(d, "ciat21") | plot_trial_layout(d, "ciat22")) + plot_layout(guides = "collect")
+```{r design, fig.width=11, fig.height=4.6}
+plot_layout_grid(d, c("ciat21", "momi21", "polo21", "repe21", "ciat22", "saha22"))
 ```
+
+Try the other trials: `arem22`, `cere22`, `stom22`.
 
 ### Missing data
 
@@ -117,7 +125,30 @@ knitr::kable(head(S[, c("rank", "g", "yield_ha", "DM_gravity", "plant_type", "in
 
 Change the weights and see how the list changes. For example, give dry matter a score of 20.
 
-## 6. Reproducibility
+## 6. Optional, two stages with weights
+
+In a **two-stage analysis**, stage 1 fits a spatial model in each trial and gives one adjusted mean (BLUE) for each clone and its standard error. Stage 2 fits the multi-environment model on these means, and each mean gets a **weight**, 1 divided by its squared standard error. A mean with a large error counts less.
+
+The function `lmer()` of lme4 has a `weights` argument, but it always estimates the residual variance again. In stage 2 that residual cannot be told apart from the clone by trial variance. The package **nlme** can keep the residual standard deviation fixed at 1 (`sigma = 1`), so the known variance of every mean is used as it is.
+
+```{r two-stage}
+library(nlme)
+B1 <- stage1_blues(d, "yield_ha")        # stage 1: BLUE and weight of each clone in each trial
+head(B1)
+m2 <- stage2_met(B1)                     # stage 2: weighted multi-environment model
+VarCorr(m2)
+```
+
+Compare the clone BLUPs of the two routes (single stage with lme4, two stages with nlme):
+
+```{r compare-routes}
+bA <- met_blups(met_model(d, "yield_ha"))
+bB <- data.frame(g = rownames(ranef(m2)$g), blup2 = ranef(m2)$g[, 1])
+cmp <- merge(bA, bB, by = "g")
+cor(cmp$blup, cmp$blup2)                 # close to 1
+```
+
+## 7. Reproducibility
 
 ```{r session}
 sessionInfo()
