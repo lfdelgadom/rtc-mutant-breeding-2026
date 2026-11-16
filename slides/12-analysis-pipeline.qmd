@@ -283,26 +283,22 @@ Same idea as the spatial analysis of Tuesday. The new part is that we repeat it 
 
 ## Heritability of each trial
 
-```{r}
-#| label: single-h2
-H2 <- single_h2(d)
-```
-
-```{r}
-#| fig-width: 9
-#| fig-height: 4.2
-#| fig-align: center
-H2$trial <- factor(H2$trial, levels = levels(d$trial))
-H2$trait <- factor(H2$trait, levels = TRAITS)
-ggplot(H2, aes(trait, trial, fill = h2)) + geom_tile(colour = "white") +
-  geom_text(aes(label = sprintf("%.2f", h2)), size = 3.2) +
-  scale_fill_gradient(low = "#F3E5D8", high = "#0072B2", limits = c(0, 1), name = "H2") +
-  labs(x = NULL, y = NULL) + theme_minimal(base_size = 13) +
-  theme(axis.text.x = element_text(angle = 30, hjust = 1))
-```
+![](images/h2_all_traits.png){.lightbox fig-align="center" width="100%"}
 
 ::: small-note
-Heritability (Cullis) of the clone means in each trial. Most values are moderate to high. A trait with a very low value (germination in stom22) is not reliable in that trial.
+Heritability of the clone means, all traits and all nine trials (green is high, red is low, blank means the trait was not measured). Original table of the 2022 report.
+:::
+
+::: keybox
+**root_skin_color** has a very high heritability in every trial (0.93 to 0.99). It is a **genetic control** to take into account when the heritability of the other traits is low.
+:::
+
+## Common misunderstandings of heritability
+
+![](images/h2_misconceptions.png){fig-align="center" height="520px"}
+
+::: small-note
+Heritability is **not** the percent of a trait that is "due to genes" in one plant. It is the share of the variance **between clones** that is genetic, in this population and these trials. Figure by the Excellence in Breeding Platform.
 :::
 
 ## Multi-environment model and G×E
@@ -378,6 +374,14 @@ S <- selection_table(B)
 The scores are a **breeder's decision**, not a statistical result. The statistics only gives fair numbers to combine.
 :::
 
+## What the index recommends
+
+![](images/sel_pca.png){fig-align="center" height="430px"}
+
+::: small-note
+Left, the traits. The arrow **index** points the same way as yield and dry matter, and plant type goes in another direction. Right, the clones. The orange triangles are the clones the index selects. Original figure of the 2022 report, 51 clones.
+:::
+
 ## Advancement table
 
 ::: {style="font-size: 0.78em"}
@@ -393,6 +397,38 @@ knitr::kable(tab, row.names = FALSE)
 
 ::: small-note
 BLUPs are differences from the mean of all clones. 51 clones, the top 20% (11 clones) advance. Clones with "is" in the name are released varieties used as checks.
+:::
+
+## The table the breeder received
+
+![](images/selection_table.png){fig-align="center" height="440px"}
+
+::: small-note
+Original table of the 2022 report (top 14 of 51 clones). The index uses the BLUP of each trait with its score. The 10 shaded clones (top 20%) are the ones selected.
+:::
+
+## BLUPs of all clones, part 1 of 3
+
+![](images/blups_all_1.png){.lightbox fig-align="center" width="100%"}
+
+::: small-note
+BLUP of every trait for each clone (sheet BLUPs_gxe of the report). The three red columns are the traits used in the index. This is the base for the breeder's decision. Click to enlarge.
+:::
+
+## BLUPs of all clones, part 2 of 3
+
+![](images/blups_all_2.png){.lightbox fig-align="center" width="100%"}
+
+::: small-note
+BLUP of every trait for each clone (sheet BLUPs_gxe of the report). The three red columns are the traits used in the index. This is the base for the breeder's decision. Click to enlarge.
+:::
+
+## BLUPs of all clones, part 3 of 3
+
+![](images/blups_all_3.png){.lightbox fig-align="center" width="100%"}
+
+::: small-note
+BLUP of every trait for each clone (sheet BLUPs_gxe of the report). The three red columns are the traits used in the index. This is the base for the breeder's decision. Click to enlarge.
 :::
 
 ## What a breeder decides from this
@@ -445,3 +481,21 @@ Run `00_install_packages.R` first. Every package must print TRUE.
 -   Fix the **field trend** in each trial before comparing clones.
 -   Use a **multi-environment model** to separate clone, place and interaction.
 -   The **selection index** uses the breeder's weights. The code makes them visible.
+
+## Plan the analysis before the trial
+
+![](images/fisher.png){fig-align="center" height="280px"}
+
+> "To consult the statistician after an experiment is finished is often merely to ask him to conduct a postmortem examination. He can perhaps say what the experiment died of."
+
+::: small-note
+Ronald Fisher, 1938. A good design and a clear question come first. The pipeline only works if the trial was planned well.
+:::
+
+## Download the whole report
+
+The Excel file of the 2022 report has all the results of this example. Each sheet is one table, for example the BLUEs and BLUPs of each trial, the heritabilities, the BLUPs of the multi-environment model and the selection index.
+
+::: keybox
+**Download**: [2022_DVGXE_master_results.xlsx](../downloads/2022_DVGXE_master_results.xlsx)
+:::
