@@ -2,65 +2,297 @@
 
 ::: {.chapter-info}
 **Author:** Luis Fernando Delgado Muñoz\
-**Session:** Day 7 – Tuesday 17 November, 08:30–09:45
+**Session:** Day 7, Tuesday 17 November, 08:30 to 09:15
 :::
 
 ## Learning objectives
 
-- Use free LLMs to write, debug and explain R code
-- Recognize typical LLM errors in statistical analysis
-- Write effective prompts for breeding data analysis
-- Protect unpublished research data
+- Use free AI assistants to write, debug and explain R code
+- Recognize typical errors of an assistant in a statistical analysis
+- Write a prompt that gives the design, the variables and the objective
+- Move an answer from one assistant to another
+- Protect unpublished research data, and run a free model on your own computer
 
-## Free tools
+[Slides of this session](../slides/14-llm-assistants.html){target="_blank"}.
 
-<!-- TODO: ChatGPT, Claude, Gemini, DeepSeek, Qwen; local models with Ollama. Availability varies by country. -->
+## Download the demo folder
 
+[LLM_assistants_demo.zip](../downloads/LLM_assistants_demo.zip) has the data (`john_alpha.csv`), the prompts of the demos, a script with three errors (`buggy_code.R`), an R script for a local model, a checklist and a prompt template.
 
-## What LLMs do well
+## Start now, install a free model on your computer
 
-<!-- TODO: Writing and debugging R code, explaining errors and outputs, drafting reports, small Shiny apps. -->
+The download takes a few minutes, so do it first and keep working.
 
+1. Go to [ollama.com/download](https://ollama.com/download), download the installer for Windows and run it.
+2. Open **PowerShell** (Start menu, write `PowerShell`).
+3. Download **one** model, according to your memory (RAM):
 
-## What LLMs get wrong
+| Your RAM | Command | Size |
+|---|---|---|
+| 8 GB | `ollama pull gemma3:4b` | 3.3 GB |
+| 6 GB | `ollama pull llama3.2:3b` | 2.0 GB |
+| 4 GB | `ollama pull gemma3:1b` | 0.8 GB |
 
-<!-- TODO: Invented results, wrong model structure, non-existent functions, confident misinterpretation. -->
+4. Test it with `ollama run gemma3:4b`. Write a message and press Enter. Write `/bye` to leave.
 
+Close the browser tabs that you do not need. The model uses your memory while it runs.
 
-## Live comparison
+## Talk to your computer
 
-<!-- TODO: Same task in 2–3 models (alpha-lattice mixed model + BLUPs); run and compare the code. -->
+You can speak your prompts. It is faster for long texts.
 
+- **Windows voice typing.** Click in a text box, press the Windows key and H, and speak. It is free and already installed.
+- **Handy.** A free and open source program that works offline.
+- **Aqua Voice.** A paid program in the cloud. Its free plan has 2,000 words.
 
-## Prompting for analysis
+Test your language and your accent before you rely on a tool. Speak in full sentences and read the text before you send it.
 
-<!-- TODO: Describe design, variables and objective; ask for code, not results; always run and verify. -->
+## Free assistants
 
+What you can use for free in the browser: ChatGPT, Claude, Gemini, DeepSeek and Qwen. The free plans have limits that change often, and the availability depends on the country. Use at least two different assistants. You will need the second one to check the first one.
 
-## Data privacy
+## What an LLM is
 
-<!-- TODO: Unpublished breeding data, institutional policies, where data are stored. -->
+A large language model (LLM) has read a huge amount of text and learned which word is likely to come next. It writes text and code that look right. It does not run your analysis and it does not know your field. Because it predicts text, it can give a wrong answer with great confidence.
 
+## What they do well
 
-## Using an LLM with the report template
+- Write R code from a clear description
+- Explain an error message and fix the line
+- Explain an output or a function in simple words
+- Draft a report, a caption or a methods paragraph
+- Translate text and comments
 
+## What they get wrong
 
-## Exercise
+- **Invented results.** Without data, the assistant invents a number.
+- **Wrong model structure.** It does not know your design unless you tell it.
+- **Functions that do not exist**, or arguments from an old version
+- **Confident misinterpretation.** The text sounds right even when the statistics is wrong.
 
-<!-- TODO: one exercise on the shared data -->
+The main risk is not code that fails. It is code that runs and gives a wrong answer.
 
-::: {.callout-tip collapse="true"}
-## Solution
+### A typical mistake in an alpha-lattice
+
+In the data of Day 2 the blocks are named B1 to B6 in every replicate. Block B1 of replicate 1 is not the same block as B1 of replicate 2.
 
 ```{r}
 #| eval: false
+# Correct. The block is nested in the replicate.
+lmer(yield ~ rep + gen + (1 | rep:block), data = d)
+
+# Typical wrong answer. Blocks with the same name are treated as one block.
+lmer(yield ~ gen + (1 | rep) + (1 | block), data = d)
 ```
-:::
+
+Both codes run without an error. They give different variances. Only a person who knows the design can see the problem.
+
+## Prompting for analysis
+
+A good prompt has six parts.
+
+1. **Role.** Who should the assistant be?
+2. **Design.** Replicates, blocks, locations, number of genotypes.
+3. **Data.** Name, type and units of each column, and anything special.
+4. **Objective.** What do you want to know?
+5. **Task and format.** Which package, how long, only code?
+6. **A rule.** "Do not invent numbers. Ask me if something is not clear."
+
+**A bad prompt.** *Analyse my trial and tell me which genotype is the best.*
+
+**A good prompt.**
+
+> You are a statistician who helps a plant breeder. Answer in simple English.\
+> Design: alpha-lattice, 3 replicates, 6 incomplete blocks per replicate, 24 genotypes.\
+> Data: data frame `d` with `rep`, `block` (B1 to B6, repeated in each replicate), `gen`, `yield` (t/ha).\
+> Objective: adjusted mean of each genotype.\
+> Task: write R code with lme4 and emmeans. Give only code. Do not invent numbers.
+
+Ask for **code**, not for **results**. The numbers must come from your own R session. The file `prompt_template.md` has a template for your own work.
+
+## Run and verify
+
+1. Run the code on your data.
+2. Check the model against your design. What is fixed and what is random?
+3. Check every number of a text against your output.
+4. Check that the functions exist. Try `?function`.
+5. Ask a second assistant to review the code.
+6. Check units and traits.
+7. Save the final code and the prompt that worked.
+
+## Live demo
+
+Use `john_alpha.csv` and the files in the folder `prompts/`.
+
+1. **Bad prompt** (`01_bad_prompt.txt`). What does the assistant answer?
+2. **Good prompt** (`02_good_prompt.txt`) in two assistants. Compare the two codes.
+3. **Run both.** Compare `VarCorr()`. Are they the same model?
+4. **Invented result** (`03_invented_result.txt`). Ask for a heritability without data.
+5. **Debug.** Open `buggy_code.R` and copy each error to the assistant.
+6. **Explain and report** (`04_explain_output.txt`, `07_report_paragraph.txt`). Check every number.
+
+## How to transfer an answer from one model to another
+
+Assistants do not share memory. A new chat starts from zero. To move your work:
+
+1. Ask the first assistant for a hand-over summary (`05_handoff_summary.txt`). It should include the design, the columns, the objective, the final code, the errors found and what is missing.
+2. Paste the summary in the second assistant and continue.
+3. Or paste the code and ask the second assistant to review it (`06_review_other_model.txt`).
+
+If the two assistants agree, you have more confidence. If they disagree, you found the place to look. You decide, because two assistants can make the same mistake.
+
+## Data privacy
+
+Text that you write in an online assistant is sent to the servers of a company. It can be stored, and some plans use it to train new models.
+
+| Do not paste | You can paste |
+|---|---|
+| The full data of an unpublished trial | The design and the column names |
+| Names of protected lines or partners | Codes (G01, G02) instead of real names |
+| GPS coordinates of fields or farmers | A few rows of simulated data |
+| Anything your institution says is confidential | The error message and the code |
+
+Ask your institution for its AI policy. If there is none, do not paste unpublished data. Check the privacy settings of the assistant and turn off the use of your chats for training.
+
+## A model on your own computer
+
+A local model runs on your computer. It works without internet and nothing leaves your machine. It is free and has no daily limit. It is smaller and slower than the cloud assistants, so use it for drafts, code and private data.
+
+Programs to run one:
+
+- **Ollama.** Simple, and it is what R connects to.
+- **LM Studio** and **Jan.** Programs with windows and buttons. They also show if a model fits in your memory.
+- **Hugging Face.** The website where most of the models live.
+
+### The technical words, in simple terms
+
+- **Parameters (4B, 12B).** The size of the model, in billions of numbers. More parameters usually means a better model and more memory.
+- **Quantization.** A way to compress a model, like saving a photo as JPEG. It becomes 3 or 4 times smaller and loses little quality. The default of Ollama is 4 bits.
+- **Context window.** How much text the model can keep in mind in one chat.
+- **Temperature.** How creative it is. Use a low value for code and statistics.
+
+At 4 bits, a model needs about 0.6 GB for each billion parameters, plus memory for the chat. Download sizes from the Ollama library:
+
+| Model | Size |
+|---|---|
+| `gemma3:1b` | 0.8 GB |
+| `llama3.2:3b` | 2.0 GB |
+| `gemma3:4b` | 3.3 GB |
+| `qwen3:8b` | 5.2 GB |
+| `qwen2.5-coder:14b` | 9.0 GB |
+
+A model needs more memory than its download size while it runs. With 8 GB of RAM choose a model of 4 GB or less. A model as large as the memory of the computer will not run. This is the most common reason why a download fails.
+
+### Use it from R
+
+The package **ellmer** (from Posit) connects R with a model, local or in the cloud.
+
+```{r}
+#| eval: false
+library(ellmer)
+
+chat <- chat_ollama(
+  model = "gemma3:4b",
+  system_prompt = "You are a statistics assistant for plant breeders. Give R code, not results."
+)
+
+chat$chat("Alpha-lattice, 3 replicates, 6 blocks per replicate, 24 genotypes.
+           Data frame d: rep, block, gen, yield. Write lme4 code for the adjusted mean of each genotype.")
+```
+
+The data stay in R. Only the text of your question goes to the model. Run the code that it writes and check it.
+
+Other tools: **btw** gives the model the context of your R session, **gander** is an assistant inside the editor, and **Positron Assistant** is a chat inside Positron that can use local models from Ollama. They change quickly. Start with ellmer.
+
+### The Ollama window
+
+After you install Ollama, open the **Ollama app** from the Start menu. It has a chat window: choose a model from the list, write, and press Enter. You do not need the terminal. Your chats are saved on your computer. It is the same Ollama: a model that you downloaded in PowerShell appears in the window, and the other way around. In Settings you find the folder where the models are saved and, in recent versions, the context length.
+
+### The API of Ollama
+
+Cloud assistants give an API key. Ollama does not need one. When Ollama is open, it runs a small server on your computer at `http://localhost:11434`. Open that address in the browser. You should read "Ollama is running".
+
+When a program asks for the API, use this:
+
+| The program asks for | You write |
+|---|---|
+| Base URL, host or endpoint | `http://localhost:11434` |
+| OpenAI compatible URL | `http://localhost:11434/v1` |
+| API key | nothing, or any text, for example `ollama` |
+| Model | the exact name that you see in `ollama list` |
+
+`localhost` means your own computer, so nobody else can use your model. The server listens to your computer only, unless you change `OLLAMA_HOST`.
+
+### Connect Ollama to R and to Positron
+
+```{r}
+#| eval: false
+# ellmer finds the address alone
+library(ellmer)
+chat <- chat_ollama(model = "gemma3:4b")
+models_ollama()                      # the models that you have
+
+# btw: gives the model the context of your R session
+options(btw.client = ellmer::chat_ollama(model = "qwen2.5-coder:3b"))
+btw::btw_app()
+
+# chattr: a chat inside RStudio
+chattr::chattr_use(ellmer::chat_ollama(model = "gemma3:4b"))
+chattr::chattr_app()
+```
+
+In **Positron**, open the Accounts menu, choose *Configure Language Model Providers*, select **Ollama** and press Connect. Menu names change between versions.
+
+Tools that call R functions, like btw and the agents of Positron, need a model that supports **tools**. Check it with `ollama show model_name`. Small models make more mistakes with tools. Start with `ellmer`.
+
+The **context length** is a setting of Ollama, not of R. If the model forgets the start of a long text, raise it in the Ollama settings, or with the variable `OLLAMA_CONTEXT_LENGTH` (for example 8192), and restart Ollama.
+
+### Cheat sheets
+
+- [Ollama commands](../cheatsheets/ollama_commands_cheatsheet.pdf). The commands that you will really use in PowerShell, the settings and the Modelfile.
+- [Local models in simple words](../cheatsheets/local_models_cheatsheet.pdf). Parameters, quantization, context window, memory, kinds of models.
+
+### Cloud or local
+
+| | Cloud | Local |
+|---|---|---|
+| Quality | Better | Good for small tasks |
+| Speed | Fast | Slow in a modest computer |
+| Privacy | The text goes to a company | Stays on your computer |
+| Cost | Free plan with limits | Free, no limit |
+| Internet | Needed | Not needed |
+
+## Exercise
+
+Use the data of your own trial, or `john_alpha.csv`.
+
+1. Write a prompt with the six parts for your own design and objective.
+2. Send it to two different assistants. Run the two codes and compare the results.
+3. Ask one assistant to review the code of the other.
+4. Write in 3 lines what was correct and what you had to fix.
+
+## Homework for tonight
+
+About 60 minutes. Use your own data, or a practice data set from `exercises/Practice_datasets` (chrysanthemum, wheat or bean). Do not paste unpublished data into a cloud assistant. The one-page version is [tonight_task.pdf](../cheatsheets/tonight_task.pdf).
+
+1. **Check Ollama (10 min).** The Ollama window answers. `http://localhost:11434` says "Ollama is running". The script `01_ellmer_local_model.R` runs. Measure the speed with `ollama run model_name --verbose`.
+2. **One problem, two assistants (25 min).** Choose one question about your data. Write one prompt with the six parts and send it to a cloud assistant and to your local model. Run both codes. Apply the 7 checks to the answer you prefer.
+3. **Make it fail (10 min).** Ask each assistant to review the code of the other one. Remove the description of the blocks from the prompt and see what happens.
+4. **Your notes (10 min).** Model and size, speed, what was good, what you had to correct, cloud against local, one question for the class.
+
+Extra: dictate your prompt with your voice, connect the model to btw, chattr or Positron (`02_connect_tools.R`), or make your own helper with a Modelfile.
 
 ## Key takeaways
 
--
--
--
+- Assistants are fast and useful for code, errors, explanations and drafts.
+- They can invent and they can choose a wrong model. Describe your design, then run and verify.
+- To change assistant, ask for a hand-over summary. Use one assistant to review the other.
+- Do not paste unpublished data. Share the structure, not the data.
+- A local model keeps the data on your computer. It is slower, but it works without internet.
+- Ollama has a window and an API at `http://localhost:11434`. It needs no key, and R, Positron and other tools can use it.
 
 ## References
+
+- Ollama. <https://ollama.com>
+- Posit. ellmer, a package to chat with large language models from R. <https://ellmer.tidyverse.org>
+- John, J. A. and Williams, E. R. (1995). *Cyclic and Computer Generated Designs*. Chapman and Hall. (Data `john.alpha` of the R package agridat.)

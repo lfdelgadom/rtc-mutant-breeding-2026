@@ -1,0 +1,4 @@
+Write one paragraph for the results section of a breeding report in simple English.
+Use ONLY the numbers in the output below. If a number is not in the output, do not write it.
+
+(paste here the output)

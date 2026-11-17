@@ -11,6 +11,7 @@ project:
     - "slides/images/**"
     - "downloads/*.zip"
     - "downloads/*.xlsx"
+    - "cheatsheets/*.pdf"
     - "data/bean_nirs.csv"
     - "data/Example_Beans.csv"
 

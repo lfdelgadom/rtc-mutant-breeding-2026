@@ -1,0 +1,757 @@
+"environment","location","water","plot","block","row","column","genotype","type","parent","dose_Gy","seed_coat_colour","days_to_flowering","days_to_maturity","pods_per_plant","hundred_seed_weight_g","seed_yield_kg_ha"
+"Site1_irrigated","Site1","Irrigated",101,"B1",1,1,"M049","mutant","Parent_B",100,"red",40,87,14.6,24.8,2214
+"Site1_irrigated","Site1","Irrigated",102,"B1",2,1,"M024","mutant","Parent_A",300,"cream",41,88,14.5,19.9,2207
+"Site1_irrigated","Site1","Irrigated",103,"B1",3,1,"M046","mutant","Parent_B",100,"red",35,84,12,19,2055
+"Site1_irrigated","Site1","Irrigated",104,"B1",4,1,"M066","mutant","Parent_C",300,"black",,,,,
+"Site1_irrigated","Site1","Irrigated",105,"B1",5,1,"M021","mutant","Parent_A",300,"cream",39,89,13.9,23.7,2232
+"Site1_irrigated","Site1","Irrigated",106,"B1",6,1,"M075","mutant","Parent_C",300,"black",38,86,13.1,24.6,2551
+"Site1_irrigated","Site1","Irrigated",107,"B1",7,1,"M078","mutant","Parent_C",300,"black",38,82,16,25.3,2301
+"Site1_irrigated","Site1","Irrigated",108,"B1",1,2,"M047","mutant","Parent_B",200,"red",37,87,13.6,22.3,1889
+"Site1_irrigated","Site1","Irrigated",109,"B1",2,2,"M034","mutant","Parent_B",100,"red",36,81,12.1,23.9,2009
+"Site1_irrigated","Site1","Irrigated",110,"B1",3,2,"M004","mutant","Parent_A",100,"cream",39,85,15.2,22.4,2491
+"Site1_irrigated","Site1","Irrigated",111,"B1",4,2,"M044","mutant","Parent_B",200,"red",39,86,12.8,24.8,1920
+"Site1_irrigated","Site1","Irrigated",112,"B1",5,2,"M077","mutant","Parent_C",200,"black",37,84,11,25.4,2470
+"Site1_irrigated","Site1","Irrigated",113,"B1",6,2,"M068","mutant","Parent_C",200,"black",38,87,16.3,22.2,2904
+"Site1_irrigated","Site1","Irrigated",114,"B1",7,2,"M080","mutant","Parent_C",200,"black",37,81,,20.6,2520
+"Site1_irrigated","Site1","Irrigated",115,"B1",1,3,"M020","mutant","Parent_A",200,"white",37,84,12.7,24.7,2201
+"Site1_irrigated","Site1","Irrigated",116,"B1",2,3,"M022","mutant","Parent_A",100,"red mottled",39,88,14.9,26.3,2183
+"Site1_irrigated","Site1","Irrigated",117,"B1",3,3,"Parent_C","parent","Parent_C",0,"black",37,83,14.1,22.7,2271
+"Site1_irrigated","Site1","Irrigated",118,"B1",4,3,"M012","mutant","Parent_A",300,"cream",40,86,18.4,21.9,2694
+"Site1_irrigated","Site1","Irrigated",119,"B1",5,3,"M076","mutant","Parent_C",100,"black",36,80,13.2,225,
+"Site1_irrigated","Site1","Irrigated",120,"B1",6,3,"M001","mutant","Parent_A",100,"cream",40,,15.3,23.2,2396
+"Site1_irrigated","Site1","Irrigated",121,"B1",7,3,"M036","mutant","Parent_B",300,"red",36,86,15.1,18.4,2135
+"Site1_irrigated","Site1","Irrigated",122,"B1",1,4,"M061","mutant","Parent_C",100,"black",37,82,16.2,25.4,2275
+"Site1_irrigated","Site1","Irrigated",123,"B1",2,4,"M037","mutant","Parent_B",100,"red",36,88,14.2,24.7,2543
+"Site1_irrigated","Site1","Irrigated",124,"B1",3,4,"M053","mutant","Parent_B",200,"red",37,83,10.3,24.6,1998
+"Site1_irrigated","Site1","Irrigated",125,"B1",4,4,"M051","mutant","Parent_B",300,"white",36,81,13.5,,
+"Site1_irrigated","Site1","Irrigated",126,"B1",5,4,"M040","mutant","Parent_B",100,"red",35,83,11.6,22.9,2450
+"Site1_irrigated","Site1","Irrigated",127,"B1",6,4,"Parent_A","parent","Parent_A",0,"cream",40,85,15.1,25.5,2605
+"Site1_irrigated","Site1","Irrigated",128,"B1",7,4,"M013","mutant","Parent_A",100,"cream",40,88,15.7,24,
+"Site1_irrigated","Site1","Irrigated",129,"B1",1,5,"M070","mutant","Parent_C",100,"black",36,81,13.2,24.3,3086
+"Site1_irrigated","Site1","Irrigated",130,"B1",2,5,"M026","mutant","Parent_A",200,"cream",40,93,15.7,26.1,2175
+"Site1_irrigated","Site1","Irrigated",131,"B1",3,5,"M017","mutant","Parent_A",200,"cream",40,90,10.4,25.9,1802
+"Site1_irrigated","Site1","Irrigated",132,"B1",4,5,"M072","mutant","Parent_C",300,"black",37,77,15.3,22.1,2049
+"Site1_irrigated","Site1","Irrigated",133,"B1",5,5,"M028","mutant","Parent_B",100,"red",36,85,8.3,23.8,1750
+"Site1_irrigated","Site1","Irrigated",134,"B1",6,5,"M014","mutant","Parent_A",200,"cream",40,89,12.8,18.5,1779
+"Site1_irrigated","Site1","Irrigated",135,"B1",7,5,"M042","mutant","Parent_B",300,"red",35,84,9.4,23.5,2364
+"Site1_irrigated","Site1","Irrigated",136,"B1",1,6,"M050","mutant","Parent_B",200,"black",36,84,11,23.4,2281
+"Site1_irrigated","Site1","Irrigated",137,"B1",2,6,"M055","mutant","Parent_C",100,"black",35,83,15.7,24.9,2346
+"Site1_irrigated","Site1","Irrigated",138,"B1",3,6,"M002","mutant","Parent_A",200,"red mottled",39,87,15.6,26.4,2366
+"Site1_irrigated","Site1","Irrigated",139,"B1",4,6,"M033","mutant","Parent_B",300,"white",38,89,17.1,25.2,2994
+"Site1_irrigated","Site1","Irrigated",140,"B1",5,6,"M067","mutant","Parent_C",100,"black",38,85,13,23,2869
+"Site1_irrigated","Site1","Irrigated",141,"B1",6,6,"M025","mutant","Parent_A",100,"cream",39,91,16.2,21.8,2261
+"Site1_irrigated","Site1","Irrigated",142,"B1",7,6,"M010","mutant","Parent_A",100,"cream",38,86,15.1,24.1,2143
+"Site1_irrigated","Site1","Irrigated",143,"B1",1,7,"M065","mutant","Parent_C",200,"black",35,82,12.7,21.7,2243
+"Site1_irrigated","Site1","Irrigated",144,"B1",2,7,"M045","mutant","Parent_B",300,"brown",33,90,13.3,26.4,2293
+"Site1_irrigated","Site1","Irrigated",145,"B1",3,7,"M005","mutant","Parent_A",200,"cream",37,115,146,24,2443
+"Site1_irrigated","Site1","Irrigated",146,"B1",4,7,"M015","mutant","Parent_A",300,"cream",37,86,11.7,27.4,2560
+"Site1_irrigated","Site1","Irrigated",147,"B1",5,7,"M031","mutant","Parent_B",100,"red",35,83,12.9,20.2,2103
+"Site1_irrigated","Site1","Irrigated",148,"B1",6,7,"M073","mutant","Parent_C",100,"black",37,86,14.2,22.8,2842
+"Site1_irrigated","Site1","Irrigated",149,"B1",7,7,"M018","mutant","Parent_A",300,"cream",37,88,13,18,2377
+"Site1_irrigated","Site1","Irrigated",150,"B1",1,8,"M057","mutant","Parent_C",300,"black",37,84,,29.4,2971
+"Site1_irrigated","Site1","Irrigated",151,"B1",2,8,"M069","mutant","Parent_C",300,"cream",38,82,13.8,20.7,2280
+"Site1_irrigated","Site1","Irrigated",152,"B1",3,8,"M048","mutant","Parent_B",300,"red",38,83,11.2,31.5,2272
+"Site1_irrigated","Site1","Irrigated",153,"B1",4,8,"M016","mutant","Parent_A",100,"cream",38,85,17.2,21.9,2520
+"Site1_irrigated","Site1","Irrigated",154,"B1",5,8,"M027","mutant","Parent_A",300,"white",37,83,11.9,22.4,2783
+"Site1_irrigated","Site1","Irrigated",155,"B1",6,8,"M056","mutant","Parent_C",200,"black",35,,12.6,22,3194
+"Site1_irrigated","Site1","Irrigated",156,"B1",7,8,"M071","mutant","Parent_C",200,"black",36,85,12.6,23.9,3054
+"Site1_irrigated","Site1","Irrigated",157,"B1",1,9,"M060","mutant","Parent_C",300,"black",40,93,15,23.9,2899
+"Site1_irrigated","Site1","Irrigated",158,"B1",2,9,"M006","mutant","Parent_A",300,"cream",39,86,12.9,22.5,1544
+"Site1_irrigated","Site1","Irrigated",159,"B1",3,9,"M064","mutant","Parent_C",100,"black",36,81,11.7,23.4,2647
+"Site1_irrigated","Site1","Irrigated",160,"B1",4,9,"M003","mutant","Parent_A",300,"cream",39,86,15.4,27.2,2800
+"Site1_irrigated","Site1","Irrigated",161,"B1",5,9,"M007","mutant","Parent_A",100,"cream",37,83,15.5,22.4,2664
+"Site1_irrigated","Site1","Irrigated",162,"B1",6,9,"M039","mutant","Parent_B",300,"black",34,86,15.8,18.4,2438
+"Site1_irrigated","Site1","Irrigated",163,"B1",7,9,"M032","mutant","Parent_B",200,"red",36,86,11,21.1,2317
+"Site1_irrigated","Site1","Irrigated",164,"B1",1,10,"M041","mutant","Parent_B",200,"red",38,84,7.9,26.7,1747
+"Site1_irrigated","Site1","Irrigated",165,"B1",2,10,"M079","mutant","Parent_C",100,"black",38,85,18.6,25.6,2683
+"Site1_irrigated","Site1","Irrigated",166,"B1",3,10,"M081","mutant","Parent_C",300,"black",,,,,
+"Site1_irrigated","Site1","Irrigated",167,"B1",4,10,"M062","mutant","Parent_C",200,"black",38,85,11.3,25.3,2101
+"Site1_irrigated","Site1","Irrigated",168,"B1",5,10,"M009","mutant","Parent_A",300,"cream",,85,10.2,24.3,1585
+"Site1_irrigated","Site1","Irrigated",169,"B1",6,10,"M063","mutant","Parent_C",300,"black",37,85,15.7,21.6,2537
+"Site1_irrigated","Site1","Irrigated",170,"B1",7,10,"M052","mutant","Parent_B",100,"red",37,85,12,24,2430
+"Site1_irrigated","Site1","Irrigated",171,"B1",1,11,"M008","mutant","Parent_A",200,"cream",41,86,10.2,25.9,1780
+"Site1_irrigated","Site1","Irrigated",172,"B1",2,11,"Parent_B","parent","Parent_B",0,"red",38,88,17.6,25.8,2386
+"Site1_irrigated","Site1","Irrigated",173,"B1",3,11,"M054","mutant","Parent_B",300,"red",38,82,14,,2385
+"Site1_irrigated","Site1","Irrigated",174,"B1",4,11,"M058","mutant","Parent_C",100,"black",40,86,15.1,25.7,2787
+"Site1_irrigated","Site1","Irrigated",175,"B1",5,11,"M074","mutant","Parent_C",200,"black",39,83,14.9,21.8,2070
+"Site1_irrigated","Site1","Irrigated",176,"B1",6,11,"M030","mutant","Parent_B",300,"red",45,99,10.1,22,2168
+"Site1_irrigated","Site1","Irrigated",177,"B1",7,11,"M019","mutant","Parent_A",100,"cream",37,85,14.2,19.6,2591
+"Site1_irrigated","Site1","Irrigated",178,"B1",1,12,"M035","mutant","Parent_B",200,"red",36,84,15.4,21.4,1898
+"Site1_irrigated","Site1","Irrigated",179,"B1",2,12,"M029","mutant","Parent_B",200,"red",41,87,11.5,26.1,1249
+"Site1_irrigated","Site1","Irrigated",180,"B1",3,12,"M011","mutant","Parent_A",200,"cream",42,88,12.9,27.4,1977
+"Site1_irrigated","Site1","Irrigated",181,"B1",4,12,"M059","mutant","Parent_C",200,"red mottled",40,84,15.8,25.8,2480
+"Site1_irrigated","Site1","Irrigated",182,"B1",5,12,"M043","mutant","Parent_B",100,"red",37,80,13,18.9,2029
+"Site1_irrigated","Site1","Irrigated",183,"B1",6,12,"M023","mutant","Parent_A",200,"cream",40,86,12.3,24.2,2820
+"Site1_irrigated","Site1","Irrigated",184,"B1",7,12,"M038","mutant","Parent_B",200,"red",37,87,13.8,20.1,2440
+"Site1_irrigated","Site1","Irrigated",185,"B2",1,13,"M021","mutant","Parent_A",300,"cream",41,92,13.3,22,2050
+"Site1_irrigated","Site1","Irrigated",186,"B2",2,13,"M041","mutant","Parent_B",200,"red",39,88,11.9,28.2,2532
+"Site1_irrigated","Site1","Irrigated",187,"B2",3,13,"M037","mutant","Parent_B",100,"red",38,85,16,23.3,2017
+"Site1_irrigated","Site1","Irrigated",188,"B2",4,13,"M015","mutant","Parent_A",300,"cream",40,89,12.5,27.7,2619
+"Site1_irrigated","Site1","Irrigated",189,"B2",5,13,"M014","mutant","Parent_A",200,"cream",41,88,13.6,18.3,1146
+"Site1_irrigated","Site1","Irrigated",190,"B2",6,13,"M026","mutant","Parent_A",200,"cream",41,91,13.8,26.1,2789
+"Site1_irrigated","Site1","Irrigated",191,"B2",7,13,"M008","mutant","Parent_A",200,"cream",40,89,12.1,,2722
+"Site1_irrigated","Site1","Irrigated",192,"B2",1,14,"M045","mutant","Parent_B",300,"brown",33,90,12.6,21.9,2364
+"Site1_irrigated","Site1","Irrigated",193,"B2",2,14,"M018","mutant","Parent_A",300,"cream",38,90,,21.7,1885
+"Site1_irrigated","Site1","Irrigated",194,"B2",3,14,"M048","mutant","Parent_B",300,"red",67,82,7.7,30.2,1853
+"Site1_irrigated","Site1","Irrigated",195,"B2",4,14,"M056","mutant","Parent_C",200,"black",38,82,14.1,23.7,2532
+"Site1_irrigated","Site1","Irrigated",196,"B2",5,14,"M070","mutant","Parent_C",100,"black",36,77,12.7,22.2,2936
+"Site1_irrigated","Site1","Irrigated",197,"B2",6,14,"M003","mutant","Parent_A",300,"cream",37,84,15.2,28.6,3261
+"Site1_irrigated","Site1","Irrigated",198,"B2",7,14,"M012","mutant","Parent_A",300,"cream",40,88,14.8,21.9,2812
+"Site1_irrigated","Site1","Irrigated",199,"B2",1,15,"M006","mutant","Parent_A",300,"cream",39,,9,22.1,1910
+"Site1_irrigated","Site1","Irrigated",200,"B2",2,15,"M001","mutant","Parent_A",100,"cream",41,88,15.5,23.9,2002
+"Site1_irrigated","Site1","Irrigated",201,"B2",3,15,"M075","mutant","Parent_C",300,"black",38,83,14.8,23.8,2690
+"Site1_irrigated","Site1","Irrigated",202,"B2",4,15,"M052","mutant","Parent_B",100,"red",39,84,13.7,23.7,2475
+"Site1_irrigated","Site1","Irrigated",203,"B2",5,15,"M064","mutant","Parent_C",100,"black",38,86,16,22.3,2023
+"Site1_irrigated","Site1","Irrigated",204,"B2",6,15,"M030","mutant","Parent_B",300,"red",45,100,11.3,23.6,2408
+"Site1_irrigated","Site1","Irrigated",205,"B2",7,15,"M062","mutant","Parent_C",200,"black",37,86,10.3,28.2,2589
+"Site1_irrigated","Site1","Irrigated",206,"B2",1,16,"M019","mutant","Parent_A",100,"cream",39,85,14.1,22.5,2287
+"Site1_irrigated","Site1","Irrigated",207,"B2",2,16,"M055","mutant","Parent_C",100,"black",37,86,13.8,25,3061
+"Site1_irrigated","Site1","Irrigated",208,"B2",3,16,"Parent_B","parent","Parent_B",0,"red",37,84,11.9,21.7,1551
+"Site1_irrigated","Site1","Irrigated",209,"B2",4,16,"M029","mutant","Parent_B",200,"red",44,89,13.6,28.7,2224
+"Site1_irrigated","Site1","Irrigated",210,"B2",5,16,"M034","mutant","Parent_B",100,"red",35,82,13.3,20.8,1722
+"Site1_irrigated","Site1","Irrigated",211,"B2",6,16,"M065","mutant","Parent_C",200,"black",39,86,15.8,23.3,3172
+"Site1_irrigated","Site1","Irrigated",212,"B2",7,16,"M044","mutant","Parent_B",200,"red",,86,10.1,25.1,2301
+"Site1_irrigated","Site1","Irrigated",213,"B2",1,17,"M009","mutant","Parent_A",300,"cream",40,87,10.8,28.3,2253
+"Site1_irrigated","Site1","Irrigated",214,"B2",2,17,"M050","mutant","Parent_B",200,"black",37,84,14.1,26,2303
+"Site1_irrigated","Site1","Irrigated",215,"B2",3,17,"M059","mutant","Parent_C",200,"red mottled",38,,11.4,25.7,
+"Site1_irrigated","Site1","Irrigated",216,"B2",4,17,"M039","mutant","Parent_B",300,"black",35,88,,17.8,2622
+"Site1_irrigated","Site1","Irrigated",217,"B2",5,17,"M024","mutant","Parent_A",300,"cream",,,,,
+"Site1_irrigated","Site1","Irrigated",218,"B2",6,17,"M005","mutant","Parent_A",200,"cream",38,87,15.9,24.3,2810
+"Site1_irrigated","Site1","Irrigated",219,"B2",7,17,"M080","mutant","Parent_C",200,"black",37,82,14.5,21.7,3017
+"Site1_irrigated","Site1","Irrigated",220,"B2",1,18,"M043","mutant","Parent_B",100,"red",37,85,15,22.9,1966
+"Site1_irrigated","Site1","Irrigated",221,"B2",2,18,"M071","mutant","Parent_C",200,"black",36,85,14,24.5,2749
+"Site1_irrigated","Site1","Irrigated",222,"B2",3,18,"M017","mutant","Parent_A",200,"cream",42,88,9.4,26.6,1775
+"Site1_irrigated","Site1","Irrigated",223,"B2",4,18,"Parent_C","parent","Parent_C",0,"black",39,84,16.5,27.1,2753
+"Site1_irrigated","Site1","Irrigated",224,"B2",5,18,"M079","mutant","Parent_C",100,"black",38,85,16.7,23.5,2378
+"Site1_irrigated","Site1","Irrigated",225,"B2",6,18,"M068","mutant","Parent_C",200,"black",41,87,16.9,25.8,3091
+"Site1_irrigated","Site1","Irrigated",226,"B2",7,18,"M063","mutant","Parent_C",300,"black",36,84,12.2,19,2266
+"Site1_irrigated","Site1","Irrigated",227,"B2",1,19,"M081","mutant","Parent_C",300,"black",38,84,11.4,27.5,2700
+"Site1_irrigated","Site1","Irrigated",228,"B2",2,19,"M051","mutant","Parent_B",300,"white",37,80,14.3,23.1,1984
+"Site1_irrigated","Site1","Irrigated",229,"B2",3,19,"M042","mutant","Parent_B",300,"red",38,83,11.8,24.6,1969
+"Site1_irrigated","Site1","Irrigated",230,"B2",4,19,"M032","mutant","Parent_B",200,"red",39,86,13.8,24.4,2063
+"Site1_irrigated","Site1","Irrigated",231,"B2",5,19,"M049","mutant","Parent_B",100,"red",37,89,,23.2,1794
+"Site1_irrigated","Site1","Irrigated",232,"B2",6,19,"M076","mutant","Parent_C",100,"black",36,84,14.5,24.5,2827
+"Site1_irrigated","Site1","Irrigated",233,"B2",7,19,"M073","mutant","Parent_C",100,"black",37,86,14.5,23.5,2928
+"Site1_irrigated","Site1","Irrigated",234,"B2",1,20,"M046","mutant","Parent_B",100,"red",36,84,11.7,21.1,1726
+"Site1_irrigated","Site1","Irrigated",235,"B2",2,20,"M078","mutant","Parent_C",300,"black",37,83,,26.3,2811
+"Site1_irrigated","Site1","Irrigated",236,"B2",3,20,"M035","mutant","Parent_B",200,"red",,86,14.1,19.9,1983
+"Site1_irrigated","Site1","Irrigated",237,"B2",4,20,"M077","mutant","Parent_C",200,"black",39,86,15.4,24.8,2265
+"Site1_irrigated","Site1","Irrigated",238,"B2",5,20,"M072","mutant","Parent_C",300,"black",37,78,17.8,18.6,2260
+"Site1_irrigated","Site1","Irrigated",239,"B2",6,20,"M010","mutant","Parent_A",100,"cream",40,,15.4,25.1,2900
+"Site1_irrigated","Site1","Irrigated",240,"B2",7,20,"M066","mutant","Parent_C",300,"black",41,86,10.9,22,3033
+"Site1_irrigated","Site1","Irrigated",241,"B2",1,21,"M036","mutant","Parent_B",300,"red",37,86,13.4,20.8,2098
+"Site1_irrigated","Site1","Irrigated",242,"B2",2,21,"M028","mutant","Parent_B",100,"red",37,83,9.7,26.1,1808
+"Site1_irrigated","Site1","Irrigated",243,"B2",3,21,"M061","mutant","Parent_C",100,"black",38,81,14.1,25.9,2224
+"Site1_irrigated","Site1","Irrigated",244,"B2",4,21,"M016","mutant","Parent_A",100,"cream",40,86,17.6,24.9,2310
+"Site1_irrigated","Site1","Irrigated",245,"B2",5,21,"M022","mutant","Parent_A",100,"red mottled",40,86,13.9,23.8,2093
+"Site1_irrigated","Site1","Irrigated",246,"B2",6,21,"M060","mutant","Parent_C",300,"black",40,93,14.7,23.7,2911
+"Site1_irrigated","Site1","Irrigated",247,"B2",7,21,"M047","mutant","Parent_B",200,"red",36,84,10.8,19.8,2366
+"Site1_irrigated","Site1","Irrigated",248,"B2",1,22,"M004","mutant","Parent_A",100,"cream",39,84,15.5,22.1,2277
+"Site1_irrigated","Site1","Irrigated",249,"B2",2,22,"M007","mutant","Parent_A",100,"cream",,85,16.5,22.5,2475
+"Site1_irrigated","Site1","Irrigated",250,"B2",3,22,"M027","mutant","Parent_A",300,"white",38,84,14.1,22.3,1991
+"Site1_irrigated","Site1","Irrigated",251,"B2",4,22,"Parent_A","parent","Parent_A",0,"cream",40,89,15.6,24.4,1945
+"Site1_irrigated","Site1","Irrigated",252,"B2",5,22,"M054","mutant","Parent_B",300,"red",37,81,15.6,19.7,1767
+"Site1_irrigated","Site1","Irrigated",253,"B2",6,22,"M040","mutant","Parent_B",100,"red",34,85,14.5,23.9,2043
+"Site1_irrigated","Site1","Irrigated",254,"B2",7,22,"M011","mutant","Parent_A",200,"cream",40,87,11.3,26.5,2509
+"Site1_irrigated","Site1","Irrigated",255,"B2",1,23,"M038","mutant","Parent_B",200,"red",37,87,10,21.4,1815
+"Site1_irrigated","Site1","Irrigated",256,"B2",2,23,"M057","mutant","Parent_C",300,"black",38,85,16.7,31,3342
+"Site1_irrigated","Site1","Irrigated",257,"B2",3,23,"M031","mutant","Parent_B",100,"red",37,81,15.8,21.9,1775
+"Site1_irrigated","Site1","Irrigated",258,"B2",4,23,"M069","mutant","Parent_C",300,"cream",40,81,15.3,21.5,2303
+"Site1_irrigated","Site1","Irrigated",259,"B2",5,23,"M023","mutant","Parent_A",200,"cream",40,86,12.4,24.8,1921
+"Site1_irrigated","Site1","Irrigated",260,"B2",6,23,"M025","mutant","Parent_A",100,"cream",41,94,18.5,24.1,2361
+"Site1_irrigated","Site1","Irrigated",261,"B2",7,23,"M033","mutant","Parent_B",300,"white",,,14,23.9,2529
+"Site1_irrigated","Site1","Irrigated",262,"B2",1,24,"M002","mutant","Parent_A",200,"red mottled",38,86,14,25.5,2572
+"Site1_irrigated","Site1","Irrigated",263,"B2",2,24,"M067","mutant","Parent_C",100,"black",39,83,15.8,24.8,2689
+"Site1_irrigated","Site1","Irrigated",264,"B2",3,24,"M013","mutant","Parent_A",100,"cream",38,85,16.3,26.8,2136
+"Site1_irrigated","Site1","Irrigated",265,"B2",4,24,"M053","mutant","Parent_B",200,"red",39,84,12.8,27,2275
+"Site1_irrigated","Site1","Irrigated",266,"B2",5,24,"M058","mutant","Parent_C",100,"black",37,82,14.1,25.9,2289
+"Site1_irrigated","Site1","Irrigated",267,"B2",6,24,"M020","mutant","Parent_A",200,"white",38,81,12.7,23.6,2512
+"Site1_irrigated","Site1","Irrigated",268,"B2",7,24,"M074","mutant","Parent_C",200,"black",38,83,15.3,22.3,2511
+"Site1_irrigated","Site1","Irrigated",269,"B3",1,25,"M055","mutant","Parent_C",100,"black",35,82,15.3,23,2581
+"Site1_irrigated","Site1","Irrigated",270,"B3",2,25,"M042","mutant","Parent_B",300,"red",38,84,12.2,25.4,2402
+"Site1_irrigated","Site1","Irrigated",271,"B3",3,25,"M014","mutant","Parent_A",200,"cream",40,87,13.6,18.7,1371
+"Site1_irrigated","Site1","Irrigated",272,"B3",4,25,"M052","mutant","Parent_B",100,"red",38,85,15.6,23,2142
+"Site1_irrigated","Site1","Irrigated",273,"B3",5,25,"M047","mutant","Parent_B",200,"red",37,84,15,21.5,1806
+"Site1_irrigated","Site1","Irrigated",274,"B3",6,25,"M070","mutant","Parent_C",100,"black",35,81,14.4,25.3,2773
+"Site1_irrigated","Site1","Irrigated",275,"B3",7,25,"M018","mutant","Parent_A",300,"cream",36,84,12.4,22.1,2511
+"Site1_irrigated","Site1","Irrigated",276,"B3",1,26,"Parent_B","parent","Parent_B",0,"red",37,83,,22.6,1870
+"Site1_irrigated","Site1","Irrigated",277,"B3",2,26,"M043","mutant","Parent_B",100,"red",36,83,14.9,24.6,2399
+"Site1_irrigated","Site1","Irrigated",278,"B3",3,26,"M038","mutant","Parent_B",200,"red",37,85,15.8,22.2,1835
+"Site1_irrigated","Site1","Irrigated",279,"B3",4,26,"M037","mutant","Parent_B",100,"red",36,86,16.7,24.2,2216
+"Site1_irrigated","Site1","Irrigated",280,"B3",5,26,"M020","mutant","Parent_A",200,"white",36,112,,23.3,1923
+"Site1_irrigated","Site1","Irrigated",281,"B3",6,26,"M053","mutant","Parent_B",200,"red",38,84,11.3,24.3,2527
+"Site1_irrigated","Site1","Irrigated",282,"B3",7,26,"M011","mutant","Parent_A",200,"cream",40,88,12.4,26.5,2473
+"Site1_irrigated","Site1","Irrigated",283,"B3",1,27,"M012","mutant","Parent_A",300,"cream",40,86,14.1,23.3,2328
+"Site1_irrigated","Site1","Irrigated",284,"B3",2,27,"M035","mutant","Parent_B",200,"red",36,85,13.8,22.2,2454
+"Site1_irrigated","Site1","Irrigated",285,"B3",3,27,"M002","mutant","Parent_A",200,"red mottled",41,88,16.8,27.6,2568
+"Site1_irrigated","Site1","Irrigated",286,"B3",4,27,"M068","mutant","Parent_C",200,"black",40,87,17.7,26.6,3011
+"Site1_irrigated","Site1","Irrigated",287,"B3",5,27,"M024","mutant","Parent_A",300,"cream",40,87,15.8,17.6,1841
+"Site1_irrigated","Site1","Irrigated",288,"B3",6,27,"M075","mutant","Parent_C",300,"black",69,85,14,26.4,2922
+"Site1_irrigated","Site1","Irrigated",289,"B3",7,27,"Parent_C","parent","Parent_C",0,"black",38,82,13.7,26.3,2674
+"Site1_irrigated","Site1","Irrigated",290,"B3",1,28,"M079","mutant","Parent_C",100,"black",36,81,10.8,23.5,2510
+"Site1_irrigated","Site1","Irrigated",291,"B3",2,28,"M021","mutant","Parent_A",300,"cream",41,91,17.7,,2458
+"Site1_irrigated","Site1","Irrigated",292,"B3",3,28,"M010","mutant","Parent_A",100,"cream",39,84,14.6,23.5,2227
+"Site1_irrigated","Site1","Irrigated",293,"B3",4,28,"M059","mutant","Parent_C",200,"red mottled",37,85,13.2,23,3072
+"Site1_irrigated","Site1","Irrigated",294,"B3",5,28,"M076","mutant","Parent_C",100,"black",36,83,14.9,26.2,3041
+"Site1_irrigated","Site1","Irrigated",295,"B3",6,28,"M057","mutant","Parent_C",300,"black",36,83,14.4,29.7,3041
+"Site1_irrigated","Site1","Irrigated",296,"B3",7,28,"M029","mutant","Parent_B",200,"red",41,85,8.6,24.5,2323
+"Site1_irrigated","Site1","Irrigated",297,"B3",1,29,"M065","mutant","Parent_C",200,"black",37,,13.5,20.9,2416
+"Site1_irrigated","Site1","Irrigated",298,"B3",2,29,"M060","mutant","Parent_C",300,"black",42,94,15.8,24.9,2970
+"Site1_irrigated","Site1","Irrigated",299,"B3",3,29,"M049","mutant","Parent_B",100,"red",39,87,15.2,23.6,1992
+"Site1_irrigated","Site1","Irrigated",300,"B3",4,29,"M028","mutant","Parent_B",100,"red",38,86,13.4,23.3,1679
+"Site1_irrigated","Site1","Irrigated",301,"B3",5,29,"M063","mutant","Parent_C",300,"black",36,83,17.1,19.6,2348
+"Site1_irrigated","Site1","Irrigated",302,"B3",6,29,"M058","mutant","Parent_C",100,"black",37,84,12.7,26.1,2857
+"Site1_irrigated","Site1","Irrigated",303,"B3",7,29,"M015","mutant","Parent_A",300,"cream",39,87,8.5,26.1,2391
+"Site1_irrigated","Site1","Irrigated",304,"B3",1,30,"M062","mutant","Parent_C",200,"black",37,83,9.9,24.8,2350
+"Site1_irrigated","Site1","Irrigated",305,"B3",2,30,"M009","mutant","Parent_A",300,"cream",42,87,12.9,27.3,2456
+"Site1_irrigated","Site1","Irrigated",306,"B3",3,30,"M007","mutant","Parent_A",100,"cream",38,83,16.6,20.5,2036
+"Site1_irrigated","Site1","Irrigated",307,"B3",4,30,"M056","mutant","Parent_C",200,"black",37,81,12.9,22.8,2658
+"Site1_irrigated","Site1","Irrigated",308,"B3",5,30,"M077","mutant","Parent_C",200,"black",37,85,14.5,26.1,2457
+"Site1_irrigated","Site1","Irrigated",309,"B3",6,30,"M069","mutant","Parent_C",300,"cream",39,84,12.6,21.6,2236
+"Site1_irrigated","Site1","Irrigated",310,"B3",7,30,"M071","mutant","Parent_C",200,"black",37,87,15,24.4,3054
+"Site1_irrigated","Site1","Irrigated",311,"B3",1,31,"M019","mutant","Parent_A",100,"cream",39,85,13.1,17.5,2400
+"Site1_irrigated","Site1","Irrigated",312,"B3",2,31,"M005","mutant","Parent_A",200,"cream",38,87,14.8,23.8,2358
+"Site1_irrigated","Site1","Irrigated",313,"B3",3,31,"M061","mutant","Parent_C",100,"black",,83,11.4,22.9,2226
+"Site1_irrigated","Site1","Irrigated",314,"B3",4,31,"M034","mutant","Parent_B",100,"red",37,83,12.7,20.5,2047
+"Site1_irrigated","Site1","Irrigated",315,"B3",5,31,"M080","mutant","Parent_C",200,"black",37,85,13.3,21.1,2524
+"Site1_irrigated","Site1","Irrigated",316,"B3",6,31,"Parent_A","parent","Parent_A",0,"cream",38,89,13.3,,2541
+"Site1_irrigated","Site1","Irrigated",317,"B3",7,31,"M039","mutant","Parent_B",300,"black",33,86,14.4,14.2,1543
+"Site1_irrigated","Site1","Irrigated",318,"B3",1,32,"M001","mutant","Parent_A",100,"cream",40,86,10.9,22.5,2580
+"Site1_irrigated","Site1","Irrigated",319,"B3",2,32,"M016","mutant","Parent_A",100,"cream",37,85,13.9,21.7,2120
+"Site1_irrigated","Site1","Irrigated",320,"B3",3,32,"M008","mutant","Parent_A",200,"cream",40,87,9.7,25,1978
+"Site1_irrigated","Site1","Irrigated",321,"B3",4,32,"M044","mutant","Parent_B",200,"red",40,87,13.6,24.5,2033
+"Site1_irrigated","Site1","Irrigated",322,"B3",5,32,"M051","mutant","Parent_B",300,"white",35,80,12.4,19,1810
+"Site1_irrigated","Site1","Irrigated",323,"B3",6,32,"M026","mutant","Parent_A",200,"cream",40,96,14.7,26.3,2169
+"Site1_irrigated","Site1","Irrigated",324,"B3",7,32,"M006","mutant","Parent_A",300,"cream",40,82,7.2,21.1,1867
+"Site1_irrigated","Site1","Irrigated",325,"B3",1,33,"M004","mutant","Parent_A",100,"cream",39,84,13.7,23.4,2296
+"Site1_irrigated","Site1","Irrigated",326,"B3",2,33,"M073","mutant","Parent_C",100,"black",38,85,14,23,2144
+"Site1_irrigated","Site1","Irrigated",327,"B3",3,33,"M046","mutant","Parent_B",100,"red",37,84,13.6,20.1,1951
+"Site1_irrigated","Site1","Irrigated",328,"B3",4,33,"M003","mutant","Parent_A",300,"cream",39,86,14.9,,2893
+"Site1_irrigated","Site1","Irrigated",329,"B3",5,33,"M030","mutant","Parent_B",300,"red",45,100,12.3,22.3,2022
+"Site1_irrigated","Site1","Irrigated",330,"B3",6,33,"M064","mutant","Parent_C",100,"black",39,89,13,25.8,3091
+"Site1_irrigated","Site1","Irrigated",331,"B3",7,33,"M013","mutant","Parent_A",100,"cream",41,88,18.1,24.4,2485
+"Site1_irrigated","Site1","Irrigated",332,"B3",1,34,"M045","mutant","Parent_B",300,"brown",33,89,9.1,19.9,2304
+"Site1_irrigated","Site1","Irrigated",333,"B3",2,34,"M017","mutant","Parent_A",200,"cream",41,90,8.2,28,1668
+"Site1_irrigated","Site1","Irrigated",334,"B3",3,34,"M067","mutant","Parent_C",100,"black",39,81,10.8,22.9,1996
+"Site1_irrigated","Site1","Irrigated",335,"B3",4,34,"M040","mutant","Parent_B",100,"red",37,87,,19.8,2133
+"Site1_irrigated","Site1","Irrigated",336,"B3",5,34,"M074","mutant","Parent_C",200,"black",39,85,12.6,23,2343
+"Site1_irrigated","Site1","Irrigated",337,"B3",6,34,"M081","mutant","Parent_C",300,"black",38,85,14.2,24.6,2708
+"Site1_irrigated","Site1","Irrigated",338,"B3",7,34,"M078","mutant","Parent_C",300,"black",,86,13.3,23,2244
+"Site1_irrigated","Site1","Irrigated",339,"B3",1,35,"M022","mutant","Parent_A",100,"red mottled",,85,12.2,21.2,2103
+"Site1_irrigated","Site1","Irrigated",340,"B3",2,35,"M033","mutant","Parent_B",300,"white",37,,15.7,26.1,2434
+"Site1_irrigated","Site1","Irrigated",341,"B3",3,35,"M048","mutant","Parent_B",300,"red",38,83,8.2,30.2,1707
+"Site1_irrigated","Site1","Irrigated",342,"B3",4,35,"M054","mutant","Parent_B",300,"red",40,86,15.5,24.1,1730
+"Site1_irrigated","Site1","Irrigated",343,"B3",5,35,"M025","mutant","Parent_A",100,"cream",40,92,18.5,22.5,2139
+"Site1_irrigated","Site1","Irrigated",344,"B3",6,35,"M072","mutant","Parent_C",300,"black",,79,15.5,22.3,2290
+"Site1_irrigated","Site1","Irrigated",345,"B3",7,35,"M050","mutant","Parent_B",200,"black",,,,,
+"Site1_irrigated","Site1","Irrigated",346,"B3",1,36,"M036","mutant","Parent_B",300,"red",38,86,15.9,19.9,2160
+"Site1_irrigated","Site1","Irrigated",347,"B3",2,36,"M031","mutant","Parent_B",100,"red",37,83,13.2,20.8,1979
+"Site1_irrigated","Site1","Irrigated",348,"B3",3,36,"M027","mutant","Parent_A",300,"white",38,84,13.8,23.6,2033
+"Site1_irrigated","Site1","Irrigated",349,"B3",4,36,"M032","mutant","Parent_B",200,"red",39,86,13.7,24.6,2217
+"Site1_irrigated","Site1","Irrigated",350,"B3",5,36,"M041","mutant","Parent_B",200,"red",40,87,8.7,27.9,1825
+"Site1_irrigated","Site1","Irrigated",351,"B3",6,36,"M023","mutant","Parent_A",200,"cream",41,88,13,23.3,2658
+"Site1_irrigated","Site1","Irrigated",352,"B3",7,36,"M066","mutant","Parent_C",300,"black",41,84,13.8,24.6,2333
+"Site1_drought","Site1","Terminal drought",201,"B1",1,1,"M037","mutant","Parent_B",100,"red",38,81,5.8,20.5,1628
+"Site1_drought","Site1","Terminal drought",202,"B1",2,1,"M009","mutant","Parent_A",300,"cream",,77,6.2,21.7,898
+"Site1_drought","Site1","Terminal drought",203,"B1",3,1,"M049","mutant","Parent_B",100,"red",38,81,8,19.9,838
+"Site1_drought","Site1","Terminal drought",204,"B1",4,1,"M035","mutant","Parent_B",200,"red",40,81,10.4,18.7,826
+"Site1_drought","Site1","Terminal drought",205,"B1",5,1,"M007","mutant","Parent_A",100,"cream",36,71,4.9,16.5,606
+"Site1_drought","Site1","Terminal drought",206,"B1",6,1,"M038","mutant","Parent_B",200,"red",41,82,9.9,16.3,80
+"Site1_drought","Site1","Terminal drought",207,"B1",7,1,"M029","mutant","Parent_B",200,"red",40,81,1.6,,756
+"Site1_drought","Site1","Terminal drought",208,"B1",1,2,"M070","mutant","Parent_C",100,"black",32,69,21,10.5,1982
+"Site1_drought","Site1","Terminal drought",209,"B1",2,2,"M065","mutant","Parent_C",200,"black",36,78,20.9,20.4,
+"Site1_drought","Site1","Terminal drought",210,"B1",3,2,"M050","mutant","Parent_B",200,"black",41,79,10.6,18.4,521
+"Site1_drought","Site1","Terminal drought",211,"B1",4,2,"M044","mutant","Parent_B",200,"red",42,82,8,22.6,542
+"Site1_drought","Site1","Terminal drought",212,"B1",5,2,"M030","mutant","Parent_B",300,"red",49,90,7.9,13.1,792
+"Site1_drought","Site1","Terminal drought",213,"B1",6,2,"M039","mutant","Parent_B",300,"black",,79,12.9,14.8,2076
+"Site1_drought","Site1","Terminal drought",214,"B1",7,2,"M076","mutant","Parent_C",100,"black",36,76,9.8,15.9,1230
+"Site1_drought","Site1","Terminal drought",215,"B1",1,3,"M014","mutant","Parent_A",200,"cream",43,83,1,27.3,385
+"Site1_drought","Site1","Terminal drought",216,"B1",2,3,"M061","mutant","Parent_C",100,"black",34,75,21.5,20.7,1887
+"Site1_drought","Site1","Terminal drought",217,"B1",3,3,"M006","mutant","Parent_A",300,"cream",37,72,1,18.1,80
+"Site1_drought","Site1","Terminal drought",218,"B1",4,3,"M053","mutant","Parent_B",200,"red",39,80,11.9,,1095
+"Site1_drought","Site1","Terminal drought",219,"B1",5,3,"M016","mutant","Parent_A",100,"cream",36,75,1,16.9,270
+"Site1_drought","Site1","Terminal drought",220,"B1",6,3,"M051","mutant","Parent_B",300,"white",40,74,10.7,15.1,611
+"Site1_drought","Site1","Terminal drought",221,"B1",7,3,"M057","mutant","Parent_C",300,"black",34,72,4.2,16.2,1606
+"Site1_drought","Site1","Terminal drought",222,"B1",1,4,"M005","mutant","Parent_A",200,"cream",32,79,10.9,20.3,
+"Site1_drought","Site1","Terminal drought",223,"B1",2,4,"M003","mutant","Parent_A",300,"cream",36,76,10.7,,1573
+"Site1_drought","Site1","Terminal drought",224,"B1",3,4,"M052","mutant","Parent_B",100,"red",37,77,4.6,,1053
+"Site1_drought","Site1","Terminal drought",225,"B1",4,4,"M054","mutant","Parent_B",300,"red",38,83,84,16.3,771
+"Site1_drought","Site1","Terminal drought",226,"B1",5,4,"M045","mutant","Parent_B",300,"brown",40,80,1,15.6,80
+"Site1_drought","Site1","Terminal drought",227,"B1",6,4,"M074","mutant","Parent_C",200,"black",35,74,10.7,15.7,1954
+"Site1_drought","Site1","Terminal drought",228,"B1",7,4,"M067","mutant","Parent_C",100,"black",33,70,,18.1,490
+"Site1_drought","Site1","Terminal drought",229,"B1",1,5,"M073","mutant","Parent_C",100,"black",35,72,15.9,19.6,1691
+"Site1_drought","Site1","Terminal drought",230,"B1",2,5,"Parent_A","parent","Parent_A",0,"cream",39,80,3.5,24,884
+"Site1_drought","Site1","Terminal drought",231,"B1",3,5,"M068","mutant","Parent_C",200,"black",37,79,11,19.1,1495
+"Site1_drought","Site1","Terminal drought",232,"B1",4,5,"M072","mutant","Parent_C",300,"black",40,77,14.6,17,1864
+"Site1_drought","Site1","Terminal drought",233,"B1",5,5,"M047","mutant","Parent_B",200,"red",37,80,6.5,16.5,593
+"Site1_drought","Site1","Terminal drought",234,"B1",6,5,"M080","mutant","Parent_C",200,"black",32,73,14.7,13.2,
+"Site1_drought","Site1","Terminal drought",235,"B1",7,5,"M020","mutant","Parent_A",200,"white",34,74,1,19.5,167
+"Site1_drought","Site1","Terminal drought",236,"B1",1,6,"M001","mutant","Parent_A",100,"cream",36,76,3.5,20.5,159
+"Site1_drought","Site1","Terminal drought",237,"B1",2,6,"M043","mutant","Parent_B",100,"red",40,80,6,19.4,1873
+"Site1_drought","Site1","Terminal drought",238,"B1",3,6,"M055","mutant","Parent_C",100,"black",32,75,9.3,17.1,2153
+"Site1_drought","Site1","Terminal drought",239,"B1",4,6,"M017","mutant","Parent_A",200,"cream",38,82,1,19.9,519
+"Site1_drought","Site1","Terminal drought",240,"B1",5,6,"M021","mutant","Parent_A",300,"cream",37,79,1,14.3,80
+"Site1_drought","Site1","Terminal drought",241,"B1",6,6,"M075","mutant","Parent_C",300,"black",36,76,6.8,16.5,735
+"Site1_drought","Site1","Terminal drought",242,"B1",7,6,"M056","mutant","Parent_C",200,"black",35,71,13,21.2,2264
+"Site1_drought","Site1","Terminal drought",243,"B1",1,7,"M031","mutant","Parent_B",100,"red",35,75,4.3,18.6,620
+"Site1_drought","Site1","Terminal drought",244,"B1",2,7,"M011","mutant","Parent_A",200,"cream",37,71,6.4,20.9,721
+"Site1_drought","Site1","Terminal drought",245,"B1",3,7,"M004","mutant","Parent_A",100,"cream",34,76,1,19.7,194
+"Site1_drought","Site1","Terminal drought",246,"B1",4,7,"M066","mutant","Parent_C",300,"black",36,75,8.7,10.5,1515
+"Site1_drought","Site1","Terminal drought",247,"B1",5,7,"M060","mutant","Parent_C",300,"black",35,78,11.1,13.1,1537
+"Site1_drought","Site1","Terminal drought",248,"B1",6,7,"M041","mutant","Parent_B",200,"red",38,78,2.6,22.1,1237
+"Site1_drought","Site1","Terminal drought",249,"B1",7,7,"M015","mutant","Parent_A",300,"cream",37,77,4.6,23.4,575
+"Site1_drought","Site1","Terminal drought",250,"B1",1,8,"M081","mutant","Parent_C",300,"black",36,79,19.5,23.5,890
+"Site1_drought","Site1","Terminal drought",251,"B1",2,8,"M032","mutant","Parent_B",200,"red",41,78,12.9,28.8,777
+"Site1_drought","Site1","Terminal drought",252,"B1",3,8,"M063","mutant","Parent_C",300,"black",29,75,1,12.7,721
+"Site1_drought","Site1","Terminal drought",253,"B1",4,8,"M002","mutant","Parent_A",200,"red mottled",40,85,7.3,20.3,1052
+"Site1_drought","Site1","Terminal drought",254,"B1",5,8,"M024","mutant","Parent_A",300,"cream",36,77,5.8,17.1,160
+"Site1_drought","Site1","Terminal drought",255,"B1",6,8,"M028","mutant","Parent_B",100,"red",39,79,16.8,21.2,2087
+"Site1_drought","Site1","Terminal drought",256,"B1",7,8,"M078","mutant","Parent_C",300,"black",32,72,8.3,14.8,2046
+"Site1_drought","Site1","Terminal drought",257,"B1",1,9,"M033","mutant","Parent_B",300,"white",,,,,
+"Site1_drought","Site1","Terminal drought",258,"B1",2,9,"M025","mutant","Parent_A",100,"cream",39,80,5,13.9,80
+"Site1_drought","Site1","Terminal drought",259,"B1",3,9,"M027","mutant","Parent_A",300,"white",36,74,1,,80
+"Site1_drought","Site1","Terminal drought",260,"B1",4,9,"M062","mutant","Parent_C",200,"black",36,80,4.2,14.8,1800
+"Site1_drought","Site1","Terminal drought",261,"B1",5,9,"M079","mutant","Parent_C",100,"black",35,74,8.8,15.4,126
+"Site1_drought","Site1","Terminal drought",262,"B1",6,9,"Parent_B","parent","Parent_B",0,"red",40,,15.2,20,817
+"Site1_drought","Site1","Terminal drought",263,"B1",7,9,"M022","mutant","Parent_A",100,"red mottled",,,,,
+"Site1_drought","Site1","Terminal drought",264,"B1",1,10,"M046","mutant","Parent_B",100,"red",,,,,
+"Site1_drought","Site1","Terminal drought",265,"B1",2,10,"M023","mutant","Parent_A",200,"cream",40,79,1,20.7,269
+"Site1_drought","Site1","Terminal drought",266,"B1",3,10,"M026","mutant","Parent_A",200,"cream",38,80,1,18.7,80
+"Site1_drought","Site1","Terminal drought",267,"B1",4,10,"M018","mutant","Parent_A",300,"cream",35,78,2.6,20.7,683
+"Site1_drought","Site1","Terminal drought",268,"B1",5,10,"M069","mutant","Parent_C",300,"cream",36,77,5.5,21.6,1711
+"Site1_drought","Site1","Terminal drought",269,"B1",6,10,"M013","mutant","Parent_A",100,"cream",38,75,1.3,24.1,798
+"Site1_drought","Site1","Terminal drought",270,"B1",7,10,"M019","mutant","Parent_A",100,"cream",38,72,9.1,21.6,159
+"Site1_drought","Site1","Terminal drought",271,"B1",1,11,"M058","mutant","Parent_C",100,"black",34,76,14.6,23.3,1516
+"Site1_drought","Site1","Terminal drought",272,"B1",2,11,"M036","mutant","Parent_B",300,"red",37,78,7.9,18.6,267
+"Site1_drought","Site1","Terminal drought",273,"B1",3,11,"Parent_C","parent","Parent_C",0,"black",33,71,10,19.7,654
+"Site1_drought","Site1","Terminal drought",274,"B1",4,11,"M064","mutant","Parent_C",100,"black",33,73,7,17.9,2795
+"Site1_drought","Site1","Terminal drought",275,"B1",5,11,"M042","mutant","Parent_B",300,"red",42,,1,25.2,638
+"Site1_drought","Site1","Terminal drought",276,"B1",6,11,"M048","mutant","Parent_B",300,"red",38,78,9.7,18.2,1669
+"Site1_drought","Site1","Terminal drought",277,"B1",7,11,"M008","mutant","Parent_A",200,"cream",39,73,8.9,20.2,396
+"Site1_drought","Site1","Terminal drought",278,"B1",1,12,"M059","mutant","Parent_C",200,"red mottled",28,63,6.2,21.4,1156
+"Site1_drought","Site1","Terminal drought",279,"B1",2,12,"M071","mutant","Parent_C",200,"black",39,79,17.7,26.7,2246
+"Site1_drought","Site1","Terminal drought",280,"B1",3,12,"M034","mutant","Parent_B",100,"red",33,69,5.7,,725
+"Site1_drought","Site1","Terminal drought",281,"B1",4,12,"M010","mutant","Parent_A",100,"cream",35,78,11.6,27.3,
+"Site1_drought","Site1","Terminal drought",282,"B1",5,12,"M012","mutant","Parent_A",300,"cream",33,71,1,21.6,694
+"Site1_drought","Site1","Terminal drought",283,"B1",6,12,"M077","mutant","Parent_C",200,"black",37,,13.6,24.3,2244
+"Site1_drought","Site1","Terminal drought",284,"B1",7,12,"M040","mutant","Parent_B",100,"red",37,78,6.1,14.3,1330
+"Site1_drought","Site1","Terminal drought",285,"B2",1,13,"M004","mutant","Parent_A",100,"cream",36,73,2.4,22,80
+"Site1_drought","Site1","Terminal drought",286,"B2",2,13,"M049","mutant","Parent_B",100,"red",38,78,14.7,21.3,512
+"Site1_drought","Site1","Terminal drought",287,"B2",3,13,"M045","mutant","Parent_B",300,"brown",37,76,1,19.1,80
+"Site1_drought","Site1","Terminal drought",288,"B2",4,13,"M047","mutant","Parent_B",200,"red",38,83,5.3,20.6,1694
+"Site1_drought","Site1","Terminal drought",289,"B2",5,13,"M081","mutant","Parent_C",300,"black",39,82,14.2,25.7,2351
+"Site1_drought","Site1","Terminal drought",290,"B2",6,13,"M076","mutant","Parent_C",100,"black",38,76,,19.6,2165
+"Site1_drought","Site1","Terminal drought",291,"B2",7,13,"M055","mutant","Parent_C",100,"black",35,75,9.3,18.5,1533
+"Site1_drought","Site1","Terminal drought",292,"B2",1,14,"M046","mutant","Parent_B",100,"red",37,77,2.8,18.7,652
+"Site1_drought","Site1","Terminal drought",293,"B2",2,14,"M039","mutant","Parent_B",300,"black",40,80,15.2,22.5,804
+"Site1_drought","Site1","Terminal drought",294,"B2",3,14,"M059","mutant","Parent_C",200,"red mottled",29,65,7.2,24.5,781
+"Site1_drought","Site1","Terminal drought",295,"B2",4,14,"M078","mutant","Parent_C",300,"black",34,78,17.6,19.3,1901
+"Site1_drought","Site1","Terminal drought",296,"B2",5,14,"M066","mutant","Parent_C",300,"black",36,74,13.2,13.9,
+"Site1_drought","Site1","Terminal drought",297,"B2",6,14,"M036","mutant","Parent_B",300,"red",39,83,0,18.2,0
+"Site1_drought","Site1","Terminal drought",298,"B2",7,14,"M001","mutant","Parent_A",100,"cream",40,79,8.9,23.3,1540
+"Site1_drought","Site1","Terminal drought",299,"B2",1,15,"M015","mutant","Parent_A",300,"cream",36,73,1,23.6,148
+"Site1_drought","Site1","Terminal drought",300,"B2",2,15,"M025","mutant","Parent_A",100,"cream",39,80,7.6,19.4,271
+"Site1_drought","Site1","Terminal drought",301,"B2",3,15,"M042","mutant","Parent_B",300,"red",41,79,1,22.5,761
+"Site1_drought","Site1","Terminal drought",302,"B2",4,15,"M032","mutant","Parent_B",200,"red",,80,5.9,20.9,1062
+"Site1_drought","Site1","Terminal drought",303,"B2",5,15,"M050","mutant","Parent_B",200,"black",39,80,1.7,17.6,197
+"Site1_drought","Site1","Terminal drought",304,"B2",6,15,"M013","mutant","Parent_A",100,"cream",40,,,24.3,1681
+"Site1_drought","Site1","Terminal drought",305,"B2",7,15,"M064","mutant","Parent_C",100,"black",32,72,9.3,18.8,1426
+"Site1_drought","Site1","Terminal drought",306,"B2",1,16,"M022","mutant","Parent_A",100,"red mottled",35,75,6.8,22,80
+"Site1_drought","Site1","Terminal drought",307,"B2",2,16,"M063","mutant","Parent_C",300,"black",,75,0,17.8,0
+"Site1_drought","Site1","Terminal drought",308,"B2",3,16,"M071","mutant","Parent_C",200,"black",35,78,12.3,24.2,1330
+"Site1_drought","Site1","Terminal drought",309,"B2",4,16,"Parent_B","parent","Parent_B",0,"red",36,79,3.1,16.5,1230
+"Site1_drought","Site1","Terminal drought",310,"B2",5,16,"M020","mutant","Parent_A",200,"white",34,79,1,18.6,450
+"Site1_drought","Site1","Terminal drought",311,"B2",6,16,"M035","mutant","Parent_B",200,"red",42,79,20.7,20.1,1818
+"Site1_drought","Site1","Terminal drought",312,"B2",7,16,"M006","mutant","Parent_A",300,"cream",36,76,2,19.9,80
+"Site1_drought","Site1","Terminal drought",313,"B2",1,17,"M074","mutant","Parent_C",200,"black",35,,0,18.9,0
+"Site1_drought","Site1","Terminal drought",314,"B2",2,17,"M080","mutant","Parent_C",200,"black",30,73,20,16.8,941
+"Site1_drought","Site1","Terminal drought",315,"B2",3,17,"M031","mutant","Parent_B",100,"red",32,75,1,20.1,98
+"Site1_drought","Site1","Terminal drought",316,"B2",4,17,"M040","mutant","Parent_B",100,"red",38,85,1,20.3,1772
+"Site1_drought","Site1","Terminal drought",317,"B2",5,17,"M060","mutant","Parent_C",300,"black",35,80,15.2,16.4,2005
+"Site1_drought","Site1","Terminal drought",318,"B2",6,17,"M028","mutant","Parent_B",100,"red",40,81,8.6,21.3,1360
+"Site1_drought","Site1","Terminal drought",319,"B2",7,17,"M023","mutant","Parent_A",200,"cream",35,70,1,17.8,300
+"Site1_drought","Site1","Terminal drought",320,"B2",1,18,"M041","mutant","Parent_B",200,"red",38,76,4.2,22.1,80
+"Site1_drought","Site1","Terminal drought",321,"B2",2,18,"M048","mutant","Parent_B",300,"red",35,77,4.9,19.6,80
+"Site1_drought","Site1","Terminal drought",322,"B2",3,18,"M017","mutant","Parent_A",200,"cream",34,77,1,21.7,262
+"Site1_drought","Site1","Terminal drought",323,"B2",4,18,"M024","mutant","Parent_A",300,"cream",37,82,4.5,19.5,1410
+"Site1_drought","Site1","Terminal drought",324,"B2",5,18,"M075","mutant","Parent_C",300,"black",37,81,8.8,16.9,1599
+"Site1_drought","Site1","Terminal drought",325,"B2",6,18,"M070","mutant","Parent_C",100,"black",33,67,,7.9,1056
+"Site1_drought","Site1","Terminal drought",326,"B2",7,18,"M043","mutant","Parent_B",100,"red",37,79,9.7,16,
+"Site1_drought","Site1","Terminal drought",327,"B2",1,19,"M053","mutant","Parent_B",200,"red",37,73,5.1,20.8,357
+"Site1_drought","Site1","Terminal drought",328,"B2",2,19,"M034","mutant","Parent_B",100,"red",35,76,12.7,22.2,80
+"Site1_drought","Site1","Terminal drought",329,"B2",3,19,"M014","mutant","Parent_A",200,"cream",37,79,1,21.2,80
+"Site1_drought","Site1","Terminal drought",330,"B2",4,19,"M033","mutant","Parent_B",300,"white",,84,1.5,164,965
+"Site1_drought","Site1","Terminal drought",331,"B2",5,19,"M058","mutant","Parent_C",100,"black",35,76,9.2,17.4,2568
+"Site1_drought","Site1","Terminal drought",332,"B2",6,19,"M021","mutant","Parent_A",300,"cream",43,81,11.6,20.8,971
+"Site1_drought","Site1","Terminal drought",333,"B2",7,19,"M038","mutant","Parent_B",200,"red",38,87,13.6,10.9,1190
+"Site1_drought","Site1","Terminal drought",334,"B2",1,20,"M068","mutant","Parent_C",200,"black",35,77,9.8,21.7,80
+"Site1_drought","Site1","Terminal drought",335,"B2",2,20,"M056","mutant","Parent_C",200,"black",31,74,15.5,22,1129
+"Site1_drought","Site1","Terminal drought",336,"B2",3,20,"M065","mutant","Parent_C",200,"black",31,76,6.8,16.2,1806
+"Site1_drought","Site1","Terminal drought",337,"B2",4,20,"M003","mutant","Parent_A",300,"cream",37,80,4.2,23.6,1672
+"Site1_drought","Site1","Terminal drought",338,"B2",5,20,"M026","mutant","Parent_A",200,"cream",38,82,4.4,23.7,169
+"Site1_drought","Site1","Terminal drought",339,"B2",6,20,"M009","mutant","Parent_A",300,"cream",41,78,11.2,19.8,585
+"Site1_drought","Site1","Terminal drought",340,"B2",7,20,"M037","mutant","Parent_B",100,"red",36,75,8.8,18.3,1891
+"Site1_drought","Site1","Terminal drought",341,"B2",1,21,"M044","mutant","Parent_B",200,"red",36,75,1,22.1,80
+"Site1_drought","Site1","Terminal drought",342,"B2",2,21,"M072","mutant","Parent_C",300,"black",32,72,14.5,19,329
+"Site1_drought","Site1","Terminal drought",343,"B2",3,21,"M052","mutant","Parent_B",100,"red",36,74,2.6,17.5,535
+"Site1_drought","Site1","Terminal drought",344,"B2",4,21,"M016","mutant","Parent_A",100,"cream",34,78,8.2,20.9,379
+"Site1_drought","Site1","Terminal drought",345,"B2",5,21,"M067","mutant","Parent_C",100,"black",35,74,22,20.3,934
+"Site1_drought","Site1","Terminal drought",346,"B2",6,21,"M018","mutant","Parent_A",300,"cream",37,76,13.4,22,461
+"Site1_drought","Site1","Terminal drought",347,"B2",7,21,"Parent_A","parent","Parent_A",0,"cream",33,76,5.5,18.1,654
+"Site1_drought","Site1","Terminal drought",348,"B2",1,22,"M019","mutant","Parent_A",100,"cream",34,74,1,22.3,485
+"Site1_drought","Site1","Terminal drought",349,"B2",2,22,"M069","mutant","Parent_C",300,"cream",34,78,14.8,24.5,80
+"Site1_drought","Site1","Terminal drought",350,"B2",3,22,"M030","mutant","Parent_B",300,"red",44,88,6.7,12,80
+"Site1_drought","Site1","Terminal drought",351,"B2",4,22,"M002","mutant","Parent_A",200,"red mottled",38,84,7.6,23.2,957
+"Site1_drought","Site1","Terminal drought",352,"B2",5,22,"M010","mutant","Parent_A",100,"cream",,,,,
+"Site1_drought","Site1","Terminal drought",353,"B2",6,22,"M029","mutant","Parent_B",200,"red",41,83,15.3,18.8,1484
+"Site1_drought","Site1","Terminal drought",354,"B2",7,22,"M008","mutant","Parent_A",200,"cream",36,72,2.3,21.2,982
+"Site1_drought","Site1","Terminal drought",355,"B2",1,23,"M062","mutant","Parent_C",200,"black",37,78,11.6,16.3,926
+"Site1_drought","Site1","Terminal drought",356,"B2",2,23,"M012","mutant","Parent_A",300,"cream",35,72,1,26.3,208
+"Site1_drought","Site1","Terminal drought",357,"B2",3,23,"M027","mutant","Parent_A",300,"white",32,77,1,23.7,
+"Site1_drought","Site1","Terminal drought",358,"B2",4,23,"M007","mutant","Parent_A",100,"cream",35,75,11.2,18.6,80
+"Site1_drought","Site1","Terminal drought",359,"B2",5,23,"M079","mutant","Parent_C",100,"black",33,77,14.5,9.5,690
+"Site1_drought","Site1","Terminal drought",360,"B2",6,23,"M077","mutant","Parent_C",200,"black",39,75,18.5,18.1,1509
+"Site1_drought","Site1","Terminal drought",361,"B2",7,23,"M054","mutant","Parent_B",300,"red",35,78,1,15.3,1441
+"Site1_drought","Site1","Terminal drought",362,"B2",1,24,"M057","mutant","Parent_C",300,"black",34,72,17.8,19.2,1422
+"Site1_drought","Site1","Terminal drought",363,"B2",2,24,"M073","mutant","Parent_C",100,"black",32,74,11.9,21.1,1351
+"Site1_drought","Site1","Terminal drought",364,"B2",3,24,"M051","mutant","Parent_B",300,"white",34,71,1,14.4,80
+"Site1_drought","Site1","Terminal drought",365,"B2",4,24,"Parent_C","parent","Parent_C",0,"black",34,79,10.7,17.5,
+"Site1_drought","Site1","Terminal drought",366,"B2",5,24,"M005","mutant","Parent_A",200,"cream",31,74,1,15.6,80
+"Site1_drought","Site1","Terminal drought",367,"B2",6,24,"M061","mutant","Parent_C",100,"black",33,,15,14.8,2699
+"Site1_drought","Site1","Terminal drought",368,"B2",7,24,"M011","mutant","Parent_A",200,"cream",31,,2.6,16.4,861
+"Site1_drought","Site1","Terminal drought",369,"B3",1,25,"M039","mutant","Parent_B",300,"black",34,81,6,12.1,80
+"Site1_drought","Site1","Terminal drought",370,"B3",2,25,"M053","mutant","Parent_B",200,"red",38,81,5.5,26,846
+"Site1_drought","Site1","Terminal drought",371,"B3",3,25,"M051","mutant","Parent_B",300,"white",34,73,1,16.2,80
+"Site1_drought","Site1","Terminal drought",372,"B3",4,25,"M040","mutant","Parent_B",100,"red",38,85,1,17.2,1881
+"Site1_drought","Site1","Terminal drought",373,"B3",5,25,"M029","mutant","Parent_B",200,"red",,79,1,18.4,1268
+"Site1_drought","Site1","Terminal drought",374,"B3",6,25,"M013","mutant","Parent_A",100,"cream",36,80,3.8,18.2,2196
+"Site1_drought","Site1","Terminal drought",375,"B3",7,25,"M006","mutant","Parent_A",300,"cream",36,74,1,17.3,989
+"Site1_drought","Site1","Terminal drought",376,"B3",1,26,"M064","mutant","Parent_C",100,"black",31,73,4.1,17.5,682
+"Site1_drought","Site1","Terminal drought",377,"B3",2,26,"M073","mutant","Parent_C",100,"black",34,78,15.1,23.1,1794
+"Site1_drought","Site1","Terminal drought",378,"B3",3,26,"M035","mutant","Parent_B",200,"red",36,78,1,15.5,1125
+"Site1_drought","Site1","Terminal drought",379,"B3",4,26,"M024","mutant","Parent_A",300,"cream",38,80,1,20,650
+"Site1_drought","Site1","Terminal drought",380,"B3",5,26,"M047","mutant","Parent_B",200,"red",36,80,1,15.1,1048
+"Site1_drought","Site1","Terminal drought",381,"B3",6,26,"M063","mutant","Parent_C",300,"black",31,77,6.2,13.8,3360
+"Site1_drought","Site1","Terminal drought",382,"B3",7,26,"M038","mutant","Parent_B",200,"red",36,85,3.4,14.4,587
+"Site1_drought","Site1","Terminal drought",383,"B3",1,27,"M046","mutant","Parent_B",100,"red",32,76,0,16.3,0
+"Site1_drought","Site1","Terminal drought",384,"B3",2,27,"M037","mutant","Parent_B",100,"red",38,84,22.8,28.3,1947
+"Site1_drought","Site1","Terminal drought",385,"B3",3,27,"M043","mutant","Parent_B",100,"red",34,82,13.1,19.3,668
+"Site1_drought","Site1","Terminal drought",386,"B3",4,27,"M010","mutant","Parent_A",100,"cream",36,80,3.2,20.2,1808
+"Site1_drought","Site1","Terminal drought",387,"B3",5,27,"M020","mutant","Parent_A",200,"white",36,78,1.2,18.3,909
+"Site1_drought","Site1","Terminal drought",388,"B3",6,27,"M069","mutant","Parent_C",300,"cream",38,79,6.5,18.9,1937
+"Site1_drought","Site1","Terminal drought",389,"B3",7,27,"M077","mutant","Parent_C",200,"black",,70,7.1,19.1,2541
+"Site1_drought","Site1","Terminal drought",390,"B3",1,28,"M025","mutant","Parent_A",100,"cream",37,81,1,14.8,80
+"Site1_drought","Site1","Terminal drought",391,"B3",2,28,"M050","mutant","Parent_B",200,"black",38,83,10.1,22.2,918
+"Site1_drought","Site1","Terminal drought",392,"B3",3,28,"M032","mutant","Parent_B",200,"red",65,77,5.9,24.5,995
+"Site1_drought","Site1","Terminal drought",393,"B3",4,28,"M058","mutant","Parent_C",100,"black",35,81,12.3,25.3,2382
+"Site1_drought","Site1","Terminal drought",394,"B3",5,28,"M057","mutant","Parent_C",300,"black",34,78,1,19.5,2940
+"Site1_drought","Site1","Terminal drought",395,"B3",6,28,"Parent_B","parent","Parent_B",0,"red",38,79,5.5,18.9,1933
+"Site1_drought","Site1","Terminal drought",396,"B3",7,28,"M075","mutant","Parent_C",300,"black",35,76,8.5,19.5,2.23
+"Site1_drought","Site1","Terminal drought",397,"B3",1,29,"M002","mutant","Parent_A",200,"red mottled",36,79,,,925
+"Site1_drought","Site1","Terminal drought",398,"B3",2,29,"M081","mutant","Parent_C",300,"black",39,82,26.1,25,
+"Site1_drought","Site1","Terminal drought",399,"B3",3,29,"M008","mutant","Parent_A",200,"cream",33,70,2.2,27.3,843
+"Site1_drought","Site1","Terminal drought",400,"B3",4,29,"M016","mutant","Parent_A",100,"cream",37,82,12.7,24.5,1330
+"Site1_drought","Site1","Terminal drought",401,"B3",5,29,"M026","mutant","Parent_A",200,"cream",,85,9.3,,969
+"Site1_drought","Site1","Terminal drought",402,"B3",6,29,"M052","mutant","Parent_B",100,"red",40,78,10.4,22,2415
+"Site1_drought","Site1","Terminal drought",403,"B3",7,29,"M001","mutant","Parent_A",100,"cream",36,79,6.5,19.3,1377
+"Site1_drought","Site1","Terminal drought",404,"B3",1,30,"M079","mutant","Parent_C",100,"black",33,72,7.9,13.5,742
+"Site1_drought","Site1","Terminal drought",405,"B3",2,30,"M078","mutant","Parent_C",300,"black",37,74,19.8,21.1,1688
+"Site1_drought","Site1","Terminal drought",406,"B3",3,30,"M022","mutant","Parent_A",100,"red mottled",38,80,10.6,22.5,709
+"Site1_drought","Site1","Terminal drought",407,"B3",4,30,"M031","mutant","Parent_B",100,"red",37,81,13.4,24.3,1785
+"Site1_drought","Site1","Terminal drought",408,"B3",5,30,"M015","mutant","Parent_A",300,"cream",36,80,7.2,26.1,1158
+"Site1_drought","Site1","Terminal drought",409,"B3",6,30,"M034","mutant","Parent_B",100,"red",37,77,8.4,20.9,1575
+"Site1_drought","Site1","Terminal drought",410,"B3",7,30,"M005","mutant","Parent_A",200,"cream",34,80,5.4,20.6,1253
+"Site1_drought","Site1","Terminal drought",411,"B3",1,31,"M066","mutant","Parent_C",300,"black",35,72,10,10.1,437
+"Site1_drought","Site1","Terminal drought",412,"B3",2,31,"M044","mutant","Parent_B",200,"red",39,78,5.3,21.2,80
+"Site1_drought","Site1","Terminal drought",413,"B3",3,31,"M068","mutant","Parent_C",200,"black",36,75,11.4,19.2,1510
+"Site1_drought","Site1","Terminal drought",414,"B3",4,31,"Parent_C","parent","Parent_C",0,"black",37,79,11.7,19.1,2337
+"Site1_drought","Site1","Terminal drought",415,"B3",5,31,"M009","mutant","Parent_A",300,"cream",38,80,4.7,19.8,180
+"Site1_drought","Site1","Terminal drought",416,"B3",6,31,"M042","mutant","Parent_B",300,"red",44,86,5.6,24.7,1924
+"Site1_drought","Site1","Terminal drought",417,"B3",7,31,"M023","mutant","Parent_A",200,"cream",39,82,8.5,20.3,1324
+"Site1_drought","Site1","Terminal drought",418,"B3",1,32,"M071","mutant","Parent_C",200,"black",36,77,14.7,15.3,
+"Site1_drought","Site1","Terminal drought",419,"B3",2,32,"M076","mutant","Parent_C",100,"black",35,78,10.4,20.7,1551
+"Site1_drought","Site1","Terminal drought",420,"B3",3,32,"Parent_A","parent","Parent_A",0,"cream",36,76,1.6,19.5,649
+"Site1_drought","Site1","Terminal drought",421,"B3",4,32,"M067","mutant","Parent_C",100,"black",35,78,14.1,22.9,3552
+"Site1_drought","Site1","Terminal drought",422,"B3",5,32,"M028","mutant","Parent_B",100,"red",38,82,106,22.3,1282
+"Site1_drought","Site1","Terminal drought",423,"B3",6,32,"M012","mutant","Parent_A",300,"cream",37,75,0,24,0
+"Site1_drought","Site1","Terminal drought",424,"B3",7,32,"M036","mutant","Parent_B",300,"red",34,80,8,17.5,1198
+"Site1_drought","Site1","Terminal drought",425,"B3",1,33,"M018","mutant","Parent_A",300,"cream",37,74,1.5,18,1091
+"Site1_drought","Site1","Terminal drought",426,"B3",2,33,"M007","mutant","Parent_A",100,"cream",37,76,14.2,28.2,1278
+"Site1_drought","Site1","Terminal drought",427,"B3",3,33,"M080","mutant","Parent_C",200,"black",,76,16.1,18.2,2240
+"Site1_drought","Site1","Terminal drought",428,"B3",4,33,"M014","mutant","Parent_A",200,"cream",43,85,1,27.6,1121
+"Site1_drought","Site1","Terminal drought",429,"B3",5,33,"M059","mutant","Parent_C",200,"red mottled",28,67,6.6,23.8,1910
+"Site1_drought","Site1","Terminal drought",430,"B3",6,33,"M061","mutant","Parent_C",100,"black",35,78,13.3,21,4081
+"Site1_drought","Site1","Terminal drought",431,"B3",7,33,"M072","mutant","Parent_C",300,"black",34,73,17.7,15.1,1331
+"Site1_drought","Site1","Terminal drought",432,"B3",1,34,"M054","mutant","Parent_B",300,"red",36,79,1.3,18.2,1095
+"Site1_drought","Site1","Terminal drought",433,"B3",2,34,"M017","mutant","Parent_A",200,"cream",38,80,1.3,28.4,1434
+"Site1_drought","Site1","Terminal drought",434,"B3",3,34,"M060","mutant","Parent_C",300,"black",32,80,17.3,18.3,1973
+"Site1_drought","Site1","Terminal drought",435,"B3",4,34,"M048","mutant","Parent_B",300,"red",35,80,1,20.1,1674
+"Site1_drought","Site1","Terminal drought",436,"B3",5,34,"M062","mutant","Parent_C",200,"black",36,79,12.1,18.2,2354
+"Site1_drought","Site1","Terminal drought",437,"B3",6,34,"M011","mutant","Parent_A",200,"cream",36,75,8.1,21.7,1932
+"Site1_drought","Site1","Terminal drought",438,"B3",7,34,"M041","mutant","Parent_B",200,"red",35,77,0,20.4,0
+"Site1_drought","Site1","Terminal drought",439,"B3",1,35,"M003","mutant","Parent_A",300,"cream",34,71,1,20.4,1464
+"Site1_drought","Site1","Terminal drought",440,"B3",2,35,"M027","mutant","Parent_A",300,"white",37,77,6.3,31.2,1592
+"Site1_drought","Site1","Terminal drought",441,"B3",3,35,"M019","mutant","Parent_A",100,"cream",31,73,1,19.2,398
+"Site1_drought","Site1","Terminal drought",442,"B3",4,35,"M030","mutant","Parent_B",300,"red",48,94,12.2,12.9,1539
+"Site1_drought","Site1","Terminal drought",443,"B3",5,35,"M065","mutant","Parent_C",200,"black",37,78,18.5,16.7,2606
+"Site1_drought","Site1","Terminal drought",444,"B3",6,35,"M004","mutant","Parent_A",100,"cream",34,74,1,22.4,850
+"Site1_drought","Site1","Terminal drought",445,"B3",7,35,"M070","mutant","Parent_C",100,"black",27,65,22.4,6,1184
+"Site1_drought","Site1","Terminal drought",446,"B3",1,36,"M049","mutant","Parent_B",100,"red",39,78,1,17.7,1109
+"Site1_drought","Site1","Terminal drought",447,"B3",2,36,"M074","mutant","Parent_C",200,"black",36,77,17.4,21.4,1655
+"Site1_drought","Site1","Terminal drought",448,"B3",3,36,"M055","mutant","Parent_C",100,"black",32,71,6.5,17.3,1274
+"Site1_drought","Site1","Terminal drought",449,"B3",4,36,"M021","mutant","Parent_A",300,"cream",35,79,1,,80
+"Site1_drought","Site1","Terminal drought",450,"B3",5,36,"M045","mutant","Parent_B",300,"brown",37,76,1,19.4,210
+"Site1_drought","Site1","Terminal drought",451,"B3",6,36,"M033","mutant","Parent_B",300,"white",36,79,16.3,9.7,1400
+"Site1_drought","Site1","Terminal drought",452,"B3",7,36,"M056","mutant","Parent_C",200,"black",29,72,20.7,17,1495
+"Site2_rainfed","Site2","Rainfed",301,"B1",1,1,"Parent_C","parent","Parent_C",0,"black",40,91,10.3,,1595
+"Site2_rainfed","Site2","Rainfed",302,"B1",2,1,"M041","mutant","Parent_B",200,"red",38,88,,23.9,1974
+"Site2_rainfed","Site2","Rainfed",303,"B1",3,1,"Parent_B","parent","Parent_B",0,"red",40,89,6.6,20.9,1905
+"Site2_rainfed","Site2","Rainfed",304,"B1",4,1,"M001","mutant","Parent_A",100,"cream",41,93,12.1,22.2,1972
+"Site2_rainfed","Site2","Rainfed",305,"B1",5,1,"M077","mutant","Parent_C",200,"black",41,87,11.1,24.5,1736
+"Site2_rainfed","Site2","Rainfed",306,"B1",6,1,"M080","mutant","Parent_C",200,"black",39,85,19.2,18,2164
+"Site2_rainfed","Site2","Rainfed",307,"B1",7,1,"M078","mutant","Parent_C",300,"black",40,84,13.7,19.3,1384
+"Site2_rainfed","Site2","Rainfed",308,"B1",1,2,"M016","mutant","Parent_A",100,"cream",39,92,9.2,20.8,2223
+"Site2_rainfed","Site2","Rainfed",309,"B1",2,2,"M051","mutant","Parent_B",300,"white",39,86,8.1,18.6,1313
+"Site2_rainfed","Site2","Rainfed",310,"B1",3,2,"M061","mutant","Parent_C",100,"black",39,85,9.9,19.3,2139
+"Site2_rainfed","Site2","Rainfed",311,"B1",4,2,"M027","mutant","Parent_A",300,"white",42,93,10.3,20.8,1047
+"Site2_rainfed","Site2","Rainfed",312,"B1",5,2,"M031","mutant","Parent_B",100,"red",37,89,8.1,19.6,1731
+"Site2_rainfed","Site2","Rainfed",313,"B1",6,2,"M026","mutant","Parent_A",200,"cream",40,95,13.4,23.6,2465
+"Site2_rainfed","Site2","Rainfed",314,"B1",7,2,"M047","mutant","Parent_B",200,"red",38,85,9.9,23.4,1484
+"Site2_rainfed","Site2","Rainfed",315,"B1",1,3,"M052","mutant","Parent_B",100,"red",40,,5.9,20.9,1825
+"Site2_rainfed","Site2","Rainfed",316,"B1",2,3,"M074","mutant","Parent_C",200,"black",40,89,12.1,,2099
+"Site2_rainfed","Site2","Rainfed",317,"B1",3,3,"M017","mutant","Parent_A",200,"cream",42,90,4.7,23.6,1953
+"Site2_rainfed","Site2","Rainfed",318,"B1",4,3,"M075","mutant","Parent_C",300,"black",41,89,13.9,22.1,2086
+"Site2_rainfed","Site2","Rainfed",319,"B1",5,3,"M018","mutant","Parent_A",300,"cream",39,90,9.1,19.9,1810
+"Site2_rainfed","Site2","Rainfed",320,"B1",6,3,"M035","mutant","Parent_B",200,"red",39,89,16,20.9,1976
+"Site2_rainfed","Site2","Rainfed",321,"B1",7,3,"M005","mutant","Parent_A",200,"cream",39,88,14.5,17.9,1501
+"Site2_rainfed","Site2","Rainfed",322,"B1",1,4,"M049","mutant","Parent_B",100,"red",41,93,7.9,23.8,
+"Site2_rainfed","Site2","Rainfed",323,"B1",2,4,"M008","mutant","Parent_A",200,"cream",42,91,,26.8,2086
+"Site2_rainfed","Site2","Rainfed",324,"B1",3,4,"M010","mutant","Parent_A",100,"cream",40,90,13.2,22.9,1983
+"Site2_rainfed","Site2","Rainfed",325,"B1",4,4,"M007","mutant","Parent_A",100,"cream",40,91,13.7,252,2626
+"Site2_rainfed","Site2","Rainfed",326,"B1",5,4,"M009","mutant","Parent_A",300,"cream",43,87,6.4,26.7,1319
+"Site2_rainfed","Site2","Rainfed",327,"B1",6,4,"M079","mutant","Parent_C",100,"black",39,87,15.6,21.7,2731
+"Site2_rainfed","Site2","Rainfed",328,"B1",7,4,"M030","mutant","Parent_B",300,"red",36,99,14.3,20.8,2168
+"Site2_rainfed","Site2","Rainfed",329,"B1",1,5,"M065","mutant","Parent_C",200,"black",39,90,7.7,21.6,1833
+"Site2_rainfed","Site2","Rainfed",330,"B1",2,5,"M025","mutant","Parent_A",100,"cream",41,99,10.6,22.3,2074
+"Site2_rainfed","Site2","Rainfed",331,"B1",3,5,"M043","mutant","Parent_B",100,"red",40,90,11.3,22.2,2084
+"Site2_rainfed","Site2","Rainfed",332,"B1",4,5,"M063","mutant","Parent_C",300,"black",40,90,15.5,17.1,1986
+"Site2_rainfed","Site2","Rainfed",333,"B1",5,5,"M011","mutant","Parent_A",200,"cream",43,93,8.1,23.5,2430
+"Site2_rainfed","Site2","Rainfed",334,"B1",6,5,"M071","mutant","Parent_C",200,"black",41,91,17.4,25.6,2959
+"Site2_rainfed","Site2","Rainfed",335,"B1",7,5,"M042","mutant","Parent_B",300,"red",40,85,7.1,25.5,1830
+"Site2_rainfed","Site2","Rainfed",336,"B1",1,6,"M032","mutant","Parent_B",200,"red",40,93,6.7,25.8,1694
+"Site2_rainfed","Site2","Rainfed",337,"B1",2,6,"M004","mutant","Parent_A",100,"cream",42,90,11.7,21.6,2158
+"Site2_rainfed","Site2","Rainfed",338,"B1",3,6,"M020","mutant","Parent_A",200,"white",38,88,9,21.6,2264
+"Site2_rainfed","Site2","Rainfed",339,"B1",4,6,"M072","mutant","Parent_C",300,"black",39,84,14.9,17.8,1365
+"Site2_rainfed","Site2","Rainfed",340,"B1",5,6,"M045","mutant","Parent_B",300,"brown",34,92,6.9,27.5,2.119
+"Site2_rainfed","Site2","Rainfed",341,"B1",6,6,"M076","mutant","Parent_C",100,"black",39,88,16.1,23.9,3241
+"Site2_rainfed","Site2","Rainfed",342,"B1",7,6,"M073","mutant","Parent_C",100,"black",38,84,10.7,15,1446
+"Site2_rainfed","Site2","Rainfed",343,"B1",1,7,"M014","mutant","Parent_A",200,"cream",42,98,1.5,19.6,777
+"Site2_rainfed","Site2","Rainfed",344,"B1",2,7,"M057","mutant","Parent_C",300,"black",37,88,10.9,24.3,2215
+"Site2_rainfed","Site2","Rainfed",345,"B1",3,7,"M050","mutant","Parent_B",200,"black",37,87,5.8,25.4,1130
+"Site2_rainfed","Site2","Rainfed",346,"B1",4,7,"M044","mutant","Parent_B",200,"red",41,88,6.2,28.1,1362
+"Site2_rainfed","Site2","Rainfed",347,"B1",5,7,"M066","mutant","Parent_C",300,"black",40,88,152,18.2,1375
+"Site2_rainfed","Site2","Rainfed",348,"B1",6,7,"M029","mutant","Parent_B",200,"red",42,93,7.8,30.4,2219
+"Site2_rainfed","Site2","Rainfed",349,"B1",7,7,"M040","mutant","Parent_B",100,"red",38,86,15.1,21.2,2049
+"Site2_rainfed","Site2","Rainfed",350,"B1",1,8,"M019","mutant","Parent_A",100,"cream",40,91,9.8,21.2,1717
+"Site2_rainfed","Site2","Rainfed",351,"B1",2,8,"M015","mutant","Parent_A",300,"cream",42,96,7,29,1076
+"Site2_rainfed","Site2","Rainfed",352,"B1",3,8,"M056","mutant","Parent_C",200,"black",39,88,6.7,20.6,1458
+"Site2_rainfed","Site2","Rainfed",353,"B1",4,8,"M070","mutant","Parent_C",100,"black",39,85,11.4,22.5,1937
+"Site2_rainfed","Site2","Rainfed",354,"B1",5,8,"M054","mutant","Parent_B",300,"red",40,90,9.4,26.9,1793
+"Site2_rainfed","Site2","Rainfed",355,"B1",6,8,"M055","mutant","Parent_C",100,"black",39,89,17.2,18.4,2056
+"Site2_rainfed","Site2","Rainfed",356,"B1",7,8,"M003","mutant","Parent_A",300,"cream",38,86,7.6,21.2,2079
+"Site2_rainfed","Site2","Rainfed",357,"B1",1,9,"M006","mutant","Parent_A",300,"cream",41,91,5.2,15.9,714
+"Site2_rainfed","Site2","Rainfed",358,"B1",2,9,"M046","mutant","Parent_B",100,"red",39,90,11.9,20.7,1744
+"Site2_rainfed","Site2","Rainfed",359,"B1",3,9,"M038","mutant","Parent_B",200,"red",40,95,6.2,20.8,1018
+"Site2_rainfed","Site2","Rainfed",360,"B1",4,9,"M034","mutant","Parent_B",100,"red",40,91,10.8,25.8,1750
+"Site2_rainfed","Site2","Rainfed",361,"B1",5,9,"M069","mutant","Parent_C",300,"cream",44,92,12.6,19.7,1933
+"Site2_rainfed","Site2","Rainfed",362,"B1",6,9,"M024","mutant","Parent_A",300,"cream",41,91,16.6,15.7,2040
+"Site2_rainfed","Site2","Rainfed",363,"B1",7,9,"M013","mutant","Parent_A",100,"cream",41,90,,21.3,1505
+"Site2_rainfed","Site2","Rainfed",364,"B1",1,10,"M068","mutant","Parent_C",200,"black",41,91,8.6,16.9,1370
+"Site2_rainfed","Site2","Rainfed",365,"B1",2,10,"M067","mutant","Parent_C",100,"black",41,89,10.4,24.7,1884
+"Site2_rainfed","Site2","Rainfed",366,"B1",3,10,"M037","mutant","Parent_B",100,"red",38,94,10.6,22.1,1520
+"Site2_rainfed","Site2","Rainfed",367,"B1",4,10,"M048","mutant","Parent_B",300,"red",39,89,11.7,36.3,2071
+"Site2_rainfed","Site2","Rainfed",368,"B1",5,10,"M039","mutant","Parent_B",300,"black",37,91,11.6,17.3,1571
+"Site2_rainfed","Site2","Rainfed",369,"B1",6,10,"M002","mutant","Parent_A",200,"red mottled",43,96,11.8,25,1633
+"Site2_rainfed","Site2","Rainfed",370,"B1",7,10,"M033","mutant","Parent_B",300,"white",39,90,8.4,19.8,1519
+"Site2_rainfed","Site2","Rainfed",371,"B1",1,11,"M064","mutant","Parent_C",100,"black",40,89,12.2,,1.614
+"Site2_rainfed","Site2","Rainfed",372,"B1",2,11,"M081","mutant","Parent_C",300,"black",41,92,11.6,27,2218
+"Site2_rainfed","Site2","Rainfed",373,"B1",3,11,"M023","mutant","Parent_A",200,"cream",42,90,8,22.5,1793
+"Site2_rainfed","Site2","Rainfed",374,"B1",4,11,"M036","mutant","Parent_B",300,"red",40,98,13.4,18.8,1341
+"Site2_rainfed","Site2","Rainfed",375,"B1",5,11,"M021","mutant","Parent_A",300,"cream",42,95,7.4,18.6,1400
+"Site2_rainfed","Site2","Rainfed",376,"B1",6,11,"M059","mutant","Parent_C",200,"red mottled",39,85,10.9,20.9,2238
+"Site2_rainfed","Site2","Rainfed",377,"B1",7,11,"Parent_A","parent","Parent_A",0,"cream",41,89,11.2,21.1,1607
+"Site2_rainfed","Site2","Rainfed",378,"B1",1,12,"M053","mutant","Parent_B",200,"red",40,90,6.7,24,1043
+"Site2_rainfed","Site2","Rainfed",379,"B1",2,12,"M022","mutant","Parent_A",100,"red mottled",43,89,6,25,1635
+"Site2_rainfed","Site2","Rainfed",380,"B1",3,12,"M058","mutant","Parent_C",100,"black",40,90,13.1,23.6,1931
+"Site2_rainfed","Site2","Rainfed",381,"B1",4,12,"M028","mutant","Parent_B",100,"red",40,93,12.9,29,1583
+"Site2_rainfed","Site2","Rainfed",382,"B1",5,12,"M060","mutant","Parent_C",300,"black",41,99,13.6,20.9,2651
+"Site2_rainfed","Site2","Rainfed",383,"B1",6,12,"M062","mutant","Parent_C",200,"black",45,94,11.5,26,1926
+"Site2_rainfed","Site2","Rainfed",384,"B1",7,12,"M012","mutant","Parent_A",300,"cream",40,91,12.7,18.6,1096
+"Site2_rainfed","Site2","Rainfed",385,"B2",1,13,"M038","mutant","Parent_B",200,"red",39,,9,24.5,1113
+"Site2_rainfed","Site2","Rainfed",386,"B2",2,13,"M028","mutant","Parent_B",100,"red",,85,7.2,26.6,1852
+"Site2_rainfed","Site2","Rainfed",387,"B2",3,13,"M040","mutant","Parent_B",100,"red",37,88,13,24.2,1820
+"Site2_rainfed","Site2","Rainfed",388,"B2",4,13,"M050","mutant","Parent_B",200,"black",36,91,9.2,27.7,1627
+"Site2_rainfed","Site2","Rainfed",389,"B2",5,13,"M070","mutant","Parent_C",100,"black",37,83,11.6,17.5,1611
+"Site2_rainfed","Site2","Rainfed",390,"B2",6,13,"M074","mutant","Parent_C",200,"black",41,87,13.9,24.9,2595
+"Site2_rainfed","Site2","Rainfed",391,"B2",7,13,"M026","mutant","Parent_A",200,"cream",39,92,10.1,24.2,1680
+"Site2_rainfed","Site2","Rainfed",392,"B2",1,14,"M007","mutant","Parent_A",100,"cream",39,88,10.7,22.5,2292
+"Site2_rainfed","Site2","Rainfed",393,"B2",2,14,"M003","mutant","Parent_A",300,"cream",38,90,7.3,27.3,1838
+"Site2_rainfed","Site2","Rainfed",394,"B2",3,14,"M039","mutant","Parent_B",300,"black",37,94,13,,1838
+"Site2_rainfed","Site2","Rainfed",395,"B2",4,14,"M008","mutant","Parent_A",200,"cream",40,93,,27.5,1684
+"Site2_rainfed","Site2","Rainfed",396,"B2",5,14,"M022","mutant","Parent_A",100,"red mottled",39,90,6.9,22.7,1253
+"Site2_rainfed","Site2","Rainfed",397,"B2",6,14,"M051","mutant","Parent_B",300,"white",41,86,14,21.8,
+"Site2_rainfed","Site2","Rainfed",398,"B2",7,14,"M055","mutant","Parent_C",100,"black",39,90,11.5,19.2,1515
+"Site2_rainfed","Site2","Rainfed",399,"B2",1,15,"M053","mutant","Parent_B",200,"red",,,,,
+"Site2_rainfed","Site2","Rainfed",400,"B2",2,15,"M041","mutant","Parent_B",200,"red",38,91,10.2,28,2447
+"Site2_rainfed","Site2","Rainfed",401,"B2",3,15,"M033","mutant","Parent_B",300,"white",39,95,12.8,18.9,1890
+"Site2_rainfed","Site2","Rainfed",402,"B2",4,15,"M018","mutant","Parent_A",300,"cream",40,95,12.3,21,1586
+"Site2_rainfed","Site2","Rainfed",403,"B2",5,15,"M054","mutant","Parent_B",300,"red",42,92,12.5,25.9,1208
+"Site2_rainfed","Site2","Rainfed",404,"B2",6,15,"M058","mutant","Parent_C",100,"black",40,87,15.6,23.8,2045
+"Site2_rainfed","Site2","Rainfed",405,"B2",7,15,"M077","mutant","Parent_C",200,"black",42,87,8.9,21,1197
+"Site2_rainfed","Site2","Rainfed",406,"B2",1,16,"M071","mutant","Parent_C",200,"black",41,94,15.7,19.9,2200
+"Site2_rainfed","Site2","Rainfed",407,"B2",2,16,"M017","mutant","Parent_A",200,"cream",41,94,6.6,24.4,1285
+"Site2_rainfed","Site2","Rainfed",408,"B2",3,16,"M020","mutant","Parent_A",200,"white",38,91,10,20.5,
+"Site2_rainfed","Site2","Rainfed",409,"B2",4,16,"M061","mutant","Parent_C",100,"black",39,87,13.1,22,1807
+"Site2_rainfed","Site2","Rainfed",410,"B2",5,16,"M067","mutant","Parent_C",100,"black",42,89,14,21.7,2004
+"Site2_rainfed","Site2","Rainfed",411,"B2",6,16,"M073","mutant","Parent_C",100,"black",42,90,18.3,22.4,1994
+"Site2_rainfed","Site2","Rainfed",412,"B2",7,16,"M013","mutant","Parent_A",100,"cream",40,89,7.3,21.2,2058
+"Site2_rainfed","Site2","Rainfed",413,"B2",1,17,"M056","mutant","Parent_C",200,"black",39,90,15.9,20.2,1486
+"Site2_rainfed","Site2","Rainfed",414,"B2",2,17,"M029","mutant","Parent_B",200,"red",43,93,8,27.1,1312
+"Site2_rainfed","Site2","Rainfed",415,"B2",3,17,"M036","mutant","Parent_B",300,"red",41,96,11.2,158,1510
+"Site2_rainfed","Site2","Rainfed",416,"B2",4,17,"M069","mutant","Parent_C",300,"cream",43,91,15.7,15.9,1456
+"Site2_rainfed","Site2","Rainfed",417,"B2",5,17,"M079","mutant","Parent_C",100,"black",39,88,12,19.1,1778
+"Site2_rainfed","Site2","Rainfed",418,"B2",6,17,"M076","mutant","Parent_C",100,"black",40,90,17.6,23.4,2895
+"Site2_rainfed","Site2","Rainfed",419,"B2",7,17,"M047","mutant","Parent_B",200,"red",38,88,11.6,21.8,1350
+"Site2_rainfed","Site2","Rainfed",420,"B2",1,18,"M048","mutant","Parent_B",300,"red",39,88,9,28.2,894
+"Site2_rainfed","Site2","Rainfed",421,"B2",2,18,"M023","mutant","Parent_A",200,"cream",41,90,7.8,22.3,1178
+"Site2_rainfed","Site2","Rainfed",422,"B2",3,18,"M006","mutant","Parent_A",300,"cream",41,95,12.3,15.3,623
+"Site2_rainfed","Site2","Rainfed",423,"B2",4,18,"M011","mutant","Parent_A",200,"cream",45,95,15.7,27.1,1716
+"Site2_rainfed","Site2","Rainfed",424,"B2",5,18,"Parent_B","parent","Parent_B",0,"red",39,90,11,23.4,1375
+"Site2_rainfed","Site2","Rainfed",425,"B2",6,18,"M024","mutant","Parent_A",300,"cream",42,,12.9,13.9,
+"Site2_rainfed","Site2","Rainfed",426,"B2",7,18,"M080","mutant","Parent_C",200,"black",41,88,16.9,19.2,
+"Site2_rainfed","Site2","Rainfed",427,"B2",1,19,"M044","mutant","Parent_B",200,"red",41,88,9.6,24.1,386
+"Site2_rainfed","Site2","Rainfed",428,"B2",2,19,"M078","mutant","Parent_C",300,"black",39,87,12.3,18,903
+"Site2_rainfed","Site2","Rainfed",429,"B2",3,19,"Parent_C","parent","Parent_C",0,"black",41,90,10.5,,1490
+"Site2_rainfed","Site2","Rainfed",430,"B2",4,19,"M075","mutant","Parent_C",300,"black",40,89,13.6,20.4,1861
+"Site2_rainfed","Site2","Rainfed",431,"B2",5,19,"M002","mutant","Parent_A",200,"red mottled",42,97,11.2,20.6,1560
+"Site2_rainfed","Site2","Rainfed",432,"B2",6,19,"Parent_A","parent","Parent_A",0,"cream",41,90,11.9,22.7,1897
+"Site2_rainfed","Site2","Rainfed",433,"B2",7,19,"M031","mutant","Parent_B",100,"red",38,89,9.8,18.3,1792
+"Site2_rainfed","Site2","Rainfed",434,"B2",1,20,"M060","mutant","Parent_C",300,"black",40,95,14.1,16.6,1684
+"Site2_rainfed","Site2","Rainfed",435,"B2",2,20,"M034","mutant","Parent_B",100,"red",,90,8.7,22.4,1121
+"Site2_rainfed","Site2","Rainfed",436,"B2",3,20,"M059","mutant","Parent_C",200,"red mottled",38,86,13.8,20,1501
+"Site2_rainfed","Site2","Rainfed",437,"B2",4,20,"M057","mutant","Parent_C",300,"black",38,87,12.4,23.9,2300
+"Site2_rainfed","Site2","Rainfed",438,"B2",5,20,"M037","mutant","Parent_B",100,"red",39,91,12.9,18.5,1418
+"Site2_rainfed","Site2","Rainfed",439,"B2",6,20,"M025","mutant","Parent_A",100,"cream",41,95,12.4,23.5,1078
+"Site2_rainfed","Site2","Rainfed",440,"B2",7,20,"M046","mutant","Parent_B",100,"red",40,120,10.1,20,1356
+"Site2_rainfed","Site2","Rainfed",441,"B2",1,21,"M015","mutant","Parent_A",300,"cream",41,95,4.3,20.3,532
+"Site2_rainfed","Site2","Rainfed",442,"B2",2,21,"M045","mutant","Parent_B",300,"brown",35,95,9.4,23.9,1968
+"Site2_rainfed","Site2","Rainfed",443,"B2",3,21,"M032","mutant","Parent_B",200,"red",39,89,12.3,22.9,1903
+"Site2_rainfed","Site2","Rainfed",444,"B2",4,21,"M068","mutant","Parent_C",200,"black",,,,,
+"Site2_rainfed","Site2","Rainfed",445,"B2",5,21,"M042","mutant","Parent_B",300,"red",41,88,6,23.1,1494
+"Site2_rainfed","Site2","Rainfed",446,"B2",6,21,"M016","mutant","Parent_A",100,"cream",41,92,11.2,23.2,1765
+"Site2_rainfed","Site2","Rainfed",447,"B2",7,21,"M081","mutant","Parent_C",300,"black",41,91,,20.2,1893
+"Site2_rainfed","Site2","Rainfed",448,"B2",1,22,"M010","mutant","Parent_A",100,"cream",37,89,6.4,19.4,1230
+"Site2_rainfed","Site2","Rainfed",449,"B2",2,22,"M009","mutant","Parent_A",300,"cream",42,92,6,25.9,1080
+"Site2_rainfed","Site2","Rainfed",450,"B2",3,22,"M005","mutant","Parent_A",200,"cream",41,90,14,16.5,1725
+"Site2_rainfed","Site2","Rainfed",451,"B2",4,22,"M072","mutant","Parent_C",300,"black",41,85,13.2,17.2,1733
+"Site2_rainfed","Site2","Rainfed",452,"B2",5,22,"M004","mutant","Parent_A",100,"cream",40,87,8.2,19.8,1760
+"Site2_rainfed","Site2","Rainfed",453,"B2",6,22,"M035","mutant","Parent_B",200,"red",39,,14.8,15,1997
+"Site2_rainfed","Site2","Rainfed",454,"B2",7,22,"M043","mutant","Parent_B",100,"red",39,85,9.8,20.6,1320
+"Site2_rainfed","Site2","Rainfed",455,"B2",1,23,"M052","mutant","Parent_B",100,"red",39,88,5,20.1,1389
+"Site2_rainfed","Site2","Rainfed",456,"B2",2,23,"M066","mutant","Parent_C",300,"black",42,92,12,16.1,1731
+"Site2_rainfed","Site2","Rainfed",457,"B2",3,23,"M027","mutant","Parent_A",300,"white",39,91,1.8,16.5,0.798
+"Site2_rainfed","Site2","Rainfed",458,"B2",4,23,"M014","mutant","Parent_A",200,"cream",43,97,6,21.3,1003
+"Site2_rainfed","Site2","Rainfed",459,"B2",5,23,"M064","mutant","Parent_C",100,"black",,87,10.7,14.8,2053
+"Site2_rainfed","Site2","Rainfed",460,"B2",6,23,"M019","mutant","Parent_A",100,"cream",72,88,11.1,20.4,1908
+"Site2_rainfed","Site2","Rainfed",461,"B2",7,23,"M049","mutant","Parent_B",100,"red",42,92,9.6,22.9,2305
+"Site2_rainfed","Site2","Rainfed",462,"B2",1,24,"M012","mutant","Parent_A",300,"cream",41,93,8.9,20.2,1094
+"Site2_rainfed","Site2","Rainfed",463,"B2",2,24,"M062","mutant","Parent_C",200,"black",42,94,8.6,20.5,1609
+"Site2_rainfed","Site2","Rainfed",464,"B2",3,24,"M021","mutant","Parent_A",300,"cream",42,,4,17.4,1239
+"Site2_rainfed","Site2","Rainfed",465,"B2",4,24,"M001","mutant","Parent_A",100,"cream",41,94,9.8,22.4,1714
+"Site2_rainfed","Site2","Rainfed",466,"B2",5,24,"M030","mutant","Parent_B",300,"red",38,105,17.4,19,1964
+"Site2_rainfed","Site2","Rainfed",467,"B2",6,24,"M065","mutant","Parent_C",200,"black",40,87,12.6,21.4,1926
+"Site2_rainfed","Site2","Rainfed",468,"B2",7,24,"M063","mutant","Parent_C",300,"black",40,89,12.4,14.3,1647
+"Site2_rainfed","Site2","Rainfed",469,"B3",1,25,"M003","mutant","Parent_A",300,"cream",39,88,,26.5,974
+"Site2_rainfed","Site2","Rainfed",470,"B3",2,25,"M065","mutant","Parent_C",200,"black",38,88,7.7,22.4,1001
+"Site2_rainfed","Site2","Rainfed",471,"B3",3,25,"M033","mutant","Parent_B",300,"white",40,93,6.1,19.7,1322
+"Site2_rainfed","Site2","Rainfed",472,"B3",4,25,"M061","mutant","Parent_C",100,"black",40,88,11.7,20.5,1647
+"Site2_rainfed","Site2","Rainfed",473,"B3",5,25,"M053","mutant","Parent_B",200,"red",,,,,
+"Site2_rainfed","Site2","Rainfed",474,"B3",6,25,"Parent_B","parent","Parent_B",0,"red",41,91,10.8,23,1790
+"Site2_rainfed","Site2","Rainfed",475,"B3",7,25,"M004","mutant","Parent_A",100,"cream",40,89,7.1,21,1424
+"Site2_rainfed","Site2","Rainfed",476,"B3",1,26,"M072","mutant","Parent_C",300,"black",41,85,7.6,17.2,826
+"Site2_rainfed","Site2","Rainfed",477,"B3",2,26,"M070","mutant","Parent_C",100,"black",38,86,5.8,18.3,1044
+"Site2_rainfed","Site2","Rainfed",478,"B3",3,26,"M015","mutant","Parent_A",300,"cream",43,96,7.9,23.2,1290
+"Site2_rainfed","Site2","Rainfed",479,"B3",4,26,"M066","mutant","Parent_C",300,"black",45,93,13.9,21.3,1760
+"Site2_rainfed","Site2","Rainfed",480,"B3",5,26,"M079","mutant","Parent_C",100,"black",41,87,12.8,19.8,1810
+"Site2_rainfed","Site2","Rainfed",481,"B3",6,26,"M050","mutant","Parent_B",200,"black",38,86,10.8,23.3,1243
+"Site2_rainfed","Site2","Rainfed",482,"B3",7,26,"M007","mutant","Parent_A",100,"cream",40,87,10,23.1,1953
+"Site2_rainfed","Site2","Rainfed",483,"B3",1,27,"M046","mutant","Parent_B",100,"red",38,118,4.6,16.4,843
+"Site2_rainfed","Site2","Rainfed",484,"B3",2,27,"M042","mutant","Parent_B",300,"red",,,,,
+"Site2_rainfed","Site2","Rainfed",485,"B3",3,27,"M025","mutant","Parent_A",100,"cream",42,98,10.3,19.3,1376
+"Site2_rainfed","Site2","Rainfed",486,"B3",4,27,"M017","mutant","Parent_A",200,"cream",,93,3.1,28,1237
+"Site2_rainfed","Site2","Rainfed",487,"B3",5,27,"M009","mutant","Parent_A",300,"cream",43,90,2,22.7,580
+"Site2_rainfed","Site2","Rainfed",488,"B3",6,27,"M073","mutant","Parent_C",100,"black",42,89,9.7,16.8,
+"Site2_rainfed","Site2","Rainfed",489,"B3",7,27,"M055","mutant","Parent_C",100,"black",39,91,12.3,16.5,
+"Site2_rainfed","Site2","Rainfed",490,"B3",1,28,"M078","mutant","Parent_C",300,"black",39,87,7.5,19.4,982
+"Site2_rainfed","Site2","Rainfed",491,"B3",2,28,"M013","mutant","Parent_A",100,"cream",,,,,
+"Site2_rainfed","Site2","Rainfed",492,"B3",3,28,"M081","mutant","Parent_C",300,"black",42,93,12.2,24,2183
+"Site2_rainfed","Site2","Rainfed",493,"B3",4,28,"M041","mutant","Parent_B",200,"red",41,91,10.3,25.8,1654
+"Site2_rainfed","Site2","Rainfed",494,"B3",5,28,"M023","mutant","Parent_A",200,"cream",42,92,8.2,22.9,1559
+"Site2_rainfed","Site2","Rainfed",495,"B3",6,28,"M010","mutant","Parent_A",100,"cream",41,88,10.5,22.1,1816
+"Site2_rainfed","Site2","Rainfed",496,"B3",7,28,"M075","mutant","Parent_C",300,"black",40,88,12.9,20,2087
+"Site2_rainfed","Site2","Rainfed",497,"B3",1,29,"M034","mutant","Parent_B",100,"red",40,92,3.4,24.6,1030
+"Site2_rainfed","Site2","Rainfed",498,"B3",2,29,"M057","mutant","Parent_C",300,"black",38,89,8.5,23.9,1368
+"Site2_rainfed","Site2","Rainfed",499,"B3",3,29,"M080","mutant","Parent_C",200,"black",39,87,12.7,18.5,1765
+"Site2_rainfed","Site2","Rainfed",500,"B3",4,29,"M001","mutant","Parent_A",100,"cream",44,95,13.7,24.3,1839
+"Site2_rainfed","Site2","Rainfed",501,"B3",5,29,"Parent_C","parent","Parent_C",0,"black",41,88,13.4,20,1945
+"Site2_rainfed","Site2","Rainfed",502,"B3",6,29,"M043","mutant","Parent_B",100,"red",40,85,8.6,19.3,1618
+"Site2_rainfed","Site2","Rainfed",503,"B3",7,29,"M019","mutant","Parent_A",100,"cream",40,90,11,21.9,1859
+"Site2_rainfed","Site2","Rainfed",504,"B3",1,30,"M037","mutant","Parent_B",100,"red",41,93,7,24.6,922
+"Site2_rainfed","Site2","Rainfed",505,"B3",2,30,"M012","mutant","Parent_A",300,"cream",41,92,7.6,17.6,684
+"Site2_rainfed","Site2","Rainfed",506,"B3",3,30,"M045","mutant","Parent_B",300,"brown",37,95,9.1,21.9,1529
+"Site2_rainfed","Site2","Rainfed",507,"B3",4,30,"M058","mutant","Parent_C",100,"black",40,91,14.7,23.3,2052
+"Site2_rainfed","Site2","Rainfed",508,"B3",5,30,"M032","mutant","Parent_B",200,"red",40,88,11.6,27.9,1694
+"Site2_rainfed","Site2","Rainfed",509,"B3",6,30,"M006","mutant","Parent_A",300,"cream",41,91,6.1,19.5,1207
+"Site2_rainfed","Site2","Rainfed",510,"B3",7,30,"M052","mutant","Parent_B",100,"red",40,89,,20.8,1500
+"Site2_rainfed","Site2","Rainfed",511,"B3",1,31,"M067","mutant","Parent_C",100,"black",40,90,11.5,21.7,2292
+"Site2_rainfed","Site2","Rainfed",512,"B3",2,31,"M077","mutant","Parent_C",200,"black",43,94,9,23,1971
+"Site2_rainfed","Site2","Rainfed",513,"B3",3,31,"M040","mutant","Parent_B",100,"red",38,89,10.2,20,1921
+"Site2_rainfed","Site2","Rainfed",514,"B3",4,31,"M068","mutant","Parent_C",200,"black",43,95,12.3,23,1738
+"Site2_rainfed","Site2","Rainfed",515,"B3",5,31,"M044","mutant","Parent_B",200,"red",40,86,6.3,30.4,1328
+"Site2_rainfed","Site2","Rainfed",516,"B3",6,31,"M020","mutant","Parent_A",200,"white",40,90,10.4,22,1603
+"Site2_rainfed","Site2","Rainfed",517,"B3",7,31,"M056","mutant","Parent_C",200,"black",40,87,8.4,22.5,1645
+"Site2_rainfed","Site2","Rainfed",518,"B3",1,32,"M069","mutant","Parent_C",300,"cream",43,90,11.2,17.6,1519
+"Site2_rainfed","Site2","Rainfed",519,"B3",2,32,"M060","mutant","Parent_C",300,"black",39,96,11.5,16.6,2216
+"Site2_rainfed","Site2","Rainfed",520,"B3",3,32,"M049","mutant","Parent_B",100,"red",40,93,9.2,23.4,1276
+"Site2_rainfed","Site2","Rainfed",521,"B3",4,32,"M011","mutant","Parent_A",200,"cream",44,98,9.2,25.3,1753
+"Site2_rainfed","Site2","Rainfed",522,"B3",5,32,"M051","mutant","Parent_B",300,"white",,,,,
+"Site2_rainfed","Site2","Rainfed",523,"B3",6,32,"M035","mutant","Parent_B",200,"red",40,88,14,21.3,1610
+"Site2_rainfed","Site2","Rainfed",524,"B3",7,32,"M074","mutant","Parent_C",200,"black",40,86,12.3,19,1962
+"Site2_rainfed","Site2","Rainfed",525,"B3",1,33,"M002","mutant","Parent_A",200,"red mottled",42,97,9.6,22.8,1434
+"Site2_rainfed","Site2","Rainfed",526,"B3",2,33,"M031","mutant","Parent_B",100,"red",40,91,12.8,22.8,1630
+"Site2_rainfed","Site2","Rainfed",527,"B3",3,33,"M028","mutant","Parent_B",100,"red",,,,,
+"Site2_rainfed","Site2","Rainfed",528,"B3",4,33,"M016","mutant","Parent_A",100,"cream",40,94,12.5,19.7,1782
+"Site2_rainfed","Site2","Rainfed",529,"B3",5,33,"M048","mutant","Parent_B",300,"red",39,84,5.3,27,2012
+"Site2_rainfed","Site2","Rainfed",530,"B3",6,33,"M039","mutant","Parent_B",300,"black",38,,13.6,22.5,1504
+"Site2_rainfed","Site2","Rainfed",531,"B3",7,33,"M014","mutant","Parent_A",200,"cream",43,94,6.9,21.1,974
+"Site2_rainfed","Site2","Rainfed",532,"B3",1,34,"M018","mutant","Parent_A",300,"cream",39,93,6.3,21.7,1111
+"Site2_rainfed","Site2","Rainfed",533,"B3",2,34,"M047","mutant","Parent_B",200,"red",39,93,12.4,26.9,1572
+"Site2_rainfed","Site2","Rainfed",534,"B3",3,34,"M026","mutant","Parent_A",200,"cream",38,95,12.3,20.8,1442
+"Site2_rainfed","Site2","Rainfed",535,"B3",4,34,"M059","mutant","Parent_C",200,"red mottled",39,91,18.3,18.9,2236
+"Site2_rainfed","Site2","Rainfed",536,"B3",5,34,"M022","mutant","Parent_A",100,"red mottled",42,90,5.7,21,1450
+"Site2_rainfed","Site2","Rainfed",537,"B3",6,34,"M038","mutant","Parent_B",200,"red",40,92,12.9,22.7,1256
+"Site2_rainfed","Site2","Rainfed",538,"B3",7,34,"M036","mutant","Parent_B",300,"red",41,94,13,16.8,1539
+"Site2_rainfed","Site2","Rainfed",539,"B3",1,35,"M063","mutant","Parent_C",300,"black",39,88,10.6,,1576
+"Site2_rainfed","Site2","Rainfed",540,"B3",2,35,"M071","mutant","Parent_C",200,"black",39,93,13.9,25.6,1724
+"Site2_rainfed","Site2","Rainfed",541,"B3",3,35,"M054","mutant","Parent_B",300,"red",39,89,7.1,23.7,
+"Site2_rainfed","Site2","Rainfed",542,"B3",4,35,"M027","mutant","Parent_A",300,"white",40,90,6.8,22.1,1010
+"Site2_rainfed","Site2","Rainfed",543,"B3",5,35,"M021","mutant","Parent_A",300,"cream",43,90,3.8,20.3,1601
+"Site2_rainfed","Site2","Rainfed",544,"B3",6,35,"M005","mutant","Parent_A",200,"cream",42,90,12.6,21.9,2247
+"Site2_rainfed","Site2","Rainfed",545,"B3",7,35,"M029","mutant","Parent_B",200,"red",44,94,,28.8,2187
+"Site2_rainfed","Site2","Rainfed",546,"B3",1,36,"M008","mutant","Parent_A",200,"cream",41,90,6.7,27.1,2004
+"Site2_rainfed","Site2","Rainfed",547,"B3",2,36,"M062","mutant","Parent_C",200,"black",43,95,9.7,23.2,1851
+"Site2_rainfed","Site2","Rainfed",548,"B3",3,36,"M030","mutant","Parent_B",300,"red",36,102,12.9,24.8,2027
+"Site2_rainfed","Site2","Rainfed",549,"B3",4,36,"M076","mutant","Parent_C",100,"black",38,86,12.7,21.5,2249
+"Site2_rainfed","Site2","Rainfed",550,"B3",5,36,"M064","mutant","Parent_C",100,"black",41,85,9.4,,1649
+"Site2_rainfed","Site2","Rainfed",551,"B3",6,36,"M024","mutant","Parent_A",300,"cream",42,92,12.3,15.4,1569
+"Site2_rainfed","Site2","Rainfed",552,"B3",7,36,"Parent_A","parent","Parent_A",0,"cream",40,,7.6,18.9,1616

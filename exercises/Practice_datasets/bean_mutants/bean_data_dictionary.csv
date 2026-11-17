@@ -1,0 +1,18 @@
+variable,description,unit_or_values
+environment,Name of the trial (environment),Site1_irrigated / Site1_drought / Site2_rainfed
+location,Place of the trial,Site1 / Site2
+water,Water conditions,Irrigated / Terminal drought / Rainfed
+plot,Plot number (unique in the whole file),integer
+block,Complete block (replicate) inside the environment,B1 B2 B3
+row,Row of the plot in the field,integer
+column,Column of the plot in the field (blocks are side by side),integer
+genotype,Name of the line,Parent_A to Parent_C and M001 to M081
+type,Parent cultivar (not irradiated) or mutant line,parent / mutant
+parent,Cultivar from which the line comes (a parent is its own parent),Parent_A to Parent_C
+dose_Gy,Gamma radiation dose given to the seeds (0 for the parents),Gy
+seed_coat_colour,Seed coat colour class of the genotype (the same in all environments),black / brown / cream / red / red mottled / white
+days_to_flowering,Days from sowing to 50% of plants with a flower,days
+days_to_maturity,Days from sowing to physiological maturity of the plot,days
+pods_per_plant,Mean number of pods per plant,count
+hundred_seed_weight_g,Weight of 100 seeds,g
+seed_yield_kg_ha,Seed yield,kg/ha

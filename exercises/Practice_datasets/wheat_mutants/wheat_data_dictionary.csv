@@ -1,0 +1,20 @@
+variable,description,unit_or_values
+environment,Name of the trial (environment),North_2024 / South_2024 / North_2025 / South_2025
+location,Place of the trial,North / South
+year,Year of the trial,2024 / 2025
+water,Water conditions of that year,Normal rainfall / Dry year
+plot,Plot number (unique in the whole file),integer
+block,Block inside the environment,B1 B2
+row,Row of the plot in the field,integer
+column,Column of the plot in the field (blocks are side by side),integer
+genotype,Name of the line,Parent_A to Parent_C and M001 to M102
+type,Parent cultivar (not irradiated) or mutant line,parent / mutant
+parent,Cultivar from which the line comes (a parent is its own parent),Parent_A to Parent_C
+dose_Gy,Gamma radiation dose given to the seeds (0 for the parents),Gy
+awn_type,Awn class of the genotype (the same in all environments),awned / short awned / awnless
+days_to_heading,Days from sowing to heading of 50% of the plot,days
+plant_height_cm,Plant height at maturity,cm
+spikes_per_m2,Number of spikes per square metre,count
+thousand_kernel_weight_g,Weight of 1000 kernels,g
+grain_yield_t_ha,Grain yield,t/ha
+lodging_score,Lodging of the plot (1 = standing, 5 = flat on the ground),1 to 5

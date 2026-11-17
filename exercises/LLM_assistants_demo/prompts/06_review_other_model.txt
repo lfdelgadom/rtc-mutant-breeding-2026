@@ -1,0 +1,4 @@
+Another assistant wrote the code below for an alpha-lattice trial (3 replicates, 6 blocks per replicate, block names repeated in each replicate).
+Review it as a statistician. Is the model structure correct for this design? List every error. Do not rewrite the whole code.
+
+(paste the code here)

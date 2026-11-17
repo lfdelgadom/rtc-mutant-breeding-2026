@@ -25,6 +25,8 @@ SLIDES=(
   "tutorial-artemis-photos"
   "tutorial-mrbean-spatial"
   "11-ai-plant-breeding"
+  "14-llm-assistants"
+  "12-analysis-pipeline"
 )
 
 # 0. Optional: save and push the source files to GitHub (branch main)

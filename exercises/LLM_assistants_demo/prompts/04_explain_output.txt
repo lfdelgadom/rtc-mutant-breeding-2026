@@ -1,0 +1,4 @@
+Explain this output to a breeder who is not a statistician. Use 5 sentences.
+Do not add any number that is not in the output.
+
+(paste here the output of VarCorr(m) and anova(m))

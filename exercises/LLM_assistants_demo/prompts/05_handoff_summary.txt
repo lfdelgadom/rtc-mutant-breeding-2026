@@ -1,0 +1,4 @@
+Write a summary so that I can continue this work in another assistant.
+Include: (1) the design, (2) the columns of the data, (3) the objective, (4) the final code that worked,
+(5) the errors we found and how we fixed them, (6) what is still not done.
+Write it as one block of text that I can paste.

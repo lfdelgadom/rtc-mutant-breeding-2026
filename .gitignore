@@ -27,3 +27,6 @@ my-work/
 
 # exercise ZIPs are built by publish.sh
 downloads/
+
+# answer keys and simulation scripts: never publish
+instructor_only/

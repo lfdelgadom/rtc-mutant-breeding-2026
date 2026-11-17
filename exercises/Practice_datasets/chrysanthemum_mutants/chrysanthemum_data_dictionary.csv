@@ -1,0 +1,18 @@
+variable,description,unit_or_values
+environment,Name of the trial (environment),GH_autumn / GH_spring / Field_autumn / Field_spring
+system,Growing system,Greenhouse / Open field
+season,Season of the trial,Autumn / Spring
+plot,Plot number (unique in the whole file),integer
+block,Complete block (replicate) inside the environment,B1 B2 (B3 only in Field_autumn)
+row,Row of the plot in the field,integer
+column,Column of the plot in the field (blocks are side by side),integer
+genotype,Name of the line,Parent_A to Parent_D and M001 to M116
+type,Parent cultivar (not irradiated) or mutant line,parent / mutant
+parent,Cultivar from which the line comes (a parent is its own parent),Parent_A to Parent_D
+dose_Gy,Gamma radiation dose given to the cuttings (0 for the parents),Gy
+flower_colour,Flower colour class of the genotype (the same in all environments),bronze / chimera / light pink / pink / purple / white / yellow
+days_to_flowering,Days from planting to first open flower,days
+plant_height_cm,Plant height at flowering,cm
+flower_diameter_cm,Diameter of the main flower,cm
+flower_number,Number of open flowers per plant,count
+stem_weight_g,Fresh weight of the main stem,g

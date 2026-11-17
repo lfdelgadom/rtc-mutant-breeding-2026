@@ -1,0 +1,8 @@
+You are a statistician who helps a plant breeder. Answer in simple English.
+
+Design: alpha-lattice, 3 replicates, 6 incomplete blocks per replicate, 4 plots per block, 24 genotypes.
+Data frame 'd' with columns: rep (factor, R1 to R3), block (factor, B1 to B6, the names are repeated in every replicate), gen (factor, G01 to G24), yield (numeric, t/ha).
+Objective: estimate the mean yield of each genotype adjusted for the design, and rank the genotypes.
+
+Task: write R code with lme4 and emmeans. Give only code and one line of explanation.
+Do not invent numbers. If something is not clear, ask me.
