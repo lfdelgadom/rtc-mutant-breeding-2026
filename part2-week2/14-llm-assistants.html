@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -288,16 +323,35 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">15.1</span> Learning objectives</a></li>
-  <li><a href="#free-tools" id="toc-free-tools" class="nav-link" data-scroll-target="#free-tools"><span class="header-section-number">15.2</span> Free tools</a></li>
-  <li><a href="#what-llms-do-well" id="toc-what-llms-do-well" class="nav-link" data-scroll-target="#what-llms-do-well"><span class="header-section-number">15.3</span> What LLMs do well</a></li>
-  <li><a href="#what-llms-get-wrong" id="toc-what-llms-get-wrong" class="nav-link" data-scroll-target="#what-llms-get-wrong"><span class="header-section-number">15.4</span> What LLMs get wrong</a></li>
-  <li><a href="#live-comparison" id="toc-live-comparison" class="nav-link" data-scroll-target="#live-comparison"><span class="header-section-number">15.5</span> Live comparison</a></li>
-  <li><a href="#prompting-for-analysis" id="toc-prompting-for-analysis" class="nav-link" data-scroll-target="#prompting-for-analysis"><span class="header-section-number">15.6</span> Prompting for analysis</a></li>
-  <li><a href="#data-privacy" id="toc-data-privacy" class="nav-link" data-scroll-target="#data-privacy"><span class="header-section-number">15.7</span> Data privacy</a></li>
-  <li><a href="#using-an-llm-with-the-report-template" id="toc-using-an-llm-with-the-report-template" class="nav-link" data-scroll-target="#using-an-llm-with-the-report-template"><span class="header-section-number">15.8</span> Using an LLM with the report template</a></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">15.9</span> Exercise</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">15.10</span> Key takeaways</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">15.11</span> References</a></li>
+  <li><a href="#download-the-demo-folder" id="toc-download-the-demo-folder" class="nav-link" data-scroll-target="#download-the-demo-folder"><span class="header-section-number">15.2</span> Download the demo folder</a></li>
+  <li><a href="#start-now-install-a-free-model-on-your-computer" id="toc-start-now-install-a-free-model-on-your-computer" class="nav-link" data-scroll-target="#start-now-install-a-free-model-on-your-computer"><span class="header-section-number">15.3</span> Start now, install a free model on your computer</a></li>
+  <li><a href="#talk-to-your-computer" id="toc-talk-to-your-computer" class="nav-link" data-scroll-target="#talk-to-your-computer"><span class="header-section-number">15.4</span> Talk to your computer</a></li>
+  <li><a href="#free-assistants" id="toc-free-assistants" class="nav-link" data-scroll-target="#free-assistants"><span class="header-section-number">15.5</span> Free assistants</a></li>
+  <li><a href="#what-an-llm-is" id="toc-what-an-llm-is" class="nav-link" data-scroll-target="#what-an-llm-is"><span class="header-section-number">15.6</span> What an LLM is</a></li>
+  <li><a href="#what-they-do-well" id="toc-what-they-do-well" class="nav-link" data-scroll-target="#what-they-do-well"><span class="header-section-number">15.7</span> What they do well</a></li>
+  <li><a href="#what-they-get-wrong" id="toc-what-they-get-wrong" class="nav-link" data-scroll-target="#what-they-get-wrong"><span class="header-section-number">15.8</span> What they get wrong</a>
+  <ul class="collapse">
+  <li><a href="#a-typical-mistake-in-an-alpha-lattice" id="toc-a-typical-mistake-in-an-alpha-lattice" class="nav-link" data-scroll-target="#a-typical-mistake-in-an-alpha-lattice"><span class="header-section-number">15.8.1</span> A typical mistake in an alpha-lattice</a></li>
+  </ul></li>
+  <li><a href="#prompting-for-analysis" id="toc-prompting-for-analysis" class="nav-link" data-scroll-target="#prompting-for-analysis"><span class="header-section-number">15.9</span> Prompting for analysis</a></li>
+  <li><a href="#run-and-verify" id="toc-run-and-verify" class="nav-link" data-scroll-target="#run-and-verify"><span class="header-section-number">15.10</span> Run and verify</a></li>
+  <li><a href="#live-demo" id="toc-live-demo" class="nav-link" data-scroll-target="#live-demo"><span class="header-section-number">15.11</span> Live demo</a></li>
+  <li><a href="#how-to-transfer-an-answer-from-one-model-to-another" id="toc-how-to-transfer-an-answer-from-one-model-to-another" class="nav-link" data-scroll-target="#how-to-transfer-an-answer-from-one-model-to-another"><span class="header-section-number">15.12</span> How to transfer an answer from one model to another</a></li>
+  <li><a href="#data-privacy" id="toc-data-privacy" class="nav-link" data-scroll-target="#data-privacy"><span class="header-section-number">15.13</span> Data privacy</a></li>
+  <li><a href="#a-model-on-your-own-computer" id="toc-a-model-on-your-own-computer" class="nav-link" data-scroll-target="#a-model-on-your-own-computer"><span class="header-section-number">15.14</span> A model on your own computer</a>
+  <ul class="collapse">
+  <li><a href="#the-technical-words-in-simple-terms" id="toc-the-technical-words-in-simple-terms" class="nav-link" data-scroll-target="#the-technical-words-in-simple-terms"><span class="header-section-number">15.14.1</span> The technical words, in simple terms</a></li>
+  <li><a href="#use-it-from-r" id="toc-use-it-from-r" class="nav-link" data-scroll-target="#use-it-from-r"><span class="header-section-number">15.14.2</span> Use it from R</a></li>
+  <li><a href="#the-ollama-window" id="toc-the-ollama-window" class="nav-link" data-scroll-target="#the-ollama-window"><span class="header-section-number">15.14.3</span> The Ollama window</a></li>
+  <li><a href="#the-api-of-ollama" id="toc-the-api-of-ollama" class="nav-link" data-scroll-target="#the-api-of-ollama"><span class="header-section-number">15.14.4</span> The API of Ollama</a></li>
+  <li><a href="#connect-ollama-to-r-and-to-positron" id="toc-connect-ollama-to-r-and-to-positron" class="nav-link" data-scroll-target="#connect-ollama-to-r-and-to-positron"><span class="header-section-number">15.14.5</span> Connect Ollama to R and to Positron</a></li>
+  <li><a href="#cheat-sheets" id="toc-cheat-sheets" class="nav-link" data-scroll-target="#cheat-sheets"><span class="header-section-number">15.14.6</span> Cheat sheets</a></li>
+  <li><a href="#cloud-or-local" id="toc-cloud-or-local" class="nav-link" data-scroll-target="#cloud-or-local"><span class="header-section-number">15.14.7</span> Cloud or local</a></li>
+  </ul></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">15.15</span> Exercise</a></li>
+  <li><a href="#homework-for-tonight" id="toc-homework-for-tonight" class="nav-link" data-scroll-target="#homework-for-tonight"><span class="header-section-number">15.16</span> Homework for tonight</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">15.17</span> Key takeaways</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">15.18</span> References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lfdelgadom/rtc-mutant-breeding-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -325,74 +379,412 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="chapter-info">
 <p><strong>Author:</strong> Luis Fernando Delgado Muñoz<br>
-<strong>Session:</strong> Day 7 – Tuesday 17 November, 08:30–09:45</p>
+<strong>Session:</strong> Day 7, Tuesday 17 November, 08:30 to 09:15</p>
 </div>
 <section id="learning-objectives" class="level2" data-number="15.1">
 <h2 data-number="15.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">15.1</span> Learning objectives</h2>
 <ul>
-<li>Use free LLMs to write, debug and explain R code</li>
-<li>Recognize typical LLM errors in statistical analysis</li>
-<li>Write effective prompts for breeding data analysis</li>
-<li>Protect unpublished research data</li>
+<li>Use free AI assistants to write, debug and explain R code</li>
+<li>Recognize typical errors of an assistant in a statistical analysis</li>
+<li>Write a prompt that gives the design, the variables and the objective</li>
+<li>Move an answer from one assistant to another</li>
+<li>Protect unpublished research data, and run a free model on your own computer</li>
 </ul>
+<p><a href="../slides/14-llm-assistants.html" target="_blank">Slides of this session</a>.</p>
 </section>
-<section id="free-tools" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="free-tools"><span class="header-section-number">15.2</span> Free tools</h2>
-<!-- TODO: ChatGPT, Claude, Gemini, DeepSeek, Qwen; local models with Ollama. Availability varies by country. -->
+<section id="download-the-demo-folder" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="download-the-demo-folder"><span class="header-section-number">15.2</span> Download the demo folder</h2>
+<p><a href="../downloads/LLM_assistants_demo.zip">LLM_assistants_demo.zip</a> has the data (<code>john_alpha.csv</code>), the prompts of the demos, a script with three errors (<code>buggy_code.R</code>), an R script for a local model, a checklist and a prompt template.</p>
 </section>
-<section id="what-llms-do-well" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="what-llms-do-well"><span class="header-section-number">15.3</span> What LLMs do well</h2>
-<!-- TODO: Writing and debugging R code, explaining errors and outputs, drafting reports, small Shiny apps. -->
+<section id="start-now-install-a-free-model-on-your-computer" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="start-now-install-a-free-model-on-your-computer"><span class="header-section-number">15.3</span> Start now, install a free model on your computer</h2>
+<p>The download takes a few minutes, so do it first and keep working.</p>
+<ol type="1">
+<li>Go to <a href="https://ollama.com/download">ollama.com/download</a>, download the installer for Windows and run it.</li>
+<li>Open <strong>PowerShell</strong> (Start menu, write <code>PowerShell</code>).</li>
+<li>Download <strong>one</strong> model, according to your memory (RAM):</li>
+</ol>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Your RAM</th>
+<th>Command</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>8 GB</td>
+<td><code>ollama pull gemma3:4b</code></td>
+<td>3.3 GB</td>
+</tr>
+<tr class="even">
+<td>6 GB</td>
+<td><code>ollama pull llama3.2:3b</code></td>
+<td>2.0 GB</td>
+</tr>
+<tr class="odd">
+<td>4 GB</td>
+<td><code>ollama pull gemma3:1b</code></td>
+<td>0.8 GB</td>
+</tr>
+</tbody>
+</table>
+<ol start="4" type="1">
+<li>Test it with <code>ollama run gemma3:4b</code>. Write a message and press Enter. Write <code>/bye</code> to leave.</li>
+</ol>
+<p>Close the browser tabs that you do not need. The model uses your memory while it runs.</p>
 </section>
-<section id="what-llms-get-wrong" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="what-llms-get-wrong"><span class="header-section-number">15.4</span> What LLMs get wrong</h2>
-<!-- TODO: Invented results, wrong model structure, non-existent functions, confident misinterpretation. -->
-</section>
-<section id="live-comparison" class="level2" data-number="15.5">
-<h2 data-number="15.5" class="anchored" data-anchor-id="live-comparison"><span class="header-section-number">15.5</span> Live comparison</h2>
-<!-- TODO: Same task in 2–3 models (alpha-lattice mixed model + BLUPs); run and compare the code. -->
-</section>
-<section id="prompting-for-analysis" class="level2" data-number="15.6">
-<h2 data-number="15.6" class="anchored" data-anchor-id="prompting-for-analysis"><span class="header-section-number">15.6</span> Prompting for analysis</h2>
-<!-- TODO: Describe design, variables and objective; ask for code, not results; always run and verify. -->
-</section>
-<section id="data-privacy" class="level2" data-number="15.7">
-<h2 data-number="15.7" class="anchored" data-anchor-id="data-privacy"><span class="header-section-number">15.7</span> Data privacy</h2>
-<!-- TODO: Unpublished breeding data, institutional policies, where data are stored. -->
-</section>
-<section id="using-an-llm-with-the-report-template" class="level2" data-number="15.8">
-<h2 data-number="15.8" class="anchored" data-anchor-id="using-an-llm-with-the-report-template"><span class="header-section-number">15.8</span> Using an LLM with the report template</h2>
-</section>
-<section id="exercise" class="level2" data-number="15.9">
-<h2 data-number="15.9" class="anchored" data-anchor-id="exercise"><span class="header-section-number">15.9</span> Exercise</h2>
-<!-- TODO: one exercise on the shared data -->
-<div class="callout callout-style-default callout-tip callout-empty-content callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-
-</div>
-</div>
-</div>
-</section>
-<section id="key-takeaways" class="level2" data-number="15.10">
-<h2 data-number="15.10" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">15.10</span> Key takeaways</h2>
+<section id="talk-to-your-computer" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="talk-to-your-computer"><span class="header-section-number">15.4</span> Talk to your computer</h2>
+<p>You can speak your prompts. It is faster for long texts.</p>
 <ul>
-<li></li>
-<li></li>
-<li></li>
+<li><strong>Windows voice typing.</strong> Click in a text box, press the Windows key and H, and speak. It is free and already installed.</li>
+<li><strong>Handy.</strong> A free and open source program that works offline.</li>
+<li><strong>Aqua Voice.</strong> A paid program in the cloud. Its free plan has 2,000 words.</li>
+</ul>
+<p>Test your language and your accent before you rely on a tool. Speak in full sentences and read the text before you send it.</p>
+</section>
+<section id="free-assistants" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="free-assistants"><span class="header-section-number">15.5</span> Free assistants</h2>
+<p>What you can use for free in the browser: ChatGPT, Claude, Gemini, DeepSeek and Qwen. The free plans have limits that change often, and the availability depends on the country. Use at least two different assistants. You will need the second one to check the first one.</p>
+</section>
+<section id="what-an-llm-is" class="level2" data-number="15.6">
+<h2 data-number="15.6" class="anchored" data-anchor-id="what-an-llm-is"><span class="header-section-number">15.6</span> What an LLM is</h2>
+<p>A large language model (LLM) has read a huge amount of text and learned which word is likely to come next. It writes text and code that look right. It does not run your analysis and it does not know your field. Because it predicts text, it can give a wrong answer with great confidence.</p>
+</section>
+<section id="what-they-do-well" class="level2" data-number="15.7">
+<h2 data-number="15.7" class="anchored" data-anchor-id="what-they-do-well"><span class="header-section-number">15.7</span> What they do well</h2>
+<ul>
+<li>Write R code from a clear description</li>
+<li>Explain an error message and fix the line</li>
+<li>Explain an output or a function in simple words</li>
+<li>Draft a report, a caption or a methods paragraph</li>
+<li>Translate text and comments</li>
 </ul>
 </section>
-<section id="references" class="level2" data-number="15.11">
-<h2 data-number="15.11" class="anchored" data-anchor-id="references"><span class="header-section-number">15.11</span> References</h2>
+<section id="what-they-get-wrong" class="level2" data-number="15.8">
+<h2 data-number="15.8" class="anchored" data-anchor-id="what-they-get-wrong"><span class="header-section-number">15.8</span> What they get wrong</h2>
+<ul>
+<li><strong>Invented results.</strong> Without data, the assistant invents a number.</li>
+<li><strong>Wrong model structure.</strong> It does not know your design unless you tell it.</li>
+<li><strong>Functions that do not exist</strong>, or arguments from an old version</li>
+<li><strong>Confident misinterpretation.</strong> The text sounds right even when the statistics is wrong.</li>
+</ul>
+<p>The main risk is not code that fails. It is code that runs and gives a wrong answer.</p>
+<section id="a-typical-mistake-in-an-alpha-lattice" class="level3" data-number="15.8.1">
+<h3 data-number="15.8.1" class="anchored" data-anchor-id="a-typical-mistake-in-an-alpha-lattice"><span class="header-section-number">15.8.1</span> A typical mistake in an alpha-lattice</h3>
+<p>In the data of Day 2 the blocks are named B1 to B6 in every replicate. Block B1 of replicate 1 is not the same block as B1 of replicate 2.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correct. The block is nested in the replicate.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(yield <span class="sc">~</span> rep <span class="sc">+</span> gen <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rep<span class="sc">:</span>block), <span class="at">data =</span> d)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Typical wrong answer. Blocks with the same name are treated as one block.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(yield <span class="sc">~</span> gen <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rep) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> block), <span class="at">data =</span> d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Both codes run without an error. They give different variances. Only a person who knows the design can see the problem.</p>
+</section>
+</section>
+<section id="prompting-for-analysis" class="level2" data-number="15.9">
+<h2 data-number="15.9" class="anchored" data-anchor-id="prompting-for-analysis"><span class="header-section-number">15.9</span> Prompting for analysis</h2>
+<p>A good prompt has six parts.</p>
+<ol type="1">
+<li><strong>Role.</strong> Who should the assistant be?</li>
+<li><strong>Design.</strong> Replicates, blocks, locations, number of genotypes.</li>
+<li><strong>Data.</strong> Name, type and units of each column, and anything special.</li>
+<li><strong>Objective.</strong> What do you want to know?</li>
+<li><strong>Task and format.</strong> Which package, how long, only code?</li>
+<li><strong>A rule.</strong> “Do not invent numbers. Ask me if something is not clear.”</li>
+</ol>
+<p><strong>A bad prompt.</strong> <em>Analyse my trial and tell me which genotype is the best.</em></p>
+<p><strong>A good prompt.</strong></p>
+<blockquote class="blockquote">
+<p>You are a statistician who helps a plant breeder. Answer in simple English.<br>
+Design: alpha-lattice, 3 replicates, 6 incomplete blocks per replicate, 24 genotypes.<br>
+Data: data frame <code>d</code> with <code>rep</code>, <code>block</code> (B1 to B6, repeated in each replicate), <code>gen</code>, <code>yield</code> (t/ha).<br>
+Objective: adjusted mean of each genotype.<br>
+Task: write R code with lme4 and emmeans. Give only code. Do not invent numbers.</p>
+</blockquote>
+<p>Ask for <strong>code</strong>, not for <strong>results</strong>. The numbers must come from your own R session. The file <code>prompt_template.md</code> has a template for your own work.</p>
+</section>
+<section id="run-and-verify" class="level2" data-number="15.10">
+<h2 data-number="15.10" class="anchored" data-anchor-id="run-and-verify"><span class="header-section-number">15.10</span> Run and verify</h2>
+<ol type="1">
+<li>Run the code on your data.</li>
+<li>Check the model against your design. What is fixed and what is random?</li>
+<li>Check every number of a text against your output.</li>
+<li>Check that the functions exist. Try <code>?function</code>.</li>
+<li>Ask a second assistant to review the code.</li>
+<li>Check units and traits.</li>
+<li>Save the final code and the prompt that worked.</li>
+</ol>
+</section>
+<section id="live-demo" class="level2" data-number="15.11">
+<h2 data-number="15.11" class="anchored" data-anchor-id="live-demo"><span class="header-section-number">15.11</span> Live demo</h2>
+<p>Use <code>john_alpha.csv</code> and the files in the folder <code>prompts/</code>.</p>
+<ol type="1">
+<li><strong>Bad prompt</strong> (<code>01_bad_prompt.txt</code>). What does the assistant answer?</li>
+<li><strong>Good prompt</strong> (<code>02_good_prompt.txt</code>) in two assistants. Compare the two codes.</li>
+<li><strong>Run both.</strong> Compare <code>VarCorr()</code>. Are they the same model?</li>
+<li><strong>Invented result</strong> (<code>03_invented_result.txt</code>). Ask for a heritability without data.</li>
+<li><strong>Debug.</strong> Open <code>buggy_code.R</code> and copy each error to the assistant.</li>
+<li><strong>Explain and report</strong> (<code>04_explain_output.txt</code>, <code>07_report_paragraph.txt</code>). Check every number.</li>
+</ol>
+</section>
+<section id="how-to-transfer-an-answer-from-one-model-to-another" class="level2" data-number="15.12">
+<h2 data-number="15.12" class="anchored" data-anchor-id="how-to-transfer-an-answer-from-one-model-to-another"><span class="header-section-number">15.12</span> How to transfer an answer from one model to another</h2>
+<p>Assistants do not share memory. A new chat starts from zero. To move your work:</p>
+<ol type="1">
+<li>Ask the first assistant for a hand-over summary (<code>05_handoff_summary.txt</code>). It should include the design, the columns, the objective, the final code, the errors found and what is missing.</li>
+<li>Paste the summary in the second assistant and continue.</li>
+<li>Or paste the code and ask the second assistant to review it (<code>06_review_other_model.txt</code>).</li>
+</ol>
+<p>If the two assistants agree, you have more confidence. If they disagree, you found the place to look. You decide, because two assistants can make the same mistake.</p>
+</section>
+<section id="data-privacy" class="level2" data-number="15.13">
+<h2 data-number="15.13" class="anchored" data-anchor-id="data-privacy"><span class="header-section-number">15.13</span> Data privacy</h2>
+<p>Text that you write in an online assistant is sent to the servers of a company. It can be stored, and some plans use it to train new models.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Do not paste</th>
+<th>You can paste</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>The full data of an unpublished trial</td>
+<td>The design and the column names</td>
+</tr>
+<tr class="even">
+<td>Names of protected lines or partners</td>
+<td>Codes (G01, G02) instead of real names</td>
+</tr>
+<tr class="odd">
+<td>GPS coordinates of fields or farmers</td>
+<td>A few rows of simulated data</td>
+</tr>
+<tr class="even">
+<td>Anything your institution says is confidential</td>
+<td>The error message and the code</td>
+</tr>
+</tbody>
+</table>
+<p>Ask your institution for its AI policy. If there is none, do not paste unpublished data. Check the privacy settings of the assistant and turn off the use of your chats for training.</p>
+</section>
+<section id="a-model-on-your-own-computer" class="level2" data-number="15.14">
+<h2 data-number="15.14" class="anchored" data-anchor-id="a-model-on-your-own-computer"><span class="header-section-number">15.14</span> A model on your own computer</h2>
+<p>A local model runs on your computer. It works without internet and nothing leaves your machine. It is free and has no daily limit. It is smaller and slower than the cloud assistants, so use it for drafts, code and private data.</p>
+<p>Programs to run one:</p>
+<ul>
+<li><strong>Ollama.</strong> Simple, and it is what R connects to.</li>
+<li><strong>LM Studio</strong> and <strong>Jan.</strong> Programs with windows and buttons. They also show if a model fits in your memory.</li>
+<li><strong>Hugging Face.</strong> The website where most of the models live.</li>
+</ul>
+<section id="the-technical-words-in-simple-terms" class="level3" data-number="15.14.1">
+<h3 data-number="15.14.1" class="anchored" data-anchor-id="the-technical-words-in-simple-terms"><span class="header-section-number">15.14.1</span> The technical words, in simple terms</h3>
+<ul>
+<li><strong>Parameters (4B, 12B).</strong> The size of the model, in billions of numbers. More parameters usually means a better model and more memory.</li>
+<li><strong>Quantization.</strong> A way to compress a model, like saving a photo as JPEG. It becomes 3 or 4 times smaller and loses little quality. The default of Ollama is 4 bits.</li>
+<li><strong>Context window.</strong> How much text the model can keep in mind in one chat.</li>
+<li><strong>Temperature.</strong> How creative it is. Use a low value for code and statistics.</li>
+</ul>
+<p>At 4 bits, a model needs about 0.6 GB for each billion parameters, plus memory for the chat. Download sizes from the Ollama library:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>gemma3:1b</code></td>
+<td>0.8 GB</td>
+</tr>
+<tr class="even">
+<td><code>llama3.2:3b</code></td>
+<td>2.0 GB</td>
+</tr>
+<tr class="odd">
+<td><code>gemma3:4b</code></td>
+<td>3.3 GB</td>
+</tr>
+<tr class="even">
+<td><code>qwen3:8b</code></td>
+<td>5.2 GB</td>
+</tr>
+<tr class="odd">
+<td><code>qwen2.5-coder:14b</code></td>
+<td>9.0 GB</td>
+</tr>
+</tbody>
+</table>
+<p>A model needs more memory than its download size while it runs. With 8 GB of RAM choose a model of 4 GB or less. A model as large as the memory of the computer will not run. This is the most common reason why a download fails.</p>
+</section>
+<section id="use-it-from-r" class="level3" data-number="15.14.2">
+<h3 data-number="15.14.2" class="anchored" data-anchor-id="use-it-from-r"><span class="header-section-number">15.14.2</span> Use it from R</h3>
+<p>The package <strong>ellmer</strong> (from Posit) connects R with a model, local or in the cloud.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ellmer)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>chat <span class="ot">&lt;-</span> <span class="fu">chat_ollama</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">"gemma3:4b"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">system_prompt =</span> <span class="st">"You are a statistics assistant for plant breeders. Give R code, not results."</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>chat<span class="sc">$</span><span class="fu">chat</span>(<span class="st">"Alpha-lattice, 3 replicates, 6 blocks per replicate, 24 genotypes.</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">           Data frame d: rep, block, gen, yield. Write lme4 code for the adjusted mean of each genotype."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The data stay in R. Only the text of your question goes to the model. Run the code that it writes and check it.</p>
+<p>Other tools: <strong>btw</strong> gives the model the context of your R session, <strong>gander</strong> is an assistant inside the editor, and <strong>Positron Assistant</strong> is a chat inside Positron that can use local models from Ollama. They change quickly. Start with ellmer.</p>
+</section>
+<section id="the-ollama-window" class="level3" data-number="15.14.3">
+<h3 data-number="15.14.3" class="anchored" data-anchor-id="the-ollama-window"><span class="header-section-number">15.14.3</span> The Ollama window</h3>
+<p>After you install Ollama, open the <strong>Ollama app</strong> from the Start menu. It has a chat window: choose a model from the list, write, and press Enter. You do not need the terminal. Your chats are saved on your computer. It is the same Ollama: a model that you downloaded in PowerShell appears in the window, and the other way around. In Settings you find the folder where the models are saved and, in recent versions, the context length.</p>
+</section>
+<section id="the-api-of-ollama" class="level3" data-number="15.14.4">
+<h3 data-number="15.14.4" class="anchored" data-anchor-id="the-api-of-ollama"><span class="header-section-number">15.14.4</span> The API of Ollama</h3>
+<p>Cloud assistants give an API key. Ollama does not need one. When Ollama is open, it runs a small server on your computer at <code>http://localhost:11434</code>. Open that address in the browser. You should read “Ollama is running”.</p>
+<p>When a program asks for the API, use this:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>The program asks for</th>
+<th>You write</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Base URL, host or endpoint</td>
+<td><code>http://localhost:11434</code></td>
+</tr>
+<tr class="even">
+<td>OpenAI compatible URL</td>
+<td><code>http://localhost:11434/v1</code></td>
+</tr>
+<tr class="odd">
+<td>API key</td>
+<td>nothing, or any text, for example <code>ollama</code></td>
+</tr>
+<tr class="even">
+<td>Model</td>
+<td>the exact name that you see in <code>ollama list</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>localhost</code> means your own computer, so nobody else can use your model. The server listens to your computer only, unless you change <code>OLLAMA_HOST</code>.</p>
+</section>
+<section id="connect-ollama-to-r-and-to-positron" class="level3" data-number="15.14.5">
+<h3 data-number="15.14.5" class="anchored" data-anchor-id="connect-ollama-to-r-and-to-positron"><span class="header-section-number">15.14.5</span> Connect Ollama to R and to Positron</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ellmer finds the address alone</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ellmer)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>chat <span class="ot">&lt;-</span> <span class="fu">chat_ollama</span>(<span class="at">model =</span> <span class="st">"gemma3:4b"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">models_ollama</span>()                      <span class="co"># the models that you have</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># btw: gives the model the context of your R session</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">btw.client =</span> ellmer<span class="sc">::</span><span class="fu">chat_ollama</span>(<span class="at">model =</span> <span class="st">"qwen2.5-coder:3b"</span>))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>btw<span class="sc">::</span><span class="fu">btw_app</span>()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># chattr: a chat inside RStudio</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>chattr<span class="sc">::</span><span class="fu">chattr_use</span>(ellmer<span class="sc">::</span><span class="fu">chat_ollama</span>(<span class="at">model =</span> <span class="st">"gemma3:4b"</span>))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>chattr<span class="sc">::</span><span class="fu">chattr_app</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>In <strong>Positron</strong>, open the Accounts menu, choose <em>Configure Language Model Providers</em>, select <strong>Ollama</strong> and press Connect. Menu names change between versions.</p>
+<p>Tools that call R functions, like btw and the agents of Positron, need a model that supports <strong>tools</strong>. Check it with <code>ollama show model_name</code>. Small models make more mistakes with tools. Start with <code>ellmer</code>.</p>
+<p>The <strong>context length</strong> is a setting of Ollama, not of R. If the model forgets the start of a long text, raise it in the Ollama settings, or with the variable <code>OLLAMA_CONTEXT_LENGTH</code> (for example 8192), and restart Ollama.</p>
+</section>
+<section id="cheat-sheets" class="level3" data-number="15.14.6">
+<h3 data-number="15.14.6" class="anchored" data-anchor-id="cheat-sheets"><span class="header-section-number">15.14.6</span> Cheat sheets</h3>
+<ul>
+<li><a href="../cheatsheets/ollama_commands_cheatsheet.pdf">Ollama commands</a>. The commands that you will really use in PowerShell, the settings and the Modelfile.</li>
+<li><a href="../cheatsheets/local_models_cheatsheet.pdf">Local models in simple words</a>. Parameters, quantization, context window, memory, kinds of models.</li>
+</ul>
+</section>
+<section id="cloud-or-local" class="level3" data-number="15.14.7">
+<h3 data-number="15.14.7" class="anchored" data-anchor-id="cloud-or-local"><span class="header-section-number">15.14.7</span> Cloud or local</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Cloud</th>
+<th>Local</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Quality</td>
+<td>Better</td>
+<td>Good for small tasks</td>
+</tr>
+<tr class="even">
+<td>Speed</td>
+<td>Fast</td>
+<td>Slow in a modest computer</td>
+</tr>
+<tr class="odd">
+<td>Privacy</td>
+<td>The text goes to a company</td>
+<td>Stays on your computer</td>
+</tr>
+<tr class="even">
+<td>Cost</td>
+<td>Free plan with limits</td>
+<td>Free, no limit</td>
+</tr>
+<tr class="odd">
+<td>Internet</td>
+<td>Needed</td>
+<td>Not needed</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="exercise" class="level2" data-number="15.15">
+<h2 data-number="15.15" class="anchored" data-anchor-id="exercise"><span class="header-section-number">15.15</span> Exercise</h2>
+<p>Use the data of your own trial, or <code>john_alpha.csv</code>.</p>
+<ol type="1">
+<li>Write a prompt with the six parts for your own design and objective.</li>
+<li>Send it to two different assistants. Run the two codes and compare the results.</li>
+<li>Ask one assistant to review the code of the other.</li>
+<li>Write in 3 lines what was correct and what you had to fix.</li>
+</ol>
+</section>
+<section id="homework-for-tonight" class="level2" data-number="15.16">
+<h2 data-number="15.16" class="anchored" data-anchor-id="homework-for-tonight"><span class="header-section-number">15.16</span> Homework for tonight</h2>
+<p>About 60 minutes. Use your own data, or a practice data set from <code>exercises/Practice_datasets</code> (chrysanthemum, wheat or bean). Do not paste unpublished data into a cloud assistant. The one-page version is <a href="../cheatsheets/tonight_task.pdf">tonight_task.pdf</a>.</p>
+<ol type="1">
+<li><strong>Check Ollama (10 min).</strong> The Ollama window answers. <code>http://localhost:11434</code> says “Ollama is running”. The script <code>01_ellmer_local_model.R</code> runs. Measure the speed with <code>ollama run model_name --verbose</code>.</li>
+<li><strong>One problem, two assistants (25 min).</strong> Choose one question about your data. Write one prompt with the six parts and send it to a cloud assistant and to your local model. Run both codes. Apply the 7 checks to the answer you prefer.</li>
+<li><strong>Make it fail (10 min).</strong> Ask each assistant to review the code of the other one. Remove the description of the blocks from the prompt and see what happens.</li>
+<li><strong>Your notes (10 min).</strong> Model and size, speed, what was good, what you had to correct, cloud against local, one question for the class.</li>
+</ol>
+<p>Extra: dictate your prompt with your voice, connect the model to btw, chattr or Positron (<code>02_connect_tools.R</code>), or make your own helper with a Modelfile.</p>
+</section>
+<section id="key-takeaways" class="level2" data-number="15.17">
+<h2 data-number="15.17" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">15.17</span> Key takeaways</h2>
+<ul>
+<li>Assistants are fast and useful for code, errors, explanations and drafts.</li>
+<li>They can invent and they can choose a wrong model. Describe your design, then run and verify.</li>
+<li>To change assistant, ask for a hand-over summary. Use one assistant to review the other.</li>
+<li>Do not paste unpublished data. Share the structure, not the data.</li>
+<li>A local model keeps the data on your computer. It is slower, but it works without internet.</li>
+<li>Ollama has a window and an API at <code>http://localhost:11434</code>. It needs no key, and R, Positron and other tools can use it.</li>
+</ul>
+</section>
+<section id="references" class="level2" data-number="15.18">
+<h2 data-number="15.18" class="anchored" data-anchor-id="references"><span class="header-section-number">15.18</span> References</h2>
+<ul>
+<li>Ollama. <a href="https://ollama.com" class="uri">https://ollama.com</a></li>
+<li>Posit. ellmer, a package to chat with large language models from R. <a href="https://ellmer.tidyverse.org" class="uri">https://ellmer.tidyverse.org</a></li>
+<li>John, J. A. and Williams, E. R. (1995). <em>Cyclic and Computer Generated Designs</em>. Chapman and Hall. (Data <code>john.alpha</code> of the R package agridat.)</li>
+</ul>
 
 
 </section>
