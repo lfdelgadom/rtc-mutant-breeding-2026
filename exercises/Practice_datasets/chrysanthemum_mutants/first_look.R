@@ -2,7 +2,8 @@
 # Needs the packages ggplot2 (install.packages("ggplot2") if you do not have it).
 library(ggplot2)
 
-d <- read.csv("chrysanthemum_mutant_trials.csv", stringsAsFactors = FALSE)
+# Open Practice_datasets.Rproj first. The working directory is then the folder Practice_datasets.
+d <- read.csv("chrysanthemum_mutants/chrysanthemum_mutant_trials.csv", stringsAsFactors = FALSE)
 traits <- c("days_to_flowering", "plant_height_cm", "flower_diameter_cm", "flower_number", "stem_weight_g")
 for (v in c("environment", "block", "genotype", "type", "parent", "flower_colour")) d[[v]] <- factor(d[[v]])
 

@@ -2,7 +2,8 @@
 # Needs the package ggplot2 (install.packages("ggplot2") if you do not have it).
 library(ggplot2)
 
-d <- read.csv("wheat_mutant_trials.csv", stringsAsFactors = FALSE)
+# Open Practice_datasets.Rproj first. The working directory is then the folder Practice_datasets.
+d <- read.csv("wheat_mutants/wheat_mutant_trials.csv", stringsAsFactors = FALSE)
 traits <- c("days_to_heading", "plant_height_cm", "spikes_per_m2", "thousand_kernel_weight_g", "grain_yield_t_ha")
 for (v in c("environment", "block", "genotype", "type", "parent", "awn_type")) d[[v]] <- factor(d[[v]])
 
