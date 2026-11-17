@@ -422,7 +422,7 @@ Address: `http://localhost:11434`. **No key. No account. No cost.**
 ## Connect Ollama to your tools {.smaller}
 
 | Tool | How to connect |
-|------------------|------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | **ellmer** | `chat_ollama(model = "gemma3:4b")` |
 | **btw** | `options(btw.client = ellmer::chat_ollama(model = "qwen2.5-coder:3b"))` then `btw::btw_app()` |
 | **chattr** | `chattr::chattr_use(ellmer::chat_ollama(model = "gemma3:4b"))` then `chattr::chattr_app()` |
@@ -436,7 +436,7 @@ btw and Positron agents need a model with **tools** (see `ollama show`). Set the
 ## Tools to use an assistant inside R {.smaller}
 
 | Tool | What it does |
-|----------------------|-------------------------------------------------|
+|-----------------------|-------------------------------------------------|
 | **ellmer** | The R package of Posit to talk to a model, local or in the cloud. The base of the others. |
 | **btw** | Gives the model the context of your R session (objects, help pages). |
 | **gander** | An assistant inside the editor. You select code and ask. |
@@ -470,7 +470,7 @@ Practise with **one cloud assistant**, **one local model** and **your data** (or
 4.  **Your notes (10 min).** Model, speed, what was wrong, one question for the class.
 
 ::: keybox
-No data of your own? Use `exercises/Practice_datasets` (chrysanthemum, wheat or bean). **Do not paste unpublished data into a cloud assistant.**
+No data of your own? Download [Practice_datasets.zip](../downloads/Practice_datasets.zip) (chrysanthemum, wheat or bean). The prompt template is `prompt_template.md` inside [LLM_assistants_demo.zip](../downloads/LLM_assistants_demo.zip). **Do not paste unpublished data into a cloud assistant.**
 :::
 
 ## Cheat sheets

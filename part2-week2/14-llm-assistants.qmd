@@ -273,7 +273,7 @@ Use the data of your own trial, or `john_alpha.csv`.
 
 ## Homework for tonight
 
-About 60 minutes. Use your own data, or a practice data set from `exercises/Practice_datasets` (chrysanthemum, wheat or bean). Do not paste unpublished data into a cloud assistant. The one-page version is [tonight_task.pdf](../cheatsheets/tonight_task.pdf).
+About 60 minutes. Use your own data, or a practice data set from [Practice_datasets.zip](../downloads/Practice_datasets.zip) (chrysanthemum, wheat or bean). The prompt template (`prompt_template.md`) is inside [LLM_assistants_demo.zip](../downloads/LLM_assistants_demo.zip). Do not paste unpublished data into a cloud assistant. The one-page version is [tonight_task.pdf](../cheatsheets/tonight_task.pdf).
 
 1. **Check Ollama (10 min).** The Ollama window answers. `http://localhost:11434` says "Ollama is running". The script `01_ellmer_local_model.R` runs. Measure the speed with `ollama run model_name --verbose`.
 2. **One problem, two assistants (25 min).** Choose one question about your data. Write one prompt with the six parts and send it to a cloud assistant and to your local model. Run both codes. Apply the 7 checks to the answer you prefer.

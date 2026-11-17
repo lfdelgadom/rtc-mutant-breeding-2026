@@ -5,6 +5,8 @@ RTC RER5030, Day 7
 WHAT IS IN THIS FOLDER
   data/john_alpha.csv          72 plots, 24 genotypes, 3 reps, alpha-lattice (the data of Day 2)
   prompts/                     the prompts we use in the demos (copy and paste them)
+  prompts/00_analysis_coach_FULL.txt   a prompt that INTERVIEWS you (data, design, objective) and then plans the analysis. For ChatGPT, Gemini, Copilot, Claude
+  prompts/00_analysis_coach_SHORT.txt  the same, shorter, for a local model in Ollama
   prompt_template.md           a template for your own prompts
   checklist.md                 7 checks before you trust an answer
   buggy_code.R                 a script with 3 small errors, for the debugging demo
