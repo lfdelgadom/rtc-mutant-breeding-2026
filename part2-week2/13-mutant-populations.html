@@ -323,9 +323,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">14.1</span> Learning objectives</a></li>
-  <li><a href="#planned-content" id="toc-planned-content" class="nav-link" data-scroll-target="#planned-content"><span class="header-section-number">14.2</span> Planned content</a></li>
-  <li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts"><span class="header-section-number">14.3</span> Key concepts</a></li>
-  <li><a href="#worked-demo-in-r" id="toc-worked-demo-in-r" class="nav-link" data-scroll-target="#worked-demo-in-r"><span class="header-section-number">14.4</span> Worked demo in R</a></li>
+  <li><a href="#mutant-populations" id="toc-mutant-populations" class="nav-link" data-scroll-target="#mutant-populations"><span class="header-section-number">14.2</span> Mutant populations</a>
+  <ul class="collapse">
+  <li><a href="#unreplicated-and-replicated-early-generations" id="toc-unreplicated-and-replicated-early-generations" class="nav-link" data-scroll-target="#unreplicated-and-replicated-early-generations"><span class="header-section-number">14.2.1</span> Unreplicated and replicated early generations</a></li>
+  <li><a href="#autogamous-allogamous-and-clonal-crops" id="toc-autogamous-allogamous-and-clonal-crops" class="nav-link" data-scroll-target="#autogamous-allogamous-and-clonal-crops"><span class="header-section-number">14.2.2</span> Autogamous, allogamous and clonal crops</a></li>
+  </ul></li>
+  <li><a href="#the-pipeline-in-six-steps" id="toc-the-pipeline-in-six-steps" class="nav-link" data-scroll-target="#the-pipeline-in-six-steps"><span class="header-section-number">14.3</span> The pipeline in six steps</a>
+  <ul class="collapse">
+  <li><a href="#explore" id="toc-explore" class="nav-link" data-scroll-target="#explore"><span class="header-section-number">14.3.1</span> 1. Explore</a></li>
+  <li><a href="#clean" id="toc-clean" class="nav-link" data-scroll-target="#clean"><span class="header-section-number">14.3.2</span> 2. Clean</a></li>
+  <li><a href="#single-trial-analysis" id="toc-single-trial-analysis" class="nav-link" data-scroll-target="#single-trial-analysis"><span class="header-section-number">14.3.3</span> 3. Single trial analysis</a></li>
+  <li><a href="#multi-environment-analysis" id="toc-multi-environment-analysis" class="nav-link" data-scroll-target="#multi-environment-analysis"><span class="header-section-number">14.3.4</span> 4. Multi-environment analysis</a></li>
+  <li><a href="#stability" id="toc-stability" class="nav-link" data-scroll-target="#stability"><span class="header-section-number">14.3.5</span> 5. Stability</a></li>
+  <li><a href="#selection" id="toc-selection" class="nav-link" data-scroll-target="#selection"><span class="header-section-number">14.3.6</span> 6. Selection</a></li>
+  </ul></li>
+  <li><a href="#radiosensitivity-analysis" id="toc-radiosensitivity-analysis" class="nav-link" data-scroll-target="#radiosensitivity-analysis"><span class="header-section-number">14.4</span> Radiosensitivity analysis</a></li>
   <li><a href="#interpretation-for-breeding-decisions" id="toc-interpretation-for-breeding-decisions" class="nav-link" data-scroll-target="#interpretation-for-breeding-decisions"><span class="header-section-number">14.5</span> Interpretation for breeding decisions</a></li>
   <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">14.6</span> Exercise</a></li>
   <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">14.7</span> Key takeaways</a></li>
@@ -357,72 +369,486 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="chapter-info">
 <p><strong>Author:</strong> Luis Fernando Delgado Muñoz<br>
-<strong>Session:</strong> Day 6 – Monday 16 November, 13:30–17:00 (Topic 10)</p>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Chapter in preparation
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This chapter will be written by Luis Fernando Delgado Muñoz. The outline below follows the course agenda.</p>
-</div>
+<strong>Session:</strong> Day 8, Wednesday 18 November (Topic 10)<br>
+<strong>Slides:</strong> <a href="../slides/16-mutant-pipeline.html">Pipelines for mutant populations</a> and <a href="../slides/17-radiosensitivity.html">Radiosensitivity analysis</a><br>
+<strong>Practice files:</strong> <a href="../downloads/Mutant_pipeline_practical.zip">Mutant_pipeline_practical.zip</a> and <a href="../downloads/Radiosensitivity_practical.zip">Radiosensitivity_practical.zip</a></p>
 </div>
 <section id="learning-objectives" class="level2" data-number="14.1">
 <h2 data-number="14.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">14.1</span> Learning objectives</h2>
 <ul>
-<li>To be defined by the author</li>
+<li>Explain what is different in the analysis of a mutant population (M2 to M5).</li>
+<li>Choose an approach for unreplicated and replicated early generations.</li>
+<li>Run a complete pipeline with free packages: explore, clean, single trial, multi-environment, stability and selection.</li>
+<li>Estimate GR50 and LD50 from a dose test and choose a working dose.</li>
 </ul>
 </section>
-<section id="planned-content" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="planned-content"><span class="header-section-number">14.2</span> Planned content</h2>
+<section id="mutant-populations" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="mutant-populations"><span class="header-section-number">14.2</span> Mutant populations</h2>
+<p>In a mutation breeding programme the variation does not come from crosses between known parents. It comes from <strong>random changes in the DNA</strong> caused by the radiation. Three facts shape the analysis.</p>
+<ol type="1">
+<li>Most mutations are neutral or harmful. The useful ones are <strong>rare</strong>.</li>
+<li>The population is large, and the <strong>material per line is small</strong>.</li>
+<li>Early generations are often <strong>unreplicated</strong>.</li>
+</ol>
+<p>The statistics are the same as in conventional breeding: mixed models, BLUEs and BLUPs, heritability, G × E and selection indices. What changes is the <strong>amount of material</strong> and the <strong>stage</strong> of the programme.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 27%">
+<col style="width: 21%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stage</th>
+<th>Material</th>
+<th>Replication</th>
+<th>Main analysis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>M2</td>
+<td>Single plants, very variable</td>
+<td>None</td>
+<td>Compare with the controls. Select plants.</td>
+</tr>
+<tr class="even">
+<td>M3</td>
+<td>Progeny of selected plants</td>
+<td>None or 1 to 2</td>
+<td>Confirm the change. Compare each family with its control.</td>
+</tr>
+<tr class="odd">
+<td>M4</td>
+<td>Lines in preliminary trials</td>
+<td>2 or more, or partial</td>
+<td>Mixed models, heritability, BLUPs. First ranking.</td>
+</tr>
+<tr class="even">
+<td>M5 and later</td>
+<td>Advanced lines, several locations</td>
+<td>2 to 3, several environments</td>
+<td>Multi-environment analysis, stability, advancement.</td>
+</tr>
+</tbody>
+</table>
+<section id="unreplicated-and-replicated-early-generations" class="level3" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="unreplicated-and-replicated-early-generations"><span class="header-section-number">14.2.1</span> Unreplicated and replicated early generations</h3>
 <ul>
-<li>Analysis of mutant populations (M2–M5)</li>
-<li>Selection under high variability (unreplicated and replicated approaches at early generations)</li>
-<li>Application of statistical pipelines to mutation breeding of different types of crops (autogamous and allogamous)</li>
+<li><strong>Unreplicated.</strong> Repeat the <strong>controls</strong> (the parents) all over the field. Compare each plant with its neighbour controls. Remove the field trend with a spatial model. Keep <strong>more lines</strong> than you think you need, because one plot is a weak signal.</li>
+<li><strong>Replicated.</strong> Use blocks, or rows and columns. Treat the genotype as random to obtain BLUPs and heritability, and as fixed to obtain BLUEs. With several environments, study G × E and stability.</li>
 </ul>
 </section>
-<section id="key-concepts" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="key-concepts"><span class="header-section-number">14.3</span> Key concepts</h2>
-<!-- Author: theory, formulas and figures -->
+<section id="autogamous-allogamous-and-clonal-crops" class="level3" data-number="14.2.2">
+<h3 data-number="14.2.2" class="anchored" data-anchor-id="autogamous-allogamous-and-clonal-crops"><span class="header-section-number">14.2.2</span> Autogamous, allogamous and clonal crops</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Autogamous (wheat, rice, bean)</th>
+<th>Allogamous (maize)</th>
+<th>Clonal (chrysanthemum, banana, potato)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mutation is fixed by</td>
+<td>Selfing, lines are fixed in M4 or M5</td>
+<td>Selfing or controlled crosses</td>
+<td>Cuttings or tubers</td>
+</tr>
+<tr class="even">
+<td>Unit of analysis</td>
+<td>Line</td>
+<td>Family or selfed progeny</td>
+<td>Clone</td>
+</tr>
+<tr class="odd">
+<td>Typical problem</td>
+<td>Few seeds in M2 and M3</td>
+<td>Many generations of selfing</td>
+<td>Chimeras</td>
+</tr>
+</tbody>
+</table>
+<p>The pipeline is the same for all of them. Only the <strong>unit</strong> and the <strong>replication</strong> change.</p>
 </section>
-<section id="worked-demo-in-r" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="worked-demo-in-r"><span class="header-section-number">14.4</span> Worked demo in R</h2>
+</section>
+<section id="the-pipeline-in-six-steps" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="the-pipeline-in-six-steps"><span class="header-section-number">14.3</span> The pipeline in six steps</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_flow.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>What is a Gy?</strong> The gray (Gy) is the unit of radiation dose: 1 Gy is 1 joule of energy absorbed by each kilogram of tissue. In this example 20 Gy is a low dose, 40 Gy a medium dose and 60 Gy a high dose. A higher dose gives more mutations, but also more damage (smaller plants, more losses). The right dose comes from the radiosensitivity test (see below).</p>
+<p>The example is a simulated chrysanthemum population: 120 lines (4 parents and 116 mutants irradiated with 20, 40 or 60 Gy), 4 environments, randomized complete blocks with row and column, 5 traits and 1,080 plots. The data have real problems on purpose: missing values, a flooded block and wrong values. Wheat (partially replicated) and bean are also available. The data were simulated in R with the package <code>FieldSimR</code> (spatial error, blocks and several environments), correlated genetic effects from <code>MASS::mvrnorm</code>, and problems added on purpose. The true genetic values are kept by the instructor, so we can check the selection at the end. The radiosensitivity data were simulated in base R from a dose-response curve and a logistic survival curve. All functions are in <code>helpers_mutant.R</code> and use only free packages: <code>ggplot2</code>, <code>lme4</code> and <code>SpATS</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the shared course datasets in data/ where possible</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"helpers_mutant.R"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">load_mutant</span>(<span class="st">"data/chrysanthemum_mutant_trials.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>TRAITS <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"days_to_flowering"</span>, <span class="st">"plant_height_cm"</span>, <span class="st">"flower_diameter_cm"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">"flower_number"</span>, <span class="st">"stem_weight_g"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="explore" class="level3" data-number="14.3.1">
+<h3 data-number="14.3.1" class="anchored" data-anchor-id="explore"><span class="header-section-number">14.3.1</span> 1. Explore</h3>
+<p>Look at missing data, variation, boxplots, field maps and correlations <strong>before</strong> any model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(d, TRAITS)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">check_traits</span>(d, TRAITS)     <span class="co"># % missing, mean, sd, CV and keep</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A trait with more than 20 to 25% of missing values, or with almost no variation (CV below 1%), is not worth analysing.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_box_raw.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>The orange points are impossible values (a decimal point in the wrong place). They stretch the axis and hide the real variation. The raw correlations are close to zero for the same reason.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_corr_raw.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>The field maps show the <strong>flooded block</strong> (grey squares) and any trend in rows or columns.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_field_maps.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="clean" class="level3" data-number="14.3.2">
+<h3 data-number="14.3.2" class="anchored" data-anchor-id="clean"><span class="header-section-number">14.3.2</span> 2. Clean</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>flags <span class="ot">&lt;-</span> <span class="fu">flag_outliers</span>(d, TRAITS)     <span class="co"># robust z in each trial, then a model residual</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A value is flagged in two steps: first a gross error (very far from the trial median), then a residual of a model with genotype and block as random terms (only when lines have at least 1.5 plots). In the simulated data 32 outliers were inserted and 31 were found.</p>
+<p><strong>A flag is a question, not a decision.</strong> Removing every outlier is not always the best choice. In a mutant population the most interesting line can be the one that looks strange. A line that is extreme in all its plots may be a <strong>potential mutant</strong> or a new accession for a second stage. <code>review_outliers()</code> helps to decide. For each flagged value it checks the limits of what is possible (that you give) and the other plots of the same line:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>rev <span class="ot">&lt;-</span> <span class="fu">review_outliers</span>(d, flags, <span class="at">limits =</span> <span class="fu">list</span>(<span class="at">plant_height_cm =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">200</span>)))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(rev<span class="sc">$</span>suggestion)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">remove_outliers</span>(d, rev[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"Possible mutant"</span>, rev<span class="sc">$</span>suggestion), ])   <span class="co"># optional</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 36%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Flagged value is</th>
+<th>What we see</th>
+<th>Suggestion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Impossible</td>
+<td>Outside the limits you give</td>
+<td>Remove</td>
+</tr>
+<tr class="even">
+<td>Isolated</td>
+<td>The other plots of the line are normal</td>
+<td>Check the field book, then remove</td>
+</tr>
+<tr class="odd">
+<td>Repeated</td>
+<td>The line is extreme in its other plots too</td>
+<td>Keep it. Possible mutant</td>
+</tr>
+</tbody>
+</table>
+<p>With a more sensitive cut-off (<code>cutoff = 3</code>) 55 values are flagged: 28 are impossible, 25 are isolated and 2 are repeated. One of them is line M066 (60 Gy), flagged for plant height. Because the data are simulated we know that M066 is the shortest line of the whole population (59 cm, while its parent has 87 cm): a dwarf mutant that would have been lost by removing every outlier. The breeder decides, and removing outliers is optional.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_box_before_after.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="single-trial-analysis" class="level3" data-number="14.3.3">
+<h3 data-number="14.3.3" class="anchored" data-anchor-id="single-trial-analysis"><span class="header-section-number">14.3.3</span> 3. Single trial analysis</h3>
+<p>Each trial and trait is analysed with <code>lme4</code> and with <code>SpATS</code>. In <code>lme4</code> we can try four versions of the random terms. Genotype is always random:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 43%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Random terms</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>block</td>
+<td>block</td>
+<td>Design only. The starting point.</td>
+</tr>
+<tr class="even">
+<td>rowcol</td>
+<td>block, row, column</td>
+<td>Row and column as crossed random effects.</td>
+</tr>
+<tr class="odd">
+<td>nested</td>
+<td>block, row inside block, column inside block</td>
+<td>Row or column numbers are repeated in every block.</td>
+</tr>
+<tr class="even">
+<td>rowcol_nb</td>
+<td>row, column</td>
+<td>No block term, when blocks are too small to estimate.</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(y <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">|</span> g) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> block) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> row) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> col))     <span class="co"># BLUPs and heritability</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(y <span class="sc">~</span> g <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> block) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> row) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> col))           <span class="co"># BLUEs</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">compare_lme4_models</span>(x, <span class="st">"plant_height_cm"</span>)    <span class="co"># AIC, heritability and variances of the four models</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># SpATS, design and field trend</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">SpATS</span>(<span class="at">response =</span> <span class="st">"y"</span>, <span class="at">genotype =</span> <span class="st">"g"</span>, <span class="at">genotype.as.random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">spatial =</span> <span class="sc">~</span> <span class="fu">PSANOVA</span>(col, row), <span class="at">random =</span> <span class="sc">~</span> block, <span class="at">data =</span> x)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>st <span class="ot">&lt;-</span> <span class="fu">single_trials</span>(d2, TRAITS)       <span class="co"># all traits in all trials, all models</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>In our trials the blocks are strips of columns, so the column is already inside the block and the row crosses the blocks. Other layouts need other choices. Try the models and compare them. We keep the model with the <strong>lowest AIC</strong> (a difference below 2 is a tie) and we also look at the heritability.</p>
+<p><strong>Do the rows and columns explain variance?</strong> Yes. In plant height of <code>Field_autumn</code> row and column take a large part of the variance that was in the residual, and the AIC of the block-only model is much higher.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_lme4_models.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Which model wins depends on the trial and the trait: in our 20 cases <em>rowcol</em> wins 8 times, <em>rowcol_nb</em> 8, <em>block</em> 2 and <em>nested</em> 2. For plant height in <code>Field_autumn</code> the heritability goes from 0.64 (block) to 0.73 (block, row and column). <code>SpATS</code> gives 0.71.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_h2_models.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><code>SpATS</code> also gives a heritability based on the spatial surface. The heritability of the <code>lme4</code> models is calculated from the prediction error variance of the BLUPs (one minus the mean variance of the prediction error divided by the genetic variance).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_h2_spats.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>The heritability of a trial tells how well the line means reflect the genotype. A simple traffic light:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 71%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Heritability</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Above 0.5</td>
+<td>Good. Use it for selection.</td>
+</tr>
+<tr class="even">
+<td>0.2 to 0.5</td>
+<td>Use with care. Less weight in the index.</td>
+</tr>
+<tr class="odd">
+<td>Below 0.2</td>
+<td>Do not trust the ranking in this trial. Drop the trial or the trait.</td>
+</tr>
+</tbody>
+</table>
+<p>These limits are a guide, not a law.</p>
+<p>In the comparison, each point is one trait in one trial (5 traits in 4 trials, 20 points). On average the heritability is 0.64 with the best <code>lme4</code> model and 0.65 with <code>SpATS</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_h2_compare.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>BLUE or BLUP.</strong> BLUEs (genotype fixed) are used to compare lines and as input of a two-stage analysis. BLUPs (genotype random) are used for ranking. BLUPs of a single trial are <strong>not</strong> an input for the multi-environment model, because they are already shrunk.</p>
+<p><strong>Early generations.</strong> In M2 and M3 many lines have one plot. The BLUP pulls a line with one plot towards the mean, because one plot is a weak signal and a high value can be luck. Keep more lines than you think you need in the first generations and repeat the best ones in the next stage.</p>
+</section>
+<section id="multi-environment-analysis" class="level3" data-number="14.3.4">
+<h3 data-number="14.3.4" class="anchored" data-anchor-id="multi-environment-analysis"><span class="header-section-number">14.3.4</span> 4. Multi-environment analysis</h3>
+<p>Start again from the plot data. Do not reuse the single-trial BLUPs.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># trial is fixed. Block, genotype and genotype by trial are random</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(y <span class="sc">~</span> trial <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> block_id) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> g) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> g<span class="sc">:</span>trial))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>mets <span class="ot">&lt;-</span> <span class="fu">lapply</span>(TRAITS, <span class="cf">function</span>(tr) <span class="fu">met_fit</span>(d2, tr))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">met_summary</span>(mets[[<span class="dv">1</span>]])                 <span class="co"># variances and heritability</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A model over environments needs <strong>lines in common</strong> (the bridges). With few shared lines the G × E estimate is weak. In the example all 120 lines are in all 4 environments. In real programmes plan some common lines (the parents and a few good lines) in every trial.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_shared_chr.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:55.0%"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_met_variance.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>When G × E is large compared with the genotype variance (here days to flowering), a good line in one place is not always good everywhere. The genotypic correlation between environments and between traits helps to decide. The correlation between trials is shown for stem weight (left) and flower number (right).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_gcor_trials.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_gcor_traits.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+<p>Flower number and flower diameter have a negative correlation (r = -0.54). This is a trade-off that the selection index must handle. Correlations from BLUPs tend to be a little high because of shrinkage.</p>
+</section>
+<section id="stability" class="level3" data-number="14.3.5">
+<h3 data-number="14.3.5" class="anchored" data-anchor-id="stability"><span class="header-section-number">14.3.5</span> 5. Stability</h3>
+<p>The GGE biplot is built with a singular value decomposition of the matrix of BLUEs (lines in rows, environments in columns). Lines at the right have a high mean. Lines near the horizontal axis are stable.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">gge_fit</span>(W)        <span class="co"># W: lines x environments matrix of BLUEs</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_gge</span>(f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_gge.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="selection" class="level3" data-number="14.3.6">
+<h3 data-number="14.3.6" class="anchored" data-anchor-id="selection"><span class="header-section-number">14.3.6</span> 6. Selection</h3>
+<p>We combine the standardised BLUPs in a selection index. The weights are the product profile and must be defined with the breeder, the grower and the market. The example weights are +10 flower number, +10 flower diameter, +5 stem weight and -5 days to flowering.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">all_blups</span>(d2, TRAITS)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">selection_table</span>(B, weights, <span class="at">pct =</span> <span class="fl">0.25</span>)    <span class="co"># advance the top 25%</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_index.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Because the data are simulated, we can check the choice. Of the 30 lines selected, 19 are truly in the best 25%. This is the uncertainty that we always have.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mut_truth.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="radiosensitivity-analysis" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="radiosensitivity-analysis"><span class="header-section-number">14.4</span> Radiosensitivity analysis</h2>
+<p>Before the large irradiation we test a range of doses on a small sample. A dose that is too low gives few mutations. A dose that is too high kills the plants. Mutation breeding <strong>follows conventional breeding</strong>: the parent must already be a good variety, and the mutant only has to add one or two useful changes.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 46%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Meaning</th>
+<th>Measured on</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>LD50</strong></td>
+<td>Dose that kills 50% of the plants</td>
+<td>Survival</td>
+</tr>
+<tr class="even">
+<td><strong>GR50</strong></td>
+<td>Dose that reduces growth by 50%</td>
+<td>Height, weight or root length of the survivors</td>
+</tr>
+</tbody>
+</table>
+<p>Both depend on the crop, the tissue (seed, cutting, in vitro) and the trait.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"radio_helpers.R"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/chrysanthemum_radiosensitivity.csv"</span>)   <span class="co"># one row per plant</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dose_summary</span>(d)                                            <span class="co"># mean and reduction by dose</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">fit_dose_response</span>(d, <span class="st">"height_cm"</span>)                   <span class="co"># growth = D / (1 + (dose / e)^b), e is GR50</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dose_for_reduction</span>(fit, <span class="fl">0.5</span>)                               <span class="co"># GR50 with a 95% interval</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>sv <span class="ot">&lt;-</span> <span class="fu">fit_survival</span>(d)                                      <span class="co"># logistic regression</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ld50</span>(sv)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">dose_table</span>(<span class="fu">sort</span>(<span class="fu">unique</span>(d<span class="sc">$</span>dose_Gy)), fit, sv)               <span class="co"># reduction and survival by dose</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A straight line <code>height ~ dose</code> is a quick approximation (GR50 = 53 to 55 Gy here) and it works only near the middle of the range. The curve uses all plants and gives an interval.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rad_linear.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rad_curve.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>In the chrysanthemum example GR50 is 53 Gy (95% interval 51 to 56), GR30 is 38 Gy and LD50 is 89 Gy (81 to 99).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rad_choose.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Many programmes work with a dose between <strong>GR30 and GR50</strong> that still keeps good survival (about 90% here, 40 to 55 Gy). This is a <strong>guide, not a rule</strong>. Check the literature for your crop and confirm with the mutation frequency in the next generation. The GR50 depends on the trait: for fresh weight it is 39 Gy, lower than for height. Report the trait you used, or both.</p>
+<p>The same code works for wheat seeds. The doses are different, the method is the same (GR50 = 216 Gy, LD50 = 348 Gy).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rad_choose_wheat.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
 </div>
 </section>
 <section id="interpretation-for-breeding-decisions" class="level2" data-number="14.5">
 <h2 data-number="14.5" class="anchored" data-anchor-id="interpretation-for-breeding-decisions"><span class="header-section-number">14.5</span> Interpretation for breeding decisions</h2>
+<ul>
+<li>Keep <strong>more lines</strong> than you need when a line has one plot.</li>
+<li>Review the <strong>outliers</strong> before removing them. A line that is extreme in all its plots can be a potential mutant.</li>
+<li>Drop trials or traits with <strong>low heritability</strong> before the multi-environment step.</li>
+<li>Look at <strong>G × E</strong> before you select. Decide where the variety will be grown.</li>
+<li>Use an index that follows the <strong>product profile</strong>, and accept the uncertainty.</li>
+<li>Choose a dose with a <strong>good effect on growth and good survival</strong>.</li>
+</ul>
 </section>
 <section id="exercise" class="level2" data-number="14.6">
 <h2 data-number="14.6" class="anchored" data-anchor-id="exercise"><span class="header-section-number">14.6</span> Exercise</h2>
-<div class="callout callout-style-default callout-tip callout-empty-content callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-
-</div>
-</div>
-</div>
+<ol type="1">
+<li>Download <code>Mutant_pipeline_practical.zip</code>, run the pipeline for chrysanthemum and answer the 13 questions in the file.</li>
+<li>Change one line to run it for wheat or bean. What changes?</li>
+<li>Download <code>Radiosensitivity_practical.zip</code>, estimate GR50 and LD50 for chrysanthemum and for wheat, and choose a dose.</li>
+</ol>
 </section>
 <section id="key-takeaways" class="level2" data-number="14.7">
 <h2 data-number="14.7" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">14.7</span> Key takeaways</h2>
+<ol type="1">
+<li>A mutant population needs the same statistics, with more care.</li>
+<li>Explore and clean before you model.</li>
+<li>Use <code>SpATS</code> and <code>lme4</code> in each trial and check the heritability.</li>
+<li>The multi-environment model starts again from the plot data.</li>
+<li>Study G × E and stability before choosing.</li>
+<li>Choose the dose with a curve, not only a straight line, and report an interval.</li>
+</ol>
 </section>
 <section id="references" class="level2" data-number="14.8">
 <h2 data-number="14.8" class="anchored" data-anchor-id="references"><span class="header-section-number">14.8</span> References</h2>
+<ul>
+<li>Piepho, H.P. and Möhring, J. (2007). Computing heritability and selection response from unbalanced plant breeding trials. <em>Genetics</em> 177, 1881 to 1888.</li>
+<li>Rodríguez-Álvarez, M.X., Boer, M.P., van Eeuwijk, F.A. and Eilers, P.H.C. (2018). Correcting for spatial heterogeneity in plant breeding experiments with P-splines. <em>Spatial Statistics</em> 23, 52 to 71.</li>
+<li>Bates, D., Mächler, M., Bolker, B. and Walker, S. (2015). Fitting linear mixed-effects models using lme4. <em>Journal of Statistical Software</em> 67(1).</li>
+<li>Yan, W. and Kang, M.S. (2003). <em>GGE Biplot Analysis</em>. CRC Press.</li>
+</ul>
 
 
 </section>
