@@ -1,0 +1,109 @@
+---
+title: "Radiosensitivity analysis"
+subtitle: "RTC RER5030, Topic 10. Practical session"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 8, fig.height = 4.5)
+```
+
+## 0. Choose the crop
+
+Change **only the word below**: `"chrysanthemum"` (cuttings, doses 0 to 100 Gy) or `"wheat"` (seeds, doses 0 to 400 Gy).
+
+```{r config}
+CROP <- "chrysanthemum"
+
+source("radio_helpers.R")
+d <- read.csv(paste0("data/", CROP, "_radiosensitivity.csv"))
+d$dose_f <- factor(d$dose_Gy)
+head(d)
+table(d$dose_Gy, d$survived)
+```
+
+**Question 1.** How many plants per dose? What does `survived = 0` mean for the measurements of that plant?
+
+## 1. Look at the raw data
+
+```{r raw}
+ggplot(d, aes(dose_f, height_cm)) +
+  geom_boxplot(outlier.shape = NA, fill = "grey92") +
+  geom_jitter(width = 0.15, alpha = 0.6, colour = "#0072B2") +
+  labs(x = "Dose (Gy)", y = "Plant height (cm)") + theme_minimal()
+```
+
+```{r summary}
+s <- dose_summary(d, "height_cm")    # mean, sd, n, relative growth, reduction (%)
+s
+```
+
+**Question 2.** At which dose does the mean height fall to about half of the control? Do the plants vary more or less when the dose goes up?
+
+## 2. The simple way: a straight line
+
+```{r linear}
+lin <- lm(height_cm ~ dose_Gy, data = d)
+cf <- coef(lin)
+GR50_line <- -0.5 * cf[1] / cf[2]      # dose where the line reaches half of the intercept
+GR50_line
+
+ggplot(d, aes(dose_Gy, height_cm)) + geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE, colour = "#D55E00") + theme_minimal()
+```
+
+**Your turn.** Repeat the regression using only the doses up to 75% of the maximum dose. Does GR50 change?
+
+```{r your-turn-1}
+# Hint: d[d$dose_Gy <= 0.75 * max(d$dose_Gy), ]
+```
+
+## 3. The dose-response curve
+
+```{r curve}
+fit <- fit_dose_response(d, "height_cm")     # growth = D / (1 + (dose / e)^b)
+summary(fit)$coefficients                    # e is GR50
+sapply(c(GR20 = 0.2, GR30 = 0.3, GR50 = 0.5), function(k) round(dose_for_reduction(fit, k)))
+```
+
+```{r curve-plot}
+dd <- data.frame(dose_Gy = seq(0, max(d$dose_Gy), length.out = 200))
+dd$y <- predict(fit, dd)
+ggplot(d, aes(dose_Gy, height_cm)) + geom_point(alpha = 0.4) +
+  geom_line(data = dd, aes(y = y), colour = "#0072B2", linewidth = 1) + theme_minimal()
+```
+
+**Question 3.** What is GR50 with its 95% interval? How far is it from the straight-line value?
+
+**Your turn.** Fit the curve for **fresh weight** (`"fresh_weight_g"`). Is GR50 the same as for height?
+
+```{r your-turn-2}
+# fit_w <- fit_dose_response(d, "fresh_weight_g")
+```
+
+## 4. Survival and LD50
+
+```{r survival}
+sv <- fit_survival(d)       # glm(survived ~ dose_Gy, family = binomial)
+ld50(sv)                    # estimate and 95% interval
+```
+
+**Question 4.** Is LD50 higher or lower than GR50? Why?
+
+## 5. Choose the dose
+
+```{r choose}
+doses <- sort(unique(d$dose_Gy))
+dose_table(doses, fit, sv)       # growth reduction and survival predicted by the models
+```
+
+**Question 5.** The programme wants a strong effect on growth and at least **90% of the plants alive**. Which doses are candidates? Which dose do you choose, and why?
+
+**Question 6.** If you could only irradiate **two doses** in the large experiment, which ones and why?
+
+## Your own data
+
+Prepare a `.csv` with the columns `dose_Gy`, `survived` (1 or 0), and one column for each measurement (for example `height_cm`). Change the file name in section 0 and run again.

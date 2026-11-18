@@ -205,7 +205,7 @@ stage1_blues <- function(d, trait) {
 }
 
 # Stage 2: clone and clone by trial are random, and the known variance of each mean is used as weight.
-# nlme can fix the residual standard deviation to 1 (lme4 cannot), as ASReml does with its weights.
+# nlme can fix the residual standard deviation to 1 (lme4 cannot).
 stage2_met <- function(B) {
   nlme::lme(blue ~ trial, random = ~ 1 | g/trial, weights = nlme::varFixed(~ se2), data = B,
             control = nlme::lmeControl(sigma = 1))

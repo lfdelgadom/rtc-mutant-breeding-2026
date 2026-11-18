@@ -1,0 +1,1081 @@
+"environment","system","season","plot","block","row","column","genotype","type","parent","dose_Gy","flower_colour","days_to_flowering","plant_height_cm","flower_diameter_cm","flower_number","stem_weight_g"
+"GH_autumn","Greenhouse","Autumn",101,"B1","1","1","M028","mutant","Parent_A",20,"pink",73,89.4,5.7,29,56.7
+"GH_autumn","Greenhouse","Autumn",102,"B1","2","1","M102","mutant","Parent_D",60,"bronze",74,75.4,7.3,29,48
+"GH_autumn","Greenhouse","Autumn",103,"B1","3","1","M107","mutant","Parent_D",40,"bronze",76,88.9,7.3,24,59
+"GH_autumn","Greenhouse","Autumn",104,"B1","4","1","M093","mutant","Parent_D",60,"bronze",82,65.4,5.7,17,74.5
+"GH_autumn","Greenhouse","Autumn",105,"B1","5","1","M114","mutant","Parent_D",60,"bronze",70,59.4,6.1,19,38.9
+"GH_autumn","Greenhouse","Autumn",106,"B1","6","1","M004","mutant","Parent_A",20,"pink",67,81.9,7.6,14,35
+"GH_autumn","Greenhouse","Autumn",107,"B1","7","1","M078","mutant","Parent_C",60,"yellow",,79.2,9.1,9,68.4
+"GH_autumn","Greenhouse","Autumn",108,"B1","8","1","M047","mutant","Parent_B",40,"white",73,88.7,9.2,9,556
+"GH_autumn","Greenhouse","Autumn",109,"B1","9","1","M012","mutant","Parent_A",60,"pink",57,55,4.7,,49.6
+"GH_autumn","Greenhouse","Autumn",110,"B1","10","1","M048","mutant","Parent_B",60,"white",72,97.3,6,14,55.5
+"GH_autumn","Greenhouse","Autumn",111,"B1","11","1","M022","mutant","Parent_A",20,"pink",76,88.7,7.2,19,38.9
+"GH_autumn","Greenhouse","Autumn",112,"B1","12","1","M111","mutant","Parent_D",60,"bronze",77,75.4,6.9,18,53.5
+"GH_autumn","Greenhouse","Autumn",113,"B1","1","2","M020","mutant","Parent_A",40,"pink",76,97.2,8,18,59.4
+"GH_autumn","Greenhouse","Autumn",114,"B1","2","2","M101","mutant","Parent_D",40,"bronze",83,71.5,7,27,58.7
+"GH_autumn","Greenhouse","Autumn",115,"B1","3","2","M116","mutant","Parent_D",40,"bronze",80,76.9,6.2,22,76.1
+"GH_autumn","Greenhouse","Autumn",116,"B1","4","2","M106","mutant","Parent_D",20,"bronze",75,65.7,5.5,9,47.4
+"GH_autumn","Greenhouse","Autumn",117,"B1","5","2","M060","mutant","Parent_C",60,"yellow",68,70.1,6.4,19,40.9
+"GH_autumn","Greenhouse","Autumn",118,"B1","6","2","M018","mutant","Parent_A",60,"pink",72,85.2,6.7,19,48.4
+"GH_autumn","Greenhouse","Autumn",119,"B1","7","2","M038","mutant","Parent_B",40,"white",53,86.5,7,0,61.5
+"GH_autumn","Greenhouse","Autumn",120,"B1","8","2","M070","mutant","Parent_C",20,"bronze",76,89.9,9.3,10,63.8
+"GH_autumn","Greenhouse","Autumn",121,"B1","9","2","M065","mutant","Parent_C",40,"yellow",73,93.9,,11,77.6
+"GH_autumn","Greenhouse","Autumn",122,"B1","10","2","M098","mutant","Parent_D",40,"bronze",79,90.8,7.2,24,53.5
+"GH_autumn","Greenhouse","Autumn",123,"B1","11","2","Parent_C","parent","Parent_C",0,"yellow",,,,,
+"GH_autumn","Greenhouse","Autumn",124,"B1","12","2","Parent_A","parent","Parent_A",0,"pink",70,85.5,6.8,19,54.2
+"GH_autumn","Greenhouse","Autumn",125,"B1","1","3","M031","mutant","Parent_B",20,"white",59,88.4,8.1,10,46.5
+"GH_autumn","Greenhouse","Autumn",126,"B1","2","3","M021","mutant","Parent_A",60,"pink",75,93.9,6.7,13,49.1
+"GH_autumn","Greenhouse","Autumn",127,"B1","3","3","M050","mutant","Parent_B",40,"white",70,117.4,7.9,26,84.2
+"GH_autumn","Greenhouse","Autumn",128,"B1","4","3","M029","mutant","Parent_A",40,"pink",69,98.1,7.5,34,63.6
+"GH_autumn","Greenhouse","Autumn",129,"B1","5","3","M105","mutant","Parent_D",60,"bronze",76,,7.7,17,49.7
+"GH_autumn","Greenhouse","Autumn",130,"B1","6","3","M064","mutant","Parent_C",20,"yellow",79,102.4,8.9,17,
+"GH_autumn","Greenhouse","Autumn",131,"B1","7","3","M016","mutant","Parent_A",20,"pink",58,74.8,7.1,8,13.4
+"GH_autumn","Greenhouse","Autumn",132,"B1","8","3","M027","mutant","Parent_A",60,"chimera",78,70.1,6.3,21,48.7
+"GH_autumn","Greenhouse","Autumn",133,"B1","9","3","M053","mutant","Parent_B",40,"white",70,100.3,9.3,10,55.2
+"GH_autumn","Greenhouse","Autumn",134,"B1","10","3","M085","mutant","Parent_C",20,"yellow",78,118.9,9.5,28,86.4
+"GH_autumn","Greenhouse","Autumn",135,"B1","11","3","M046","mutant","Parent_B",20,"white",62,104.4,8.5,8,62.9
+"GH_autumn","Greenhouse","Autumn",136,"B1","12","3","M087","mutant","Parent_C",60,"yellow",70,,9.6,0,89.3
+"GH_autumn","Greenhouse","Autumn",137,"B1","1","4","Parent_B","parent","Parent_B",0,"white",,85.6,8.2,4,55.8
+"GH_autumn","Greenhouse","Autumn",138,"B1","2","4","M026","mutant","Parent_A",40,"pink",67,97.1,7.7,24,64.8
+"GH_autumn","Greenhouse","Autumn",139,"B1","3","4","M010","mutant","Parent_A",20,"pink",69,105.6,7.1,14,60.7
+"GH_autumn","Greenhouse","Autumn",140,"B1","4","4","M008","mutant","Parent_A",40,"pink",65,75.4,4.1,23,52.1
+"GH_autumn","Greenhouse","Autumn",141,"B1","5","4","M044","mutant","Parent_B",40,"white",64,93.4,,18,51.9
+"GH_autumn","Greenhouse","Autumn",142,"B1","6","4","M055","mutant","Parent_B",20,"white",57,79.6,7.8,0,41
+"GH_autumn","Greenhouse","Autumn",143,"B1","7","4","M023","mutant","Parent_A",40,"pink",78,71.9,7.6,16,58.6
+"GH_autumn","Greenhouse","Autumn",144,"B1","8","4","M080","mutant","Parent_C",40,"yellow",70,104.1,8.3,13,74.1
+"GH_autumn","Greenhouse","Autumn",145,"B1","9","4","M007","mutant","Parent_A",20,"pink",76,81.6,7.7,26,57.2
+"GH_autumn","Greenhouse","Autumn",146,"B1","10","4","M063","mutant","Parent_C",60,"yellow",88,109.9,8.4,13,64.9
+"GH_autumn","Greenhouse","Autumn",147,"B1","11","4","M075","mutant","Parent_C",60,"yellow",248.890441896253,108.8,8.4,2,59.3
+"GH_autumn","Greenhouse","Autumn",148,"B1","12","4","M094","mutant","Parent_D",20,"bronze",,90.6,7.8,15,58.5
+"GH_autumn","Greenhouse","Autumn",149,"B1","1","5","M113","mutant","Parent_D",40,"bronze",72,82.5,6.6,29,73.8
+"GH_autumn","Greenhouse","Autumn",150,"B1","2","5","M100","mutant","Parent_D",20,"bronze",80,94,6.8,28,66.7
+"GH_autumn","Greenhouse","Autumn",151,"B1","3","5","M032","mutant","Parent_B",40,"white",69,95.3,7.6,9,48.8
+"GH_autumn","Greenhouse","Autumn",152,"B1","4","5","M033","mutant","Parent_B",60,"white",74,112.1,9.3,13,57.8
+"GH_autumn","Greenhouse","Autumn",153,"B1","5","5","M036","mutant","Parent_B",60,"white",68,94.8,9.2,4,53.4
+"GH_autumn","Greenhouse","Autumn",154,"B1","6","5","M006","mutant","Parent_A",60,"pink",73,81.5,7.5,15,45.5
+"GH_autumn","Greenhouse","Autumn",155,"B1","7","5","M003","mutant","Parent_A",60,"chimera",62,67.8,6.2,21,29.3
+"GH_autumn","Greenhouse","Autumn",156,"B1","8","5","M090","mutant","Parent_D",60,"bronze",90,90.9,8,22,61
+"GH_autumn","Greenhouse","Autumn",157,"B1","9","5","M013","mutant","Parent_A",20,"pink",70,89.1,6.4,18,61.2
+"GH_autumn","Greenhouse","Autumn",158,"B1","10","5","M011","mutant","Parent_A",40,"pink",72,94.6,8.3,5,53.7
+"GH_autumn","Greenhouse","Autumn",159,"B1","11","5","M069","mutant","Parent_C",60,"bronze",76,106.9,9.8,9,61.4
+"GH_autumn","Greenhouse","Autumn",160,"B1","12","5","M024","mutant","Parent_A",60,"pink",81,107.3,6.7,4,64.8
+"GH_autumn","Greenhouse","Autumn",161,"B1","1","6","M056","mutant","Parent_B",40,"white",60,114.6,9.7,24,54.2
+"GH_autumn","Greenhouse","Autumn",162,"B1","2","6","M002","mutant","Parent_A",40,"pink",77,95.8,8.1,15,82.5
+"GH_autumn","Greenhouse","Autumn",163,"B1","3","6","M043","mutant","Parent_B",20,"white",63,116.9,8.7,16,65
+"GH_autumn","Greenhouse","Autumn",164,"B1","4","6","M091","mutant","Parent_D",20,"bronze",77,90.5,8.2,31,93.2
+"GH_autumn","Greenhouse","Autumn",165,"B1","5","6","M103","mutant","Parent_D",20,"bronze",61,85,7.2,26,62.8
+"GH_autumn","Greenhouse","Autumn",166,"B1","6","6","M082","mutant","Parent_C",20,"yellow",72,121,10,14,101.9
+"GH_autumn","Greenhouse","Autumn",167,"B1","7","6","M084","mutant","Parent_C",60,"yellow",83,105.8,10.4,11,88.8
+"GH_autumn","Greenhouse","Autumn",168,"B1","8","6","M108","mutant","Parent_D",60,"bronze",76,94.4,7.2,31,68.6
+"GH_autumn","Greenhouse","Autumn",169,"B1","9","6","M025","mutant","Parent_A",20,"pink",,84.5,6.1,28,47.5
+"GH_autumn","Greenhouse","Autumn",170,"B1","10","6","M095","mutant","Parent_D",40,"bronze",84,81.8,7.1,24,70.5
+"GH_autumn","Greenhouse","Autumn",171,"B1","11","6","M045","mutant","Parent_B",60,"white",,109.7,8,4,46.9
+"GH_autumn","Greenhouse","Autumn",172,"B1","12","6","M017","mutant","Parent_A",40,"pink",76,113.8,6,8,68
+"GH_autumn","Greenhouse","Autumn",173,"B1","1","7","M072","mutant","Parent_C",60,"yellow",,,,,
+"GH_autumn","Greenhouse","Autumn",174,"B1","2","7","M061","mutant","Parent_C",20,"yellow",83,105.5,10.1,23,84.5
+"GH_autumn","Greenhouse","Autumn",175,"B1","3","7","M066","mutant","Parent_C",60,"yellow",70,72.6,11.6,13,51.6
+"GH_autumn","Greenhouse","Autumn",176,"B1","4","7","M068","mutant","Parent_C",40,"yellow",82,100.7,10.9,16,110.3
+"GH_autumn","Greenhouse","Autumn",177,"B1","5","7","M073","mutant","Parent_C",20,"yellow",78,82,10.9,20,73
+"GH_autumn","Greenhouse","Autumn",178,"B1","6","7","M019","mutant","Parent_A",20,"pink",,,8.7,18,71.7
+"GH_autumn","Greenhouse","Autumn",179,"B1","7","7","M099","mutant","Parent_D",60,"bronze",76,78.6,9,16,67.3
+"GH_autumn","Greenhouse","Autumn",180,"B1","8","7","M092","mutant","Parent_D",40,"bronze",72,80.7,10.6,18,70.5
+"GH_autumn","Greenhouse","Autumn",181,"B1","9","7","M115","mutant","Parent_D",20,"chimera",71,89.9,6.1,19,74.2
+"GH_autumn","Greenhouse","Autumn",182,"B1","10","7","M112","mutant","Parent_D",20,"bronze",75,71.8,8,17,67.3
+"GH_autumn","Greenhouse","Autumn",183,"B1","11","7","M057","mutant","Parent_B",60,"white",73,100.4,8.7,23,57.9
+"GH_autumn","Greenhouse","Autumn",184,"B1","12","7","M039","mutant","Parent_B",60,"chimera",62,73.1,8.3,19,503
+"GH_autumn","Greenhouse","Autumn",185,"B1","1","8","M005","mutant","Parent_A",40,"light pink",65,,7.9,13,71.5
+"GH_autumn","Greenhouse","Autumn",186,"B1","2","8","M079","mutant","Parent_C",20,"yellow",74,114.9,9.9,19,71
+"GH_autumn","Greenhouse","Autumn",187,"B1","3","8","M067","mutant","Parent_C",20,"yellow",77,111.9,7,20,83.7
+"GH_autumn","Greenhouse","Autumn",188,"B1","4","8","M014","mutant","Parent_A",40,"pink",86,102.7,8.9,20,70.5
+"GH_autumn","Greenhouse","Autumn",189,"B1","5","8","Parent_D","parent","Parent_D",0,"bronze",81,75.1,,24,83.9
+"GH_autumn","Greenhouse","Autumn",190,"B1","6","8","M058","mutant","Parent_B",20,"white",70,100.5,10.3,0,51.4
+"GH_autumn","Greenhouse","Autumn",191,"B1","7","8","M001","mutant","Parent_A",20,"pink",63,86.3,7.7,9,68.9
+"GH_autumn","Greenhouse","Autumn",192,"B1","8","8","M042","mutant","Parent_B",60,"white",65,102.2,9.9,10,53.7
+"GH_autumn","Greenhouse","Autumn",193,"B1","9","8","M054","mutant","Parent_B",60,"white",66,70.4,7.6,14,45
+"GH_autumn","Greenhouse","Autumn",194,"B1","10","8","M035","mutant","Parent_B",40,"white",57,91.1,7.9,14,61.6
+"GH_autumn","Greenhouse","Autumn",195,"B1","11","8","M081","mutant","Parent_C",60,"yellow",,,,,
+"GH_autumn","Greenhouse","Autumn",196,"B1","12","8","M071","mutant","Parent_C",40,"yellow",82,98.9,10.2,21,81.8
+"GH_autumn","Greenhouse","Autumn",197,"B1","1","9","M062","mutant","Parent_C",40,"yellow",73,97.8,9.7,8,78.1
+"GH_autumn","Greenhouse","Autumn",198,"B1","2","9","M077","mutant","Parent_C",40,"yellow",76,88.4,9.9,14,80.4
+"GH_autumn","Greenhouse","Autumn",199,"B1","3","9","M059","mutant","Parent_C",40,"yellow",84,90,84,11,64.1
+"GH_autumn","Greenhouse","Autumn",200,"B1","4","9","M097","mutant","Parent_D",20,"bronze",80,92.1,7.7,25,
+"GH_autumn","Greenhouse","Autumn",201,"B1","5","9","M030","mutant","Parent_B",60,"white",57,83.5,8.9,11,52.9
+"GH_autumn","Greenhouse","Autumn",202,"B1","6","9","M109","mutant","Parent_D",20,"bronze",74,74.4,8.3,23,73.6
+"GH_autumn","Greenhouse","Autumn",203,"B1","7","9","M037","mutant","Parent_B",20,"white",68,90.2,,15,62.1
+"GH_autumn","Greenhouse","Autumn",204,"B1","8","9","M076","mutant","Parent_C",20,"yellow",79,96.8,8.3,17,87.8
+"GH_autumn","Greenhouse","Autumn",205,"B1","9","9","M034","mutant","Parent_B",20,"white",62,88.3,8.6,17,69.3
+"GH_autumn","Greenhouse","Autumn",206,"B1","10","9","M083","mutant","Parent_C",40,"yellow",80,101.4,9.8,18,80.7
+"GH_autumn","Greenhouse","Autumn",207,"B1","11","9","M049","mutant","Parent_B",20,"white",69,87.3,9.7,13,46
+"GH_autumn","Greenhouse","Autumn",208,"B1","12","9","M110","mutant","Parent_D",40,"bronze",76,98.5,6,24,69.4
+"GH_autumn","Greenhouse","Autumn",209,"B1","1","10","M041","mutant","Parent_B",40,"white",61,89.6,10.7,0,46.7
+"GH_autumn","Greenhouse","Autumn",210,"B1","2","10","M074","mutant","Parent_C",40,"yellow",73,124.5,8.9,28,80.2
+"GH_autumn","Greenhouse","Autumn",211,"B1","3","10","M040","mutant","Parent_B",20,"white",63,97.9,8.1,11,61.1
+"GH_autumn","Greenhouse","Autumn",212,"B1","4","10","M104","mutant","Parent_D",40,"bronze",83,76.3,8,22,91
+"GH_autumn","Greenhouse","Autumn",213,"B1","5","10","M009","mutant","Parent_A",60,"pink",62,96.3,9.8,23,81.2
+"GH_autumn","Greenhouse","Autumn",214,"B1","6","10","M086","mutant","Parent_C",40,"yellow",72,99.8,9,28,81.7
+"GH_autumn","Greenhouse","Autumn",215,"B1","7","10","M088","mutant","Parent_D",20,"bronze",75,88.2,8.1,8,64.7
+"GH_autumn","Greenhouse","Autumn",216,"B1","8","10","M052","mutant","Parent_B",20,"white",78,106,10.6,13,56.7
+"GH_autumn","Greenhouse","Autumn",217,"B1","9","10","M096","mutant","Parent_D",60,"bronze",83,78.1,6.8,22,48.1
+"GH_autumn","Greenhouse","Autumn",218,"B1","10","10","M015","mutant","Parent_A",60,"yellow",69,115.3,7.6,26,61.7
+"GH_autumn","Greenhouse","Autumn",219,"B1","11","10","M089","mutant","Parent_D",40,"bronze",,,,,
+"GH_autumn","Greenhouse","Autumn",220,"B1","12","10","M051","mutant","Parent_B",60,"white",71,94.6,8.8,3,63.4
+"GH_autumn","Greenhouse","Autumn",221,"B2","1","11","M105","mutant","Parent_D",60,"bronze",71,92.6,5.3,25,57.4
+"GH_autumn","Greenhouse","Autumn",222,"B2","2","11","M050","mutant","Parent_B",40,"white",72,108.4,9.7,18,70.9
+"GH_autumn","Greenhouse","Autumn",223,"B2","3","11","M014","mutant","Parent_A",40,"pink",81,96.7,8.9,26,74.9
+"GH_autumn","Greenhouse","Autumn",224,"B2","4","11","M097","mutant","Parent_D",20,"bronze",77,85.2,7.3,22,89.3
+"GH_autumn","Greenhouse","Autumn",225,"B2","5","11","M042","mutant","Parent_B",60,"white",66,73.5,9.2,0,53.2
+"GH_autumn","Greenhouse","Autumn",226,"B2","6","11","M035","mutant","Parent_B",40,"white",70,89.4,10,3,74.5
+"GH_autumn","Greenhouse","Autumn",227,"B2","7","11","M076","mutant","Parent_C",20,"yellow",76,104.8,10,9,83.3
+"GH_autumn","Greenhouse","Autumn",228,"B2","8","11","M075","mutant","Parent_C",60,"yellow",74,98.7,8.9,19,68.2
+"GH_autumn","Greenhouse","Autumn",229,"B2","9","11","M090","mutant","Parent_D",60,"bronze",90,91.6,6.7,18,67.2
+"GH_autumn","Greenhouse","Autumn",230,"B2","10","11","M115","mutant","Parent_D",20,"chimera",74,88.6,5,,53.7
+"GH_autumn","Greenhouse","Autumn",231,"B2","11","11","M103","mutant","Parent_D",20,"bronze",65,75,7,17,59
+"GH_autumn","Greenhouse","Autumn",232,"B2","12","11","M009","mutant","Parent_A",60,"pink",70,124.4,7.6,21,70.3
+"GH_autumn","Greenhouse","Autumn",233,"B2","1","12","M033","mutant","Parent_B",60,"white",65,96,8.6,11,58.4
+"GH_autumn","Greenhouse","Autumn",234,"B2","2","12","M018","mutant","Parent_A",60,"pink",81,81.1,7.5,35,75.3
+"GH_autumn","Greenhouse","Autumn",235,"B2","3","12","M084","mutant","Parent_C",60,"yellow",81,123.2,9.3,18,80.8
+"GH_autumn","Greenhouse","Autumn",236,"B2","4","12","M012","mutant","Parent_A",60,"pink",78,85.5,7.9,20,78.6
+"GH_autumn","Greenhouse","Autumn",237,"B2","5","12","M054","mutant","Parent_B",60,"white",69,73.8,6.9,8,63.1
+"GH_autumn","Greenhouse","Autumn",238,"B2","6","12","M027","mutant","Parent_A",60,"chimera",70,72.1,5.7,17,55.7
+"GH_autumn","Greenhouse","Autumn",239,"B2","7","12","M071","mutant","Parent_C",40,"yellow",79,82.9,8.6,6,72.9
+"GH_autumn","Greenhouse","Autumn",240,"B2","8","12","M072","mutant","Parent_C",60,"yellow",90,93.8,10.5,18,94.3
+"GH_autumn","Greenhouse","Autumn",241,"B2","9","12","M100","mutant","Parent_D",20,"bronze",74,90.4,7.7,15,54.4
+"GH_autumn","Greenhouse","Autumn",242,"B2","10","12","M074","mutant","Parent_C",40,"yellow",71,109,8.8,23,70.1
+"GH_autumn","Greenhouse","Autumn",243,"B2","11","12","M067","mutant","Parent_C",20,"yellow",69,113.7,7.1,18,72.8
+"GH_autumn","Greenhouse","Autumn",244,"B2","12","12","M095","mutant","Parent_D",40,"bronze",74,68.5,8.4,24,70
+"GH_autumn","Greenhouse","Autumn",245,"B2","1","13","M091","mutant","Parent_D",20,"bronze",69,69.2,6.8,13,67.3
+"GH_autumn","Greenhouse","Autumn",246,"B2","2","13","M111","mutant","Parent_D",60,"bronze",79,72,6.4,29,71.4
+"GH_autumn","Greenhouse","Autumn",247,"B2","3","13","M060","mutant","Parent_C",60,"yellow",67,92.8,9.1,13,74.8
+"GH_autumn","Greenhouse","Autumn",248,"B2","4","13","M113","mutant","Parent_D",40,"bronze",72,80.8,6.5,16,88.4
+"GH_autumn","Greenhouse","Autumn",249,"B2","5","13","M002","mutant","Parent_A",40,"pink",76,,7.8,13,63.7
+"GH_autumn","Greenhouse","Autumn",250,"B2","6","13","M034","mutant","Parent_B",20,"white",72,93.5,9.4,12,68
+"GH_autumn","Greenhouse","Autumn",251,"B2","7","13","M049","mutant","Parent_B",20,"white",72,92.4,9.8,10,72.4
+"GH_autumn","Greenhouse","Autumn",252,"B2","8","13","M096","mutant","Parent_D",60,"bronze",91,91.5,7.2,,64.1
+"GH_autumn","Greenhouse","Autumn",253,"B2","9","13","M032","mutant","Parent_B",40,"white",74,92.9,8.6,18,34.6
+"GH_autumn","Greenhouse","Autumn",254,"B2","10","13","M057","mutant","Parent_B",60,"white",79,,8,22,44.9
+"GH_autumn","Greenhouse","Autumn",255,"B2","11","13","M005","mutant","Parent_A",40,"light pink",69,83.7,7.9,26,70.5
+"GH_autumn","Greenhouse","Autumn",256,"B2","12","13","M058","mutant","Parent_B",20,"white",66,107.9,8.5,7,53.4
+"GH_autumn","Greenhouse","Autumn",257,"B2","1","14","M083","mutant","Parent_C",40,"yellow",74,93.8,10,16,64.8
+"GH_autumn","Greenhouse","Autumn",258,"B2","2","14","M106","mutant","Parent_D",20,"bronze",79,82.4,10.4,22,66.1
+"GH_autumn","Greenhouse","Autumn",259,"B2","3","14","M079","mutant","Parent_C",20,"yellow",72,110.1,8.2,7,62.7
+"GH_autumn","Greenhouse","Autumn",260,"B2","4","14","Parent_A","parent","Parent_A",0,"pink",76,84.5,9.5,11,75
+"GH_autumn","Greenhouse","Autumn",261,"B2","5","14","M093","mutant","Parent_D",60,"bronze",,45.7,,0,67.6
+"GH_autumn","Greenhouse","Autumn",262,"B2","6","14","M031","mutant","Parent_B",20,"white",71,71.5,9.1,10,56
+"GH_autumn","Greenhouse","Autumn",263,"B2","7","14","M087","mutant","Parent_C",60,"yellow",,93.5,,0,78
+"GH_autumn","Greenhouse","Autumn",264,"B2","8","14","M030","mutant","Parent_B",60,"white",68,99.9,9.8,12,58.8
+"GH_autumn","Greenhouse","Autumn",265,"B2","9","14","M023","mutant","Parent_A",40,"pink",86,84.6,7.5,13,54.6
+"GH_autumn","Greenhouse","Autumn",266,"B2","10","14","M107","mutant","Parent_D",40,"bronze",,,,,
+"GH_autumn","Greenhouse","Autumn",267,"B2","11","14","Parent_D","parent","Parent_D",0,"bronze",77,74.4,61,21,76.2
+"GH_autumn","Greenhouse","Autumn",268,"B2","12","14","M026","mutant","Parent_A",40,"pink",69,98.8,7.5,21,70.9
+"GH_autumn","Greenhouse","Autumn",269,"B2","1","15","M008","mutant","Parent_A",40,"pink",61,100.6,5.9,23,31.3
+"GH_autumn","Greenhouse","Autumn",270,"B2","2","15","M052","mutant","Parent_B",20,"white",65,101.6,9.3,6,59.4
+"GH_autumn","Greenhouse","Autumn",271,"B2","3","15","M092","mutant","Parent_D",40,"bronze",70,67.4,8.2,230,
+"GH_autumn","Greenhouse","Autumn",272,"B2","4","15","M104","mutant","Parent_D",40,"bronze",86,87.6,7.4,23,76.2
+"GH_autumn","Greenhouse","Autumn",273,"B2","5","15","M059","mutant","Parent_C",40,"yellow",94,73,8.6,0,65
+"GH_autumn","Greenhouse","Autumn",274,"B2","6","15","M085","mutant","Parent_C",20,"yellow",82,107.5,8.9,17,90.7
+"GH_autumn","Greenhouse","Autumn",275,"B2","7","15","M063","mutant","Parent_C",60,"yellow",85,85.5,7.9,18,51.6
+"GH_autumn","Greenhouse","Autumn",276,"B2","8","15","M098","mutant","Parent_D",40,"bronze",88,82.1,8.5,27,89.4
+"GH_autumn","Greenhouse","Autumn",277,"B2","9","15","M015","mutant","Parent_A",60,"yellow",79,109.1,6.9,16,66.4
+"GH_autumn","Greenhouse","Autumn",278,"B2","10","15","M066","mutant","Parent_C",60,"yellow",71,63.8,10,2,49.2
+"GH_autumn","Greenhouse","Autumn",279,"B2","11","15","M044","mutant","Parent_B",40,"white",70,94.1,9.7,16,30.2
+"GH_autumn","Greenhouse","Autumn",280,"B2","12","15","M089","mutant","Parent_D",40,"bronze",74,,7.3,20,55.2
+"GH_autumn","Greenhouse","Autumn",281,"B2","1","16","M061","mutant","Parent_C",20,"yellow",63,98.7,,16,77
+"GH_autumn","Greenhouse","Autumn",282,"B2","2","16","M036","mutant","Parent_B",60,"white",70,92.1,9.9,11,49.8
+"GH_autumn","Greenhouse","Autumn",283,"B2","3","16","Parent_B","parent","Parent_B",0,"white",60,81.9,8.9,3,53.8
+"GH_autumn","Greenhouse","Autumn",284,"B2","4","16","M081","mutant","Parent_C",60,"yellow",67,78.2,8.5,10,70.1
+"GH_autumn","Greenhouse","Autumn",285,"B2","5","16","M102","mutant","Parent_D",60,"bronze",84,66.4,9.5,13,64.4
+"GH_autumn","Greenhouse","Autumn",286,"B2","6","16","M101","mutant","Parent_D",40,"bronze",84,75,5.7,27,59.3
+"GH_autumn","Greenhouse","Autumn",287,"B2","7","16","M109","mutant","Parent_D",20,"bronze",82,66.1,7.8,20,44.4
+"GH_autumn","Greenhouse","Autumn",288,"B2","8","16","M041","mutant","Parent_B",40,"white",78,121.5,10.6,25,88.8
+"GH_autumn","Greenhouse","Autumn",289,"B2","9","16","M038","mutant","Parent_B",40,"white",63,69.8,7.9,14,49.6
+"GH_autumn","Greenhouse","Autumn",290,"B2","10","16","M064","mutant","Parent_C",20,"yellow",83,100.8,7.7,23,79.3
+"GH_autumn","Greenhouse","Autumn",291,"B2","11","16","M047","mutant","Parent_B",40,"white",75,93.4,8.6,14,72.2
+"GH_autumn","Greenhouse","Autumn",292,"B2","12","16","M021","mutant","Parent_A",60,"pink",66,108.1,5.4,17,65.3
+"GH_autumn","Greenhouse","Autumn",293,"B2","1","17","M025","mutant","Parent_A",20,"pink",73,105.2,8,19,62.8
+"GH_autumn","Greenhouse","Autumn",294,"B2","2","17","M082","mutant","Parent_C",20,"yellow",74,101.2,8.4,16,87.7
+"GH_autumn","Greenhouse","Autumn",295,"B2","3","17","M011","mutant","Parent_A",40,"pink",77,81.9,8.5,15,42
+"GH_autumn","Greenhouse","Autumn",296,"B2","4","17","M007","mutant","Parent_A",20,"pink",76,87.3,8.3,21,70
+"GH_autumn","Greenhouse","Autumn",297,"B2","5","17","M068","mutant","Parent_C",40,"yellow",75,83.3,8.2,5,50
+"GH_autumn","Greenhouse","Autumn",298,"B2","6","17","M116","mutant","Parent_D",40,"bronze",88,81.5,6.4,24,49.5
+"GH_autumn","Greenhouse","Autumn",299,"B2","7","17","M001","mutant","Parent_A",20,"pink",71,89.6,6.3,10,74.6
+"GH_autumn","Greenhouse","Autumn",300,"B2","8","17","M046","mutant","Parent_B",20,"white",70,93,9.7,15,54.9
+"GH_autumn","Greenhouse","Autumn",301,"B2","9","17","M077","mutant","Parent_C",40,"yellow",80,96.4,8.8,24,73.6
+"GH_autumn","Greenhouse","Autumn",302,"B2","10","17","M051","mutant","Parent_B",60,"white",76,87.1,11.2,0,68.8
+"GH_autumn","Greenhouse","Autumn",303,"B2","11","17","M020","mutant","Parent_A",40,"pink",,118.3,7,,58.5
+"GH_autumn","Greenhouse","Autumn",304,"B2","12","17","M019","mutant","Parent_A",20,"pink",75,81.4,7.3,11,38.3
+"GH_autumn","Greenhouse","Autumn",305,"B2","1","18","M114","mutant","Parent_D",60,"bronze",68,70.6,5.8,11,64.4
+"GH_autumn","Greenhouse","Autumn",306,"B2","2","18","M037","mutant","Parent_B",20,"white",68,93.1,8.1,17,
+"GH_autumn","Greenhouse","Autumn",307,"B2","3","18","M069","mutant","Parent_C",60,"bronze",79,81.2,8,15,67.7
+"GH_autumn","Greenhouse","Autumn",308,"B2","4","18","M039","mutant","Parent_B",60,"chimera",67,,8.8,,52.7
+"GH_autumn","Greenhouse","Autumn",309,"B2","5","18","M099","mutant","Parent_D",60,"bronze",79,73.4,7.9,18,44.2
+"GH_autumn","Greenhouse","Autumn",310,"B2","6","18","M062","mutant","Parent_C",40,"yellow",72,109.3,9.3,13,
+"GH_autumn","Greenhouse","Autumn",311,"B2","7","18","M043","mutant","Parent_B",20,"white",60,93.1,8.2,6,44.1
+"GH_autumn","Greenhouse","Autumn",312,"B2","8","18","M040","mutant","Parent_B",20,"white",71,,91,4,53.5
+"GH_autumn","Greenhouse","Autumn",313,"B2","9","18","M073","mutant","Parent_C",20,"yellow",81,101.4,9.7,25,71.7
+"GH_autumn","Greenhouse","Autumn",314,"B2","10","18","M112","mutant","Parent_D",20,"bronze",81,75.9,7.2,29,68.8
+"GH_autumn","Greenhouse","Autumn",315,"B2","11","18","M088","mutant","Parent_D",20,"bronze",86,93.9,6.2,29,73
+"GH_autumn","Greenhouse","Autumn",316,"B2","12","18","M003","mutant","Parent_A",60,"chimera",71,75.4,5.7,15,34.8
+"GH_autumn","Greenhouse","Autumn",317,"B2","1","19","M094","mutant","Parent_D",20,"bronze",80,61.6,7.3,15,53.5
+"GH_autumn","Greenhouse","Autumn",318,"B2","2","19","M004","mutant","Parent_A",20,"pink",81,90.9,8.7,24,51.9
+"GH_autumn","Greenhouse","Autumn",319,"B2","3","19","M010","mutant","Parent_A",20,"pink",75,83.3,6.9,18,53.8
+"GH_autumn","Greenhouse","Autumn",320,"B2","4","19","M024","mutant","Parent_A",60,"pink",80,100.1,8.5,11,61.7
+"GH_autumn","Greenhouse","Autumn",321,"B2","5","19","M028","mutant","Parent_A",20,"pink",80,94.8,6.2,22,54.1
+"GH_autumn","Greenhouse","Autumn",322,"B2","6","19","M078","mutant","Parent_C",60,"yellow",72,101.7,8.8,17,61.7
+"GH_autumn","Greenhouse","Autumn",323,"B2","7","19","M080","mutant","Parent_C",40,"yellow",71,99.2,7.8,12,82.9
+"GH_autumn","Greenhouse","Autumn",324,"B2","8","19","M110","mutant","Parent_D",40,"bronze",90,99.4,8.3,30,66.3
+"GH_autumn","Greenhouse","Autumn",325,"B2","9","19","M006","mutant","Parent_A",60,"pink",69,81.7,6.8,15,45.3
+"GH_autumn","Greenhouse","Autumn",326,"B2","10","19","M016","mutant","Parent_A",20,"pink",72,81.9,5.5,13,42.6
+"GH_autumn","Greenhouse","Autumn",327,"B2","11","19","M065","mutant","Parent_C",40,"yellow",77,114.2,8,9,76.6
+"GH_autumn","Greenhouse","Autumn",328,"B2","12","19","M086","mutant","Parent_C",40,"yellow",67,90.1,6.6,13,64
+"GH_autumn","Greenhouse","Autumn",329,"B2","1","20","M108","mutant","Parent_D",60,"bronze",75,93.7,6.9,18,73.2
+"GH_autumn","Greenhouse","Autumn",330,"B2","2","20","M017","mutant","Parent_A",40,"pink",74,98.6,7,23,60
+"GH_autumn","Greenhouse","Autumn",331,"B2","3","20","M022","mutant","Parent_A",20,"pink",68,87.6,7.3,16,28.3
+"GH_autumn","Greenhouse","Autumn",332,"B2","4","20","M029","mutant","Parent_A",40,"pink",73,99.8,,30,72
+"GH_autumn","Greenhouse","Autumn",333,"B2","5","20","M048","mutant","Parent_B",60,"white",,80.2,,0,43.9
+"GH_autumn","Greenhouse","Autumn",334,"B2","6","20","M053","mutant","Parent_B",40,"white",71,115.8,7.9,20,44.9
+"GH_autumn","Greenhouse","Autumn",335,"B2","7","20","M056","mutant","Parent_B",40,"white",63,99.8,7.3,14,48.5
+"GH_autumn","Greenhouse","Autumn",336,"B2","8","20","M055","mutant","Parent_B",20,"white",61,,8,12,49.3
+"GH_autumn","Greenhouse","Autumn",337,"B2","9","20","M013","mutant","Parent_A",20,"pink",72,89.2,5.6,21,70.7
+"GH_autumn","Greenhouse","Autumn",338,"B2","10","20","Parent_C","parent","Parent_C",0,"yellow",78,97.2,7.2,7,81.1
+"GH_autumn","Greenhouse","Autumn",339,"B2","11","20","M070","mutant","Parent_C",20,"bronze",69,113.4,7.4,18,75.1
+"GH_autumn","Greenhouse","Autumn",340,"B2","12","20","M045","mutant","Parent_B",60,"white",72,106.6,8.4,24,62.1
+"GH_spring","Greenhouse","Spring",201,"B1","1","1","M101","mutant","Parent_D",40,"bronze",92,82.5,5.9,27,58.3
+"GH_spring","Greenhouse","Spring",202,"B1","2","1","M090","mutant","Parent_D",60,"bronze",89,92,6.1,17,48.1
+"GH_spring","Greenhouse","Spring",203,"B1","3","1","M041","mutant","Parent_B",40,"white",79,99.1,10,23,58.3
+"GH_spring","Greenhouse","Spring",204,"B1","4","1","M010","mutant","Parent_A",20,"pink",78,80.4,8.7,21,64.1
+"GH_spring","Greenhouse","Spring",205,"B1","5","1","M067","mutant","Parent_C",20,"yellow",82,92.6,8.4,26,77
+"GH_spring","Greenhouse","Spring",206,"B1","6","1","M045","mutant","Parent_B",60,"white",78,93.9,8.5,23,46.5
+"GH_spring","Greenhouse","Spring",207,"B1","7","1","M043","mutant","Parent_B",20,"white",74,96.4,8,15,76
+"GH_spring","Greenhouse","Spring",208,"B1","8","1","M029","mutant","Parent_A",40,"pink",82,105.2,7.5,27,78.4
+"GH_spring","Greenhouse","Spring",209,"B1","9","1","M049","mutant","Parent_B",20,"white",75,91.2,8.4,22,55
+"GH_spring","Greenhouse","Spring",210,"B1","10","1","M057","mutant","Parent_B",60,"white",,87.3,,0,56.8
+"GH_spring","Greenhouse","Spring",211,"B1","11","1","M027","mutant","Parent_A",60,"chimera",80,83.8,6.8,21,45.7
+"GH_spring","Greenhouse","Spring",212,"B1","12","1","Parent_D","parent","Parent_D",0,"bronze",85,73.2,6.6,23,54.1
+"GH_spring","Greenhouse","Spring",213,"B1","1","2","M064","mutant","Parent_C",20,"yellow",84,93.7,9.6,15,70
+"GH_spring","Greenhouse","Spring",214,"B1","2","2","M004","mutant","Parent_A",20,"pink",84,89.6,9.8,21,58.9
+"GH_spring","Greenhouse","Spring",215,"B1","3","2","Parent_B","parent","Parent_B",0,"white",72,99.2,8.4,9,48.4
+"GH_spring","Greenhouse","Spring",216,"B1","4","2","M082","mutant","Parent_C",20,"yellow",77,93.3,8.5,11,65
+"GH_spring","Greenhouse","Spring",217,"B1","5","2","M108","mutant","Parent_D",60,"bronze",80,93.1,6.8,22,64.3
+"GH_spring","Greenhouse","Spring",218,"B1","6","2","M081","mutant","Parent_C",60,"yellow",66,88.2,7.1,12,59.2
+"GH_spring","Greenhouse","Spring",219,"B1","7","2","M096","mutant","Parent_D",60,"bronze",80,83,6.7,15,41.4
+"GH_spring","Greenhouse","Spring",220,"B1","8","2","M079","mutant","Parent_C",20,"yellow",76,92.9,9.3,8,62.6
+"GH_spring","Greenhouse","Spring",221,"B1","9","2","Parent_A","parent","Parent_A",0,"pink",79,82.3,71,,59.9
+"GH_spring","Greenhouse","Spring",222,"B1","10","2","M112","mutant","Parent_D",20,"bronze",82,79.6,7.2,13,64.1
+"GH_spring","Greenhouse","Spring",223,"B1","11","2","M084","mutant","Parent_C",60,"yellow",85,108.9,11.5,5,77.7
+"GH_spring","Greenhouse","Spring",224,"B1","12","2","M077","mutant","Parent_C",40,"yellow",74,81.7,9.1,18,63.1
+"GH_spring","Greenhouse","Spring",225,"B1","1","3","M047","mutant","Parent_B",40,"white",77,105.9,7.4,16,68.2
+"GH_spring","Greenhouse","Spring",226,"B1","2","3","M042","mutant","Parent_B",60,"white",68,95.1,8.3,13,37.6
+"GH_spring","Greenhouse","Spring",227,"B1","3","3","M061","mutant","Parent_C",20,"yellow",75,88.9,7.5,18,67.4
+"GH_spring","Greenhouse","Spring",228,"B1","4","3","M015","mutant","Parent_A",60,"yellow",79,79.5,7.2,12,57.4
+"GH_spring","Greenhouse","Spring",229,"B1","5","3","M025","mutant","Parent_A",20,"pink",78,83.2,6.5,22,57.6
+"GH_spring","Greenhouse","Spring",230,"B1","6","3","M052","mutant","Parent_B",20,"white",83,101.4,7.4,20,55.7
+"GH_spring","Greenhouse","Spring",231,"B1","7","3","M006","mutant","Parent_A",60,"pink",84,82.9,7.9,26,60.4
+"GH_spring","Greenhouse","Spring",232,"B1","8","3","M072","mutant","Parent_C",60,"yellow",87,88.6,9.2,14,61
+"GH_spring","Greenhouse","Spring",233,"B1","9","3","M104","mutant","Parent_D",40,"bronze",82,69.5,6.5,26,51.4
+"GH_spring","Greenhouse","Spring",234,"B1","10","3","M083","mutant","Parent_C",40,"yellow",78,88.5,8.8,19,67.1
+"GH_spring","Greenhouse","Spring",235,"B1","11","3","M039","mutant","Parent_B",60,"chimera",64,68,7.2,12,52.6
+"GH_spring","Greenhouse","Spring",236,"B1","12","3","M040","mutant","Parent_B",20,"white",75,85.7,7.9,14,63.8
+"GH_spring","Greenhouse","Spring",237,"B1","1","4","M001","mutant","Parent_A",20,"pink",74,70,8.8,9,53.3
+"GH_spring","Greenhouse","Spring",238,"B1","2","4","M030","mutant","Parent_B",60,"white",79,97.6,,30,47.1
+"GH_spring","Greenhouse","Spring",239,"B1","3","4","M016","mutant","Parent_A",20,"pink",76,80.8,6.7,12,51.8
+"GH_spring","Greenhouse","Spring",240,"B1","4","4","M100","mutant","Parent_D",20,"bronze",87,81.5,6.1,16,56.2
+"GH_spring","Greenhouse","Spring",241,"B1","5","4","M102","mutant","Parent_D",60,"bronze",86,58.9,5,21,42.3
+"GH_spring","Greenhouse","Spring",242,"B1","6","4","M089","mutant","Parent_D",40,"bronze",82,84.3,6.7,22,72.8
+"GH_spring","Greenhouse","Spring",243,"B1","7","4","M116","mutant","Parent_D",40,"bronze",87,86.5,5,24,60.2
+"GH_spring","Greenhouse","Spring",244,"B1","8","4","M021","mutant","Parent_A",60,"pink",77,85,7.3,16,51
+"GH_spring","Greenhouse","Spring",245,"B1","9","4","M020","mutant","Parent_A",40,"pink",72,91.5,6.1,,59.6
+"GH_spring","Greenhouse","Spring",246,"B1","10","4","M065","mutant","Parent_C",40,"yellow",80,92,9.1,17,71.1
+"GH_spring","Greenhouse","Spring",247,"B1","11","4","M014","mutant","Parent_A",40,"pink",83,95.2,6.9,24,49.7
+"GH_spring","Greenhouse","Spring",248,"B1","12","4","M062","mutant","Parent_C",40,"yellow",,81.3,,0,70.7
+"GH_spring","Greenhouse","Spring",249,"B1","1","5","M069","mutant","Parent_C",60,"bronze",74,81.6,9.6,3,68
+"GH_spring","Greenhouse","Spring",250,"B1","2","5","M088","mutant","Parent_D",20,"bronze",87,69.5,7.2,26,
+"GH_spring","Greenhouse","Spring",251,"B1","3","5","M054","mutant","Parent_B",60,"white",83,71.2,7.4,15,57
+"GH_spring","Greenhouse","Spring",252,"B1","4","5","M074","mutant","Parent_C",40,"yellow",84,92.9,7.9,8,64.8
+"GH_spring","Greenhouse","Spring",253,"B1","5","5","M037","mutant","Parent_B",20,"white",75,72.7,7,15,53
+"GH_spring","Greenhouse","Spring",254,"B1","6","5","M051","mutant","Parent_B",60,"white",87,99.5,,9,50.2
+"GH_spring","Greenhouse","Spring",255,"B1","7","5","M011","mutant","Parent_A",40,"pink",77,77.1,8.2,20,56.5
+"GH_spring","Greenhouse","Spring",256,"B1","8","5","M075","mutant","Parent_C",60,"yellow",78,89.7,7.6,7,57.4
+"GH_spring","Greenhouse","Spring",257,"B1","9","5","M073","mutant","Parent_C",20,"yellow",87,83.1,10.3,13,69.7
+"GH_spring","Greenhouse","Spring",258,"B1","10","5","M080","mutant","Parent_C",40,"yellow",81,100.2,9.1,14,70.4
+"GH_spring","Greenhouse","Spring",259,"B1","11","5","M070","mutant","Parent_C",20,"bronze",76,89.7,8.4,7,75.5
+"GH_spring","Greenhouse","Spring",260,"B1","12","5","M103","mutant","Parent_D",20,"bronze",82,86.2,7.1,24,55.8
+"GH_spring","Greenhouse","Spring",261,"B1","1","6","M017","mutant","Parent_A",40,"pink",76,94,5.3,21,67.1
+"GH_spring","Greenhouse","Spring",262,"B1","2","6","M018","mutant","Parent_A",60,"pink",78,70.4,7.7,21,48.9
+"GH_spring","Greenhouse","Spring",263,"B1","3","6","M113","mutant","Parent_D",40,"bronze",91,,7.2,23,73.5
+"GH_spring","Greenhouse","Spring",264,"B1","4","6","M110","mutant","Parent_D",40,"bronze",85,73.5,5.7,19,45.2
+"GH_spring","Greenhouse","Spring",265,"B1","5","6","M005","mutant","Parent_A",40,"light pink",70,72.9,7.8,13,81.8
+"GH_spring","Greenhouse","Spring",266,"B1","6","6","M009","mutant","Parent_A",60,"pink",73,98.1,8.1,14,71.5
+"GH_spring","Greenhouse","Spring",267,"B1","7","6","M071","mutant","Parent_C",40,"yellow",76,77.3,8.4,2,38.7
+"GH_spring","Greenhouse","Spring",268,"B1","8","6","M066","mutant","Parent_C",60,"yellow",79,57.2,9.3,,37.3
+"GH_spring","Greenhouse","Spring",269,"B1","9","6","M078","mutant","Parent_C",60,"yellow",78,90.4,7,7,65.4
+"GH_spring","Greenhouse","Spring",270,"B1","10","6","M012","mutant","Parent_A",60,"pink",82,,4.9,23,54.2
+"GH_spring","Greenhouse","Spring",271,"B1","11","6","M022","mutant","Parent_A",20,"pink",76,8.94,,20,57.6
+"GH_spring","Greenhouse","Spring",272,"B1","12","6","Parent_C","parent","Parent_C",0,"yellow",80,85.1,9.5,11,78.3
+"GH_spring","Greenhouse","Spring",273,"B1","1","7","M036","mutant","Parent_B",60,"white",76,70.8,7.4,,60
+"GH_spring","Greenhouse","Spring",274,"B1","2","7","M085","mutant","Parent_C",20,"yellow",75,100.5,7.6,19,76.4
+"GH_spring","Greenhouse","Spring",275,"B1","3","7","M076","mutant","Parent_C",20,"yellow",74,97.9,7.5,14,79.1
+"GH_spring","Greenhouse","Spring",276,"B1","4","7","M086","mutant","Parent_C",40,"yellow",86,81.3,8.7,15,68.6
+"GH_spring","Greenhouse","Spring",277,"B1","5","7","M105","mutant","Parent_D",60,"bronze",90,76.8,4.1,21,52.7
+"GH_spring","Greenhouse","Spring",278,"B1","6","7","M106","mutant","Parent_D",20,"bronze",83,69.7,6.4,12,52.4
+"GH_spring","Greenhouse","Spring",279,"B1","7","7","M023","mutant","Parent_A",40,"pink",79,81.5,5.6,18,53.6
+"GH_spring","Greenhouse","Spring",280,"B1","8","7","M056","mutant","Parent_B",40,"white",80,114.8,8.9,12,50.7
+"GH_spring","Greenhouse","Spring",281,"B1","9","7","M109","mutant","Parent_D",20,"bronze",83,74.8,4.7,11,61.6
+"GH_spring","Greenhouse","Spring",282,"B1","10","7","M111","mutant","Parent_D",60,"bronze",86,72,6.8,21,67.2
+"GH_spring","Greenhouse","Spring",283,"B1","11","7","M026","mutant","Parent_A",40,"pink",,101.8,6.9,13,70.4
+"GH_spring","Greenhouse","Spring",284,"B1","12","7","M098","mutant","Parent_D",40,"bronze",82,69.3,6.4,21,60.8
+"GH_spring","Greenhouse","Spring",285,"B1","1","8","M044","mutant","Parent_B",40,"white",79,82.2,7,2,47.9
+"GH_spring","Greenhouse","Spring",286,"B1","2","8","M031","mutant","Parent_B",20,"white",75,86.9,7.7,20,57.4
+"GH_spring","Greenhouse","Spring",287,"B1","3","8","M058","mutant","Parent_B",20,"white",75,95.8,8.1,9,57.8
+"GH_spring","Greenhouse","Spring",288,"B1","4","8","M008","mutant","Parent_A",40,"pink",73,73.6,5.7,20,56.7
+"GH_spring","Greenhouse","Spring",289,"B1","5","8","M068","mutant","Parent_C",40,"yellow",78,95.2,8.8,12,69.9
+"GH_spring","Greenhouse","Spring",290,"B1","6","8","M093","mutant","Parent_D",60,"bronze",88,78.7,3.8,24,61.7
+"GH_spring","Greenhouse","Spring",291,"B1","7","8","M050","mutant","Parent_B",40,"white",81,95,5.2,20,48.2
+"GH_spring","Greenhouse","Spring",292,"B1","8","8","M013","mutant","Parent_A",20,"pink",82,85.8,5.5,20,69
+"GH_spring","Greenhouse","Spring",293,"B1","9","8","M063","mutant","Parent_C",60,"yellow",82,90.4,6.5,15,42.6
+"GH_spring","Greenhouse","Spring",294,"B1","10","8","M115","mutant","Parent_D",20,"chimera",84,71.4,6.5,20,61
+"GH_spring","Greenhouse","Spring",295,"B1","11","8","M099","mutant","Parent_D",60,"bronze",,63.1,8.7,4,53.3
+"GH_spring","Greenhouse","Spring",296,"B1","12","8","M094","mutant","Parent_D",20,"bronze",82,68.4,5.7,14,62.8
+"GH_spring","Greenhouse","Spring",297,"B1","1","9","M028","mutant","Parent_A",20,"pink",79,73.4,8.2,16,60.7
+"GH_spring","Greenhouse","Spring",298,"B1","2","9","M007","mutant","Parent_A",20,"pink",,,,,
+"GH_spring","Greenhouse","Spring",299,"B1","3","9","M097","mutant","Parent_D",20,"bronze",83,98.1,7.3,29,70.5
+"GH_spring","Greenhouse","Spring",300,"B1","4","9","M060","mutant","Parent_C",60,"yellow",,,,0,51.1
+"GH_spring","Greenhouse","Spring",301,"B1","5","9","M003","mutant","Parent_A",60,"chimera",,68.6,6.2,9,52.8
+"GH_spring","Greenhouse","Spring",302,"B1","6","9","M035","mutant","Parent_B",40,"white",77,104.5,,14,64.9
+"GH_spring","Greenhouse","Spring",303,"B1","7","9","M019","mutant","Parent_A",20,"pink",80,82.9,6.9,14,50.1
+"GH_spring","Greenhouse","Spring",304,"B1","8","9","M091","mutant","Parent_D",20,"bronze",83,,6.3,21,48.5
+"GH_spring","Greenhouse","Spring",305,"B1","9","9","M053","mutant","Parent_B",40,"white",78,96.5,6.3,17,58.3
+"GH_spring","Greenhouse","Spring",306,"B1","10","9","M048","mutant","Parent_B",60,"white",,,,,
+"GH_spring","Greenhouse","Spring",307,"B1","11","9","M087","mutant","Parent_C",60,"yellow",78,97.5,8,0,79.3
+"GH_spring","Greenhouse","Spring",308,"B1","12","9","M024","mutant","Parent_A",60,"pink",81,72,8.9,17,54.8
+"GH_spring","Greenhouse","Spring",309,"B1","1","10","M002","mutant","Parent_A",40,"pink",,93.3,10,10,61.9
+"GH_spring","Greenhouse","Spring",310,"B1","2","10","M032","mutant","Parent_B",40,"white",85,93.1,8,9,50.7
+"GH_spring","Greenhouse","Spring",311,"B1","3","10","M095","mutant","Parent_D",40,"bronze",78,60.8,5.1,20,45.3
+"GH_spring","Greenhouse","Spring",312,"B1","4","10","M059","mutant","Parent_C",40,"yellow",93,82.3,,6,69.6
+"GH_spring","Greenhouse","Spring",313,"B1","5","10","M092","mutant","Parent_D",40,"bronze",77,66.4,7.6,16,56.5
+"GH_spring","Greenhouse","Spring",314,"B1","6","10","M033","mutant","Parent_B",60,"white",79,102.5,8.8,9,52.1
+"GH_spring","Greenhouse","Spring",315,"B1","7","10","M038","mutant","Parent_B",40,"white",71,87.9,6.4,18,37.5
+"GH_spring","Greenhouse","Spring",316,"B1","8","10","M107","mutant","Parent_D",40,"bronze",81,90.3,6.9,21,51.5
+"GH_spring","Greenhouse","Spring",317,"B1","9","10","M046","mutant","Parent_B",20,"white",72,84.5,6.5,12,72.5
+"GH_spring","Greenhouse","Spring",318,"B1","10","10","M034","mutant","Parent_B",20,"white",79,106.5,8.6,23,67.5
+"GH_spring","Greenhouse","Spring",319,"B1","11","10","M114","mutant","Parent_D",60,"bronze",78,70.1,6.4,14,50.7
+"GH_spring","Greenhouse","Spring",320,"B1","12","10","M055","mutant","Parent_B",20,"white",73,73.8,7.8,13,47.2
+"GH_spring","Greenhouse","Spring",321,"B2","1","11","M033","mutant","Parent_B",60,"white",79,86.5,8.7,6,48.7
+"GH_spring","Greenhouse","Spring",322,"B2","2","11","M107","mutant","Parent_D",40,"bronze",81,86.5,4.3,16,58.4
+"GH_spring","Greenhouse","Spring",323,"B2","3","11","M006","mutant","Parent_A",60,"pink",77,82.2,9.7,15,55.9
+"GH_spring","Greenhouse","Spring",324,"B2","4","11","M023","mutant","Parent_A",40,"pink",85,72.6,6.6,21,66.4
+"GH_spring","Greenhouse","Spring",325,"B2","5","11","M068","mutant","Parent_C",40,"yellow",76,87.8,8.9,9,68.4
+"GH_spring","Greenhouse","Spring",326,"B2","6","11","M017","mutant","Parent_A",40,"pink",76,101,5.8,14,53.5
+"GH_spring","Greenhouse","Spring",327,"B2","7","11","M013","mutant","Parent_A",20,"pink",76,88.9,6.7,20,44.4
+"GH_spring","Greenhouse","Spring",328,"B2","8","11","M030","mutant","Parent_B",60,"white",79,89.4,6.9,12,45.4
+"GH_spring","Greenhouse","Spring",329,"B2","9","11","Parent_D","parent","Parent_D",0,"bronze",83,76.6,5,16,61.1
+"GH_spring","Greenhouse","Spring",330,"B2","10","11","M048","mutant","Parent_B",60,"white",82,96.5,6.6,18,55.5
+"GH_spring","Greenhouse","Spring",331,"B2","11","11","M020","mutant","Parent_A",40,"pink",75,90.2,8.2,12,57.6
+"GH_spring","Greenhouse","Spring",332,"B2","12","11","M067","mutant","Parent_C",20,"yellow",83,102.1,8,22,72.5
+"GH_spring","Greenhouse","Spring",333,"B2","1","12","M091","mutant","Parent_D",20,"bronze",83,70.7,6.7,16,69.7
+"GH_spring","Greenhouse","Spring",334,"B2","2","12","M016","mutant","Parent_A",20,"pink",68,78.2,6.4,13,64.2
+"GH_spring","Greenhouse","Spring",335,"B2","3","12","M114","mutant","Parent_D",60,"bronze",76,78.7,7.2,13,47.6
+"GH_spring","Greenhouse","Spring",336,"B2","4","12","M073","mutant","Parent_C",20,"yellow",82,107.3,8.8,18,82.8
+"GH_spring","Greenhouse","Spring",337,"B2","5","12","M064","mutant","Parent_C",20,"yellow",73,95.6,7.5,19,87.1
+"GH_spring","Greenhouse","Spring",338,"B2","6","12","M096","mutant","Parent_D",60,"bronze",77,96.1,7.7,12,70.4
+"GH_spring","Greenhouse","Spring",339,"B2","7","12","M072","mutant","Parent_C",60,"yellow",85,103,7.5,11,77.5
+"GH_spring","Greenhouse","Spring",340,"B2","8","12","M074","mutant","Parent_C",40,"yellow",80,83.8,8.6,12,73.7
+"GH_spring","Greenhouse","Spring",341,"B2","9","12","M089","mutant","Parent_D",40,"bronze",80,82.2,5.3,17,68.2
+"GH_spring","Greenhouse","Spring",342,"B2","10","12","M055","mutant","Parent_B",20,"white",72,68.5,7.7,11,50.7
+"GH_spring","Greenhouse","Spring",343,"B2","11","12","M111","mutant","Parent_D",60,"bronze",77,73.7,5,13,57.6
+"GH_spring","Greenhouse","Spring",344,"B2","12","12","M102","mutant","Parent_D",60,"bronze",92,74,7,15,55.2
+"GH_spring","Greenhouse","Spring",345,"B2","1","13","M022","mutant","Parent_A",20,"pink",71,80.7,5.9,14,66.5
+"GH_spring","Greenhouse","Spring",346,"B2","2","13","M115","mutant","Parent_D",20,"chimera",90,88.1,8,19,72.1
+"GH_spring","Greenhouse","Spring",347,"B2","3","13","M024","mutant","Parent_A",60,"pink",92,73,8.1,18,52.7
+"GH_spring","Greenhouse","Spring",348,"B2","4","13","M050","mutant","Parent_B",40,"white",73,93.1,8.2,15,84.9
+"GH_spring","Greenhouse","Spring",349,"B2","5","13","M112","mutant","Parent_D",20,"bronze",76,78,7.2,6,69.4
+"GH_spring","Greenhouse","Spring",350,"B2","6","13","M054","mutant","Parent_B",60,"white",73,80,8,16,56.7
+"GH_spring","Greenhouse","Spring",351,"B2","7","13","M087","mutant","Parent_C",60,"yellow",80,93.5,8.9,6,78.1
+"GH_spring","Greenhouse","Spring",352,"B2","8","13","M103","mutant","Parent_D",20,"bronze",83,73.3,6.5,15,62.3
+"GH_spring","Greenhouse","Spring",353,"B2","9","13","M018","mutant","Parent_A",60,"pink",73,86.2,,15,48.1
+"GH_spring","Greenhouse","Spring",354,"B2","10","13","M106","mutant","Parent_D",20,"bronze",69,82.2,4.6,11,66
+"GH_spring","Greenhouse","Spring",355,"B2","11","13","M097","mutant","Parent_D",20,"bronze",,72.1,4.7,15,58
+"GH_spring","Greenhouse","Spring",356,"B2","12","13","M039","mutant","Parent_B",60,"chimera",74,82.6,8.2,15,61.6
+"GH_spring","Greenhouse","Spring",357,"B2","1","14","M079","mutant","Parent_C",20,"yellow",79,88.9,8.9,0,68.9
+"GH_spring","Greenhouse","Spring",358,"B2","2","14","M108","mutant","Parent_D",60,"bronze",87,89.6,7.8,12,91.9
+"GH_spring","Greenhouse","Spring",359,"B2","3","14","M095","mutant","Parent_D",40,"bronze",,69.9,,0,61.8
+"GH_spring","Greenhouse","Spring",360,"B2","4","14","M037","mutant","Parent_B",20,"white",75,85.8,8.7,12,59.9
+"GH_spring","Greenhouse","Spring",361,"B2","5","14","M116","mutant","Parent_D",40,"bronze",87,87.9,3.9,15,70.6
+"GH_spring","Greenhouse","Spring",362,"B2","6","14","M031","mutant","Parent_B",20,"white",68,81.7,8,9,65.3
+"GH_spring","Greenhouse","Spring",363,"B2","7","14","M038","mutant","Parent_B",40,"white",65,68.8,7.7,8,47.6
+"GH_spring","Greenhouse","Spring",364,"B2","8","14","M110","mutant","Parent_D",40,"bronze",84,86.3,5.5,33,57.9
+"GH_spring","Greenhouse","Spring",365,"B2","9","14","M062","mutant","Parent_C",40,"yellow",69,68.9,7.7,9,79.8
+"GH_spring","Greenhouse","Spring",366,"B2","10","14","M027","mutant","Parent_A",60,"chimera",80,77.8,4.6,9,51.9
+"GH_spring","Greenhouse","Spring",367,"B2","11","14","M086","mutant","Parent_C",40,"yellow",,76.3,,0,48.3
+"GH_spring","Greenhouse","Spring",368,"B2","12","14","M085","mutant","Parent_C",20,"yellow",69,77.1,6.9,12,58.8
+"GH_spring","Greenhouse","Spring",369,"B2","1","15","M066","mutant","Parent_C",60,"yellow",70,57.5,9.6,0,49.9
+"GH_spring","Greenhouse","Spring",370,"B2","2","15","M034","mutant","Parent_B",20,"white",82,98.3,10.5,2,83.1
+"GH_spring","Greenhouse","Spring",371,"B2","3","15","M063","mutant","Parent_C",60,"yellow",89,82.3,6.8,14,74.7
+"GH_spring","Greenhouse","Spring",372,"B2","4","15","M002","mutant","Parent_A",40,"pink",78,91.5,,21,73.5
+"GH_spring","Greenhouse","Spring",373,"B2","5","15","M008","mutant","Parent_A",40,"pink",75,80.5,6.5,290,62.4
+"GH_spring","Greenhouse","Spring",374,"B2","6","15","M047","mutant","Parent_B",40,"white",76,80.8,8.1,9,74.2
+"GH_spring","Greenhouse","Spring",375,"B2","7","15","M100","mutant","Parent_D",20,"bronze",78,85.3,6.1,,60.9
+"GH_spring","Greenhouse","Spring",376,"B2","8","15","M029","mutant","Parent_A",40,"pink",81,80,7.2,26,66.8
+"GH_spring","Greenhouse","Spring",377,"B2","9","15","M082","mutant","Parent_C",20,"yellow",69,73.8,6.6,11,72.9
+"GH_spring","Greenhouse","Spring",378,"B2","10","15","M014","mutant","Parent_A",40,"pink",88,91.1,7.3,24,52.6
+"GH_spring","Greenhouse","Spring",379,"B2","11","15","M101","mutant","Parent_D",40,"bronze",90,80.2,6,16,65.2
+"GH_spring","Greenhouse","Spring",380,"B2","12","15","M099","mutant","Parent_D",60,"bronze",83,76.9,7.3,14,44.9
+"GH_spring","Greenhouse","Spring",381,"B2","1","16","M051","mutant","Parent_B",60,"white",76,82.1,7.8,5,39.4
+"GH_spring","Greenhouse","Spring",382,"B2","2","16","M005","mutant","Parent_A",40,"light pink",76,79,9.3,22,74.4
+"GH_spring","Greenhouse","Spring",383,"B2","3","16","M083","mutant","Parent_C",40,"yellow",79,91.5,8,12,67.8
+"GH_spring","Greenhouse","Spring",384,"B2","4","16","M061","mutant","Parent_C",20,"yellow",73,76.6,8.6,7,61.4
+"GH_spring","Greenhouse","Spring",385,"B2","5","16","M049","mutant","Parent_B",20,"white",73,90.2,9,15,61.9
+"GH_spring","Greenhouse","Spring",386,"B2","6","16","M015","mutant","Parent_A",60,"yellow",75,102.2,9.1,22,66.1
+"GH_spring","Greenhouse","Spring",387,"B2","7","16","M069","mutant","Parent_C",60,"bronze",79,80.4,7.6,6,50.1
+"GH_spring","Greenhouse","Spring",388,"B2","8","16","M058","mutant","Parent_B",20,"white",75,87.2,8.9,0,74.4
+"GH_spring","Greenhouse","Spring",389,"B2","9","16","M090","mutant","Parent_D",60,"bronze",,55.5,4.7,6,60
+"GH_spring","Greenhouse","Spring",390,"B2","10","16","M007","mutant","Parent_A",20,"pink",67,78.8,6.1,13,56.8
+"GH_spring","Greenhouse","Spring",391,"B2","11","16","M059","mutant","Parent_C",40,"yellow",88,87.3,9.5,0,57.7
+"GH_spring","Greenhouse","Spring",392,"B2","12","16","M009","mutant","Parent_A",60,"pink",73,106.2,7.3,19,64.9
+"GH_spring","Greenhouse","Spring",393,"B2","1","17","M011","mutant","Parent_A",40,"pink",77,77.2,9.4,19,
+"GH_spring","Greenhouse","Spring",394,"B2","2","17","M045","mutant","Parent_B",60,"white",79,81.5,8.4,10,44.2
+"GH_spring","Greenhouse","Spring",395,"B2","3","17","M032","mutant","Parent_B",40,"white",80,84.1,7.4,12,43.1
+"GH_spring","Greenhouse","Spring",396,"B2","4","17","M098","mutant","Parent_D",40,"bronze",84,65.8,4.9,11,58.5
+"GH_spring","Greenhouse","Spring",397,"B2","5","17","M081","mutant","Parent_C",60,"yellow",72,86.5,6.6,,65.3
+"GH_spring","Greenhouse","Spring",398,"B2","6","17","M094","mutant","Parent_D",20,"bronze",83,78.1,5.6,17,
+"GH_spring","Greenhouse","Spring",399,"B2","7","17","M003","mutant","Parent_A",60,"chimera",76,62,7.2,14,41.4
+"GH_spring","Greenhouse","Spring",400,"B2","8","17","M088","mutant","Parent_D",20,"bronze",86,74.8,6,13,55.4
+"GH_spring","Greenhouse","Spring",401,"B2","9","17","M077","mutant","Parent_C",40,"yellow",73,78.6,8.4,5,59.2
+"GH_spring","Greenhouse","Spring",402,"B2","10","17","Parent_A","parent","Parent_A",0,"pink",75,84.9,6.7,13,65.1
+"GH_spring","Greenhouse","Spring",403,"B2","11","17","M052","mutant","Parent_B",20,"white",85,98.6,7.2,5,69.9
+"GH_spring","Greenhouse","Spring",404,"B2","12","17","M105","mutant","Parent_D",60,"bronze",90,84.9,6,18,52.3
+"GH_spring","Greenhouse","Spring",405,"B2","1","18","M057","mutant","Parent_B",60,"white",79,79.4,7.8,13,45.7
+"GH_spring","Greenhouse","Spring",406,"B2","2","18","M036","mutant","Parent_B",60,"white",88,84,9.4,9,52.4
+"GH_spring","Greenhouse","Spring",407,"B2","3","18","M004","mutant","Parent_A",20,"pink",71,81,7.7,22,55.3
+"GH_spring","Greenhouse","Spring",408,"B2","4","18","M065","mutant","Parent_C",40,"yellow",77,91.3,7.6,2,76.2
+"GH_spring","Greenhouse","Spring",409,"B2","5","18","M060","mutant","Parent_C",60,"yellow",75,75.3,8,10,58.2
+"GH_spring","Greenhouse","Spring",410,"B2","6","18","M035","mutant","Parent_B",40,"white",82,87.2,9,11,58.3
+"GH_spring","Greenhouse","Spring",411,"B2","7","18","M078","mutant","Parent_C",60,"yellow",74,75.4,9.2,16,69.5
+"GH_spring","Greenhouse","Spring",412,"B2","8","18","M056","mutant","Parent_B",40,"white",75,99.9,8.3,16,45.2
+"GH_spring","Greenhouse","Spring",413,"B2","9","18","M026","mutant","Parent_A",40,"pink",79,92.8,7.1,24,48.3
+"GH_spring","Greenhouse","Spring",414,"B2","10","18","M044","mutant","Parent_B",40,"white",81,101.8,6.6,11,43.8
+"GH_spring","Greenhouse","Spring",415,"B2","11","18","M071","mutant","Parent_C",40,"yellow",75,87.3,7.5,5,71.8
+"GH_spring","Greenhouse","Spring",416,"B2","12","18","Parent_C","parent","Parent_C",0,"yellow",75,91,8.2,6,66.4
+"GH_spring","Greenhouse","Spring",417,"B2","1","19","M012","mutant","Parent_A",60,"pink",85,63.3,7.9,15,46.1
+"GH_spring","Greenhouse","Spring",418,"B2","2","19","M076","mutant","Parent_C",20,"yellow",74,75,7.4,6,555
+"GH_spring","Greenhouse","Spring",419,"B2","3","19","M093","mutant","Parent_D",60,"bronze",87,71.5,,18,59.9
+"GH_spring","Greenhouse","Spring",420,"B2","4","19","M084","mutant","Parent_C",60,"yellow",88,118.4,9.7,0,79.8
+"GH_spring","Greenhouse","Spring",421,"B2","5","19","M092","mutant","Parent_D",40,"bronze",80,78.3,8.1,28,72.4
+"GH_spring","Greenhouse","Spring",422,"B2","6","19","M113","mutant","Parent_D",40,"bronze",,84.5,6.3,24,66.8
+"GH_spring","Greenhouse","Spring",423,"B2","7","19","M109","mutant","Parent_D",20,"bronze",85,88.4,5.8,14,44.9
+"GH_spring","Greenhouse","Spring",424,"B2","8","19","M040","mutant","Parent_B",20,"white",82,80.3,7,12,57.6
+"GH_spring","Greenhouse","Spring",425,"B2","9","19","M041","mutant","Parent_B",40,"white",78,73.3,8.9,12,57.6
+"GH_spring","Greenhouse","Spring",426,"B2","10","19","M019","mutant","Parent_A",20,"pink",74,84.4,6.6,12,51.9
+"GH_spring","Greenhouse","Spring",427,"B2","11","19","M021","mutant","Parent_A",60,"pink",70,77.1,6.3,5,42.4
+"GH_spring","Greenhouse","Spring",428,"B2","12","19","M070","mutant","Parent_C",20,"bronze",78,95.4,7.6,1,60.2
+"GH_spring","Greenhouse","Spring",429,"B2","1","20","M042","mutant","Parent_B",60,"white",72,91.1,9.7,5,54.4
+"GH_spring","Greenhouse","Spring",430,"B2","2","20","M028","mutant","Parent_A",20,"pink",73,85.5,8.1,19,63.5
+"GH_spring","Greenhouse","Spring",431,"B2","3","20","M010","mutant","Parent_A",20,"pink",75,74.7,7.3,12,63.4
+"GH_spring","Greenhouse","Spring",432,"B2","4","20","M046","mutant","Parent_B",20,"white",84,104.1,7.7,13,67.2
+"GH_spring","Greenhouse","Spring",433,"B2","5","20","Parent_B","parent","Parent_B",0,"white",,,,,
+"GH_spring","Greenhouse","Spring",434,"B2","6","20","M104","mutant","Parent_D",40,"bronze",95,87.2,6.3,20,60
+"GH_spring","Greenhouse","Spring",435,"B2","7","20","M001","mutant","Parent_A",20,"pink",73,58.5,7.2,11,49.9
+"GH_spring","Greenhouse","Spring",436,"B2","8","20","M043","mutant","Parent_B",20,"white",81,,9.3,16,67.5
+"GH_spring","Greenhouse","Spring",437,"B2","9","20","M025","mutant","Parent_A",20,"pink",72,77.7,6.9,10,54.3
+"GH_spring","Greenhouse","Spring",438,"B2","10","20","M075","mutant","Parent_C",60,"yellow",81,95.6,7.7,12,75
+"GH_spring","Greenhouse","Spring",439,"B2","11","20","M053","mutant","Parent_B",40,"white",83,88.9,7.3,10,43.5
+"GH_spring","Greenhouse","Spring",440,"B2","12","20","M080","mutant","Parent_C",40,"yellow",80,88.9,9.5,17,69.8
+"Field_autumn","Open field","Autumn",301,"B1","1","1","M013","mutant","Parent_A",20,"pink",85,67.1,5.3,0,48.7
+"Field_autumn","Open field","Autumn",302,"B1","2","1","M005","mutant","Parent_A",40,"light pink",78,84.8,6.8,2,70.3
+"Field_autumn","Open field","Autumn",303,"B1","3","1","M095","mutant","Parent_D",40,"bronze",80,64.7,4.5,5,40.6
+"Field_autumn","Open field","Autumn",304,"B1","4","1","M089","mutant","Parent_D",40,"bronze",76,90.5,4.9,,53.1
+"Field_autumn","Open field","Autumn",305,"B1","5","1","M047","mutant","Parent_B",40,"white",,,,,
+"Field_autumn","Open field","Autumn",306,"B1","6","1","M087","mutant","Parent_C",60,"yellow",76,74.1,5,0,47.1
+"Field_autumn","Open field","Autumn",307,"B1","7","1","M020","mutant","Parent_A",40,"pink",84,87.2,3.8,1,54.6
+"Field_autumn","Open field","Autumn",308,"B1","8","1","M056","mutant","Parent_B",40,"white",79,70,8,0,47.9
+"Field_autumn","Open field","Autumn",309,"B1","9","1","M040","mutant","Parent_B",20,"white",72,70.2,4.9,0,37.6
+"Field_autumn","Open field","Autumn",310,"B1","10","1","M042","mutant","Parent_B",60,"white",84,82.8,9.8,6,51.3
+"Field_autumn","Open field","Autumn",311,"B1","11","1","M091","mutant","Parent_D",20,"bronze",,,,,
+"Field_autumn","Open field","Autumn",312,"B1","12","1","M079","mutant","Parent_C",20,"yellow",80,93.4,7.7,15,50.1
+"Field_autumn","Open field","Autumn",313,"B1","1","2","M100","mutant","Parent_D",20,"bronze",82,70.2,6.9,9,55.4
+"Field_autumn","Open field","Autumn",314,"B1","2","2","M002","mutant","Parent_A",40,"pink",82,81.7,5.2,0,61.8
+"Field_autumn","Open field","Autumn",315,"B1","3","2","M004","mutant","Parent_A",20,"pink",83,94.6,4.9,13,46.6
+"Field_autumn","Open field","Autumn",316,"B1","4","2","M048","mutant","Parent_B",60,"white",88,90.9,5.8,14,30.6
+"Field_autumn","Open field","Autumn",317,"B1","5","2","M115","mutant","Parent_D",20,"chimera",84,72.6,4.3,9,36.3
+"Field_autumn","Open field","Autumn",318,"B1","6","2","M071","mutant","Parent_C",40,"yellow",80,89.8,7.1,20,50.8
+"Field_autumn","Open field","Autumn",319,"B1","7","2","M068","mutant","Parent_C",40,"yellow",,,,,
+"Field_autumn","Open field","Autumn",320,"B1","8","2","M064","mutant","Parent_C",20,"yellow",88,85.4,5.7,14,706
+"Field_autumn","Open field","Autumn",321,"B1","9","2","M024","mutant","Parent_A",60,"pink",82,82.3,2,6,48.3
+"Field_autumn","Open field","Autumn",322,"B1","10","2","M090","mutant","Parent_D",60,"bronze",90,79.3,5.2,18,56.3
+"Field_autumn","Open field","Autumn",323,"B1","11","2","M099","mutant","Parent_D",60,"bronze",80,59.2,7,3,28.5
+"Field_autumn","Open field","Autumn",324,"B1","12","2","M058","mutant","Parent_B",20,"white",71,77.7,11.6,0,28.3
+"Field_autumn","Open field","Autumn",325,"B1","1","3","M059","mutant","Parent_C",40,"yellow",96,65.7,5.8,9,50
+"Field_autumn","Open field","Autumn",326,"B1","2","3","M012","mutant","Parent_A",60,"pink",85,86.3,5.4,13,58
+"Field_autumn","Open field","Autumn",327,"B1","3","3","M081","mutant","Parent_C",60,"yellow",84,83.5,3.8,5,51.9
+"Field_autumn","Open field","Autumn",328,"B1","4","3","M023","mutant","Parent_A",40,"pink",88,89.4,5.7,7,56.1
+"Field_autumn","Open field","Autumn",329,"B1","5","3","M107","mutant","Parent_D",40,"bronze",82,83,6,13,33.7
+"Field_autumn","Open field","Autumn",330,"B1","6","3","M092","mutant","Parent_D",40,"bronze",76,88.7,6.2,26,43.7
+"Field_autumn","Open field","Autumn",331,"B1","7","3","M103","mutant","Parent_D",20,"bronze",81,84.2,4.8,22,40.3
+"Field_autumn","Open field","Autumn",332,"B1","8","3","M083","mutant","Parent_C",40,"yellow",83,91.8,6.8,18,55.6
+"Field_autumn","Open field","Autumn",333,"B1","9","3","M046","mutant","Parent_B",20,"white",78,67,7.3,4,30
+"Field_autumn","Open field","Autumn",334,"B1","10","3","M078","mutant","Parent_C",60,"yellow",73,82.3,7.1,9,37.4
+"Field_autumn","Open field","Autumn",335,"B1","11","3","M035","mutant","Parent_B",40,"white",79,71,5.9,,55.7
+"Field_autumn","Open field","Autumn",336,"B1","12","3","M036","mutant","Parent_B",60,"white",88,109,7.1,16,47.1
+"Field_autumn","Open field","Autumn",337,"B1","1","4","M106","mutant","Parent_D",20,"bronze",80,64.7,4.5,8,48.6
+"Field_autumn","Open field","Autumn",338,"B1","2","4","M050","mutant","Parent_B",40,"white",87,64.1,11.6,0,49
+"Field_autumn","Open field","Autumn",339,"B1","3","4","M067","mutant","Parent_C",20,"yellow",82,75.2,6.7,,
+"Field_autumn","Open field","Autumn",340,"B1","4","4","M114","mutant","Parent_D",60,"bronze",88,83.4,2.5,21,44
+"Field_autumn","Open field","Autumn",341,"B1","5","4","Parent_B","parent","Parent_B",0,"white",85,59.8,7.2,1,51.6
+"Field_autumn","Open field","Autumn",342,"B1","6","4","M112","mutant","Parent_D",20,"bronze",88,76.9,5,17,55.6
+"Field_autumn","Open field","Autumn",343,"B1","7","4","M016","mutant","Parent_A",20,"pink",82,93,4.1,5,46.9
+"Field_autumn","Open field","Autumn",344,"B1","8","4","M084","mutant","Parent_C",60,"yellow",88,113.4,6.4,20,49
+"Field_autumn","Open field","Autumn",345,"B1","9","4","M021","mutant","Parent_A",60,"pink",74,82.9,1.3,,24.6
+"Field_autumn","Open field","Autumn",346,"B1","10","4","M008","mutant","Parent_A",40,"pink",70,82.6,3.8,16,489
+"Field_autumn","Open field","Autumn",347,"B1","11","4","M061","mutant","Parent_C",20,"yellow",82,85.5,8.6,18,54.5
+"Field_autumn","Open field","Autumn",348,"B1","12","4","M086","mutant","Parent_C",40,"yellow",75,96,4.7,20,48.5
+"Field_autumn","Open field","Autumn",349,"B1","1","5","M027","mutant","Parent_A",60,"chimera",,,,,
+"Field_autumn","Open field","Autumn",350,"B1","2","5","M116","mutant","Parent_D",40,"bronze",92,85.2,4.2,13,66.3
+"Field_autumn","Open field","Autumn",351,"B1","3","5","M066","mutant","Parent_C",60,"yellow",69,38.4,4.6,8,27
+"Field_autumn","Open field","Autumn",352,"B1","4","5","M051","mutant","Parent_B",60,"white",89,64.5,9.5,0,43.1
+"Field_autumn","Open field","Autumn",353,"B1","5","5","M060","mutant","Parent_C",60,"yellow",76,71,,0,24.8
+"Field_autumn","Open field","Autumn",354,"B1","6","5","M098","mutant","Parent_D",40,"bronze",93,87.3,9.5,16,47.2
+"Field_autumn","Open field","Autumn",355,"B1","7","5","Parent_C","parent","Parent_C",0,"yellow",86,87.7,5.4,0,58.5
+"Field_autumn","Open field","Autumn",356,"B1","8","5","M094","mutant","Parent_D",20,"bronze",90,76.7,5.8,17,49.7
+"Field_autumn","Open field","Autumn",357,"B1","9","5","M015","mutant","Parent_A",60,"yellow",81,88.9,4.8,16,41.8
+"Field_autumn","Open field","Autumn",358,"B1","10","5","M030","mutant","Parent_B",60,"white",89,88.6,9.4,16,46.7
+"Field_autumn","Open field","Autumn",359,"B1","11","5","M041","mutant","Parent_B",40,"white",81,83.9,8.8,13,59.3
+"Field_autumn","Open field","Autumn",360,"B1","12","5","M052","mutant","Parent_B",20,"white",84,110.9,8.2,11,50.4
+"Field_autumn","Open field","Autumn",361,"B1","1","6","M085","mutant","Parent_C",20,"yellow",77,61.3,5.4,3,54.5
+"Field_autumn","Open field","Autumn",362,"B1","2","6","M010","mutant","Parent_A",20,"pink",86,65.5,6.5,9,
+"Field_autumn","Open field","Autumn",363,"B1","3","6","M076","mutant","Parent_C",20,"yellow",79,88.5,5.5,,62.9
+"Field_autumn","Open field","Autumn",364,"B1","4","6","M113","mutant","Parent_D",40,"bronze",101,96.8,7.3,11,55.3
+"Field_autumn","Open field","Autumn",365,"B1","5","6","M069","mutant","Parent_C",60,"bronze",92,80.9,6.6,5,55.7
+"Field_autumn","Open field","Autumn",366,"B1","6","6","M043","mutant","Parent_B",20,"white",92,87.7,10.2,8,57.2
+"Field_autumn","Open field","Autumn",367,"B1","7","6","M063","mutant","Parent_C",60,"yellow",90,62.4,7.2,0,38.8
+"Field_autumn","Open field","Autumn",368,"B1","8","6","M045","mutant","Parent_B",60,"white",84,68.4,,3,61.5
+"Field_autumn","Open field","Autumn",369,"B1","9","6","M032","mutant","Parent_B",40,"white",78,75.2,9.6,0,20.1
+"Field_autumn","Open field","Autumn",370,"B1","10","6","M082","mutant","Parent_C",20,"yellow",89,89.7,8,20,51
+"Field_autumn","Open field","Autumn",371,"B1","11","6","M038","mutant","Parent_B",40,"white",76,64.6,9.2,8,43.3
+"Field_autumn","Open field","Autumn",372,"B1","12","6","M102","mutant","Parent_D",60,"bronze",89,101.6,5.7,,47
+"Field_autumn","Open field","Autumn",373,"B1","1","7","M049","mutant","Parent_B",20,"white",86,62.4,7.6,0,54.8
+"Field_autumn","Open field","Autumn",374,"B1","2","7","M080","mutant","Parent_C",40,"yellow",86,81.3,7.5,14,56.3
+"Field_autumn","Open field","Autumn",375,"B1","3","7","Parent_D","parent","Parent_D",0,"bronze",,,,,
+"Field_autumn","Open field","Autumn",376,"B1","4","7","M026","mutant","Parent_A",40,"pink",84,82.7,7.3,1,69.2
+"Field_autumn","Open field","Autumn",377,"B1","5","7","M074","mutant","Parent_C",40,"yellow",,59.4,,0,43.9
+"Field_autumn","Open field","Autumn",378,"B1","6","7","M028","mutant","Parent_A",20,"pink",84,98.6,7.4,13,78.8
+"Field_autumn","Open field","Autumn",379,"B1","7","7","M039","mutant","Parent_B",60,"chimera",82,78.6,8.6,,52.5
+"Field_autumn","Open field","Autumn",380,"B1","8","7","M105","mutant","Parent_D",60,"bronze",86,72.6,7.1,17,72.2
+"Field_autumn","Open field","Autumn",381,"B1","9","7","M022","mutant","Parent_A",20,"pink",85,79.4,5.2,8,69.2
+"Field_autumn","Open field","Autumn",382,"B1","10","7","M111","mutant","Parent_D",60,"bronze",82,65.7,4.8,22,59
+"Field_autumn","Open field","Autumn",383,"B1","11","7","M088","mutant","Parent_D",20,"bronze",82,81.9,7.1,23,57.6
+"Field_autumn","Open field","Autumn",384,"B1","12","7","M029","mutant","Parent_A",40,"pink",78,97.7,4.7,32,42.5
+"Field_autumn","Open field","Autumn",385,"B1","1","8","M070","mutant","Parent_C",20,"bronze",81,75.3,6.6,5,39.2
+"Field_autumn","Open field","Autumn",386,"B1","2","8","M019","mutant","Parent_A",20,"pink",85,73.8,,4,
+"Field_autumn","Open field","Autumn",387,"B1","3","8","M034","mutant","Parent_B",20,"white",80,59.8,8.8,4,46.4
+"Field_autumn","Open field","Autumn",388,"B1","4","8","M072","mutant","Parent_C",60,"yellow",,,,,
+"Field_autumn","Open field","Autumn",389,"B1","5","8","M011","mutant","Parent_A",40,"pink",85,78.8,4.2,0,57
+"Field_autumn","Open field","Autumn",390,"B1","6","8","M001","mutant","Parent_A",20,"pink",263.890441896253,86,8.7,2,74.5
+"Field_autumn","Open field","Autumn",391,"B1","7","8","M073","mutant","Parent_C",20,"yellow",85,72.3,,0,56.6
+"Field_autumn","Open field","Autumn",392,"B1","8","8","M065","mutant","Parent_C",40,"yellow",87,89.9,6.9,8,77.8
+"Field_autumn","Open field","Autumn",393,"B1","9","8","M017","mutant","Parent_A",40,"pink",94,82.6,6.6,0,65.2
+"Field_autumn","Open field","Autumn",394,"B1","10","8","M044","mutant","Parent_B",40,"white",88,67.7,10.5,,54.5
+"Field_autumn","Open field","Autumn",395,"B1","11","8","M003","mutant","Parent_A",60,"chimera",71,52.1,5.3,2,55.2
+"Field_autumn","Open field","Autumn",396,"B1","12","8","M053","mutant","Parent_B",40,"white",82,95.2,7,22,42.4
+"Field_autumn","Open field","Autumn",397,"B1","1","9","M018","mutant","Parent_A",60,"pink",77,77.1,3.8,4,44.9
+"Field_autumn","Open field","Autumn",398,"B1","2","9","M033","mutant","Parent_B",60,"white",80,78.9,7.6,0,51.8
+"Field_autumn","Open field","Autumn",399,"B1","3","9","M031","mutant","Parent_B",20,"white",78,7.39,6.5,2,50.3
+"Field_autumn","Open field","Autumn",400,"B1","4","9","M055","mutant","Parent_B",20,"white",,,,,
+"Field_autumn","Open field","Autumn",401,"B1","5","9","M014","mutant","Parent_A",40,"pink",92,65.6,5.5,4,64.4
+"Field_autumn","Open field","Autumn",402,"B1","6","9","M101","mutant","Parent_D",40,"bronze",80,77.5,6.4,25,49.8
+"Field_autumn","Open field","Autumn",403,"B1","7","9","M007","mutant","Parent_A",20,"pink",82,69.4,5.5,0,70.8
+"Field_autumn","Open field","Autumn",404,"B1","8","9","Parent_A","parent","Parent_A",0,"pink",84,76.7,6.6,4,63.8
+"Field_autumn","Open field","Autumn",405,"B1","9","9","M054","mutant","Parent_B",60,"white",,56.6,7.4,0,47.6
+"Field_autumn","Open field","Autumn",406,"B1","10","9","M062","mutant","Parent_C",40,"yellow",81,77.5,8.6,14,70.3
+"Field_autumn","Open field","Autumn",407,"B1","11","9","M104","mutant","Parent_D",40,"bronze",91,75.3,7.5,19,42.2
+"Field_autumn","Open field","Autumn",408,"B1","12","9","M075","mutant","Parent_C",60,"yellow",70,98,6.3,18,35.2
+"Field_autumn","Open field","Autumn",409,"B1","1","10","M093","mutant","Parent_D",60,"bronze",78,73.9,4.4,15,51.9
+"Field_autumn","Open field","Autumn",410,"B1","2","10","M097","mutant","Parent_D",20,"bronze",88,79.6,6.2,20,62.5
+"Field_autumn","Open field","Autumn",411,"B1","3","10","M037","mutant","Parent_B",20,"white",85,67.2,6.3,0,
+"Field_autumn","Open field","Autumn",412,"B1","4","10","M109","mutant","Parent_D",20,"bronze",86,86.1,5.2,10,47.6
+"Field_autumn","Open field","Autumn",413,"B1","5","10","M108","mutant","Parent_D",60,"bronze",83,74.6,,3,54.1
+"Field_autumn","Open field","Autumn",414,"B1","6","10","M025","mutant","Parent_A",20,"pink",87,92.2,5.4,7,63
+"Field_autumn","Open field","Autumn",415,"B1","7","10","M006","mutant","Parent_A",60,"pink",82,81.6,4.4,0,67.2
+"Field_autumn","Open field","Autumn",416,"B1","8","10","M110","mutant","Parent_D",40,"bronze",87,68.4,6.1,5,
+"Field_autumn","Open field","Autumn",417,"B1","9","10","M096","mutant","Parent_D",60,"bronze",,74.5,5.6,2,46.1
+"Field_autumn","Open field","Autumn",418,"B1","10","10","M057","mutant","Parent_B",60,"white",89,81.4,11.8,6,45
+"Field_autumn","Open field","Autumn",419,"B1","11","10","M077","mutant","Parent_C",40,"yellow",75,59.8,9.3,3,49.3
+"Field_autumn","Open field","Autumn",420,"B1","12","10","M009","mutant","Parent_A",60,"pink",66,110.6,6.9,11,59.2
+"Field_autumn","Open field","Autumn",421,"B2","1","11","M071","mutant","Parent_C",40,"yellow",77,70.9,7,2,48.1
+"Field_autumn","Open field","Autumn",422,"B2","2","11","M111","mutant","Parent_D",60,"bronze",81,68,3.9,23,53.2
+"Field_autumn","Open field","Autumn",423,"B2","3","11","M003","mutant","Parent_A",60,"chimera",72,62.7,2.9,0,43.5
+"Field_autumn","Open field","Autumn",424,"B2","4","11","M050","mutant","Parent_B",40,"white",87,64.5,6.4,5,67.1
+"Field_autumn","Open field","Autumn",425,"B2","5","11","M004","mutant","Parent_A",20,"pink",80,54.6,3,0,46.6
+"Field_autumn","Open field","Autumn",426,"B2","6","11","M083","mutant","Parent_C",40,"yellow",79,75.1,6.8,9,51.3
+"Field_autumn","Open field","Autumn",427,"B2","7","11","M008","mutant","Parent_A",40,"pink",66,57.4,5.2,0,51.6
+"Field_autumn","Open field","Autumn",428,"B2","8","11","M047","mutant","Parent_B",40,"white",90,86.7,9.7,2,65.6
+"Field_autumn","Open field","Autumn",429,"B2","9","11","M035","mutant","Parent_B",40,"white",80,69.2,8.7,0,
+"Field_autumn","Open field","Autumn",430,"B2","10","11","M001","mutant","Parent_A",20,"pink",79,88.8,8.3,7,72
+"Field_autumn","Open field","Autumn",431,"B2","11","11","M069","mutant","Parent_C",60,"bronze",,,,,
+"Field_autumn","Open field","Autumn",432,"B2","12","11","M034","mutant","Parent_B",20,"white",79,81.7,10.4,13,48.5
+"Field_autumn","Open field","Autumn",433,"B2","1","12","M065","mutant","Parent_C",40,"yellow",82,88.2,5.9,4,
+"Field_autumn","Open field","Autumn",434,"B2","2","12","M090","mutant","Parent_D",60,"bronze",98,81.2,5.4,15,61.9
+"Field_autumn","Open field","Autumn",435,"B2","3","12","M012","mutant","Parent_A",60,"pink",75,87.5,3.2,5,62.2
+"Field_autumn","Open field","Autumn",436,"B2","4","12","M063","mutant","Parent_C",60,"yellow",82,74.8,5.7,8,38.5
+"Field_autumn","Open field","Autumn",437,"B2","5","12","M057","mutant","Parent_B",60,"white",81,83.7,5.9,7,60
+"Field_autumn","Open field","Autumn",438,"B2","6","12","M064","mutant","Parent_C",20,"yellow",89,82.8,7.4,18,64.5
+"Field_autumn","Open field","Autumn",439,"B2","7","12","M056","mutant","Parent_B",40,"white",80,88.3,8,0,45.6
+"Field_autumn","Open field","Autumn",440,"B2","8","12","M060","mutant","Parent_C",60,"yellow",74,67,5.3,0,37.9
+"Field_autumn","Open field","Autumn",441,"B2","9","12","M007","mutant","Parent_A",20,"pink",78,68.2,5.9,0,46.9
+"Field_autumn","Open field","Autumn",442,"B2","10","12","M013","mutant","Parent_A",20,"pink",82,82.4,8,0,
+"Field_autumn","Open field","Autumn",443,"B2","11","12","M042","mutant","Parent_B",60,"white",84,64.1,13.6,0,51.6
+"Field_autumn","Open field","Autumn",444,"B2","12","12","M024","mutant","Parent_A",60,"pink",86,85.7,8.8,13,66.9
+"Field_autumn","Open field","Autumn",445,"B2","1","13","M025","mutant","Parent_A",20,"pink",85,82.7,4.5,10,53.4
+"Field_autumn","Open field","Autumn",446,"B2","2","13","M075","mutant","Parent_C",60,"yellow",76,99.3,9.6,6,46
+"Field_autumn","Open field","Autumn",447,"B2","3","13","M107","mutant","Parent_D",40,"bronze",81,78.2,5.8,8,63.1
+"Field_autumn","Open field","Autumn",448,"B2","4","13","M101","mutant","Parent_D",40,"bronze",76,76,3,11,34.2
+"Field_autumn","Open field","Autumn",449,"B2","5","13","M005","mutant","Parent_A",40,"light pink",78,83,3.4,14,63.6
+"Field_autumn","Open field","Autumn",450,"B2","6","13","M026","mutant","Parent_A",40,"pink",78,100.9,6.6,9,68.3
+"Field_autumn","Open field","Autumn",451,"B2","7","13","M019","mutant","Parent_A",20,"pink",72,88,4.9,1,48.7
+"Field_autumn","Open field","Autumn",452,"B2","8","13","M082","mutant","Parent_C",20,"yellow",86,84.2,7.8,21,45.5
+"Field_autumn","Open field","Autumn",453,"B2","9","13","M016","mutant","Parent_A",20,"pink",,97.1,8,16,58.3
+"Field_autumn","Open field","Autumn",454,"B2","10","13","M087","mutant","Parent_C",60,"yellow",82,80.9,9.7,14,54.3
+"Field_autumn","Open field","Autumn",455,"B2","11","13","Parent_C","parent","Parent_C",0,"yellow",78,74,9.9,4,54.6
+"Field_autumn","Open field","Autumn",456,"B2","12","13","M032","mutant","Parent_B",40,"white",73,78.5,9.1,18,28.1
+"Field_autumn","Open field","Autumn",457,"B2","1","14","M046","mutant","Parent_B",20,"white",82,69.6,7.7,0,48.8
+"Field_autumn","Open field","Autumn",458,"B2","2","14","M022","mutant","Parent_A",20,"pink",80,93.2,6,7,64
+"Field_autumn","Open field","Autumn",459,"B2","3","14","M041","mutant","Parent_B",40,"white",79,63.6,8.6,0,49.5
+"Field_autumn","Open field","Autumn",460,"B2","4","14","M112","mutant","Parent_D",20,"bronze",84,73.3,4.9,10,53.6
+"Field_autumn","Open field","Autumn",461,"B2","5","14","M066","mutant","Parent_C",60,"yellow",69,26.9,5.4,0,27.7
+"Field_autumn","Open field","Autumn",462,"B2","6","14","M102","mutant","Parent_D",60,"bronze",93,79.9,6.7,31,55
+"Field_autumn","Open field","Autumn",463,"B2","7","14","M027","mutant","Parent_A",60,"chimera",83,74.3,2.7,7,53.9
+"Field_autumn","Open field","Autumn",464,"B2","8","14","M023","mutant","Parent_A",40,"pink",79,68.2,5.2,9,58
+"Field_autumn","Open field","Autumn",465,"B2","9","14","Parent_B","parent","Parent_B",0,"white",79,59.1,9.1,2,49.8
+"Field_autumn","Open field","Autumn",466,"B2","10","14","M045","mutant","Parent_B",60,"white",68,71.1,8.5,1,33.4
+"Field_autumn","Open field","Autumn",467,"B2","11","14","M062","mutant","Parent_C",40,"yellow",73,71.6,10,7,62.3
+"Field_autumn","Open field","Autumn",468,"B2","12","14","M018","mutant","Parent_A",60,"pink",73,93.6,7.4,17,36.5
+"Field_autumn","Open field","Autumn",469,"B2","1","15","M048","mutant","Parent_B",60,"white",256.890441896253,68.2,6.4,6,
+"Field_autumn","Open field","Autumn",470,"B2","2","15","M114","mutant","Parent_D",60,"bronze",85,76.6,4.6,15,53.2
+"Field_autumn","Open field","Autumn",471,"B2","3","15","M014","mutant","Parent_A",40,"pink",80,80.7,6.9,1,65.8
+"Field_autumn","Open field","Autumn",472,"B2","4","15","M038","mutant","Parent_B",40,"white",,58.5,7.5,0,45
+"Field_autumn","Open field","Autumn",473,"B2","5","15","M054","mutant","Parent_B",60,"white",81,75.3,7.8,0,51.5
+"Field_autumn","Open field","Autumn",474,"B2","6","15","M080","mutant","Parent_C",40,"yellow",84,89.1,8.4,11,69
+"Field_autumn","Open field","Autumn",475,"B2","7","15","M053","mutant","Parent_B",40,"white",,71.1,6.8,0,45.2
+"Field_autumn","Open field","Autumn",476,"B2","8","15","M091","mutant","Parent_D",20,"bronze",84,88.8,6.5,29,61.3
+"Field_autumn","Open field","Autumn",477,"B2","9","15","M094","mutant","Parent_D",20,"bronze",,76.2,3.8,32,39.5
+"Field_autumn","Open field","Autumn",478,"B2","10","15","M058","mutant","Parent_B",20,"white",73,72.6,10.9,14,46.8
+"Field_autumn","Open field","Autumn",479,"B2","11","15","M092","mutant","Parent_D",40,"bronze",74,58,6.8,13,53.5
+"Field_autumn","Open field","Autumn",480,"B2","12","15","M044","mutant","Parent_B",40,"white",75,84.5,9.5,10,52.2
+"Field_autumn","Open field","Autumn",481,"B2","1","16","M074","mutant","Parent_C",40,"yellow",82,59.4,6.2,6,51
+"Field_autumn","Open field","Autumn",482,"B2","2","16","M055","mutant","Parent_B",20,"white",83,78.9,10.6,0,58.6
+"Field_autumn","Open field","Autumn",483,"B2","3","16","M088","mutant","Parent_D",20,"bronze",80,68.6,4.3,2,60.4
+"Field_autumn","Open field","Autumn",484,"B2","4","16","M110","mutant","Parent_D",40,"bronze",83,,4.6,7,55.9
+"Field_autumn","Open field","Autumn",485,"B2","5","16","M068","mutant","Parent_C",40,"yellow",71,82.7,3,5,69.3
+"Field_autumn","Open field","Autumn",486,"B2","6","16","M067","mutant","Parent_C",20,"yellow",83,83.2,9,22,74.4
+"Field_autumn","Open field","Autumn",487,"B2","7","16","M081","mutant","Parent_C",60,"yellow",72,88.2,3,2,46.2
+"Field_autumn","Open field","Autumn",488,"B2","8","16","M020","mutant","Parent_A",40,"pink",,,,,
+"Field_autumn","Open field","Autumn",489,"B2","9","16","M078","mutant","Parent_C",60,"yellow",71,64.7,4.1,19,36.7
+"Field_autumn","Open field","Autumn",490,"B2","10","16","M037","mutant","Parent_B",20,"white",88,86.2,8.4,21,51.1
+"Field_autumn","Open field","Autumn",491,"B2","11","16","M052","mutant","Parent_B",20,"white",81,78.1,8.9,19,77.2
+"Field_autumn","Open field","Autumn",492,"B2","12","16","M085","mutant","Parent_C",20,"yellow",73,78.1,7.8,10,43.4
+"Field_autumn","Open field","Autumn",493,"B2","1","17","M095","mutant","Parent_D",40,"bronze",89,78.8,6.1,10,
+"Field_autumn","Open field","Autumn",494,"B2","2","17","M100","mutant","Parent_D",20,"bronze",86,90.7,6.7,11,68.4
+"Field_autumn","Open field","Autumn",495,"B2","3","17","M086","mutant","Parent_C",40,"yellow",72,82.2,6.5,0,63.8
+"Field_autumn","Open field","Autumn",496,"B2","4","17","M040","mutant","Parent_B",20,"white",78,76.5,7.4,0,55.5
+"Field_autumn","Open field","Autumn",497,"B2","5","17","M010","mutant","Parent_A",20,"pink",72,77.7,4,1,58.5
+"Field_autumn","Open field","Autumn",498,"B2","6","17","M073","mutant","Parent_C",20,"yellow",85,90.6,8.1,12,59.4
+"Field_autumn","Open field","Autumn",499,"B2","7","17","M051","mutant","Parent_B",60,"white",77,55,8.8,0,48.5
+"Field_autumn","Open field","Autumn",500,"B2","8","17","M017","mutant","Parent_A",40,"pink",92,106,5.7,11,64.7
+"Field_autumn","Open field","Autumn",501,"B2","9","17","M109","mutant","Parent_D",20,"bronze",80,92.1,4.6,30,57.8
+"Field_autumn","Open field","Autumn",502,"B2","10","17","M097","mutant","Parent_D",20,"bronze",89,78.5,6.4,24,56.9
+"Field_autumn","Open field","Autumn",503,"B2","11","17","M061","mutant","Parent_C",20,"yellow",74,74.3,6.8,25,67.4
+"Field_autumn","Open field","Autumn",504,"B2","12","17","M030","mutant","Parent_B",60,"white",81,72.7,11.7,16,38.9
+"Field_autumn","Open field","Autumn",505,"B2","1","18","M002","mutant","Parent_A",40,"pink",80,81.8,4.9,0,75.2
+"Field_autumn","Open field","Autumn",506,"B2","2","18","M011","mutant","Parent_A",40,"pink",77,97.6,7.2,11,64.2
+"Field_autumn","Open field","Autumn",507,"B2","3","18","M096","mutant","Parent_D",60,"bronze",76,91.5,,0,57.7
+"Field_autumn","Open field","Autumn",508,"B2","4","18","Parent_D","parent","Parent_D",0,"bronze",85,75.4,5.5,12,58.8
+"Field_autumn","Open field","Autumn",509,"B2","5","18","M072","mutant","Parent_C",60,"yellow",85,84.6,6.3,1,49.4
+"Field_autumn","Open field","Autumn",510,"B2","6","18","M099","mutant","Parent_D",60,"bronze",77,87,5.6,6,45.9
+"Field_autumn","Open field","Autumn",511,"B2","7","18","M033","mutant","Parent_B",60,"white",68,67.6,6.3,0,46.9
+"Field_autumn","Open field","Autumn",512,"B2","8","18","M079","mutant","Parent_C",20,"yellow",84,86.3,7.5,19,72.2
+"Field_autumn","Open field","Autumn",513,"B2","9","18","M009","mutant","Parent_A",60,"pink",72,93.7,5.7,19,41.9
+"Field_autumn","Open field","Autumn",514,"B2","10","18","M105","mutant","Parent_D",60,"bronze",83,86.3,5.9,37,56.7
+"Field_autumn","Open field","Autumn",515,"B2","11","18","M115","mutant","Parent_D",20,"chimera",80,69.5,9.9,22,59.8
+"Field_autumn","Open field","Autumn",516,"B2","12","18","M108","mutant","Parent_D",60,"bronze",75,95.1,8.2,30,59.1
+"Field_autumn","Open field","Autumn",517,"B2","1","19","M116","mutant","Parent_D",40,"bronze",91,,6.1,25,58.9
+"Field_autumn","Open field","Autumn",518,"B2","2","19","M021","mutant","Parent_A",60,"pink",82,74.1,6.6,12,45.1
+"Field_autumn","Open field","Autumn",519,"B2","3","19","M006","mutant","Parent_A",60,"pink",77,94.5,8.9,0,69
+"Field_autumn","Open field","Autumn",520,"B2","4","19","M036","mutant","Parent_B",60,"white",83,93.7,7.8,0,64
+"Field_autumn","Open field","Autumn",521,"B2","5","19","M015","mutant","Parent_A",60,"yellow",84,84.4,5.2,0,58
+"Field_autumn","Open field","Autumn",522,"B2","6","19","M084","mutant","Parent_C",60,"yellow",83,104.1,7.4,17,75.1
+"Field_autumn","Open field","Autumn",523,"B2","7","19","M104","mutant","Parent_D",40,"bronze",82,69.2,4.1,15,42.5
+"Field_autumn","Open field","Autumn",524,"B2","8","19","M031","mutant","Parent_B",20,"white",81,74.3,7.3,1,61
+"Field_autumn","Open field","Autumn",525,"B2","9","19","M029","mutant","Parent_A",40,"pink",73,95,4.8,27,45.4
+"Field_autumn","Open field","Autumn",526,"B2","10","19","Parent_A","parent","Parent_A",0,"pink",77,83.1,6,20,76.6
+"Field_autumn","Open field","Autumn",527,"B2","11","19","M077","mutant","Parent_C",40,"yellow",73,64.8,7.7,23,56.9
+"Field_autumn","Open field","Autumn",528,"B2","12","19","M039","mutant","Parent_B",60,"chimera",76,89.3,9.9,9,44.2
+"Field_autumn","Open field","Autumn",529,"B2","1","20","M059","mutant","Parent_C",40,"yellow",93,82.1,5.4,14,48
+"Field_autumn","Open field","Autumn",530,"B2","2","20","M049","mutant","Parent_B",20,"white",92,83.8,11.5,10,62.3
+"Field_autumn","Open field","Autumn",531,"B2","3","20","M113","mutant","Parent_D",40,"bronze",89,99.6,5.7,4,51
+"Field_autumn","Open field","Autumn",532,"B2","4","20","M076","mutant","Parent_C",20,"yellow",69,75.3,8.3,0,72.7
+"Field_autumn","Open field","Autumn",533,"B2","5","20","M103","mutant","Parent_D",20,"bronze",71,69.7,5.2,0,46.6
+"Field_autumn","Open field","Autumn",534,"B2","6","20","M043","mutant","Parent_B",20,"white",85,85,10.1,0,72.1
+"Field_autumn","Open field","Autumn",535,"B2","7","20","M093","mutant","Parent_D",60,"bronze",75,72.8,4.7,18,50.6
+"Field_autumn","Open field","Autumn",536,"B2","8","20","M089","mutant","Parent_D",40,"bronze",73,77.1,,23,49.5
+"Field_autumn","Open field","Autumn",537,"B2","9","20","M098","mutant","Parent_D",40,"bronze",82,84.5,8.1,23,46.8
+"Field_autumn","Open field","Autumn",538,"B2","10","20","M028","mutant","Parent_A",20,"pink",74,83.6,8,17,71.2
+"Field_autumn","Open field","Autumn",539,"B2","11","20","M070","mutant","Parent_C",20,"bronze",72,61.5,8.7,16,57.9
+"Field_autumn","Open field","Autumn",540,"B2","12","20","M106","mutant","Parent_D",20,"bronze",76,75,8.6,21,41.2
+"Field_autumn","Open field","Autumn",541,"B3","1","21","M077","mutant","Parent_C",40,"yellow",,,,,
+"Field_autumn","Open field","Autumn",542,"B3","2","21","M111","mutant","Parent_D",60,"bronze",,,,,
+"Field_autumn","Open field","Autumn",543,"B3","3","21","M034","mutant","Parent_B",20,"white",,,,,
+"Field_autumn","Open field","Autumn",544,"B3","4","21","M114","mutant","Parent_D",60,"bronze",,,,,
+"Field_autumn","Open field","Autumn",545,"B3","5","21","M064","mutant","Parent_C",20,"yellow",84,79.5,8.4,0,82.2
+"Field_autumn","Open field","Autumn",546,"B3","6","21","M016","mutant","Parent_A",20,"pink",80,92.8,7.7,6,69
+"Field_autumn","Open field","Autumn",547,"B3","7","21","M039","mutant","Parent_B",60,"chimera",72,65,7.4,0,51.8
+"Field_autumn","Open field","Autumn",548,"B3","8","21","M109","mutant","Parent_D",20,"bronze",85,95.1,8.8,25,76.3
+"Field_autumn","Open field","Autumn",549,"B3","9","21","M040","mutant","Parent_B",20,"white",78,63.2,,0,48.7
+"Field_autumn","Open field","Autumn",550,"B3","10","21","M115","mutant","Parent_D",20,"chimera",83,81.9,7.6,28,65.1
+"Field_autumn","Open field","Autumn",551,"B3","11","21","M045","mutant","Parent_B",60,"white",74,66,9.2,21,56.2
+"Field_autumn","Open field","Autumn",552,"B3","12","21","M021","mutant","Parent_A",60,"pink",76,82.5,6.5,17,50.4
+"Field_autumn","Open field","Autumn",553,"B3","1","22","M052","mutant","Parent_B",20,"white",,,,,
+"Field_autumn","Open field","Autumn",554,"B3","2","22","M116","mutant","Parent_D",40,"bronze",,,,,
+"Field_autumn","Open field","Autumn",555,"B3","3","22","M056","mutant","Parent_B",40,"white",,,,,
+"Field_autumn","Open field","Autumn",556,"B3","4","22","M103","mutant","Parent_D",20,"bronze",,,,,
+"Field_autumn","Open field","Autumn",557,"B3","5","22","M032","mutant","Parent_B",40,"white",70,74.9,8.7,0,37.2
+"Field_autumn","Open field","Autumn",558,"B3","6","22","M072","mutant","Parent_C",60,"yellow",83,81.8,8.6,6,57
+"Field_autumn","Open field","Autumn",559,"B3","7","22","M059","mutant","Parent_C",40,"yellow",85,61.6,5.3,9,67.8
+"Field_autumn","Open field","Autumn",560,"B3","8","22","M071","mutant","Parent_C",40,"yellow",80,70.4,8.6,25,66.5
+"Field_autumn","Open field","Autumn",561,"B3","9","22","M017","mutant","Parent_A",40,"pink",81,96.2,5.7,21,69
+"Field_autumn","Open field","Autumn",562,"B3","10","22","M046","mutant","Parent_B",20,"white",79,85.1,9.5,30,72.1
+"Field_autumn","Open field","Autumn",563,"B3","11","22","M002","mutant","Parent_A",40,"pink",79,78.2,9.1,16,91.3
+"Field_autumn","Open field","Autumn",564,"B3","12","22","M068","mutant","Parent_C",40,"yellow",70,90.5,7.7,28,75.7
+"Field_autumn","Open field","Autumn",565,"B3","1","23","M043","mutant","Parent_B",20,"white",,,,,
+"Field_autumn","Open field","Autumn",566,"B3","2","23","M086","mutant","Parent_C",40,"yellow",,,,,
+"Field_autumn","Open field","Autumn",567,"B3","3","23","M011","mutant","Parent_A",40,"pink",,,,,
+"Field_autumn","Open field","Autumn",568,"B3","4","23","M044","mutant","Parent_B",40,"white",,,,,
+"Field_autumn","Open field","Autumn",569,"B3","5","23","M008","mutant","Parent_A",40,"pink",63,57.8,4.7,0,37.9
+"Field_autumn","Open field","Autumn",570,"B3","6","23","M051","mutant","Parent_B",60,"white",,,,,
+"Field_autumn","Open field","Autumn",571,"B3","7","23","M078","mutant","Parent_C",60,"yellow",71,71.1,5.7,14,51.9
+"Field_autumn","Open field","Autumn",572,"B3","8","23","M108","mutant","Parent_D",60,"bronze",84,96.2,7.8,19,78.6
+"Field_autumn","Open field","Autumn",573,"B3","9","23","M112","mutant","Parent_D",20,"bronze",76,70.8,4.1,31,52.5
+"Field_autumn","Open field","Autumn",574,"B3","10","23","M047","mutant","Parent_B",40,"white",86,100.6,10.4,23,89.9
+"Field_autumn","Open field","Autumn",575,"B3","11","23","M088","mutant","Parent_D",20,"bronze",85,90.5,8.6,29,81.8
+"Field_autumn","Open field","Autumn",576,"B3","12","23","M037","mutant","Parent_B",20,"white",81,71.2,9.8,14,48.9
+"Field_autumn","Open field","Autumn",577,"B3","1","24","M004","mutant","Parent_A",20,"pink",84,88.5,5.6,10,61.2
+"Field_autumn","Open field","Autumn",578,"B3","2","24","M062","mutant","Parent_C",40,"yellow",82,104.9,8.7,13,72.1
+"Field_autumn","Open field","Autumn",579,"B3","3","24","M095","mutant","Parent_D",40,"bronze",80,82.9,7.3,5,61
+"Field_autumn","Open field","Autumn",580,"B3","4","24","M094","mutant","Parent_D",20,"bronze",84,81.7,6.1,25,47.2
+"Field_autumn","Open field","Autumn",581,"B3","5","24","M063","mutant","Parent_C",60,"yellow",81,78.6,5.4,7,38.4
+"Field_autumn","Open field","Autumn",582,"B3","6","24","M031","mutant","Parent_B",20,"white",85,75.4,9.4,16,61.5
+"Field_autumn","Open field","Autumn",583,"B3","7","24","M089","mutant","Parent_D",40,"bronze",81,89.8,5.1,16,60.4
+"Field_autumn","Open field","Autumn",584,"B3","8","24","M076","mutant","Parent_C",20,"yellow",76,92.4,8.7,13,82.5
+"Field_autumn","Open field","Autumn",585,"B3","9","24","M099","mutant","Parent_D",60,"bronze",79,,6,12,50
+"Field_autumn","Open field","Autumn",586,"B3","10","24","M022","mutant","Parent_A",20,"pink",85,108.2,8.4,30,85.1
+"Field_autumn","Open field","Autumn",587,"B3","11","24","M041","mutant","Parent_B",40,"white",,74.4,,0,70.9
+"Field_autumn","Open field","Autumn",588,"B3","12","24","M073","mutant","Parent_C",20,"yellow",85,94.7,8.6,19,58.9
+"Field_autumn","Open field","Autumn",589,"B3","1","25","M105","mutant","Parent_D",60,"bronze",84,81.9,4.7,22,52.6
+"Field_autumn","Open field","Autumn",590,"B3","2","25","M085","mutant","Parent_C",20,"yellow",84,72.2,10.2,15,67
+"Field_autumn","Open field","Autumn",591,"B3","3","25","Parent_D","parent","Parent_D",0,"bronze",79,80.1,8.6,24,49.5
+"Field_autumn","Open field","Autumn",592,"B3","4","25","M061","mutant","Parent_C",20,"yellow",82,95.8,,9,68.3
+"Field_autumn","Open field","Autumn",593,"B3","5","25","M098","mutant","Parent_D",40,"bronze",82,78.2,5.2,9,43.6
+"Field_autumn","Open field","Autumn",594,"B3","6","25","M049","mutant","Parent_B",20,"white",89,92,11,6,57.4
+"Field_autumn","Open field","Autumn",595,"B3","7","25","M097","mutant","Parent_D",20,"bronze",80,84.6,4.7,5,44.2
+"Field_autumn","Open field","Autumn",596,"B3","8","25","M057","mutant","Parent_B",60,"white",86,92.3,9.9,7,56.3
+"Field_autumn","Open field","Autumn",597,"B3","9","25","M026","mutant","Parent_A",40,"pink",76,93.4,7.3,,70.2
+"Field_autumn","Open field","Autumn",598,"B3","10","25","M113","mutant","Parent_D",40,"bronze",93,106.8,8.8,27,86.5
+"Field_autumn","Open field","Autumn",599,"B3","11","25","M036","mutant","Parent_B",60,"white",81,86.9,6.8,7,68
+"Field_autumn","Open field","Autumn",600,"B3","12","25","M024","mutant","Parent_A",60,"pink",81,95.4,5.9,9,66.5
+"Field_autumn","Open field","Autumn",601,"B3","1","26","M013","mutant","Parent_A",20,"pink",82,103.7,4.7,26,58.6
+"Field_autumn","Open field","Autumn",602,"B3","2","26","M030","mutant","Parent_B",60,"white",89,86.3,13.1,24,56.6
+"Field_autumn","Open field","Autumn",603,"B3","3","26","Parent_B","parent","Parent_B",0,"white",81,72.7,10.7,4,47.7
+"Field_autumn","Open field","Autumn",604,"B3","4","26","M090","mutant","Parent_D",60,"bronze",94,101.7,7.5,19,64.5
+"Field_autumn","Open field","Autumn",605,"B3","5","26","M067","mutant","Parent_C",20,"yellow",85,86.4,7,6,54.2
+"Field_autumn","Open field","Autumn",606,"B3","6","26","M058","mutant","Parent_B",20,"white",80,77,12.6,,34
+"Field_autumn","Open field","Autumn",607,"B3","7","26","M019","mutant","Parent_A",20,"pink",76,106.9,5.7,0,59
+"Field_autumn","Open field","Autumn",608,"B3","8","26","M091","mutant","Parent_D",20,"bronze",85,96.4,5.4,8,60.3
+"Field_autumn","Open field","Autumn",609,"B3","9","26","M102","mutant","Parent_D",60,"bronze",86,97.6,3.7,15,46.7
+"Field_autumn","Open field","Autumn",610,"B3","10","26","M042","mutant","Parent_B",60,"white",,97,,0,
+"Field_autumn","Open field","Autumn",611,"B3","11","26","M038","mutant","Parent_B",40,"white",77,71.7,8.7,5,54.9
+"Field_autumn","Open field","Autumn",612,"B3","12","26","M001","mutant","Parent_A",20,"pink",76,99.6,7,13,73.8
+"Field_autumn","Open field","Autumn",613,"B3","1","27","M003","mutant","Parent_A",60,"chimera",,72.4,,0,55
+"Field_autumn","Open field","Autumn",614,"B3","2","27","M027","mutant","Parent_A",60,"chimera",87,84.8,7.2,18,62.4
+"Field_autumn","Open field","Autumn",615,"B3","3","27","M080","mutant","Parent_C",40,"yellow",82,86.8,8.7,17,72.8
+"Field_autumn","Open field","Autumn",616,"B3","4","27","M074","mutant","Parent_C",40,"yellow",82,97.5,7.2,19,58.5
+"Field_autumn","Open field","Autumn",617,"B3","5","27","M010","mutant","Parent_A",20,"pink",82,98.2,,15,56.2
+"Field_autumn","Open field","Autumn",618,"B3","6","27","Parent_A","parent","Parent_A",0,"pink",85,100.3,7.4,26,67.7
+"Field_autumn","Open field","Autumn",619,"B3","7","27","M028","mutant","Parent_A",20,"pink",80,93.9,3.2,5,50.5
+"Field_autumn","Open field","Autumn",620,"B3","8","27","M055","mutant","Parent_B",20,"white",80,,9.1,11,55.7
+"Field_autumn","Open field","Autumn",621,"B3","9","27","M107","mutant","Parent_D",40,"bronze",77,100.1,4.4,3,38.6
+"Field_autumn","Open field","Autumn",622,"B3","10","27","M101","mutant","Parent_D",40,"bronze",81,90.5,5.5,18,45.7
+"Field_autumn","Open field","Autumn",623,"B3","11","27","M104","mutant","Parent_D",40,"bronze",87,81.4,5.2,21,55.9
+"Field_autumn","Open field","Autumn",624,"B3","12","27","M025","mutant","Parent_A",20,"pink",79,104.6,8.2,11,65.9
+"Field_autumn","Open field","Autumn",625,"B3","1","28","M006","mutant","Parent_A",60,"pink",82,100.7,9.8,6,51.8
+"Field_autumn","Open field","Autumn",626,"B3","2","28","M100","mutant","Parent_D",20,"bronze",86,86.2,,23,49
+"Field_autumn","Open field","Autumn",627,"B3","3","28","M083","mutant","Parent_C",40,"yellow",82,98,5.8,27,49.3
+"Field_autumn","Open field","Autumn",628,"B3","4","28","M082","mutant","Parent_C",20,"yellow",84,105.1,7.5,17,58.1
+"Field_autumn","Open field","Autumn",629,"B3","5","28","M096","mutant","Parent_D",60,"bronze",82,95.3,4.5,13,
+"Field_autumn","Open field","Autumn",630,"B3","6","28","M005","mutant","Parent_A",40,"light pink",87,108.8,7.7,25,73.7
+"Field_autumn","Open field","Autumn",631,"B3","7","28","M050","mutant","Parent_B",40,"white",83,,7.7,0,38.4
+"Field_autumn","Open field","Autumn",632,"B3","8","28","M029","mutant","Parent_A",40,"pink",85,108.4,5.9,28,38.5
+"Field_autumn","Open field","Autumn",633,"B3","9","28","M087","mutant","Parent_C",60,"yellow",76,84,3.7,12,37.2
+"Field_autumn","Open field","Autumn",634,"B3","10","28","M081","mutant","Parent_C",60,"yellow",83,105.5,,13,46.3
+"Field_autumn","Open field","Autumn",635,"B3","11","28","M053","mutant","Parent_B",40,"white",89,76,8.2,3,45.9
+"Field_autumn","Open field","Autumn",636,"B3","12","28","M106","mutant","Parent_D",20,"bronze",73,90,6.8,21,52.4
+"Field_autumn","Open field","Autumn",637,"B3","1","29","M015","mutant","Parent_A",60,"yellow",92,,7.4,11,60.5
+"Field_autumn","Open field","Autumn",638,"B3","2","29","M054","mutant","Parent_B",60,"white",88,90.5,11.5,11,57.3
+"Field_autumn","Open field","Autumn",639,"B3","3","29","M048","mutant","Parent_B",60,"white",,82.7,,0,39.1
+"Field_autumn","Open field","Autumn",640,"B3","4","29","M079","mutant","Parent_C",20,"yellow",90,100.6,7.5,,
+"Field_autumn","Open field","Autumn",641,"B3","5","29","M018","mutant","Parent_A",60,"pink",84,87.6,6.6,12,47.9
+"Field_autumn","Open field","Autumn",642,"B3","6","29","M060","mutant","Parent_C",60,"yellow",76,97.3,6.5,23,26
+"Field_autumn","Open field","Autumn",643,"B3","7","29","M020","mutant","Parent_A",40,"pink",85,106.3,7,4,58.3
+"Field_autumn","Open field","Autumn",644,"B3","8","29","M066","mutant","Parent_C",60,"yellow",76,66.2,6.1,14,32
+"Field_autumn","Open field","Autumn",645,"B3","9","29","M110","mutant","Parent_D",40,"bronze",,99.7,,0,26.7
+"Field_autumn","Open field","Autumn",646,"B3","10","29","M007","mutant","Parent_A",20,"pink",81,101.8,6.9,15,64
+"Field_autumn","Open field","Autumn",647,"B3","11","29","M014","mutant","Parent_A",40,"pink",80,89.6,5.4,0,52.3
+"Field_autumn","Open field","Autumn",648,"B3","12","29","M012","mutant","Parent_A",60,"pink",75,101.6,4.7,,66.1
+"Field_autumn","Open field","Autumn",649,"B3","1","30","M033","mutant","Parent_B",60,"white",77,,9.3,3,31.9
+"Field_autumn","Open field","Autumn",650,"B3","2","30","M023","mutant","Parent_A",40,"pink",89,93,7.9,11,59.1
+"Field_autumn","Open field","Autumn",651,"B3","3","30","M084","mutant","Parent_C",60,"yellow",85,95.7,6.6,16,56.5
+"Field_autumn","Open field","Autumn",652,"B3","4","30","Parent_C","parent","Parent_C",0,"yellow",87,94.6,8,31,62.2
+"Field_autumn","Open field","Autumn",653,"B3","5","30","M069","mutant","Parent_C",60,"bronze",86,108.1,6.9,17,43.2
+"Field_autumn","Open field","Autumn",654,"B3","6","30","M035","mutant","Parent_B",40,"white",83,86.2,9,20,46.8
+"Field_autumn","Open field","Autumn",655,"B3","7","30","M075","mutant","Parent_C",60,"yellow",74,10.79,4.9,4,42.6
+"Field_autumn","Open field","Autumn",656,"B3","8","30","M093","mutant","Parent_D",60,"bronze",80,86,5.4,22,57.9
+"Field_autumn","Open field","Autumn",657,"B3","9","30","M092","mutant","Parent_D",40,"bronze",71,78.8,4.3,17,35.8
+"Field_autumn","Open field","Autumn",658,"B3","10","30","M065","mutant","Parent_C",40,"yellow",85,113.2,7,15,63.4
+"Field_autumn","Open field","Autumn",659,"B3","11","30","M070","mutant","Parent_C",20,"bronze",79,90.9,5.9,14,50.2
+"Field_autumn","Open field","Autumn",660,"B3","12","30","M009","mutant","Parent_A",60,"pink",70,102.4,5.8,12,56.6
+"Field_spring","Open field","Spring",401,"B1","1","1","M062","mutant","Parent_C",40,"yellow",96,84,7.1,8,59.8
+"Field_spring","Open field","Spring",402,"B1","2","1","M109","mutant","Parent_D",20,"bronze",88,91.5,5.1,,45.7
+"Field_spring","Open field","Spring",403,"B1","3","1","M009","mutant","Parent_A",60,"pink",80,87.7,4.4,26,44.2
+"Field_spring","Open field","Spring",404,"B1","4","1","M016","mutant","Parent_A",20,"pink",95,77.1,7.8,9,52.6
+"Field_spring","Open field","Spring",405,"B1","5","1","M018","mutant","Parent_A",60,"pink",74,67.4,3.8,10,48.4
+"Field_spring","Open field","Spring",406,"B1","6","1","M089","mutant","Parent_D",40,"bronze",82,103,6.5,17,58.6
+"Field_spring","Open field","Spring",407,"B1","7","1","Parent_C","parent","Parent_C",0,"yellow",84,81.5,7.2,12,65.3
+"Field_spring","Open field","Spring",408,"B1","8","1","M048","mutant","Parent_B",60,"white",91,70.1,5.5,18,42.3
+"Field_spring","Open field","Spring",409,"B1","9","1","M028","mutant","Parent_A",20,"pink",81,67.3,6.1,5,55
+"Field_spring","Open field","Spring",410,"B1","10","1","M096","mutant","Parent_D",60,"bronze",89,74.2,4.6,7,51.4
+"Field_spring","Open field","Spring",411,"B1","11","1","M104","mutant","Parent_D",40,"bronze",,61.3,,0,37.5
+"Field_spring","Open field","Spring",412,"B1","12","1","M100","mutant","Parent_D",20,"bronze",77,79.2,6.3,7,61.1
+"Field_spring","Open field","Spring",413,"B1","1","2","M031","mutant","Parent_B",20,"white",98,58.8,6.6,4,48.2
+"Field_spring","Open field","Spring",414,"B1","2","2","M090","mutant","Parent_D",60,"bronze",99,92.8,4.2,17,61.3
+"Field_spring","Open field","Spring",415,"B1","3","2","M073","mutant","Parent_C",20,"yellow",94,93.1,7.8,12,54.6
+"Field_spring","Open field","Spring",416,"B1","4","2","M037","mutant","Parent_B",20,"white",97,72.9,6,14,51.2
+"Field_spring","Open field","Spring",417,"B1","5","2","M113","mutant","Parent_D",40,"bronze",99,83.2,3.5,15,59.7
+"Field_spring","Open field","Spring",418,"B1","6","2","M005","mutant","Parent_A",40,"light pink",98,81.9,7.2,12,65.7
+"Field_spring","Open field","Spring",419,"B1","7","2","M013","mutant","Parent_A",20,"pink",81,65.2,4.7,70,57
+"Field_spring","Open field","Spring",420,"B1","8","2","M098","mutant","Parent_D",40,"bronze",93,7.05,5.3,6,46.2
+"Field_spring","Open field","Spring",421,"B1","9","2","M010","mutant","Parent_A",20,"pink",77,76.7,7.1,,51.9
+"Field_spring","Open field","Spring",422,"B1","10","2","M094","mutant","Parent_D",20,"bronze",97,70.4,6.8,22,46.7
+"Field_spring","Open field","Spring",423,"B1","11","2","M006","mutant","Parent_A",60,"pink",77,77.6,7.1,8,
+"Field_spring","Open field","Spring",424,"B1","12","2","M077","mutant","Parent_C",40,"yellow",73,73.1,7.9,0,47
+"Field_spring","Open field","Spring",425,"B1","1","3","Parent_B","parent","Parent_B",0,"white",100,75.7,6.2,9,
+"Field_spring","Open field","Spring",426,"B1","2","3","M112","mutant","Parent_D",20,"bronze",92,63.7,3,10,51.9
+"Field_spring","Open field","Spring",427,"B1","3","3","M105","mutant","Parent_D",60,"bronze",100,90.8,,18,49.3
+"Field_spring","Open field","Spring",428,"B1","4","3","M072","mutant","Parent_C",60,"yellow",89,87.3,6.5,13,38.2
+"Field_spring","Open field","Spring",429,"B1","5","3","M011","mutant","Parent_A",40,"pink",89,54.4,6.5,0,57.1
+"Field_spring","Open field","Spring",430,"B1","6","3","M082","mutant","Parent_C",20,"yellow",102,89.9,6.8,11,58.6
+"Field_spring","Open field","Spring",431,"B1","7","3","M043","mutant","Parent_B",20,"white",100,73.5,3.8,100,63.5
+"Field_spring","Open field","Spring",432,"B1","8","3","M074","mutant","Parent_C",40,"yellow",101,78.2,9.1,8,48.1
+"Field_spring","Open field","Spring",433,"B1","9","3","M111","mutant","Parent_D",60,"bronze",82,50,5.4,6,38.6
+"Field_spring","Open field","Spring",434,"B1","10","3","M014","mutant","Parent_A",40,"pink",,79.5,,0,54.2
+"Field_spring","Open field","Spring",435,"B1","11","3","M001","mutant","Parent_A",20,"pink",79,57.9,5.1,1,59
+"Field_spring","Open field","Spring",436,"B1","12","3","M097","mutant","Parent_D",20,"bronze",73,,4.6,3,44.6
+"Field_spring","Open field","Spring",437,"B1","1","4","M035","mutant","Parent_B",40,"white",105,79.6,5.7,1,55.4
+"Field_spring","Open field","Spring",438,"B1","2","4","M114","mutant","Parent_D",60,"bronze",98,65.4,4.2,11,58.6
+"Field_spring","Open field","Spring",439,"B1","3","4","M017","mutant","Parent_A",40,"pink",93,101,2.8,9,58.7
+"Field_spring","Open field","Spring",440,"B1","4","4","M070","mutant","Parent_C",20,"bronze",108,96.6,8.6,14,62.9
+"Field_spring","Open field","Spring",441,"B1","5","4","M050","mutant","Parent_B",40,"white",107,59.1,4.5,10,56.1
+"Field_spring","Open field","Spring",442,"B1","6","4","M003","mutant","Parent_A",60,"chimera",,64,6,10,69.9
+"Field_spring","Open field","Spring",443,"B1","7","4","M033","mutant","Parent_B",60,"white",94,,7.8,3,55.4
+"Field_spring","Open field","Spring",444,"B1","8","4","M052","mutant","Parent_B",20,"white",103,67.8,7.2,11,53.8
+"Field_spring","Open field","Spring",445,"B1","9","4","M110","mutant","Parent_D",40,"bronze",87,59.4,4.5,10,41.3
+"Field_spring","Open field","Spring",446,"B1","10","4","M021","mutant","Parent_A",60,"pink",88,61.1,2.5,15,47.1
+"Field_spring","Open field","Spring",447,"B1","11","4","M067","mutant","Parent_C",20,"yellow",94,61.1,4.8,0,46.1
+"Field_spring","Open field","Spring",448,"B1","12","4","M019","mutant","Parent_A",20,"pink",99,71.7,6.9,9,
+"Field_spring","Open field","Spring",449,"B1","1","5","M022","mutant","Parent_A",20,"pink",90,67.5,7.3,6,49.5
+"Field_spring","Open field","Spring",450,"B1","2","5","M055","mutant","Parent_B",20,"white",103,60.8,6.7,0,47.8
+"Field_spring","Open field","Spring",451,"B1","3","5","M078","mutant","Parent_C",60,"yellow",75,47.5,4.5,0,31.7
+"Field_spring","Open field","Spring",452,"B1","4","5","M042","mutant","Parent_B",60,"white",110,,6.5,2,68.1
+"Field_spring","Open field","Spring",453,"B1","5","5","M056","mutant","Parent_B",40,"white",110,70.8,4.3,11,49.8
+"Field_spring","Open field","Spring",454,"B1","6","5","M039","mutant","Parent_B",60,"chimera",105,63.9,6.6,20,49.6
+"Field_spring","Open field","Spring",455,"B1","7","5","M044","mutant","Parent_B",40,"white",95,56.7,4.9,11,55.6
+"Field_spring","Open field","Spring",456,"B1","8","5","M040","mutant","Parent_B",20,"white",,61.9,6.8,26,48.4
+"Field_spring","Open field","Spring",457,"B1","9","5","M004","mutant","Parent_A",20,"pink",84,60,3,13,39.7
+"Field_spring","Open field","Spring",458,"B1","10","5","M012","mutant","Parent_A",60,"pink",88,56.1,3,0,33.7
+"Field_spring","Open field","Spring",459,"B1","11","5","M059","mutant","Parent_C",40,"yellow",101,58.1,7.1,0,70.2
+"Field_spring","Open field","Spring",460,"B1","12","5","M008","mutant","Parent_A",40,"pink",87,54.6,4.8,4,34.6
+"Field_spring","Open field","Spring",461,"B1","1","6","M099","mutant","Parent_D",60,"bronze",96,71.5,4.9,7,34.2
+"Field_spring","Open field","Spring",462,"B1","2","6","M087","mutant","Parent_C",60,"yellow",102,69.2,7.2,0,48.3
+"Field_spring","Open field","Spring",463,"B1","3","6","M045","mutant","Parent_B",60,"white",103,56.7,3.9,0,412
+"Field_spring","Open field","Spring",464,"B1","4","6","M063","mutant","Parent_C",60,"yellow",,78.1,6.3,8,42.9
+"Field_spring","Open field","Spring",465,"B1","5","6","M002","mutant","Parent_A",40,"pink",90,73.2,3.4,3,50
+"Field_spring","Open field","Spring",466,"B1","6","6","M032","mutant","Parent_B",40,"white",110,84.6,5.2,11,56.3
+"Field_spring","Open field","Spring",467,"B1","7","6","M107","mutant","Parent_D",40,"bronze",84,67.7,2.2,17,55.1
+"Field_spring","Open field","Spring",468,"B1","8","6","M023","mutant","Parent_A",40,"pink",91,60.7,6.5,23,33.9
+"Field_spring","Open field","Spring",469,"B1","9","6","M115","mutant","Parent_D",20,"chimera",,45.4,5.9,2,34.8
+"Field_spring","Open field","Spring",470,"B1","10","6","Parent_A","parent","Parent_A",0,"pink",85,67.5,5.1,9,47.4
+"Field_spring","Open field","Spring",471,"B1","11","6","M080","mutant","Parent_C",40,"yellow",82,85.4,65,0,39.4
+"Field_spring","Open field","Spring",472,"B1","12","6","M071","mutant","Parent_C",40,"yellow",86,54.8,8.4,12,47.3
+"Field_spring","Open field","Spring",473,"B1","1","7","M103","mutant","Parent_D",20,"bronze",99,73.5,6,7,43.4
+"Field_spring","Open field","Spring",474,"B1","2","7","M102","mutant","Parent_D",60,"bronze",98,73.4,3.2,12,46.7
+"Field_spring","Open field","Spring",475,"B1","3","7","M083","mutant","Parent_C",40,"yellow",89,74.7,4.7,0,45.1
+"Field_spring","Open field","Spring",476,"B1","4","7","M069","mutant","Parent_C",60,"bronze",99,82.2,6.1,0,33.7
+"Field_spring","Open field","Spring",477,"B1","5","7","M051","mutant","Parent_B",60,"white",101,65.3,6.2,0,43.3
+"Field_spring","Open field","Spring",478,"B1","6","7","M030","mutant","Parent_B",60,"white",105,59.6,5.6,1,38.3
+"Field_spring","Open field","Spring",479,"B1","7","7","M053","mutant","Parent_B",40,"white",103,46.9,6.8,4,37.1
+"Field_spring","Open field","Spring",480,"B1","8","7","M064","mutant","Parent_C",20,"yellow",101,74.9,5.3,7,52.5
+"Field_spring","Open field","Spring",481,"B1","9","7","Parent_D","parent","Parent_D",0,"bronze",87,73.2,3.5,15,28.5
+"Field_spring","Open field","Spring",482,"B1","10","7","M093","mutant","Parent_D",60,"bronze",87,58.5,1.3,12,40.5
+"Field_spring","Open field","Spring",483,"B1","11","7","M020","mutant","Parent_A",40,"pink",76,60.3,5.5,0,
+"Field_spring","Open field","Spring",484,"B1","12","7","M046","mutant","Parent_B",20,"white",100,63.3,6.5,18,43.2
+"Field_spring","Open field","Spring",485,"B1","1","8","M075","mutant","Parent_C",60,"yellow",102,79.3,7.9,0,40.8
+"Field_spring","Open field","Spring",486,"B1","2","8","M085","mutant","Parent_C",20,"yellow",,65.9,7.3,2,44.5
+"Field_spring","Open field","Spring",487,"B1","3","8","M076","mutant","Parent_C",20,"yellow",88,72.2,6.4,4,50.4
+"Field_spring","Open field","Spring",488,"B1","4","8","M092","mutant","Parent_D",40,"bronze",93,62.6,5.5,15,
+"Field_spring","Open field","Spring",489,"B1","5","8","M081","mutant","Parent_C",60,"yellow",90,76.5,4.4,0,50.4
+"Field_spring","Open field","Spring",490,"B1","6","8","M041","mutant","Parent_B",40,"white",108,61.9,6.6,5,49.6
+"Field_spring","Open field","Spring",491,"B1","7","8","M079","mutant","Parent_C",20,"yellow",89,75.1,7.5,0,39.2
+"Field_spring","Open field","Spring",492,"B1","8","8","M049","mutant","Parent_B",20,"white",115,85.8,7,17,45.2
+"Field_spring","Open field","Spring",493,"B1","9","8","M061","mutant","Parent_C",20,"yellow",79,75.8,8.4,0,29.8
+"Field_spring","Open field","Spring",494,"B1","10","8","M025","mutant","Parent_A",20,"pink",87,56.6,5.8,14,31.4
+"Field_spring","Open field","Spring",495,"B1","11","8","M106","mutant","Parent_D",20,"bronze",257.890441896253,74.7,41,9,35.6
+"Field_spring","Open field","Spring",496,"B1","12","8","M095","mutant","Parent_D",40,"bronze",93,75.8,5.7,12,54.3
+"Field_spring","Open field","Spring",497,"B1","1","9","M066","mutant","Parent_C",60,"yellow",79,50,6.8,0,31.4
+"Field_spring","Open field","Spring",498,"B1","2","9","M091","mutant","Parent_D",20,"bronze",99,90.4,7.5,8,60.3
+"Field_spring","Open field","Spring",499,"B1","3","9","M026","mutant","Parent_A",40,"pink",82,54.6,5.7,0,45.5
+"Field_spring","Open field","Spring",500,"B1","4","9","M015","mutant","Parent_A",60,"yellow",93,72.8,7.2,0,45.1
+"Field_spring","Open field","Spring",501,"B1","5","9","M057","mutant","Parent_B",60,"white",102,52.5,5.5,0,31.8
+"Field_spring","Open field","Spring",502,"B1","6","9","M029","mutant","Parent_A",40,"pink",97,91.3,3.7,15,29.7
+"Field_spring","Open field","Spring",503,"B1","7","9","M036","mutant","Parent_B",60,"white",96,8.16,6.4,12,36.6
+"Field_spring","Open field","Spring",504,"B1","8","9","M047","mutant","Parent_B",40,"white",101,84.2,9.2,22,36.3
+"Field_spring","Open field","Spring",505,"B1","9","9","M060","mutant","Parent_C",60,"yellow",77,70.5,5.2,0,6.5
+"Field_spring","Open field","Spring",506,"B1","10","9","M058","mutant","Parent_B",20,"white",94,79.1,10.8,0,40.3
+"Field_spring","Open field","Spring",507,"B1","11","9","M101","mutant","Parent_D",40,"bronze",87,61.4,3.5,17,21.4
+"Field_spring","Open field","Spring",508,"B1","12","9","M065","mutant","Parent_C",40,"yellow",95,82,8.7,12,52.6
+"Field_spring","Open field","Spring",509,"B1","1","10","M068","mutant","Parent_C",40,"yellow",97,74.6,6.2,1,37.2
+"Field_spring","Open field","Spring",510,"B1","2","10","M034","mutant","Parent_B",20,"white",115,63,6.6,12,46.3
+"Field_spring","Open field","Spring",511,"B1","3","10","M108","mutant","Parent_D",60,"bronze",86,91.5,5.7,8,56.1
+"Field_spring","Open field","Spring",512,"B1","4","10","M007","mutant","Parent_A",20,"pink",92,54.4,7.7,2,39.2
+"Field_spring","Open field","Spring",513,"B1","5","10","M024","mutant","Parent_A",60,"pink",,55.7,5.4,0,39.8
+"Field_spring","Open field","Spring",514,"B1","6","10","M086","mutant","Parent_C",40,"yellow",92,73.8,8.3,9,41.1
+"Field_spring","Open field","Spring",515,"B1","7","10","M116","mutant","Parent_D",40,"bronze",89,100.3,2.7,21,46.2
+"Field_spring","Open field","Spring",516,"B1","8","10","M084","mutant","Parent_C",60,"yellow",104,,7.4,,44.4
+"Field_spring","Open field","Spring",517,"B1","9","10","M054","mutant","Parent_B",60,"white",106,70.8,6.1,10,30.7
+"Field_spring","Open field","Spring",518,"B1","10","10","M088","mutant","Parent_D",20,"bronze",95,70.9,5.5,6,52.6
+"Field_spring","Open field","Spring",519,"B1","11","10","M038","mutant","Parent_B",40,"white",85,26.6,3.7,0,18.6
+"Field_spring","Open field","Spring",520,"B1","12","10","M027","mutant","Parent_A",60,"chimera",,,,,
+"Field_spring","Open field","Spring",521,"B2","1","11","M105","mutant","Parent_D",60,"bronze",103,90.1,6.7,16,50.1
+"Field_spring","Open field","Spring",522,"B2","2","11","M061","mutant","Parent_C",20,"yellow",102,74.5,77,0,42
+"Field_spring","Open field","Spring",523,"B2","3","11","M027","mutant","Parent_A",60,"chimera",94,67,5.8,0,42.2
+"Field_spring","Open field","Spring",524,"B2","4","11","M072","mutant","Parent_C",60,"yellow",88,63.9,5.8,0,40
+"Field_spring","Open field","Spring",525,"B2","5","11","M007","mutant","Parent_A",20,"pink",91,,6.7,0,56.5
+"Field_spring","Open field","Spring",526,"B2","6","11","M005","mutant","Parent_A",40,"light pink",94,85.8,11.1,15,
+"Field_spring","Open field","Spring",527,"B2","7","11","M048","mutant","Parent_B",60,"white",104,81.5,6.1,23,
+"Field_spring","Open field","Spring",528,"B2","8","11","M041","mutant","Parent_B",40,"white",293.890441896253,101,8.8,26,52.1
+"Field_spring","Open field","Spring",529,"B2","9","11","M040","mutant","Parent_B",20,"white",103,58.4,6.6,8,33.6
+"Field_spring","Open field","Spring",530,"B2","10","11","M055","mutant","Parent_B",20,"white",102,62.6,6,17,37.4
+"Field_spring","Open field","Spring",531,"B2","11","11","M060","mutant","Parent_C",60,"yellow",82,73.4,4.5,,24.2
+"Field_spring","Open field","Spring",532,"B2","12","11","M063","mutant","Parent_C",60,"yellow",95,65.3,6.9,7,42.4
+"Field_spring","Open field","Spring",533,"B2","1","12","M039","mutant","Parent_B",60,"chimera",103,57,8.3,6,40.7
+"Field_spring","Open field","Spring",534,"B2","2","12","M085","mutant","Parent_C",20,"yellow",108,46.9,10.1,3,34.6
+"Field_spring","Open field","Spring",535,"B2","3","12","M026","mutant","Parent_A",40,"pink",80,55.4,4.3,0,47.6
+"Field_spring","Open field","Spring",536,"B2","4","12","M104","mutant","Parent_D",40,"bronze",87,64.4,5.1,4,
+"Field_spring","Open field","Spring",537,"B2","5","12","M033","mutant","Parent_B",60,"white",88,60.8,8.8,1,62.4
+"Field_spring","Open field","Spring",538,"B2","6","12","M070","mutant","Parent_C",20,"bronze",101,100.1,13.4,18,59.4
+"Field_spring","Open field","Spring",539,"B2","7","12","M022","mutant","Parent_A",20,"pink",88,76.9,8.8,8,60
+"Field_spring","Open field","Spring",540,"B2","8","12","M034","mutant","Parent_B",20,"white",106,86.3,8.2,21,46
+"Field_spring","Open field","Spring",541,"B2","9","12","M111","mutant","Parent_D",60,"bronze",85,65.4,49,20,28.1
+"Field_spring","Open field","Spring",542,"B2","10","12","M091","mutant","Parent_D",20,"bronze",90,106.9,4.8,16,41.7
+"Field_spring","Open field","Spring",543,"B2","11","12","M013","mutant","Parent_A",20,"pink",83,47.5,2.3,0,31.1
+"Field_spring","Open field","Spring",544,"B2","12","12","M067","mutant","Parent_C",20,"yellow",105,70.5,7.5,6,50.8
+"Field_spring","Open field","Spring",545,"B2","1","13","M089","mutant","Parent_D",40,"bronze",81,80.8,5.5,18,55.3
+"Field_spring","Open field","Spring",546,"B2","2","13","M025","mutant","Parent_A",20,"pink",99,64.5,5.5,7,48.3
+"Field_spring","Open field","Spring",547,"B2","3","13","M068","mutant","Parent_C",40,"yellow",,49.6,4.4,0,41.9
+"Field_spring","Open field","Spring",548,"B2","4","13","M077","mutant","Parent_C",40,"yellow",93,70.3,9.8,4,46.2
+"Field_spring","Open field","Spring",549,"B2","5","13","M036","mutant","Parent_B",60,"white",93,63.4,8.1,7,60.4
+"Field_spring","Open field","Spring",550,"B2","6","13","M088","mutant","Parent_D",20,"bronze",100,81.3,7.8,23,64
+"Field_spring","Open field","Spring",551,"B2","7","13","M065","mutant","Parent_C",40,"yellow",98,87.1,8.2,0,54
+"Field_spring","Open field","Spring",552,"B2","8","13","M075","mutant","Parent_C",60,"yellow",102,97.6,9.4,13,50.1
+"Field_spring","Open field","Spring",553,"B2","9","13","M029","mutant","Parent_A",40,"pink",106,107.3,4.9,26,20.3
+"Field_spring","Open field","Spring",554,"B2","10","13","M001","mutant","Parent_A",20,"pink",90,81.4,7.3,9,37.5
+"Field_spring","Open field","Spring",555,"B2","11","13","M046","mutant","Parent_B",20,"white",89,47.7,5.9,3,28.3
+"Field_spring","Open field","Spring",556,"B2","12","13","M101","mutant","Parent_D",40,"bronze",95,63.8,4.5,23,43.4
+"Field_spring","Open field","Spring",557,"B2","1","14","M042","mutant","Parent_B",60,"white",111,,9.9,2,52.3
+"Field_spring","Open field","Spring",558,"B2","2","14","M019","mutant","Parent_A",20,"pink",96,6.74,4.8,11,47.8
+"Field_spring","Open field","Spring",559,"B2","3","14","M049","mutant","Parent_B",20,"white",,62.2,10.7,0,48.4
+"Field_spring","Open field","Spring",560,"B2","4","14","M103","mutant","Parent_D",20,"bronze",89,96.4,8.3,23,55.5
+"Field_spring","Open field","Spring",561,"B2","5","14","M037","mutant","Parent_B",20,"white",99,71.1,9.2,16,60.8
+"Field_spring","Open field","Spring",562,"B2","6","14","M084","mutant","Parent_C",60,"yellow",94,84.1,9.5,3,58.4
+"Field_spring","Open field","Spring",563,"B2","7","14","M093","mutant","Parent_D",60,"bronze",95,48.7,4.2,16,47.8
+"Field_spring","Open field","Spring",564,"B2","8","14","M110","mutant","Parent_D",40,"bronze",86,80.7,9.1,12,53.1
+"Field_spring","Open field","Spring",565,"B2","9","14","M079","mutant","Parent_C",20,"yellow",86,62.7,9.1,7,32.1
+"Field_spring","Open field","Spring",566,"B2","10","14","M095","mutant","Parent_D",40,"bronze",107,80.8,5.6,22,42.7
+"Field_spring","Open field","Spring",567,"B2","11","14","M115","mutant","Parent_D",20,"chimera",95,79,5.5,9,40.8
+"Field_spring","Open field","Spring",568,"B2","12","14","M087","mutant","Parent_C",60,"yellow",103,77,7.7,14,45.8
+"Field_spring","Open field","Spring",569,"B2","1","15","M020","mutant","Parent_A",40,"pink",97,55.5,7.6,2,34.9
+"Field_spring","Open field","Spring",570,"B2","2","15","M094","mutant","Parent_D",20,"bronze",97,60.6,4.6,23,42.6
+"Field_spring","Open field","Spring",571,"B2","3","15","M028","mutant","Parent_A",20,"pink",97,69.8,8.4,9,41.5
+"Field_spring","Open field","Spring",572,"B2","4","15","M023","mutant","Parent_A",40,"pink",93,77.8,8.1,12,59.5
+"Field_spring","Open field","Spring",573,"B2","5","15","M045","mutant","Parent_B",60,"white",91,63.6,6.8,10,51.6
+"Field_spring","Open field","Spring",574,"B2","6","15","M078","mutant","Parent_C",60,"yellow",89,73.1,10.6,10,37.8
+"Field_spring","Open field","Spring",575,"B2","7","15","M030","mutant","Parent_B",60,"white",102,64.3,9,8,45.4
+"Field_spring","Open field","Spring",576,"B2","8","15","M081","mutant","Parent_C",60,"yellow",283.890441896253,82.5,10.6,7,61.3
+"Field_spring","Open field","Spring",577,"B2","9","15","M096","mutant","Parent_D",60,"bronze",90,84.5,5.6,1,42.5
+"Field_spring","Open field","Spring",578,"B2","10","15","M052","mutant","Parent_B",20,"white",,,6.1,20,43.6
+"Field_spring","Open field","Spring",579,"B2","11","15","M071","mutant","Parent_C",40,"yellow",90,63.5,8.6,11,38.8
+"Field_spring","Open field","Spring",580,"B2","12","15","M003","mutant","Parent_A",60,"chimera",87,47.5,7.5,15,41.2
+"Field_spring","Open field","Spring",581,"B2","1","16","M053","mutant","Parent_B",40,"white",,,,,
+"Field_spring","Open field","Spring",582,"B2","2","16","M107","mutant","Parent_D",40,"bronze",94,71.2,8.8,12,59.8
+"Field_spring","Open field","Spring",583,"B2","3","16","M062","mutant","Parent_C",40,"yellow",93,,9,20,50.5
+"Field_spring","Open field","Spring",584,"B2","4","16","M008","mutant","Parent_A",40,"pink",88,63.4,6.6,27,42.9
+"Field_spring","Open field","Spring",585,"B2","5","16","M038","mutant","Parent_B",40,"white",83,,6.2,2,42.9
+"Field_spring","Open field","Spring",586,"B2","6","16","M018","mutant","Parent_A",60,"pink",92,78.7,8.6,24,43.9
+"Field_spring","Open field","Spring",587,"B2","7","16","M099","mutant","Parent_D",60,"bronze",91,60.6,3.6,9,25
+"Field_spring","Open field","Spring",588,"B2","8","16","M098","mutant","Parent_D",40,"bronze",107,83.2,7,,44.3
+"Field_spring","Open field","Spring",589,"B2","9","16","M057","mutant","Parent_B",60,"white",,45.9,9.2,12,37.3
+"Field_spring","Open field","Spring",590,"B2","10","16","Parent_B","parent","Parent_B",0,"white",116,72.6,10.2,11,48.6
+"Field_spring","Open field","Spring",591,"B2","11","16","M092","mutant","Parent_D",40,"bronze",91,69.5,2.5,20,46.7
+"Field_spring","Open field","Spring",592,"B2","12","16","M066","mutant","Parent_C",60,"yellow",83,51,7.9,0,26.7
+"Field_spring","Open field","Spring",593,"B2","1","17","M035","mutant","Parent_B",40,"white",109,51.3,8.1,11,54.7
+"Field_spring","Open field","Spring",594,"B2","2","17","M024","mutant","Parent_A",60,"pink",114,70.7,7.9,4,41.5
+"Field_spring","Open field","Spring",595,"B2","3","17","M015","mutant","Parent_A",60,"yellow",103,62.6,7.5,20,68.6
+"Field_spring","Open field","Spring",596,"B2","4","17","M102","mutant","Parent_D",60,"bronze",85,80.2,5.1,15,65.2
+"Field_spring","Open field","Spring",597,"B2","5","17","M016","mutant","Parent_A",20,"pink",95,90.4,8.1,4,58.9
+"Field_spring","Open field","Spring",598,"B2","6","17","M012","mutant","Parent_A",60,"pink",108,87.4,6.1,15,71.2
+"Field_spring","Open field","Spring",599,"B2","7","17","M074","mutant","Parent_C",40,"yellow",93,72.9,4.2,,34.9
+"Field_spring","Open field","Spring",600,"B2","8","17","M114","mutant","Parent_D",60,"bronze",106,66.8,6.1,13,43.7
+"Field_spring","Open field","Spring",601,"B2","9","17","M051","mutant","Parent_B",60,"white",109,67.7,8.5,0,26.9
+"Field_spring","Open field","Spring",602,"B2","10","17","M083","mutant","Parent_C",40,"yellow",106,65,7.8,17,40
+"Field_spring","Open field","Spring",603,"B2","11","17","M031","mutant","Parent_B",20,"white",106,64.2,4.3,7,27.4
+"Field_spring","Open field","Spring",604,"B2","12","17","M108","mutant","Parent_D",60,"bronze",104,78.2,7.2,20,53
+"Field_spring","Open field","Spring",605,"B2","1","18","M021","mutant","Parent_A",60,"pink",100,63.6,5.8,12,38.1
+"Field_spring","Open field","Spring",606,"B2","2","18","M059","mutant","Parent_C",40,"yellow",108,55.1,11.6,20,71.3
+"Field_spring","Open field","Spring",607,"B2","3","18","M047","mutant","Parent_B",40,"white",,,,,
+"Field_spring","Open field","Spring",608,"B2","4","18","M100","mutant","Parent_D",20,"bronze",94,76.7,5.8,31,67.2
+"Field_spring","Open field","Spring",609,"B2","5","18","M112","mutant","Parent_D",20,"bronze",98,76.2,4.1,18,
+"Field_spring","Open field","Spring",610,"B2","6","18","M011","mutant","Parent_A",40,"pink",90,66.4,7.8,8,
+"Field_spring","Open field","Spring",611,"B2","7","18","M014","mutant","Parent_A",40,"pink",107,86.1,4,,46
+"Field_spring","Open field","Spring",612,"B2","8","18","M043","mutant","Parent_B",20,"white",123,82.8,8.2,0,48.3
+"Field_spring","Open field","Spring",613,"B2","9","18","M032","mutant","Parent_B",40,"white",,72.7,6.1,1,34.2
+"Field_spring","Open field","Spring",614,"B2","10","18","M010","mutant","Parent_A",20,"pink",96,80,7.5,10,44.7
+"Field_spring","Open field","Spring",615,"B2","11","18","M054","mutant","Parent_B",60,"white",119,49.2,10.8,5,42.5
+"Field_spring","Open field","Spring",616,"B2","12","18","M050","mutant","Parent_B",40,"white",107,70.8,,17,45.9
+"Field_spring","Open field","Spring",617,"B2","1","19","M080","mutant","Parent_C",40,"yellow",102,86.6,10.1,17,61.7
+"Field_spring","Open field","Spring",618,"B2","2","19","M073","mutant","Parent_C",20,"yellow",102,86.6,,17,52.5
+"Field_spring","Open field","Spring",619,"B2","3","19","M017","mutant","Parent_A",40,"pink",96,88.4,4,1,63.9
+"Field_spring","Open field","Spring",620,"B2","4","19","M069","mutant","Parent_C",60,"bronze",112,72.3,,18,51.6
+"Field_spring","Open field","Spring",621,"B2","5","19","M009","mutant","Parent_A",60,"pink",79,72.9,6.6,16,57.4
+"Field_spring","Open field","Spring",622,"B2","6","19","M076","mutant","Parent_C",20,"yellow",96,76.1,5.4,4,56.9
+"Field_spring","Open field","Spring",623,"B2","7","19","Parent_C","parent","Parent_C",0,"yellow",98,82,7,,57.6
+"Field_spring","Open field","Spring",624,"B2","8","19","M064","mutant","Parent_C",20,"yellow",111,92.4,8.5,6,62.7
+"Field_spring","Open field","Spring",625,"B2","9","19","M090","mutant","Parent_D",60,"bronze",101,52,4.5,60,29.2
+"Field_spring","Open field","Spring",626,"B2","10","19","M002","mutant","Parent_A",40,"pink",106,64.7,6.1,12,44.5
+"Field_spring","Open field","Spring",627,"B2","11","19","M086","mutant","Parent_C",40,"yellow",104,47.8,6.2,0,26.1
+"Field_spring","Open field","Spring",628,"B2","12","19","M097","mutant","Parent_D",20,"bronze",101,78.4,6.1,18,38.1
+"Field_spring","Open field","Spring",629,"B2","1","20","M116","mutant","Parent_D",40,"bronze",96,91.4,4.8,30,53
+"Field_spring","Open field","Spring",630,"B2","2","20","M004","mutant","Parent_A",20,"pink",99,75.3,5.5,19,52.9
+"Field_spring","Open field","Spring",631,"B2","3","20","Parent_A","parent","Parent_A",0,"pink",92,66.8,,11,53.5
+"Field_spring","Open field","Spring",632,"B2","4","20","M044","mutant","Parent_B",40,"white",102,75.7,8.3,21,50.4
+"Field_spring","Open field","Spring",633,"B2","5","20","Parent_D","parent","Parent_D",0,"bronze",92,68.3,3.1,16,43
+"Field_spring","Open field","Spring",634,"B2","6","20","M082","mutant","Parent_C",20,"yellow",95,72.4,7.9,8,52.3
+"Field_spring","Open field","Spring",635,"B2","7","20","M113","mutant","Parent_D",40,"bronze",104,75.3,4.7,14,51.9
+"Field_spring","Open field","Spring",636,"B2","8","20","M006","mutant","Parent_A",60,"pink",96,77.7,10.2,6,50.3
+"Field_spring","Open field","Spring",637,"B2","9","20","M056","mutant","Parent_B",40,"white",104,51.9,7.5,14,40.6
+"Field_spring","Open field","Spring",638,"B2","10","20","M109","mutant","Parent_D",20,"bronze",104,76.8,5.1,19,52.2
+"Field_spring","Open field","Spring",639,"B2","11","20","M106","mutant","Parent_D",20,"bronze",98,70,6,7,40.5
+"Field_spring","Open field","Spring",640,"B2","12","20","M058","mutant","Parent_B",20,"white",126,80.7,12.7,15,62.3

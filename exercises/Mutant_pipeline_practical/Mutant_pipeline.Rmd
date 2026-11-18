@@ -1,0 +1,263 @@
+---
+title: "Statistical pipeline for a mutant population"
+subtitle: "RTC RER5030, Topic 10. Practical session"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 9, fig.height = 4.5)
+```
+
+## 0. Choose the crop
+
+Change **only the word below**: `"chrysanthemum"`, `"wheat"` or `"bean"`. Then run the whole file (button **Knit**) or run it chunk by chunk.
+
+```{r config}
+CROP <- "chrysanthemum"
+
+source("helpers_mutant.R")
+library(ggplot2)
+
+cfg <- switch(CROP,
+  chrysanthemum = list(file = "data/chrysanthemum_mutant_trials.csv",
+    traits  = c("days_to_flowering", "plant_height_cm", "flower_diameter_cm", "flower_number", "stem_weight_g"),
+    weights = c(flower_number = 10, flower_diameter_cm = 10, stem_weight_g = 5, days_to_flowering = -5),
+    gge_trait = "stem_weight_g",
+    limits = list(days_to_flowering = c(40, 150), plant_height_cm = c(10, 200), flower_diameter_cm = c(1, 15),
+                  flower_number = c(0, 80), stem_weight_g = c(5, 250))),
+  wheat = list(file = "data/wheat_mutant_trials.csv",
+    traits  = c("days_to_heading", "plant_height_cm", "spikes_per_m2", "thousand_kernel_weight_g", "grain_yield_t_ha"),
+    weights = c(grain_yield_t_ha = 10, thousand_kernel_weight_g = 5, spikes_per_m2 = 5, days_to_heading = -3),
+    gge_trait = "grain_yield_t_ha",
+    limits = list(days_to_heading = c(80, 180), plant_height_cm = c(30, 150), spikes_per_m2 = c(50, 700),
+                  thousand_kernel_weight_g = c(15, 70), grain_yield_t_ha = c(0, 12))),
+  bean = list(file = "data/bean_mutant_trials.csv",
+    traits  = c("days_to_flowering", "days_to_maturity", "pods_per_plant", "hundred_seed_weight_g", "seed_yield_kg_ha"),
+    weights = c(seed_yield_kg_ha = 10, pods_per_plant = 5, hundred_seed_weight_g = 5, days_to_maturity = -5),
+    gge_trait = "seed_yield_kg_ha",
+    limits = list(days_to_flowering = c(20, 80), days_to_maturity = c(55, 130), pods_per_plant = c(0, 100),
+                  hundred_seed_weight_g = c(8, 60), seed_yield_kg_ha = c(0, 5000))))
+TRAITS <- cfg$traits
+d <- load_mutant(cfg$file)      # adds: trial, g (genotype), block_id, row_number, col_number
+table(d$trial)
+```
+
+**Question 1.** How many trials, genotypes and plots do you have? Which column is the genotype? Which is the block?
+
+## 1. Explore
+
+### 1.1 Missing data and variation
+
+```{r explore-missing}
+plot_missing(d, TRAITS)
+check_traits(d, TRAITS)      # % missing, mean, sd, coefficient of variation, keep
+```
+
+**Question 2.** Is there a trait with more than 25% of missing values? Is there a trait with almost no variation (CV below 1%)? What do you do with it?
+
+### 1.2 Boxplots with plain `ggplot2`
+
+```{r explore-box, fig.height = 5.5}
+long <- do.call(rbind, lapply(TRAITS, function(tr)
+  data.frame(trial = d$trial, trait = tr, value = d[[tr]])))
+ggplot(long, aes(trial, value)) +
+  geom_boxplot(outlier.colour = "#D55E00", fill = "grey92") +
+  facet_wrap(~ trait, scales = "free_y") +
+  theme_minimal() + theme(axis.text.x = element_text(angle = 40, hjust = 1))
+```
+
+**Question 3.** Look at the orange points. Are they possible values? What could be the reason for each one?
+
+### 1.3 Field maps
+
+```{r explore-map, fig.height = 4}
+tr1 <- TRAITS[2]
+ggplot(d, aes(col_number, row_number, fill = .data[[tr1]])) +
+  geom_tile(colour = "white") + scale_y_reverse() + scale_fill_viridis_c(na.value = "grey85") +
+  facet_wrap(~ trial) + coord_equal() + theme_minimal() + labs(title = tr1)
+```
+
+**Question 4.** Do you see a trend or a block of grey (missing) plots? What caused it? Change `tr1` to another trait.
+
+### 1.4 Raw correlation between traits
+
+```{r explore-corr}
+R_raw <- cor(d[TRAITS], use = "pairwise.complete.obs")
+plot_corr(R_raw, "Raw data")
+```
+
+## 2. Clean
+
+### 2.1 Flag the outliers
+
+```{r clean}
+flags <- flag_outliers(d, TRAITS)     # robust z in each trial, then a model residual
+table(flags$trait)
+```
+
+### 2.2 Review them before removing
+
+A flag is a **question**, not a decision. An impossible value is an error. But a line that is extreme in **all its plots** can be a **potential mutant**. `review_outliers()` looks at the limits you give and at the other plots of the same line.
+
+```{r review}
+rev <- review_outliers(d, flags, limits = cfg$limits)
+table(rev$suggestion)
+rev[, c("g", "trial", "trait", "value", "z", "others_n", "others_z", "suggestion")]
+```
+
+**Question 5.** How many flagged values are impossible, isolated or repeated? Why is it not always a good idea to remove all of them?
+
+### 2.3 Remove (optional)
+
+You decide. Set `REMOVE_OUTLIERS <- FALSE` to keep everything. By default we remove all the flags except the lines that look like possible mutants.
+
+```{r remove}
+REMOVE_OUTLIERS <- TRUE
+keep_flag <- grepl("Possible mutant", rev$suggestion)
+d2 <- if (REMOVE_OUTLIERS) remove_outliers(d, rev[!keep_flag, ]) else d
+R_clean <- cor(d2[TRAITS], use = "pairwise.complete.obs")
+plot_corr(R_clean, "After cleaning")
+```
+
+**Your turn.** Be more sensitive. Use a lower cut-off and see which lines are marked as possible mutants:
+
+```{r look-for-mutants}
+flags_low <- flag_outliers(d, TRAITS, cutoff = 3)
+rev_low <- review_outliers(d, flags_low, limits = cfg$limits, check_z = 1.5)
+rev_low[grepl("Possible mutant", rev_low$suggestion), ]
+```
+
+**Question 6.** Which lines are marked as possible mutants? Look at their values in all plots. Would you follow them in the next stage?
+
+## 3. Single trial analysis
+
+Each trial and trait gets **five models**. Four are `lme4` models and one is `SpATS`. It takes **a few minutes**.
+
+| Model | Random terms (genotype is always random) |
+|---------------|-----------------------------------------|
+| `block` | block |
+| `rowcol` | block, row, column (crossed) |
+| `nested` | block, row inside block, column inside block |
+| `rowcol_nb` | row, column (no block) |
+| `SpATS` | block and a smooth surface of row and column |
+
+```{r single, cache = TRUE}
+st <- single_trials(d2, TRAITS, spatial = TRUE)
+st$h2        # heritability of each model; best_model has the lowest AIC; h2_lme4 is the heritability of the best model
+```
+
+### 3.1 Do the rows and columns explain variance?
+
+```{r single-models, fig.width = 12, fig.height = 4.4}
+M <- st$models
+subset(M, trait == TRAITS[2] & trial == levels(d$trial)[1])    # variances, AIC and heritability
+plot_lme4_models(M, TRAITS[2], levels(d$trial)[1])
+table(st$h2$best_model)                                         # which model wins in how many cases
+```
+
+**Question 7.** In the chosen trial and trait, how much variance do row and column take? Which model has the lowest AIC? Does the heritability change when you add rows and columns?
+
+**Your turn.** Change the trait and the trial in `plot_lme4_models()`. Is the best model always the same?
+
+### 3.2 Heritability
+
+```{r single-h2}
+plot_h2(st$h2, "h2_spats")
+plot_h2(st$h2, "h2_lme4")
+```
+
+**Question 8.** Which trait has the lowest heritability? In which trial? Use the traffic light (below 0.2 low, 0.2 to 0.5 medium, above 0.5 good). Would you drop any trial or trait?
+
+```{r single-compare}
+ggplot(st$h2, aes(h2_lme4, h2_spats, colour = trait, shape = trial)) + geom_abline(colour = "grey70") +
+  geom_point(size = 3) + coord_equal() + theme_minimal()
+```
+
+**Question 9.** Each point is one trait in one trial. Is SpATS always higher than the best lme4 model? Where is the difference larger?
+
+## 4. Multi-environment analysis
+
+We **start again** from the plot data. We do **not** use the BLUPs of the single trials.
+
+```{r met-shared}
+gt <- genotype_in_trials(d2)
+table(gt$n_trials)         # in how many trials is each genotype tested
+```
+
+```{r met-fit, cache = TRUE}
+mets <- lapply(TRAITS, function(tr) met_fit(d2, tr)); names(mets) <- TRAITS
+vc <- do.call(rbind, lapply(TRAITS, function(tr) cbind(trait = tr, round(met_summary(mets[[tr]]), 2))))
+vc
+```
+
+**Question 10.** For which trait is the G x trial variance (`VgxE`) larger than the genotype variance (`Vg`)? What does it mean for selection?
+
+### Genotypic correlation between trials
+
+```{r met-gcor}
+plot_corr(trial_gcor(mets[[cfg$gge_trait]]), cfg$gge_trait, 3)
+```
+
+### Genotypic correlation between traits
+
+```{r met-gcor-traits}
+B <- all_blups(d2, TRAITS)          # one BLUP per genotype and trait, over all trials
+plot_corr(cor(B[, -1]), "Genotypic correlation between traits (BLUPs)")
+```
+
+**Question 11.** Which traits go in opposite directions (negative correlation)? What does it mean for the selection index?
+
+## 5. Stability. GGE biplot
+
+```{r gge, fig.height = 5}
+tr <- cfg$gge_trait
+b <- st$blues[st$blues$trait == tr & st$blues$method == "SpATS", ]
+W <- reshape(b[, c("g", "trial", "blue")], idvar = "g", timevar = "trial", direction = "wide")
+rownames(W) <- W$g; W <- as.matrix(W[, -1]); colnames(W) <- sub("blue\\.", "", colnames(W))
+W <- W[complete.cases(W), ]          # only genotypes present in all trials
+f <- gge_fit(W)
+f$explained                          # % of the variation of the first two axes
+plot_gge(f)
+```
+
+**Question 12.** Which environments point in the same direction? Which line is high **and** stable?
+
+## 6. Selection
+
+```{r select}
+meta <- unique(d2[, c("g", "type", "parent", "dose_Gy")]); names(meta)[1] <- "g"
+S <- selection_table(B, cfg$weights, pct = 0.25)     # standardised BLUPs times the weights
+S <- merge(S, meta, by = "g"); S <- S[order(S$rank), ]
+head(S, 10)
+```
+
+```{r select-plot}
+S$group <- ifelse(S$type == "parent", "parent", ifelse(S$selected, "selected mutant", "other mutant"))
+ggplot(S, aes(rank, index, colour = group)) + geom_point(size = 2) +
+  scale_colour_manual(values = c(`selected mutant` = "#4F9D5D", `other mutant` = "grey70", parent = "#D55E00")) +
+  theme_minimal() + theme(legend.position = "top")
+```
+
+```{r select-groups}
+m <- S[S$type == "mutant", ]
+aggregate(selected ~ dose_Gy, m, function(x) round(100 * mean(x)))   # % selected by dose
+aggregate(selected ~ parent, m, function(x) round(100 * mean(x)))   # % selected by parent
+S[S$type == "parent", c("g", "rank", "index", "selected")]          # where are the parents?
+```
+
+**Question 13.** Which dose gives the highest proportion of selected mutants? How many mutants are better than the best parent? Change the weights at the top and run again. How much does the list change?
+
+## Your own data
+
+Prepare a `.csv` with one row per plot and the columns: environment (trial), genotype, block, row, column and the traits. Then:
+
+```r
+d <- load_mutant("my_data.csv", env = "environment", genotype = "genotype",
+                 block = "block", row = "row", col = "column")
+```
+
+and run the same steps.

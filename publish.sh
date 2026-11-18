@@ -27,6 +27,8 @@ SLIDES=(
   "11-ai-plant-breeding"
   "14-llm-assistants"
   "12-analysis-pipeline"
+  "16-mutant-pipeline"
+  "17-radiosensitivity"
 )
 
 # 0. Optional: save and push the source files to GitHub (branch main)
