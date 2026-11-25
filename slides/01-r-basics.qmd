@@ -136,7 +136,7 @@ In one minute, tell us:
 | Introductions                                              |
 | **Block 1.** Installation check                            |
 | **Blocks 2 to 5.** R concepts with plant breeding examples |
-| **Live coding** in RStudio with the course data            |
+| **Practical session** in RStudio with the course data (50 min) |
 | Homework and questions                                     |
 
 ------------------------------------------------------------------------
@@ -603,17 +603,129 @@ Patterns in the field are the reason to use **blocks** (Day 2) and **spatial mod
 
 ------------------------------------------------------------------------
 
-## Live coding {.divider}
+## Practical session {.divider}
 
-Let's open RStudio
+About 50 minutes in RStudio
 
-[We now run the code of the course manual, chapter 1, step by step with the course data.]{.small-note}
+[Objects, importing data, checking and plotting, with the same small trial.]{.small-note}
 
 ------------------------------------------------------------------------
 
-## Homework before Session 2
+## How the practical works
 
-Use `data/precourse_trial.csv` inside an RStudio project:
+::::: columns
+::: {.column width="52%"}
+1.  Download: [**R first steps practical (ZIP)**](../downloads/R_first_steps_practical.zip)
+2.  Unzip it, open `R_first_steps.Rproj`, run `install_packages.R`
+3.  Open `R_first_steps.Rmd` and run it **chunk by chunk**
+4.  **Your turn** chunks are empty: write your code there
+5.  **Check yourself** boxes give the result you should get
+6.  At the end, click **Knit**
+:::
+
+::: {.column width="48%"}
+| Part | Topic | Time |
+|:--|:-----------------|:--|
+| 1 | Objects and types | 10 min |
+| 2 | Importing data | 15 min |
+| 3 | Checking the data | 5 min |
+| 4 | First plots | 10 min |
+| 5 | Knit your report | 5 min |
+:::
+:::::
+
+::: keybox
+No R on your computer? Use **Posit Cloud** and upload the unzipped folder.
+:::
+
+------------------------------------------------------------------------
+
+## Part 1. Objects and types (10 min)
+
+```{r}
+yield <- c(4.60, 3.77, 3.24, 4.04, 4.31, 3.92)      # grain yield of 6 plots (t/ha)
+geno  <- c("M4-01", "M4-10", "M4-06", "M4-02", "Parent", "M4-09")
+geno[which.max(yield)]                              # genotype of the best plot
+```
+
+-   A **vector** holds one type of data: numbers or text
+-   A **factor** is a label with levels: genotype, replicate, block
+-   A **data frame** is your field book: one column per variable
+
+**The type trap.** One value was typed with a decimal comma:
+
+```{r}
+as.numeric(c("4.6", "3.77", "4,04"))
+```
+
+------------------------------------------------------------------------
+
+## Part 2. Importing data (15 min)
+
+The same trial, saved in four ways. Choose the function that matches the file:
+
+| File | What is special | Function |
+|:--------------------|:-------------------------|:------------------|
+| `precourse_trial.csv` | Comma separator, decimal point | `read_csv()` |
+| `precourse_trial_eu.csv` | Semicolon separator, decimal comma | `read_csv2()` |
+| `precourse_trial.xlsx` | Excel file | `read_excel()` |
+| `Example_rice.csv` | Accents in an old encoding | `locale(encoding = "latin1")` |
+
+```{r}
+dim(read_csv("data/precourse_trial_eu.csv"))     # the wrong function: 1 column
+dim(read_csv2("data/precourse_trial_eu.csv"))    # the right one: 36 rows, 13 columns
+```
+
+You should get the **same** 36 × 13 table and the same mean yield from the three trial files.
+
+------------------------------------------------------------------------
+
+## Part 3. Check your data (5 min)
+
+```{r}
+trial <- read_csv("data/precourse_trial.csv")
+dim(trial)
+colSums(is.na(trial))[c("yield_t_ha", "disease_score")]    # missing values
+```
+
+**Your turn:** which plots have a missing yield? What happens to `mean(trial$yield_t_ha)`, and how do you fix it?
+
+[Hint: `filter(is.na(...))` and `na.rm = TRUE`.]{.small-note}
+
+------------------------------------------------------------------------
+
+## Part 4. First plots (10 min)
+
+Three plots, one idea each: a **histogram** (distribution), a **boxplot** (groups) and a **scatter plot** (two traits).
+
+```{r}
+#| fig-width: 9
+#| fig-height: 3.6
+ggplot(trial, aes(x = days_to_flowering, y = yield_t_ha, colour = check)) +
+  geom_point(size = 3) +
+  labs(x = "Days to flowering", y = "Yield (t/ha)", colour = "Parent or check") +
+  theme_rtc
+```
+
+**Your turn:** a boxplot of `disease_score` by replicate, then save it with `ggsave()`.
+
+------------------------------------------------------------------------
+
+## Part 5. Knit, and an extension
+
+Click **Knit**: RStudio runs the file from the top and makes your own HTML report.
+
+Finished early?
+
+1.  Mean days to flowering per genotype, from earliest to latest
+2.  Which mutant lines have a mean yield higher than the parent?
+3.  Repeat Part 2 and Part 3 with **your own data file**
+
+------------------------------------------------------------------------
+
+## Homework before Session 2 (optional extension)
+
+If you did not finish the practical, or want more, use `data/precourse_trial.csv` inside an RStudio project:
 
 1.  Import `precourse_trial_eu.csv` and check that `yield_t_ha` is numeric
 2.  How many plots have a missing `disease_score`?

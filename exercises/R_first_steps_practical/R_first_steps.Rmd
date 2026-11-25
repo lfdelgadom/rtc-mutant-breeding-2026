@@ -1,0 +1,292 @@
+---
+title: "Getting started with R and RStudio"
+subtitle: "RTC RER5030, Pre-course Session 1. Practical session"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 7, fig.height = 4)
+```
+
+## How this practical works
+
+You will work on a small mutant trial from Skopje (36 plots, 10 M4 lines, one parent and one check, 3 replicates). It takes about **50 minutes** in five parts.
+
+| Part | What you do | Time |
+|:--|:------------------------|:--|
+| 1 | Objects and types: vectors, factors, data frames | 10 min |
+| 2 | Import data from different files (csv, European csv, Excel, accents) | 15 min |
+| 3 | Check what you imported | 5 min |
+| 4 | First plots with `ggplot2` | 10 min |
+| 5 | Knit your own report | 5 min |
+
+How to work:
+
+1. Run each chunk with the green arrow, or put the cursor on a line and press **Ctrl + Enter** (**Cmd + Enter** on Mac).
+2. Chunks called **Your turn** are empty. Write your code there and run it.
+3. After each task, **Check yourself** gives the result you should get. If your result is different, read the error message first, then ask.
+4. At the end, click **Knit** to make your own HTML report.
+
+Load the packages. If R says `there is no package called ...`, run `install_packages.R` once.
+
+```{r packages}
+library(readr)     # read csv files
+library(readxl)    # read Excel files
+library(dplyr)     # work with tables
+library(ggplot2)   # plots
+```
+
+## Part 1. Objects and types (10 min)
+
+R keeps everything in **objects**. We create them with `<-`. Here are the first six plots of the trial.
+
+```{r objects}
+yield <- c(4.60, 3.77, 3.24, 4.04, 4.31, 3.92)             # grain yield, t/ha
+days  <- c(64, 63, 63, 61, 62, 62)                         # days to flowering
+geno  <- c("M4-01", "M4-10", "M4-06", "M4-02", "Parent", "M4-09")
+
+mean(yield)
+class(yield)     # numbers
+class(geno)      # text
+```
+
+A vector holds one type of data. Use `[ ]` to select positions.
+
+**Your turn 1.1.** Find (a) the earliest and the latest day of flowering with `range()`, (b) the position of the plot with the highest yield with `which.max()`, and (c) the name of the genotype in that plot with `geno[...]`.
+
+```{r your-turn-1-1}
+# Write your code here
+# Hints: range(days), which.max(yield), geno[...]
+```
+
+> **Check yourself.** The range is 61 to 64. The highest yield is in position 1, genotype `"M4-01"`.
+
+A **factor** is a vector of labels with a fixed set of levels. We use factors for genotypes, replicates and blocks.
+
+```{r factors}
+repl <- c(1, 1, 1, 2, 2, 2)    # replicate of each plot
+class(repl)                    # numeric, but a replicate is a label, not a quantity
+repl_f <- factor(repl)
+levels(repl_f)
+table(repl_f)
+```
+
+**Your turn 1.2.** Create the vector `check <- c("no", "no", "no", "no", "yes", "no")` (the parent is a check). Turn it into a factor called `check_f` and count the plots of each level with `table()`.
+
+```{r your-turn-1-2}
+# Write your code here
+# Hints: factor(...), table(...)
+```
+
+> **Check yourself.** 5 plots are `no` and 1 plot is `yes`.
+
+A **data frame** is a table: your field book in R. Each column is a vector.
+
+```{r dataframe}
+plots <- data.frame(plot = 1:6, geno = geno, yield = yield, days = days)
+plots
+str(plots)                     # type of each column
+plots$yield                    # one column
+plots[plots$yield > 4, ]       # rows that meet a condition
+```
+
+**Your turn 1.3.** Add a column called `late` to `plots`. It is `TRUE` when `days` is more than 62. Then count the late plots with `sum()`.
+
+```{r your-turn-1-3}
+# Write your code here
+# Hint: plots$late <- ...
+```
+
+> **Check yourself.** There are 3 late plots.
+
+**The type trap.** One of these values was typed with a decimal comma.
+
+```{r trap}
+x <- c("4.6", "3.77", "4,04")
+as.numeric(x)
+```
+
+> **Check yourself.** Which value became `NA`, and why? Write your answer here: ______
+>
+> It is `"4,04"`. R only understands the decimal point. You will meet the same problem with European csv files in Part 2.
+
+## Part 2. Importing data from different files (15 min)
+
+The `data/` folder has the same trial saved in different ways. Always import with a **relative path** inside the RStudio project (the file `.Rproj` sets the working directory).
+
+| File | What is special | Function |
+|:------------------------|:------------------------|:------------------------|
+| `precourse_trial.csv` | Comma separator, decimal point | `read_csv()` |
+| `precourse_trial_eu.csv` | Semicolon separator, decimal comma | `read_csv2()` |
+| `precourse_trial.xlsx` | Excel file | `read_excel()` |
+| `Example_rice.csv` | Accents saved in an old encoding | `read_csv(locale = ...)` |
+
+### 2.1 A csv file
+
+```{r import-csv}
+trial_csv <- read_csv("data/precourse_trial.csv")
+dim(trial_csv)       # rows and columns
+```
+
+> **Check yourself.** 36 rows and 13 columns.
+
+### 2.2 A European csv file
+
+First, the wrong function. Look at the result.
+
+```{r import-wrong}
+wrong <- read_csv("data/precourse_trial_eu.csv")
+dim(wrong)
+```
+
+> **Check yourself.** 36 rows and only 1 column. Everything is in one column because the separator is `;` and not `,`.
+
+Now the right function.
+
+```{r import-csv2}
+trial_eu <- read_csv2("data/precourse_trial_eu.csv")
+dim(trial_eu)
+class(trial_eu$yield_t_ha)     # must be numeric
+```
+
+> **Check yourself.** 36 rows, 13 columns, and `yield_t_ha` is numeric.
+
+### 2.3 An Excel file
+
+```{r import-excel}
+excel_sheets("data/precourse_trial.xlsx")                 # sheets inside the file
+trial_xlsx <- read_excel("data/precourse_trial.xlsx")     # first sheet by default
+dim(trial_xlsx)
+```
+
+**Your turn 2.1.** Are the three tables the same? Compare the mean yield of each one (`na.rm = TRUE`, because there are missing values) and use `all.equal()` to compare `trial_csv` with `trial_xlsx`. Add `check.attributes = FALSE` to `all.equal()`, and use `as.data.frame()` on both tables.
+
+```{r your-turn-2-1}
+# Write your code here
+# Hints: mean(..., na.rm = TRUE), all.equal(...)
+```
+
+> **Check yourself.** The three means are 4.08, and `all.equal()` returns `TRUE`.
+
+### 2.4 Accents and special letters
+
+```{r import-rice}
+rice <- read_csv("data/Example_rice.csv")
+unique(rice$TRAT)       # the accent is broken
+```
+
+```{r import-rice-latin1}
+rice <- read_csv("data/Example_rice.csv", locale = locale(encoding = "latin1"))
+unique(rice$TRAT)
+```
+
+> **Check yourself.** The second result shows `Irrigación` with the accent. Best solution: save from Excel as **CSV UTF-8**.
+
+### 2.5 Other ways to import
+
+These lines are not run. They show what you will meet with other files.
+
+```{r import-other, eval = FALSE}
+read_delim("data/file.txt", delim = "\t")                     # tab separated
+read_delim("data/file.txt", delim = ";", locale = locale(decimal_mark = ","))
+read_excel("data/file.xlsx", sheet = "field_book", skip = 2, na = c("", "."))
+read_csv("https://example.org/trial.csv")                     # from a web address
+read.csv("data/precourse_trial.csv")                          # base R, no package needed
+```
+
+**Optional.** You can also import with the mouse: in the **Environment** pane click **Import Dataset**, **From Text (readr)**, choose a file, check the preview and copy the code that RStudio shows at the bottom right. Paste that code in a chunk here, so you can run it again later.
+
+## Part 3. Check what you imported (5 min)
+
+Every new file gets the same checks: size, column types and missing values.
+
+```{r check}
+trial <- trial_csv
+dim(trial)
+glimpse(trial)
+colSums(is.na(trial))      # missing values per column
+```
+
+Design variables (replicate, row, column, genotype, check) are labels, so we turn them into factors.
+
+```{r factors-trial}
+trial <- trial |>
+  mutate(across(c(rep, row, col, geno, check), factor))
+glimpse(trial)
+```
+
+**Your turn 3.1.** (a) Which plots have a missing yield? Use `filter(is.na(yield_t_ha))` and show `plot`, `rep` and `geno` with `select()`. (b) Compute the mean yield with `mean(trial$yield_t_ha)`. What do you get? Then add `na.rm = TRUE`.
+
+```{r your-turn-3-1}
+# Write your code here
+# Hints: filter(is.na(...)), select(...), mean(..., na.rm = TRUE)
+```
+
+> **Check yourself.** Plot 8 (replicate 1, M4-08) and plot 29 (replicate 3, M4-01) have no yield. The mean without `na.rm = TRUE` is `NA`. With `na.rm = TRUE` it is 4.08.
+
+## Part 4. First plots (10 min)
+
+A `ggplot` has three parts: the **data**, the **aesthetics** `aes()` (what goes on each axis or colour) and a **geom** (the shape). We add layers with `+`.
+
+```{r plot-hist}
+ggplot(trial, aes(x = yield_t_ha)) +
+  geom_histogram(bins = 8, fill = "steelblue", colour = "white") +
+  labs(x = "Yield (t/ha)", y = "Number of plots")
+```
+
+```{r plot-box}
+ggplot(trial, aes(x = reorder(geno, yield_t_ha, FUN = median, na.rm = TRUE), y = yield_t_ha)) +
+  geom_boxplot(fill = "grey85") +
+  coord_flip() +
+  labs(x = NULL, y = "Yield (t/ha)", title = "Yield by genotype, ordered by median")
+```
+
+```{r plot-scatter}
+ggplot(trial, aes(x = days_to_flowering, y = yield_t_ha, colour = check)) +
+  geom_point(size = 3) +
+  labs(x = "Days to flowering", y = "Yield (t/ha)", colour = "Parent or check")
+```
+
+**Your turn 4.1.** Make a boxplot of `disease_score` by replicate (`rep`). Change one more thing: the fill colour or the axis labels.
+
+```{r your-turn-4-1}
+# Write your code here
+# Hint: ggplot(trial, aes(x = ..., y = ...)) + geom_boxplot()
+```
+
+**Your turn 4.2.** Save your plot as a png file with `ggsave()`: first store the plot in an object (`p <- ggplot(...)`), then `ggsave("my_plot.png", p, width = 6, height = 4, dpi = 300)`.
+
+```{r your-turn-4-2}
+# Write your code here
+# Hint: p <- ggplot(...); ggsave("my_plot.png", p, ...)
+```
+
+> **Check yourself.** A file `my_plot.png` appears in the **Files** pane.
+
+## Part 5. Knit your report (5 min)
+
+Click **Knit** at the top of this window. RStudio runs all the chunks from the top and makes an HTML file with your code, results and plots. If it stops with an error, the message tells you the chunk where it failed.
+
+## Extension (optional)
+
+For those who finish early. Use the `trial` table.
+
+**E1.** Mean days to flowering of each genotype, from the earliest to the latest. Hint: `group_by()`, `summarise()`, `arrange()`.
+
+```{r extension-1}
+# Write your code here
+```
+
+**E2.** Which mutant lines (`check == "no"`) have a mean yield higher than the parent?
+
+```{r extension-2}
+# Write your code here
+```
+
+> **Check yourself.** The earliest genotypes are M4-03 and M4-07 (60 days). Three lines beat the parent: M4-03 (5.28 t/ha), M4-07 (4.96) and M4-01 (4.38).
+
+**E3.** Repeat Part 2 with **your own data file** (csv or Excel) and run the checks of Part 3.

@@ -11,6 +11,12 @@
 [Open the slides of Pre-course Session 1](../slides/01-r-basics.html){target="_blank"}
 :::
 
+::: callout-tip
+## Practical session
+
+Download [R_first_steps_practical.zip](../downloads/R_first_steps_practical.zip), unzip it, open `R_first_steps.Rproj` and work through `R_first_steps.Rmd` chunk by chunk (50 min). It covers object types, importing data in four ways, checking the data and first plots.
+:::
+
 ## Learning objectives
 
 - Install R, RStudio and the course packages, or use Posit Cloud
