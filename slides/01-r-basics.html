@@ -334,7 +334,7 @@ Luis Fernando Delgado Muñoz
 <td><strong>Blocks 2 to 5.</strong> R concepts with plant breeding examples</td>
 </tr>
 <tr class="even">
-<td><strong>Live coding</strong> in RStudio with the course data</td>
+<td><strong>Practical session</strong> in RStudio with the course data (50 min)</td>
 </tr>
 <tr class="odd">
 <td>Homework and questions</td>
@@ -895,14 +895,181 @@ $ disease_score     &lt;dbl&gt; 2, 5, 6, 5, 3, 6, 6, 6, 4, 4, 3, 3, 3, 1, 3, 5, 
 </div>
 <img data-src="01-r-basics_files/figure-revealjs/unnamed-chunk-18-1.png" width="1056" class="r-stretch"><p>Patterns in the field are the reason to use <strong>blocks</strong> (Day 2) and <strong>spatial models</strong> (Day 4).</p>
 </section>
-<section id="live-coding" class="slide level2 divider">
-<h2>Live coding</h2>
-<p>Let’s open RStudio</p>
-<p><span class="small-note">We now run the code of the course manual, chapter 1, step by step with the course data.</span></p>
+<section id="practical-session" class="slide level2 divider">
+<h2>Practical session</h2>
+<p>About 50 minutes in RStudio</p>
+<p><span class="small-note">Objects, importing data, checking and plotting, with the same small trial.</span></p>
 </section>
-<section id="homework-before-session-2" class="slide level2 scrollable">
-<h2>Homework before Session 2</h2>
-<p>Use <code>data/precourse_trial.csv</code> inside an RStudio project:</p>
+<section id="how-the-practical-works" class="slide level2 scrollable">
+<h2>How the practical works</h2>
+<div class="columns">
+<div class="column" style="width:52%;">
+<ol type="1">
+<li>Download: <a href="../downloads/R_first_steps_practical.zip"><strong>R first steps practical (ZIP)</strong></a></li>
+<li>Unzip it, open <code>R_first_steps.Rproj</code>, run <code>install_packages.R</code></li>
+<li>Open <code>R_first_steps.Rmd</code> and run it <strong>chunk by chunk</strong></li>
+<li><strong>Your turn</strong> chunks are empty: write your code there</li>
+<li><strong>Check yourself</strong> boxes give the result you should get</li>
+<li>At the end, click <strong>Knit</strong></li>
+</ol>
+</div><div class="column" style="width:48%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">Topic</th>
+<th style="text-align: left;">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Objects and types</td>
+<td style="text-align: left;">10 min</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Importing data</td>
+<td style="text-align: left;">15 min</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Checking the data</td>
+<td style="text-align: left;">5 min</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">First plots</td>
+<td style="text-align: left;">10 min</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">Knit your report</td>
+<td style="text-align: left;">5 min</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="keybox">
+<p>No R on your computer? Use <strong>Posit Cloud</strong> and upload the unzipped folder.</p>
+</div>
+</section>
+<section id="part-1.-objects-and-types-10-min" class="slide level2">
+<h2>Part 1. Objects and types (10 min)</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-label="1"></a>yield <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">4.60</span>, <span class="fl">3.77</span>, <span class="fl">3.24</span>, <span class="fl">4.04</span>, <span class="fl">4.31</span>, <span class="fl">3.92</span>)      <span class="co"># grain yield of 6 plots (t/ha)</span></span>
+<span id="cb47-2"><a href="" aria-label="2"></a>geno  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"M4-01"</span>, <span class="st">"M4-10"</span>, <span class="st">"M4-06"</span>, <span class="st">"M4-02"</span>, <span class="st">"Parent"</span>, <span class="st">"M4-09"</span>)</span>
+<span id="cb47-3"><a href="" aria-label="3"></a>geno[<span class="fu">which.max</span>(yield)]                              <span class="co"># genotype of the best plot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "M4-01"</code></pre>
+</div>
+</div>
+<ul>
+<li>A <strong>vector</strong> holds one type of data: numbers or text</li>
+<li>A <strong>factor</strong> is a label with levels: genotype, replicate, block</li>
+<li>A <strong>data frame</strong> is your field book: one column per variable</li>
+</ul>
+<p><strong>The type trap.</strong> One value was typed with a decimal comma:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-label="1"></a><span class="fu">as.numeric</span>(<span class="fu">c</span>(<span class="st">"4.6"</span>, <span class="st">"3.77"</span>, <span class="st">"4,04"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.60 3.77   NA</code></pre>
+</div>
+</div>
+</section>
+<section id="part-2.-importing-data-15-min" class="slide level2">
+<h2>Part 2. Importing data (15 min)</h2>
+<p>The same trial, saved in four ways. Choose the function that matches the file:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 39%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">File</th>
+<th style="text-align: left;">What is special</th>
+<th style="text-align: left;">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>precourse_trial.csv</code></td>
+<td style="text-align: left;">Comma separator, decimal point</td>
+<td style="text-align: left;"><code>read_csv()</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>precourse_trial_eu.csv</code></td>
+<td style="text-align: left;">Semicolon separator, decimal comma</td>
+<td style="text-align: left;"><code>read_csv2()</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>precourse_trial.xlsx</code></td>
+<td style="text-align: left;">Excel file</td>
+<td style="text-align: left;"><code>read_excel()</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>Example_rice.csv</code></td>
+<td style="text-align: left;">Accents in an old encoding</td>
+<td style="text-align: left;"><code>locale(encoding = "latin1")</code></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-label="1"></a><span class="fu">dim</span>(<span class="fu">read_csv</span>(<span class="st">"data/precourse_trial_eu.csv"</span>))     <span class="co"># the wrong function: 1 column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 36  1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-label="1"></a><span class="fu">dim</span>(<span class="fu">read_csv2</span>(<span class="st">"data/precourse_trial_eu.csv"</span>))    <span class="co"># the right one: 36 rows, 13 columns</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 36 13</code></pre>
+</div>
+</div>
+<p>You should get the <strong>same</strong> 36 × 13 table and the same mean yield from the three trial files.</p>
+</section>
+<section id="part-3.-check-your-data-5-min" class="slide level2">
+<h2>Part 3. Check your data (5 min)</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-label="1"></a>trial <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/precourse_trial.csv"</span>)</span>
+<span id="cb55-2"><a href="" aria-label="2"></a><span class="fu">dim</span>(trial)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 36 13</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="" aria-label="1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(trial))[<span class="fu">c</span>(<span class="st">"yield_t_ha"</span>, <span class="st">"disease_score"</span>)]    <span class="co"># missing values</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   yield_t_ha disease_score 
+            2             1 </code></pre>
+</div>
+</div>
+<p><strong>Your turn:</strong> which plots have a missing yield? What happens to <code>mean(trial$yield_t_ha)</code>, and how do you fix it?</p>
+<p><span class="small-note">Hint: <code>filter(is.na(...))</code> and <code>na.rm = TRUE</code>.</span></p>
+</section>
+<section id="part-4.-first-plots-10-min" class="slide level2">
+<h2>Part 4. First plots (10 min)</h2>
+<p>Three plots, one idea each: a <strong>histogram</strong> (distribution), a <strong>boxplot</strong> (groups) and a <strong>scatter plot</strong> (two traits).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="" aria-label="1"></a><span class="fu">ggplot</span>(trial, <span class="fu">aes</span>(<span class="at">x =</span> days_to_flowering, <span class="at">y =</span> yield_t_ha, <span class="at">colour =</span> check)) <span class="sc">+</span></span>
+<span id="cb59-2"><a href="" aria-label="2"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb59-3"><a href="" aria-label="3"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Days to flowering"</span>, <span class="at">y =</span> <span class="st">"Yield (t/ha)"</span>, <span class="at">colour =</span> <span class="st">"Parent or check"</span>) <span class="sc">+</span></span>
+<span id="cb59-4"><a href="" aria-label="4"></a>  theme_rtc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="01-r-basics_files/figure-revealjs/unnamed-chunk-23-1.png" width="864" class="r-stretch"><p><strong>Your turn:</strong> a boxplot of <code>disease_score</code> by replicate, then save it with <code>ggsave()</code>.</p>
+</section>
+<section id="part-5.-knit-and-an-extension" class="slide level2 scrollable">
+<h2>Part 5. Knit, and an extension</h2>
+<p>Click <strong>Knit</strong>: RStudio runs the file from the top and makes your own HTML report.</p>
+<p>Finished early?</p>
+<ol type="1">
+<li>Mean days to flowering per genotype, from earliest to latest</li>
+<li>Which mutant lines have a mean yield higher than the parent?</li>
+<li>Repeat Part 2 and Part 3 with <strong>your own data file</strong></li>
+</ol>
+</section>
+<section id="homework-before-session-2-optional-extension" class="slide level2 scrollable">
+<h2>Homework before Session 2 (optional extension)</h2>
+<p>If you did not finish the practical, or want more, use <code>data/precourse_trial.csv</code> inside an RStudio project:</p>
 <ol type="1">
 <li>Import <code>precourse_trial_eu.csv</code> and check that <code>yield_t_ha</code> is numeric</li>
 <li>How many plots have a missing <code>disease_score</code>?</li>
