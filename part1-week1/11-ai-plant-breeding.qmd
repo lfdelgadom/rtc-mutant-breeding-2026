@@ -502,6 +502,18 @@ The function `make_folds()` takes any grouping variable, for example `make_folds
 
 Use the bean ZIP file at the top of this chapter. You will follow the same workflow with short code and functions: look at the spectra, prepare them, fit PCR, validate with random folds and with folds by line, choose the number of components, compare a chemical trait (total sugars, phytate) with a physical one (cooking time, iron), and write a conclusion for a breeder.
 
+## Open NIR datasets to practise
+
+Many NIR datasets are open. You can use them to practise the workflow of this chapter with other crops and traits, or to test a model on data that you did not collect. Three places are a good start.
+
+| Source | What it has |
+|---|---|
+| [NIRBENCH](https://github.com/DeepLightLab/NIRBENCH_DL_v0.1) (with a [live dashboard](https://deeplightlab.github.io/nirbench01/index.html)) | 27 tasks with fixed training and test splits, from grain, flour, fruit, milk, soil and meat. It also reports the test error of 16 models for each task, so you can compare your result with them. A few tasks need a separate download from Eigenvector. |
+| [nirs4all datasets](https://github.com/GBeurier/nirs4all-datasets) | 34 more datasets from different crops and materials, such as wheat, barley, maize, rice, tomato, mango, olive oil, leaves and soils. Each dataset has its own licence. |
+| [Blog post by cheoc](https://cheoc.github.io/posts/nir-automl-71-tasks/) | Describes 71 public NIR tasks and says where each one comes from. It shares only the row numbers of the splits, not the spectra, so go to the two sources above for the data. |
+
+Before you use a dataset, read its licence. Most are open (CC BY, CC0 or public domain), but a few have no standard licence and are allowed only for comparing methods. Always cite the original authors. Apply the rules of this chapter to any of them, and keep all samples of the same line or batch in the same fold. The results in the blog post come from one author, so read them as a guide to what data exist and not as proof that one method is the best.
+
 ## Key takeaways
 
 - **Train, validation and test** have different jobs. The test set gives the final grade and is used once. With small data, cross-validation replaces the validation set.
@@ -525,3 +537,4 @@ Use the bean ZIP file at the top of this chapter. You will follow the same workf
 - DeHaat. AI and ML in agriculture (blog). dehaat.in/en/blog/ai-and-ml-in-agriculture
 - GeoPard. Applications of machine learning for precision agriculture (blog). geopard.tech/blog/applications-of-machine-learning-for-precision-agriculture/
 - Bean NIR data: CIAT (PhD work of L. F. Londoño), shared for training.
+- cheoc. NIR AutoML on 71 public tasks (blog post). https://cheoc.github.io/posts/nir-automl-71-tasks/
