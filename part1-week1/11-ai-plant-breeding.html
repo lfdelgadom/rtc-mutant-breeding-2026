@@ -379,8 +379,9 @@ window.Quarto = {
   <li><a href="#other-uses-and-other-validation-units" id="toc-other-uses-and-other-validation-units" class="nav-link" data-scroll-target="#other-uses-and-other-validation-units"><span class="header-section-number">12.15</span> Other uses and other validation units</a></li>
   <li><a href="#limits-of-prediction-models" id="toc-limits-of-prediction-models" class="nav-link" data-scroll-target="#limits-of-prediction-models"><span class="header-section-number">12.16</span> Limits of prediction models</a></li>
   <li><a href="#practical-2-beans-and-pcr" id="toc-practical-2-beans-and-pcr" class="nav-link" data-scroll-target="#practical-2-beans-and-pcr"><span class="header-section-number">12.17</span> Practical 2, beans and PCR</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">12.18</span> Key takeaways</a></li>
-  <li><a href="#sec-ai-breeding-refs" id="toc-sec-ai-breeding-refs" class="nav-link" data-scroll-target="#sec-ai-breeding-refs"><span class="header-section-number">12.19</span> References</a></li>
+  <li><a href="#open-nir-datasets-to-practise" id="toc-open-nir-datasets-to-practise" class="nav-link" data-scroll-target="#open-nir-datasets-to-practise"><span class="header-section-number">12.18</span> Open NIR datasets to practise</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">12.19</span> Key takeaways</a></li>
+  <li><a href="#sec-ai-breeding-refs" id="toc-sec-ai-breeding-refs" class="nav-link" data-scroll-target="#sec-ai-breeding-refs"><span class="header-section-number">12.20</span> References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lfdelgadom/rtc-mutant-breeding-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1651,8 +1652,35 @@ Figure&nbsp;12.10: R² of PCR with validation by line for 13 bean traits, colour
 <h2 data-number="12.17" class="anchored" data-anchor-id="practical-2-beans-and-pcr"><span class="header-section-number">12.17</span> Practical 2, beans and PCR</h2>
 <p>Use the bean ZIP file at the top of this chapter. You will follow the same workflow with short code and functions: look at the spectra, prepare them, fit PCR, validate with random folds and with folds by line, choose the number of components, compare a chemical trait (total sugars, phytate) with a physical one (cooking time, iron), and write a conclusion for a breeder.</p>
 </section>
-<section id="key-takeaways" class="level2" data-number="12.18">
-<h2 data-number="12.18" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">12.18</span> Key takeaways</h2>
+<section id="open-nir-datasets-to-practise" class="level2" data-number="12.18">
+<h2 data-number="12.18" class="anchored" data-anchor-id="open-nir-datasets-to-practise"><span class="header-section-number">12.18</span> Open NIR datasets to practise</h2>
+<p>Many NIR datasets are open. You can use them to practise the workflow of this chapter with other crops and traits, or to test a model on data that you did not collect. Three places are a good start.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>What it has</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/DeepLightLab/NIRBENCH_DL_v0.1">NIRBENCH</a> (with a <a href="https://deeplightlab.github.io/nirbench01/index.html">live dashboard</a>)</td>
+<td>27 tasks with fixed training and test splits, from grain, flour, fruit, milk, soil and meat. It also reports the test error of 16 models for each task, so you can compare your result with them. A few tasks need a separate download from Eigenvector.</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/GBeurier/nirs4all-datasets">nirs4all datasets</a></td>
+<td>34 more datasets from different crops and materials, such as wheat, barley, maize, rice, tomato, mango, olive oil, leaves and soils. Each dataset has its own licence.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://cheoc.github.io/posts/nir-automl-71-tasks/">Blog post by cheoc</a></td>
+<td>Describes 71 public NIR tasks and says where each one comes from. It shares only the row numbers of the splits, not the spectra, so go to the two sources above for the data.</td>
+</tr>
+</tbody>
+</table>
+<p>Before you use a dataset, read its licence. Most are open (CC BY, CC0 or public domain), but a few have no standard licence and are allowed only for comparing methods. Always cite the original authors. Apply the rules of this chapter to any of them, and keep all samples of the same line or batch in the same fold. The results in the blog post come from one author, so read them as a guide to what data exist and not as proof that one method is the best.</p>
+</section>
+<section id="key-takeaways" class="level2" data-number="12.19">
+<h2 data-number="12.19" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">12.19</span> Key takeaways</h2>
 <ul>
 <li><strong>Train, validation and test</strong> have different jobs. The test set gives the final grade and is used once. With small data, cross-validation replaces the validation set.</li>
 <li>ML is for <strong>prediction</strong>: it turns a cheap measurement into an estimate of an expensive one. It does not replace the experimental design or the mixed model.</li>
@@ -1663,8 +1691,8 @@ Figure&nbsp;12.10: R² of PCR with validation by line for 13 bean traits, colour
 <li>Use prediction to <strong>screen</strong>, and confirm the promising lines in the laboratory.</li>
 </ul>
 </section>
-<section id="sec-ai-breeding-refs" class="level2" data-number="12.19">
-<h2 data-number="12.19" class="anchored" data-anchor-id="sec-ai-breeding-refs"><span class="header-section-number">12.19</span> References</h2>
+<section id="sec-ai-breeding-refs" class="level2" data-number="12.20">
+<h2 data-number="12.20" class="anchored" data-anchor-id="sec-ai-breeding-refs"><span class="header-section-number">12.20</span> References</h2>
 <ul>
 <li>Garcia, T., Carvajal-Yepes, M., Drewry, D. T., Santos, L. G., Duitama, J., Wenzl, P. and Chacón-Sánchez, M. I. (2025). Non-destructive prediction of nitrogen, iron and zinc content in diverse common bean seeds from a genebank using near-infrared spectroscopy. <em>Food Chemistry: Molecular Sciences</em> 11: 100316. DOI: 10.1016/j.fochms.2025.100316.</li>
 <li>Ghaitaranpour, A., Kebede, B., Duizer, L. M. and Yoosefzadeh-Najafabadi, M. (2026). AI-assisted nondestructive phenotyping of sensory-related traits in modern legume breeding. <em>Smart Agricultural Technology</em> 15: 102668. DOI: 10.1016/j.atech.2026.102668.</li>
@@ -1677,6 +1705,7 @@ Figure&nbsp;12.10: R² of PCR with validation by line for 13 bean traits, colour
 <li>DeHaat. AI and ML in agriculture (blog). dehaat.in/en/blog/ai-and-ml-in-agriculture</li>
 <li>GeoPard. Applications of machine learning for precision agriculture (blog). geopard.tech/blog/applications-of-machine-learning-for-precision-agriculture/</li>
 <li>Bean NIR data: CIAT (PhD work of L. F. Londoño), shared for training.</li>
+<li>cheoc. NIR AutoML on 71 public tasks (blog post). https://cheoc.github.io/posts/nir-automl-71-tasks/</li>
 </ul>
 
 
